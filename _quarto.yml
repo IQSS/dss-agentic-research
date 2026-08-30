@@ -10,8 +10,8 @@ project:
 
 website:
   title: "Agentic AI for Researchers"
-  site-url: https://iqss.github.io/dss-agentic-research/
-  repo-url: https://github.com/IQSS/dss-agentic-research
+  # site-url: set when a public URL exists (Cloudflare Pages, then IQSS)
+  repo-url: https://github.com/stevenworthington/dss-agentic-research
   page-navigation: true
   sidebar:
     style: floating
