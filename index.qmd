@@ -1,0 +1,14 @@
+---
+title: "Agentic AI for Researchers"
+---
+
+A working guide to doing research with an AI agent, for researchers rather than developers.
+
+How to run an agent, how to teach it your conventions, how to use it at each stage of a paper (organization, literature, data, analysis, verification, writing, reproducibility), and the judgment that keeps it safe. It assumes the Claude or Codex app, git, and the language you already use.
+
+::: {.callout-note}
+## This site is being built
+
+The chapters are generated from the guide's markdown source, and the conversion is not finished yet.
+Until it is, the current PDF is the complete document.
+:::
