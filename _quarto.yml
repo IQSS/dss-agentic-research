@@ -22,7 +22,9 @@ project:
 
 website:
   title: "Agentic AI for Researchers"
-  # site-url: set when a public URL exists (Cloudflare Pages, then IQSS)
+  # Cloudflare Pages, direct upload from `just deploy`. Behind Cloudflare Access while the
+  # content is polished; it changes if the site ever moves to IQSS.
+  site-url: https://dss-agentic-research.pages.dev
   repo-url: https://github.com/stevenworthington/dss-agentic-research
   page-navigation: true
   sidebar:
