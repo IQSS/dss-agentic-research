@@ -1,0 +1,179 @@
+---
+title: "6. The files the agent reads"
+---
+
+<!--
+STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
+SOURCE: tool-chain §12 "AGENTS.md / CLAUDE.md hierarchy", "Context economy", "Anti-patterns" (hub-and-spoke figure, simplified), §17b "Task planner"; content bank framings/agent-metadata-my-way.md (folded in; module points back here); deck "You write your conventions once", "What goes in them"
+COVERS: Global vs project. AGENTS.md / CLAUDE.md; the ancillary files (writing, coding, modeling); STATUS.md (the current-state snapshot, read first) and TASKS.md (the task record); METHODOLOGY.md and PLAN.md; four files, four roles. What goes where. Context economy. Anti-patterns (the STATUS.md / TASKS.md seam under Duplicated state). Two worked examples: a 26-line global file for a researcher, and a project brief for a paper (full text in Appendix A).
+VERIFY: checked 2026-08-26 against the Claude Code memory docs and the Codex AGENTS.md docs: Claude Code reads CLAUDE.md, not AGENTS.md; `@path` imports load at launch; Windows symlinks need admin rights; ~/.claude/CLAUDE.md is the user file; auto memory on by default under ~/.claude/projects/; 200-line guidance. Codex reads ~/.codex/AGENTS.md then AGENTS.md from the git root down to the cwd, 32 KiB combined default. Both have /init. Re-check at release.
+-->
+
+Anyone who has done this work for years asks the same question: how will it know to do things *my* way? A general model writes generic code and generic prose, and organizes a project the generic way. Your naming, your folder layout, your estimands and priors, your citation style, the journal's conventions: none of that is in the model. The answer is concrete. The agent reads a few plain-text files at the start of every session, and you write them once. This is most of what "setup" means.
+
+## Two layers
+
+Global files hold *how you work*: code style, prose voice, statistical defaults, file naming, the things you would tell any new research assistant on their first day. The agent reads them in every project, so you never restate them. A project file adds *what this project is*: what it is for, where things live, how to run it, and what is off limits. It is the onboarding document you would write for a new RA, except that you write it once and it is followed every time.
+
+![](figures/hub-and-spoke.svg){#fig-hub-and-spoke fig-alt="A global box holding AGENTS.md with three convention files linked to it, above a local box of three project types, with arrows running from global to local." above="6pt" below="6pt"}
+
+The files are plain markdown in ordinary folders: no settings screen, no vendor format, readable by you, by a collaborator, and by whichever agent you run. That has a consequence beyond convenience. Conventions written down are conventions a collaborator, or you in a year, can reproduce. The brief that makes the agent consistent is also project documentation, and it outlasts any one session.
+
+## Where the files live
+
+The two agents agree on everything but the filename. Claude Code reads `CLAUDE.md`; Codex reads `AGENTS.md`. Each reads a global file from your home folder (written `~` below; `/Users/you` on a Mac, `C:\Users\you` on Windows) and a project file from the folder you point it at. Each also reads a file in a subfolder, so a rule can apply to `manuscript/` alone.
+
+| | Claude Code | Codex |
+|:--|:--|:--|
+| Global (how you work) | `~/.claude/CLAUDE.md` | `~/.codex/AGENTS.md` |
+| Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
+| A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
+
+Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
+
+```
+@AGENTS.md
+```
+
+Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.[^tc-hier]
+
+[^tc-hier]: The tool-chain map, §12, "AGENTS.md / CLAUDE.md hierarchy", shows the full arrangement, with the global files kept in a version-controlled folder and synced across machines. None of that is needed to start.
+
+Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. The rules it could not know are the ones you add, and they are the point.
+
+## What goes in the global file
+
+Two kinds of content. Your craft: folder layout and naming, coding style, statistical conventions (estimands, priors, interval types), citation and prose style. Your guardrails: never send identifiable data to a model, always pin dependencies, follow the journal's disclosure policy. The same file that makes the agent work your way is where the responsible-use rules live, as standing instructions rather than things you remember to type.
+
+Here is a complete global file for a researcher. Twenty-six lines; Appendix A has it as a file to copy and edit.
+
+```
+# How I work
+
+Quantitative social scientist. R first, Stata for collaborators, some Python.
+
+## Projects
+- One folder per paper, under git. Its AGENTS.md says where things live.
+- `data/raw/` is read-only. Derived files go in `data/processed/`.
+- Paths via `here::here()`. No `setwd()`, no absolute paths.
+- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+
+## Code
+- R: tidyverse style, the native pipe `|>`, one script per stage.
+- Packages pinned with `renv`. Never install one without updating the lockfile.
+- Comment what a block is for, not what each line does.
+
+## Statistics
+- State the estimand before fitting. Report every estimate with an interval.
+- No model is trusted until it recovers known parameters from simulated data.
+- Fits longer than a few minutes run outside the agent, from a script I start.
+
+## Writing
+- Short sentences. Point first, then the qualification. Prose, not bullets.
+- Methods: the equation first, then the prose that explains it.
+- American spelling. Oxford comma.
+
+## Never
+- Never read, print, or copy `data/raw/`, or anything a project marks restricted.
+- Never delete or overwrite a data file. Never rewrite git history.
+- Ask before anything that takes more than a few minutes or reaches the network.
+
+## Every session
+- Read `STATUS.md`, then `TASKS.md`, at the start.
+- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+```
+
+Every line is concrete enough to check: "use `here::here()` for paths" can be verified in a script, "keep paths tidy" cannot, and an instruction the agent cannot verify is one it will follow inconsistently. The *Never* section is short and absolute, and it is not the enforcement: a sentence in a file is advice the agent will almost always take, and §5 and §16 show how to make the data rule impossible to break rather than merely forbidden. And the file is short on purpose, for a reason the *Context economy* section below explains.
+
+## What goes in the project file
+
+The project file answers the questions a new RA would ask in the first hour: what is this, where is everything, how do I run it, and what must I not touch. Add the conventions that hold for this project only (the coauthor's software, the journal, the variable-naming scheme) and pointers to the files that hold the rest. Here is a project file for a paper; Appendix A has the full text.
+
+```
+# heat-birthweight
+
+Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
+Target: Demography. Decisions live in METHODOLOGY.md, the current state in
+STATUS.md, open tasks in TASKS.md.
+
+## Where things live
+- `data/raw/natality/`: restricted microdata under a DUA. See Off limits below.
+- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
+- `data/processed/`: what we build. Working file: `natality-county.parquet`.
+- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
+  `run-all.R` runs all three in order.
+- `outputs/`: figures and tables the manuscript reads.
+- `manuscript/`: the paper, Quarto to Word for the coauthor.
+
+## This project
+- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
+  The two must agree before a number goes in the paper.
+- Estimand: the effect of one more third-trimester day above 35 °C on county
+  mean birthweight. Two-way fixed effects with county-clustered standard errors.
+- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+
+## Off limits
+- `data/raw/natality/` is restricted. Never read, list, or copy it.
+- Work only from `data/processed/natality-county.parquet`.
+- Never send any file under `data/` to a web search or an external service.
+```
+
+Notice what is not there. No history of how the analysis evolved (that is `METHODOLOGY.md`), no statement of where the project stands (`STATUS.md`), no list of what remains to do (`TASKS.md`), no description for a reader who is not the agent (`README.md`). The project file is rules and pointers, and it stays readable because it is nothing else.
+
+## The other files
+
+Five more files do specific jobs. None is required on day one.
+
+*Convention files.* When one topic in the global file outgrows a screen, move it to its own file alongside (`WRITING.md`, `CODING.md`, `MODELING.md`) and leave a one-line pointer behind: "For prose voice, see `WRITING.md`." The agent reads the pointer every session and the file only when the task calls for it. Two rules make this work: name the file for what it contains, so the agent can choose it from the name alone, and make each one self-contained, so it can be read without the others.
+
+*`STATUS.md`.* Where the project stands right now, on one screen: the stage and the date it was last updated, the headline result so far, what is in motion, what is waiting on someone else, the facts the agent would otherwise hunt for (the current N, the specification in force, the working file), and the risks that are not yet tasks. It is rewritten in place when the state changes and never added to, so it says where the project is and not how it got there. The agent reads it first in every session, before `TASKS.md`; you read it when a coauthor asks how the paper is going.
+
+*`TASKS.md`.* The record of open and finished work: three headings, *To Do*, *In Progress*, and *Done*, with a date on each finished item. The agent reads it after `STATUS.md` to see what is open and what is half-done, and updates it as work happens; you read it on Monday to remember Friday. Deliberately low-tech. §9 covers the session habits around it.
+
+```
+# Tasks
+
+## To Do
+- Sensitivity analysis: drop 2020 and refit.
+- Figure 2: switch to per-capita exposure.
+
+## In Progress
+- Stata mirror of `model-heat-bwt.R`. Estimates agree; SEs differ in 3rd decimal.
+
+## Done
+- 2026-08-19 — Cleaning script reproduces the coauthor's N (1,214,308 births).
+```
+
+*`METHODOLOGY.md`.* Dated entries recording why: why this model, why this prior, why these exclusions, what was tried and rejected. It is what the agent consults before proposing an alternative you already ruled out, and it is the seed of the paper's methods section (§14).
+
+*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning.[^tc-planner] Do not mix them. The agent reads the right file for the right question only if each file has one job.
+
+[^tc-planner]: The tool-chain map, §17b, "Task planner (agent-native)".
+
+## Context economy
+
+An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that does not bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
+
+The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. When the task is "rewrite this section of the manuscript," the agent reads `WRITING.md` and leaves `CODING.md` alone. One distinction matters here. A *pointer* ("see `WRITING.md`") is read on demand. Claude Code's `@` *import* is loaded at the start of every session, whatever the task. Use the import for the one-line bridge between `CLAUDE.md` and `AGENTS.md`, and pointers for everything else.
+
+## Memory
+
+Claude Code also keeps notes for itself across sessions (it calls this auto memory, and it is on by default): your corrections, your preferences, and project context it could not derive from the files, saved as markdown under `~/.claude/projects/` and opened with `/memory`. Treat it as a convenience. Memory is for what the agent noticed; the files are for what you decided. When the two disagree, the file wins, and a rule you find yourself relying on memory to keep belongs in `AGENTS.md`.
+
+## Anti-patterns
+
+*Vague rules.* "Write clean code" and "organize files sensibly" produce generic behavior. Say the concrete thing, with an example: the pipe, the path function, the naming pattern.
+
+*The growing file.* A brief that gains a paragraph per session until it is 800 lines, most of them narrative. Move history to `METHODOLOGY.md`, to-dos to `TASKS.md`, and the current state to `STATUS.md`; keep the brief to rules and pointers.
+
+*Duplicated state.* The same fact in the brief, in `STATUS.md`, in `TASKS.md`, and in memory. When it changes, one copy will be missed. Pick one home per kind of fact and point to it from the others. The pair to watch is `STATUS.md` and `TASKS.md`, because finishing a task usually changes the state. Record the completion once, in `TASKS.md`; then rewrite the line of `STATUS.md` it changed, rather than copying the entry over. A `STATUS.md` that starts to keep a history has become a second task list, and the agent now has two to reconcile.
+
+*Pasting whole files.* Pasting a script into the chat when naming it would do. The agent can read the file. A name costs nothing; a paste fills the context window with text the agent may already have.
+
+*Stale memory.* A note that was true once (a renamed file, a reversed decision) acted on without being flagged. Worse than no memory. Open the notes occasionally and delete what has expired.
+
+*A rule where a setting is needed.* "Never read `data/raw/`" as a sentence is advice. If it must never happen, it needs a permission setting that stops the read regardless of what the agent decides (§5, §16). Write the rule in both places.
+
+## Writing your first file
+
+Do not write it from scratch. Start with the twenty-six lines above, or with `/init`, and then run the agent on a real task. Each time you correct it, ask whether the correction would apply next week; if so, it is a rule, and it goes in the file. Three corrections make a good first session. The file is loaded when a session starts, so after editing it, start a new session or tell the agent to re-read it.

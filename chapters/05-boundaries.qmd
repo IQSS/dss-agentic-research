@@ -1,0 +1,98 @@
+---
+title: "5. Boundaries"
+---
+
+<!--
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: tool-chain §13 introduction (banded security-layers figure, band 4 relabelled from "containment" to version control since containers are out of scope), §13a "Three tiers of command policy", "Conservative starting posture for new agent users", "The blind-click-fest failure mode", "Two write channels"; §13b sandbox role; §1b (git)
+COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragraph. Version control as the undo button. Why anything that must never happen should not be promptable. The .claude/settings.json deny file that §16 points to.
+VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. Codex: sandbox on by default (workspace-write in a git folder), rules file `~/.codex/rules/default.rules` with `prefix_rule` per the tool-chain map v1.5 (re-check the rules syntax at release; Codex's sandbox on native Windows not verified).
+-->
+
+Limiting what an agent can do. The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others do not.
+
+![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
+
+The split that matters is between the first two and the last two. Rules and prompts bind a *cooperating* agent: a deny rule matches the command as the agent wrote it, and a prompt depends on a person reading it. Both are excellent against accidents. Neither is a wall. The sandbox and version control hold whatever the session has read and whatever the agent has decided, because the operating system and git enforce them rather than the agent's good behavior or your attention.
+
+## Allow, prompt, deny
+
+Every action an agent takes falls into one of three tiers, and the settings file is where you say which. *Allowed* actions run without asking. *Prompted* actions stop for a yes or no, with the command or the edit shown. *Denied* actions are refused, in every mode, and the agent is told so.
+
+A conservative starting posture for a researcher, in shape rather than as a copyable file:
+
+- *Allow* what only reads or builds: reading files in the project, `git status`, `git diff`, `git log`, running your own scripts and the build command. With the sandbox on (below), most local commands can sit here because the sandbox bounds them.
+- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages, deleting files, anything that reaches the network, any command that touches `data/`.
+- *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
+
+The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt.
+
+Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `.claude/settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+
+```
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript *)",
+      "Bash(git status *)", "Bash(git diff *)", "Bash(git log *)",
+      "Bash(just build)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(install.packages *)", "Bash(renv::install *)"
+    ],
+    "deny": [
+      "Read(./data/raw/**)",
+      "Edit(./data/raw/**)",
+      "Bash(rm -rf *)", "Bash(sudo *)",
+      "Bash(git push --force *)", "Bash(git reset --hard *)", "Bash(git clean *)",
+      "PowerShell(Remove-Item *)",
+      "Edit(./.claude/settings.json)"
+    ]
+  }
+}
+```
+
+The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule cannot be talked away in the session it is meant to bind.
+
+Codex keeps the same posture in a rules file, `~/.codex/rules/default.rules`, one entry per rule with a justification that travels with it:
+
+```
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "forbidden",
+    justification = "Never discard a working tree from an agent session.",
+)
+
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "Visible outside the machine; approve each push.",
+)
+```
+
+The decisions are `allow`, `prompt`, and `forbidden`. Codex has no read-deny of this kind; for restricted data on Codex, the enforcement is location (§16).
+
+## Why anything that must never happen should not be promptable
+
+A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you would not fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
+
+What stays dependable at that point is what does not depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen should not be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, is not.
+
+The aim is a prompt rate low enough that you read every prompt. Reaching it means moving the safe routine to allow, the truly dangerous to deny, and leaving in the middle only the handful of actions you actually want to decide each time.
+
+## The sandbox in one paragraph
+
+A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. In Codex the sandbox is on by default, in a mode that allows writes inside the project folder and no network until you approve a host (§4). One caveat for both: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
+
+## Version control as the undo button
+
+Every change an agent makes is a git change, and that is what makes delegating tolerable. Before a task, the working copy is clean: `git status` shows nothing, so whatever the agent does will show up, alone, as a diff. After the task, `git diff` is the review (§9 covers reading it, in the app or the terminal). A single file the agent got wrong comes back with `git restore <file>`. A whole task that went wrong comes back with `git revert` of its commit, and a task you approved but regret next week comes back the same way, because the history is still there. The habit that makes this work is a commit before every task you delegate and one after, so that each commit is one task and the undo is one command.
+
+Two limits. Git undoes what it tracks, and it does not track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. An agent that can undo your undo has no undo.
+
+## A starting posture
+
+In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.[^tc-sec]
+
+[^tc-sec]: The tool-chain map, §13, has the full treatment: the layered model, the settings for both agents with their rationale, the sandbox internals, and the container layer this guide leaves out.

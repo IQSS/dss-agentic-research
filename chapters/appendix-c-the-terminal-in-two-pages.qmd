@@ -1,0 +1,96 @@
+---
+title: "Appendix C. The terminal in two pages"
+---
+
+<!--
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: quickstart Appendix B "Terminal Concepts", cut to what this guide's readers meet (no TTY history, no subshells, no aliases, no login shells); the glossary is new, built from the terms the guide defines at first use
+COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windows, the working directory and paths, running a script, output to a log, environment variables, starting the agent in a folder, six git commands, WSL2 in one paragraph. Glossary at the end.
+VERIFY: Claude Code's sandbox needs WSL2 on Windows (checked 2026-08-27); both CLIs otherwise run natively on Windows per the docs consulted for §4 and §5. Re-check native-Windows support at release.
+-->
+
+The desktop apps need none of this. If you run Claude Code or Codex in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
+
+## The terminal and the shell
+
+A *terminal* is a window that shows text and takes typed commands; a *shell* is the program inside it that reads each command, runs it, and prints the result. On a Mac the terminal is the Terminal app (Command-Space, type Terminal) and the shell is `zsh`; on Windows it is Windows Terminal (or PowerShell from the Start menu) and the shell is PowerShell. The line ending in `%`, `$`, or `>` is the *prompt*: the shell waiting for a command. Type one, press Return, read what comes back.
+
+Every command runs in a *working directory*, the folder the shell is currently in. `pwd` prints it (on Windows too); `cd heat-birthweight` moves into a folder, `cd ..` moves up one, and `ls` (Windows: `dir`, or `ls` in PowerShell) lists what is there. A *path* names a file by its folders: `code/model.R` is relative to the working directory, `~` is your home folder, and a path beginning with `/` (Windows: `C:\`) is absolute. Nearly everything in this guide assumes the working directory is the project folder, and the first command in any session is the `cd` that gets you there.
+
+## Running things
+
+`Rscript code/model.R` runs an R script and prints what it prints; `stata-mp -b do model.do` runs a do-file in batch mode and writes its log beside it (§13). If the shell answers *command not found*, the program is installed but its folder is not on the `PATH`, the list of folders the shell searches for commands; on Windows, R's installer does not add its folder, and the agent can fix that when asked. Output can be sent to a file instead of the screen: `Rscript code/fit.R > logs/fit.log 2>&1` writes both the normal output and the errors to the log, which is how a long fit (§12) leaves a record the agent can read later. Control-C stops a running program.
+
+An *environment variable* is a named value the shell hands to every program it starts, and it is where a key lives (§11): `export CENSUS_API_KEY=...` in the shell for this session, or a line in R's `.Renviron` file so every R session has it; on Windows PowerShell, `$env:CENSUS_API_KEY = "..."`. The agent refers to the variable by name and never needs the value.
+
+## The agent, and git
+
+Start the agent in the project folder: `cd` there, then `claude` or `codex`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
+
+Six git commands cover this guide. `git status` says what has changed since the last commit. `git diff` shows the changes. `git add -A` followed by `git commit -m "message"` records them as one commit (§9). `git log --oneline` lists the commits. `git restore code/model.R` puts one file back to its last committed state, the undo of §5. And `git clone <address> folder` copies a repository from GitHub into a new folder, which is the first step of the fresh-clone check in §15. The rest of git the agent can drive, with you reading the prompts.
+
+## Windows
+
+Both CLIs run on Windows itself. One thing does not: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you do not want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.[^tc-term]
+
+[^tc-term]: The quickstart's Appendix B covers the shell in more depth (standard streams, sourcing, subshells, startup files) for readers who go on to the full toolchain.
+
+## Glossary
+
+*Agent.* A model given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
+
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§13).
+
+*Auto mode.* A Claude Code permission mode in which a second model, the *classifier*, reviews each action against your request and blocks the ones it judges unsafe (§4).
+
+*Batch mode.* Running Stata from the command line on a do-file, with the output written to a log instead of a window (§13).
+
+*Brief.* The project's `AGENTS.md`: what the project is, where things live, how to run it, what is off limits (§6). Claude Code reads it through a `CLAUDE.md` that imports it.
+
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§15). *One-command build* means the same.
+
+*Calibration.* Checking what a model says under a known truth before trusting what it says under an unknown one: recovery of known parameters, and the rate at which the decision rule fires when it should and when it should not (§12).
+
+*Commit.* A recorded snapshot of the project's tracked files, with a message; the unit of undo (§5, §9).
+
+*Context window.* The agent's working memory for a session: everything it has read so far, finite (§6, §18).
+
+*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§12).
+
+*Deny rule.* A permission setting that refuses an action in every mode, whatever the agent decides (§5). The form for restricted data is a deny on reading the path (§16).
+
+*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§9).
+
+*Effort.* How much the model reasons before it acts; a setting with levels (§4).
+
+*Environment variable.* A named value the shell passes to every program it starts; where an API key lives (§11, above).
+
+*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
+
+*Global file.* The file the agent reads in every project, holding how you work (§6). Its counterpart, the project file, is the brief.
+
+*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
+
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§15).
+
+*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§13).
+
+*Permission mode.* The setting that decides which actions the agent may take without asking (§4).
+
+*Plan mode.* A permission mode in which the agent reads and drafts a plan but edits nothing until you approve it (§4).
+
+*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §5); and, in Appendix B, a request you type to the agent.
+
+*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§11).
+
+*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §11).
+
+*Sandbox.* A fence the operating system puts around a command, limiting where it may write and which hosts it may reach (§5).
+
+*Session.* One conversation with the agent, from start to `/exit`, with its own context window (§18).
+
+*Usage window.* On a subscription, the allowance a session spends: a rolling five-hour window plus a weekly cap (§17).
+
+*Version control.* Git: the system that records every change to the project's files and can undo any of them (§5).
+
+*WSL2.* Windows Subsystem for Linux, a Linux environment inside Windows; where Claude Code's sandbox runs on a Windows machine (above).

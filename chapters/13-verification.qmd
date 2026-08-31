@@ -1,0 +1,95 @@
+---
+title: "13. Verification"
+---
+
+<!--
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: content bank judgment/verification-cross-language.md (folded in; module points back here); tool-chain §15 "Cross-implementation verification", "Validation, unit tests, and model checks"; deck "Verification: don't trust, re-run"
+COVERS: Cross-implementation: R vs Python vs Stata, with Stata first-class. Independence: a different agent, a different reasoning path, the written spec rather than each other's code. What counts as agreement: exact vs Monte Carlo error. Assertions and tests in one page.
+VERIFY: Stata batch mode checked 2026-08-27 against Stata's FAQs: `stata-mp -b do file.do` (Mac/Unix; executable name by flavor) and `StataMP-64.exe /e do file.do` (Windows) write a log of the same name. The worked-example table is illustrative, not from a real project.
+-->
+
+The failure worth guarding against is not code that breaks; that you catch. It is code that runs, passes a reading, and is still wrong: off by a merge key, a default argument, a silent type conversion. The output looks reasonable, so the error survives into the table. Reproducing the result does not catch it, because the same code re-run gives the same wrong answer (§15). The check is to require the result from *different* code, written independently, and to compare.
+
+## What to ask for
+
+The strongest check you have on whether a result is correct, rather than merely reproducible, is a second implementation in a second language. If you work in Stata, ask for the analysis in R; if in R, ask for Python or Stata. A mistake made while writing the analysis in one language rarely recurs, in the same place, in another: the two implementations fail independently, and that is what makes agreement mean something. Stata works well here. Agents write `.do` files competently, and they can run them without you: Stata's batch mode (`stata-mp -b do model.do` on a Mac, `StataMP-64.exe /e do model.do` on Windows) executes a do-file and writes a log of the same name, which the agent then reads in the observe step (§2).
+
+The language is necessary but not sufficient. What has to be independent is the *reasoning*. If the agent that wrote the R version translates its own code into Stata, the two carry the same misreading of the design and agree on the wrong answer. So the second implementation is written by a different agent, or at least a fresh session, working from the written specification and not from the first implementation's code. Two agents reasoning separately from the same specification keep their errors uncorrelated. Claude Code on one side and Codex on the other is the cleanest version; a fresh session of the same agent, told not to read `code/`, is the next best.
+
+That puts weight on the specification. For the check to work, `METHODOLOGY.md` (§6) has to state what a second implementer needs and nothing they should infer: the estimand; the sample, with every exclusion in the order applied; how each variable is constructed; the model, down to the family, the fixed effects, the clustering, and the weights; and which quantity is the result (a coefficient, a marginal effect, an odds ratio, a predicted contrast). If the file cannot say these things, that is a finding in itself, and it is the same finding a referee will make later.
+
+The request has three parts, and they go to different sessions. To the first:
+
+> Working only from `METHODOLOGY.md` § Main model and the data in `data/processed/`, implement the main model in Stata. Do not read anything in `code/`. Write `code/stata/model.do`, run it in batch mode, and save every estimate you report to `outputs/verification/stata-main.csv` with six decimals.
+
+The R side already exists, so ask its session to write the same estimates to `r-main.csv` in the same folder and layout. Then, to either session:
+
+> Compare `outputs/verification/r-main.csv` with `stata-main.csv`. For every quantity, show both values, the difference, and whether it is within the tolerance in `METHODOLOGY.md` § Verification. Report; do not change either implementation.
+
+The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) will not match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss is not talked into a pass afterward.
+
+Do this for the results that carry a claim: the headline estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
+
+## What the agent does
+
+The second implementation is ordinary agent work: read the specification, read the data, write the do-file, run it, read the log, fix what failed, write the estimates out. The comparison is a short script that reads two files and prints a table. What makes the exercise different from any other task is only what the agent is *not* allowed to read, and what it is not allowed to do when the numbers disagree.
+
+The agent also builds the cheaper layer of verification, the one that runs every time rather than once. These are *assertions*: one-line checks written into a script that stop it, loudly, when a stated expectation fails. In R, `stopifnot()`; in Stata, `assert`; in Python, `assert`. Ask for them at the points where analyses go silently wrong.
+
+```
+# after every merge or filter: the N you expect, stated
+dat <- left_join(births, heat, by = c("county", "year", "month"))
+stopifnot(nrow(dat) == 1214308)          # no rows gained or lost in the merge
+stopifnot(!anyDuplicated(dat$birth_id))  # one row per birth
+stopifnot(all(dat$bwt_g >= 200 & dat$bwt_g <= 7000, na.rm = TRUE))
+stopifnot(all(c("2010", "2020") %in% levels(dat$year)))
+```
+
+```
+* the same checks in Stata
+merge 1:1 county year month using "${root}/data/processed/heat.dta"
+assert _merge == 3
+drop _merge
+assert _N == 1214308
+isid birth_id
+assert inrange(bwt_g, 200, 7000) if !missing(bwt_g)
+```
+
+The expectations come from you (the N in the paper, the plausible range, the levels that must be present); the agent writes and places the checks. Two more belong in every project: a convergence check after each model fit, and a check that the sample size the model used is the sample size the paper reports. Formal unit tests, with a test runner such as `testthat`, are for functions you reuse across scripts; a paper does not need to become a package to be checked.
+
+## What you check
+
+Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent is not a result; the table is.
+
+Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations are the same warning. For the headline result, remove the temptation: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
+
+Here is what a comparison looks like when it has done its job.
+
+| Specification | R | Stata | Match |
+|:--|--:|--:|:--:|
+| OLS baseline | −0.423148 | −0.423148 | yes |
+| + county fixed effects | −0.384721 | −0.384921 | no |
+| + year fixed effects | −0.291553 | −0.291553 | yes |
+
+The second row is the signal. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference would not have been found by reading either script.
+
+That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer does not rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is not is the bug you were looking for.
+
+Agreement rules out implementation error, not specification error. If `METHODOLOGY.md` describes the wrong model, both implementations follow it faithfully and agree on the wrong answer. The check on the specification is a different one: simulate data from the model with known parameters and confirm the analysis recovers them (§12). Run both, and the two checks cover different failures.
+
+## What goes wrong
+
+*The port.* Asked for a second implementation, the agent translates the first one, because it is right there in the folder. The result agrees perfectly and proves nothing. Tell it what not to read, check what it read, or use the separate folder.
+
+*Agreement by adjustment.* Seeing a mismatch, the agent changes options in the second implementation until the numbers match the first. That destroys the check while producing a clean table. The instruction is *report, do not reconcile*; reconciling is your decision, made in the open.
+
+*The tolerance moves.* A near miss becomes "close enough" after the fact. Set the tolerance before the comparison and write it in `METHODOLOGY.md`.
+
+*Same name, different quantity.* The two files both have a column called `effect`, and one holds a coefficient while the other holds a marginal effect, or one a log-odds and the other an odds ratio, or one a conventional standard error and the other a clustered one. Compare the quantity the specification names, and make each file say which it holds.
+
+*The samples differ.* The most common discrepancy is not in the model but in who is in it: a filter applied in one implementation and not the other, missing values dropped by default in one routine and kept in another. The first number to compare is the N, before any coefficient.
+
+*Verifying everything.* Doubling the cost of every intermediate step is how the practice gets abandoned. Verify the claims.
+
+*Mistaking reproduction for verification.* A pipeline that rebuilds the same tables from the same code (§15) has shown the result is stable, not that it is right. Both matter, and they are different chapters for that reason.

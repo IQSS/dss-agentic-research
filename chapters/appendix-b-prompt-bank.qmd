@@ -1,0 +1,142 @@
+---
+title: "Appendix B. Prompt bank"
+---
+
+<!--
+STATUS: new · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: the prompts written into §7, §9, §11–§16, repeated here verbatim, plus new ones to fill each Part III chapter out to three to five. §10's slot is a placeholder until that chapter exists.
+COVERS: Three to five prompts per Part III chapter that have worked, with a one-line lead each: when to use it and what the chapter says to check. A first-session pair from §7 opens the bank.
+VERIFY: the §10 entries are missing by design (the chapter waits on the /litsearch skill); add them when §10 is written. Keep each repeated prompt identical to its chapter's copy.
+-->
+
+Prompts that have worked, three to five per stage, each with the line that says when to use it. Most are repeated from the chapters, so that the bank and the chapter agree; the rest fill the gaps. They are written for the paper of §6 and §7, and the file names are the part to change. Every one ends where the chapter says the checking starts: none of them asks the agent to confirm its own work, and several tell it not to fix what it finds.
+
+## The first session (§7)
+
+*Scaffold a new project.* In an empty folder named for the project, with any loose files dropped in:
+
+> Scaffold this folder as a paper project using the layout in my global file. Sort the loose files into it and show me the plan before moving anything. Create the root files, `.here`, and a `.gitignore` that excludes `data/raw/`, `outputs/models/`, and `logs/`. Initialize git. Do not commit yet.
+
+*Convert an existing folder.* In plan mode, after a compressed copy of the folder exists outside it:
+
+> Inventory every file in this folder with its size and modification date. Propose a table mapping each old path to its place in the paper layout from my global file, with a one-line reason per row, and flag every duplicate (the three figure folders, the two analysis folders) with your reasoning for which is current. Move nothing until I approve the table. Nothing is deleted; duplicates go to `_old/`.
+
+## Bookkeeping (§9)
+
+*Session start.*
+
+> Read `STATUS.md`, then `TASKS.md`, and tell me where we are. Then run `git status` and tell me if anything is uncommitted.
+
+*Session end.*
+
+> Update `TASKS.md`: move what is finished to Done with today's date, and on each In Progress item say what is left, not what was done. If that moved the project's state, rewrite the line of `STATUS.md` it changed, and the date. Then show me `git status` and propose a commit message.
+
+*A rename across the project.*
+
+> Rename the variable `hot_days` to `heat_days` everywhere it appears: scripts, the Stata mirror, comments, the build file, and the README. Use `git mv` for any file whose name changes. Then search the project for the old name and show me the result, and run the build to confirm nothing broke. Report the build output; do not summarize it.
+
+*A status report for a coauthor.*
+
+> From `TASKS.md` and the commits of the last two weeks, draft a one-paragraph status for my coauthor in `docs/responses/2026-09-05-status.txt`: what is done, what is in progress, what is next, with dates. Plain text, no headings. Do not describe anything as done that is still under In Progress.
+
+## Getting data (§11)
+
+*Terms before download.*
+
+> Before downloading anything from IPUMS USA, tell me how it is meant to be accessed (an API, a bulk file, a query tool), whether it needs a key, and what its terms say about redistribution, attribution, and linking. Quote the terms; do not summarize them.
+
+*A fetch with provenance.*
+
+> Fetch the 2018–2022 ACS five-year county estimates for the variables in `METHODOLOGY.md` § Covariates, through the Census API, with the script in `code/_data-acquisition/fetch-acs.R`. Save the response exactly as received to `data/raw/public/acs-5yr-2022.csv`, and add an entry to `data/raw/sources.md` with the request, the date, the vintage, and the file's checksum. Do not modify anything else in `data/raw/`.
+
+*Find the interface before scraping.*
+
+> The county heat tables at this address appear only after the page loads. Before writing any scraper, find out how the page gets its data: look for a documented API, a bulk download, or the request the page itself makes. Report what you find and which rung of the ladder it puts us on. Do not collect anything yet.
+
+*A long collection that can resume.*
+
+> Write `code/_data-acquisition/fetch-stations.py` to download the daily station files listed in `data/raw/public/stations.csv`, one request every two seconds, identifying us with a real user agent and my email. Save each file as received under `data/raw/public/stations/`, record progress in `data/checkpoints/stations.json` so an interrupted run resumes rather than restarts, and add one provenance entry for the batch. Stop and tell me if any request is refused.
+
+## Analysis, simulation first (§12)
+
+*The specification entry.*
+
+> From my description below, draft a dated entry for `METHODOLOGY.md` § Main model with four parts: the estimand; the model, with family, fixed effects, clustering, and weights; the design, with the number of counties, months, and the distribution of hot days from `data/processed/county-month-design.rds`; and the decision rule the paper will use. Mark anything I have not told you with a bracketed question rather than a guess.
+
+*The calibration check.*
+
+> Write `code/_experiments/simulate-main-model.R`. Read the county-month design from `data/processed/county-month-design.rds` (the real covariates, no outcome). For each of three truths (no effect; −1 g per hot day; −15 g), simulate 200 datasets from the model in `METHODOLOGY.md` § Main model, with county and year effects and noise at the scale we saw in the pilot, using seed = the simulation index so runs are reproducible. Fit the planned model (`feols`, two-way fixed effects, county-clustered errors) to each. Report, per truth: bias, coverage of the 95 percent interval, the rate at which the interval excludes zero, and its Monte Carlo standard error. Write the table to `outputs/tables/sim-main-model.csv`. Do not read anything under `data/raw/`.
+
+*A wrong-shape truth.*
+
+> Add a fourth truth to the simulation: no effect below five hot days a month and −15 g per day above five. Fit the planned linear model to it as before and report the same table, plus what the fitted coefficient means when the truth has that shape. Do not change the model; report.
+
+*A power curve.*
+
+> Extend the simulation to effects of −0.5, −1, −2, −3, and −5 g per hot day, 200 datasets each, and report the rejection rate with its Monte Carlo standard error at each, as a table and as a figure in `outputs/figures/working/power-main-model.pdf`. Use the same seeds as the calibration run.
+
+*After a failure.*
+
+> The calibration table shows a false-positive rate of 0.19 under no effect. Do not change the model. List the plausible reasons, in order of likelihood for this design, and for each say what one additional simulation would confirm or rule it out.
+
+## Verification (§13)
+
+*The second implementation.* To a fresh session, or a different agent:
+
+> Working only from `METHODOLOGY.md` § Main model and the data in `data/processed/`, implement the main model in Stata. Do not read anything in `code/`. Write `code/stata/model.do`, run it in batch mode, and save every estimate you report to `outputs/verification/stata-main.csv` with six decimals.
+
+*The comparison.*
+
+> Compare `outputs/verification/r-main.csv` with `stata-main.csv`. For every quantity, show both values, the difference, and whether it is within the tolerance in `METHODOLOGY.md` § Verification. Report; do not change either implementation.
+
+*Assertions where analyses go wrong.*
+
+> In `code/clean-natality.R`, add a `stopifnot()` after every merge and every filter stating the number of rows I expect there, using the counts in `METHODOLOGY.md` § Sample. Add a check that `birth_id` is unique and that `bwt_g` lies in 200 to 7000. Run the script and report which assertions fired.
+
+*A discrepancy to localize.*
+
+> The county-fixed-effects estimate differs between R and Stata at the fourth decimal. List the settings that could account for a difference of that size on a deterministic fit (singleton groups, small-sample corrections, the variance estimator, the reference level, missing-value handling), check which of them differ between the two implementations, and report. Do not change either implementation.
+
+## Writing, revision, and talks (§14)
+
+*The standing instruction.* Prepended to every drafting request:
+
+> Use only what is in `METHODOLOGY.md`, `outputs/tables/`, and the figure captions. Where a claim, a number, or a reference is not in those files, leave a bracketed gap and list it at the end. Do not fill it from what you know.
+
+*The methods section.*
+
+> With the standing instruction above: draft the Methods section in `manuscript/methods.md` from `METHODOLOGY.md` and the scripts in `code/`, describing the model as fitted, including any default the script relies on. Equation first, then the prose. Past tense for what was done. Then produce a table of every number in the draft with the file, row, and column it came from.
+
+*The reviewer response.*
+
+> Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
+
+*The Word round trip.*
+
+> Convert `manuscript/revision-1-returned.docx` back to markdown with the coauthor's tracked changes shown, and diff it against `manuscript/revision-1.md`. Sort the changes into substantive (a claim, a number, a method) and typographic, and list the substantive ones with their location. Do not merge anything.
+
+*The talk outline.*
+
+> From `manuscript/paper.md`, propose a twelve-slide outline for a twenty-minute talk: one claim per slide, in the paper's order, with the figure from `outputs/figures/final/` that carries each claim. No bullets from the abstract. I will cut it before you draft any slide.
+
+## Reproducibility and hand-off (§15)
+
+*The fresh-clone check.*
+
+> Clone this repository into a temporary folder, restore the environment from the lockfile, and run the build there. Report every step's outcome. Then compare every file in `outputs/tables/` and `outputs/figures/` with the committed version and list any that differ. Do not fix anything; report.
+
+*The lockfile audit.*
+
+> List every package the scripts in `code/` load and compare the list with `renv.lock`. Report any package that is loaded but not pinned, and any pinned package no script loads. Do not change the lockfile.
+
+*The data README.*
+
+> Write `data/README.md` documenting every column the scripts read from `data/processed/natality-county.parquet`: name, type, units, source per `data/raw/sources.md`, and how it was derived. Read the scripts to find the columns; do not infer from the column names.
+
+*The pre-deposit audit.*
+
+> Audit the deposit snapshot in `outputs/archive/deposit-v1/`. Extract every comment line from every tracked file and read them; do not search for patterns. Report anything in these categories with file and line: absolute paths or home-directory names; any reference to an AI assistant or agent, including in `.gitignore` and commit messages; other people's unpublished words; internal codenames, including strings printed at run time; development history in comments; TODOs and placeholders; and any data file ever added to the history. Then read the documentation against the code and report every claim that does not match. Report; change nothing.
+
+## Literature search and synthesis (§10)
+
+*The prompts for this stage follow when §10 is written, after the search workflow it documents has been run; the rule that governs all of them is already in §1: open every reference.*

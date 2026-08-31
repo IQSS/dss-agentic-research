@@ -1,0 +1,54 @@
+---
+title: "Appendix D. Institutional access at Harvard"
+---
+
+<!--
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: tools/harvard-ai-setup (README.md, claude-code.md, claude-code-settings.example.json); HUIT API portal overview pages; Claude Code's Amazon Bedrock docs
+COVERS: HUIT gateway setup for Claude Code; keeping it from colliding with a personal plan; data-security-level mapping; Codex. Dated.
+VERIFY: checked 2026-08-27. HUIT AI Services offers AWS Bedrock (Anthropic, Meta, Mistral), Azure OpenAI, OpenAI Direct, and Gemini gateways through the Harvard API Portal, pay-as-you-go with a HUIT billing ID or credit-based; the Bedrock API is approved for Level 3. Claude Code's Bedrock variables per its docs (ANTHROPIC_SMALL_FAST_MODEL is deprecated in favour of ANTHROPIC_DEFAULT_HAIKU_MODEL; WebSearch unavailable on Bedrock; sessions start in Manual, Auto in the cycle). Whether Codex can be pointed at HUIT's OpenAI gateways is NOT verified. Model IDs in the example date fastest: take them from the portal's Available Models page.
+-->
+
+What follows is specific to Harvard and dated August 2026; the body of the guide does not depend on it. It answers three questions: how to run Claude Code through the university's gateway rather than a personal plan, how to do that without breaking a personal plan you also have, and what data may go through it.
+
+## What HUIT provides
+
+Harvard University Information Technology runs a set of AI gateways under the name *HUIT AI Services*, reached through the Harvard API Portal with a HarvardKey login. As of this writing there are four: AWS Bedrock, which serves Anthropic's Claude models along with Meta's and Mistral's; Azure OpenAI; OpenAI Direct; and Google Gemini. Access is pay as you go, billed to a HUIT billing ID (a `B` followed by five digits, obtained through the HUIT billing form), or credit-based where a school provides credits. Each gateway issues an API key of its own.
+
+Two facts matter for a researcher. The gateways are covered: the vendors behind them do not train on inputs, and the Bedrock gateway is approved for data up to Harvard's Level 3, which is the coverage §16 requires for de-identified data. And the cost is metered rather than an allowance (§17): a departmental account pays per token, and the HUIT portal shows the spend.
+
+## Claude Code through the gateway
+
+Claude Code can route through the Bedrock gateway instead of Anthropic's own service. The configuration is a block of environment variables in a settings file; nothing else changes about how you use it.
+
+```
+{
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "1",
+    "ANTHROPIC_BEDROCK_BASE_URL": "https://go.apis.huit.harvard.edu/ais-bedrock-llm/v2",
+    "CLAUDE_CODE_SKIP_BEDROCK_AUTH": "1",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "ANTHROPIC_API_KEY": "your HUIT Bedrock key",
+    "ANTHROPIC_MODEL": "a model ID from the portal's Available Models page",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "the Haiku ID from the same page"
+  }
+}
+```
+
+Line by line: the first turns on the Bedrock path; the second points it at Harvard's gateway rather than AWS; the third tells Claude Code not to attempt AWS's own authentication, because the gateway authenticates with the key instead; the fourth removes a header the gateway does not accept; the key is yours from the portal; and the two model lines pin which models run, using the exact IDs the portal lists for the gateway, because Claude Code's own defaults name models the gateway may not serve. The values are strings, in quotes, including the ones that look like numbers.
+
+Where the file goes depends on whether you also have a personal plan.
+
+*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway. A step-by-step version of this for someone who has never opened a terminal, on a Mac and on Windows, is available from the author.
+
+*A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
+
+On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because there is no login: the key is the login, and removing the file is how you sign out.
+
+## Codex
+
+HUIT's OpenAI gateways serve the OpenAI models to code through the API. Codex can be configured to use a provider other than OpenAI's own service, but whether it works through HUIT's gateways has not been verified for this guide, which makes no claim that it does. For Codex on institutional terms, the covered paths at Harvard are the ChatGPT Edu and Business plans that some schools provide, which HMS guidance lists as Level 3 tools alongside Claude; ask your school's IT group which you have. A personal ChatGPT plan is a consumer plan for the purposes of §16, whatever school you are in.
+
+## Data levels
+
+Harvard classifies data in five levels, and the mapping to tools in §16's sidebar is the operative one: public and consumer tools for Level 1 only; the HUIT gateways and the HUIT AI Sandbox for up to Level 3; special-request systems for Level 4, which is where identifiable health data and contractually restricted data sit; nothing for Level 5. The gateway makes de-identified data permissible under university policy. It does not change what a data-use agreement says, and HMS guidance is explicit that a DUA may separately restrict a dataset's use with AI; ask the Office of Research Administration before a restricted dataset goes near any of it. All of this is on the HUIT and school IT pages, which are more current than this appendix; check them.

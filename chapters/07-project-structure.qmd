@@ -1,0 +1,140 @@
+---
+title: "7. Project structure"
+---
+
+<!--
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: ~/.config/agents/TEMPLATES.md § Paper Project Template (the shape only, simplified); tool-chain §12 "Workspace structure", "Project shapes"; quickstart §7; deck "Modern research is folders on a computer", "See it: scaffold a project, live"; ~/.config/agents/skills/scaffold/SKILL.md (the walk-through)
+COVERS: The messy-folder problem. The paper shape and the reason for each directory (raw data read-only; code tiers; outputs; docs; manuscript). Scaffolding a new project: the /scaffold walk-through, which is also the talk demo. Converting an existing folder. Dropbox and OneDrive caveats.
+VERIFY: checked 2026-08-27: Dropbox ignore is `xattr -w com.dropbox.ignored 1` on a Mac and `Set-Content -Stream com.dropbox.ignored -Value 1` in PowerShell (Dropbox help, "How to set a file or folder to be ignored"); OneDrive has no user-settable per-folder ignore (an administrator-controlled folder-exclusion feature began rolling out in August 2026, off by default). Re-check the OneDrive claim at release.
+-->
+
+Most research lives in cloud-shared folders: dozens of them, each organized differently, hard to navigate even for the person who built them. An agent walking into one has the same problem you do, with less context. The fix is the one that helps a new RA: agree on a structure that works, use it for every project, and have the agent build it.
+
+## The messy folder
+
+Here is a folder every reader will recognize.
+
+```
+mortality_disparities_study/
+|-- Data/                       412 files
+|-- data_clean/                  88 files
+|-- Analysis FINAL/
+|-- analysis_v2_USE_THIS/
+|-- figures/                     51 files
+|-- figures_new/                 37 files
+|-- figs_FINAL_v3/               44 files
+|-- from_coauthor/               63 files
+|-- Stata_do/                    19 files
+|-- Paper draft v7 (1).docx
+`-- ... 18 more folders
+```
+
+You can work in this folder because you remember what happened. An agent cannot. Asked to update a figure, it has to choose among three figure folders by name, and the names do not say which is current. Asked to fix the cleaning script, it has to find out which of two analysis folders is live. Asked to read the data, it faces 412 files with no marker for which are the originals and which are derived, so nothing stops it from writing into an original. And a fix it makes in one copy of a duplicated script does not reach the other. Every one of these is a mistake you would make too, on a bad day; the agent has more bad days, because it starts every session with no memory of the folder.
+
+Structure fixes this for both of you. A folder whose layout is written down (§6) is a folder the agent can navigate by name, and the layout is what makes bookkeeping (§9), a one-command build (§15), and a data rule you can enforce (§5, §16) possible at all.
+
+## The paper shape
+
+One layout for every paper. Here it is for the project from §6, with the reason for each part below.
+
+```
+heat-birthweight/
+|-- AGENTS.md              # the brief (§6); CLAUDE.md imports it
+|-- README.md              # for humans: what this is and how to run it
+|-- STATUS.md              # where things stand, one screen; rewritten
+|-- TASKS.md               # open and finished work
+|-- METHODOLOGY.md         # dated entries: why each analytic choice was made
+|-- .here                  # zero-byte marker for the project root
+|-- code/
+|   |-- _startup/          # sourced at the top of every script: packages,
+|   |                      #   options, data loading, shared functions
+|   |-- _experiments/      # simulations and checks (§12); not in the build
+|   |-- _data-acquisition/ # fetch scripts (§11); run when data are refreshed
+|   |-- clean-natality.R   # one script per stage; each starts from _startup/
+|   |-- model-heat-bwt.R
+|   `-- _final/            # manuscript figures and tables; run last
+|-- data/
+|   |-- raw/               # as received; never modified; often not committed
+|   `-- processed/         # built from raw by code/; rebuildable
+|-- outputs/
+|   |-- figures/           # committed: the exact versions matter
+|   |-- tables/            # committed
+|   `-- models/            # saved fits: large, rebuildable, not committed
+|-- manuscript/            # drafts, submissions, reviewer responses
+|-- docs/
+|   |-- briefs/            # dated: what collaborators sent, plans shared
+|   |-- notes/             # undated: reference material, explainers
+|   `-- references/        # the PDFs you cite
+`-- logs/                  # output of long runs; not committed
+```
+
+*The root files* are the agent's brief and the project's state, covered in §6. `.here` is a zero-byte file whose only job is to mark the project root, so that every script names a file by its path from the root and works from RStudio, from the command line, and from the agent alike. In Stata the equivalent is a `setup.do` at the root that defines a global for the project root, and every path is built from it:
+
+```
+dat <- read_parquet(here("data", "processed", "natality-county.parquet"))  # R
+use "${root}/data/processed/natality-county.dta", clear            * Stata
+```
+
+No `setwd()`, no absolute paths, no `../`: a project with those breaks the moment it is moved or opened on a coauthor's machine.
+
+*Raw data is read-only.* `data/raw/` holds data exactly as received, and nothing ever changes a file there; new data arrives as a new, dated file (§11). The pipeline reads it; getting new raw data is a deliberate act (a download script, a fresh extract), never a side effect of an analysis. State the rule in `AGENTS.md`, and enforce it with a permission rule (§5) and, for restricted data, with a read-only file permission as well. Everything in `data/processed/` is built from `data/raw/` by code, which makes it rebuildable and therefore not precious: if a derived file is wrong, fix the script and rebuild rather than editing the file, because the next run would overwrite the edit without record.
+
+*Code in three tiers.* `_startup/` holds what every script needs: the packages, the options, the data loading, the functions you reuse. Every analysis script begins by sourcing it, which is why the agent can run any one analysis without the others. The analyses themselves sit at the top level of `code/`, one script per stage or question, named for what they do rather than numbered, so a new one can be added without renumbering. `_final/` builds the manuscript's figures and tables from the saved results and runs last. The underscore on the tier folders sorts them to the top of the listing and leaves the analyses in alphabetical order beneath.
+
+*Outputs split by whether the exact version matters.* Figures and tables are committed to version control: the version in the submitted manuscript is a fact you will need again at revision. Saved model fits are large and rebuildable from code and data, so they are not. `logs/` is where long runs (§12) write their output so the agent, and you, can read what happened; not committed either.
+
+*Documents, dated or evergreen.* `docs/briefs/` holds what came from collaborators and what you shared with them, with a date prefix (`2026-08-19-coauthor-comments.md`) so the folder sorts into a timeline. `docs/notes/` holds reference material that stays true across revisions, undated. `docs/references/` holds the papers. `manuscript/` holds the paper itself and, when the time comes, one folder per submission.
+
+The whole folder is under version control from the first day, which is what makes an agent's changes reviewable and reversible (§5). What git carries is code and text. The `.gitignore` excludes `outputs/models/`, `logs/`, `data/processed/` when it is large, and `data/raw/` from the first day (Appendix A.5): a data-use agreement almost always forbids copying the data to a third party, and pushing to GitHub is exactly that (§16).
+
+This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`.[^tc-shapes] Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
+
+[^tc-shapes]: The full paper template is in the tool-chain map, §12, "Project shapes and conditional propagation", with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`.
+
+## Scaffolding a new project
+
+Standing up a new project in this shape is the first thing to delegate, and it is the live demonstration in the talk this guide backs. I keep it as a packaged workflow, `/scaffold` (§8); you can do the same with one request, once the layout is in your global file (§6) or copied from Appendix A.
+
+Make an empty folder named for the project (`heat-birthweight`; for a paper, `collaborator-topic`), drop into it any loose files you already have (the analysis plan, the coauthor's draft, a data extract), and start the agent there. Then ask:
+
+> Scaffold this folder as a paper project using the layout in my global file. Sort the loose files into it and show me the plan before moving anything. Create the root files, `.here`, and a `.gitignore` that excludes `data/raw/`, `outputs/models/`, and `logs/`. Initialize git. Do not commit yet.
+
+What a good run looks like. The agent confirms the project name and shape in one line and waits. It lists the loose files and proposes a destination for each in a table (the `.docx` to `manuscript/`, the analysis plan to `docs/briefs/` with a date prefix, the `.csv` to `data/raw/`), flags anything ambiguous rather than guessing, and waits again. Then it creates the tree, writes a first `AGENTS.md` from what it saw in the files it sorted, writes `README.md`, a `STATUS.md` whose stage line says only that the project was scaffolded today, and an empty `TASKS.md` and `METHODOLOGY.md`, adds an empty placeholder file in every empty folder so git keeps them, writes the `.gitignore`, and runs `git init`. It ends with a folder listing and a three-line "what to do next".
+
+What you check. The listing matches the shape. The draft `AGENTS.md` says what the project is and where things live, and you correct what it guessed. The `.gitignore` contains the data rule. `git status` shows no data file waiting to be committed. Then commit, yourself or by asking.
+
+If the folder lives inside Dropbox, one more thing must happen in a particular order, described below, and the agent should do it as part of scaffolding.
+
+## Converting an existing folder
+
+The folder in the first section can be converted to the shape, but it is a bigger job than scaffolding and the wrong one to do casually. Do it in plan mode (§4), with three rules fixed in advance.
+
+Nothing is deleted. Files move; duplicates are set aside in a holding folder (`_old/`, excluded from git), not removed. Raw data is moved, never rewritten. And before anything moves, a compressed copy of the whole folder is made, outside the folder, and its name written into `TASKS.md`.
+
+Then the work is an inventory and a mapping. Ask the agent to list every file with its size and date, and to propose a table: each old path, its new home, and a one-line reason. The interesting rows are the duplicates: three figure folders whose contents overlap, two analysis folders of which one is live. Ask it to resolve those by modification date and by what the current manuscript actually references, and to show its reasoning; you decide. Approve the table, and save it in `docs/notes/` as the migration log. Only then does anything move.
+
+After the move, the scripts are broken, because every `setwd()` and absolute path now points at the old layout. Ask the agent to find all of them and replace each with a path from the project root, then to run every script that still matters and report which ran clean. The scripts that fail are the second inventory: some are dead, some need a package, some read a file that was never in the folder. Nothing in `_old/` is deleted until the manuscript's figures rebuild from the new layout, which is also the first reproducibility check the project has ever had (§15).
+
+One folder is often shared with a coauthor who will not adopt the structure. That is fine. Their material arrives into `docs/briefs/`, dated; the manuscript goes to them as Word and comes back as Word (§14); and the analysis folder is yours.
+
+## Dropbox and OneDrive
+
+Most research folders are cloud-synced, and two things go wrong when a project of this shape lives in one.
+
+The first is volume. `.git/`, an R package library (`renv/`), a Python environment (`.venv/`), saved model fits, and logs contain thousands of small files or large binaries that change on every run. A sync client tries to upload all of it, every time, and a project can stall for hours while it does. The second is worse: two machines, or you and a coauthor, editing the same `.git/` through sync corrupts it, because the sync client and git both believe they own the files.
+
+Dropbox has a fix, with a rule about order. Any folder can be marked ignored, so that it stays on disk but never syncs. On a Mac the mark is set in the Terminal; on Windows, in PowerShell:
+
+```
+xattr -w com.dropbox.ignored 1 .git                              # Mac
+Set-Content -Path '.git' -Stream com.dropbox.ignored -Value 1    # Windows
+```
+
+The mark must go on *before the folder fills*. Create the folder empty, mark it, confirm the mark is there, and only then run the command that populates it (`git init`, `renv::init()`, the first model fit). Marking a folder that Dropbox has already indexed makes it un-index every file inside, and while that runs, which can take hours for a package library, the folder can be unreadable. Put the sequence in your global file so the agent does it every time, in that order, for `.git/`, `renv/`, `.venv/`, `outputs/models/`, and `logs/`.
+
+OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" does not stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
+
+Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
+
+[^tc-sync]: The tool-chain map, §1, "Cloud sync and project infrastructure", and the quickstart's per-project recipe (§7) give the full sequence, including the language-environment folders.

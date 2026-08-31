@@ -1,0 +1,58 @@
+---
+title: "8. Repeatable workflows"
+---
+
+<!--
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: tool-chain §10 "Patterns and extension points worth knowing inside Claude Code" (skills, hooks); ~/.config/agents/skills/ (scaffold, eda, dag, review-plan, review-analysis, targets, pueue); the Claude Code skills and hooks docs and the Codex skills page, fetched 2026-08-27
+COVERS: Skills and slash commands: what to package once you have done a thing three times. Examples from my own set. Hooks in one paragraph.
+VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Codex: .agents/skills/ scanned from the working directory up to the repository root, ~/.agents/skills/ for personal; /skills picker, $name mention, automatic on description; custom prompts deprecated. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop; Codex hooks experimental (v0.114, March 2026, opt-in, not on Windows) per secondary sources only. Re-check at release.
+-->
+
+Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it is where a piece of your workflow stops being a conversation and becomes a command.
+
+## What a skill is
+
+A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report` in Claude Code or `$status-report` in Codex, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
+
+```
+---
+name: status-report
+description: Draft a one-paragraph status for a coauthor from TASKS.md and
+  the recent commits. Use when asked for a status, an update, or "where are
+  we". Not for the session-start summary; that is a plain request.
+---
+
+Read TASKS.md and the commits of the last two weeks. Draft one paragraph in
+docs/responses/YYYY-MM-DD-status.txt, plain text, no headings: what is done,
+what is in progress, what is next, with dates. Describe nothing as done that
+is still under In Progress. Show me the draft; send nothing.
+```
+
+The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with the same discipline: where the output goes, what to report, what not to do.
+
+Both agents follow the same open format for the file, and differ only on where they look for it. Each skill is a folder named for the skill, holding `SKILL.md`, under:
+
+| | Claude Code | Codex |
+|:--|:--|:--|
+| Every project | `~/.claude/skills/` | `~/.agents/skills/` |
+| This project (committed) | `.claude/skills/` | `.agents/skills/` |
+| Run it | `/name`, or automatically | `$name`, `/skills` to browse, or automatically |
+
+The Claude app lists skills under the same slash menu. If you run both agents, one folder can serve both: keep the skill in one location and put a copy, or on a Mac a link, at the other. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+
+## What to package
+
+The rule is three. The first time you write a request, it is a request; the second, you copy it from your notes or from Appendix B; the third, it becomes a skill. The candidates in this guide are already written: the session rituals (§9), a fetch with its provenance entry (§11), the calibration check (§12), the second implementation and its comparison (§13), the number-traceability table (§14), the fresh-clone check and the pre-deposit audit (§15). Each prompt in Appendix B is a skill body waiting for a header.
+
+Facts about a project (where things live, what is restricted) do not belong in a skill; they are the brief's, and a skill that hard-codes them breaks in the next project. Nor do standing rules (how you write, what to never do); they are the global file's, and a skill that repeats them drifts from it. A skill holds a *procedure*, and reads the facts and the rules from the files that hold them.
+
+My own set, as examples of the shape. `/scaffold` builds a new project in the paper layout, the demonstration in §7. `/eda` renders a first-look report on a new dataset (types, missingness, distributions, correlations, outliers) into `outputs/eda/`, dated, the afternoon the data arrive. `/dag` draws a causal diagram from a written graph, with the adjustment set computed rather than guessed. `/review-plan` is a Reviewer 2 critique of an analysis plan before the work is done, and `/review-analysis` an audit of an analysis after it is done: identification, convergence, conventions. `/targets` and `/pueue` are the pipeline and long-job helpers from the fuller stack, outside this guide. Each is a hundred to two hundred lines, most of it the checks; each started as a prompt I had typed three times.[^tc-ext]
+
+[^tc-ext]: The tool-chain map, §10, "Patterns and extension points", covers skills alongside the surfaces this guide leaves out: subagents, plugins, and the servers that extend what an agent can reach.
+
+A skill that fails is a skill you edit, the same way a correction becomes a rule in the brief (§6). Keep each one to a screen or two, and put anything longer (a template, a checklist the agent reads in full) in a file beside it.
+
+## Hooks in one paragraph
+
+A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it does not depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. In Codex, hooks are an opt-in experiment as of this writing, so the deny rules carry the enforcement there. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.

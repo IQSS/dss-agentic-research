@@ -1,0 +1,17 @@
+---
+title: "10. Literature search and synthesis"
+---
+
+<!--
+STATUS: new · PHASE: 3 — written only after a /litsearch skill exists and has been run
+SOURCE: none
+COVERS: Search, fetch, screen, extract into a matrix. The fabricated-citation problem and the rule (open every reference). DOI, Crossref, OpenAlex checks. Handoff to Zotero.
+-->
+
+## What to ask for
+
+## What the agent does
+
+## What you check
+
+## What goes wrong

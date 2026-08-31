@@ -1,0 +1,60 @@
+---
+title: "18. Failure modes and habits"
+---
+
+<!--
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: tool-chain §12 "Anti-patterns", §13a "The blind-click-fest failure mode", §10 "Context hygiene"; synthesizes §2, §5, §6, §9, §12, §13, §15 of this guide
+COVERS: Confident-but-wrong. Context blow-up. Stale memory. The click-fest. Over-delegation. The supervisor stance as the habit that prevents most of it.
+VERIFY: `/compact` exists in both agents and `/context` in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's; no claim is made about Codex memory.
+-->
+
+Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures are not settings. They are the stance of §2, kept up on the days it is inconvenient.
+
+## Confident but wrong
+
+The failure that matters is not the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it is not. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs is not code that is right (§2); a rule that fired is not a finding (§12); two numbers that agree are not two independent numbers (§13).
+
+The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and the *What you check* sections are the list.
+
+## Context blow-up
+
+An agent's working memory for a session (one conversation, from its start to `/exit`) is finite (§6), and a long session fills it: every file read, every command's output, every diff rides along on each subsequent turn. The symptoms are recognizable once you have seen them. The agent forgets a rule from the brief it followed an hour ago. It repeats work it already did. It contradicts an earlier answer without noticing. It slows, and on a metered plan it starts to cost (§17). Then, near the limit, the session is compacted into a summary, and whatever did not make the summary is gone.
+
+The habits: one session per task, closed when the task is done, with `STATUS.md` and `TASKS.md` as the hand-off to the next (§9). Name files rather than pasting them. When a session has to run long, compact it yourself with `/compact`, while you can still say what the summary should keep, rather than waiting for the automatic one; in Claude Code, `/context` shows what is filling the window. Keep the brief short (§6), because it is loaded every time. And treat a session that has started to forget as finished: restart, and let the files carry the state.
+
+## Stale memory
+
+Two kinds. The agent's own notes across sessions (§6), which record what it noticed, and can record a file that has since been renamed or a decision that has since been reversed. And the agent's assumptions from earlier in a session, formed when a file said one thing, and kept after you changed it. Both are worse than no memory, because the agent acts on them without flagging that they are memories.
+
+The habits: the file wins over the note, always, and a rule you rely on memory to keep belongs in the brief. Decisions are dated in `METHODOLOGY.md`, and a reversal is a new dated entry, not an edit of the old one, so the record shows which came later. After you change a file the agent has already read, say so; and open the agent's notes now and then and delete what has expired.
+
+## The click-fest
+
+A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you would not fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have.
+
+The habits are the posture in §5: the routine allowed, the never denied, and prompts kept only for what you will actually read. The signal that the balance is wrong is your own behavior. Approving the same prompt for the tenth time means that action belongs on the allow list; approving something you would have refused had you read it means it belongs on the deny list. A prompt rate you cannot keep up with is a setting to change, not a discipline to summon.
+
+## Over-delegation
+
+The agent will take whatever you hand it, including the parts of the work that were yours. Three hand-offs go wrong.
+
+*Delegating the judgment.* The estimand, the exclusion rule, the prior, the interpretation of a discrepancy between two implementations, the decision about what to do when a calibration fails. Asked, the agent decides, fluently, and the decision looks like analysis. These are yours, and the sign that one has slipped is a number in your table you cannot explain in your own words.
+
+*Delegating the checking.* "Check that this is right" returns "it is right." An agent verifying its own work has the same blind spots the work has. The check comes from something else: a simulation with a known truth, a second implementation by a different session, a reference you opened, a build you ran yourself (§12, §13, §15).
+
+*Delegating the boundary.* Letting the agent write its own permission rules, edit the brief that constrains it, or decide which data are restricted. The boundary is set outside the session it binds (§5, §16), or it is not a boundary.
+
+There is a quieter form. Work that happens in the conversation and never reaches a script: a recode applied once, a filter agreed in chat, a table produced from a session and pasted into the manuscript. It is in the paper and nowhere in the repository. The rule from §15 is the cure: everything the paper reports comes from the build.
+
+## The loop that fixes the wrong thing
+
+Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that will not merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
+
+The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened, the fix is the problem. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
+
+## The supervisor stance
+
+Most of this chapter is prevented by the stance §2 set out, held consistently. Describe the outcome and its constraints rather than the steps. Ask for a plan when the shape of the task is not obvious, and edit it before the agent starts. Let it run without narrating each step back to you. When it finishes, check the result against something other than its own account. Keep it inside a boundary you set in advance. Open and close every session with the two rituals of §9. And let nothing into the paper that the build cannot reproduce.
+
+An agent is a research assistant with more speed and less judgment than any you have had. Treat it the way you would treat an assistant you have known for a week: clear instructions, real trust for the mechanical work, and your own eyes on everything that carries a claim. The difference is that this one never gets tired of being checked.

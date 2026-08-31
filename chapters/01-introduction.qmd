@@ -1,0 +1,60 @@
+---
+title: "1. Introduction"
+---
+
+<!--
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
+SOURCE: source/pitch.md; tool-chain "The Operating Model" (introduction; four-pillars figure); deck "The shift, in one idea", "What changes when AI acts in your project"
+COVERS: The pitch, expanded. Bookkeeping, simulation, verification, plus the writing and literature layer. What agents don't do. The four pillars: be a supervisor; teach it your way; verify and reproduce; keep it bounded. How to read this guide.
+-->
+
+A chat assistant answers questions. An agent does work inside your project: it creates the folders, writes and runs the code, reads the error, fixes it, and updates the status file, without you carrying text back and forth between a chat window and RStudio. That is the whole difference. This guide is about what follows from it when the output is a paper or a talk.
+
+You already use chat AI for writing and for code. An agent is the next step rather than a different kind of thing: the same models, given the ability to read your files, run your code, and see the result. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more grounded than a chat window, not less.
+
+## Where it pays
+
+The best places to start are the ones where the agent's work is cheap to check or harmless if wrong. Three stages of a paper fit that description well, and a fourth fits with a rule attached.
+
+*Bookkeeping.* Project structure, file organization, a running to-do list, the README that says where everything is. Tedious, nobody's idea of research, and harmless if the agent gets a name wrong. It is also where an agent shows you, in ten minutes, what delegating feels like (§9).
+
+*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone should do this and almost nobody does, because writing the simulation is the tedious part. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
+
+*Verification.* Have the agent re-implement your analysis in a second language (Python if you work in R; R if you work in Stata) and compare the numbers. Two independent implementations that agree are strong evidence. A disagreement localizes a bug you would not have found by reading (§13).
+
+*Writing and literature.* Drafting a methods section from a written methodology file and a results table is close to mechanical, and you will read every sentence anyway. Literature search is the case with the rule attached: an agent can search, fetch, screen, and tabulate faster than you can, and it can also produce a citation that does not exist, formatted perfectly. Open every reference (§10, §14).
+
+What these have in common is that something other than the agent's own confidence tells you whether the work is right: a truth you built into the simulation, a second implementation, a reference you opened, a folder listing you can read. Choosing tasks with that property is the most useful habit in this guide, and Part III is organized around it.
+
+## What agents do not do
+
+Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II is the answer, and it is short. You write it down once, in a file the agent reads at the start of every session.
+
+Agents do not know which data you may send where. Nothing in the agent knows that an IRB protocol, a data-use agreement, or a business-associate agreement exists. Given access to a folder, it will read the folder. The rule has to be written where the agent reads it, and where it must never be broken it has to be enforced by a setting rather than a sentence (§5, §16).
+
+Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
+
+That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed, which cuts both ways.
+
+::: {.needspace height="19cm"}
+:::
+
+## Four pillars
+
+Everything in this guide serves one of four principles, and each maps to the chapters that carry it out.
+
+![](figures/four-pillars.svg){#fig-four-pillars fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
+
+The first pillar is a stance. A messenger carries text between a chat window and an editor; a driver accepts or rejects each suggested line as it appears; a supervisor describes the outcome and judges the result (§2, §4). The second is preparation: conventions written down once, and projects that share one shape, so you and the agent both know where things are (§6, §7). The third is the scientific habit applied to a new source of error: simulation with a known truth, a second implementation, and a pipeline that still runs with the agent gone (§12, §13, §15). The fourth is the safety net: permissions that ask before anything destructive, a sandbox that limits what a command can touch, version control that makes any change reversible, and a data rule that is enforced rather than requested (§5, §16). The pillars come from the tool-chain map, which argues for them at length and for the tools underneath;[^tc-model] this guide takes them as given and shows the work.
+
+[^tc-model]: *Agentic AI Tool Chain: An Opinionated Ecosystem Map*, "The Operating Model". The map is written for data scientists and covers the full stack. This guide never argues a tool choice; where you want one, it points there.
+
+## How to read this guide
+
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II teaches the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a paper, from bookkeeping to hand-off (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and the failure modes that a supervisor's habits prevent (§18). The appendices hold files to copy and edit (A), prompts that have worked (B), the terminal in two pages for readers who choose that route (C), and institutional access at Harvard (D).
+
+If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at. Everyone should read §16 before an agent goes near restricted data.
+
+A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Stata is assumed to be the language you already work in; the worked examples are written in R, which the agent can translate. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: for the former it footnotes the tool-chain map, for the latter the quickstart.[^siblings] Terms are defined at first use, and Appendix C ends with a glossary.
+
+[^siblings]: The two sibling documents: *Agentic AI Tool Chain* (what is in the stack, and why) and *Agentic AI Quickstart* (how to set it up).

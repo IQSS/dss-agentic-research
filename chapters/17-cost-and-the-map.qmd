@@ -1,0 +1,53 @@
+---
+title: "17. Cost, and the map"
+---
+
+<!--
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: deck "The map, honestly costed", "Where to start"; tool-chain §14 (only the idea of usage windows)
+COVERS: Tiers: chat, editor agent, CLI agent, pipelines. Setup cost and money for each. Usage windows. When not to bother.
+VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). ChatGPT, from chatgpt.com/pricing read in the browser the same day: Free $0 with limited Codex access, Go $8 (limited Codex access), Plus $20 (expanded Codex usage), Pro from $100 at 5x or 20x; Business and Enterprise per seat; consumer tiers list training with an opt-out. Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, `/status` in Codex, per the tool-chain map §14. No wall-clock setup estimates by design (global rule).
+-->
+
+Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter is the costing, so that you climb as far as your work needs and no further.
+
+## Four tiers
+
+| Tier | What it is | What it takes to set up | What it buys |
+|:--|:--|:--|:--|
+| 0. Chat | A browser tab. Where you already are. | Nothing. | Answers, drafts, explanations. You are the messenger (§2). |
+| 1. Editor agent | Claude Code or Codex inside VS Code or Positron, next to the file you are editing. | Install the extension, sign in, write a first project file (§6). | Edits in place, with the project in view. You are the driver. |
+| 2. Agent in a folder | The same agents in a terminal or the desktop app, pointed at a project folder. | Git, one project in the paper shape (§7), the global and project files (§6), a permission posture (§5). | Whole tasks delegated and checked. You are the supervisor. This guide. |
+| 3. Pipeline | A one-command build with pinned packages that reproduces the paper (§15). | Grows over a project: the build command, the lockfile, assertions (§13). | Runs without the agent. The hand-off and the deposit. |
+
+Tier 1 pays for itself in the first hour. Tier 2 pays for itself in the first week, on bookkeeping alone, and it is where the three tasks in §1 (simulation, verification, literature) become possible. Tier 3 pays for itself on the second paper that reuses the pipeline, and at deposit, when a reviewer or a repository asks for the code to run. Nobody should build tier 3 in a week; it accretes, one build step at a time, and the agent does most of the accreting.
+
+## Money
+
+The agents come with the chat plans; there is nothing separate to buy. As of August 2026:
+
+| | Claude | ChatGPT |
+|:--|:--|:--|
+| Free | Chat only | Chat, and limited Codex access |
+| Entry | Pro, \$20 a month; includes Claude Code | Plus, \$20 a month, with expanded Codex use (Go, \$8, has the limited access of Free) |
+| Heavy use | Max, \$100 or \$200 a month, at five and twenty times the Pro allowance | Pro, \$100 or \$200 a month, at five and twenty times Plus |
+| Institutional | Team, \$25 a seat; Enterprise, per seat plus usage | Business, Enterprise, and Edu, per seat |
+| Metered | The API, per token | The API, per token |
+
+Which one. The entry plan covers tiers 1 and 2 for most researchers most of the time. Move up when you hit the usage window (next section) most days, not before. Move to the metered path when the data require it (an institutional gateway is what makes de-identified data permissible, §16) or when the institution is paying: an institutional gateway bills to a departmental account, pay as you go (Appendix D). Metered use is where the question "what does a session cost?" has a dollar answer, and the answer ranges from cents for a bookkeeping task to tens of dollars for a long session that reads a great deal; the vendor's dashboard shows it.
+
+## Usage windows
+
+On a subscription, cost arrives as an allowance rather than dollars: a rolling five-hour window that starts at your first prompt, plus a weekly cap, shared across everything you do with that vendor (Claude Code and the claude.ai chat draw from one bucket; Codex in the terminal and in the cloud likewise). The quotas change too often to print, but both agents show where you stand: `/usage` in Claude Code, `/status` in Codex. The metered path has no windows; it counts tokens, against a spending limit you set.
+
+What spends the allowance is not the number of requests but their weight. Every turn resends everything the session has read so far, so a long session with many files open costs more per message as it goes; a higher effort level and a larger model cost more per turn (§4); and a model fit that runs inside the agent's session, streaming output, spends the window while it waits. What saves it: one session per task, closed when the task is done; `/compact` when a session runs long; naming files rather than pasting them; a lower effort for mechanical work; and long fits run outside the agent, from a script, with the agent reading the log afterward (§12).
+
+## When not to bother
+
+Some work is cheaper without an agent, and knowing which is part of the judgment. A question with no project attached belongs in the chat window. A ten-line script you can write faster than describe is faster to write. A task whose result would take as long to check as to do (a one-off table you will read once) gains nothing from delegation, because the checking is the work. Anything touching data you cannot cover and cannot fake (§16) is off the table until you can do one or the other. And a project you are handing off next month does not need tier 3; it needs a README.
+
+The rule holds: climb only when the payoff justifies the friction. Most researchers reading this should live at tier 2, with tier 3 growing underneath the papers that will be deposited.
+
+## Where to start
+
+Pick one task you already do badly and would not mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. The pitch that opened this guide is one page; the map is Part III; the judgment is this part. The build, for those who want tier 3, is a workshop rather than a chapter, and the quickstart is its manual.

@@ -1,0 +1,173 @@
+---
+title: "Appendix A. Starter files"
+---
+
+<!--
+STATUS: new · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: A.1 and A.2 are the §6 worked files, copied verbatim by the build-time splice (edit them in §6, then re-run the splice; do not edit here). A.3–A.5 derived from ~/.config/agents/ (AGENTS.md, TEMPLATES.md paper template) cut to a researcher's needs.
+COVERS: Global AGENTS.md (researcher edition). Project AGENTS.md for a paper. TASKS.md. A minimal justfile (with a no-extra-tool R alternative). A .gitignore. Copy and edit.
+VERIFY: `set windows-shell` is a documented just setting; Stata batch-mode forms per §13's VERIFY note. Re-check the just syntax at release.
+-->
+
+Five files to copy and edit. The first two are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
+
+## A.1 The global file
+
+Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you do not actually hold; a rule you would not enforce on yourself teaches the agent to ignore the others.
+
+```
+# How I work
+
+Quantitative social scientist. R first, Stata for collaborators, some Python.
+
+## Projects
+- One folder per paper, under git. Its AGENTS.md says where things live.
+- `data/raw/` is read-only. Derived files go in `data/processed/`.
+- Paths via `here::here()`. No `setwd()`, no absolute paths.
+- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+
+## Code
+- R: tidyverse style, the native pipe `|>`, one script per stage.
+- Packages pinned with `renv`. Never install one without updating the lockfile.
+- Comment what a block is for, not what each line does.
+
+## Statistics
+- State the estimand before fitting. Report every estimate with an interval.
+- No model is trusted until it recovers known parameters from simulated data.
+- Fits longer than a few minutes run outside the agent, from a script I start.
+
+## Writing
+- Short sentences. Point first, then the qualification. Prose, not bullets.
+- Methods: the equation first, then the prose that explains it.
+- American spelling. Oxford comma.
+
+## Never
+- Never read, print, or copy `data/raw/`, or anything a project marks restricted.
+- Never delete or overwrite a data file. Never rewrite git history.
+- Ask before anything that takes more than a few minutes or reaches the network.
+
+## Every session
+- Read `STATUS.md`, then `TASKS.md`, at the start.
+- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+```
+
+## A.2 The project file for a paper
+
+Where it goes: `AGENTS.md` in the project folder, with a `CLAUDE.md` beside it containing the line `@AGENTS.md`. The example is the paper from §6 and §7; every path and name is specific to it, and that is what makes it useful. Replace the description, the layout, and the conventions with yours; keep the four headings. If the raw data are restricted, the working file named under *Where things live* is the synthetic file of §16, and the *Off limits* section is where the restricted path is named.
+
+```
+# heat-birthweight
+
+Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
+Target: Demography. Decisions live in METHODOLOGY.md, the current state in
+STATUS.md, open tasks in TASKS.md.
+
+## Where things live
+- `data/raw/natality/`: restricted microdata under a DUA. See Off limits below.
+- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
+- `data/processed/`: what we build. Working file: `natality-county.parquet`.
+- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
+  `run-all.R` runs all three in order.
+- `outputs/`: figures and tables the manuscript reads.
+- `manuscript/`: the paper, Quarto to Word for the coauthor.
+
+## This project
+- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
+  The two must agree before a number goes in the paper.
+- Estimand: the effect of one more third-trimester day above 35 °C on county
+  mean birthweight. Two-way fixed effects with county-clustered standard errors.
+- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+
+## Off limits
+- `data/raw/natality/` is restricted. Never read, list, or copy it.
+- Work only from `data/processed/natality-county.parquet`.
+- Never send any file under `data/` to a web search or an external service.
+```
+
+## A.3 TASKS.md
+
+Where it goes: the project root. Three headings, one line per task, a date on each finished item. The agent reads it at the start of every session, after `STATUS.md`, and updates it as it works (§6, §9); you read it to remember where you were. The comment at the top tells the agent the conventions and costs nothing.
+
+```
+# Tasks
+
+<!--
+One line per task. Move lines between sections as status changes; never
+delete a line, move it to Done with the date. An In Progress line says
+what is left, not what was done. Read this file at session start; update
+it before the session ends.
+-->
+
+## To Do
+- Write the simulation study for the main model (guide §12).
+- Stata mirror of the main model, from METHODOLOGY.md only (guide §13).
+
+## In Progress
+- (nothing)
+
+## Done
+- 2026-08-27 — Scaffolded the project in the paper shape (guide §7).
+```
+
+## A.4 A minimal justfile
+
+Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you do not already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
+
+[^just]: The install recipe is in the quickstart, and the reasoning for just over a folder of shell scripts is in the tool-chain map, §15a. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
+
+```
+# Command front door: `just` lists the recipes, `just build` runs the pipeline.
+set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
+
+# Rebuild everything from raw data to manuscript figures, in order.
+build:
+    Rscript code/clean-natality.R
+    Rscript code/model-heat-bwt.R
+    Rscript code/_final/figures.R
+
+# Manuscript figures and tables only, from saved results.
+figures:
+    Rscript code/_final/figures.R
+
+# The Stata mirror of the main model, in batch mode (guide §13). The log is
+# written next to the do-file. Windows: replace the command with
+#   & "C:\Program Files\Stata19\StataMP-64.exe" /e do code/stata/model.do
+stata:
+    stata-mp -b do code/stata/model.do
+```
+
+The same build without `just`: save the script below as `code/run-all.R` and run it from the project root with Rscript.
+
+```
+# run-all.R: the one-command build. Stops at the first script that fails.
+scripts <- c("code/clean-natality.R", "code/model-heat-bwt.R",
+             "code/_final/figures.R")
+for (s in scripts) {
+  message("== ", s)
+  if (system2("Rscript", s) != 0) stop("Failed: ", s)
+}
+```
+
+## A.5 .gitignore
+
+Where it goes: the project root. It says what git does not carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one is not.
+
+```
+# Data never leaves the machine (§16); processed data is rebuilt by code/
+data/raw/
+data/processed/
+
+# Rebuildable or large
+outputs/models/
+logs/
+_old/
+
+# Editor and OS leftovers
+.Rproj.user/
+.Rhistory
+.DS_Store
+Thumbs.db
+
+# Personal agent settings; the shared .claude/settings.json is committed
+.claude/settings.local.json
+```

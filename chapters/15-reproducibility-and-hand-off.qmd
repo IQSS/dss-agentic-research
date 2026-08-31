@@ -1,0 +1,68 @@
+---
+title: "15. Reproducibility and hand-off"
+---
+
+<!--
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+SOURCE: tool-chain §15 "The agent-detachment pattern", "When this matters most"; TEMPLATES.md "Pre-deposit audit", "Remediating a deposit that has already been published"; quickstart §8 (the justfile shape); deck "Reproducibility: it has to run without the agent"
+COVERS: It has to run without the agent. One-command build. Lockfiles (renv, uv; Stata's `require`). The acceptance check. Pipeline as audit trail. Deposit (OSF, Dataverse, Zenodo, openICPSR) and the pre-deposit audit.
+VERIFY: `require` (Correia and Seay, Stata Journal 24(4), 2024; `require setup` writes exact versions by default) checked 2026-08-27. Zenodo's 30-day self-deletion window per TEMPLATES.md; re-check the repository policies at release. renv and uv command names as of 2026.
+-->
+
+The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. It is a transcript. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
+
+## What to ask for
+
+*One command.* Everything the paper reports is produced by a script, and one command runs the scripts in order and stops at the first failure: `just build`, or the `run-all.R` that does the same without an extra tool (Appendix A.4). Ask for it early, when the project has two scripts, so that it grows with the project rather than being reconstructed at submission. The build file is a contract, and the one file the agent should not edit freely: it may propose changes, and you review each one, because a change to the build changes what "reproduced" means.
+
+*A lockfile.* The scripts need the packages they were written against, at the versions they were written against. In R, `renv` does this: `renv::init()` once at the start of a project, `renv::snapshot()` whenever a package is added, and a committed `renv.lock` from which `renv::restore()` rebuilds the library on any machine. In Python, `uv` does the same with `pyproject.toml` and `uv.lock`, restored by `uv sync`. Stata has no lockfile, and two habits stand in: a `version` line at the top of every do-file, which pins Stata's own behavior, and Correia and Seay's `require`, which pins the community packages (`require reghdfe==6.12.3`), with `require setup` writing the list for you.[^require] Ask the agent to add the lockfile the first time it installs a package, and never to install one without recording it: that line is in the global file (§6) for this reason.
+
+[^require]: Sergio Correia and Matthew P. Seay, "require: Package dependencies for reproducible research", *Stata Journal* 24(4), 2024.
+
+*The acceptance check.* Before the work is called done, the whole pipeline runs clean from a fresh copy: not the folder you have been working in, with its accumulated state, but a clone of the repository into an empty directory, the environment restored from the lockfile, the one command run, and the outputs compared with the committed ones. Ask the agent to do exactly that in a temporary folder and report what happened, including whether the tables match to the decimal (they should; for sampling-based results, within Monte Carlo error, §13).
+
+> Clone this repository into a temporary folder, restore the environment from the lockfile, and run the build there. Report every step's outcome. Then compare every file in `outputs/tables/` and `outputs/figures/` with the committed version and list any that differ. Do not fix anything; report.
+
+*The deposit.* When the paper is accepted, or before, the code and what data may be shared go to a repository that gives them a persistent identifier: OSF, Dataverse, Zenodo, or openICPSR, whichever your field and journal expect. What goes, assembled first as a snapshot folder (`outputs/archive/deposit-v1/`) that is exactly what will be uploaded: the scripts, the build file, the lockfile, a README with the run order and the software versions, a data README documenting every column the code reads, and the processed data if the agreement allows it. What does not go, ever, and has never been in the repository's history: restricted data (§16). Between the decision and the upload sits the audit below.
+
+## What the agent does
+
+Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two cannot disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
+
+For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The tool-chain map has the case for each and the quickstart the recipes;[^tc-runners] the one command above is enough for most papers.
+
+[^tc-runners]: The tool-chain map, §15a (just), §15b (targets), §15c (Snakemake); the quickstart, §8.
+
+## What you check
+
+The fresh-clone run, yourself, once. Not the agent's report of it: the run. On a second account, a colleague's machine, or a clean directory, restore and build, and compare. If it works there, it will work for the reviewer; if it works only in your folder, something in your folder is doing work the repository does not know about.
+
+That every package the code loads is in the lockfile. The agent can list the difference between what the scripts load and what the lockfile pins; the list should be empty.
+
+That the README's run order names every script the build runs and no script that does not exist, and that the software versions it states are the ones in the lockfile.
+
+That the pipeline is the audit trail. Anything the paper reports that was produced in a chat, by hand, or by a step nobody scripted is not reproducible, however correct. When a session ends, the pipeline you can rerun is the evidence of what the work does; the transcript is not.
+
+For the deposit, the audit, in two halves.
+
+*Contamination: what must not be in a public snapshot.* Absolute paths and home-directory names. Any reference to an AI assistant or agent, in files, in `.gitignore`, in empty directories, and in commit messages, which are not files and are the place such references survive. Other people's unpublished words: reviewer comments quoted, reviewer names. Internal codenames, including the ones printed at run time by `cat()` or `display`. Development history in comments ("fixed on", "used to"). Worklists: TODOs, placeholders, "still outstanding". And restricted data, anywhere in the history: `git log --all --diff-filter=A --name-only` lists every file ever added, and the largest objects in the history are worth listing too.
+
+*Correctness: an archive can be tidy and wrong.* Every documented claim matches the code: the model form, the adjustment set, the outputs, the units. Every filename mentioned resolves to a file that exists or that the build produces. The data README documents every column the code reads. The author list on the record matches the manuscript's byline exactly, same people, same order; a DOI'd record that omits a coauthor is not fixable afterward.
+
+The rule the audit turns on: *read, do not search.* A pattern search finds only what you already thought of, returns clean, and you believe it. Have the agent extract every comment line in every tracked file and read them in batches, then read the rest against the code. Use a search to verify a fix, never to find the problem. And when a comment carries a reference that has to go, rewrite it rather than delete it: the reasoning in it is usually why the code looks the way it does, which is worth more to a replicator than the reference was. Never add a line to the public README saying the repository was cleaned; it tells a reader what to hunt for.
+
+## What goes wrong
+
+*It works on my machine.* An absolute path, a `setwd()`, a package installed but never snapshotted, a file the scripts read from a folder git ignores. Each passes in your folder and fails in the clone. The fresh-clone test exists for these, and it is the only test that finds them.
+
+*The build passes and the numbers differ.* A seed that was never set, so a bootstrap or a fit gives a different answer each run. A data file refreshed since the table was made. A figure that was edited by hand after the script drew it. The comparison step of the acceptance check is what catches this; a build that merely exits clean does not.
+
+*The transcript problem.* A step that was done in the chat (a recode the agent applied once, a filter agreed in conversation) and never written into a script. It is in the results and nowhere in the repository. Everything the paper reports comes from the build, or it is not in the paper.
+
+*Restricted data in the history.* Removed from the folder months ago, still in a commit from the first week. The history check above finds it; fixing it means rewriting history before anything is public, which is why the audit runs before the first tag.
+
+*Audit by search.* The sweep for "agent" returns nothing, and the comment says "assistant". The sweep for "Claude" returns nothing, and the commit message says "Co-Authored-By". Read.
+
+*The late audit.* A deposit is public and, after a short window, permanent: Zenodo lets the depositor remove a version for thirty days and then not at all. Before the first tag every one of these problems costs a commit; after a DOI exists, the cheap fixes are gone. Audit before the tag, and if a deposit went out unaudited, audit it the same day.
+
+*Building the pipeline for a paper in review.* A near-final project with three fits left and no iteration ahead is below the line where a runner pays off; rerun by hand and finish. The one-command build pays for itself on the next paper, where it can be there from the first script.
