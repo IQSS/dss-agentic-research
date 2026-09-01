@@ -923,7 +923,7 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 *The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal is not a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
-*Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. Raw is what arrived; everything else is processed.
+*Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
 
 *Overwritten raw.* A refetch replaced last year's file, the numbers in Table 1 shifted, and the cause took a week to find. Dated files, and a deny rule on the folder.
 
@@ -1878,7 +1878,7 @@ Both CLIs run on Windows itself. One thing does not: Claude Code's sandbox (§5)
 
 *Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
 
-*Global file.* The file the agent reads in every project, holding how you work (§6). Its counterpart, the project file, is the brief.
+*Global file.* The file the agent reads in every project, holding how you work (§6). The project file is its counterpart, and is listed in this glossary under *brief*.
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
 

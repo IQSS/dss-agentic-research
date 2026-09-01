@@ -67,7 +67,7 @@ Both CLIs run on Windows itself. One thing does not: Claude Code's sandbox (§5)
 
 *Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
 
-*Global file.* The file the agent reads in every project, holding how you work (§6). Its counterpart, the project file, is the brief.
+*Global file.* The file the agent reads in every project, holding how you work (§6). The project file is its counterpart, and is listed in this glossary under *brief*.
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
 
