@@ -4,9 +4,9 @@ title: "Appendix B. Prompt bank"
 
 <!--
 STATUS: new · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: the prompts written into §7, §9, §11–§16, repeated here verbatim, plus new ones to fill each Part III chapter out to three to five. §10's slot is a placeholder until that chapter exists.
+SOURCE: the prompts written into §7, §9, §10, §11–§16, repeated here verbatim, plus new ones to fill each Part III chapter out to three to five.
 COVERS: Three to five prompts per Part III chapter that have worked, with a one-line lead each: when to use it and what the chapter says to check. A first-session pair from §7 opens the bank.
-VERIFY: the §10 entries are missing by design (the chapter waits on the /litsearch skill); add them when §10 is written. Keep each repeated prompt identical to its chapter's copy.
+VERIFY: §10's entries were added 2026-09-01 when that chapter was written; its first prompt is the verbatim copy from §10. Keep each repeated prompt identical to its chapter's copy.
 -->
 
 Prompts that have worked, three to five per stage, each with the line that says when to use it. Most are repeated from the chapters, so that the bank and the chapter agree; the rest fill the gaps. They are written for the paper of §6 and §7, and the file names are the part to change. Every one ends where the chapter says the checking starts: none of them asks the agent to confirm its own work, and several tell it not to fix what it finds.
@@ -139,4 +139,18 @@ Prompts that have worked, three to five per stage, each with the line that says 
 
 ## Literature search and synthesis (§10)
 
-*The prompts for this stage follow when §10 is written, after the search workflow it documents has been run; the rule that governs all of them is already in §1: open every reference.*
+*A search from scratch.* The long one, because the protocol is the point; everything after it is the agent working.
+
+> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with a note of where it came from, and is not cited. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation — leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
+
+*Check a reference list you already have.* For a draft written before any of this, or one a coauthor sent:
+
+> Take every reference in `manuscript/references.bib` and resolve each one by its DOI, or by title and first author where there is no DOI. Report three lists: resolved and matching, resolved but with a title, author or year that differs from the entry, and did not resolve anywhere. Check Crossref and DataCite both before calling anything unresolved. Change nothing; I will fix them.
+
+*Extend a search that has run.* When the first round is in and you want to know whether it is done:
+
+> Using the terms that appear in the included set, build a second round of queries and run them against the same sources. Report only records that are new after deduplication against what we already have, and screen them on the same criteria. If the round adds nothing that meets them, say so — that is the stopping rule, and I would rather hear it than have you keep going.
+
+*Rule on the borderline set.* When the agent brings back the ones it would not decide:
+
+> For each borderline record, quote the sentence from the fetched abstract that makes it borderline, and name which criterion it sits on the edge of. Do not recommend include or exclude. I will decide, and then you record my reason in the screening log.

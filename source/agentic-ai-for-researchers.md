@@ -1,7 +1,7 @@
 ---
 title: Agentic AI for Researchers
 subtitle: A Working Guide
-version: "1.3"
+version: "1.4"
 ---
 
 <!--
@@ -782,18 +782,76 @@ The README, by using it: the run instructions work when you follow them without 
 # 10. Literature search and synthesis
 
 <!--
-STATUS: new · PHASE: 3 — written only after a /litsearch skill exists and has been run
-SOURCE: none
-COVERS: Search, fetch, screen, extract into a matrix. The fabricated-citation problem and the rule (open every reference). DOI, Crossref, OpenAlex checks. Handoff to Zotero.
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-09-01 (first draft; needs a read-through)
+SOURCE: the /litsearch skill (~/.config/agents/skills/litsearch/) and its first real run; docs/briefs/2026-08-31-litsearch-skill-scope.md (the design decisions and what the field already has)
+COVERS: Protocol before searching. Search, screen, extract into an evidence table. The fabricated-citation problem and the rule (open every reference). Identifier resolution against Crossref, DataCite, PubMed, arXiv. Handoff as .bib and .ris, no reference manager assumed.
+VERIFY: the run described here was made on 2026-08-31 against OpenAlex, Crossref, PubMed and arXiv, on the question behind papers/worthington-journal-review-times; 15 queries, 604 records retrieved, 507 after deduplication, 37 included, 11 borderline, and the counts in the table are that run's. The three failures reported are all from it: the retrieval cap that stopped the run, the DataCite record reported as a probable fabrication, and the preprint pair deduplication missed. Rerun and re-check the counts if the protocol changes.
 -->
+
+Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, attributed to authors who work in the field — and entirely invented. Everything in this chapter follows from one decision about that: do not try to make it less likely. Make it impossible to miss.
 
 ## What to ask for
 
+*The protocol, before a single query runs.* Write down the question, what counts as included and excluded, the date range, the languages, which sources will be searched, and what "done" means. Have the agent draft it from your description, then read it and approve it. This is the step you already know how to do, and it is what makes the search auditable, re-runnable, and arguable by a reviewer. Skipping it because the question looks simple is how you end up with a set of papers nobody can defend.
+
+Vagueness is the thing to fix here rather than later. "Papers about social mobility" is not a protocol; it is a mood. If the agent cannot tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
+
+*The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier**. Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but cannot resolve goes to a quarantine file — never into the table, never into the bibliography.
+
+*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex and Crossref are cross-domain, free, and need no account: OpenAlex for finding, Crossref for confirming. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a licence, so if you have one, say so and use it; if you do not, record their absence as a gap rather than pretending the search was exhaustive.
+
+*What you want back.* A dated, self-contained directory, not a chat answer: the protocol; every query string with its source and date; the raw responses, unmodified; a screening log with a recorded reason for every exclusion; the evidence table; the quarantine; and a bibliography in both `.bib` and `.ris`, because no single format is universal.
+
+> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with a note of where it came from, and is not cited. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation — leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
+
+Three parts of that request carry the weight. *Show me the protocol first*, because approval before searching is the only cheap moment to change the scope. *Record a reason from the protocol for every exclusion*, because an exclusion without a reason is indistinguishable from an oversight, and 459 of them are impossible to audit after the fact. And *leave a cell empty*, because an empty cell is a reading task, while a guessed one is a fabrication with more steps.
+
 ## What the agent does
+
+It queries the interfaces rather than answering from what it has read. That distinction is the whole chapter: a model asked "what does the literature say" will produce fluent, sourced-looking prose from memory, and a model asked to query OpenAlex will return records that exist.
+
+Run on the question behind a real paper — how submission-to-acceptance times vary across fields, publishers, and journal prestige — the stages produced this:
+
+| stage | n |
+|:--|--:|
+| retrieved, across 15 queries | 604 |
+| dropped: no identifier | 6 |
+| after deduplication | 507 |
+| excluded at screening | 459 |
+| borderline, referred to me | 11 |
+| **included** | **37** |
+
+Of the 37, twenty-five were screened on an abstract the agent actually fetched and twelve on the title alone, because no abstract came back. The table says which, in a column, for every row. That column is the difference between a reading plan and a list of things somebody skimmed.
+
+The exclusions are not a black box either. They resolve into the protocol's own categories: 424 with no duration outcome at all, 26 measuring the wrong interval — grant review, cancer treatment delay, time to tuberculosis diagnosis — 7 with no data, and 2 single-journal reports.
+
+Then the verification pass re-fetches every surviving record by its identifier and compares. This is mechanical and belongs in a script rather than in a conversation, because you will run it more than once and because a check you can rerun is a check you will rerun.
 
 ## What you check
 
+*That the verifier passed, and what it said.* Not "the agent said it verified them". The output should name a count and the checks it ran.
+
+*The quarantine, especially when it is empty.* Ask for the number every time. **Zero records reaching the table from the model** is the result you want, and you only know it because somebody counted. A quarantine that is quietly deleted when empty teaches you nothing; one that is reported at zero teaches you the check ran.
+
+*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. That is fine at this stage, and it is not fine in the sentence you write about it.
+
+*Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they do not add up, one of the stages is lying.
+
+*Every reference you actually cite.* Open it. Not all 37 — the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper says what the row claims it says. That last step is reading, and it does not delegate.
+
 ## What goes wrong
+
+*The citation that does not exist.* The failure this chapter is built around. It does not look like an error: the formatting is right, the journal is real, the authors publish in the field, and the year is plausible. It cannot be caught by reading carefully, because careful reading is what it is designed to survive. It can only be caught by resolution — asking the registrar whether that identifier exists — which is why the rule is mechanical rather than a matter of vigilance.
+
+*The accusation that was wrong.* On the run above, the verifier reported a real and directly relevant paper as a probable fabrication. It was not: the record is registered with DataCite, and the verifier had asked only Crossref, which is one registrar among several. Had that message been believed, a good paper would have been thrown away — so a tool that cries fabrication needs to be right, and "it did not resolve" must mean "no registrar has it", not "the first place I asked did not". Treat a fabrication verdict as a claim to check, not a fact.
+
+*The constraint that was the wrong instrument.* The protocol for that run set a cap on how many records could be retrieved. It fired — 604 against a cap of 300 — and stopping was correct, but the cap itself was a mistake, and it was withdrawn rather than raised. A retrieval cap does not constrain a search methodologically; the question and the criteria do that. What it actually does is make your evidence base a function of each interface's relevance ranking, which is opaque and differs between them. "The first 300 by relevance" is not a defensible sampling frame. Bound the search with the criteria and a stopping rule, and if you want a number, make it a checkpoint that reports and continues rather than a wall.
+
+*The duplicate that survived.* Deduplication matched on identifier, then on title and year, and still let through a preprint and its published version, because the two titles differ by a single word. Both would have been counted. Cross-field and cross-repository work is full of these, and the fix is a human eye on the borderline set rather than a cleverer rule.
+
+*Screening from memory.* If the agent excludes a paper because it knows the paper, the exclusion is unauditable and probably wrong. The instruction is that a screening decision cites the text that was fetched — and where no abstract came back, that the record was screened on title, and the table says so.
+
+*The empty column read as a finding.* In the run above, the limitation column was empty for all 37 rows, because no retrieved abstract stated one. That is a gap in what was read, not a property of the literature. An empty cell is honest; the danger is reading a column of blanks as though the papers had no limitations.
 
 # 11. Getting data
 
@@ -1604,9 +1662,9 @@ Thumbs.db
 
 <!--
 STATUS: new · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: the prompts written into §7, §9, §11–§16, repeated here verbatim, plus new ones to fill each Part III chapter out to three to five. §10's slot is a placeholder until that chapter exists.
+SOURCE: the prompts written into §7, §9, §10, §11–§16, repeated here verbatim, plus new ones to fill each Part III chapter out to three to five.
 COVERS: Three to five prompts per Part III chapter that have worked, with a one-line lead each: when to use it and what the chapter says to check. A first-session pair from §7 opens the bank.
-VERIFY: the §10 entries are missing by design (the chapter waits on the /litsearch skill); add them when §10 is written. Keep each repeated prompt identical to its chapter's copy.
+VERIFY: §10's entries were added 2026-09-01 when that chapter was written; its first prompt is the verbatim copy from §10. Keep each repeated prompt identical to its chapter's copy.
 -->
 
 Prompts that have worked, three to five per stage, each with the line that says when to use it. Most are repeated from the chapters, so that the bank and the chapter agree; the rest fill the gaps. They are written for the paper of §6 and §7, and the file names are the part to change. Every one ends where the chapter says the checking starts: none of them asks the agent to confirm its own work, and several tell it not to fix what it finds.
@@ -1739,7 +1797,21 @@ Prompts that have worked, three to five per stage, each with the line that says 
 
 ## Literature search and synthesis (§10)
 
-*The prompts for this stage follow when §10 is written, after the search workflow it documents has been run; the rule that governs all of them is already in §1: open every reference.*
+*A search from scratch.* The long one, because the protocol is the point; everything after it is the agent working.
+
+> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with a note of where it came from, and is not cited. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation — leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
+
+*Check a reference list you already have.* For a draft written before any of this, or one a coauthor sent:
+
+> Take every reference in `manuscript/references.bib` and resolve each one by its DOI, or by title and first author where there is no DOI. Report three lists: resolved and matching, resolved but with a title, author or year that differs from the entry, and did not resolve anywhere. Check Crossref and DataCite both before calling anything unresolved. Change nothing; I will fix them.
+
+*Extend a search that has run.* When the first round is in and you want to know whether it is done:
+
+> Using the terms that appear in the included set, build a second round of queries and run them against the same sources. Report only records that are new after deduplication against what we already have, and screen them on the same criteria. If the round adds nothing that meets them, say so — that is the stopping rule, and I would rather hear it than have you keep going.
+
+*Rule on the borderline set.* When the agent brings back the ones it would not decide:
+
+> For each borderline record, quote the sentence from the fetched abstract that makes it borderline, and name which criterion it sits on the edge of. Do not recommend include or exclude. I will decide, and then you record my reason in the screening log.
 
 # Appendix C. The terminal in two pages
 
