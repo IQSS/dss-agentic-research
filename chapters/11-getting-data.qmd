@@ -78,4 +78,4 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 *Rate limits hit.* A script with no pause, blocked after an hour, and with it every address behind the institution's network. Throttle, identify yourself, and cache.
 
-*The log written from memory.* Provenance filled in a month later, from what the agent or you recall. The entry is written when the file is, or it is fiction.
+*The log written from memory.* Provenance filled in a month later, from what the agent or you recall. Write the entry in the same step that saves the file, or it will be written from memory.

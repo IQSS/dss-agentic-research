@@ -34,7 +34,7 @@ Agents do not know which data you may send where. Nothing in the agent knows tha
 
 Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed, which cuts both ways.
+That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed: more work gets done in an afternoon, and a mistake reaches further before anyone notices.
 
 ::: {.needspace height="19cm"}
 :::

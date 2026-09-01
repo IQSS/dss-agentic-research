@@ -52,7 +52,7 @@ Agents do not know which data you may send where. Nothing in the agent knows tha
 
 Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed, which cuts both ways.
+That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed: more work gets done in an afternoon, and a mistake reaches further before anyone notices.
 
 ::: {.needspace height="19cm"}
 :::
@@ -326,7 +326,7 @@ A *sandbox* is a fence the operating system puts around a command: inside it, th
 
 Every change an agent makes is a git change, and that is what makes delegating tolerable. Before a task, the working copy is clean: `git status` shows nothing, so whatever the agent does will show up, alone, as a diff. After the task, `git diff` is the review (§9 covers reading it, in the app or the terminal). A single file the agent got wrong comes back with `git restore <file>`. A whole task that went wrong comes back with `git revert` of its commit, and a task you approved but regret next week comes back the same way, because the history is still there. The habit that makes this work is a commit before every task you delegate and one after, so that each commit is one task and the undo is one command.
 
-Two limits. Git undoes what it tracks, and it does not track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. An agent that can undo your undo has no undo.
+Two limits. Git undoes what it tracks, and it does not track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
 
 ## A starting posture
 
@@ -837,7 +837,7 @@ Then the verification pass re-fetches every surviving record by its identifier a
 
 *Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they do not add up, one of the stages is lying.
 
-*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper supports what the row claims about it. That last step is reading, and it does not delegate.
+*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper supports what the row claims about it. That last step is yours, and it is done by reading the paper.
 
 ## What goes wrong
 
@@ -931,7 +931,7 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 *Rate limits hit.* A script with no pause, blocked after an hour, and with it every address behind the institution's network. Throttle, identify yourself, and cache.
 
-*The log written from memory.* Provenance filled in a month later, from what the agent or you recall. The entry is written when the file is, or it is fiction.
+*The log written from memory.* Provenance filled in a month later, from what the agent or you recall. Write the entry in the same step that saves the file, or it will be written from memory.
 
 # 12. Analysis, simulation first
 
@@ -1128,7 +1128,7 @@ Here is what a comparison looks like when it has done its job.
 
 The second row is the signal. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference would not have been found by reading either script.
 
-That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer does not rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is not is the bug you were looking for.
+That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer does not rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is none of them is the bug you were looking for.
 
 Agreement rules out implementation error, not specification error. If `METHODOLOGY.md` describes the wrong model, both implementations follow it faithfully and agree on the wrong answer. The check on the specification is a different one: simulate data from the model with known parameters and confirm the analysis recovers them (§12). Run both, and the two checks cover different failures.
 
@@ -1363,7 +1363,7 @@ Two smaller leaks are worth closing at the same time. Data files never go into g
 
 ## Local models as the fallback
 
-When no covered vendor exists for the data, and the synthetic-data route will not do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. Codex can do this: `codex --oss` runs an open-weight model through Ollama, with the smaller model needing about 16 GB of memory. Claude Code has no local mode. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model does not change: a DUA that restricts processing by AI restricts it on your laptop too. Local removes the disclosure problem, not the permission one.
+When no covered vendor exists for the data, and the synthetic-data route will not do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. Codex can do this: `codex --oss` runs an open-weight model through Ollama, with the smaller model needing about 16 GB of memory. Claude Code has no local mode. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model does not change: a DUA that restricts processing by AI restricts it on your laptop too. Running the model yourself settles where the data went; it does not settle whether you were allowed to process it that way.
 
 > **Harvard.** Harvard classifies data in five levels; identifiable health data is Level 4, and so is contractually restricted data, which covers most DUAs. As of August 2026, HUIT's AI API gateway (pay-as-you-go, billed to a HUIT billing ID; the path Claude Code can use, Appendix D) and the HUIT AI Sandbox are approved for data up to Level 3, and the vendors behind them do not train on inputs. HMS guidance maps the tools by level: public and consumer tools for Level 1 only; the Sandbox, Claude, ChatGPT Edu, and Copilot for Level 3; special-request systems for Level 4; nothing for Level 5. The same guidance notes that a DUA may separately restrict a dataset's use with AI, and to ask the Office of Research Administration before using a restricted dataset. Check the current pages before relying on any of this; the levels are stable, the tool list is not.
 

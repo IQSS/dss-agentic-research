@@ -58,7 +58,7 @@ Then the verification pass re-fetches every surviving record by its identifier a
 
 *Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they do not add up, one of the stages is lying.
 
-*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper supports what the row claims about it. That last step is reading, and it does not delegate.
+*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper supports what the row claims about it. That last step is yours, and it is done by reading the paper.
 
 ## What goes wrong
 
