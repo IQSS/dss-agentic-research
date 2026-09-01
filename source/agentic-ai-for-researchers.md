@@ -462,7 +462,7 @@ Five more files do specific jobs. None is required on day one.
 
 *Convention files.* When one topic in the global file outgrows a screen, move it to its own file alongside (`WRITING.md`, `CODING.md`, `MODELING.md`) and leave a one-line pointer behind: "For prose voice, see `WRITING.md`." The agent reads the pointer every session and the file only when the task calls for it. Two rules make this work: name the file for what it contains, so the agent can choose it from the name alone, and make each one self-contained, so it can be read without the others.
 
-*`STATUS.md`.* Where the project stands right now, on one screen: the stage and the date it was last updated, the headline result so far, what is in motion, what is waiting on someone else, the facts the agent would otherwise hunt for (the current N, the specification in force, the working file), and the risks that are not yet tasks. It is rewritten in place when the state changes and never added to, so it says where the project is and not how it got there. The agent reads it first in every session, before `TASKS.md`; you read it when a coauthor asks how the paper is going.
+*`STATUS.md`.* Where the project stands right now, on one screen: the stage and the date it was last updated, the main result so far, what is in motion, what is waiting on someone else, the facts the agent would otherwise hunt for (the current N, the specification in force, the working file), and the risks that are not yet tasks. It is rewritten in place when the state changes and never added to, so it says where the project is and not how it got there. The agent reads it first in every session, before `TASKS.md`; you read it when a coauthor asks how the paper is going.
 
 *`TASKS.md`.* The record of open and finished work: three headings, *To Do*, *In Progress*, and *Done*, with a date on each finished item. The agent reads it after `STATUS.md` to see what is open and what is half-done, and updates it as work happens; you read it on Monday to remember Friday. Deliberately low-tech. §9 covers the session habits around it.
 
@@ -1083,7 +1083,7 @@ The R side already exists, so ask its session to write the same estimates to `r-
 
 The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) will not match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss is not talked into a pass afterward.
 
-Do this for the results that carry a claim: the headline estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
+Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
 
 ## What the agent does
 
@@ -1116,7 +1116,7 @@ The expectations come from you (the N in the paper, the plausible range, the lev
 
 Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent is not a result; the table is.
 
-Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations are the same warning. For the headline result, remove the temptation: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
+Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations mean the same thing: the second implementation was copied from the first rather than written from `METHODOLOGY.md`, and it verifies nothing. For the primary result, put the first implementation out of reach: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
 
 Here is what a comparison looks like when it has done its job.
 
@@ -1332,7 +1332,7 @@ Two lines cover most cases, and the rest of the chapter is how to live inside th
 
 Everything else (code, text, public and aggregate data, synthetic data) can go where you like, with one caveat below about unpublished results.
 
-The rule that makes this workable is that the agent needs the *shape* of your data far more than the data. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without seeing a real row. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. There the known parameters are what matters. Here it is that no real row was ever sent. For restricted data this is the default, not the fallback.
+The rule that makes this workable is that the agent needs the *shape* of your data far more than the data itself. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without ever seeing the real data. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. In §12 the point is that you know the true values and can see whether the model recovers them. In this chapter the point is that none of your real data ever left your machine. For restricted data this is the default.
 
 ## Vendor training defaults, dated
 

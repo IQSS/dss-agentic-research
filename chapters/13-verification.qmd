@@ -29,7 +29,7 @@ The R side already exists, so ask its session to write the same estimates to `r-
 
 The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) will not match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss is not talked into a pass afterward.
 
-Do this for the results that carry a claim: the headline estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
+Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
 
 ## What the agent does
 
@@ -62,7 +62,7 @@ The expectations come from you (the N in the paper, the plausible range, the lev
 
 Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent is not a result; the table is.
 
-Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations are the same warning. For the headline result, remove the temptation: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
+Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations mean the same thing: the second implementation was copied from the first rather than written from `METHODOLOGY.md`, and it verifies nothing. For the primary result, put the first implementation out of reach: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
 
 Here is what a comparison looks like when it has done its job.
 
