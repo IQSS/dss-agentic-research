@@ -15,7 +15,7 @@ Every failure in this chapter has appeared in an earlier one. What collects them
 
 The failure that matters is not the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it is not. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs is not code that is right (§2); a rule that fired is not a finding (§12); two numbers that agree are not two independent numbers (§13).
 
-The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and the *What you check* sections are the list.
+The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and each *What you check* section names the artifacts for its stage.
 
 ## Context blow-up
 

@@ -9,7 +9,7 @@ COVERS: Tiers: chat, editor agent, CLI agent, pipelines. Setup cost and money fo
 VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). ChatGPT, from chatgpt.com/pricing read in the browser the same day: Free $0 with limited Codex access, Go $8 (limited Codex access), Plus $20 (expanded Codex usage), Pro from $100 at 5x or 20x; Business and Enterprise per seat; consumer tiers list training with an opt-out. Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, `/status` in Codex, per the tool-chain map §14. No wall-clock setup estimates by design (global rule).
 -->
 
-Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter is the costing, so that you climb as far as your work needs and no further.
+Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter prices each tier, so that you climb as far as your work needs and no further.
 
 ## Four tiers
 

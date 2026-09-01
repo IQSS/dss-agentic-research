@@ -43,7 +43,7 @@ Where the file goes depends on whether you also have a personal plan.
 
 *A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
 
-On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because there is no login: the key is the login, and removing the file is how you sign out.
+On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because you never logged in: the key in that file is what authenticates you, so deleting it is how you sign out.
 
 ## Codex
 

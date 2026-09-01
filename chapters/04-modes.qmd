@@ -38,7 +38,7 @@ Codex picks its default sandbox from the folder: a folder under git starts in th
 
 Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Do not pick it. Third, more prompts are not automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
-My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. The plan is what earns the looser mode, not the other way around.
+My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I do not switch to Auto first and write the plan inside it.
 
 ## Plan mode
 

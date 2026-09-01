@@ -46,7 +46,7 @@ What these have in common is that something other than the agent's own confidenc
 
 ## What agents do not do
 
-Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II is the answer, and it is short. You write it down once, in a file the agent reads at the start of every session.
+Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II addresses these gaps, and it is short. You write it down once, in a file the agent reads at the start of every session.
 
 Agents do not know which data you may send where. Nothing in the agent knows that an IRB protocol, a data-use agreement, or a business-associate agreement exists. Given access to a folder, it will read the folder. The rule has to be written where the agent reads it, and where it must never be broken it has to be enforced by a setting rather than a sentence (§5, §16).
 
@@ -123,7 +123,7 @@ The same models are reachable in three places, and the place determines your rol
 
 The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. Flexible, and the right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it cannot catch what was not pasted. As a *driver* the model suggests inside your editor and you stay at the wheel, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment.
 
-Moving rightward trades execution for oversight. The agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the point of this guide, and it is also its risk: the supervisor who stops checking is the failure mode every Part IV chapter comes back to.
+Moving rightward, the agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the point of this guide, and it is also its risk: the supervisor who stops checking is the failure mode every Part IV chapter comes back to.
 
 The supervisor's job, in one paragraph. Describe the outcome and its constraints, not the steps. When the shape of the task is not obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it cannot be talked around (§5, §16). Everything from here on is one of those five moves in detail.
 
@@ -215,7 +215,7 @@ Codex picks its default sandbox from the folder: a folder under git starts in th
 
 Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Do not pick it. Third, more prompts are not automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
-My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. The plan is what earns the looser mode, not the other way around.
+My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I do not switch to Auto first and write the plan inside it.
 
 ## Plan mode
 
@@ -1380,7 +1380,7 @@ COVERS: Tiers: chat, editor agent, CLI agent, pipelines. Setup cost and money fo
 VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). ChatGPT, from chatgpt.com/pricing read in the browser the same day: Free $0 with limited Codex access, Go $8 (limited Codex access), Plus $20 (expanded Codex usage), Pro from $100 at 5x or 20x; Business and Enterprise per seat; consumer tiers list training with an opt-out. Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, `/status` in Codex, per the tool-chain map §14. No wall-clock setup estimates by design (global rule).
 -->
 
-Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter is the costing, so that you climb as far as your work needs and no further.
+Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter prices each tier, so that you climb as far as your work needs and no further.
 
 ## Four tiers
 
@@ -1438,7 +1438,7 @@ Every failure in this chapter has appeared in an earlier one. What collects them
 
 The failure that matters is not the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it is not. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs is not code that is right (§2); a rule that fired is not a finding (§12); two numbers that agree are not two independent numbers (§13).
 
-The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and the *What you check* sections are the list.
+The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and each *What you check* section names the artifacts for its stage.
 
 ## Context blow-up
 
@@ -1949,7 +1949,7 @@ Where the file goes depends on whether you also have a personal plan.
 
 *A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
 
-On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because there is no login: the key is the login, and removing the file is how you sign out.
+On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because you never logged in: the key in that file is what authenticates you, so deleting it is how you sign out.
 
 ## Codex
 
