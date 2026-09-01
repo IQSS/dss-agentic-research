@@ -39,7 +39,7 @@ Claude Code expands the import when the session starts, as if the text were in `
 
 [^tc-hier]: The tool-chain map, §12, "AGENTS.md / CLAUDE.md hierarchy", shows the full arrangement, with the global files kept in a version-controlled folder and synced across machines. None of that is needed to start.
 
-Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. The rules it could not know are the ones you add, and they are the point.
+Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it cannot know are the rules you would have told a new assistant, and those are what you add.
 
 ## What goes in the global file
 

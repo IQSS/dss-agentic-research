@@ -66,7 +66,7 @@ Adapt the location to the journal. And note the two prohibitions that are absolu
 
 ## What goes wrong
 
-*Numbers typed by the model.* A transposed digit, a rounded value, an estimate from nowhere that reads exactly like the real one. The traceability table is the check, and the one-line instruction is the prevention.
+*Numbers typed by the model.* A transposed digit, a rounded value, an estimate from nowhere that reads exactly like the real one. The traceability table catches it after the fact; the one-line instruction above stops it happening.
 
 *The invented reference.* Plausible authors, a real journal, a year, and no such paper (§10). Open every one.
 

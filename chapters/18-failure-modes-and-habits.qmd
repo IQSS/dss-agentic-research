@@ -51,7 +51,7 @@ There is a quieter form. Work that happens in the conversation and never reaches
 
 Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that will not merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
 
-The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened, the fix is the problem. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
+The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened rather than satisfied, then the fix has introduced a worse problem than the one it closed. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
 
 ## The supervisor stance
 

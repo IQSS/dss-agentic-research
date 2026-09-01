@@ -24,7 +24,7 @@ Earlier AI tools did one of two things. They reasoned without acting, which is h
 
 ![](figures/think-act-observe.svg){#fig-think-act-observe fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
 
-*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is the grounding. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
+*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
 
 Two limits follow from the same mechanism, and they run through every chapter in Part III.
 

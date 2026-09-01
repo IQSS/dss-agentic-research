@@ -33,7 +33,7 @@ Two lines cover most cases, and the rest of the chapter is how to live inside th
 
 Everything else (code, text, public and aggregate data, synthetic data) can go where you like, with one caveat below about unpublished results.
 
-The rule that makes this workable is that the agent needs the *shape* of your data far more than the data. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without seeing a real row. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. Here the known parameters are beside the point; the absence of real rows is the point. For restricted data this is the default, not the fallback.
+The rule that makes this workable is that the agent needs the *shape* of your data far more than the data. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without seeing a real row. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. There the known parameters are what matters. Here it is that no real row was ever sent. For restricted data this is the default, not the fallback.
 
 ## Vendor training defaults, dated
 

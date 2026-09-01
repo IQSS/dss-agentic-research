@@ -64,11 +64,11 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 ## What goes wrong
 
-*The browser did the collection.* Two thousand pages clicked through by the agent: slow, irreproducible, and not in the pipeline. The browser is for finding the interface; the interface is for the collection.
+*The browser did the collection.* Two thousand pages clicked through by the agent: slow, irreproducible, and not in the pipeline. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
 
 *Scraping what had an interface.* Parsing rendered pages when the data were one request away, and being blocked or served stale content for the trouble. Ask for the access path first.
 
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. The refusal is the policy. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
+*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal is not a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
 *Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. Raw is what arrived; everything else is processed.
 

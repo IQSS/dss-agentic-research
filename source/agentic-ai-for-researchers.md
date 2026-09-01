@@ -101,7 +101,7 @@ Earlier AI tools did one of two things. They reasoned without acting, which is h
 
 ![](figures/think-act-observe.svg){#fig-think-act-observe fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
 
-*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is the grounding. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
+*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
 
 Two limits follow from the same mechanism, and they run through every chapter in Part III.
 
@@ -375,7 +375,7 @@ Claude Code expands the import when the session starts, as if the text were in `
 
 [^tc-hier]: The tool-chain map, §12, "AGENTS.md / CLAUDE.md hierarchy", shows the full arrangement, with the global files kept in a version-controlled folder and synced across machines. None of that is needed to start.
 
-Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. The rules it could not know are the ones you add, and they are the point.
+Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it cannot know are the rules you would have told a new assistant, and those are what you add.
 
 ## What goes in the global file
 
@@ -917,11 +917,11 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 ## What goes wrong
 
-*The browser did the collection.* Two thousand pages clicked through by the agent: slow, irreproducible, and not in the pipeline. The browser is for finding the interface; the interface is for the collection.
+*The browser did the collection.* Two thousand pages clicked through by the agent: slow, irreproducible, and not in the pipeline. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
 
 *Scraping what had an interface.* Parsing rendered pages when the data were one request away, and being blocked or served stale content for the trouble. Ask for the access path first.
 
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. The refusal is the policy. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
+*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal is not a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
 *Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. Raw is what arrived; everything else is processed.
 
@@ -1126,7 +1126,7 @@ Here is what a comparison looks like when it has done its job.
 | + county fixed effects | −0.384721 | −0.384921 | no |
 | + year fixed effects | −0.291553 | −0.291553 | yes |
 
-The second row is the signal. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference would not have been found by reading either script.
+The second row is what the check was for. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference would not have been found by reading either script.
 
 That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer does not rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is none of them is the bug you were looking for.
 
@@ -1214,7 +1214,7 @@ Adapt the location to the journal. And note the two prohibitions that are absolu
 
 ## What goes wrong
 
-*Numbers typed by the model.* A transposed digit, a rounded value, an estimate from nowhere that reads exactly like the real one. The traceability table is the check, and the one-line instruction is the prevention.
+*Numbers typed by the model.* A transposed digit, a rounded value, an estimate from nowhere that reads exactly like the real one. The traceability table catches it after the fact; the one-line instruction above stops it happening.
 
 *The invented reference.* Plausible authors, a real journal, a year, and no such paper (§10). Open every one.
 
@@ -1239,7 +1239,7 @@ COVERS: It has to run without the agent. One-command build. Lockfiles (renv, uv;
 VERIFY: `require` (Correia and Seay, Stata Journal 24(4), 2024; `require setup` writes exact versions by default) checked 2026-08-27. Zenodo's 30-day self-deletion window per TEMPLATES.md; re-check the repository policies at release. renv and uv command names as of 2026.
 -->
 
-The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. It is a transcript. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
+The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. What you have is a record of a conversation, and nobody else can re-run a conversation. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
 
 ## What to ask for
 
@@ -1332,7 +1332,7 @@ Two lines cover most cases, and the rest of the chapter is how to live inside th
 
 Everything else (code, text, public and aggregate data, synthetic data) can go where you like, with one caveat below about unpublished results.
 
-The rule that makes this workable is that the agent needs the *shape* of your data far more than the data. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without seeing a real row. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. Here the known parameters are beside the point; the absence of real rows is the point. For restricted data this is the default, not the fallback.
+The rule that makes this workable is that the agent needs the *shape* of your data far more than the data. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without seeing a real row. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. There the known parameters are what matters. Here it is that no real row was ever sent. For restricted data this is the default, not the fallback.
 
 ## Vendor training defaults, dated
 
@@ -1474,7 +1474,7 @@ There is a quieter form. Work that happens in the conversation and never reaches
 
 Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that will not merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
 
-The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened, the fix is the problem. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
+The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened rather than satisfied, then the fix has introduced a worse problem than the one it closed. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
 
 ## The supervisor stance
 

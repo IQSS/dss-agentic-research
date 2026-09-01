@@ -9,7 +9,7 @@ COVERS: It has to run without the agent. One-command build. Lockfiles (renv, uv;
 VERIFY: `require` (Correia and Seay, Stata Journal 24(4), 2024; `require setup` writes exact versions by default) checked 2026-08-27. Zenodo's 30-day self-deletion window per TEMPLATES.md; re-check the repository policies at release. renv and uv command names as of 2026.
 -->
 
-The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. It is a transcript. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
+The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. What you have is a record of a conversation, and nobody else can re-run a conversation. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
 
 ## What to ask for
 
