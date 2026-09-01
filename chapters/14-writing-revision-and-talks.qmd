@@ -25,9 +25,7 @@ The paper is the artifact the agent should touch least and can help with most. I
 
 > Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
 
-*Talks.* A deck is not the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. The talks that this guide backs are built the same way, from markdown, by the same pipeline.[^decks]
-
-[^decks]: The sibling research-workflow project holds the decks and their build; its content bank draws from this guide, chapter by chapter.
+*Talks.* A deck is not the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. A deck built this way comes out of the same markdown and the same build as the paper, which is the point: the claim on the slide and the number in the table have one source.
 
 ## What the agent does
 

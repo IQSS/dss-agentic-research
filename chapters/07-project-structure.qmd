@@ -94,7 +94,7 @@ This is a cut-down version of the layout I use myself, which adds a pipeline man
 
 ## Scaffolding a new project
 
-Standing up a new project in this shape is the first thing to delegate, and it is the live demonstration in the talk this guide backs. I keep it as a packaged workflow, `/scaffold` (§8); you can do the same with one request, once the layout is in your global file (§6) or copied from Appendix A.
+Standing up a new project in this shape is the first thing worth delegating, and the easiest way to watch an agent work. I keep it as a packaged workflow, `/scaffold` (§8); you can do the same with one request, once the layout is in your global file (§6) or copied from Appendix A.
 
 Make an empty folder named for the project (`heat-birthweight`; for a paper, `collaborator-topic`), drop into it any loose files you already have (the analysis plan, the coauthor's draft, a data extract), and start the agent there. Then ask:
 

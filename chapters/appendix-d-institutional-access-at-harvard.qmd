@@ -39,7 +39,7 @@ Line by line: the first turns on the Bedrock path; the second points it at Harva
 
 Where the file goes depends on whether you also have a personal plan.
 
-*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway. A step-by-step version of this for someone who has never opened a terminal, on a Mac and on Windows, is available from the author.
+*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway.
 
 *A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
 

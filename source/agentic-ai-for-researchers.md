@@ -73,7 +73,7 @@ Part I orients: what an agent is (§2), where to run one (§3), the modes it run
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at. Everyone should read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Stata is assumed to be the language you already work in; the worked examples are written in R, which the agent can translate. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: for the former it footnotes the tool-chain map, for the latter the quickstart.[^siblings] Terms are defined at first use, and Appendix C ends with a glossary.
+A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R, because R and Stata are the two this guide assumes and R reads more easily to a Stata user than the reverse. The agent translates either way, and §13 makes that translation a check rather than a chore. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: for the former it footnotes the tool-chain map, for the latter the quickstart.[^siblings] Terms are defined at first use, and Appendix C ends with a glossary.
 
 [^siblings]: The two sibling documents: *Agentic AI Tool Chain* (what is in the stack, and why) and *Agentic AI Quickstart* (how to set it up).
 
@@ -91,7 +91,7 @@ A chat assistant and an agent run on the same models. What differs is what the m
 
 Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so it guesses at column names and types. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you were the one carrying information across the gap: the file to the model, the model's code to the file, the error back to the model. The assistant was never wrong about anything it could see. It could not see anything.
 
-An agent closes that loop itself. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. In the words of the talk this guide backs: you stop conversing with an assistant and start delegating to a process that acts in your environment.
+An agent closes that loop itself. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
 
 Four things change when the model can act in your project. It reads your actual files, so it knows the project rather than a pasted fragment of it. It runs your code, so it sees the real error message rather than a guess at one. It edits files directly, so there is no copy-and-paste round trip. And your job changes: from transcriber, carrying text between two windows, to supervisor, deciding what to ask for and checking what came back. The rest of the guide is about doing the last one well.
 
@@ -608,7 +608,7 @@ This is a cut-down version of the layout I use myself, which adds a pipeline man
 
 ## Scaffolding a new project
 
-Standing up a new project in this shape is the first thing to delegate, and it is the live demonstration in the talk this guide backs. I keep it as a packaged workflow, `/scaffold` (§8); you can do the same with one request, once the layout is in your global file (§6) or copied from Appendix A.
+Standing up a new project in this shape is the first thing worth delegating, and the easiest way to watch an agent work. I keep it as a packaged workflow, `/scaffold` (§8); you can do the same with one request, once the layout is in your global file (§6) or copied from Appendix A.
 
 Make an empty folder named for the project (`heat-birthweight`; for a paper, `collaborator-topic`), drop into it any loose files you already have (the analysis plan, the coauthor's draft, a data extract), and start the agent there. Then ask:
 
@@ -1173,9 +1173,7 @@ The paper is the artifact the agent should touch least and can help with most. I
 
 > Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
 
-*Talks.* A deck is not the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. The talks that this guide backs are built the same way, from markdown, by the same pipeline.[^decks]
-
-[^decks]: The sibling research-workflow project holds the decks and their build; its content bank draws from this guide, chapter by chapter.
+*Talks.* A deck is not the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. A deck built this way comes out of the same markdown and the same build as the paper, which is the point: the claim on the slide and the number in the table have one source.
 
 ## What the agent does
 
@@ -1423,7 +1421,7 @@ The rule holds: climb only when the payoff justifies the friction. Most research
 
 ## Where to start
 
-Pick one task you already do badly and would not mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. The pitch that opened this guide is one page; the map is Part III; the judgment is this part. The build, for those who want tier 3, is a workshop rather than a chapter, and the quickstart is its manual.
+Pick one task you already do badly and would not mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time, and the quickstart is its manual when you want it.
 
 # 18. Failure modes and habits
 
@@ -1947,7 +1945,7 @@ Line by line: the first turns on the Bedrock path; the second points it at Harva
 
 Where the file goes depends on whether you also have a personal plan.
 
-*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway. A step-by-step version of this for someone who has never opened a terminal, on a Mac and on Windows, is available from the author.
+*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway.
 
 *A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
 
