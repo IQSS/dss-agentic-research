@@ -24,7 +24,7 @@ In Claude Code, four modes are in everyday use. You cycle through them with `Shi
 | Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape is not obvious (next section) |
 | Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Long tasks with a plan, away from restricted data |
 
-Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on.
+Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
 
 In Codex the setting is the `/permissions` picker, which offers three presets. Each bundles two dials: a *sandbox* (an operating-system fence around what a command can touch; §5) and an approval policy (when the agent stops to ask).
 
@@ -35,6 +35,15 @@ In Codex the setting is the `/permissions` picker, which offers three presets. E
 | Full Access | Everything: no sandbox, no prompts. Marked *not recommended* in the picker. | Nothing on a machine with data on it |
 
 Codex picks its default sandbox from the folder: a folder under git starts in the workspace-write sandbox that Auto uses, a folder without git starts read-only. One more reason every project folder should be under version control (§5).
+
+Behind the picker, each preset bundles the two dials by name: Read-only is the `read-only` sandbox and asks beyond reading; Auto is `workspace-write` with `on-request` approvals; Full Access is `danger-full-access` with approvals set to `never`. And the launch flags behind the blanket modes, shown so you recognize them rather than type them:
+
+```
+claude --allow-dangerously-skip-permissions
+codex --dangerously-bypass-approvals-and-sandbox
+```
+
+Codex's drops the sandbox along with the prompts, which makes it the blunter of the two.
 
 Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Do not pick it. Third, more prompts are not automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
@@ -53,6 +62,17 @@ Plan mode for: reorganizing a folder into the paper shape (§7); writing the sim
 Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: both agents let you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
 
 In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. In Codex, one `/model` picker sets both the model and its reasoning effort, on a scale from `minimal` to `xhigh` depending on the model; `medium` is the usual starting point.
+
+Both can be pinned rather than picked each session: in Claude Code, `effortLevel` in the settings file persists a level (any level but `max`, which the file refuses on purpose); in Codex the same pin is `model_reasoning_effort` in the configuration file, and it can differ by task profile. The two scales nearly line up:
+
+| Effort | Claude Code | Codex |
+|:--|:--|:--|
+| `minimal` | Not offered | The floor: fastest, for trivial mechanical tasks |
+| `low` | High-volume or latency-sensitive work | Quick tasks where speed beats thoroughness |
+| `medium` | Balanced speed, cost, and quality | The default: everyday interactive coding |
+| `high` | The default: complex reasoning, quality over speed | Thorough reasoning on hard problems |
+| `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency does not matter |
+| `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
 
 ![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
 

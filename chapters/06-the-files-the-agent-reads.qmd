@@ -29,15 +29,15 @@ The two agents agree on everything but the filename. Claude Code reads `CLAUDE.m
 | Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
 | A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
 
+These two are not the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
+
 Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
 
 ```
 @AGENTS.md
 ```
 
-Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.[^tc-hier]
-
-[^tc-hier]: The tool-chain map, §12, "AGENTS.md / CLAUDE.md hierarchy", shows the full arrangement, with the global files kept in a version-controlled folder and synced across machines. None of that is needed to start.
+Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.
 
 Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it cannot know are the rules you would have told a new assistant, and those are what you add.
 
@@ -146,15 +146,21 @@ Five more files do specific jobs. None is required on day one.
 
 *`METHODOLOGY.md`.* Dated entries recording why: why this model, why this prior, why these exclusions, what was tried and rejected. It is what the agent consults before proposing an alternative you already ruled out, and it is the seed of the paper's methods section (§14).
 
-*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning.[^tc-planner] Do not mix them. The agent reads the right file for the right question only if each file has one job.
-
-[^tc-planner]: The tool-chain map, §17b, "Task planner (agent-native)".
+*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning. Do not mix them. The agent reads the right file for the right question only if each file has one job.
 
 ## Context economy
 
 An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that does not bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
 
-The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. When the task is "rewrite this section of the manuscript," the agent reads `WRITING.md` and leaves `CODING.md` alone. One distinction matters here. A *pointer* ("see `WRITING.md`") is read on demand. Claude Code's `@` *import* is loaded at the start of every session, whatever the task. Use the import for the one-line bridge between `CLAUDE.md` and `AGENTS.md`, and pointers for everything else.
+The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. The pointers can sit together at the top of the file as a small dispatch index:
+
+```
+For prose voice and style -> see WRITING.md
+For code style -> see CODING.md
+For statistical modeling -> see MODELING.md
+```
+
+The agent then knows where to look. When the task is "rewrite this section of the manuscript," the agent reads `WRITING.md` and leaves `CODING.md` alone. One distinction matters here. A *pointer* ("see `WRITING.md`") is read on demand. Claude Code's `@` *import* is loaded at the start of every session, whatever the task. Use the import for the one-line bridge between `CLAUDE.md` and `AGENTS.md`, and pointers for everything else.
 
 ## Memory
 
@@ -164,11 +170,11 @@ Claude Code also keeps notes for itself across sessions (it calls this auto memo
 
 *Vague rules.* "Write clean code" and "organize files sensibly" produce generic behavior. Say the concrete thing, with an example: the pipe, the path function, the naming pattern.
 
-*The growing file.* A brief that gains a paragraph per session until it is 800 lines, most of them narrative. Move history to `METHODOLOGY.md`, to-dos to `TASKS.md`, and the current state to `STATUS.md`; keep the brief to rules and pointers.
+*The growing file.* A brief that gains a paragraph per session until it is 800 lines, most of them narrative. Move the reasoning to `METHODOLOGY.md`, the sequence to `PLAN.md`, to-dos to `TASKS.md`, and the current state to `STATUS.md`; save the README narrative for the `README.md`; keep the brief to rules and pointers.
 
 *Duplicated state.* The same fact in the brief, in `STATUS.md`, in `TASKS.md`, and in memory. When it changes, one copy will be missed. Pick one home per kind of fact and point to it from the others. The pair to watch is `STATUS.md` and `TASKS.md`, because finishing a task usually changes the state. Record the completion once, in `TASKS.md`; then rewrite the line of `STATUS.md` it changed, rather than copying the entry over. A `STATUS.md` that starts to keep a history has become a second task list, and the agent now has two to reconcile.
 
-*Pasting whole files.* Pasting a script into the chat when naming it would do. The agent can read the file. A name costs nothing; a paste fills the context window with text the agent may already have.
+*Pasting whole files.* Pasting a script into the chat when naming it would do. The agent can read the file, and the name wins three ways: the agent sees the current version on disk rather than a possibly stale copy; the name survives a compaction (§18), so the agent can re-read the file where a paste is gone; and a name costs nothing, where a paste fills the context window and is paid for again on every turn after.
 
 *Stale memory.* A note that was true once (a renamed file, a reversed decision) acted on without being flagged. Worse than no memory. Open the notes occasionally and delete what has expired.
 

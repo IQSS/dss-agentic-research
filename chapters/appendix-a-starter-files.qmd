@@ -9,7 +9,7 @@ COVERS: Global AGENTS.md (researcher edition). Project AGENTS.md for a paper. TA
 VERIFY: `set windows-shell` is a documented just setting; Stata batch-mode forms per §13's VERIFY note. Re-check the just syntax at release.
 -->
 
-Five files to copy and edit. The first two are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
+Five files to copy and edit, and a closing reference (A.6) with the full project layouts that §7 cut down. The first two files are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
 
 ## A.1 The global file
 
@@ -113,7 +113,7 @@ it before the session ends.
 
 Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you do not already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart, and the reasoning for just over a folder of shell scripts is in the tool-chain map, §15a. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
+[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.
@@ -171,3 +171,135 @@ Thumbs.db
 # Personal agent settings; the shared .claude/settings.json is committed
 .claude/settings.local.json
 ```
+
+## A.6 The full project shapes
+
+<!--
+STATUS: adapt · DRAFTED: 2026-09-06 (ported essentially verbatim from the tool-chain map's §12 in the dedup; this appendix is now the canonical home of the templates — the map no longer carries them)
+SOURCE: tool-chain map v1.7, "Workspace structure" and "Project shapes and conditional propagation", section references adapted to this guide
+COVERS: The shape taxonomy; the full paper, data, and publishing layouts with canonical / recommended / optional parts; the five universal meta-files.
+-->
+
+§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape does not need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
+
+The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions do not drift.
+
+*Paper shape* (statistical analysis ending in a manuscript). A representative layout:
+
+```
+<workspace-root>/papers/lee-test-project/
+|-- AGENTS.md                      # project brief
+|-- CLAUDE.md     -> AGENTS.md     # symlink (or the one-line import, §6)
+|-- README.md
+|-- METHODOLOGY.md                 # dated entries: *why* behind choices
+|-- STATUS.md                      # current state, one screen; rewritten in place
+|-- TASKS.md                       # to do / in progress / done; accumulates
+|-- proj-lee-test-project.Rproj
+|-- .here                          # 0-byte sentinel for here::here()
+|-- _targets.R                     # pipeline manifest (when targets is used)
+|-- _targets/                      # per-target object store (gitignored)
+|-- justfile                       # project-wide command surface
+|-- .graveyard/                    # transient working copies (gitignored)
+|-- code/
+|   |-- _startup/                  # tier 1: session-start bootstrap
+|   |   |-- init.R                 # entry: sources the rest in order
+|   |   |-- functions.R            # project helpers (defines load_pkgs())
+|   |   |-- packages.R             # load_pkgs() calls
+|   |   |-- options.R              # options() — sampler defaults, mc.cores
+|   |   |-- data.R                 # read + prep the project dataset(s)
+|   |   |-- specifications.R       # spec registry (model_templates etc.)
+|   |   `-- pipeline-helpers.R     # parameterized callables for _targets.R
+|   |-- _experiments/              # investigative work (sourced on demand)
+|   |-- _data-acquisition/         # external-data fetchers
+|   |-- _final/                    # tier 3: figure assembly (figures.R)
+|   |-- _report/                   # tier 3: working Quarto summary
+|   `-- <topic>-<variant>.R        # tier 2: analyses (semantic kebab-case)
+|-- dags/                          # causal DAG sources + measurement model
+|-- data/
+|   |-- raw/                       # original data, never modified
+|   `-- processed/                 # transformations (often empty)
+|-- outputs/
+|   |-- archive/zenodo-vN/         # archival snapshots (own repo)
+|   |-- eda/                       # first-look EDA reports
+|   |-- figures/{final/,working/}  # publication-ready + diagnostic
+|   |-- models/<script>/           # saved fits (gitignored)
+|   |-- results/                   # serialized analysis bundles (gitignored)
+|   `-- tables/                    # committed; exact versions matter
+|-- logs/                          # long-running-job logs (gitignored)
+|-- manuscript/                    # drafts, response letters
+`-- docs/
+    |-- briefs/                    # dated · collaborator-facing incoming
+    |-- responses/                 # dated · collaborator-facing outgoing
+    |-- findings/                  # dated · internal: results, decisions
+    |-- notes/                     # evergreen reference material
+    `-- references/                # methodology PDFs
+```
+
+Canonical for this shape: the meta files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `STATUS.md`, `TASKS.md`, `METHODOLOGY.md`, the `.Rproj`, `.here`), `code/_startup/` with its seven canonical files, `code/`, `data/`, `outputs/` with its six subdirectories (`archive/`, `eda/`, `figures/`, `models/`, `results/`, `tables/`), `manuscript/`, `renv.lock`. The three-tier `code/` layout (`_startup/`, then the top-level analyses, then `_final/` + `_report/`), the two non-tier sibling directories (`_experiments/` for investigative work, `_data-acquisition/` for external-data fetchers), and the per-script subdirectories under `outputs/figures/working/` and `outputs/models/` are paper-shape convention. Recommended: `_targets.R` + `_targets/` + `justfile` for projects with a pipeline runner (§15), `logs/` (Bayesian fits run long enough that you want the job output captured somewhere, §12), `dags/` (when the project uses a causal-DAG identification strategy), `docs/` (four-way split: `briefs/`, `responses/`, `findings/`, `notes/`, meaning dated collaborator-facing incoming, dated collaborator-facing outgoing, dated internal, evergreen reference). Optional: `.graveyard/`, `outputs/archive/zenodo-vN/` (only when depositing, §15).
+
+*Data shape* (web scrape or data-collection pipeline ending in a structured dataset). A representative layout:
+
+```
+<workspace-root>/data/example-scrape/
+|-- AGENTS.md
+|-- CLAUDE.md     -> AGENTS.md
+|-- README.md
+|-- STATUS.md                      # current state, one screen; rewritten in place
+|-- TASKS.md                       # to do / in progress / done; accumulates
+|-- pyproject.toml                 # uv project manifest
+|-- uv.lock                        # pinned dependency closure (committed)
+|-- .python-version                # interpreter version pin (committed)
+|-- .venv/                         # virtual env (gitignored; sync-ignored)
+|-- .graveyard/                    # transient working copies (gitignored)
+|-- justfile                       # command front door: just build
+|-- scripts/                       # numbered pipeline scripts
+|   |-- 01-collect-source-a.py
+|   |-- 02-collect-source-b.py
+|   `-- 03-merge.py
+|-- data/
+|   |-- sources/                   # raw per-source downloads
+|   |-- checkpoints/               # resumable collection state (JSON)
+|   `-- validation/                # independent validation checks
+|-- outputs/
+|   |-- eda/                       # first-look EDA reports
+|   |-- figures/                   # interactive HTML + PNG
+|   |-- reports/                   # assembled PDFs + writeups
+|   `-- tables/                    # target lists, summary CSV/XLSX
+|-- logs/                          # pipeline progress logs
+|-- site/                          # built dashboard (when applicable)
+|-- templates/                     # Jinja2 templates for dashboards
+`-- docs/
+    |-- briefs/                    # dated · collaborator-facing incoming
+    |-- responses/                 # dated · collaborator-facing outgoing
+    |-- findings/                  # dated · internal: QA, decisions, results
+    `-- notes/                     # evergreen reference material
+```
+
+Canonical for this shape: the meta files, `justfile` (the command front door, §15, where `just build` / `just scrape` wrap the pipeline), `pyproject.toml` + `uv.lock` + `.python-version` (the pinned Python environment, §15), `scripts/`, `data/`, `data/sources/`, `data/checkpoints/`. The numbered-script convention (`01-`, `02-`, and so on) signals execution order to anyone reading the project, including agents. Recommended: `outputs/` with its four standard subdirectories (`eda/`, `figures/`, `reports/`, `tables/`), `logs/` (scrape scripts almost always run long enough that you want the job output captured somewhere), `docs/` (the same four-way split as the paper shape). Optional: `site/` + `templates/` (only if the project produces a deployable dashboard), `.graveyard/`. The `.venv/` directory exists locally but is gitignored, and when the project sits in a synced folder it is also kept out of sync (§7): the environment contains thousands of files that would otherwise storm a service like Dropbox. For projects whose dependencies include conda-forge / CUDA / Bioconda / R-mixed components, a `pixi` variant (`pixi.toml` + `pixi.lock` + `.pixi/`) replaces the `uv` files, and the rest of the shape is identical.
+
+*Publishing shape* (markdown to pandoc to XeTeX to PDF, for design-controlled standalone publishing). A representative layout:
+
+```
+<workspace-root>/publishing/methods-guide/
+|-- AGENTS.md
+|-- CLAUDE.md             -> AGENTS.md
+|-- README.md
+|-- STATUS.md                            # current state, one screen; rewritten in place
+|-- TASKS.md                             # to do / in progress / done; accumulates
+|-- source/                              # markdown source
+|   `-- methods-guide.md
+|-- assets/                              # images, logos, embedded resources
+|-- filters/                             # project pandoc Lua filters
+|-- template.tex                         # custom XeLaTeX template
+|-- justfile                             # build front door: just build
+|-- output/                              # the PDF deliverable (committed)
+|   `-- methods-guide.pdf
+`-- docs/                                # working notes (recommended)
+    |-- briefs/                          # dated incoming
+    |-- responses/                       # dated outgoing
+    `-- notes/                           # evergreen reference
+```
+
+Canonical for this shape: the meta files, `template.tex`, `justfile`, `source/`, `output/` (committed, since the PDF is the deliverable and the exact version matters). Recommended: `filters/` (any pandoc Lua filters the document needs; most documents need none), `assets/` (anything the template embeds), and `docs/` for any project that will accumulate audit reports, draft outlines, collaborator feedback, or decision logs over time; the `briefs/` / `responses/` / `notes/` split mirrors the paper shape, and filenames are `YYYY-MM-DD-<slug>.md`. Trivial one-off documents (CVs, single-shot reports) can omit `docs/` entirely. Filters worth reusing across projects belong in a shared location rather than copied per project. One compatibility note: with TeX Live 2026 and later, a pandoc-driven `template.tex` must define a `none` counter for `\LTcaptype` (newer `longtable` and `caption` releases validate it), or tables without captions fail the build.
+
+The pattern across shapes is the same: `AGENTS.md`, `CLAUDE.md` (the bridge to it), `STATUS.md`, `TASKS.md`, `README.md` are universal. Five files, whatever the shape. Shape-specific files (`METHODOLOGY.md` for papers, the numbered `scripts/` and the lockfile pair for data projects, `template.tex` + `justfile` for publishing projects) come from the shape's template.

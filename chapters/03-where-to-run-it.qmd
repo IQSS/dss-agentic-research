@@ -36,13 +36,13 @@ The agent. The desktop apps are downloads from the vendors and include the agent
 
 Optionally `just`, the command runner in Appendix A.4 (§15). Nothing else from the fuller toolchain: no dotfile manager, secrets manager, multiplexer, or runtime manager; the quickstart covers those.[^tc-run]
 
-[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes; the tool-chain map, §9 and §10, the reasoning.
+[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes.
 
 ## Signing in, and what it implies for data
 
 There are two ways in, and the choice is made before the first session on any project with restricted data.
 
-*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier does not include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans do not train and may be covered, depending on what your institution signed.
+*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier does not include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans do not train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
 
 *A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key is not covered by anything.
 

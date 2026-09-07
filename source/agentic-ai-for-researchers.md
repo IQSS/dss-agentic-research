@@ -1,7 +1,7 @@
 ---
 title: Agentic AI for Researchers
 subtitle: A Working Guide
-version: "1.4"
+version: "1.5"
 ---
 
 <!--
@@ -14,6 +14,9 @@ OUTLINE STUB (2026-08-26). Each chapter carries a comment with:
   VERIFY  claims that date quickly and must be checked at writing time
 Repurposing rules for adapted material: AGENTS.md § "Source material and repurposing rules".
 Part III chapters share one skeleton as H2s: What to ask for / What the agent does / What you check / What goes wrong.
+2026-09-06 dedup (v1.5): the tool-chain map's usage passages absorbed here, essentially verbatim
+(ledger: the map's docs/briefs/2026-09-06-dedup-ledger.md); per-section footnotes to the map
+culled so the guide stands alone; the full project shapes added as Appendix A.6.
 -->
 
 <!-- ===================== PART I — ORIENTATION ===================== -->
@@ -65,7 +68,7 @@ Everything in this guide serves one of four principles, and each maps to the cha
 
 The first pillar is a stance. A messenger carries text between a chat window and an editor; a driver accepts or rejects each suggested line as it appears; a supervisor describes the outcome and judges the result (§2, §4). The second is preparation: conventions written down once, and projects that share one shape, so you and the agent both know where things are (§6, §7). The third is the scientific habit applied to a new source of error: simulation with a known truth, a second implementation, and a pipeline that still runs with the agent gone (§12, §13, §15). The fourth is the safety net: permissions that ask before anything destructive, a sandbox that limits what a command can touch, version control that makes any change reversible, and a data rule that is enforced rather than requested (§5, §16). The pillars come from the tool-chain map, which argues for them at length and for the tools underneath;[^tc-model] this guide takes them as given and shows the work.
 
-[^tc-model]: *Agentic AI Tool Chain: An Opinionated Ecosystem Map*, "The Operating Model". The map is written for data scientists and covers the full stack. This guide never argues a tool choice; where you want one, it points there.
+[^tc-model]: *Agentic AI Tool Chain: An Opinionated Ecosystem Map*: the companion document, written for data scientists, on what is in the stack and why. Its own companion, *Agentic AI Quickstart*, holds the install recipes. This is the one place the guide points at them; everything else here stands alone.
 
 ## How to read this guide
 
@@ -73,9 +76,7 @@ Part I orients: what an agent is (§2), where to run one (§3), the modes it run
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at. Everyone should read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R, because R and Stata are the two this guide assumes and R reads more easily to a Stata user than the reverse. The agent translates either way, and §13 makes that translation a check rather than a chore. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: for the former it footnotes the tool-chain map, for the latter the quickstart.[^siblings] Terms are defined at first use, and Appendix C ends with a glossary.
-
-[^siblings]: The two sibling documents: *Agentic AI Tool Chain* (what is in the stack, and why) and *Agentic AI Quickstart* (how to set it up).
+A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R, because R and Stata are the two this guide assumes and R reads more easily to a Stata user than the reverse. The agent translates either way, and §13 makes that translation a check rather than a chore. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: those live in its two companion documents, the tool-chain map and the quickstart. Terms are defined at first use, and Appendix C ends with a glossary.
 
 # 2. What an agent is
 
@@ -163,13 +164,13 @@ The agent. The desktop apps are downloads from the vendors and include the agent
 
 Optionally `just`, the command runner in Appendix A.4 (§15). Nothing else from the fuller toolchain: no dotfile manager, secrets manager, multiplexer, or runtime manager; the quickstart covers those.[^tc-run]
 
-[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes; the tool-chain map, §9 and §10, the reasoning.
+[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes.
 
 ## Signing in, and what it implies for data
 
 There are two ways in, and the choice is made before the first session on any project with restricted data.
 
-*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier does not include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans do not train and may be covered, depending on what your institution signed.
+*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier does not include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans do not train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
 
 *A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key is not covered by anything.
 
@@ -201,7 +202,7 @@ In Claude Code, four modes are in everyday use. You cycle through them with `Shi
 | Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape is not obvious (next section) |
 | Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Long tasks with a plan, away from restricted data |
 
-Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on.
+Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
 
 In Codex the setting is the `/permissions` picker, which offers three presets. Each bundles two dials: a *sandbox* (an operating-system fence around what a command can touch; §5) and an approval policy (when the agent stops to ask).
 
@@ -212,6 +213,15 @@ In Codex the setting is the `/permissions` picker, which offers three presets. E
 | Full Access | Everything: no sandbox, no prompts. Marked *not recommended* in the picker. | Nothing on a machine with data on it |
 
 Codex picks its default sandbox from the folder: a folder under git starts in the workspace-write sandbox that Auto uses, a folder without git starts read-only. One more reason every project folder should be under version control (§5).
+
+Behind the picker, each preset bundles the two dials by name: Read-only is the `read-only` sandbox and asks beyond reading; Auto is `workspace-write` with `on-request` approvals; Full Access is `danger-full-access` with approvals set to `never`. And the launch flags behind the blanket modes, shown so you recognize them rather than type them:
+
+```
+claude --allow-dangerously-skip-permissions
+codex --dangerously-bypass-approvals-and-sandbox
+```
+
+Codex's drops the sandbox along with the prompts, which makes it the blunter of the two.
 
 Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Do not pick it. Third, more prompts are not automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
@@ -230,6 +240,17 @@ Plan mode for: reorganizing a folder into the paper shape (§7); writing the sim
 Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: both agents let you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
 
 In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. In Codex, one `/model` picker sets both the model and its reasoning effort, on a scale from `minimal` to `xhigh` depending on the model; `medium` is the usual starting point.
+
+Both can be pinned rather than picked each session: in Claude Code, `effortLevel` in the settings file persists a level (any level but `max`, which the file refuses on purpose); in Codex the same pin is `model_reasoning_effort` in the configuration file, and it can differ by task profile. The two scales nearly line up:
+
+| Effort | Claude Code | Codex |
+|:--|:--|:--|
+| `minimal` | Not offered | The floor: fastest, for trivial mechanical tasks |
+| `low` | High-volume or latency-sensitive work | Quick tasks where speed beats thoroughness |
+| `medium` | Balanced speed, cost, and quality | The default: everyday interactive coding |
+| `high` | The default: complex reasoning, quality over speed | Thorough reasoning on hard problems |
+| `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency does not matter |
+| `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
 
 ![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
 
@@ -259,12 +280,12 @@ Every action an agent takes falls into one of three tiers, and the settings file
 A conservative starting posture for a researcher, in shape rather than as a copyable file:
 
 - *Allow* what only reads or builds: reading files in the project, `git status`, `git diff`, `git log`, running your own scripts and the build command. With the sandbox on (below), most local commands can sit here because the sandbox bounds them.
-- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages, deleting files, anything that reaches the network, any command that touches `data/`.
+- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages (system packages too: `brew`, `apt`, `winget`), deleting files, anything that reaches the network, any command that touches `data/`.
 - *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
 
-The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt.
+The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you did not expect.
 
-Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `.claude/settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
 
 ```
 {
@@ -330,9 +351,7 @@ Two limits. Git undoes what it tracks, and it does not track data files or model
 
 ## A starting posture
 
-In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.[^tc-sec]
-
-[^tc-sec]: The tool-chain map, §13, has the full treatment: the layered model, the settings for both agents with their rationale, the sandbox internals, and the container layer this guide leaves out.
+In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.
 
 <!-- ===================== PART II — TEACHING IT YOUR WAY ===================== -->
 
@@ -365,15 +384,15 @@ The two agents agree on everything but the filename. Claude Code reads `CLAUDE.m
 | Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
 | A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
 
+These two are not the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
+
 Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
 
 ```
 @AGENTS.md
 ```
 
-Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.[^tc-hier]
-
-[^tc-hier]: The tool-chain map, §12, "AGENTS.md / CLAUDE.md hierarchy", shows the full arrangement, with the global files kept in a version-controlled folder and synced across machines. None of that is needed to start.
+Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.
 
 Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it cannot know are the rules you would have told a new assistant, and those are what you add.
 
@@ -482,15 +501,21 @@ Five more files do specific jobs. None is required on day one.
 
 *`METHODOLOGY.md`.* Dated entries recording why: why this model, why this prior, why these exclusions, what was tried and rejected. It is what the agent consults before proposing an alternative you already ruled out, and it is the seed of the paper's methods section (§14).
 
-*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning.[^tc-planner] Do not mix them. The agent reads the right file for the right question only if each file has one job.
-
-[^tc-planner]: The tool-chain map, §17b, "Task planner (agent-native)".
+*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning. Do not mix them. The agent reads the right file for the right question only if each file has one job.
 
 ## Context economy
 
 An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that does not bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
 
-The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. When the task is "rewrite this section of the manuscript," the agent reads `WRITING.md` and leaves `CODING.md` alone. One distinction matters here. A *pointer* ("see `WRITING.md`") is read on demand. Claude Code's `@` *import* is loaded at the start of every session, whatever the task. Use the import for the one-line bridge between `CLAUDE.md` and `AGENTS.md`, and pointers for everything else.
+The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. The pointers can sit together at the top of the file as a small dispatch index:
+
+```
+For prose voice and style -> see WRITING.md
+For code style -> see CODING.md
+For statistical modeling -> see MODELING.md
+```
+
+The agent then knows where to look. When the task is "rewrite this section of the manuscript," the agent reads `WRITING.md` and leaves `CODING.md` alone. One distinction matters here. A *pointer* ("see `WRITING.md`") is read on demand. Claude Code's `@` *import* is loaded at the start of every session, whatever the task. Use the import for the one-line bridge between `CLAUDE.md` and `AGENTS.md`, and pointers for everything else.
 
 ## Memory
 
@@ -500,11 +525,11 @@ Claude Code also keeps notes for itself across sessions (it calls this auto memo
 
 *Vague rules.* "Write clean code" and "organize files sensibly" produce generic behavior. Say the concrete thing, with an example: the pipe, the path function, the naming pattern.
 
-*The growing file.* A brief that gains a paragraph per session until it is 800 lines, most of them narrative. Move history to `METHODOLOGY.md`, to-dos to `TASKS.md`, and the current state to `STATUS.md`; keep the brief to rules and pointers.
+*The growing file.* A brief that gains a paragraph per session until it is 800 lines, most of them narrative. Move the reasoning to `METHODOLOGY.md`, the sequence to `PLAN.md`, to-dos to `TASKS.md`, and the current state to `STATUS.md`; save the README narrative for the `README.md`; keep the brief to rules and pointers.
 
 *Duplicated state.* The same fact in the brief, in `STATUS.md`, in `TASKS.md`, and in memory. When it changes, one copy will be missed. Pick one home per kind of fact and point to it from the others. The pair to watch is `STATUS.md` and `TASKS.md`, because finishing a task usually changes the state. Record the completion once, in `TASKS.md`; then rewrite the line of `STATUS.md` it changed, rather than copying the entry over. A `STATUS.md` that starts to keep a history has become a second task list, and the agent now has two to reconcile.
 
-*Pasting whole files.* Pasting a script into the chat when naming it would do. The agent can read the file. A name costs nothing; a paste fills the context window with text the agent may already have.
+*Pasting whole files.* Pasting a script into the chat when naming it would do. The agent can read the file, and the name wins three ways: the agent sees the current version on disk rather than a possibly stale copy; the name survives a compaction (§18), so the agent can re-read the file where a paste is gone; and a name costs nothing, where a paste fills the context window and is paid for again on every turn after.
 
 *Stale memory.* A note that was true once (a renamed file, a reversed decision) acted on without being flagged. Worse than no memory. Open the notes occasionally and delete what has expired.
 
@@ -602,9 +627,44 @@ No `setwd()`, no absolute paths, no `../`: a project with those breaks the momen
 
 The whole folder is under version control from the first day, which is what makes an agent's changes reviewable and reversible (§5). What git carries is code and text. The `.gitignore` excludes `outputs/models/`, `logs/`, `data/processed/` when it is large, and `data/raw/` from the first day (Appendix A.5): a data-use agreement almost always forbids copying the data to a third party, and pushing to GitHub is exactly that (§16).
 
-This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`.[^tc-shapes] Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
+This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
 
-[^tc-shapes]: The full paper template is in the tool-chain map, §12, "Project shapes and conditional propagation", with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`.
+## One workspace
+
+One convention pays off across projects rather than within one: keep every active project under a single workspace directory, organized by what each produces. Throughout, `<workspace-root>/` stands for that directory; substitute your own (a common choice is `~/workspace/`). Mine sits inside a cloud-synced folder; the Dropbox rules at the end of this chapter are what make that workable.
+
+```
+<workspace-root>/
+|-- papers/        # peer-reviewed manuscripts + analyses (paper shape)
+|   |-- lee-bone-density/
+|   |-- jones-gait-study/
+|   `-- ...
+|-- publishing/    # polished deliverables (guides, decks, CVs)
+|-- data/          # data collection / analysis without a manuscript
+|   |-- publication-survey/
+|   `-- ...
+|-- consulting/    # statistical consulting engagements
+|-- ops/           # operational management of ongoing concerns
+|-- business/      # market research, branding, finance
+|-- software/      # application logic and product behavior
+|-- tools/         # utilities, automation, templates, workflow infrastructure
+|-- sites/         # content-first or identity-first websites
+|-- notes/         # personal knowledge management
+`-- archived/      # fully inactive projects (mirror of the categories above)
+    |-- papers/
+    |-- data/
+    `-- ...
+```
+
+The top-level folder tells you, and the agent, a project's kind without opening any file: `papers/` holds paper-shaped projects, `data/` data projects, each in the layouts of Appendix A.6. Names are lowercase and hyphenated throughout: `lee-bone-density`, `publication-survey`, `heat-birthweight`. No spaces, no underscores, no CamelCase. A paper is `collaborator-topic` (`jones-gait-study`), a consulting project `client-topic`, and everything else a descriptive slug. Filenames inside projects follow the same convention, with R-tooling extensions (`.R`, `.Rmd`, `.Rproj`) keeping their canonical capitalization.
+
+The structure is also what makes reorganizing safe. Because every script anchors its paths to the project root (the `.here` marker above), a finished paper moves from `papers/heat-birthweight` to `archived/papers/heat-birthweight` without a single script edit. In Python the same anchor is a few lines at the top of a script:
+
+```
+PROJECT_ROOT = next(p for p in Path(__file__).resolve().parents
+                    if (p / "AGENTS.md").exists())
+DATA = PROJECT_ROOT / "data"
+```
 
 ## Scaffolding a new project
 
@@ -651,7 +711,7 @@ OneDrive has no mark you can set yourself: as of this writing, folder exclusion 
 
 Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
 
-[^tc-sync]: The tool-chain map, §1, "Cloud sync and project infrastructure", and the quickstart's per-project recipe (§7) give the full sequence, including the language-environment folders.
+[^tc-sync]: The quickstart's per-project recipe (§7) gives the full sequence, including the language-environment folders.
 
 # 8. Repeatable workflows
 
@@ -700,9 +760,7 @@ The rule is three. The first time you write a request, it is a request; the seco
 
 Facts about a project (where things live, what is restricted) do not belong in a skill; they are the brief's, and a skill that hard-codes them breaks in the next project. Nor do standing rules (how you write, what to never do); they are the global file's, and a skill that repeats them drifts from it. A skill holds a *procedure*, and reads the facts and the rules from the files that hold them.
 
-My own set, as examples of the shape. `/scaffold` builds a new project in the paper layout, the demonstration in §7. `/eda` renders a first-look report on a new dataset (types, missingness, distributions, correlations, outliers) into `outputs/eda/`, dated, the afternoon the data arrive. `/dag` draws a causal diagram from a written graph, with the adjustment set computed rather than guessed. `/review-plan` is a Reviewer 2 critique of an analysis plan before the work is done, and `/review-analysis` an audit of an analysis after it is done: identification, convergence, conventions. `/targets` and `/pueue` are the pipeline and long-job helpers from the fuller stack, outside this guide. Each is a hundred to two hundred lines, most of it the checks; each started as a prompt I had typed three times.[^tc-ext]
-
-[^tc-ext]: The tool-chain map, §10, "Patterns and extension points", covers skills alongside the surfaces this guide leaves out: subagents, plugins, and the servers that extend what an agent can reach.
+My own set, as examples of the shape. `/scaffold` builds a new project in the paper layout, the demonstration in §7. `/eda` renders a first-look report on a new dataset (types, missingness, distributions, correlations, outliers) into `outputs/eda/`, dated, the afternoon the data arrive. `/dag` draws a causal diagram from a written graph, with the adjustment set computed rather than guessed. `/review-plan` is a Reviewer 2 critique of an analysis plan before the work is done, and `/review-analysis` an audit of an analysis after it is done: identification, convergence, conventions. `/targets` and `/pueue` are the pipeline and long-job helpers from the fuller stack, outside this guide. Each is a hundred to two hundred lines, most of it the checks; each started as a prompt I had typed three times.
 
 A skill that fails is a skill you edit, the same way a correction becomes a rule in the brief (§6). Keep each one to a screen or two, and put anything longer (a template, a checklist the agent reads in full) in a file beside it.
 
@@ -747,9 +805,7 @@ You read the diff (below), then commit, or let the agent commit with a prompt (�
 
 Reads `STATUS.md`, `TASKS.md`, and the git log, and summarizes. Writes the task lines and the dates. Rewrites the README sections that describe structure when structure changes. Runs renames with `git mv` and then finds every reference to the old name and updates it, including the ones in the build file and in comments. After a rename or a move, runs the build (§15) to confirm nothing broke, and reports the result rather than assuming it. Drafts the commit message from the diff.
 
-Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git is not yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.[^tc-review]
-
-[^tc-review]: The tool-chain map, §15, "Reviewing what the agent changed": the pager, the structural diff, and the hunk-by-hunk review tool, none of which the app's diff view needs.
+Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git is not yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
 
 ## What you check
 
@@ -1020,9 +1076,7 @@ Read it row by row. Under no effect, the interval excludes zero 4.5 percent of t
 
 For a Bayesian model the script is the same shape with a different fit and a different rule (the posterior probability exceeding a threshold, the credible interval excluding zero), fewer simulated datasets because each fit is slower, and one more check: that the prior actually in force in the fitted model is the prior the paper says, because fitting software fills in defaults you did not set.
 
-*Long fits run outside the agent.* A model that takes more than a few minutes to fit does not belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The agent writes the script; you start it yourself, from a terminal or from RStudio, with its output sent to a file in `logs/` (§7); when it finishes, you tell the agent where the log is and it reads the result. If a project accumulates many long fits, two tools from the fuller stack are built for this: `targets`, an R pipeline runner that reruns only the steps whose inputs changed and resumes a fit that was interrupted, and `pueue`, a job queue that keeps a job alive after the session that started it has gone. Both are outside this guide; the tool-chain map covers them,[^tc-long] and neither is needed for the check above.
-
-[^tc-long]: The tool-chain map, §7 (long-running jobs and pueue) and §15b (targets), and the quickstart for installation. Snakemake is the cross-language equivalent, §15c.
+*Long fits run outside the agent.* A model that takes more than a few minutes to fit does not belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The agent writes the script; you start it yourself, from a terminal or from RStudio, with its output sent to a file in `logs/` (§7); when it finishes, you tell the agent where the log is and it reads the result. If a project accumulates many long fits, two tools from the fuller stack are built for this: `targets`, an R pipeline runner that reruns only the steps whose inputs changed and resumes a fit that was interrupted, and `pueue`, a job queue that keeps a job alive after the session that started it has gone. Both are outside this guide (the quickstart covers installation), and neither is needed for the check above.
 
 ## What you check
 
@@ -1259,9 +1313,7 @@ The agent helped build the analysis; the analysis has to run without it. A pipel
 
 Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two cannot disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
 
-For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The tool-chain map has the case for each and the quickstart the recipes;[^tc-runners] the one command above is enough for most papers.
-
-[^tc-runners]: The tool-chain map, §15a (just), §15b (targets), §15c (Snakemake); the quickstart, §8.
+For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The quickstart (§8) has the recipes; the one command above is enough for most papers.
 
 ## What you check
 
@@ -1345,7 +1397,7 @@ Separate from whether a vendor may *see* your data is whether it may *train* on 
 | ChatGPT Free, Go, Plus, or Pro, including Codex under those plans | Yes, unless turned off | ChatGPT, Settings, Data controls, *Improve the model for everyone* |
 | ChatGPT Business, Enterprise, or Edu; the API | No | None needed |
 
-Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. Second, the switch does not change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
+Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch does not change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
 
 ## The rule, and its enforcement
 
@@ -1444,7 +1496,7 @@ The habit: never accept a report as a result. "Done", "they agree", "it works", 
 
 An agent's working memory for a session (one conversation, from its start to `/exit`) is finite (§6), and a long session fills it: every file read, every command's output, every diff rides along on each subsequent turn. The symptoms are recognizable once you have seen them. The agent forgets a rule from the brief it followed an hour ago. It repeats work it already did. It contradicts an earlier answer without noticing. It slows, and on a metered plan it starts to cost (§17). Then, near the limit, the session is compacted into a summary, and whatever did not make the summary is gone.
 
-The habits: one session per task, closed when the task is done, with `STATUS.md` and `TASKS.md` as the hand-off to the next (§9). Name files rather than pasting them. When a session has to run long, compact it yourself with `/compact`, while you can still say what the summary should keep, rather than waiting for the automatic one; in Claude Code, `/context` shows what is filling the window. Keep the brief short (§6), because it is loaded every time. And treat a session that has started to forget as finished: restart, and let the files carry the state.
+The habits: one session per task, closed when the task is done, with `STATUS.md` and `TASKS.md` as the hand-off to the next (§9). Name files rather than pasting them. When a session has to run long, compact it yourself with `/compact`, while you can still say what the summary should keep, rather than waiting for the automatic one; in Claude Code, `/context` shows what is filling the window (my own habit: glance at it once a session has run long, and compact when usage passes roughly 300,000 tokens). Keep the brief short (§6), because it is loaded every time. And treat a session that has started to forget as finished: restart, and let the files carry the state.
 
 ## Stale memory
 
@@ -1493,7 +1545,7 @@ COVERS: Global AGENTS.md (researcher edition). Project AGENTS.md for a paper. TA
 VERIFY: `set windows-shell` is a documented just setting; Stata batch-mode forms per §13's VERIFY note. Re-check the just syntax at release.
 -->
 
-Five files to copy and edit. The first two are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
+Five files to copy and edit, and a closing reference (A.6) with the full project layouts that §7 cut down. The first two files are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
 
 ## A.1 The global file
 
@@ -1597,7 +1649,7 @@ it before the session ends.
 
 Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you do not already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart, and the reasoning for just over a folder of shell scripts is in the tool-chain map, §15a. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
+[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.
@@ -1655,6 +1707,138 @@ Thumbs.db
 # Personal agent settings; the shared .claude/settings.json is committed
 .claude/settings.local.json
 ```
+
+## A.6 The full project shapes
+
+<!--
+STATUS: adapt · DRAFTED: 2026-09-06 (ported essentially verbatim from the tool-chain map's §12 in the dedup; this appendix is now the canonical home of the templates — the map no longer carries them)
+SOURCE: tool-chain map v1.7, "Workspace structure" and "Project shapes and conditional propagation", section references adapted to this guide
+COVERS: The shape taxonomy; the full paper, data, and publishing layouts with canonical / recommended / optional parts; the five universal meta-files.
+-->
+
+§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape does not need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
+
+The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions do not drift.
+
+*Paper shape* (statistical analysis ending in a manuscript). A representative layout:
+
+```
+<workspace-root>/papers/lee-test-project/
+|-- AGENTS.md                      # project brief
+|-- CLAUDE.md     -> AGENTS.md     # symlink (or the one-line import, §6)
+|-- README.md
+|-- METHODOLOGY.md                 # dated entries: *why* behind choices
+|-- STATUS.md                      # current state, one screen; rewritten in place
+|-- TASKS.md                       # to do / in progress / done; accumulates
+|-- proj-lee-test-project.Rproj
+|-- .here                          # 0-byte sentinel for here::here()
+|-- _targets.R                     # pipeline manifest (when targets is used)
+|-- _targets/                      # per-target object store (gitignored)
+|-- justfile                       # project-wide command surface
+|-- .graveyard/                    # transient working copies (gitignored)
+|-- code/
+|   |-- _startup/                  # tier 1: session-start bootstrap
+|   |   |-- init.R                 # entry: sources the rest in order
+|   |   |-- functions.R            # project helpers (defines load_pkgs())
+|   |   |-- packages.R             # load_pkgs() calls
+|   |   |-- options.R              # options() — sampler defaults, mc.cores
+|   |   |-- data.R                 # read + prep the project dataset(s)
+|   |   |-- specifications.R       # spec registry (model_templates etc.)
+|   |   `-- pipeline-helpers.R     # parameterized callables for _targets.R
+|   |-- _experiments/              # investigative work (sourced on demand)
+|   |-- _data-acquisition/         # external-data fetchers
+|   |-- _final/                    # tier 3: figure assembly (figures.R)
+|   |-- _report/                   # tier 3: working Quarto summary
+|   `-- <topic>-<variant>.R        # tier 2: analyses (semantic kebab-case)
+|-- dags/                          # causal DAG sources + measurement model
+|-- data/
+|   |-- raw/                       # original data, never modified
+|   `-- processed/                 # transformations (often empty)
+|-- outputs/
+|   |-- archive/zenodo-vN/         # archival snapshots (own repo)
+|   |-- eda/                       # first-look EDA reports
+|   |-- figures/{final/,working/}  # publication-ready + diagnostic
+|   |-- models/<script>/           # saved fits (gitignored)
+|   |-- results/                   # serialized analysis bundles (gitignored)
+|   `-- tables/                    # committed; exact versions matter
+|-- logs/                          # long-running-job logs (gitignored)
+|-- manuscript/                    # drafts, response letters
+`-- docs/
+    |-- briefs/                    # dated · collaborator-facing incoming
+    |-- responses/                 # dated · collaborator-facing outgoing
+    |-- findings/                  # dated · internal: results, decisions
+    |-- notes/                     # evergreen reference material
+    `-- references/                # methodology PDFs
+```
+
+Canonical for this shape: the meta files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `STATUS.md`, `TASKS.md`, `METHODOLOGY.md`, the `.Rproj`, `.here`), `code/_startup/` with its seven canonical files, `code/`, `data/`, `outputs/` with its six subdirectories (`archive/`, `eda/`, `figures/`, `models/`, `results/`, `tables/`), `manuscript/`, `renv.lock`. The three-tier `code/` layout (`_startup/`, then the top-level analyses, then `_final/` + `_report/`), the two non-tier sibling directories (`_experiments/` for investigative work, `_data-acquisition/` for external-data fetchers), and the per-script subdirectories under `outputs/figures/working/` and `outputs/models/` are paper-shape convention. Recommended: `_targets.R` + `_targets/` + `justfile` for projects with a pipeline runner (§15), `logs/` (Bayesian fits run long enough that you want the job output captured somewhere, §12), `dags/` (when the project uses a causal-DAG identification strategy), `docs/` (four-way split: `briefs/`, `responses/`, `findings/`, `notes/`, meaning dated collaborator-facing incoming, dated collaborator-facing outgoing, dated internal, evergreen reference). Optional: `.graveyard/`, `outputs/archive/zenodo-vN/` (only when depositing, §15).
+
+*Data shape* (web scrape or data-collection pipeline ending in a structured dataset). A representative layout:
+
+```
+<workspace-root>/data/example-scrape/
+|-- AGENTS.md
+|-- CLAUDE.md     -> AGENTS.md
+|-- README.md
+|-- STATUS.md                      # current state, one screen; rewritten in place
+|-- TASKS.md                       # to do / in progress / done; accumulates
+|-- pyproject.toml                 # uv project manifest
+|-- uv.lock                        # pinned dependency closure (committed)
+|-- .python-version                # interpreter version pin (committed)
+|-- .venv/                         # virtual env (gitignored; sync-ignored)
+|-- .graveyard/                    # transient working copies (gitignored)
+|-- justfile                       # command front door: just build
+|-- scripts/                       # numbered pipeline scripts
+|   |-- 01-collect-source-a.py
+|   |-- 02-collect-source-b.py
+|   `-- 03-merge.py
+|-- data/
+|   |-- sources/                   # raw per-source downloads
+|   |-- checkpoints/               # resumable collection state (JSON)
+|   `-- validation/                # independent validation checks
+|-- outputs/
+|   |-- eda/                       # first-look EDA reports
+|   |-- figures/                   # interactive HTML + PNG
+|   |-- reports/                   # assembled PDFs + writeups
+|   `-- tables/                    # target lists, summary CSV/XLSX
+|-- logs/                          # pipeline progress logs
+|-- site/                          # built dashboard (when applicable)
+|-- templates/                     # Jinja2 templates for dashboards
+`-- docs/
+    |-- briefs/                    # dated · collaborator-facing incoming
+    |-- responses/                 # dated · collaborator-facing outgoing
+    |-- findings/                  # dated · internal: QA, decisions, results
+    `-- notes/                     # evergreen reference material
+```
+
+Canonical for this shape: the meta files, `justfile` (the command front door, §15, where `just build` / `just scrape` wrap the pipeline), `pyproject.toml` + `uv.lock` + `.python-version` (the pinned Python environment, §15), `scripts/`, `data/`, `data/sources/`, `data/checkpoints/`. The numbered-script convention (`01-`, `02-`, and so on) signals execution order to anyone reading the project, including agents. Recommended: `outputs/` with its four standard subdirectories (`eda/`, `figures/`, `reports/`, `tables/`), `logs/` (scrape scripts almost always run long enough that you want the job output captured somewhere), `docs/` (the same four-way split as the paper shape). Optional: `site/` + `templates/` (only if the project produces a deployable dashboard), `.graveyard/`. The `.venv/` directory exists locally but is gitignored, and when the project sits in a synced folder it is also kept out of sync (§7): the environment contains thousands of files that would otherwise storm a service like Dropbox. For projects whose dependencies include conda-forge / CUDA / Bioconda / R-mixed components, a `pixi` variant (`pixi.toml` + `pixi.lock` + `.pixi/`) replaces the `uv` files, and the rest of the shape is identical.
+
+*Publishing shape* (markdown to pandoc to XeTeX to PDF, for design-controlled standalone publishing). A representative layout:
+
+```
+<workspace-root>/publishing/methods-guide/
+|-- AGENTS.md
+|-- CLAUDE.md             -> AGENTS.md
+|-- README.md
+|-- STATUS.md                            # current state, one screen; rewritten in place
+|-- TASKS.md                             # to do / in progress / done; accumulates
+|-- source/                              # markdown source
+|   `-- methods-guide.md
+|-- assets/                              # images, logos, embedded resources
+|-- filters/                             # project pandoc Lua filters
+|-- template.tex                         # custom XeLaTeX template
+|-- justfile                             # build front door: just build
+|-- output/                              # the PDF deliverable (committed)
+|   `-- methods-guide.pdf
+`-- docs/                                # working notes (recommended)
+    |-- briefs/                          # dated incoming
+    |-- responses/                       # dated outgoing
+    `-- notes/                           # evergreen reference
+```
+
+Canonical for this shape: the meta files, `template.tex`, `justfile`, `source/`, `output/` (committed, since the PDF is the deliverable and the exact version matters). Recommended: `filters/` (any pandoc Lua filters the document needs; most documents need none), `assets/` (anything the template embeds), and `docs/` for any project that will accumulate audit reports, draft outlines, collaborator feedback, or decision logs over time; the `briefs/` / `responses/` / `notes/` split mirrors the paper shape, and filenames are `YYYY-MM-DD-<slug>.md`. Trivial one-off documents (CVs, single-shot reports) can omit `docs/` entirely. Filters worth reusing across projects belong in a shared location rather than copied per project. One compatibility note: with TeX Live 2026 and later, a pandoc-driven `template.tex` must define a `none` counter for `\LTcaptype` (newer `longtable` and `caption` releases validate it), or tables without captions fail the build.
+
+The pattern across shapes is the same: `AGENTS.md`, `CLAUDE.md` (the bridge to it), `STATUS.md`, `TASKS.md`, `README.md` are universal. Five files, whatever the shape. Shape-specific files (`METHODOLOGY.md` for papers, the numbered `scripts/` and the lockfile pair for data projects, `template.tex` + `justfile` for publishing projects) come from the shape's template.
 
 # Appendix B. Prompt bank
 

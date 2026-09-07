@@ -88,9 +88,44 @@ No `setwd()`, no absolute paths, no `../`: a project with those breaks the momen
 
 The whole folder is under version control from the first day, which is what makes an agent's changes reviewable and reversible (§5). What git carries is code and text. The `.gitignore` excludes `outputs/models/`, `logs/`, `data/processed/` when it is large, and `data/raw/` from the first day (Appendix A.5): a data-use agreement almost always forbids copying the data to a third party, and pushing to GitHub is exactly that (§16).
 
-This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`.[^tc-shapes] Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
+This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
 
-[^tc-shapes]: The full paper template is in the tool-chain map, §12, "Project shapes and conditional propagation", with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`.
+## One workspace
+
+One convention pays off across projects rather than within one: keep every active project under a single workspace directory, organized by what each produces. Throughout, `<workspace-root>/` stands for that directory; substitute your own (a common choice is `~/workspace/`). Mine sits inside a cloud-synced folder; the Dropbox rules at the end of this chapter are what make that workable.
+
+```
+<workspace-root>/
+|-- papers/        # peer-reviewed manuscripts + analyses (paper shape)
+|   |-- lee-bone-density/
+|   |-- jones-gait-study/
+|   `-- ...
+|-- publishing/    # polished deliverables (guides, decks, CVs)
+|-- data/          # data collection / analysis without a manuscript
+|   |-- publication-survey/
+|   `-- ...
+|-- consulting/    # statistical consulting engagements
+|-- ops/           # operational management of ongoing concerns
+|-- business/      # market research, branding, finance
+|-- software/      # application logic and product behavior
+|-- tools/         # utilities, automation, templates, workflow infrastructure
+|-- sites/         # content-first or identity-first websites
+|-- notes/         # personal knowledge management
+`-- archived/      # fully inactive projects (mirror of the categories above)
+    |-- papers/
+    |-- data/
+    `-- ...
+```
+
+The top-level folder tells you, and the agent, a project's kind without opening any file: `papers/` holds paper-shaped projects, `data/` data projects, each in the layouts of Appendix A.6. Names are lowercase and hyphenated throughout: `lee-bone-density`, `publication-survey`, `heat-birthweight`. No spaces, no underscores, no CamelCase. A paper is `collaborator-topic` (`jones-gait-study`), a consulting project `client-topic`, and everything else a descriptive slug. Filenames inside projects follow the same convention, with R-tooling extensions (`.R`, `.Rmd`, `.Rproj`) keeping their canonical capitalization.
+
+The structure is also what makes reorganizing safe. Because every script anchors its paths to the project root (the `.here` marker above), a finished paper moves from `papers/heat-birthweight` to `archived/papers/heat-birthweight` without a single script edit. In Python the same anchor is a few lines at the top of a script:
+
+```
+PROJECT_ROOT = next(p for p in Path(__file__).resolve().parents
+                    if (p / "AGENTS.md").exists())
+DATA = PROJECT_ROOT / "data"
+```
 
 ## Scaffolding a new project
 
@@ -137,4 +172,4 @@ OneDrive has no mark you can set yourself: as of this writing, folder exclusion 
 
 Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
 
-[^tc-sync]: The tool-chain map, §1, "Cloud sync and project infrastructure", and the quickstart's per-project recipe (§7) give the full sequence, including the language-environment folders.
+[^tc-sync]: The quickstart's per-project recipe (§7) gives the full sequence, including the language-environment folders.

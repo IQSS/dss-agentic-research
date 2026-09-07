@@ -46,7 +46,7 @@ Separate from whether a vendor may *see* your data is whether it may *train* on 
 | ChatGPT Free, Go, Plus, or Pro, including Codex under those plans | Yes, unless turned off | ChatGPT, Settings, Data controls, *Improve the model for everyone* |
 | ChatGPT Business, Enterprise, or Edu; the API | No | None needed |
 
-Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. Second, the switch does not change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
+Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch does not change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
 
 ## The rule, and its enforcement
 

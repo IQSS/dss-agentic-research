@@ -22,12 +22,12 @@ Every action an agent takes falls into one of three tiers, and the settings file
 A conservative starting posture for a researcher, in shape rather than as a copyable file:
 
 - *Allow* what only reads or builds: reading files in the project, `git status`, `git diff`, `git log`, running your own scripts and the build command. With the sandbox on (below), most local commands can sit here because the sandbox bounds them.
-- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages, deleting files, anything that reaches the network, any command that touches `data/`.
+- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages (system packages too: `brew`, `apt`, `winget`), deleting files, anything that reaches the network, any command that touches `data/`.
 - *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
 
-The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt.
+The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you did not expect.
 
-Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `.claude/settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
 
 ```
 {
@@ -93,6 +93,4 @@ Two limits. Git undoes what it tracks, and it does not track data files or model
 
 ## A starting posture
 
-In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.[^tc-sec]
-
-[^tc-sec]: The tool-chain map, §13, has the full treatment: the layered model, the settings for both agents with their rationale, the sandbox internals, and the container layer this guide leaves out.
+In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.
