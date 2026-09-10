@@ -126,7 +126,7 @@ body:has(.console-page) #title-block-header { padding-top: 1.2rem; }
 /* ---- parts kit ---- */
 .part { display: none; }
 .part.show { display: block; }
-#figure { --coat: #6f7f76; --coat-dk: #55635b; --coat-lt: #8a9a90; }
+#figure { --coat: #6f7f76; --coat-dk: #55635b; --coat-lt: #8a9a90; --gloves: #7a5535; --gloves-dk: #5c3f27; }
 .coat { fill: var(--coat); }
 .coat-dk { fill: var(--coat-dk); }
 .coat-lt { fill: var(--coat-lt); }

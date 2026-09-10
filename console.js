@@ -19,6 +19,13 @@
     rose:    { c: "#b08984", dk: "#8b6a66", lt: "#c7a39e" },
     crimson: { c: "#8c3a45", dk: "#6a2a33", lt: "#a95560" },
   };
+  // Gloves: chosen per chapter to contrast with the coat, since a hand the coat's own colour disappears.
+  const GLOVES = {
+    brown:   { c: "#7a5535", dk: "#5c3f27" },
+    cream:   { c: "#e3d9c1", dk: "#c9bda0" },
+    mustard: { c: "#c8a23c", dk: "#8f7228" },
+    slate:   { c: "#4f6478", dk: "#3b4c5c" },
+  };
   const EYES = {
     calm:    { color: "#f0d67a", r: 9,  brows: false },
     alert:   { color: "#6fa3e6", r: 11, brows: false },
@@ -37,73 +44,73 @@
   // ---- chapters: a recipe for the figure and a control on the console ----
   const CH = [
     { n: "1",  part: "I",   slug: "01-introduction", title: "Introduction", ctl: "dome",
-      r: { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", holds: null, scene: null },
+      r: { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null },
       body: "A chat assistant answers questions. An agent does work inside your project: it creates the folders, writes and runs the code, reads the error, fixes it, and updates the status file. This guide is about what follows from that when the output is a paper or a talk." },
     { n: "2",  part: "I",   slug: "02-what-an-agent-is", title: "What an agent is", ctl: "crt",
-      r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "sage", holds: null, scene: "screens" },
+      r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "sage", gloves: "mustard", holds: null, scene: "screens" },
       body: "Same models as the chat window. What differs is what the model can see and do: it reads the files that are there, runs the code, reads what the code printed, and edits in place. The model did not change. The room it works in did." },
     { n: "3",  part: "I",   slug: "03-where-to-run-it", title: "Where to run it", ctl: "lampgrid",
-      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "slate", holds: "terminal", scene: null },
+      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "slate", gloves: "cream", holds: "terminal", scene: null },
       body: "Two companies, four surfaces each, and the choice matters less than it looks. What differs is what you see while it works and how you sign in, and the second decides what data may pass through it." },
     { n: "4",  part: "I",   slug: "04-modes", title: "Modes", ctl: "rotary",
-      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", holds: "dial", scene: null },
+      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", gloves: "brown", holds: "dial", scene: null },
       body: "Three settings shape a session before the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. All three change in a few keystrokes." },
     { n: "5",  part: "I",   slug: "05-boundaries", title: "Boundaries", ctl: "toggles",
-      r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "slate", holds: null, scene: "glassbox" },
+      r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "slate", gloves: "mustard", holds: null, scene: "glassbox" },
       body: "The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will. Four boundaries, each covering a failure the others do not, keep a mistake from being unrecoverable." },
     { n: "6",  part: "II",  slug: "06-the-files-the-agent-reads", title: "The files the agent reads", ctl: "cardslot",
-      r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", holds: "sheet", scene: null },
+      r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
       body: "How will it know to do things your way? A few plain-text files the agent reads at the start of every session: who you are, how you work, what this project is, and what is open." },
     { n: "7",  part: "II",  slug: "07-project-structure", title: "Project structure", ctl: "dpad",
-      r: { hat: "hardhat", eyes: "calm", arms: "rest", coat: "mustard", holds: null, scene: "tree" },
+      r: { hat: "hardhat", eyes: "calm", arms: "rest", coat: "mustard", gloves: "slate", holds: null, scene: "tree" },
       body: "An agent walking into a cloud-shared folder has the same problem a new RA does, with less context. Agree on one structure, use it for every project, and have the agent build it." },
     { n: "8",  part: "II",  slug: "08-repeatable-workflows", title: "Repeatable workflows", ctl: "keys",
-      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "rose", holds: "gear", scene: null },
+      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "rose", gloves: "slate", holds: "gear", scene: null },
       body: "Once you have asked for the same thing three times, write it down as a skill: a named, packaged instruction the agent runs when you call it. A piece of your workflow stops being a conversation and becomes a command." },
     { n: "9",  part: "III", slug: "09-bookkeeping", title: "Bookkeeping", ctl: "counter",
-      r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", holds: "clipboard", scene: null },
+      r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", gloves: "brown", holds: "clipboard", scene: null },
       body: "Where to start, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand. The habit that makes every other chapter's checks possible." },
     { n: "10", part: "III", slug: "10-literature-search-and-synthesis", title: "Literature search and synthesis", ctl: "ledbar",
-      r: { hat: "beret", eyes: "alert", arms: "hold", coat: "slate", holds: "books", scene: null },
+      r: { hat: "beret", eyes: "alert", arms: "hold", coat: "slate", gloves: "cream", holds: "books", scene: null },
       body: "Where the agent's speed and its worst habit meet. It can screen faster than you can read the first abstract, and it can produce a perfectly formatted citation for a paper that does not exist. One decision follows." },
     { n: "11", part: "III", slug: "11-getting-data", title: "Getting data", ctl: "jacks",
-      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", holds: "key", scene: "database" },
+      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "mustard", holds: "key", scene: "database" },
       body: "Where an agent first touches the outside world. What comes in gets a provenance log; what is already in is read-only. Between them, a ladder of ways to fetch, from a documented interface down to a browser." },
     { n: "12", part: "III", slug: "12-analysis-simulation-first", title: "Analysis, simulation first", ctl: "scope",
-      r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", holds: "dice", scene: null },
+      r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
       body: "The agent writes the scripts; you own the model. Before a model is trusted with the real data, simulate from known parameters, fit the planned model, and see whether it recovers them." },
     { n: "13", part: "III", slug: "13-verification", title: "Verification", ctl: "twinmeters",
-      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "sage", holds: "magnifier", scene: null },
+      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "sage", gloves: "mustard", holds: "magnifier", scene: null },
       body: "The failure to guard against is code that runs, passes a reading, and is still wrong. Re-running gives the same wrong answer. The check is to require the result from different code, in Stata, from the methods write-up alone." },
     { n: "14", part: "III", slug: "14-writing-revision-and-talks", title: "Writing, revision, and talks", ctl: "printer",
-      r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", holds: "pen", scene: null },
+      r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
       body: "The artifact the agent should touch least and can help with most. It writes from your files, never from its sense of what papers like yours usually say. You rewrite what it drafts." },
     { n: "15", part: "III", slug: "15-reproducibility-and-hand-off", title: "Reproducibility and hand-off", ctl: "lever",
-      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", holds: "package", scene: null },
+      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "brown", holds: "package", scene: null },
       body: "The analysis has to run without the agent. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables." },
     { n: "16", part: "IV",  slug: "16-data-confidentiality", title: "Data confidentiality", ctl: "keyswitch",
-      r: { hat: "fedora", eyes: "alarmed", arms: "hold", coat: "slate", holds: "lock", scene: null },
+      r: { hat: "fedora", eyes: "alarmed", arms: "hold", coat: "slate", gloves: "cream", holds: "lock", scene: null },
       body: "The agent reads whatever folder it is pointed at, and everything it reads goes to the model. Two concrete questions: what do your protocol and agreements permit, and is the vendor covered?" },
     { n: "17", part: "IV",  slug: "17-cost-and-the-map", title: "Cost, and the map", ctl: "gauge",
-      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "mustard", holds: "meter", scene: null },
+      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "mustard", gloves: "slate", holds: "meter", scene: null },
       body: "Four tiers run from the chat window you already use to a pipeline that runs without you. Each is priced, so that you climb as far as your work needs and no further." },
     { n: "18", part: "IV",  slug: "18-failure-modes-and-habits", title: "Failure modes and habits", ctl: "stop",
-      r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", holds: null, scene: null },
+      r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", gloves: "brown", holds: null, scene: null },
       body: "The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures are not settings." },
     { n: "A",  part: "A",   slug: "appendix-a-starter-files", title: "Starter files", ctl: "key",
-      r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", holds: "sheet", scene: null },
+      r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
       body: "Five files to copy and edit, plus the full project layouts. Every line is a decision you can reverse; starting from a file rather than a blank page makes the decisions visible." },
     { n: "B",  part: "A",   slug: "appendix-b-prompt-bank", title: "Prompt bank", ctl: "key",
-      r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", holds: "clipboard", scene: null },
+      r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
       body: "Prompts that have worked, three to five per stage, each with the line that says when to use it. None asks the agent to confirm its own work." },
     { n: "C",  part: "A",   slug: "appendix-c-the-terminal-in-two-pages", title: "The terminal in two pages", ctl: "key",
-      r: { hat: "none", eyes: "alert", arms: "hold", coat: "slate", holds: "terminal", scene: null },
+      r: { hat: "none", eyes: "alert", arms: "hold", coat: "slate", gloves: "mustard", holds: "terminal", scene: null },
       body: "The desktop apps need none of this. If you run the agent in a terminal, you need about this much and no more." },
     { n: "D",  part: "A",   slug: "appendix-d-institutional-access-at-harvard", title: "Institutional access at Harvard", ctl: "key",
-      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "crimson", holds: "key", scene: null },
+      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "crimson", gloves: "cream", holds: "key", scene: null },
       body: "Specific to Harvard and dated August 2026. How to run through the university's gateway, how to keep a personal plan intact, and what data may go through it." },
   ];
-  const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", holds: null, scene: null };
+  const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null };
 
   const svgNS = "http://www.w3.org/2000/svg";
   const el = (tag, attrs, parent) => {
@@ -128,8 +135,9 @@
     el("circle", { cx: 0, cy: 0, r: 8, fill: "var(--c-metal-3)" }, f);
     el("rect", { x: -10, y: 0, width: 20, height: SEG.forearm, rx: 4, fill: "var(--c-metal)" }, f);
     el("rect", { x: -10, y: SEG.forearm - 6, width: 20, height: 6, fill: "var(--c-metal-3)" }, f);
-    el("rect", { x: -12, y: SEG.forearm, width: 24, height: SEG.hand, rx: 4, fill: "var(--c-metal-2)" }, f);
-    [-9, -2, 5].forEach(x => el("rect", { x, y: SEG.forearm + SEG.hand - 4, width: 6, height: 12, rx: 2, fill: "var(--c-metal-2)" }, f));
+    el("rect", { x: -12, y: SEG.forearm, width: 24, height: SEG.hand, rx: 4, fill: "var(--gloves)" }, f);
+    [-9, -2, 5].forEach(x => el("rect", { x, y: SEG.forearm + SEG.hand - 4, width: 6, height: 12, rx: 2, fill: "var(--gloves-dk)" }, f));
+    el("rect", { x: -12, y: SEG.forearm, width: 24, height: 4, fill: "var(--gloves-dk)" }, f);
     return g;
   }
   function handAnchor(side, a1, a2) {
@@ -149,6 +157,8 @@
   function applyRecipe(r) {
     const c = COATS[r.coat];
     figure.style.setProperty("--coat", c.c); figure.style.setProperty("--coat-dk", c.dk); figure.style.setProperty("--coat-lt", c.lt);
+    const g = GLOVES[r.gloves];
+    figure.style.setProperty("--gloves", g.c); figure.style.setProperty("--gloves-dk", g.dk);
     const e = EYES[r.eyes];
     figure.querySelectorAll(".iris").forEach(i => { i.setAttribute("r", e.r); i.setAttribute("fill", e.color); });
     document.querySelectorAll(".part").forEach(p => p.classList.remove("show"));
