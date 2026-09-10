@@ -19,13 +19,15 @@ Nothing executes, so a render needs only Quarto. The look is the `dss-theme` ext
 ## Layout
 
 One `.qmd` per chapter in `chapters/`, with the order set by the sidebar in `_quarto.yml`; figures as SVG
-in `figures/`. On a Dropbox-synced checkout, `_site` is a symlink outside Dropbox.
+in `figures/`. The landing page is hand-written: `index.qmd` draws a control console with the agent behind
+it, every control a chapter, with `console.js` and `console.css` beside it. On a Dropbox-synced checkout,
+`_site` is a symlink outside Dropbox.
 
 ## Status
 
-A private working repository, not yet published anywhere. Publishing will come from Cloudflare Pages
-building from this repository; a move to IQSS and the DSS training index waits on iteration over the
-materials themselves.
+A private working repository. The site is published to Cloudflare Pages by direct upload (`just deploy`)
+and sits behind an access login while the materials are iterated on; a move to IQSS and the DSS training
+index waits on that.
 
 ## License
 
