@@ -67,6 +67,11 @@ body.quarto-dark {
   --c-ground: #14181e;
 }
 
+/* The landing page uses page-layout: custom, which drops the theme's grid, so the wrapper sets the
+   width itself: the navbar container's 1368px box with its 28px padding, like the training index. */
+.console-page, body:has(.console-page) #title-block-header { max-width: 1368px; margin: 0 auto; padding: 0 28px; }
+body:has(.console-page) #title-block-header { padding-top: 1.2rem; }
+.console-page { padding-bottom: 2rem; }
 .console-scene svg { display: block; width: 100%; height: auto; max-width: 100%; }
 
 /* ---- readout ---- */
@@ -104,7 +109,7 @@ body.quarto-dark {
 }
 
 /* ---- controls ---- */
-.hot { cursor: pointer; }
+.hot { cursor: pointer; text-decoration: none; }
 .hot:focus { outline: none; }
 .hot .ring { fill: none; stroke: transparent; stroke-width: 2; opacity: 0; transition: opacity .12s; }
 .hot:focus-visible .ring, .hot:hover .ring { stroke: var(--c-focus); stroke-width: 3; opacity: 1; }

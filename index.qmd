@@ -1,11 +1,14 @@
 ---
 title: "Agentic AI for Researchers"
-page-layout: full
+page-layout: custom
+sidebar: false
 toc: false
 resources:
   - console.css
   - console.js
 ---
+
+::: {.console-page}
 
 A working guide to doing research with an AI agent, for researchers rather than developers. How to run an agent, how to teach it your conventions, how to use it at each stage of a paper (organization, literature, data, analysis, verification, writing, reproducibility), and the judgment that keeps it safe. It assumes the Claude or Codex app, git, and the language you already use.
 
@@ -302,8 +305,10 @@ A working guide to doing research with an AI agent, for researchers rather than 
     <p id="ro-body">Every switch, gauge and screen is a chapter of the guide. Hover over one to see what it covers here, and press it to open the chapter. On a touch screen, tap once to read and again to open. The agent changes with the chapter: orientation on the left wing, the files and the work in the centre, judgment and the appendices on the right.</p>
     <a class="go" id="ro-link" href="chapters/01-introduction.html" hidden>Open chapter</a>
   </div>
-  <div class="hint" id="ro-hint">The sidebar lists every chapter in order.</div>
+  <div class="hint" id="ro-hint">Every chapter page lists the full contents in its sidebar.</div>
 </section>
 <div class="console-legend" id="legend"></div>
 <script src="console.js"></script>
 ```
+
+:::
