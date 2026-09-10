@@ -1,14 +1,309 @@
 ---
 title: "Agentic AI for Researchers"
+page-layout: full
+toc: false
+resources:
+  - console.css
+  - console.js
 ---
 
-A working guide to doing research with an AI agent, for researchers rather than developers.
+A working guide to doing research with an AI agent, for researchers rather than developers. How to run an agent, how to teach it your conventions, how to use it at each stage of a paper (organization, literature, data, analysis, verification, writing, reproducibility), and the judgment that keeps it safe. It assumes the Claude or Codex app, git, and the language you already use.
 
-How to run an agent, how to teach it your conventions, how to use it at each stage of a paper (organization, literature, data, analysis, verification, writing, reproducibility), and the judgment that keeps it safe. It assumes the Claude or Codex app, git, and the language you already use.
+```{=html}
+<link rel="stylesheet" href="console.css">
+<div class="console-scene">
+<svg id="scene" viewBox="0 0 1200 760" role="img" aria-label="The agent at its console" aria-describedby="scene-desc">
+      <desc id="scene-desc">A robot in a hat and trench coat stands behind a three-part control panel of gauges, screens, switches and lamps. Each control is a chapter of the guide; selecting one changes the robot's hat, eyes, arms, coat, what it holds and what surrounds it, and fills the readout below the scene.</desc>
+      <defs>
+        <linearGradient id="panelFace" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--c-panel)"/><stop offset="1" stop-color="var(--c-panel-2)"/>
+        </linearGradient>
+        <linearGradient id="panelFront" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--c-panel-3)"/><stop offset="1" stop-color="var(--c-panel-edge)"/>
+        </linearGradient>
+        <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
+          <path d="M12 0H0V12" fill="none" stroke="var(--c-ink)" stroke-opacity="0.05"/>
+        </pattern>
+        <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+          <rect width="4" height="2" fill="#000" opacity="0.18"/>
+        </pattern>
+        <pattern id="hazard" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="5" height="10" fill="var(--c-mustard-2)"/><rect x="5" width="5" height="10" fill="var(--c-label)"/>
+        </pattern>
+      </defs>
 
-::: {.callout-note}
-## This site is being built
+      <!-- backdrop -->
+      <g>
+        <circle cx="200" cy="170" r="110" fill="var(--c-blue)" opacity="0.26"/>
+        <polygon points="760,20 1090,70 1040,330 860,290" fill="var(--c-rose)" opacity="0.28"/>
+        <circle cx="1010" cy="130" r="52" fill="var(--c-mustard)" opacity="0.42"/>
+        <polygon points="40,360 380,330 350,395 70,415" fill="var(--c-panel)" opacity="0.32"/>
+        <polygon points="880,330 1170,350 1140,410 900,395" fill="var(--c-olive)" opacity="0.22"/>
+        <rect x="0" y="0" width="1200" height="760" fill="url(#grid)"/>
+      </g>
 
-The chapters are generated from the guide's markdown source, and the conversion is not finished yet.
-Until it is, the current PDF is the complete document.
-:::
+      <!-- ===== surroundings ===== -->
+      <g id="surround">
+        <g class="part" data-part="glassbox">
+          <rect x="492" y="0" width="216" height="366" fill="var(--c-glass)" stroke="var(--c-blue-2)" stroke-width="3" stroke-dasharray="12 7"/>
+          <rect x="500" y="8" width="200" height="350" fill="none" stroke="var(--c-blue-2)" stroke-width="1" opacity="0.5"/>
+          <g transform="translate(686,30)">
+            <rect x="-12" y="0" width="24" height="18" rx="2" fill="var(--c-blue)"/>
+            <path d="M-7 0V-7a7 7 0 0 1 14 0V0" fill="none" stroke="var(--c-blue)" stroke-width="3"/>
+          </g>
+          <text x="600" y="382" text-anchor="middle" class="lbl" style="fill:var(--c-ink-2);font-size:11px">reads here, writes here, nothing else</text>
+        </g>
+        <g class="part" data-part="tree" transform="translate(380,120)">
+          <rect x="0" y="0" width="104" height="150" rx="4" fill="var(--c-paper)" stroke="var(--c-ink-2)" stroke-width="2"/>
+          <g class="tiny" style="font-size:10px;fill:#262c2d">
+            <text x="10" y="20">paper/</text><text x="20" y="38">AGENTS.md</text><text x="20" y="56">STATUS.md</text>
+            <text x="20" y="74">code/</text><text x="20" y="92">data/raw/</text><text x="20" y="110">outputs/</text><text x="20" y="128">docs/</text>
+          </g>
+          <path d="M14 24 V124" stroke="#cfc8b9" stroke-width="1.5" fill="none"/>
+        </g>
+        <g class="part" data-part="database" transform="translate(392,150)">
+          <ellipse cx="46" cy="14" rx="46" ry="14" fill="var(--c-blue-2)"/>
+          <rect x="0" y="14" width="92" height="84" fill="var(--c-blue)"/>
+          <ellipse cx="46" cy="98" rx="46" ry="14" fill="var(--c-blue)"/>
+          <ellipse cx="46" cy="42" rx="46" ry="14" fill="none" stroke="var(--c-blue-2)" stroke-width="2"/>
+          <ellipse cx="46" cy="70" rx="46" ry="14" fill="none" stroke="var(--c-blue-2)" stroke-width="2"/>
+          <g transform="translate(46,130)">
+            <rect x="-11" y="0" width="22" height="16" rx="2" fill="var(--c-rose)"/>
+            <path d="M-6 0V-6a6 6 0 0 1 12 0V0" fill="none" stroke="var(--c-rose)" stroke-width="3"/>
+          </g>
+          <text x="46" y="166" text-anchor="middle" class="lbl" style="fill:var(--c-ink-2)">raw: read-only</text>
+        </g>
+        <g class="part" data-part="screens" transform="translate(372,110)">
+          <rect x="0" y="0" width="120" height="80" rx="4" fill="var(--c-metal-3)"/>
+          <rect x="6" y="6" width="108" height="62" fill="var(--c-screen)"/>
+          <text x="14" y="26" class="scr" style="font-size:10px">$ claude</text>
+          <text x="14" y="42" class="scr" style="font-size:10px">&gt; run the sim</text>
+          <text x="14" y="58" class="scr" style="font-size:10px">reading code/…</text>
+          <rect x="50" y="82" width="20" height="14" fill="var(--c-metal-2)"/>
+          <rect x="30" y="96" width="60" height="6" rx="2" fill="var(--c-metal-2)"/>
+          <rect x="0" y="120" width="120" height="80" rx="4" fill="var(--c-metal-3)" opacity="0.9"/>
+          <rect x="6" y="126" width="108" height="62" fill="var(--c-paper)"/>
+          <rect x="14" y="136" width="70" height="5" fill="#cfc8b9"/><rect x="14" y="148" width="90" height="4" fill="#cfc8b9"/>
+          <rect x="14" y="158" width="80" height="4" fill="#cfc8b9"/><rect x="14" y="168" width="60" height="4" fill="#cfc8b9"/>
+        </g>
+      </g>
+
+      <!-- ===== the figure ===== -->
+      <g id="figure">
+        <ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/>
+        <g>
+          <rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/>
+          <rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/>
+          <circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/>
+          <circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/>
+          <rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/>
+          <rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/>
+          <path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/>
+          <path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/>
+          <rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/>
+          <rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/>
+        </g>
+        <g>
+          <polygon points="550,152 650,152 672,298 528,298" class="coat"/>
+          <polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/>
+          <rect x="528" y="292" width="144" height="7" class="coat-dk"/>
+          <polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/>
+          <rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/>
+          <polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/>
+          <polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/>
+          <polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/>
+          <polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/>
+          <polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/>
+          <polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/>
+          <rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/>
+          <rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/>
+          <rect x="536" y="228" width="128" height="13" class="coat-dk"/>
+          <rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/>
+          <rect x="594" y="228" width="12" height="13" class="coat-dk"/>
+          <circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/>
+          <rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/>
+          <rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/>
+          <line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/>
+        </g>
+        <g id="arms"></g>
+        <rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/>
+        <rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/>
+        <rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/>
+        <g id="head">
+          <rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/>
+          <rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/>
+          <rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/>
+          <g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g>
+          <rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/>
+          <rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/>
+          <g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g>
+          <g id="eyes">
+            <circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/>
+            <circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/>
+            <circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/>
+            <g class="part" data-part="brows">
+              <rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/>
+              <rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/>
+            </g>
+          </g>
+          <g class="part" data-part="antenna">
+            <rect x="597" y="24" width="6" height="28" fill="var(--c-metal-2)"/>
+            <circle cx="600" cy="22" r="7" fill="var(--c-mustard)"/><circle cx="600" cy="22" r="3" fill="var(--c-mustard-2)"/>
+          </g>
+          <g class="part" data-part="fedora">
+            <path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/>
+            <path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/>
+            <path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/>
+            <path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/>
+            <rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/>
+          </g>
+          <g class="part" data-part="bowler">
+            <ellipse cx="600" cy="53" rx="76" ry="7" fill="var(--c-hat-bowler)"/>
+            <path d="M542 53 A58 46 0 0 1 658 53 Z" fill="var(--c-hat-bowler)"/>
+            <path d="M552 46 A48 38 0 0 1 648 46" fill="none" stroke="var(--c-hat-bowler-2)" stroke-width="2"/>
+            <rect x="546" y="42" width="108" height="8" fill="var(--c-rose)"/>
+          </g>
+          <g class="part" data-part="hardhat">
+            <path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/>
+            <rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/>
+            <rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/>
+            <path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/>
+          </g>
+          <g class="part" data-part="beret">
+            <path d="M536 52 Q540 26 600 22 Q664 22 668 52 Q640 46 600 46 Q560 46 536 52Z" fill="var(--c-blue)"/>
+            <rect x="542" y="48" width="116" height="6" rx="3" fill="var(--c-blue-2)"/>
+            <rect x="598" y="14" width="4" height="10" fill="var(--c-blue)"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- ===== held objects ===== -->
+      <g id="held">
+        <g class="part" data-part="sheet" transform="rotate(-8)">
+          <rect x="-30" y="-38" width="60" height="76" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/>
+          <text x="-22" y="-20" class="tiny" style="fill:#262c2d">AGENTS.md</text>
+          <g fill="#cfc8b9"><rect x="-22" y="-12" width="44" height="3"/><rect x="-22" y="-4" width="36" height="3"/><rect x="-22" y="4" width="42" height="3"/><rect x="-22" y="12" width="28" height="3"/><rect x="-22" y="20" width="40" height="3"/></g>
+        </g>
+        <g class="part" data-part="books">
+          <rect x="-36" y="-30" width="72" height="16" fill="var(--c-blue)"/><rect x="-30" y="-14" width="72" height="16" fill="var(--c-rose)"/>
+          <rect x="-34" y="2" width="72" height="16" fill="var(--c-mustard)"/><rect x="-28" y="18" width="72" height="16" fill="var(--c-olive)"/>
+          <g fill="var(--c-paper)" opacity="0.7"><rect x="-30" y="-26" width="4" height="8"/><rect x="-24" y="-10" width="4" height="8"/><rect x="-28" y="6" width="4" height="8"/><rect x="-22" y="22" width="4" height="8"/></g>
+        </g>
+        <g class="part" data-part="magnifier">
+          <circle cx="-8" cy="-8" r="22" fill="var(--c-glass)" stroke="var(--c-ink)" stroke-width="5"/>
+          <circle cx="-14" cy="-14" r="6" fill="#fff" opacity="0.5"/>
+          <line x1="8" y1="8" x2="32" y2="32" stroke="var(--c-ink)" stroke-width="8" stroke-linecap="round"/>
+        </g>
+        <g class="part" data-part="pen">
+          <rect x="-34" y="-40" width="64" height="80" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/>
+          <rect x="-26" y="-30" width="46" height="5" fill="#4f5856"/>
+          <g fill="#cfc8b9"><rect x="-26" y="-18" width="40" height="3"/><rect x="-26" y="-10" width="46" height="3"/><rect x="-26" y="-2" width="34" height="3"/></g>
+          <g fill="var(--c-rose)"><rect x="-26" y="6" width="42" height="3"/><rect x="-26" y="14" width="24" height="3"/></g>
+          <g transform="translate(18,22) rotate(40)"><rect x="-4" y="-44" width="8" height="44" fill="var(--c-blue)"/><polygon points="-4,0 4,0 0,10" fill="var(--c-mustard)"/></g>
+        </g>
+        <g class="part" data-part="lock">
+          <rect x="-22" y="-6" width="44" height="36" rx="4" fill="var(--c-rose)"/>
+          <path d="M-13 -6V-18a13 13 0 0 1 26 0V-6" fill="none" stroke="var(--c-rose)" stroke-width="7"/>
+          <circle cx="0" cy="8" r="5" fill="var(--c-ink)"/><rect x="-2" y="8" width="4" height="12" fill="var(--c-ink)"/>
+        </g>
+        <g class="part" data-part="meter">
+          <rect x="-40" y="-30" width="80" height="60" rx="5" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/>
+          <path d="M-30 18 A32 32 0 0 1 30 18" fill="none" stroke="#cfc8b9" stroke-width="8"/>
+          <path d="M-30 18 A32 32 0 0 1 0 -14" fill="none" stroke="var(--c-mustard)" stroke-width="8"/>
+          <line x1="0" y1="18" x2="-16" y2="-6" stroke="#262c2d" stroke-width="3" stroke-linecap="round"/><circle cy="18" r="4" fill="#262c2d"/>
+          <text x="-32" y="27" class="tiny" style="font-size:7.5px;fill:#262c2d">chat</text><text x="32" y="27" text-anchor="end" class="tiny" style="font-size:7.5px;fill:#262c2d">pipeline</text>
+        </g>
+        <g class="part" data-part="gear">
+          <g fill="var(--c-mustard)">
+            <rect x="-6" y="-34" width="12" height="68"/><rect x="-34" y="-6" width="68" height="12"/>
+            <rect x="-6" y="-34" width="12" height="68" transform="rotate(45)"/><rect x="-34" y="-6" width="68" height="12" transform="rotate(45)"/>
+          </g>
+          <circle r="24" fill="var(--c-mustard)"/><circle r="9" fill="var(--c-ground)"/>
+          <g transform="translate(30,26)">
+            <g fill="var(--c-rose)"><rect x="-4" y="-20" width="8" height="40" transform="rotate(22)"/><rect x="-20" y="-4" width="40" height="8" transform="rotate(22)"/><rect x="-4" y="-20" width="8" height="40" transform="rotate(67)"/><rect x="-20" y="-4" width="40" height="8" transform="rotate(67)"/></g>
+            <circle r="13" fill="var(--c-rose)"/><circle r="5" fill="var(--c-ground)"/>
+          </g>
+        </g>
+        <g class="part" data-part="clipboard">
+          <rect x="-30" y="-36" width="60" height="80" rx="3" fill="var(--c-mustard-3)"/>
+          <rect x="-25" y="-28" width="50" height="66" fill="var(--c-paper)"/>
+          <rect x="-12" y="-42" width="24" height="12" rx="3" fill="var(--c-metal-2)"/>
+          <g fill="none" stroke="#4f5856" stroke-width="1.5"><rect x="-19" y="-18" width="8" height="8"/><rect x="-19" y="-4" width="8" height="8"/><rect x="-19" y="10" width="8" height="8"/><rect x="-19" y="24" width="8" height="8"/></g>
+          <path d="M-18 -14 l3 3 l5 -6" fill="none" stroke="var(--c-olive)" stroke-width="2"/><path d="M-18 0 l3 3 l5 -6" fill="none" stroke="var(--c-olive)" stroke-width="2"/>
+          <g fill="#cfc8b9"><rect x="-7" y="-15" width="26" height="3"/><rect x="-7" y="-1" width="22" height="3"/><rect x="-7" y="13" width="26" height="3"/><rect x="-7" y="27" width="18" height="3"/></g>
+        </g>
+        <g class="part" data-part="key" transform="rotate(-30)">
+          <circle cx="-22" cy="0" r="14" fill="none" stroke="var(--c-mustard)" stroke-width="7"/>
+          <rect x="-8" y="-4" width="46" height="8" fill="var(--c-mustard)"/>
+          <rect x="24" y="4" width="6" height="10" fill="var(--c-mustard)"/><rect x="34" y="4" width="6" height="8" fill="var(--c-mustard)"/>
+        </g>
+        <g class="part" data-part="terminal">
+          <rect x="-40" y="-30" width="80" height="60" rx="4" fill="var(--c-metal-3)"/>
+          <rect x="-34" y="-24" width="68" height="46" fill="var(--c-screen)"/>
+          <text x="-28" y="-8" class="scr" style="font-size:9px">$ just build</text>
+          <text x="-28" y="6" class="scr" style="font-size:9px">ok: 3 scripts</text>
+          <rect x="-28" y="10" width="6" height="8" fill="var(--c-phosphor)"/>
+        </g>
+        <g class="part" data-part="dice">
+          <g transform="rotate(-12)">
+            <rect x="-30" y="-30" width="44" height="44" rx="7" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/>
+            <g fill="#262c2d"><circle cx="-19" cy="-19" r="3.5"/><circle cx="3" cy="-19" r="3.5"/><circle cx="-8" cy="-8" r="3.5"/><circle cx="-19" cy="3" r="3.5"/><circle cx="3" cy="3" r="3.5"/></g>
+          </g>
+          <g transform="translate(24,18) rotate(20)">
+            <rect x="-16" y="-16" width="32" height="32" rx="5" fill="var(--c-rose)" stroke="#4f5856" stroke-width="2"/>
+            <g fill="var(--c-paper)"><circle cx="-7" cy="-7" r="3"/><circle cx="7" cy="7" r="3"/></g>
+          </g>
+        </g>
+        <g class="part" data-part="dial">
+          <circle r="30" fill="var(--c-panel-3)"/><circle r="22" fill="var(--c-metal)"/>
+          <g stroke="var(--c-label)" stroke-width="2"><line x1="-24" y1="8" x2="-19" y2="6"/><line x1="0" y1="-26" x2="0" y2="-20"/><line x1="24" y1="8" x2="19" y2="6"/></g>
+          <line x1="0" y1="0" x2="-14" y2="-14" stroke="var(--c-ink)" stroke-width="4" stroke-linecap="round"/><circle r="4" fill="var(--c-ink)"/>
+          <text x="-40" y="4" text-anchor="end" class="tiny" style="font-size:8px">ask</text><text x="0" y="-33" text-anchor="middle" class="tiny" style="font-size:8px">plan</text><text x="40" y="4" class="tiny" style="font-size:8px">auto</text>
+        </g>
+        <g class="part" data-part="package">
+          <rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard-3)"/>
+          <rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard)" opacity="0.5"/>
+          <rect x="-34" y="-4" width="68" height="10" fill="var(--c-paper)" opacity="0.85"/><rect x="-6" y="-26" width="12" height="56" fill="var(--c-paper)" opacity="0.85"/>
+          <rect x="10" y="8" width="20" height="14" fill="var(--c-paper)"/><text x="12" y="19" class="tiny" style="font-size:8px;fill:#262c2d">v1.0</text>
+        </g>
+      </g>
+
+      <!-- ===== the console ===== -->
+      <g id="console">
+        <rect x="350" y="385" width="500" height="180" fill="url(#panelFace)" stroke="var(--c-panel-edge)" stroke-width="2"/>
+        <rect x="350" y="565" width="500" height="50" fill="url(#panelFront)"/>
+        <g transform="matrix(1.115 -0.423 0 0.96 350 385)">
+          <rect x="-260" y="0" width="260" height="196" fill="url(#panelFace)" stroke="var(--c-panel-edge)" stroke-width="2"/>
+          <rect x="-260" y="196" width="260" height="52" fill="url(#panelFront)"/>
+          <g id="wingL"></g>
+        </g>
+        <g transform="matrix(1.115 0.423 0 0.96 850 385)">
+          <rect x="0" y="0" width="260" height="196" fill="url(#panelFace)" stroke="var(--c-panel-edge)" stroke-width="2"/>
+          <rect x="0" y="196" width="260" height="52" fill="url(#panelFront)"/>
+          <g id="wingR"></g>
+        </g>
+        <!-- centre trim: divider, screws, a strip of status lamps, vents on the front -->
+        <line x1="540" y1="395" x2="540" y2="555" stroke="var(--c-panel-edge)" stroke-width="1.5" opacity="0.5"/>
+        <g fill="var(--c-panel-edge)" opacity="0.7"><circle cx="358" cy="393" r="3"/><circle cx="842" cy="393" r="3"/><circle cx="358" cy="557" r="3"/><circle cx="842" cy="557" r="3"/></g>
+        <g id="statusStrip"></g>
+        <g fill="var(--c-panel-edge)" opacity="0.6">
+          <rect x="362" y="580" width="22" height="3"/><rect x="362" y="587" width="22" height="3"/><rect x="362" y="594" width="22" height="3"/>
+          <rect x="816" y="580" width="22" height="3"/><rect x="816" y="587" width="22" height="3"/><rect x="816" y="594" width="22" height="3"/>
+        </g>
+        <g id="centre"></g>
+        <text x="600" y="595" text-anchor="middle" class="eng" style="fill:var(--c-ground);opacity:.8">AGENTIC AI FOR RESEARCHERS · CONSOLE MK III</text>
+      </g>
+    </svg>
+</div>
+<section class="console-readout" id="readout" aria-live="polite">
+  <div class="eyebrow"><i></i><span id="ro-part">How this works</span></div>
+  <h2 id="ro-title">Pick a control on the console</h2>
+  <div class="main">
+    <p id="ro-body">Every switch, gauge and screen is a chapter of the guide. Hover over one to see what it covers here, and press it to open the chapter. On a touch screen, tap once to read and again to open. The agent changes with the chapter: orientation on the left wing, the files and the work in the centre, judgment and the appendices on the right.</p>
+    <a class="go" id="ro-link" href="chapters/01-introduction.html" hidden>Open chapter</a>
+  </div>
+  <div class="hint" id="ro-hint">The sidebar lists every chapter in order.</div>
+</section>
+<div class="console-legend" id="legend"></div>
+<script src="console.js"></script>
+```

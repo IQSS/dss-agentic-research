@@ -1,0 +1,129 @@
+/* console.css — styles for the landing page's console (index.qmd + console.js). Hand-maintained.
+   Colours are tokens so one drawing works on both of the theme's grounds: the light values sit on
+   :root and body.quarto-dark redefines the ones that change. The theme toggles that class itself. */
+
+:root {
+  --c-ink: #262c2d;
+  --c-ink-2: #4f5856;
+  --c-muted: #6c7578;
+  --c-rule: #dde1e4;
+  --c-card: #f6f6f4;
+  --c-panel: #a9b5aa;
+  --c-panel-2: #8d9b90;
+  --c-panel-3: #5b6a68;
+  --c-panel-edge: #3b4745;
+  --c-label: #23302e;
+  --c-mustard: #c8a23c;
+  --c-mustard-2: #e4c25a;
+  --c-mustard-3: #8f7228;
+  --c-rose: #c49a95;
+  --c-red: #c4463f;
+  --c-blue: #34568b;
+  --c-blue-2: #5a7cb0;
+  --c-olive: #7c8a3a;
+  --c-metal: #98a3a8;
+  --c-metal-2: #6e7a80;
+  --c-metal-3: #4a555a;
+  --c-plate: #b7c0c4;
+  --c-hat-fedora: #55635b;
+  --c-hat-fedora-2: #6f7f76;
+  --c-hat-band: #8f7228;
+  --c-hat-bowler: #4a5358;
+  --c-hat-bowler-2: #626b70;
+  --c-sole: #1f2424;
+  --c-shirt: #efe9d8;
+  --c-screen: #0f1a14;
+  --c-phosphor: #9fd8a8;
+  --c-glass: rgba(90, 124, 176, 0.18);
+  --c-glow: rgba(200, 162, 60, 0.55);
+  --c-paper: #f7f4ec;
+  --c-ground: #ffffff;
+  --c-focus: #c8a23c;
+  --c-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+body.quarto-dark {
+  --c-ink: #e6e9ed;
+  --c-ink-2: #c4cbd3;
+  --c-muted: #9aa5b5;
+  --c-rule: #2b333c;
+  --c-card: #1d232b;
+  --c-panel: #6f7d74;
+  --c-panel-2: #566359;
+  --c-panel-3: #38443f;
+  --c-panel-edge: #1d2523;
+  --c-label: #0f1513;
+  --c-olive: #a8b455;
+  --c-red: #d9534c;
+  --c-metal: #8d989d;
+  --c-plate: #aab3b7;
+  --c-hat-fedora: #7c8d83;
+  --c-hat-fedora-2: #94a49a;
+  --c-hat-band: #c8a23c;
+  --c-hat-bowler: #8a949a;
+  --c-hat-bowler-2: #a3adb2;
+  --c-sole: #2b3336;
+  --c-paper: #e9e4d8;
+  --c-glass: rgba(143, 176, 224, 0.16);
+  --c-ground: #14181e;
+}
+
+.console-scene svg { display: block; width: 100%; height: auto; max-width: 100%; }
+
+/* ---- readout ---- */
+.console-readout {
+  background: var(--c-card);
+  border: 1px solid var(--c-rule);
+  border-radius: 6px;
+  padding: 18px 26px 18px;
+  margin-top: 6px;
+}
+.console-readout[data-preview="1"] { border-color: var(--c-mustard); }
+.console-readout .eyebrow {
+  font-family: var(--c-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--c-muted); display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+}
+.console-readout .eyebrow i {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--dot, var(--c-mustard));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot, var(--c-mustard)) 25%, transparent);
+}
+.console-readout h2 {
+  font-size: 1.45rem; line-height: 1.2; margin: 0 0 8px; padding: 0; border: 0; text-wrap: balance; color: var(--c-ink);
+}
+.console-readout h2 .n { color: var(--c-mustard); margin-right: 0.35em; }
+.console-readout .main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 28px; }
+.console-readout .main p { flex: 1 1 40ch; margin: 0 0 6px; color: var(--c-ink-2); max-width: 90ch; }
+.console-readout .go { font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--c-mustard); padding-bottom: 1px; }
+.console-readout .go:hover, .console-readout .go:focus-visible { border-bottom-color: currentColor; outline: none; }
+.console-readout .hint { color: var(--c-muted); font-size: 0.85rem; margin-top: 6px; }
+.console-legend {
+  display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; padding-left: 2px;
+  font-family: var(--c-mono); font-size: 12px; color: var(--c-muted);
+}
+.console-legend span::before {
+  content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--dot);
+}
+
+/* ---- controls ---- */
+.hot { cursor: pointer; }
+.hot:focus { outline: none; }
+.hot .ring { fill: none; stroke: transparent; stroke-width: 2; opacity: 0; transition: opacity .12s; }
+.hot:focus-visible .ring, .hot:hover .ring { stroke: var(--c-focus); stroke-width: 3; opacity: 1; }
+.hot.on .ring { stroke: var(--c-mustard-2); stroke-width: 3; opacity: 1; }
+.hot .lamp { transition: fill .15s; }
+.hot.on .lamp, .hot:hover .lamp { fill: var(--c-mustard-2); filter: drop-shadow(0 0 5px var(--c-glow)); }
+.hot.on .glow, .hot:hover .glow { filter: drop-shadow(0 0 5px var(--c-glow)); }
+.lbl { font-family: var(--c-mono); font-size: 12px; fill: var(--c-label); letter-spacing: 0.02em; pointer-events: none; }
+.eng { font-family: Questrial, Montserrat, sans-serif; font-size: 12.5px; letter-spacing: 0.16em; fill: var(--c-label); opacity: 0.8; pointer-events: none; }
+.tiny { font-family: var(--c-mono); font-size: 9px; fill: var(--c-ink); pointer-events: none; }
+.tag { font-family: var(--c-mono); font-size: 7px; font-weight: 600; letter-spacing: 0.06em; fill: var(--c-label); opacity: 0.8; pointer-events: none; }
+.scr { font-family: var(--c-mono); font-size: 7.5px; fill: var(--c-phosphor); pointer-events: none; }
+
+/* ---- parts kit ---- */
+.part { display: none; }
+.part.show { display: block; }
+#figure { --coat: #6f7f76; --coat-dk: #55635b; --coat-lt: #8a9a90; }
+.coat { fill: var(--coat); }
+.coat-dk { fill: var(--coat-dk); }
+.coat-lt { fill: var(--coat-lt); }
+#figure, #held, .arm-seg { transition: transform .3s ease; }
+@media (prefers-reduced-motion: reduce) { #figure, #held, .arm-seg, .hot .ring, .hot .lamp { transition: none; } }
