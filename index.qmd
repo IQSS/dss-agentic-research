@@ -10,8 +10,6 @@ resources:
 
 ::: {.console-page}
 
-A working guide to doing research with an AI agent, for researchers rather than developers. How to run an agent, how to teach it your conventions, how to use it at each stage of a paper (organization, literature, data, analysis, verification, writing, reproducibility), and the judgment that keeps it safe. It assumes the Claude or Codex app, git, and the language you already use.
-
 ```{=html}
 <link rel="stylesheet" href="console.css">
 <div class="console-scene">
@@ -302,10 +300,10 @@ A working guide to doing research with an AI agent, for researchers rather than 
   <div class="eyebrow"><i></i><span id="ro-part">How this works</span></div>
   <h2 id="ro-title">Pick a control on the console</h2>
   <div class="main">
-    <p id="ro-body">Every switch, gauge and screen is a chapter of the guide. Hover over one to see what it covers here, and press it to open the chapter. On a touch screen, tap once to read and again to open. The agent changes with the chapter: orientation on the left wing, the files and the work in the centre, judgment and the appendices on the right.</p>
+    <p id="ro-body">A working guide to using AI agents for researchers: how to run them, teach them your conventions, use them at each stage of the research lifecycle, and keep your data and files safe. Every control on the panel above links to a chapter of the guide. Hover over one to see what it covers, and press it to navigate to that chapter.</p>
     <a class="go" id="ro-link" href="chapters/01-introduction.html" hidden>Open chapter</a>
   </div>
-  <div class="hint" id="ro-hint">Every chapter page lists the full contents in its sidebar.</div>
+  <div class="hint" id="ro-hint">On a touch screen, tap once to preview and again to open.</div>
 </section>
 <div class="console-legend" id="legend"></div>
 <script src="console.js"></script>
