@@ -292,7 +292,7 @@ resources:
         </g>
       </g>
 
-      <!-- ===== the console: modelled in 3D by console.js, which draws its faces into #shell and fits each
+      <!-- ===== the console: modeled in 3D by console.js, which draws its faces into #shell and fits each
            control to the face it sits on ===== -->
       <g id="console">
         <defs>

@@ -1,7 +1,7 @@
 // console.js — the landing page's console. Hand-maintained, like index.qmd; not part of the sync.
 // The figure is a parts kit: hat, eyes, arms, coat, held object and surroundings are separate groups in
 // the SVG in index.qmd, and each chapter is a recipe over them. The controls are drawn here, one kind
-// per chapter, and are real links to the chapter pages; the desk under them is modelled in 3D and drawn
+// per chapter, and are real links to the chapter pages; the desk under them is modeled in 3D and drawn
 // in perspective. Pointer: hover previews, a press opens the chapter. Touch: the first tap shows the
 // chapter in the agent's speech bubble, with a link, and the second opens.
 (function () {
@@ -20,7 +20,7 @@
     rose:    { c: "#b08984", dk: "#8b6a66", lt: "#c7a39e" },
     crimson: { c: "#8c3a45", dk: "#6a2a33", lt: "#a95560" },
   };
-  // Gloves: chosen per chapter to contrast with the coat, since a hand the coat's own colour disappears.
+  // Gloves: chosen per chapter to contrast with the coat, since a hand the coat's own color disappears.
   const GLOVES = {
     brown:   { c: "#7a5535", dk: "#5c3f27" },
     cream:   { c: "#e3d9c1", dk: "#c9bda0" },
@@ -427,9 +427,9 @@
   txt(ss, 736, 397, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
 
   // ---- the console in perspective ----
-  // The console is modelled in 3D and projected: x right, y up, z toward the viewer, one unit a pixel at z = 0.
+  // The console is modeled in 3D and projected: x right, y up, z toward the viewer, one unit a pixel at z = 0.
   // Its three segments share one profile, a sloping control face over a vertical apron with a recessed
-  // toe-kick. The wings turn toward the viewer and meet the centre in mitred joins, so their outer ends come
+  // toe-kick. The wings turn toward the viewer and meet the centre in mitered joins, so their outer ends come
   // nearer, grow, and show end caps; faces are shaded from a light at the upper left. The controls above are
   // drawn flat, in each panel's own coordinates, and each is then fitted to its face by the affine map tangent
   // to the projection at the control's centre.

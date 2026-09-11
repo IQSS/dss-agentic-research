@@ -1,5 +1,5 @@
 /* console.css — styles for the landing page's console (index.qmd + console.js). Hand-maintained.
-   Colours are tokens so one drawing works on both of the theme's grounds: the light values sit on
+   Colors are tokens so one drawing works on both of the theme's grounds: the light values sit on
    :root and body.quarto-dark redefines the ones that change. The theme toggles that class itself. */
 
 :root {
