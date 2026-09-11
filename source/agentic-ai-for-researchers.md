@@ -1,6 +1,5 @@
 ---
 title: Doing Research with AI Agents
-# the title page breaks the title where it reads best; the footer and the website use title
 title-page: |
   Doing Research\
   with AI Agents
