@@ -1,8 +1,9 @@
 // console.js — the landing page's console. Hand-maintained, like index.qmd; not part of the sync.
 // The figure is a parts kit: hat, eyes, arms, coat, held object and surroundings are separate groups in
 // the SVG in index.qmd, and each chapter is a recipe over them. The controls are drawn here, one kind
-// per chapter, and are real links to the chapter pages. Pointer: hover previews, a press opens the
-// chapter. Touch: the first tap shows the readout with a link, the second opens.
+// per chapter, and are real links to the chapter pages; the desk under them is modelled in 3D and drawn
+// in perspective. Pointer: hover previews, a press opens the chapter. Touch: the first tap shows the
+// chapter in the agent's speech bubble, with a link, and the second opens.
 (function () {
   const SITE = "chapters/";
   const PARTS = {
@@ -425,17 +426,106 @@
   for (let i = 0; i < 8; i++) el("rect", { x: 744 + i * 12, y: 392, width: 8, height: 5, rx: 1, fill: i < 6 ? "var(--c-olive)" : "var(--c-mustard)", opacity: 0.9 }, ss);
   txt(ss, 736, 397, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
 
+  // ---- the console in perspective ----
+  // The console is modelled in 3D and projected: x right, y up, z toward the viewer, one unit a pixel at z = 0.
+  // Its three segments share one profile, a sloping control face over a vertical apron with a recessed
+  // toe-kick. The wings turn toward the viewer and meet the centre in mitred joins, so their outer ends come
+  // nearer, grow, and show end caps; faces are shaded from a light at the upper left. The controls above are
+  // drawn flat, in each panel's own coordinates, and each is then fitted to its face by the affine map tangent
+  // to the projection at the control's centre.
+  {
+    const CX = 600, HORIZON = 90, CAM_Z = 1600, CAM_Y = 470;
+    const HALF = 250, DEPTH = 200, RISE = 138, APRON = 60, KICK = 9, WING = 250, TURN = rad(36);
+    const S = Math.sin(TURN), C = Math.cos(TURN), T2 = Math.tan(TURN / 2);
+    const norm = v => { const l = Math.hypot(...v); return v.map(c => c / l); };
+    const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    const LIGHT = norm([-0.4, 0.75, 0.55]), UP = [0, 1, 0];
+    const proj = p => { const k = CAM_Z / (CAM_Z - p[2]); return [CX + p[0] * k, HORIZON + (CAM_Y - p[1]) * k]; };
+    // a segment: an origin on its front top edge, an axis along that edge, a normal toward the viewer, and its
+    // extent along the axis at depth w; the mitres make each back edge longer than its front edge
+    const SEG = {
+      left:   { o: [-HALF, 0, 0], d: [-C, 0, S], w: [S, 0, C],  lo: w => w * T2, hi: () => WING },
+      centre: { o: [-HALF, 0, 0], d: [1, 0, 0],  w: [0, 0, 1],  lo: w => w * T2, hi: w => 2 * HALF - w * T2 },
+      right:  { o: [HALF, 0, 0],  d: [C, 0, S],  w: [-S, 0, C], lo: w => w * T2, hi: () => WING },
+    };
+    const ALL = [SEG.left, SEG.centre, SEG.right];
+    const at = (g, u, w, v) => [0, 1, 2].map(i => g.o[i] + g.d[i] * u + g.w[i] * w + UP[i] * v);
+    const slope = (g, u, s) => at(g, u, -DEPTH * s, RISE * s);          // s is 0 at the front edge, 1 at the back
+    const pts = ps => ps.map(p => proj(p).map(c => c.toFixed(1)).join(",")).join(" ");
+    const shell = document.getElementById("shell");
+    const poly = (ps, attrs) => el("polygon", Object.assign({ points: pts(ps) }, attrs), shell);
+    const face = (ps, fill, n, upright) => {
+      poly(ps, { fill, stroke: EDGE, "stroke-width": 1.5, "stroke-linejoin": "round" });
+      const b = dot(n, LIGHT), pivot = upright ? 0.6 : 0.92, lit = b > pivot;
+      const amt = Math.min(0.45, lit ? (b - pivot) * (upright ? 0.7 : 2.0) : (pivot - b) * (upright ? 0.75 : 1.05));
+      if (amt > 0.005) poly(ps, { fill: lit ? "#fff" : "#000", opacity: amt.toFixed(3) });
+    };
+
+    // a contact shadow along the foot of the aprons
+    poly([at(SEG.left, WING, 0, -APRON), [-HALF, -APRON, 0], [HALF, -APRON, 0], at(SEG.right, WING, 0, -APRON),
+          at(SEG.right, WING, 14, -APRON), [HALF, -APRON, 14], [-HALF, -APRON, 14], at(SEG.left, WING, 14, -APRON)],
+         { fill: "#000", opacity: 0.35, filter: "url(#consoleShadow)" });
+    for (const g of ALL)                                                  // control faces
+      face([slope(g, g.lo(0), 0), slope(g, g.hi(0), 0), slope(g, g.hi(-DEPTH), 1), slope(g, g.lo(-DEPTH), 1)],
+           "url(#panelFace)", norm([0, 1, 2].map(i => UP[i] * DEPTH + g.w[i] * RISE)), false);
+    for (const g of ALL) {                                                // aprons, each with a recessed toe-kick
+      const a = g.lo(0), b = g.hi(0);
+      face([at(g, a, 0, 0), at(g, b, 0, 0), at(g, b, 0, -APRON), at(g, a, 0, -APRON)], "url(#panelFront)", g.w, true);
+      poly([at(g, a, 0, KICK - APRON), at(g, b, 0, KICK - APRON), at(g, b, 0, -APRON), at(g, a, 0, -APRON)], { fill: "#000", opacity: 0.28 });
+    }
+    for (const g of [SEG.left, SEG.right])                                // end caps
+      face([at(g, WING, 0, 0), at(g, WING, -DEPTH, RISE), at(g, WING, -DEPTH, -APRON), at(g, WING, 0, -APRON)],
+           "url(#panelFront)", g.d, true);
+    for (const g of ALL) {                                                // inset panel lines and screws
+      const inset = (s, m) => [slope(g, g.lo(-DEPTH * s) + m, s), slope(g, g.hi(-DEPTH * s) - m, s)];
+      const [a, b] = inset(0.06, 12), [c, d] = inset(0.94, 12);
+      poly([a, b, d, c], { fill: "none", stroke: "#000", "stroke-opacity": 0.2, "stroke-width": 1 });
+      for (const p of [...inset(0.025, 7), ...inset(0.975, 7)]) {
+        const [x, y] = proj(p);
+        el("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: 2.6, fill: EDGE, opacity: 0.7 }, shell);
+      }
+    }
+    const line = (ps, attrs) => el("polyline", Object.assign({ points: pts(ps), fill: "none", "stroke-linejoin": "round" }, attrs), shell);
+    line([slope(SEG.centre, 190, 0.94), slope(SEG.centre, 190, 0.06)], { stroke: EDGE, "stroke-width": 1.5, opacity: 0.5 });   // Part II | Part III
+    line([at(SEG.left, WING, 0, 0), [-HALF, 0, 0], [HALF, 0, 0], at(SEG.right, WING, 0, 0)],                                  // the front edge catches the light
+         { stroke: "#fff", "stroke-opacity": 0.4, "stroke-width": 1.6 });
+    line([at(SEG.left, WING, -DEPTH, RISE), slope(SEG.centre, SEG.centre.lo(-DEPTH), 1),                                        // the back edge a little
+          slope(SEG.centre, SEG.centre.hi(-DEPTH), 1), at(SEG.right, WING, -DEPTH, RISE)],
+         { stroke: "#fff", "stroke-opacity": 0.22, "stroke-width": 1.4 });
+    const vent = (g, u0) => {
+      for (let i = 0; i < 3; i++)
+        poly([at(g, u0, 0, -13 - 7 * i), at(g, u0 + 22, 0, -13 - 7 * i), at(g, u0 + 22, 0, -16 - 7 * i), at(g, u0, 0, -16 - 7 * i)], { fill: EDGE, opacity: 0.6 });
+    };
+    vent(SEG.centre, 12); vent(SEG.centre, 466); vent(SEG.left, WING - 40); vent(SEG.right, WING - 40);
+    const [tx, ty] = proj([0, -APRON * 0.58, 0]);
+    txt(shell, tx, (ty + 4).toFixed(1), "AGENTIC AI FOR RESEARCHERS · CONSOLE MK III", "eng", { "text-anchor": "middle", style: "fill:var(--c-ground);opacity:.8" });
+
+    // fit each control, heading and lamp to its face
+    const onWing = (g, sign) => (lx, ly) => proj(slope(g, sign * lx * WING / 260, 1 - ly / 196));
+    const onCentre = (lx, ly) => proj(slope(SEG.centre, lx - 350, 1 - (ly - 385) / 180));
+    const fit = (node, map) => {
+      const bb = node.getBBox(), cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2, h = 8;
+      const P = map(cx, cy), X1 = map(cx + h, cy), X0 = map(cx - h, cy), Y1 = map(cx, cy + h), Y0 = map(cx, cy - h);
+      const a = (X1[0] - X0[0]) / (2 * h), b = (X1[1] - X0[1]) / (2 * h), c = (Y1[0] - Y0[0]) / (2 * h), d = (Y1[1] - Y0[1]) / (2 * h);
+      const wrap = el("g", { transform: "matrix(" + [a, b, c, d, P[0] - a * cx - c * cy, P[1] - b * cx - d * cy].map(n => +n.toFixed(4)).join(" ") + ")" });
+      node.parentNode.insertBefore(wrap, node); wrap.appendChild(node);
+    };
+    for (const [id, map] of [["wingL", onWing(SEG.left, -1)], ["wingR", onWing(SEG.right, 1)], ["centre", onCentre], ["statusStrip", onCentre]])
+      [...document.getElementById(id).children].forEach(n => fit(n, map));
+  }
+
   const lg = document.getElementById("legend");
   for (const k in PARTS) { const s = document.createElement("span"); s.style.setProperty("--dot", PARTS[k].dot); s.textContent = PARTS[k].name; lg.appendChild(s); }
 
   // ---- readout ----
   const ro = document.getElementById("readout");
+  const roIntro = document.getElementById("ro-intro"), roChapter = document.getElementById("ro-chapter"), roHow = document.getElementById("ro-how");
   const roPart = document.getElementById("ro-part"), roTitle = document.getElementById("ro-title"),
         roBody = document.getElementById("ro-body"), roLink = document.getElementById("ro-link"), roHint = document.getElementById("ro-hint");
-  const DEFAULT_BODY = roBody.textContent, DEFAULT_HINT = roHint.textContent;
   let pinned = null;
   function show(ch, preview) {
     applyRecipe(ch.r);
+    roIntro.hidden = true; roChapter.hidden = false;
     ro.style.setProperty("--dot", PARTS[ch.part].dot);
     ro.dataset.preview = preview ? "1" : "0";
     roPart.textContent = PARTS[ch.part].name;
@@ -451,11 +541,11 @@
     if (pinned) { show(pinned, false); return; }
     applyRecipe(DEFAULT);
     ro.dataset.preview = "0"; ro.style.setProperty("--dot", "var(--c-mustard)");
-    roPart.textContent = "How this works"; roTitle.textContent = "Pick a control on the console";
-    roBody.textContent = DEFAULT_BODY; roLink.hidden = true; roHint.textContent = DEFAULT_HINT;
+    roChapter.hidden = true; roIntro.hidden = false;
   }
   const find = a => CH.find(c => c.n === a.dataset.n);
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!fine) roHow.textContent = "Every control is a chapter of the guide. Tap one to see what it covers, and tap it again to open that chapter.";
   document.querySelectorAll(".hot").forEach(a => {
     a.addEventListener("click", e => {
       if (fine) return;                          // pointer: hover previews, a press opens the chapter
@@ -470,5 +560,21 @@
       a.addEventListener("mouseleave", restore);
     }
   });
+  // ---- the speech bubble ----
+  // The readout lives in the bubble, whose outline is redrawn to fit the text whenever the text changes height.
+  // The bubble's type scales with the drawing, so below 760px the readout moves out under the scene instead.
+  const bubble = document.getElementById("bubble"), home = document.getElementById("bubble-home");
+  const shape = bubble.querySelector(".bubble-shape"), scene = document.querySelector(".console-scene");
+  const narrow = window.matchMedia("(max-width: 760px)");
+  const placeReadout = () => {
+    if (narrow.matches) { scene.after(ro); bubble.style.display = "none"; }
+    else { home.appendChild(ro); bubble.style.display = ""; }
+  };
+  narrow.addEventListener("change", placeReadout); placeReadout();
+  const fitBubble = () => {
+    const bottom = 38 + Math.max(150, home.offsetHeight) + 16;
+    shape.setAttribute("d", `M36 22 H462 a16 16 0 0 1 16 16 V84 L502 106 L478 124 V${bottom - 16} a16 16 0 0 1 -16 16 H36 a16 16 0 0 1 -16 -16 V38 a16 16 0 0 1 16 -16 Z`);
+  };
+  new ResizeObserver(fitBubble).observe(home); fitBubble();
   applyRecipe(DEFAULT);
 })();

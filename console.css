@@ -69,12 +69,19 @@ body.quarto-dark {
 
 /* The landing page uses page-layout: custom, which drops the theme's grid, so the wrapper sets the
    width itself: the navbar container's 1368px box with its 28px padding, like the training index. */
-.console-page, body:has(.console-page) #title-block-header { max-width: 1368px; margin: 0 auto; padding: 0 28px; }
-body:has(.console-page) #title-block-header { padding-top: 1.2rem; }
-.console-page { padding-bottom: 2rem; }
+.console-page { max-width: 1368px; margin: 0 auto; padding: 1rem 28px 2rem; }
+body:has(.console-page) #title-block-header { display: none; }   /* the title lives in the readout */
 .console-scene svg { display: block; width: 100%; height: auto; max-width: 100%; }
 
-/* ---- readout ---- */
+/* ---- the speech bubble, and the readout in it ----
+   The readout sits in a foreignObject in the bubble, so its type scales with the drawing. Below 760px that is too
+   small to read, and console.js moves the readout out under the scene, where it is a card again. */
+#bubble .bubble-shape { fill: var(--c-card); stroke: var(--c-muted); stroke-width: 2; stroke-linejoin: round; transition: stroke .15s; }
+#bubble:has(#readout[data-preview="1"]) .bubble-shape { stroke: var(--c-mustard); }
+#bubble foreignObject { pointer-events: none; }
+#bubble a { pointer-events: auto; }
+#bubble-home { display: flow-root; font-family: Montserrat, Questrial, sans-serif; color: var(--c-ink); }
+
 .console-readout {
   background: var(--c-card);
   border: 1px solid var(--c-rule);
@@ -91,15 +98,27 @@ body:has(.console-page) #title-block-header { padding-top: 1.2rem; }
   width: 10px; height: 10px; border-radius: 50%; background: var(--dot, var(--c-mustard));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--dot, var(--c-mustard)) 25%, transparent);
 }
-.console-readout h2 {
+.console-readout h1, .console-readout h2 {
   font-size: 1.45rem; line-height: 1.2; margin: 0 0 8px; padding: 0; border: 0; text-wrap: balance; color: var(--c-ink);
 }
 .console-readout h2 .n { color: var(--c-mustard); margin-right: 0.35em; }
+.console-readout p { margin: 0 0 6px; color: var(--c-ink-2); }
+.console-readout .intro p.how b { color: var(--c-ink); font-weight: 600; }
 .console-readout .main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 28px; }
-.console-readout .main p { flex: 1 1 40ch; margin: 0 0 6px; color: var(--c-ink-2); max-width: 90ch; }
+.console-readout .main p { flex: 1 1 40ch; }
 .console-readout .go { font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--c-mustard); padding-bottom: 1px; }
 .console-readout .go:hover, .console-readout .go:focus-visible { border-bottom-color: currentColor; outline: none; }
 .console-readout .hint { color: var(--c-muted); font-size: 0.85rem; margin-top: 6px; }
+/* in the bubble: no card, and sizes set for the drawing's scale */
+#bubble .console-readout { background: none; border: 0; border-radius: 0; padding: 0; margin: 0; }
+#bubble .console-readout h1 { font-size: 26px; line-height: 1.15; margin: 0 0 12px; font-weight: 600; }
+#bubble .console-readout h2 { font-size: 22px; line-height: 1.2; margin: 0 0 8px; }
+#bubble .console-readout p { font-size: 15.5px; line-height: 1.45; margin: 0 0 12px; }
+#bubble .console-readout .intro p.how { border-top: 1px solid var(--c-rule); padding-top: 11px; margin: 0; }
+#bubble .console-readout .main { display: block; }
+#bubble .console-readout .main p { margin: 0 0 8px; }
+#bubble .console-readout .go { font-size: 15px; }
+#bubble .console-readout .hint { font-size: 13px; margin-top: 4px; }
 .console-legend {
   display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; padding-left: 2px;
   font-family: var(--c-mono); font-size: 12px; color: var(--c-muted);
@@ -131,4 +150,4 @@ body:has(.console-page) #title-block-header { padding-top: 1.2rem; }
 .coat-dk { fill: var(--coat-dk); }
 .coat-lt { fill: var(--coat-lt); }
 #figure, #held, .arm-seg { transition: transform .3s ease; }
-@media (prefers-reduced-motion: reduce) { #figure, #held, .arm-seg, .hot .ring, .hot .lamp { transition: none; } }
+@media (prefers-reduced-motion: reduce) { #figure, #held, .arm-seg, .hot .ring, .hot .lamp, #bubble .bubble-shape { transition: none; } }
