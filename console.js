@@ -498,7 +498,7 @@
     };
     vent(SEG.centre, 12); vent(SEG.centre, 466); vent(SEG.left, WING - 40); vent(SEG.right, WING - 40);
     const [tx, ty] = proj([0, -APRON * 0.58, 0]);
-    txt(shell, tx, (ty + 4).toFixed(1), "AGENTIC AI FOR RESEARCHERS · CONSOLE MK III", "eng", { "text-anchor": "middle", style: "fill:var(--c-ground);opacity:.8" });
+    txt(shell, tx, (ty + 4).toFixed(1), "AGENT CONTROL CONSOLE MK III", "eng", { "text-anchor": "middle", style: "fill:var(--c-ground);opacity:.8" });
 
     // fit each control, heading and lamp to its face
     const onWing = (g, sign) => (lx, ly) => proj(slope(g, sign * lx * WING / 260, 1 - ly / 196));
@@ -545,7 +545,7 @@
   }
   const find = a => CH.find(c => c.n === a.dataset.n);
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  if (!fine) roHow.textContent = "Every control is a chapter of the guide. Tap one to see what it covers, and tap it again to open that chapter.";
+  if (!fine) roHow.textContent = "Tap one to see what it covers, and tap it again to open that chapter.";
   document.querySelectorAll(".hot").forEach(a => {
     a.addEventListener("click", e => {
       if (fine) return;                          // pointer: hover previews, a press opens the chapter
