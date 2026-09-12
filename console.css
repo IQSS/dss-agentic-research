@@ -6,8 +6,8 @@
   --c-ink: #262c2d;
   --c-ink-2: #4f5856;
   --c-muted: #6c7578;
-  --c-rule: #dde1e4;
-  --c-card: #f6f6f4;
+  --c-rule: #dcd9d2;
+  --c-card: #ece9e1;
   --c-panel: #a9b5aa;
   --c-panel-2: #8d9b90;
   --c-panel-3: #5b6a68;
@@ -37,7 +37,7 @@
   --c-glass: rgba(90, 124, 176, 0.18);
   --c-glow: rgba(200, 162, 60, 0.55);
   --c-paper: #f7f4ec;
-  --c-ground: #ffffff;
+  --c-ground: #f7f4ec;
   --c-focus: #c8a23c;
   --c-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
