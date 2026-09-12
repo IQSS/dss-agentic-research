@@ -393,7 +393,10 @@
   };
 
   function control(g, ch, x, y) {
-    const a = el("a", { href: SITE + ch.slug + ".html", class: "hot", "data-n": ch.n, tabindex: "0", role: "link" }, g);
+    // A chapter opens in a new tab: this page is the way into the guide and stays put, the same rule the
+    // training index and every other link to materials follows. Without it readers get a same-tab jump --
+    // browser extensions that rewrite links can mask this locally, so it has to be set here to be real.
+    const a = el("a", { href: SITE + ch.slug + ".html", class: "hot", "data-n": ch.n, tabindex: "0", role: "link", target: "_blank", rel: "noopener" }, g);
     el("title", {}, a).textContent = ch.n + ". " + ch.title;
     const h = CTL[ch.ctl](a, x, y, PARTS[ch.part].dot, ch);
     if (ch.ctl !== "key") txt(a, x, y + h + 12, ch.n, "lbl", { "text-anchor": "middle" });
