@@ -12,6 +12,9 @@ format:
     css:
       - site.css
       - figures-dark.css
+      # The console's colour tokens and part classes. The landing page links this itself; the
+      # chapter pages need it too now that each one opens with a figure from the same parts kit.
+      - console.css
 
 project:
   type: dss-theme
