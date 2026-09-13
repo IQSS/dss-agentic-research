@@ -21,6 +21,10 @@ project:
   output-dir: _site
   render:
     - index.qmd
+    # Cloudflare Pages serves /404.html for any address it does not recognise. Without it Pages treats
+    # the site as a single-page app and returns index.html with a 200, so a stale link silently shows
+    # the landing page instead of saying the page is gone.
+    - 404.qmd
     - "chapters/*.qmd"
 
 website:

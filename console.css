@@ -151,3 +151,10 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
 .coat-lt { fill: var(--coat-lt); }
 #figure, #held, .arm-seg { transition: transform .3s ease; }
 @media (prefers-reduced-motion: reduce) { #figure, #held, .arm-seg, .hot .ring, .hot .lamp, #bubble .bubble-shape { transition: none; } }
+
+/* ---- the page-not-found figure ----
+   The agent with its hands up, on the one page that is not a chapter. It is the same parts kit, dressed
+   by split-chapters.py from a recipe written for this page rather than for a chapter, then pasted in:
+   404.qmd is hand-maintained like index.qmd and is not part of the sync. Centred, not floated. */
+.lost-agent { max-width: 260px; margin: 0 auto 4px; }
+.lost-agent svg { display: block; width: 100%; height: auto; }
