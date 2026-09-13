@@ -58,11 +58,17 @@ table tr:has(.matrix-band-1) > td {
    deliberately left alone. */
 main:has(.chapter-agent) #title-block-header .quarto-title { display: none; }
 
-.chapter-agent { float: right; width: 40%; margin: 0 0 14px 32px; }
+.chapter-agent { float: right; width: 40%; margin: 0 0 14px -30px; }
 .chapter-agent svg { display: block; width: 100%; height: auto; }
 .chapter-agent + h1 { margin-top: 0; }
 
-/* Narrow: the measure beside a 40% figure is already tight at full width, and below this it stops
+/* The gap is negative on purpose. The figure's box is its viewBox, not the robot: every agent carries
+   transparent space on its left (about 60px as rendered on most chapters, less on Boundaries, where the
+   glass box reaches further out), so a zero margin still leaves the text stranded well clear of the ink.
+   -30px pulls it into that dead space. Checked across all four arm poses and the glass box: at -60px the
+   text ran under Boundaries' dashed border, at -30px every chapter clears.
+
+   Narrow: the measure beside a 40% figure is already tight at full width, and below this it stops
    being a column at all, so the figure gives up the float and sits above the text. */
 @media (max-width: 700px) {
   .chapter-agent { float: none; width: min(60%, 250px); margin: 0 auto 16px; }
