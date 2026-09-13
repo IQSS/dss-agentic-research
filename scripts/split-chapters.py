@@ -179,7 +179,13 @@ def body_of(lines: list[str], chapter: dict) -> str:
 # live in the site repository and are hand-maintained, which is what keeps this site-internal: a
 # document with no console.js (the tool-chain) gets no agents and none of this runs.
 
-AGENT_VIEWBOX = "451 -16 346 398"  # measured across every pose, widest held objects included
+AGENT_VIEWBOX = "451 -16 346 410"  # measured across every pose, widest held objects included,
+                                   # and deep enough for the glassbox caption on y=382
+
+# Scene props that wrap around the figure rather than standing beside it, so they belong in the
+# chapter's crop. Boundaries' glassbox is the case this exists for: the whole point of the drawing
+# is the container, and a robot shipped without it is the figure with its subject removed.
+ENCLOSING_SCENES = frozenset({"glassbox"})
 
 CH_ENTRY = re.compile(r'\{\s*n:\s*"(?P<n>[^"]+)".*?slug:\s*"[^"]+".*?r:\s*\{(?P<r>[^}]*)\}', re.S)
 
@@ -315,9 +321,16 @@ def agent_svg(kit: dict, r: dict) -> str:
         held = re.sub(r'<g id="held" transform="[^"]*"',
                       f'<g id="held" transform="translate({hx:.1f},{hy:.1f})"', held, count=1)
 
+    # The scene goes first so it sits behind the figure, as it does on the console. Only the props
+    # that enclose the robot survive the chapter crop: the tree, database and screens are drawn to
+    # the right of the figure to clear the speech bubble and fall outside it entirely, and widening
+    # the box to reach them would shrink the robot on all 22 pages to serve three.
+    scene = ""
+    if r["scene"] in ENCLOSING_SCENES:
+        scene = _keep_parts(kit["surround"], {r["scene"]})
     svg = (f'<div class="chapter-agent" aria-hidden="true">'
            f'<svg viewBox="{AGENT_VIEWBOX}" xmlns="http://www.w3.org/2000/svg">'
-           f"{fig}{held}</svg></div>")
+           f"{scene}{fig}{held}</svg></div>")
     svg = re.sub(r"\s*\n\s*", "", svg)
     if "\n" in svg:
         sys.exit("error: the agent markup contains a newline; a blank line would end the raw HTML "
@@ -335,6 +348,7 @@ def build_agents(site: Path, chapters: list[dict]) -> dict[str, str]:
            for name in ("COATS", "GLOVES", "EYES", "ARMS", "SHOULDER", "SEG")}
     kit["figure"] = _svg_group(qmd, "figure")
     kit["held"] = _svg_group(qmd, "held")
+    kit["surround"] = _svg_group(qmd, "surround")
     agents = {m.group("n"): agent_svg(kit, _recipe(m.group("r")))
               for m in CH_ENTRY.finditer(_js_literal(js, "CH"))}
     absent = [c["key"] for c in chapters if c["key"] and c["key"] not in agents]
