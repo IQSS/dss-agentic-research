@@ -401,13 +401,13 @@
     const h = CTL[ch.ctl](a, x, y, PARTS[ch.part].dot, ch);
     if (ch.ctl !== "key") txt(a, x, y + h + 12, ch.n, "lbl", { "text-anchor": "middle" });
   }
-  const heading = (g, s, x, y) => txt(g, x, y, s, "eng");
+  const heading = (g, s, x, y) => txt(g, x, y, s, "eng", { "text-anchor": "middle" });
   const byN = n => CH.find(c => c.n === n);
   const place = (g, list) => list.forEach(([n, x, y]) => control(g, byN(n), x, y));
 
   // Left wing: Part I. Local coordinates, x in [-260, 0], y in [0, 196].
   const wl = document.getElementById("wingL");
-  heading(wl, "ORIENTATION", -244, 26);
+  heading(wl, "ORIENTATION", -101, 26);
   // Spacing set against a mock-up, 2026-09-13. Every row is distributed with an even gap and centred
   // in the panel rather than pushed to one end. The panel face is longer than the join line suggests --
   // the mitre extends it, to lx +43 at the top row's depth and +17 at the bottom row's -- so the inner
@@ -421,16 +421,16 @@
   // The heading keeps its height; only the controls drop (8), so the label does not crowd them.
   // x pulled left from 366: "THEM" is two characters longer than "IT" and ran 7 units past the
   // Part II | Part III divider at 540.
-  heading(ce, "TEACH THEM YOUR WAY", 356, 408);
+  heading(ce, "TEACH THEM YOUR WAY", 417, 408);
   place(ce, [["6", 378, 450], ["7", 492, 460], ["8", 420, 520]]);
-  heading(ce, "THE WORK", 556, 408);
+  heading(ce, "THE WORK", 723, 408);
   place(ce, [["9", 598, 438], ["10", 686, 438], ["11", 766, 438], ["15", 832, 474], ["12", 600, 512], ["13", 694, 512], ["14", 775, 512]]);
 
   // Right wing: Part IV above, the appendices as a keypad below.
   const wr = document.getElementById("wingR");
-  heading(wr, "JUDGMENT", 16, 26);
+  heading(wr, "JUDGMENT", 101, 26);
   place(wr, [["16", 11, 70], ["17", 103, 66], ["18", 201, 70]]);          // 14 between controls, as on the left
-  heading(wr, "APPENDICES", 16, 130);
+  heading(wr, "APPENDICES", 119, 130);
   // The keys keep their original 6-unit gap -- they read as one block, which is right for four
   // appendices -- but the block is centred in the panel now rather than sitting inboard of it.
   place(wr, [["A", 55, 160], ["B", 101, 160], ["C", 147, 160], ["D", 193, 160]]);
