@@ -78,7 +78,7 @@ Both can be pinned rather than picked each session: in Claude Code, `effortLevel
 | `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency does not matter |
 | `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
 
-![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
+![](figures/two-gears.svg){fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
 
 Think of them as two gears that turn together with how scripted the task is. A deterministic recipe, such as scaffolding a project whose shape is already written down (§7) or applying a known pattern across scripts, runs well on a smaller model at lower effort: it thinks less and does more, and is faster for it. A job where the agent has to work out its own approach and change course as evidence arrives wants the frontier model and the depth. What links the two gears is a single dimension: how much of the approach is given, and how much the agent has to invent.
 
