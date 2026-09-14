@@ -423,7 +423,7 @@
   // Part II | Part III divider at 540.
   heading(ce, "TEACH THEM YOUR WAY", 417, 408);
   place(ce, [["6", 378, 450], ["7", 492, 460], ["8", 420, 520]]);
-  heading(ce, "THE WORK", 723, 408);
+  heading(ce, "THE WORK", 662, 408);   // a third along Part III, not its midpoint
   place(ce, [["9", 598, 438], ["10", 686, 438], ["11", 766, 438], ["15", 832, 474], ["12", 600, 512], ["13", 694, 512], ["14", 775, 512]]);
 
   // Right wing: Part IV above, the appendices as a keypad below.
@@ -437,8 +437,8 @@
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");
-  for (let i = 0; i < 8; i++) el("rect", { x: 744 + i * 12, y: 392, width: 8, height: 5, rx: 1, fill: i < 6 ? "var(--c-olive)" : "var(--c-mustard)", opacity: 0.9 }, ss);
-  txt(ss, 736, 397, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
+  for (let i = 0; i < 8; i++) el("rect", { x: 744 + i * 12, y: 386, width: 8, height: 5, rx: 1, fill: i < 6 ? "var(--c-olive)" : "var(--c-mustard)", opacity: 0.9 }, ss);
+  txt(ss, 736, 391, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
 
   // ---- the console in perspective ----
   // The console is modeled in 3D and projected: x right, y up, z toward the viewer, one unit a pixel at z = 0.
