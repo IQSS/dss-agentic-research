@@ -8,7 +8,7 @@
   const SITE = "chapters/";
   const PARTS = {
     I:   { name: "Part I · Orientation",          dot: "var(--c-blue-2)" },
-    II:  { name: "Part II · Teaching it your way", dot: "var(--c-mustard)" },
+    II:  { name: "Part II · Teach them your way", dot: "var(--c-mustard)" },
     III: { name: "Part III · The work",           dot: "var(--c-rose)" },
     IV:  { name: "Part IV · Judgment",            dot: "var(--c-olive)" },
     A:   { name: "Appendices",                    dot: "var(--c-muted)" },

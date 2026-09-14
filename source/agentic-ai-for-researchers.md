@@ -355,7 +355,7 @@ Two limits. Git undoes what it tracks, and it does not track data files or model
 
 In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.
 
-<!-- ===================== PART II — TEACHING IT YOUR WAY ===================== -->
+<!-- ===================== PART II — TEACH THEM YOUR WAY ===================== -->
 
 # 6. The files the agent reads
 

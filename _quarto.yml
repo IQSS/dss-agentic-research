@@ -48,7 +48,7 @@ website:
           - chapters/03-where-to-run-it.qmd
           - chapters/04-modes.qmd
           - chapters/05-boundaries.qmd
-      - section: "Part II — Teaching It Your Way"
+      - section: "Part II — Teach Them Your Way"
         contents:
           - chapters/06-the-files-the-agent-reads.qmd
           - chapters/07-project-structure.qmd
