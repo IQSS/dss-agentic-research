@@ -408,21 +408,32 @@
   // Left wing: Part I. Local coordinates, x in [-260, 0], y in [0, 196].
   const wl = document.getElementById("wingL");
   heading(wl, "ORIENTATION", -244, 26);
-  place(wl, [["1", -222, 70], ["2", -148, 70], ["3", -56, 62], ["4", -204, 148], ["5", -104, 150]]);
+  // Spacing set against a mock-up, 2026-09-13. Every row is distributed with an even gap and centred
+  // in the panel rather than pushed to one end. The panel face is longer than the join line suggests --
+  // the mitre extends it, to lx +43 at the top row's depth and +17 at the bottom row's -- so the inner
+  // end had ~59 units of dead panel on the top row and ~44 on the bottom. Top row: 14 between controls.
+  // Bottom row: the slack split three ways. Control 3 stops short of the mitre on purpose; at a wider
+  // gap its lower inner corner crosses the panel edge, which slants with depth.
+  place(wl, [["1", -212, 70], ["2", -120, 70], ["3", -18, 62], ["4", -191, 148], ["5", -86, 150]]);
 
   // Centre: Part II left of the divider, Part III right of it.
   const ce = document.getElementById("centre");
-  heading(ce, "TEACH IT YOUR WAY", 366, 408);
-  place(ce, [["6", 404, 442], ["7", 492, 452], ["8", 410, 512]]);
+  // The heading keeps its height; only the controls drop (8), so the label does not crowd them.
+  // x pulled left from 366: "THEM" is two characters longer than "IT" and ran 7 units past the
+  // Part II | Part III divider at 540.
+  heading(ce, "TEACH THEM YOUR WAY", 356, 408);
+  place(ce, [["6", 378, 450], ["7", 492, 460], ["8", 420, 520]]);
   heading(ce, "THE WORK", 556, 408);
-  place(ce, [["9", 598, 438], ["10", 686, 438], ["11", 766, 438], ["15", 824, 478], ["12", 600, 512], ["13", 694, 512], ["14", 770, 512]]);
+  place(ce, [["9", 598, 438], ["10", 686, 438], ["11", 766, 438], ["15", 832, 474], ["12", 600, 512], ["13", 694, 512], ["14", 775, 512]]);
 
   // Right wing: Part IV above, the appendices as a keypad below.
   const wr = document.getElementById("wingR");
   heading(wr, "JUDGMENT", 16, 26);
-  place(wr, [["16", 46, 70], ["17", 130, 66], ["18", 220, 70]]);
+  place(wr, [["16", 11, 70], ["17", 103, 66], ["18", 201, 70]]);          // 14 between controls, as on the left
   heading(wr, "APPENDICES", 16, 130);
-  place(wr, [["A", 40, 160], ["B", 86, 160], ["C", 132, 160], ["D", 178, 160]]);
+  // The keys keep their original 6-unit gap -- they read as one block, which is right for four
+  // appendices -- but the block is centred in the panel now rather than sitting inboard of it.
+  place(wr, [["A", 55, 160], ["B", 101, 160], ["C", 147, 160], ["D", 193, 160]]);
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");
