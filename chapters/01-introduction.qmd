@@ -12,33 +12,33 @@ SOURCE: source/pitch.md; tool-chain "The Operating Model" (introduction; four-pi
 COVERS: The pitch, expanded. Bookkeeping, simulation, verification, plus the writing and literature layer. What agents don't do. The four pillars: be a supervisor; teach it your way; verify and reproduce; keep it bounded. How to read this guide.
 -->
 
-A chat assistant answers questions. An agent does work inside your project: it creates the folders, writes and runs the code, reads the error, fixes it, and updates the status file, without you carrying text back and forth between a chat window and RStudio. That is the whole difference. This guide is about what follows from it when the output is a paper or a talk.
+An AI chat assistant answers questions. An AI agent works inside your project: it creates files and folders, writes and runs code, reads errors, fixes them, keeps track of tasks and the current project status, all without you copying text back and forth between a chat window and your project files. This guide is about how to make that process work efficiently when the output is an academic paper or talk.
 
-You already use chat AI for writing and for code. An agent is the next step rather than a different kind of thing: the same models, given the ability to read your files, run your code, and see the result. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more grounded than a chat window, not less.
+You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more useful than a chat window.
 
-## Where it pays
+## Where it pays to use an agent
 
-The best places to start are the ones where the agent's work is cheap to check or harmless if wrong. Three stages of a paper fit that description well, and a fourth fits with a rule attached.
+The best places to use an agent are those parts of the research lifecycle that are time consuming or tedious for humans to do themselves. 
 
-*Bookkeeping.* Project structure, file organization, a running to-do list, the README that says where everything is. Tedious, nobody's idea of research, and harmless if the agent gets a name wrong. It is also where an agent shows you, in ten minutes, what delegating feels like (§9).
+*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list, and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
 
-*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone should do this and almost nobody does, because writing the simulation is the tedious part. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
+*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone *should* do this few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
-*Verification.* Have the agent re-implement your analysis in a second language (Python if you work in R; R if you work in Stata) and compare the numbers. Two independent implementations that agree are strong evidence. A disagreement localizes a bug you would not have found by reading (§13).
+*Verification.* Have the agent re-implement your analysis in a second language (Python if you work in R; R if you work in Stata) and compare the numbers. Two independent implementations that agree are strong evidence. A disagreement locates a bug you may not have found by reading (§13).
 
-*Writing and literature.* Drafting a methods section from a written methodology file and a results table is close to mechanical, and you will read every sentence anyway. Literature search is the case with the rule attached: an agent can search, fetch, screen, and tabulate faster than you can, and it can also produce a citation that does not exist, formatted perfectly. Open every reference (§10, §14).
+*Writing and literature.* An agent can search, fetch, screen, and tabulate faster than you can, just make sure it records and checks every DOI (§10, §14).
 
-What these have in common is that something other than the agent's own confidence tells you whether the work is right: a truth you built into the simulation, a second implementation, a reference you opened, a folder listing you can read. Choosing tasks with that property is the most useful habit in this guide, and Part III is organized around it.
+What these four areas have in common is that something other than the agent's own confidence tells you whether the work is right: a truth you built into the simulation, a second implementation, a reference you opened, a folder listing you can read. Choosing tasks with that property is the core of this guide and Part III is organized around it.
 
 ## What agents do not do
 
-Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II addresses these gaps, and it is short. You write it down once, in a file the agent reads at the start of every session.
+Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II addresses these gaps: you write it down once, in a file the agent reads at the start of every session.
 
-Agents do not know which data you may send where. Nothing in the agent knows that an IRB protocol, a data-use agreement, or a business-associate agreement exists. Given access to a folder, it will read the folder. The rule has to be written where the agent reads it, and where it must never be broken it has to be enforced by a setting rather than a sentence (§5, §16).
+Agents don't know whether your data are sensitive. The agent doesn't know that an IRB protocol, a data-use agreement, or a business-associate agreement exists. Given access to a folder, it will read the folder. So rules have to be written where the agent reads them, and if the rule must never be broken it has to be enforced by a setting rather than a sentence (§5, §16).
 
 Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-That is your job, and it is the same job you already do with a research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer. What is new is the speed: more work gets done in an afternoon, and a mistake reaches further before anyone notices.
+Your job is the same one you already do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but the speed is increased: you can have many agents running around the clock.
 
 ::: {.needspace height="19cm"}
 :::
