@@ -38,7 +38,7 @@ Rungs one to three are scripts, committed in `code/_data-acquisition/` and rerun
 |:--|:--|:--|
 | American Community Survey (Census Bureau) | The Census Data API; in R, `tidycensus`. Five hundred queries a day per address without a key; a key beyond that. | Public domain. Record the vintage: one-year versus five-year, and which years. |
 | IPUMS (USA, International, NHIS, NHGIS) | The IPUMS API with a key; in R, `ipumsr`. You define an extract, submit it, and download it. | Redistribution needs IPUMS's permission, with one allowance: a subset published to meet a journal's data requirement. IPUMS International forbids redistribution outright. The extract *definition* is shareable and is the reproducible object. Cite as they specify. |
-| CDC WONDER | A web query tool, with an API for some databases. Each API request carries your consent to the data-use restrictions; the API asks for one query at a time, about two minutes apart. | Sub-national vital statistics (state, county) cannot be queried through the API, only the web tool. No linking to identify individuals; suppression rules apply; credit CDC WONDER when you publish. Microdata is separate, under a data user agreement. |
+| CDC WONDER | A web query tool, with an API for some databases. Each API request carries your consent to the data-use restrictions; the API asks for one query at a time, about two minutes apart. | Sub-national vital statistics (state, county) can't be queried through the API, only the web tool. No linking to identify individuals; suppression rules apply; credit CDC WONDER when you publish. Microdata is separate, under a data user agreement. |
 | WHO Global Health Observatory | A documented API, no key, at a fixed address; a replacement has been announced, so have the agent read the current documentation page. | Attribution required. |
 | World Bank indicators | The Indicators API, no key; in R, `WDI`. | Open license with attribution. Record the indicator code and the download date; series are revised. |
 
@@ -56,13 +56,13 @@ Keys are handled by name. An API key lives in an environment variable (`CENSUS_A
 
 ## What you check
 
-The terms, yourself, once per source: whether the processed extract may go in the deposit, what attribution text is required, and what may not be linked to what. This is the one thing in the chapter the agent cannot decide for you, because the consequence of getting it wrong lands on you.
+The terms, yourself, once per source: whether the processed extract may go in the deposit, what attribution text is required, and what may not be linked to what. This is the one thing in the chapter the agent can't decide for you, because the consequence of getting it wrong lands on you.
 
 The provenance entry: complete enough that rerunning the request gives the same file, or a new dated one, and that the paper's data section can be written from it.
 
 The raw file is what the source sent. Row and column counts against the source's own description; one cell checked against the web tool by hand; no recoding, renaming, or filtering on the way in.
 
-The fetch is a script in the repository, rerunnable, and it touched nothing already in `data/raw/`. The key is not in the script, and a search of the repository for the key's value finds nothing.
+The fetch is a script in the repository, rerunnable, and it touched nothing already in `data/raw/`. The key isn't in the script, and a search of the repository for the key's value finds nothing.
 
 The vintage is recorded, and the same one is used throughout: which ACS, which IPUMS sample, which WONDER data year, which indicator revision.
 
@@ -72,7 +72,7 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 *Scraping what had an interface.* Parsing rendered pages when the data were one request away, and being blocked or served stale content for the trouble. Ask for the access path first.
 
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal is not a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
+*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal isn't a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
 *Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
 

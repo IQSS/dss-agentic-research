@@ -17,7 +17,7 @@ Five files to copy and edit, and a closing reference (A.6) with the full project
 
 ## A.1 The global file
 
-Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you do not actually hold; a rule you would not enforce on yourself teaches the agent to ignore the others.
+Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
 
 ```
 # How I work
@@ -115,9 +115,9 @@ it before the session ends.
 
 ## A.4 A minimal justfile
 
-Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you do not already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
+Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you don't already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
+[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.
@@ -154,7 +154,7 @@ for (s in scripts) {
 
 ## A.5 .gitignore
 
-Where it goes: the project root. It says what git does not carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one is not.
+Where it goes: the project root. It says what git doesn't carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one isn't.
 
 ```
 # Data never leaves the machine (§16); processed data is rebuilt by code/
@@ -184,9 +184,9 @@ SOURCE: tool-chain map v1.7, "Workspace structure" and "Project shapes and condi
 COVERS: The shape taxonomy; the full paper, data, and publishing layouts with canonical / recommended / optional parts; the five universal meta-files.
 -->
 
-§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape does not need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
+§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape doesn't need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
 
-The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions do not drift.
+The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions don't drift.
 
 *Paper shape* (statistical analysis ending in a manuscript). A representative layout:
 

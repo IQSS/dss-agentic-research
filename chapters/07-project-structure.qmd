@@ -34,7 +34,7 @@ mortality_disparities_study/
 `-- ... 18 more folders
 ```
 
-You can work in this folder because you remember what happened. An agent cannot. Asked to update a figure, it has to choose among three figure folders by name, and the names do not say which is current. Asked to fix the cleaning script, it has to find out which of two analysis folders is live. Asked to read the data, it faces 412 files with no marker for which are the originals and which are derived, so nothing stops it from writing into an original. And a fix it makes in one copy of a duplicated script does not reach the other. Every one of these is a mistake you would make too, on a bad day; the agent has more bad days, because it starts every session with no memory of the folder.
+You can work in this folder because you remember what happened. An agent can't. Asked to update a figure, it has to choose among three figure folders by name, and the names don't say which is current. Asked to fix the cleaning script, it has to find out which of two analysis folders is live. Asked to read the data, it faces 412 files with no marker for which are the originals and which are derived, so nothing stops it from writing into an original. And a fix it makes in one copy of a duplicated script doesn't reach the other. Every one of these is a mistake you would make too, on a bad day; the agent has more bad days, because it starts every session with no memory of the folder.
 
 Structure fixes this for both of you. A folder whose layout is written down (§6) is a folder the agent can navigate by name, and the layout is what makes bookkeeping (§9), a one-command build (§15), and a data rule you can enforce (§5, §16) possible at all.
 
@@ -86,13 +86,13 @@ No `setwd()`, no absolute paths, no `../`: a project with those breaks the momen
 
 *Code in three tiers.* `_startup/` holds what every script needs: the packages, the options, the data loading, the functions you reuse. Every analysis script begins by sourcing it, which is why the agent can run any one analysis without the others. The analyses themselves sit at the top level of `code/`, one script per stage or question, named for what they do rather than numbered, so a new one can be added without renumbering. `_final/` builds the manuscript's figures and tables from the saved results and runs last. The underscore on the tier folders sorts them to the top of the listing and leaves the analyses in alphabetical order beneath.
 
-*Outputs split by whether the exact version matters.* Figures and tables are committed to version control: the version in the submitted manuscript is a fact you will need again at revision. Saved model fits are large and rebuildable from code and data, so they are not. `logs/` is where long runs (§12) write their output so the agent, and you, can read what happened; not committed either.
+*Outputs split by whether the exact version matters.* Figures and tables are committed to version control: the version in the submitted manuscript is a fact you will need again at revision. Saved model fits are large and rebuildable from code and data, so they aren't. `logs/` is where long runs (§12) write their output so the agent, and you, can read what happened; not committed either.
 
 *Documents, dated or evergreen.* `docs/briefs/` holds what came from collaborators and what you shared with them, with a date prefix (`2026-08-19-coauthor-comments.md`) so the folder sorts into a timeline. `docs/notes/` holds reference material that stays true across revisions, undated. `docs/references/` holds the papers. `manuscript/` holds the paper itself and, when the time comes, one folder per submission.
 
 The whole folder is under version control from the first day, which is what makes an agent's changes reviewable and reversible (§5). What git carries is code and text. The `.gitignore` excludes `outputs/models/`, `logs/`, `data/processed/` when it is large, and `data/raw/` from the first day (Appendix A.5): a data-use agreement almost always forbids copying the data to a third party, and pushing to GitHub is exactly that (§16).
 
-This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
+This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters isn't this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
 
 ## One workspace
 
@@ -155,7 +155,7 @@ Then the work is an inventory and a mapping. Ask the agent to list every file wi
 
 After the move, the scripts are broken, because every `setwd()` and absolute path now points at the old layout. Ask the agent to find all of them and replace each with a path from the project root, then to run every script that still matters and report which ran clean. The scripts that fail are the second inventory: some are dead, some need a package, some read a file that was never in the folder. Nothing in `_old/` is deleted until the manuscript's figures rebuild from the new layout, which is also the first reproducibility check the project has ever had (§15).
 
-One folder is often shared with a coauthor who will not adopt the structure. That is fine. Their material arrives into `docs/briefs/`, dated; the manuscript goes to them as Word and comes back as Word (§14); and the analysis folder is yours.
+One folder is often shared with a coauthor who won't adopt the structure. That is fine. Their material arrives into `docs/briefs/`, dated; the manuscript goes to them as Word and comes back as Word (§14); and the analysis folder is yours.
 
 ## Dropbox and OneDrive
 
@@ -172,7 +172,7 @@ Set-Content -Path '.git' -Stream com.dropbox.ignored -Value 1    # Windows
 
 The mark must go on *before the folder fills*. Create the folder empty, mark it, confirm the mark is there, and only then run the command that populates it (`git init`, `renv::init()`, the first model fit). Marking a folder that Dropbox has already indexed makes it un-index every file inside, and while that runs, which can take hours for a package library, the folder can be unreadable. Put the sequence in your global file so the agent does it every time, in that order, for `.git/`, `renv/`, `.venv/`, `outputs/models/`, and `logs/`.
 
-OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" does not stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
+OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" doesn't stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
 
 Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
 

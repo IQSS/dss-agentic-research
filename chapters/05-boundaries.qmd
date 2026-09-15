@@ -13,7 +13,7 @@ COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragrap
 VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. Codex: sandbox on by default (workspace-write in a git folder), rules file `~/.codex/rules/default.rules` with `prefix_rule` per the tool-chain map v1.5 (re-check the rules syntax at release; Codex's sandbox on native Windows not verified).
 -->
 
-Limiting what an agent can do. The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others do not.
+Limiting what an agent can do. The question isn't whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others don't.
 
 ![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
 
@@ -29,9 +29,9 @@ A conservative starting posture for a researcher, in shape rather than as a copy
 - *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages (system packages too: `brew`, `apt`, `winget`), deleting files, anything that reaches the network, any command that touches `data/`.
 - *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
 
-The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you did not expect.
+The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you didn't expect.
 
-Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and isn't committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
 
 ```
 {
@@ -57,7 +57,7 @@ Here is that posture as the file §16 points to. It is `.claude/settings.json` i
 }
 ```
 
-The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule cannot be talked away in the session it is meant to bind.
+The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind.
 
 Codex keeps the same posture in a rules file, `~/.codex/rules/default.rules`, one entry per rule with a justification that travels with it:
 
@@ -79,9 +79,9 @@ The decisions are `allow`, `prompt`, and `forbidden`. Codex has no read-deny of 
 
 ## Why anything that must never happen should not be promptable
 
-A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you would not fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
+A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you wouldn't fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
 
-What stays dependable at that point is what does not depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen should not be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, is not.
+What stays dependable at that point is what doesn't depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen shouldn't be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, isn't.
 
 The aim is a prompt rate low enough that you read every prompt. Reaching it means moving the safe routine to allow, the truly dangerous to deny, and leaving in the middle only the handful of actions you actually want to decide each time.
 
@@ -93,7 +93,7 @@ A *sandbox* is a fence the operating system puts around a command: inside it, th
 
 Every change an agent makes is a git change, and that is what makes delegating tolerable. Before a task, the working copy is clean: `git status` shows nothing, so whatever the agent does will show up, alone, as a diff. After the task, `git diff` is the review (§9 covers reading it, in the app or the terminal). A single file the agent got wrong comes back with `git restore <file>`. A whole task that went wrong comes back with `git revert` of its commit, and a task you approved but regret next week comes back the same way, because the history is still there. The habit that makes this work is a commit before every task you delegate and one after, so that each commit is one task and the undo is one command.
 
-Two limits. Git undoes what it tracks, and it does not track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
+Two limits. Git undoes what it tracks, and it doesn't track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
 
 ## A starting posture
 

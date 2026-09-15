@@ -155,6 +155,6 @@ Prompts that have worked, three to five per stage, each with the line that says 
 
 > Using the terms that appear in the included set, build a second round of queries and run them against the same sources. Report only records that are new after deduplication against what we already have, and screen them on the same criteria. If the round adds nothing that meets them, say so — that is the stopping rule, and I would rather hear it than have you keep going.
 
-*Rule on the borderline set.* When the agent brings back the ones it would not decide:
+*Rule on the borderline set.* When the agent brings back the ones it wouldn't decide:
 
 > For each borderline record, quote the sentence from the fetched abstract that makes it borderline, and name which criterion it sits on the edge of. Do not recommend include or exclude. I will decide, and then you record my reason in the screening log.

@@ -29,7 +29,7 @@ The agent summarizes what is in progress and what is next, and flags anything ha
 
 > Update `TASKS.md`: move what is finished to Done with today's date, and on each In Progress item say what is left, not what was done. If that moved the project's state, rewrite the line of `STATUS.md` it changed, and the date. Then show me `git status` and propose a commit message.
 
-You read the diff (below), then commit, or let the agent commit with a prompt (§5). What you are protecting is Monday: a session that starts from a `TASKS.md` that was not updated on Friday will repeat work, or undo it.
+You read the diff (below), then commit, or let the agent commit with a prompt (§5). What you are protecting is Monday: a session that starts from a `TASKS.md` that wasn't updated on Friday will repeat work, or undo it.
 
 *Between.* The README stays true: when the folder's structure changes, the README says so, because the README is what a coauthor and a future you open first. Renames follow the conventions in your global file (§6), and a rename that touches more than one file (a variable used across scripts, a set of files that break the naming rule, a folder that moves) is done with a plan (§4) and with `git mv`, so that history follows the file. A migration a collaborator would need to know about gets a dated note in `docs/notes/`. And status reports come from the bookkeeping rather than from memory: "write a one-paragraph status for my coauthor from `TASKS.md` and the last two weeks of commits" produces a draft for `docs/responses/` that is right about dates.
 
@@ -39,7 +39,7 @@ You read the diff (below), then commit, or let the agent commit with a prompt (�
 
 Reads `STATUS.md`, `TASKS.md`, and the git log, and summarizes. Writes the task lines and the dates. Rewrites the README sections that describe structure when structure changes. Runs renames with `git mv` and then finds every reference to the old name and updates it, including the ones in the build file and in comments. After a rename or a move, runs the build (§15) to confirm nothing broke, and reports the result rather than assuming it. Drafts the commit message from the diff.
 
-Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git is not yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
+Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git isn't yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
 
 ## What you check
 
@@ -63,8 +63,8 @@ The README, by using it: the run instructions work when you follow them without 
 
 *The rename that missed one.* The Quarto file, the justfile, the coauthor's do-file, a string inside a plotting call. The search for the old name is the check; the build is the second check.
 
-*The stale README.* It still describes `analysis_v2_USE_THIS`. Structure changes and the README does not, because nobody asked. Make "update the README" part of every structural task.
+*The stale README.* It still describes `analysis_v2_USE_THIS`. Structure changes and the README doesn't, because nobody asked. Make "update the README" part of every structural task.
 
-*The unasked tidy.* Asked to fix one function, the agent reformats every file it opened, and the real change is buried in two hundred lines of whitespace. The rule for the global file: change only what the task requires, and never reformat a file the task did not need to edit.
+*The unasked tidy.* Asked to fix one function, the agent reformats every file it opened, and the real change is buried in two hundred lines of whitespace. The rule for the global file: change only what the task requires, and never reformat a file the task didn't need to edit.
 
-*The session that did not read.* A fresh session started in a hurry, without the opening ritual, repeats Friday's work or reverts it. The ritual is two lines; make it a habit before it is a loss.
+*The session that didn't read.* A fresh session started in a hurry, without the opening ritual, repeats Friday's work or reverts it. The ritual is two lines; make it a habit before it is a loss.

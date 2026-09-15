@@ -37,27 +37,27 @@ You may already use AI chat for writing and for code. An agent is the same sort 
 
 ## Where it pays to use an agent
 
-The best places to use an agent are those parts of the research lifecycle that are time consuming or tedious for you to do yourself. 
+The best places to use an agent are those parts of the research lifecycle that are time-consuming or tedious for you to do yourself.
 
 *Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list, and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
 
-*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
+*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that doesn't fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
 *Verification.* Have the agent re-implement your analysis in a second language (Python if you work in R; R if you work in Stata) and compare the numbers. Two independent implementations that agree are strong evidence. A disagreement locates a bug you may not have found by reading (§13).
 
-*Writing and literature.* An agent can search, fetch, screen, and tabulate faster than you can, just make sure it records and checks every DOI (§10, §14).
+*Writing and literature.* An agent can search, fetch, screen, and tabulate faster than you can; just make sure it records and checks every DOI (§10, §14).
 
-What these four areas have in common is that something other than the agent's own confidence tells you whether the work is right: a truth you built into the simulation, a second implementation, a reference you opened, a folder listing you can read. Choosing tasks with that property is the core of this guide and Part III is organized around it.
+What these four areas have in common is that something other than the agent's own confidence tells you whether the work is right: a truth you built into the simulation, a second implementation, a reference you opened, a folder listing you can read. Choosing tasks with that property is the core of this guide, and Part III is organized around it.
 
-## What agents do not do
+## What agents don't do
 
-Agents do not know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II addresses these gaps: you write it down once, in a file the agent reads at the start of every session.
+Agents don't know your field's conventions. Your estimands, your journal's style, the folder layout you have used for a decade, your coauthor's insistence on Stata: none of that is in the model. Part II addresses these gaps: you write your conventions down once, in a file the agent reads at the start of every session.
 
 Agents don't know whether your data are sensitive. The agent doesn't know that an IRB protocol, a data-use agreement, or a business-associate agreement exists. Given access to a folder, it will read the folder. So rules have to be written where the agent reads them, and if the rule must never be broken it has to be enforced by a setting rather than a sentence (§5, §16).
 
-Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
+Agents don't know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but the speed is increased: you can have many agents running tasks around the clock.
+Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but with accelerated speed: you can have many agents running tasks around the clock.
 
 ::: {.needspace height="19cm"}
 :::
@@ -70,11 +70,11 @@ Everything in this guide serves one of four principles, and each principle maps 
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from literature review to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and institutional access at Harvard (D).
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and institutional access at Harvard (D).
 
-If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
+If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you wouldn't mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in Appendix D and in short sidebars. The guide makes no tool arguments and gives no install recipes: those live in a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
+A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in Appendix D and in short sidebars. The guide makes no tool arguments and gives no install recipes: those live on a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
 
 # 2. What an agent is
 
@@ -84,11 +84,11 @@ SOURCE: content bank concepts/three-paradigms.md (folded in; module points back 
 COVERS: Chat vs agent. The think/act/observe loop and why the agent "sees the real error". Three ways of working: messenger, driver, supervisor.
 -->
 
-A chat assistant and an agent run on the same models. What differs is what the model can see and do. In a chat window it sees what you paste and returns text you carry back by hand. An agent sits inside your project folder: it reads the files that are there, runs the code, reads what the code printed, and edits the files in place. The model did not change. The room it works in did.
+A chat assistant and an agent run on the same models. What differs is what the model can see and do. In a chat window it sees what you paste and returns text you carry back by hand. An agent sits inside your project folder: it reads the files that are there, runs the code, reads what the code printed, and edits the files in place. The model didn't change. The room it works in did.
 
 ## Chat versus agent
 
-Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so it guesses at column names and types. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you were the one carrying information across the gap: the file to the model, the model's code to the file, the error back to the model. The assistant was never wrong about anything it could see. It could not see anything.
+Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so it guesses at column names and types. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you were the one carrying information across the gap: the file to the model, the model's code to the file, the error back to the model. The assistant was never wrong about anything it could see. It couldn't see anything.
 
 An agent closes that loop itself. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
 
@@ -106,7 +106,7 @@ Two limits follow from the same mechanism, and they run through every chapter in
 
 The loop verifies that something happened, not that it should have. A model that converged with a warning, a regression that answers the wrong question, a merge that silently dropped a third of the rows: each of these *ran*. The observe step reports success because the script exited cleanly. Nothing in the loop knows the estimand, the design, or the data-use agreement. That knowledge has to come from you, in the files the agent reads (§6) and in the checks you run afterward (§12, §13).
 
-And the loop can converge on the wrong target. Asked to make a failing script work, an agent will sometimes make the failure go away rather than fix its cause: wrap the call so the error is swallowed, drop the rows that will not merge, relax the check that was failing. Each step looked like progress in the observe step. This is the most important habit of reading an agent's work: look at *how* it made the error disappear, not just that it did. §18 collects the patterns.
+And the loop can converge on the wrong target. Asked to make a failing script work, an agent will sometimes make the failure go away rather than fix its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the check that was failing. Each step looked like progress in the observe step. This is the most important habit of reading an agent's work: look at *how* it made the error disappear, not just that it did. §18 collects the patterns.
 
 ## Three ways of working
 
@@ -120,11 +120,11 @@ The same models are reachable in three places, and the place determines your rol
 | Sees real errors | no | partly | yes |
 | Your role | messenger | driver | supervisor |
 
-The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. Flexible, and the right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it cannot catch what was not pasted. As a *driver* the model suggests inside your editor and you stay at the wheel, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment.
+The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. Flexible, and the right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it can't catch what wasn't pasted. As a *driver* the model suggests inside your editor and you stay at the wheel, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment.
 
 Moving rightward, the agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the point of this guide, and it is also its risk: the supervisor who stops checking is the failure mode every Part IV chapter comes back to.
 
-The supervisor's job, in one paragraph. Describe the outcome and its constraints, not the steps. When the shape of the task is not obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it cannot be talked around (§5, §16). Everything from here on is one of those five moves in detail.
+The supervisor's job, in one paragraph. Describe the outcome and its constraints, not the steps. When the shape of the task isn't obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it can't be talked around (§5, §16). Everything from here on is one of those five moves in detail.
 
 # 3. Where to run it
 
@@ -148,9 +148,9 @@ As of August 2026:
 | Terminal | `claude`. Mac, Windows, Linux, and WSL2. | `codex`. Mac, Windows, Linux. | Readers who want scripts, automation, or the full command surface. Appendix C. |
 | Web and cloud | Claude Code on the web; cloud sessions from the app. | Codex cloud, from the ChatGPT site. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
 
-The surfaces are one agent: the desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. The sandbox (§5) is one of those shared settings rather than a feature of the terminal; what limits it is the platform, not the surface. It does not run on native Windows, so a Windows reader who wants it works inside WSL2, which is a terminal (Appendix C). The desktop apps need no terminal; for a reader who never opens Appendix C, they are the whole of this guide.
+The surfaces are one agent: the desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. The sandbox (§5) is one of those shared settings rather than a feature of the terminal; what limits it is the platform, not the surface. It doesn't run on native Windows, so a Windows reader who wants it works inside WSL2, which is a terminal (Appendix C). The desktop apps need no terminal; for a reader who never opens Appendix C, they are the whole of this guide.
 
-Which for whom. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and asks for nothing you do not have. Move to the terminal when a workflow becomes a script, or when you want the full command surface. Use the editor extension if Positron or VS Code is already where you write code. RStudio has no extension for either agent; RStudio users run the desktop app beside it, on the same files.
+Which for whom. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and asks for nothing you don't have. Move to the terminal when a workflow becomes a script, or when you want the full command surface. Use the editor extension if Positron or VS Code is already where you write code. RStudio has no extension for either agent; RStudio users run the desktop app beside it, on the same files.
 
 ## What must be installed
 
@@ -168,9 +168,9 @@ Optionally `just`, the command runner in Appendix A.4 (§15). Nothing else from 
 
 There are two ways in, and the choice is made before the first session on any project with restricted data.
 
-*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier does not include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans do not train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
+*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier doesn't include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans don't train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
 
-*A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key is not covered by anything.
+*A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key isn't covered by anything.
 
 Two consequences for how you work. Sessions start in a different mode: Auto on a Pro, Max, or Team plan, Manual on an Enterprise plan or a gateway (§4). And the two paths must be kept apart when you have both. A key set as an environment variable "to try it" overrides the plan for every session on the machine, silently, and bills the key. The key belongs in a project-local settings file (Appendix D).
 
@@ -197,7 +197,7 @@ In Claude Code, four modes are in everyday use. You cycle through them with `Shi
 |:--|:--|:--|
 | Manual | Reads only. Every edit and every command prompts. | Your first sessions; anything near restricted data |
 | Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Everyday work you are reviewing as it goes |
-| Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape is not obvious (next section) |
+| Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape isn't obvious (next section) |
 | Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Long tasks with a plan, away from restricted data |
 
 Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
@@ -221,17 +221,17 @@ codex --dangerously-bypass-approvals-and-sandbox
 
 Codex's drops the sandbox along with the prompts, which makes it the blunter of the two.
 
-Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Do not pick it. Third, more prompts are not automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
+Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Don't pick it. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
-My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I do not switch to Auto first and write the plan inside it.
+My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I don't switch to Auto first and write the plan inside it.
 
 ## Plan mode
 
-For any task whose shape is not obvious to both you and the agent before work starts, ask for a plan before any edits. Both agents build this in. In Claude Code, cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task; in Codex, type `/plan` followed by the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
+For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Both agents build this in. In Claude Code, cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task; in Codex, type `/plan` followed by the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
 
-The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you had not noticed: which files it considers in scope, which conventions it is inferring from your `AGENTS.md` and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that do not merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
+The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your `AGENTS.md` and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
 
-Plan mode for: reorganizing a folder into the paper shape (§7); writing the simulation study for a model (§12); converting an analysis to a second language (§13); anything touching `data/`. Not plan mode for: renaming a variable across scripts, fixing a typo, adding a missing `library()` call, copying a pattern from one script into another. The rule of thumb is that if the task is small and its shape is obvious to both of you, skip the plan; otherwise ask. The cost of asking when you did not need to is one round trip. The cost of not asking when you did is rework on a wrong-shaped solution, and a diff too large to review.
+Plan mode for: reorganizing a folder into the paper shape (§7); writing the simulation study for a model (§12); converting an analysis to a second language (§13); anything touching `data/`. Not plan mode for: renaming a variable across scripts, fixing a typo, adding a missing `library()` call, copying a pattern from one script into another. The rule of thumb is that if the task is small and its shape is obvious to both of you, skip the plan; otherwise ask. The cost of asking when you didn't need to is one round trip. The cost of not asking when you did is rework on a wrong-shaped solution, and a diff too large to review.
 
 ## Model and effort
 
@@ -247,7 +247,7 @@ Both can be pinned rather than picked each session: in Claude Code, `effortLevel
 | `low` | High-volume or latency-sensitive work | Quick tasks where speed beats thoroughness |
 | `medium` | Balanced speed, cost, and quality | The default: everyday interactive coding |
 | `high` | The default: complex reasoning, quality over speed | Thorough reasoning on hard problems |
-| `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency does not matter |
+| `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency doesn't matter |
 | `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
 
 ![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
@@ -265,7 +265,7 @@ COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragrap
 VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. Codex: sandbox on by default (workspace-write in a git folder), rules file `~/.codex/rules/default.rules` with `prefix_rule` per the tool-chain map v1.5 (re-check the rules syntax at release; Codex's sandbox on native Windows not verified).
 -->
 
-Limiting what an agent can do. The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others do not.
+Limiting what an agent can do. The question isn't whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others don't.
 
 ![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
 
@@ -281,9 +281,9 @@ A conservative starting posture for a researcher, in shape rather than as a copy
 - *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages (system packages too: `brew`, `apt`, `winget`), deleting files, anything that reaches the network, any command that touches `data/`.
 - *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
 
-The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you did not expect.
+The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you didn't expect.
 
-Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and is not committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and isn't committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
 
 ```
 {
@@ -309,7 +309,7 @@ Here is that posture as the file §16 points to. It is `.claude/settings.json` i
 }
 ```
 
-The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule cannot be talked away in the session it is meant to bind.
+The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind.
 
 Codex keeps the same posture in a rules file, `~/.codex/rules/default.rules`, one entry per rule with a justification that travels with it:
 
@@ -331,9 +331,9 @@ The decisions are `allow`, `prompt`, and `forbidden`. Codex has no read-deny of 
 
 ## Why anything that must never happen should not be promptable
 
-A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you would not fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
+A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you wouldn't fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
 
-What stays dependable at that point is what does not depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen should not be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, is not.
+What stays dependable at that point is what doesn't depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen shouldn't be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, isn't.
 
 The aim is a prompt rate low enough that you read every prompt. Reaching it means moving the safe routine to allow, the truly dangerous to deny, and leaving in the middle only the handful of actions you actually want to decide each time.
 
@@ -345,7 +345,7 @@ A *sandbox* is a fence the operating system puts around a command: inside it, th
 
 Every change an agent makes is a git change, and that is what makes delegating tolerable. Before a task, the working copy is clean: `git status` shows nothing, so whatever the agent does will show up, alone, as a diff. After the task, `git diff` is the review (§9 covers reading it, in the app or the terminal). A single file the agent got wrong comes back with `git restore <file>`. A whole task that went wrong comes back with `git revert` of its commit, and a task you approved but regret next week comes back the same way, because the history is still there. The habit that makes this work is a commit before every task you delegate and one after, so that each commit is one task and the undo is one command.
 
-Two limits. Git undoes what it tracks, and it does not track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
+Two limits. Git undoes what it tracks, and it doesn't track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
 
 ## A starting posture
 
@@ -382,7 +382,7 @@ The two agents agree on everything but the filename. Claude Code reads `CLAUDE.m
 | Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
 | A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
 
-These two are not the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
+These two aren't the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
 
 Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
 
@@ -392,7 +392,7 @@ Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that
 
 Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.
 
-Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it cannot know are the rules you would have told a new assistant, and those are what you add.
+Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it can't know are the rules you would have told a new assistant, and those are what you add.
 
 ## What goes in the global file
 
@@ -436,7 +436,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 - Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
 ```
 
-Every line is concrete enough to check: "use `here::here()` for paths" can be verified in a script, "keep paths tidy" cannot, and an instruction the agent cannot verify is one it will follow inconsistently. The *Never* section is short and absolute, and it is not the enforcement: a sentence in a file is advice the agent will almost always take, and §5 and §16 show how to make the data rule impossible to break rather than merely forbidden. And the file is short on purpose, for a reason the *Context economy* section below explains.
+Every line is concrete enough to check: "use `here::here()` for paths" can be verified in a script, "keep paths tidy" can't, and an instruction the agent can't verify is one it will follow inconsistently. The *Never* section is short and absolute, and it isn't the enforcement: a sentence in a file is advice the agent will almost always take, and §5 and §16 show how to make the data rule impossible to break rather than merely forbidden. And the file is short on purpose, for a reason the *Context economy* section below explains.
 
 ## What goes in the project file
 
@@ -471,7 +471,7 @@ STATUS.md, open tasks in TASKS.md.
 - Never send any file under `data/` to a web search or an external service.
 ```
 
-Notice what is not there. No history of how the analysis evolved (that is `METHODOLOGY.md`), no statement of where the project stands (`STATUS.md`), no list of what remains to do (`TASKS.md`), no description for a reader who is not the agent (`README.md`). The project file is rules and pointers, and it stays readable because it is nothing else.
+Notice what isn't there. No history of how the analysis evolved (that is `METHODOLOGY.md`), no statement of where the project stands (`STATUS.md`), no list of what remains to do (`TASKS.md`), no description for a reader who isn't the agent (`README.md`). The project file is rules and pointers, and it stays readable because it is nothing else.
 
 ## The other files
 
@@ -479,7 +479,7 @@ Five more files do specific jobs. None is required on day one.
 
 *Convention files.* When one topic in the global file outgrows a screen, move it to its own file alongside (`WRITING.md`, `CODING.md`, `MODELING.md`) and leave a one-line pointer behind: "For prose voice, see `WRITING.md`." The agent reads the pointer every session and the file only when the task calls for it. Two rules make this work: name the file for what it contains, so the agent can choose it from the name alone, and make each one self-contained, so it can be read without the others.
 
-*`STATUS.md`.* Where the project stands right now, on one screen: the stage and the date it was last updated, the main result so far, what is in motion, what is waiting on someone else, the facts the agent would otherwise hunt for (the current N, the specification in force, the working file), and the risks that are not yet tasks. It is rewritten in place when the state changes and never added to, so it says where the project is and not how it got there. The agent reads it first in every session, before `TASKS.md`; you read it when a coauthor asks how the paper is going.
+*`STATUS.md`.* Where the project stands right now, on one screen: the stage and the date it was last updated, the main result so far, what is in motion, what is waiting on someone else, the facts the agent would otherwise hunt for (the current N, the specification in force, the working file), and the risks that aren't yet tasks. It is rewritten in place when the state changes and never added to, so it says where the project is and not how it got there. The agent reads it first in every session, before `TASKS.md`; you read it when a coauthor asks how the paper is going.
 
 *`TASKS.md`.* The record of open and finished work: three headings, *To Do*, *In Progress*, and *Done*, with a date on each finished item. The agent reads it after `STATUS.md` to see what is open and what is half-done, and updates it as work happens; you read it on Monday to remember Friday. Deliberately low-tech. §9 covers the session habits around it.
 
@@ -499,11 +499,11 @@ Five more files do specific jobs. None is required on day one.
 
 *`METHODOLOGY.md`.* Dated entries recording why: why this model, why this prior, why these exclusions, what was tried and rejected. It is what the agent consults before proposing an alternative you already ruled out, and it is the seed of the paper's methods section (§14).
 
-*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning. Do not mix them. The agent reads the right file for the right question only if each file has one job.
+*`PLAN.md`.* The analysis sequence and its milestones, for projects large enough to need one. Four files, four roles: `STATUS.md` carries the current state, `TASKS.md` carries the record, `PLAN.md` carries sequence, `METHODOLOGY.md` carries reasoning. Don't mix them. The agent reads the right file for the right question only if each file has one job.
 
 ## Context economy
 
-An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that does not bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
+An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that doesn't bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
 
 The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. The pointers can sit together at the top of the file as a small dispatch index:
 
@@ -517,7 +517,7 @@ The agent then knows where to look. When the task is "rewrite this section of th
 
 ## Memory
 
-Claude Code also keeps notes for itself across sessions (it calls this auto memory, and it is on by default): your corrections, your preferences, and project context it could not derive from the files, saved as markdown under `~/.claude/projects/` and opened with `/memory`. Treat it as a convenience. Memory is for what the agent noticed; the files are for what you decided. When the two disagree, the file wins, and a rule you find yourself relying on memory to keep belongs in `AGENTS.md`.
+Claude Code also keeps notes for itself across sessions (it calls this auto memory, and it is on by default): your corrections, your preferences, and project context it couldn't derive from the files, saved as markdown under `~/.claude/projects/` and opened with `/memory`. Treat it as a convenience. Memory is for what the agent noticed; the files are for what you decided. When the two disagree, the file wins, and a rule you find yourself relying on memory to keep belongs in `AGENTS.md`.
 
 ## Anti-patterns
 
@@ -535,7 +535,7 @@ Claude Code also keeps notes for itself across sessions (it calls this auto memo
 
 ## Writing your first file
 
-Do not write it from scratch. Start with the twenty-six lines above, or with `/init`, and then run the agent on a real task. Each time you correct it, ask whether the correction would apply next week; if so, it is a rule, and it goes in the file. Three corrections make a good first session. The file is loaded when a session starts, so after editing it, start a new session or tell the agent to re-read it.
+Don't write it from scratch. Start with the twenty-six lines above, or with `/init`, and then run the agent on a real task. Each time you correct it, ask whether the correction would apply next week; if so, it is a rule, and it goes in the file. Three corrections make a good first session. The file is loaded when a session starts, so after editing it, start a new session or tell the agent to re-read it.
 
 # 7. Project structure
 
@@ -567,7 +567,7 @@ mortality_disparities_study/
 `-- ... 18 more folders
 ```
 
-You can work in this folder because you remember what happened. An agent cannot. Asked to update a figure, it has to choose among three figure folders by name, and the names do not say which is current. Asked to fix the cleaning script, it has to find out which of two analysis folders is live. Asked to read the data, it faces 412 files with no marker for which are the originals and which are derived, so nothing stops it from writing into an original. And a fix it makes in one copy of a duplicated script does not reach the other. Every one of these is a mistake you would make too, on a bad day; the agent has more bad days, because it starts every session with no memory of the folder.
+You can work in this folder because you remember what happened. An agent can't. Asked to update a figure, it has to choose among three figure folders by name, and the names don't say which is current. Asked to fix the cleaning script, it has to find out which of two analysis folders is live. Asked to read the data, it faces 412 files with no marker for which are the originals and which are derived, so nothing stops it from writing into an original. And a fix it makes in one copy of a duplicated script doesn't reach the other. Every one of these is a mistake you would make too, on a bad day; the agent has more bad days, because it starts every session with no memory of the folder.
 
 Structure fixes this for both of you. A folder whose layout is written down (§6) is a folder the agent can navigate by name, and the layout is what makes bookkeeping (§9), a one-command build (§15), and a data rule you can enforce (§5, §16) possible at all.
 
@@ -619,13 +619,13 @@ No `setwd()`, no absolute paths, no `../`: a project with those breaks the momen
 
 *Code in three tiers.* `_startup/` holds what every script needs: the packages, the options, the data loading, the functions you reuse. Every analysis script begins by sourcing it, which is why the agent can run any one analysis without the others. The analyses themselves sit at the top level of `code/`, one script per stage or question, named for what they do rather than numbered, so a new one can be added without renumbering. `_final/` builds the manuscript's figures and tables from the saved results and runs last. The underscore on the tier folders sorts them to the top of the listing and leaves the analyses in alphabetical order beneath.
 
-*Outputs split by whether the exact version matters.* Figures and tables are committed to version control: the version in the submitted manuscript is a fact you will need again at revision. Saved model fits are large and rebuildable from code and data, so they are not. `logs/` is where long runs (§12) write their output so the agent, and you, can read what happened; not committed either.
+*Outputs split by whether the exact version matters.* Figures and tables are committed to version control: the version in the submitted manuscript is a fact you will need again at revision. Saved model fits are large and rebuildable from code and data, so they aren't. `logs/` is where long runs (§12) write their output so the agent, and you, can read what happened; not committed either.
 
 *Documents, dated or evergreen.* `docs/briefs/` holds what came from collaborators and what you shared with them, with a date prefix (`2026-08-19-coauthor-comments.md`) so the folder sorts into a timeline. `docs/notes/` holds reference material that stays true across revisions, undated. `docs/references/` holds the papers. `manuscript/` holds the paper itself and, when the time comes, one folder per submission.
 
 The whole folder is under version control from the first day, which is what makes an agent's changes reviewable and reversible (§5). What git carries is code and text. The `.gitignore` excludes `outputs/models/`, `logs/`, `data/processed/` when it is large, and `data/raw/` from the first day (Appendix A.5): a data-use agreement almost always forbids copying the data to a third party, and pushing to GitHub is exactly that (§16).
 
-This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters is not this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
+This is a cut-down version of the layout I use myself, which adds a pipeline manifest, a causal-DAG folder, a working report, and a finer split of `docs/`; Appendix A.6 has the full template, with the data-project and publishing shapes alongside it. A talk or a report is a smaller shape: a source folder, an output folder, a template, and the root files other than `METHODOLOGY.md`. Start with the shape above and add parts when a project needs them. What matters isn't this layout but *one* layout: that every paper you and the agent open has its raw data, its scripts, and its outputs in the same place.
 
 ## One workspace
 
@@ -688,7 +688,7 @@ Then the work is an inventory and a mapping. Ask the agent to list every file wi
 
 After the move, the scripts are broken, because every `setwd()` and absolute path now points at the old layout. Ask the agent to find all of them and replace each with a path from the project root, then to run every script that still matters and report which ran clean. The scripts that fail are the second inventory: some are dead, some need a package, some read a file that was never in the folder. Nothing in `_old/` is deleted until the manuscript's figures rebuild from the new layout, which is also the first reproducibility check the project has ever had (§15).
 
-One folder is often shared with a coauthor who will not adopt the structure. That is fine. Their material arrives into `docs/briefs/`, dated; the manuscript goes to them as Word and comes back as Word (§14); and the analysis folder is yours.
+One folder is often shared with a coauthor who won't adopt the structure. That is fine. Their material arrives into `docs/briefs/`, dated; the manuscript goes to them as Word and comes back as Word (§14); and the analysis folder is yours.
 
 ## Dropbox and OneDrive
 
@@ -705,7 +705,7 @@ Set-Content -Path '.git' -Stream com.dropbox.ignored -Value 1    # Windows
 
 The mark must go on *before the folder fills*. Create the folder empty, mark it, confirm the mark is there, and only then run the command that populates it (`git init`, `renv::init()`, the first model fit). Marking a folder that Dropbox has already indexed makes it un-index every file inside, and while that runs, which can take hours for a package library, the folder can be unreadable. Put the sequence in your global file so the agent does it every time, in that order, for `.git/`, `renv/`, `.venv/`, `outputs/models/`, and `logs/`.
 
-OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" does not stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
+OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" doesn't stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
 
 Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
 
@@ -756,7 +756,7 @@ The Claude app lists skills under the same slash menu. If you run both agents, o
 
 The rule is three. The first time you write a request, it is a request; the second, you copy it from your notes or from Appendix B; the third, it becomes a skill. The candidates in this guide are already written: the session rituals (§9), a fetch with its provenance entry (§11), the calibration check (§12), the second implementation and its comparison (§13), the number-traceability table (§14), the fresh-clone check and the pre-deposit audit (§15). Each prompt in Appendix B is a skill body waiting for a header.
 
-Facts about a project (where things live, what is restricted) do not belong in a skill; they are the brief's, and a skill that hard-codes them breaks in the next project. Nor do standing rules (how you write, what to never do); they are the global file's, and a skill that repeats them drifts from it. A skill holds a *procedure*, and reads the facts and the rules from the files that hold them.
+Facts about a project (where things live, what is restricted) don't belong in a skill; they are the brief's, and a skill that hard-codes them breaks in the next project. Nor do standing rules (how you write, what to never do); they are the global file's, and a skill that repeats them drifts from it. A skill holds a *procedure*, and reads the facts and the rules from the files that hold them.
 
 My own set, as examples of the shape. `/scaffold` builds a new project in the paper layout, the demonstration in §7. `/eda` renders a first-look report on a new dataset (types, missingness, distributions, correlations, outliers) into `outputs/eda/`, dated, the afternoon the data arrive. `/dag` draws a causal diagram from a written graph, with the adjustment set computed rather than guessed. `/review-plan` is a Reviewer 2 critique of an analysis plan before the work is done, and `/review-analysis` an audit of an analysis after it is done: identification, convergence, conventions. `/targets` and `/pueue` are the pipeline and long-job helpers from the fuller stack, outside this guide. Each is a hundred to two hundred lines, most of it the checks; each started as a prompt I had typed three times.
 
@@ -764,7 +764,7 @@ A skill that fails is a skill you edit, the same way a correction becomes a rule
 
 ## Hooks in one paragraph
 
-A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it does not depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. In Codex, hooks are an opt-in experiment as of this writing, so the deny rules carry the enforcement there. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
+A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. In Codex, hooks are an opt-in experiment as of this writing, so the deny rules carry the enforcement there. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
 
 <!-- ===================== PART III — THE WORK ===================== -->
 
@@ -793,7 +793,7 @@ The agent summarizes what is in progress and what is next, and flags anything ha
 
 > Update `TASKS.md`: move what is finished to Done with today's date, and on each In Progress item say what is left, not what was done. If that moved the project's state, rewrite the line of `STATUS.md` it changed, and the date. Then show me `git status` and propose a commit message.
 
-You read the diff (below), then commit, or let the agent commit with a prompt (§5). What you are protecting is Monday: a session that starts from a `TASKS.md` that was not updated on Friday will repeat work, or undo it.
+You read the diff (below), then commit, or let the agent commit with a prompt (§5). What you are protecting is Monday: a session that starts from a `TASKS.md` that wasn't updated on Friday will repeat work, or undo it.
 
 *Between.* The README stays true: when the folder's structure changes, the README says so, because the README is what a coauthor and a future you open first. Renames follow the conventions in your global file (§6), and a rename that touches more than one file (a variable used across scripts, a set of files that break the naming rule, a folder that moves) is done with a plan (§4) and with `git mv`, so that history follows the file. A migration a collaborator would need to know about gets a dated note in `docs/notes/`. And status reports come from the bookkeeping rather than from memory: "write a one-paragraph status for my coauthor from `TASKS.md` and the last two weeks of commits" produces a draft for `docs/responses/` that is right about dates.
 
@@ -803,7 +803,7 @@ You read the diff (below), then commit, or let the agent commit with a prompt (�
 
 Reads `STATUS.md`, `TASKS.md`, and the git log, and summarizes. Writes the task lines and the dates. Rewrites the README sections that describe structure when structure changes. Runs renames with `git mv` and then finds every reference to the old name and updates it, including the ones in the build file and in comments. After a rename or a move, runs the build (§15) to confirm nothing broke, and reports the result rather than assuming it. Drafts the commit message from the diff.
 
-Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git is not yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
+Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git isn't yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
 
 ## What you check
 
@@ -827,11 +827,11 @@ The README, by using it: the run instructions work when you follow them without 
 
 *The rename that missed one.* The Quarto file, the justfile, the coauthor's do-file, a string inside a plotting call. The search for the old name is the check; the build is the second check.
 
-*The stale README.* It still describes `analysis_v2_USE_THIS`. Structure changes and the README does not, because nobody asked. Make "update the README" part of every structural task.
+*The stale README.* It still describes `analysis_v2_USE_THIS`. Structure changes and the README doesn't, because nobody asked. Make "update the README" part of every structural task.
 
-*The unasked tidy.* Asked to fix one function, the agent reformats every file it opened, and the real change is buried in two hundred lines of whitespace. The rule for the global file: change only what the task requires, and never reformat a file the task did not need to edit.
+*The unasked tidy.* Asked to fix one function, the agent reformats every file it opened, and the real change is buried in two hundred lines of whitespace. The rule for the global file: change only what the task requires, and never reformat a file the task didn't need to edit.
 
-*The session that did not read.* A fresh session started in a hurry, without the opening ritual, repeats Friday's work or reverts it. The ritual is two lines; make it a habit before it is a loss.
+*The session that didn't read.* A fresh session started in a hurry, without the opening ritual, repeats Friday's work or reverts it. The ritual is two lines; make it a habit before it is a loss.
 
 # 10. Literature search and synthesis
 
@@ -842,17 +842,17 @@ COVERS: Protocol before searching. Search, screen, extract into an evidence tabl
 VERIFY: the run described here was made on 2026-08-31 against OpenAlex, Crossref, PubMed and arXiv, on the question behind papers/worthington-journal-review-times; 15 queries, 604 records retrieved, 507 after deduplication, 37 included, 11 borderline, and the counts in the table are that run's. The three failures reported are all from it: the retrieval cap that stopped the run, the DataCite record reported as a probable fabrication, and the preprint pair deduplication missed. Rerun and re-check the counts if the protocol changes.
 -->
 
-Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper does not exist. Everything in this chapter follows from one decision about that: do not try to make it less likely. Make it impossible to miss.
+Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: don't try to make it less likely. Make it impossible to miss.
 
 ## What to ask for
 
 *The protocol, before a single query runs.* Write down the question, what counts as included and excluded, the date range, the languages, which sources will be searched, and what "done" means. Have the agent draft it from your description, then read it and approve it. This is the step you already know how to do, and it is what makes the search auditable, re-runnable, and arguable by a reviewer. Skipping it because the question looks simple is how you end up with a set of papers nobody can defend.
 
-Vagueness is the thing to fix here rather than later. "Papers about social mobility" is not a protocol; it is a mood. If the agent cannot tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
+Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it is a mood. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
 
-*The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier.** Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but cannot resolve goes to a quarantine file. It does not enter the table, and it is not cited.
+*The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier.** Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but can't resolve goes to a quarantine file. It doesn't enter the table, and it isn't cited.
 
-*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex and Crossref are cross-domain, free, and need no account: OpenAlex for finding, Crossref for confirming. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a license, so if you have one, say so and use it; if you do not, record their absence as a gap rather than pretending the search was exhaustive.
+*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex and Crossref are cross-domain, free, and need no account: OpenAlex for finding, Crossref for confirming. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a license, so if you have one, say so and use it; if you don't, record their absence as a gap rather than pretending the search was exhaustive.
 
 *What you want back.* A dated, self-contained directory, not a chat answer: the protocol; every query string with its source and date; the raw responses, unmodified; a screening log with a recorded reason for every exclusion; the evidence table; the quarantine; and a bibliography in both `.bib` and `.ris`, because no single format is universal.
 
@@ -877,7 +877,7 @@ Run on the question behind a real paper (how submission-to-acceptance times vary
 
 Of the 37, twenty-five were screened on an abstract the agent actually fetched and twelve on the title alone, because no abstract came back. The table says which, in a column, for every row. That column is the difference between a reading plan and a list of things somebody skimmed.
 
-The exclusions are not a black box either. They resolve into the protocol's own categories: 424 with no duration outcome at all, 26 measuring the wrong interval (grant review, cancer treatment delay, time to tuberculosis diagnosis), 7 with no data, and 2 single-journal reports.
+The exclusions aren't a black box either. They resolve into the protocol's own categories: 424 with no duration outcome at all, 26 measuring the wrong interval (grant review, cancer treatment delay, time to tuberculosis diagnosis), 7 with no data, and 2 single-journal reports.
 
 Then the verification pass re-fetches every surviving record by its identifier and compares. This is mechanical and belongs in a script rather than in a conversation, because you will run it more than once and because a check you can rerun is a check you will rerun.
 
@@ -887,19 +887,19 @@ Then the verification pass re-fetches every surviving record by its identifier a
 
 *The quarantine, especially when it is empty.* Ask for the number every time. Zero records reaching the table from the model is the result you want, and you only know it because somebody counted. A quarantine that is quietly deleted when empty teaches you nothing; one that is reported at zero teaches you the check ran.
 
-*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. That is fine at this stage, and it is not fine in the sentence you write about it.
+*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. That is fine at this stage, and it isn't fine in the sentence you write about it.
 
-*Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they do not add up, one of the stages is lying.
+*Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they don't add up, one of the stages is lying.
 
-*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it does not prove the paper supports what the row claims about it. That last step is yours, and it is done by reading the paper.
+*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it doesn't prove the paper supports what the row claims about it. That last step is yours, and it is done by reading the paper.
 
 ## What goes wrong
 
-*The citation that does not exist.* The failure this chapter is built around. It does not look like an error: the formatting is right, the journal is real, the authors publish in the field, and the year is plausible. It cannot be caught by reading carefully, because careful reading is what it is designed to survive. It can only be caught by resolution, which means asking the registrar whether that identifier exists. That is why the rule is mechanical rather than a matter of vigilance.
+*The citation that doesn't exist.* The failure this chapter is built around. It doesn't look like an error: the formatting is right, the journal is real, the authors publish in the field, and the year is plausible. It can't be caught by reading carefully, because careful reading is what it is designed to survive. It can only be caught by resolution, which means asking the registrar whether that identifier exists. That is why the rule is mechanical rather than a matter of vigilance.
 
-*The accusation that was wrong.* On the run above, the verifier reported a real and directly relevant paper as a probable fabrication. It was not: the record is registered with DataCite, and the verifier had asked only Crossref, which is one registrar among several. Had that message been believed, a good paper would have been thrown away. A tool that cries fabrication has to be right: "it did not resolve" must mean that no registrar has it, not that the first place asked did not. Treat a fabrication verdict as a claim to check, not a fact.
+*The accusation that was wrong.* On the run above, the verifier reported a real and directly relevant paper as a probable fabrication. It wasn't: the record is registered with DataCite, and the verifier had asked only Crossref, which is one registrar among several. Had that message been believed, a good paper would have been thrown away. A tool that cries fabrication has to be right: "it didn't resolve" must mean that no registrar has it, not that the first place asked didn't. Treat a fabrication verdict as a claim to check, not a fact.
 
-*The constraint that was the wrong instrument.* The protocol for that run set a cap on how many records could be retrieved. It fired, 604 against a cap of 300, and stopping was correct. The cap itself was the mistake, and it was withdrawn rather than raised. A retrieval cap does not constrain a search methodologically; the question and the criteria do that. What it does is make your evidence base a function of each interface's relevance ranking, which is opaque and differs between them. "The first 300 by relevance" is not a defensible sampling frame. Bound the search with the criteria and a stopping rule, and if you want a number, make it a checkpoint that reports and continues rather than a wall.
+*The constraint that was the wrong instrument.* The protocol for that run set a cap on how many records could be retrieved. It fired, 604 against a cap of 300, and stopping was correct. The cap itself was the mistake, and it was withdrawn rather than raised. A retrieval cap doesn't constrain a search methodologically; the question and the criteria do that. What it does is make your evidence base a function of each interface's relevance ranking, which is opaque and differs between them. "The first 300 by relevance" isn't a defensible sampling frame. Bound the search with the criteria and a stopping rule, and if you want a number, make it a checkpoint that reports and continues rather than a wall.
 
 *The duplicate that survived.* Deduplication matched on identifier, then on title and year, and still let through a preprint and its published version, because the two titles differ by a single word. Both would have been counted. Cross-field and cross-repository work is full of these, and the fix is a human eye on the borderline set rather than a cleverer rule.
 
@@ -941,7 +941,7 @@ Rungs one to three are scripts, committed in `code/_data-acquisition/` and rerun
 |:--|:--|:--|
 | American Community Survey (Census Bureau) | The Census Data API; in R, `tidycensus`. Five hundred queries a day per address without a key; a key beyond that. | Public domain. Record the vintage: one-year versus five-year, and which years. |
 | IPUMS (USA, International, NHIS, NHGIS) | The IPUMS API with a key; in R, `ipumsr`. You define an extract, submit it, and download it. | Redistribution needs IPUMS's permission, with one allowance: a subset published to meet a journal's data requirement. IPUMS International forbids redistribution outright. The extract *definition* is shareable and is the reproducible object. Cite as they specify. |
-| CDC WONDER | A web query tool, with an API for some databases. Each API request carries your consent to the data-use restrictions; the API asks for one query at a time, about two minutes apart. | Sub-national vital statistics (state, county) cannot be queried through the API, only the web tool. No linking to identify individuals; suppression rules apply; credit CDC WONDER when you publish. Microdata is separate, under a data user agreement. |
+| CDC WONDER | A web query tool, with an API for some databases. Each API request carries your consent to the data-use restrictions; the API asks for one query at a time, about two minutes apart. | Sub-national vital statistics (state, county) can't be queried through the API, only the web tool. No linking to identify individuals; suppression rules apply; credit CDC WONDER when you publish. Microdata is separate, under a data user agreement. |
 | WHO Global Health Observatory | A documented API, no key, at a fixed address; a replacement has been announced, so have the agent read the current documentation page. | Attribution required. |
 | World Bank indicators | The Indicators API, no key; in R, `WDI`. | Open license with attribution. Record the indicator code and the download date; series are revised. |
 
@@ -959,13 +959,13 @@ Keys are handled by name. An API key lives in an environment variable (`CENSUS_A
 
 ## What you check
 
-The terms, yourself, once per source: whether the processed extract may go in the deposit, what attribution text is required, and what may not be linked to what. This is the one thing in the chapter the agent cannot decide for you, because the consequence of getting it wrong lands on you.
+The terms, yourself, once per source: whether the processed extract may go in the deposit, what attribution text is required, and what may not be linked to what. This is the one thing in the chapter the agent can't decide for you, because the consequence of getting it wrong lands on you.
 
 The provenance entry: complete enough that rerunning the request gives the same file, or a new dated one, and that the paper's data section can be written from it.
 
 The raw file is what the source sent. Row and column counts against the source's own description; one cell checked against the web tool by hand; no recoding, renaming, or filtering on the way in.
 
-The fetch is a script in the repository, rerunnable, and it touched nothing already in `data/raw/`. The key is not in the script, and a search of the repository for the key's value finds nothing.
+The fetch is a script in the repository, rerunnable, and it touched nothing already in `data/raw/`. The key isn't in the script, and a search of the repository for the key's value finds nothing.
 
 The vintage is recorded, and the same one is used throughout: which ACS, which IPUMS sample, which WONDER data year, which indicator revision.
 
@@ -975,7 +975,7 @@ The vintage is recorded, and the same one is used throughout: which ACS, which I
 
 *Scraping what had an interface.* Parsing rendered pages when the data were one request away, and being blocked or served stale content for the trouble. Ask for the access path first.
 
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal is not a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
+*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal isn't a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
 *Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
 
@@ -996,7 +996,7 @@ COVERS: The agent writes scripts; you own the model. Calibration by simulation (
 VERIFY: the script was run verbatim on 2026-08-27 (R 4.6.1, fixest 0.14.2) on a synthetic design of 25 counties × 2016–2020 × 12 months = 1,500 county-months; the table is that run's output, and the generator, the design summary, and an exploratory run over more effect sizes and a larger design are in docs/notes/sim-main-model-run.md. Rerun if the script or the design changes.
 -->
 
-The agent writes the scripts; you own the model. The estimand, the design, the priors or the test, and the claim the paper will make are yours, and the agent's job is to turn them into code. Code that runs is not code that is right (§2). So before a model is trusted with the real data, check what it says under a known truth: simulate data from known parameters, fit the planned model, and see whether it recovers them. Almost nobody does this, because writing the simulation is the tedious part. That part is now delegable.
+The agent writes the scripts; you own the model. The estimand, the design, the priors or the test, and the claim the paper will make are yours, and the agent's job is to turn them into code. Code that runs isn't code that is right (§2). So before a model is trusted with the real data, check what it says under a known truth: simulate data from known parameters, fit the planned model, and see whether it recovers them. Almost nobody does this, because writing the simulation is the tedious part. That part is now delegable.
 
 ## What to ask for
 
@@ -1006,7 +1006,7 @@ Then ask for two checks, in one script.
 
 *Recovery.* Simulate data from the model with known parameters, using the real design (the real covariates and cluster structure; a synthetic design of the same shape when the data are restricted, §16), fit the planned model, and compare the estimate to the truth. Do this for many simulated datasets, not one, and under a small set of truths: no effect, a small effect, and the effect the paper hopes to find. Report bias (the average distance from the truth) and coverage (how often the 95 percent interval contains it). If the model assumes a shape (linear in the exposure, say), add a truth that breaks it (a threshold, a saturating curve) and see what the model reports; that tells you what the claim means when the shape is wrong.
 
-*The decision rule.* Under the no-effect truth, how often does the rule fire? That rate is the model's false-positive rate on this design, and it should be at or below what the paper claims. Under each effect truth, how often does it fire? That is power, and power by simulation replaces a formula that never fit your design: clustered, two-way fixed effects, unequal groups, a rule that is not a t-test. Power minus the false-positive rate is what the design can actually resolve.
+*The decision rule.* Under the no-effect truth, how often does the rule fire? That rate is the model's false-positive rate on this design, and it should be at or below what the paper claims. Under each effect truth, how often does it fire? That is power, and power by simulation replaces a formula that never fit your design: clustered, two-way fixed effects, unequal groups, a rule that isn't a t-test. Power minus the false-positive rate is what the design can actually resolve.
 
 The request for the paper from §6 and §7:
 
@@ -1070,11 +1070,11 @@ What it produced, run as written on a synthetic design of the paper's shape (25 
 | small (−1) | −0.04 | 0.955 | 0.545 | 0.035 |
 | main (−15) | −0.04 | 0.955 | 1.00 | 0 |
 
-Read it row by row. Under no effect, the interval excludes zero 4.5 percent of the time: the rule is calibrated on this design, and a positive result is not an artifact of the clustering. Coverage sits at 95.5 percent in every row, so the standard errors are honest. The bias is the same in every row to the third decimal, which is what matched seeds do to a linear estimator: the same 200 noise draws, shifted by the true effect, so the rows differ only in what they were asked to detect. At the effect the paper hopes for, power is 100 percent, and the Monte Carlo standard error of zero says only that all 200 datasets rejected; a rate of 1.00 from 200 datasets means a rate above 0.985, not certainty. At a 1 g effect, a plausible size for this exposure, power is 55 percent: a coin flip. That is the finding that changes the paper. If the true effect is small, the design misses it half the time, so an interval that includes zero is not evidence of absence, and the discussion section should say so. That sentence is worth the entire exercise, and it cost a few minutes of the agent's time and ten of yours.
+Read it row by row. Under no effect, the interval excludes zero 4.5 percent of the time: the rule is calibrated on this design, and a positive result isn't an artifact of the clustering. Coverage sits at 95.5 percent in every row, so the standard errors are honest. The bias is the same in every row to the third decimal, which is what matched seeds do to a linear estimator: the same 200 noise draws, shifted by the true effect, so the rows differ only in what they were asked to detect. At the effect the paper hopes for, power is 100 percent, and the Monte Carlo standard error of zero says only that all 200 datasets rejected; a rate of 1.00 from 200 datasets means a rate above 0.985, not certainty. At a 1 g effect, a plausible size for this exposure, power is 55 percent: a coin flip. That is the finding that changes the paper. If the true effect is small, the design misses it half the time, so an interval that includes zero isn't evidence of absence, and the discussion section should say so. That sentence is worth the entire exercise, and it cost a few minutes of the agent's time and ten of yours.
 
-For a Bayesian model the script is the same shape with a different fit and a different rule (the posterior probability exceeding a threshold, the credible interval excluding zero), fewer simulated datasets because each fit is slower, and one more check: that the prior actually in force in the fitted model is the prior the paper says, because fitting software fills in defaults you did not set.
+For a Bayesian model the script is the same shape with a different fit and a different rule (the posterior probability exceeding a threshold, the credible interval excluding zero), fewer simulated datasets because each fit is slower, and one more check: that the prior actually in force in the fitted model is the prior the paper says, because fitting software fills in defaults you didn't set.
 
-*Long fits run outside the agent.* A model that takes more than a few minutes to fit does not belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The agent writes the script; you start it yourself, from a terminal or from RStudio, with its output sent to a file in `logs/` (§7); when it finishes, you tell the agent where the log is and it reads the result. If a project accumulates many long fits, two tools from the fuller stack are built for this: `targets`, an R pipeline runner that reruns only the steps whose inputs changed and resumes a fit that was interrupted, and `pueue`, a job queue that keeps a job alive after the session that started it has gone. Both are outside this guide (the quickstart covers installation), and neither is needed for the check above.
+*Long fits run outside the agent.* A model that takes more than a few minutes to fit doesn't belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The agent writes the script; you start it yourself, from a terminal or from RStudio, with its output sent to a file in `logs/` (§7); when it finishes, you tell the agent where the log is and it reads the result. If a project accumulates many long fits, two tools from the fuller stack are built for this: `targets`, an R pipeline runner that reruns only the steps whose inputs changed and resumes a fit that was interrupted, and `pueue`, a job queue that keeps a job alive after the session that started it has gone. Both are outside this guide (the quickstart covers installation), and neither is needed for the check above.
 
 ## What you check
 
@@ -1092,15 +1092,15 @@ That the script is committed and runs from the build command (§15), so the chec
 
 ## What goes wrong
 
-*One simulated dataset.* The most expensive mistake in this chapter, and the commonest. A colleague's project tested thirteen candidate models against two truths with one simulated dataset each, found every model "miscalibrated" at a rate near 0.75 under the null, and spent three days chasing a mechanism that did not exist. With twenty-five datasets per cell the same models were calibrated at 0.48, and the 0.75 was one draw from a distribution with a standard deviation of 0.17. The rerun took ten minutes. Never treat a single-simulation number as a rate.
+*One simulated dataset.* The most expensive mistake in this chapter, and the commonest. A colleague's project tested thirteen candidate models against two truths with one simulated dataset each, found every model "miscalibrated" at a rate near 0.75 under the null, and spent three days chasing a mechanism that didn't exist. With twenty-five datasets per cell the same models were calibrated at 0.48, and the 0.75 was one draw from a distribution with a standard deviation of 0.17. The rerun took ten minutes. Never treat a single-simulation number as a rate.
 
-*The simulation is of a different model.* Independent errors when the data are clustered; a balanced design when the real one is not; the outcome on a convenient scale. Each makes the check pass and the paper wrong. Clustered data treated as independent is the classic: the false-positive rate under the null comes out at 0.2 or 0.4 instead of 0.05, and only a simulation on the real cluster structure shows it.
+*The simulation is of a different model.* Independent errors when the data are clustered; a balanced design when the real one isn't; the outcome on a convenient scale. Each makes the check pass and the paper wrong. Clustered data treated as independent is the classic: the false-positive rate under the null comes out at 0.2 or 0.4 instead of 0.05, and only a simulation on the real cluster structure shows it.
 
 *Calibration mistaken for power, and the reverse.* Coverage and false-positive rate ask whether the instrument reads true; power asks how fine its scale is. A model can have excellent power and terrible coverage, in which case its power is meaningless. Report both, in that order.
 
-*Defaults taken for choices.* The prior, the variance estimator, the small-sample correction, the treatment of singleton groups (clusters with one observation): whatever you did not set, the software set. The simulation checks the model as fitted, defaults included, which is a virtue; the trap is describing the model in the paper as the one you meant rather than the one that ran.
+*Defaults taken for choices.* The prior, the variance estimator, the small-sample correction, the treatment of singleton groups (clusters with one observation): whatever you didn't set, the software set. The simulation checks the model as fitted, defaults included, which is a virtue; the trap is describing the model in the paper as the one you meant rather than the one that ran.
 
-*The agent tunes until it passes.* Asked to run the check, an agent that sees a failure may adjust the model (tighten a prior, drop a term, change the rule) until the table looks right, and report the result as a pass. The instruction is the same as in §13: report, do not fix. A failed calibration is a finding about the design, and the response is yours to choose: a different specification, a narrower claim, a note in the discussion, or not making the claim.
+*The agent tunes until it passes.* Asked to run the check, an agent that sees a failure may adjust the model (tighten a prior, drop a term, change the rule) until the table looks right, and report the result as a pass. The instruction is the same as in §13: report, don't fix. A failed calibration is a finding about the design, and the response is yours to choose: a different specification, a narrower claim, a note in the discussion, or not making the claim.
 
 *The fit runs in the session.* A three-hour model started inside the agent's session ends when the session does, with no error and no output. Long fits run outside the agent, from a script, to a log.
 
@@ -1115,7 +1115,7 @@ COVERS: Cross-implementation: R vs Python vs Stata, with Stata first-class. Inde
 VERIFY: Stata batch mode checked 2026-08-27 against Stata's FAQs: `stata-mp -b do file.do` (Mac/Unix; executable name by flavor) and `StataMP-64.exe /e do file.do` (Windows) write a log of the same name. The worked-example table is illustrative, not from a real project.
 -->
 
-The failure worth guarding against is not code that breaks; that you catch. It is code that runs, passes a reading, and is still wrong: off by a merge key, a default argument, a silent type conversion. The output looks reasonable, so the error survives into the table. Reproducing the result does not catch it, because the same code re-run gives the same wrong answer (§15). The check is to require the result from *different* code, written independently, and to compare.
+The failure worth guarding against isn't code that breaks; that you catch. It is code that runs, passes a reading, and is still wrong: off by a merge key, a default argument, a silent type conversion. The output looks reasonable, so the error survives into the table. Reproducing the result doesn't catch it, because the same code re-run gives the same wrong answer (§15). The check is to require the result from *different* code, written independently, and to compare.
 
 ## What to ask for
 
@@ -1123,7 +1123,7 @@ The strongest check you have on whether a result is correct, rather than merely 
 
 The language is necessary but not sufficient. What has to be independent is the *reasoning*. If the agent that wrote the R version translates its own code into Stata, the two carry the same misreading of the design and agree on the wrong answer. So the second implementation is written by a different agent, or at least a fresh session, working from the written specification and not from the first implementation's code. Two agents reasoning separately from the same specification keep their errors uncorrelated. Claude Code on one side and Codex on the other is the cleanest version; a fresh session of the same agent, told not to read `code/`, is the next best.
 
-That puts weight on the specification. For the check to work, `METHODOLOGY.md` (§6) has to state what a second implementer needs and nothing they should infer: the estimand; the sample, with every exclusion in the order applied; how each variable is constructed; the model, down to the family, the fixed effects, the clustering, and the weights; and which quantity is the result (a coefficient, a marginal effect, an odds ratio, a predicted contrast). If the file cannot say these things, that is a finding in itself, and it is the same finding a referee will make later.
+That puts weight on the specification. For the check to work, `METHODOLOGY.md` (§6) has to state what a second implementer needs and nothing they should infer: the estimand; the sample, with every exclusion in the order applied; how each variable is constructed; the model, down to the family, the fixed effects, the clustering, and the weights; and which quantity is the result (a coefficient, a marginal effect, an odds ratio, a predicted contrast). If the file can't say these things, that is a finding in itself, and it is the same finding a referee will make later.
 
 The request has three parts, and they go to different sessions. To the first:
 
@@ -1133,13 +1133,13 @@ The R side already exists, so ask its session to write the same estimates to `r-
 
 > Compare `outputs/verification/r-main.csv` with `stata-main.csv`. For every quantity, show both values, the difference, and whether it is within the tolerance in `METHODOLOGY.md` § Verification. Report; do not change either implementation.
 
-The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) will not match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss is not talked into a pass afterward.
+The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) won't match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss isn't talked into a pass afterward.
 
-Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it is not for every intermediate step.
+Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it isn't for every intermediate step.
 
 ## What the agent does
 
-The second implementation is ordinary agent work: read the specification, read the data, write the do-file, run it, read the log, fix what failed, write the estimates out. The comparison is a short script that reads two files and prints a table. What makes the exercise different from any other task is only what the agent is *not* allowed to read, and what it is not allowed to do when the numbers disagree.
+The second implementation is ordinary agent work: read the specification, read the data, write the do-file, run it, read the log, fix what failed, write the estimates out. The comparison is a short script that reads two files and prints a table. What makes the exercise different from any other task is only what the agent is *not* allowed to read, and what it isn't allowed to do when the numbers disagree.
 
 The agent also builds the cheaper layer of verification, the one that runs every time rather than once. These are *assertions*: one-line checks written into a script that stop it, loudly, when a stated expectation fails. In R, `stopifnot()`; in Stata, `assert`; in Python, `assert`. Ask for them at the points where analyses go silently wrong.
 
@@ -1162,11 +1162,11 @@ isid birth_id
 assert inrange(bwt_g, 200, 7000) if !missing(bwt_g)
 ```
 
-The expectations come from you (the N in the paper, the plausible range, the levels that must be present); the agent writes and places the checks. Two more belong in every project: a convergence check after each model fit, and a check that the sample size the model used is the sample size the paper reports. Formal unit tests, with a test runner such as `testthat`, are for functions you reuse across scripts; a paper does not need to become a package to be checked.
+The expectations come from you (the N in the paper, the plausible range, the levels that must be present); the agent writes and places the checks. Two more belong in every project: a convergence check after each model fit, and a check that the sample size the model used is the sample size the paper reports. Formal unit tests, with a test runner such as `testthat`, are for functions you reuse across scripts; a paper doesn't need to become a package to be checked.
 
 ## What you check
 
-Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent is not a result; the table is.
+Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent isn't a result; the table is.
 
 Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations mean the same thing: the second implementation was copied from the first rather than written from `METHODOLOGY.md`, and it verifies nothing. For the primary result, put the first implementation out of reach: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
 
@@ -1178,9 +1178,9 @@ Here is what a comparison looks like when it has done its job.
 | + county fixed effects | −0.384721 | −0.384921 | no |
 | + year fixed effects | −0.291553 | −0.291553 | yes |
 
-The second row is what the check was for. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference would not have been found by reading either script.
+The second row is what the check was for. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference wouldn't have been found by reading either script.
 
-That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer does not rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is none of them is the bug you were looking for.
+That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer doesn't rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is none of them is the bug you were looking for.
 
 Agreement rules out implementation error, not specification error. If `METHODOLOGY.md` describes the wrong model, both implementations follow it faithfully and agree on the wrong answer. The check on the specification is a different one: simulate data from the model with known parameters and confirm the analysis recovers them (§12). Run both, and the two checks cover different failures.
 
@@ -1188,13 +1188,13 @@ Agreement rules out implementation error, not specification error. If `METHODOLO
 
 *The port.* Asked for a second implementation, the agent translates the first one, because it is right there in the folder. The result agrees perfectly and proves nothing. Tell it what not to read, check what it read, or use the separate folder.
 
-*Agreement by adjustment.* Seeing a mismatch, the agent changes options in the second implementation until the numbers match the first. That destroys the check while producing a clean table. The instruction is *report, do not reconcile*; reconciling is your decision, made in the open.
+*Agreement by adjustment.* Seeing a mismatch, the agent changes options in the second implementation until the numbers match the first. That destroys the check while producing a clean table. The instruction is *report, don't reconcile*; reconciling is your decision, made in the open.
 
 *The tolerance moves.* A near miss becomes "close enough" after the fact. Set the tolerance before the comparison and write it in `METHODOLOGY.md`.
 
 *Same name, different quantity.* The two files both have a column called `effect`, and one holds a coefficient while the other holds a marginal effect, or one a log-odds and the other an odds ratio, or one a conventional standard error and the other a clustered one. Compare the quantity the specification names, and make each file say which it holds.
 
-*The samples differ.* The most common discrepancy is not in the model but in who is in it: a filter applied in one implementation and not the other, missing values dropped by default in one routine and kept in another. The first number to compare is the N, before any coefficient.
+*The samples differ.* The most common discrepancy isn't in the model but in who is in it: a filter applied in one implementation and not the other, missing values dropped by default in one routine and kept in another. The first number to compare is the N, before any coefficient.
 
 *Verifying everything.* Doubling the cost of every intermediate step is how the practice gets abandoned. Verify the claims.
 
@@ -1213,11 +1213,11 @@ The paper is the artifact the agent should touch least and can help with most. I
 
 ## What to ask for
 
-*Drafts from the files.* The methods section from `METHODOLOGY.md` and the scripts: the estimand and the model as fitted, equation first and then the prose that explains it, with every choice the file records and none it does not. The results from `outputs/tables/`: every number read from the file and placed, never typed from memory, and a bracketed gap wherever the file has no number for a sentence. A first pass at the discussion only from the results and a list of limitations you write yourself. The instruction that makes this work is one line, and it goes in every request:
+*Drafts from the files.* The methods section from `METHODOLOGY.md` and the scripts: the estimand and the model as fitted, equation first and then the prose that explains it, with every choice the file records and none it doesn't. The results from `outputs/tables/`: every number read from the file and placed, never typed from memory, and a bracketed gap wherever the file has no number for a sentence. A first pass at the discussion only from the results and a list of limitations you write yourself. The instruction that makes this work is one line, and it goes in every request:
 
 > Use only what is in `METHODOLOGY.md`, `outputs/tables/`, and the figure captions. Where a claim, a number, or a reference is not in those files, leave a bracketed gap and list it at the end. Do not fill it from what you know.
 
-*The voice.* The rules that transfer from a conventions file to a manuscript are short (§6, Appendix A). Short sentences; the point first, then the qualification; concrete over abstract, with the number, the file, the date. Sparse emphasis. No throat-clearing ("it is worth noting that"), no conspicuous vocabulary, no three-part lists in every paragraph. Methods equation-first. Results in the past tense, interpretation in the present, and no drifting between them. Limitations stated before a reviewer states them. A paragraph that reads as the agent's rather than yours has usually broken one of these, and the fix is to name the rule in the global file so the next draft does not.
+*The voice.* The rules that transfer from a conventions file to a manuscript are short (§6, Appendix A). Short sentences; the point first, then the qualification; concrete over abstract, with the number, the file, the date. Sparse emphasis. No throat-clearing ("it is worth noting that"), no conspicuous vocabulary, no three-part lists in every paragraph. Methods equation-first. Results in the past tense, interpretation in the present, and no drifting between them. Limitations stated before a reviewer states them. A paragraph that reads as the agent's rather than yours has usually broken one of these, and the fix is to name the rule in the global file so the next draft doesn't.
 
 *The Word round trip.* Coauthors work in Word, with tracked changes, and no amount of markdown enthusiasm changes that. The pipeline that respects both sides: you write in markdown (or Quarto), and pandoc produces the `.docx`, with a reference document that carries the journal's styles. The coauthor edits and returns a `.docx`. Then pandoc reads it back, either showing the tracked changes or accepting them, and the agent produces the diff against your markdown and a list of the substantive edits, separated from the typographic ones. Each round trip is a dated pair in `manuscript/` (§7). Figures are PDFs from the build (§15), placed by Word; they are never redrawn in Word.
 
@@ -1225,37 +1225,37 @@ The paper is the artifact the agent should touch least and can help with most. I
 
 > Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
 
-*Talks.* A deck is not the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. A deck built this way comes out of the same markdown and the same build as the paper, which is the point: the claim on the slide and the number in the table have one source.
+*Talks.* A deck isn't the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. A deck built this way comes out of the same markdown and the same build as the paper, which is the point: the claim on the slide and the number in the table have one source.
 
 ## What the agent does
 
-Reads the files and writes markdown; places numbers by reading the tables; runs the conversions (`pandoc paper.md -o paper.docx` with the reference document; the reverse with tracked changes accepted or shown); diffs the returned draft against yours and sorts the edits; drafts the responses from your notes; builds the outline and then the deck. The conversion steps are mechanical and reliable. The drafting is where the one-line instruction above does its work: an agent told to use only the files will leave gaps, and the gaps are the list of what you have not yet decided or measured.
+Reads the files and writes markdown; places numbers by reading the tables; runs the conversions (`pandoc paper.md -o paper.docx` with the reference document; the reverse with tracked changes accepted or shown); diffs the returned draft against yours and sorts the edits; drafts the responses from your notes; builds the outline and then the deck. The conversion steps are mechanical and reliable. The drafting is where the one-line instruction above does its work: an agent told to use only the files will leave gaps, and the gaps are the list of what you haven't yet decided or measured.
 
 ## What you check
 
-Every number, against the file it came from. Ask for the check as a table (number, file, row, column) and read it; a number the agent cannot trace is a number it typed.
+Every number, against the file it came from. Ask for the check as a table (number, file, row, column) and read it; a number the agent can't trace is a number it typed.
 
-Every reference, opened. The invented citation is the failure specific to this stage, and the rule from §10 holds for every sentence the agent wrote: if a reference was not in your files, it is not in the paper until you have opened it.
+Every reference, opened. The invented citation is the failure specific to this stage, and the rule from §10 holds for every sentence the agent wrote: if a reference wasn't in your files, it isn't in the paper until you have opened it.
 
 The methods against the scripts. The section must describe the model as fitted, defaults included (§12), not the model as intended; the agent can produce the cross-check by reading the script beside the paragraph.
 
-The voice, by reading a paragraph aloud. If it is not how you write, it is not done.
+The voice, by reading a paragraph aloud. If it isn't how you write, it isn't done.
 
 The disclosure, below, and its placement, which differs by journal.
 
 ### Disclosure
 
-Every journal that matters to this readership now asks the same three things in different places: that AI-assisted tools are not authors, that their use is disclosed with enough detail to be understood, and that the authors take responsibility for everything the tools produced. The differences are where the statement goes and what it must contain. As of August 2026:
+Every journal that matters to this readership now asks the same three things in different places: that AI-assisted tools aren't authors, that their use is disclosed with enough detail to be understood, and that the authors take responsibility for everything the tools produced. The differences are where the statement goes and what it must contain. As of August 2026:
 
 | Body | What it asks | Where it goes |
 |:--|:--|:--|
-| ICMJE (recommendations updated January 2026) | Disclose at submission whether AI-assisted technologies were used and how. AI is not an author. Authors are responsible for accuracy and for the absence of plagiarism, including in AI-produced text and images. | The cover letter and the submitted work: the acknowledgments for writing assistance; the methods for data collection, analysis, or figures. |
-| Nature Portfolio (the Springer Nature risk framework) | Use is governed by risk, not by tool. Language polishing, formatting, translation, and data cleaning are permitted; uses that shape interpretation (suggesting analyses, drafting summaries, extensive writing support) are permitted with human oversight and disclosure; presenting AI reasoning as your own, fabricated data or citations, AI authorship, delegating peer review, and photorealistic AI images are not permitted. Reviewers may not put manuscripts into public AI tools. | Authors disclose AI use; the framework fixes no single location, so follow the journal's instructions. |
+| ICMJE (recommendations updated January 2026) | Disclose at submission whether AI-assisted technologies were used and how. AI isn't an author. Authors are responsible for accuracy and for the absence of plagiarism, including in AI-produced text and images. | The cover letter and the submitted work: the acknowledgments for writing assistance; the methods for data collection, analysis, or figures. |
+| Nature Portfolio (the Springer Nature risk framework) | Use is governed by risk, not by tool. Language polishing, formatting, translation, and data cleaning are permitted; uses that shape interpretation (suggesting analyses, drafting summaries, extensive writing support) are permitted with human oversight and disclosure; presenting AI reasoning as your own, fabricated data or citations, AI authorship, delegating peer review, and photorealistic AI images aren't permitted. Reviewers may not put manuscripts into public AI tools. | Authors disclose AI use; the framework fixes no single location, so follow the journal's instructions. |
 | Elsevier journals | Permitted to improve language and readability and for some organizing tasks, with author oversight. AI-generated primary research images prohibited. No AI authors. Reviewers may not upload manuscripts. | A separate declaration section before the references, naming the tool and the purpose, which appears in the published article. |
 | JAMA Network (guidance of August 2026) | Report the platform, version, manufacturer, dates of use, what it did, and on which portions; confirm responsibility. Barred outright: peer review, opinion pieces, clinical images. | The acknowledgment; the methods when the tool is part of the research design. |
-| Science journals | AI as a component of the research or an aid to writing is permitted with disclosure. No AI authors, and no AI-authored sources in the reference list. AI-generated images and multimedia are not permitted without the editors' explicit permission. Reviewers may not enter any part of a manuscript into an AI tool. Accountable for accuracy, citation, and plagiarism. | The cover letter, and the methods or acknowledgments; the AAAS guidelines for AI use say which for each use. |
+| Science journals | AI as a component of the research or an aid to writing is permitted with disclosure. No AI authors, and no AI-authored sources in the reference list. AI-generated images and multimedia aren't permitted without the editors' explicit permission. Reviewers may not enter any part of a manuscript into an AI tool. Accountable for accuracy, citation, and plagiarism. | The cover letter, and the methods or acknowledgments; the AAAS guidelines for AI use say which for each use. |
 | PLOS | Report the tools, how they were used and evaluated, and which parts of the study or article were affected. Not authors. The hypotheses, interpretations, and conclusions are the authors' own. | A dedicated section of the methods; the acknowledgments where there is no methods section. |
-| NIH, applications (NOT-OD-25-132, effective 25 September 2025) | Applications substantially developed by AI are not the applicant's original ideas. Limited assistive use may be appropriate. Six applications per investigator per year. | No disclosure field; detection and post-award enforcement. |
+| NIH, applications (NOT-OD-25-132, effective 25 September 2025) | Applications substantially developed by AI aren't the applicant's original ideas. Limited assistive use may be appropriate. Six applications per investigator per year. | No disclosure field; detection and post-award enforcement. |
 | NIH, peer review (NOT-OD-23-149, June 2023) | Reviewers may not use generative AI to analyze or critique applications, and may not upload any part of one. | Not applicable: a prohibition. |
 
 Most policies were written for text and images and say little about code; treat code assistance as a "component of the research" and disclose it in the methods, with the verification that stands behind it, which is a stronger statement than most authors can make. And a generic sentence ("AI tools were used in preparing this manuscript") satisfies none of them. The statement names the tool and version, the vendor, the period, what it did and to which parts, and who checked it. For the paper of §6:
@@ -1291,11 +1291,11 @@ COVERS: It has to run without the agent. One-command build. Lockfiles (renv, uv;
 VERIFY: `require` (Correia and Seay, Stata Journal 24(4), 2024; `require setup` writes exact versions by default) checked 2026-08-27. Zenodo's 30-day self-deletion window per TEMPLATES.md; re-check the repository policies at release. renv and uv command names as of 2026.
 -->
 
-The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, is not reproducible. What you have is a record of a conversation, and nobody else can re-run a conversation. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
+The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, isn't reproducible. What you have is a record of a conversation, and nobody else can re-run a conversation. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
 
 ## What to ask for
 
-*One command.* Everything the paper reports is produced by a script, and one command runs the scripts in order and stops at the first failure: `just build`, or the `run-all.R` that does the same without an extra tool (Appendix A.4). Ask for it early, when the project has two scripts, so that it grows with the project rather than being reconstructed at submission. The build file is a contract, and the one file the agent should not edit freely: it may propose changes, and you review each one, because a change to the build changes what "reproduced" means.
+*One command.* Everything the paper reports is produced by a script, and one command runs the scripts in order and stops at the first failure: `just build`, or the `run-all.R` that does the same without an extra tool (Appendix A.4). Ask for it early, when the project has two scripts, so that it grows with the project rather than being reconstructed at submission. The build file is a contract, and the one file the agent shouldn't edit freely: it may propose changes, and you review each one, because a change to the build changes what "reproduced" means.
 
 *A lockfile.* The scripts need the packages they were written against, at the versions they were written against. In R, `renv` does this: `renv::init()` once at the start of a project, `renv::snapshot()` whenever a package is added, and a committed `renv.lock` from which `renv::restore()` rebuilds the library on any machine. In Python, `uv` does the same with `pyproject.toml` and `uv.lock`, restored by `uv sync`. Stata has no lockfile, and two habits stand in: a `version` line at the top of every do-file, which pins Stata's own behavior, and Correia and Seay's `require`, which pins the community packages (`require reghdfe==6.12.3`), with `require setup` writing the list for you.[^require] Ask the agent to add the lockfile the first time it installs a package, and never to install one without recording it: that line is in the global file (§6) for this reason.
 
@@ -1305,29 +1305,29 @@ The agent helped build the analysis; the analysis has to run without it. A pipel
 
 > Clone this repository into a temporary folder, restore the environment from the lockfile, and run the build there. Report every step's outcome. Then compare every file in `outputs/tables/` and `outputs/figures/` with the committed version and list any that differ. Do not fix anything; report.
 
-*The deposit.* When the paper is accepted, or before, the code and what data may be shared go to a repository that gives them a persistent identifier: OSF, Dataverse, Zenodo, or openICPSR, whichever your field and journal expect. What goes, assembled first as a snapshot folder (`outputs/archive/deposit-v1/`) that is exactly what will be uploaded: the scripts, the build file, the lockfile, a README with the run order and the software versions, a data README documenting every column the code reads, and the processed data if the agreement allows it. What does not go, ever, and has never been in the repository's history: restricted data (§16). Between the decision and the upload sits the audit below.
+*The deposit.* When the paper is accepted, or before, the code and what data may be shared go to a repository that gives them a persistent identifier: OSF, Dataverse, Zenodo, or openICPSR, whichever your field and journal expect. What goes, assembled first as a snapshot folder (`outputs/archive/deposit-v1/`) that is exactly what will be uploaded: the scripts, the build file, the lockfile, a README with the run order and the software versions, a data README documenting every column the code reads, and the processed data if the agreement allows it. What doesn't go, ever, and has never been in the repository's history: restricted data (§16). Between the decision and the upload sits the audit below.
 
 ## What the agent does
 
-Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two cannot disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
+Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two can't disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
 
 For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The quickstart (§8) has the recipes; the one command above is enough for most papers.
 
 ## What you check
 
-The fresh-clone run, yourself, once. Not the agent's report of it: the run. On a second account, a colleague's machine, or a clean directory, restore and build, and compare. If it works there, it will work for the reviewer; if it works only in your folder, something in your folder is doing work the repository does not know about.
+The fresh-clone run, yourself, once. Not the agent's report of it: the run. On a second account, a colleague's machine, or a clean directory, restore and build, and compare. If it works there, it will work for the reviewer; if it works only in your folder, something in your folder is doing work the repository doesn't know about.
 
 That every package the code loads is in the lockfile. The agent can list the difference between what the scripts load and what the lockfile pins; the list should be empty.
 
-That the README's run order names every script the build runs and no script that does not exist, and that the software versions it states are the ones in the lockfile.
+That the README's run order names every script the build runs and no script that doesn't exist, and that the software versions it states are the ones in the lockfile.
 
-That the pipeline is the audit trail. Anything the paper reports that was produced in a chat, by hand, or by a step nobody scripted is not reproducible, however correct. When a session ends, the pipeline you can rerun is the evidence of what the work does; the transcript is not.
+That the pipeline is the audit trail. Anything the paper reports that was produced in a chat, by hand, or by a step nobody scripted isn't reproducible, however correct. When a session ends, the pipeline you can rerun is the evidence of what the work does; the transcript isn't.
 
 For the deposit, the audit, in two halves.
 
-*Contamination: what must not be in a public snapshot.* Absolute paths and home-directory names. Any reference to an AI assistant or agent, in files, in `.gitignore`, in empty directories, and in commit messages, which are not files and are the place such references survive. Other people's unpublished words: reviewer comments quoted, reviewer names. Internal codenames, including the ones printed at run time by `cat()` or `display`. Development history in comments ("fixed on", "used to"). Worklists: TODOs, placeholders, "still outstanding". And restricted data, anywhere in the history: `git log --all --diff-filter=A --name-only` lists every file ever added, and the largest objects in the history are worth listing too.
+*Contamination: what must not be in a public snapshot.* Absolute paths and home-directory names. Any reference to an AI assistant or agent, in files, in `.gitignore`, in empty directories, and in commit messages, which aren't files and are the place such references survive. Other people's unpublished words: reviewer comments quoted, reviewer names. Internal codenames, including the ones printed at run time by `cat()` or `display`. Development history in comments ("fixed on", "used to"). Worklists: TODOs, placeholders, "still outstanding". And restricted data, anywhere in the history: `git log --all --diff-filter=A --name-only` lists every file ever added, and the largest objects in the history are worth listing too.
 
-*Correctness: an archive can be tidy and wrong.* Every documented claim matches the code: the model form, the adjustment set, the outputs, the units. Every filename mentioned resolves to a file that exists or that the build produces. The data README documents every column the code reads. The author list on the record matches the manuscript's byline exactly, same people, same order; a DOI'd record that omits a coauthor is not fixable afterward.
+*Correctness: an archive can be tidy and wrong.* Every documented claim matches the code: the model form, the adjustment set, the outputs, the units. Every filename mentioned resolves to a file that exists or that the build produces. The data README documents every column the code reads. The author list on the record matches the manuscript's byline exactly, same people, same order; a DOI'd record that omits a coauthor isn't fixable afterward.
 
 The rule the audit turns on: *read, do not search.* A pattern search finds only what you already thought of, returns clean, and you believe it. Have the agent extract every comment line in every tracked file and read them in batches, then read the rest against the code. Use a search to verify a fix, never to find the problem. And when a comment carries a reference that has to go, rewrite it rather than delete it: the reasoning in it is usually why the code looks the way it does, which is worth more to a replicator than the reference was. Never add a line to the public README saying the repository was cleaned; it tells a reader what to hunt for.
 
@@ -1335,9 +1335,9 @@ The rule the audit turns on: *read, do not search.* A pattern search finds only 
 
 *It works on my machine.* An absolute path, a `setwd()`, a package installed but never snapshotted, a file the scripts read from a folder git ignores. Each passes in your folder and fails in the clone. The fresh-clone test exists for these, and it is the only test that finds them.
 
-*The build passes and the numbers differ.* A seed that was never set, so a bootstrap or a fit gives a different answer each run. A data file refreshed since the table was made. A figure that was edited by hand after the script drew it. The comparison step of the acceptance check is what catches this; a build that merely exits clean does not.
+*The build passes and the numbers differ.* A seed that was never set, so a bootstrap or a fit gives a different answer each run. A data file refreshed since the table was made. A figure that was edited by hand after the script drew it. The comparison step of the acceptance check is what catches this; a build that merely exits clean doesn't.
 
-*The transcript problem.* A step that was done in the chat (a recode the agent applied once, a filter agreed in conversation) and never written into a script. It is in the results and nowhere in the repository. Everything the paper reports comes from the build, or it is not in the paper.
+*The transcript problem.* A step that was done in the chat (a recode the agent applied once, a filter agreed in conversation) and never written into a script. It is in the results and nowhere in the repository. Everything the paper reports comes from the build, or it isn't in the paper.
 
 *Restricted data in the history.* Removed from the folder months ago, still in a commit from the first week. The history check above finds it; fixing it means rewriting history before anything is public, which is why the audit runs before the first tag.
 
@@ -1358,15 +1358,15 @@ COVERS: IRB, DUA, BAA. Harvard data security levels (sidebar). What may reach a 
 VERIFY: checked 2026-08-27. Anthropic: Free/Pro/Max, "including when they use Claude Code", train unless the setting is off (retention 5 years on, 30 days off); Work/Education/API/Bedrock/Vertex excluded (anthropic.com/news/updates-to-our-consumer-terms). OpenAI: ChatGPT data controls apply to Codex; Business/Enterprise/Edu/API excluded by default (help.openai.com "Using Codex with your ChatGPT plan"; the help center blocked direct fetch, so this is via search summary; re-fetch at release). Codex local models: `codex --oss` via Ollama, gpt-oss:20b at ~16 GB. Harvard: HUIT Bedrock API and AI Sandbox approved to Level 3; HMS guidance maps L1 public tools / L3 Sandbox, Claude, ChatGPT Edu, Copilot / L4 special-request / L5 none, and says a DUA may separately restrict AI use (it.hms.harvard.edu generative-AI guidelines; huit.harvard.edu pages blocked direct fetch). Re-verified 2026-08-27 in the browser: privsec.harvard.edu/classify-risk defines Level 4 as Restricted Personal Information (HIPAA-protected health information, identifiable genetic data, government IDs) and contractually restricted data, and Level 3 as sensitive confidential information including most personal data; chatgpt.com/pricing lists training with an opt-out on every consumer tier. Still not fetched directly: the HUIT guidelines and Sandbox pages and the OpenAI help center (the browser extension does not allow those domains); their claims rest on the HMS page and search summaries. Re-check at release; the sidebar carries the date.
 -->
 
-The failure mode for this readership is specific: identifiable population or health data in a consumer chatbot. With an agent, no paste is needed. The agent reads whatever folder it is pointed at, and everything it reads goes to the model. So the question is not whether this is risky but two concrete ones: what do your protocol and agreements permit, and is the vendor covered? This chapter answers them for the case where the sending happens without your hand on the keyboard.
+The failure mode for this readership is specific: identifiable population or health data in a consumer chatbot. With an agent, no paste is needed. The agent reads whatever folder it is pointed at, and everything it reads goes to the model. So the question isn't whether this is risky but two concrete ones: what do your protocol and agreements permit, and is the vendor covered? This chapter answers them for the case where the sending happens without your hand on the keyboard.
 
 ## What "reach a model" means
 
-An agent works by sending the model what it has read. Every file it opens, every command's output, and every error message becomes part of the context that travels to the vendor's servers on each turn (§6). That includes the first rows of a data file it opened "to see the columns", the row that an error message printed, the log a script wrote, and the summary table a session produced. There is no "just the code" once the code prints data. The unit of disclosure is not the file you attached; it is whatever the agent looked at.
+An agent works by sending the model what it has read. Every file it opens, every command's output, and every error message becomes part of the context that travels to the vendor's servers on each turn (§6). That includes the first rows of a data file it opened "to see the columns", the row that an error message printed, the log a script wrote, and the summary table a session produced. There is no "just the code" once the code prints data. The unit of disclosure isn't the file you attached; it is whatever the agent looked at.
 
 Three documents decide what may be looked at, and by whom.
 
-Your *IRB protocol* says where the data are stored, who accesses them, and what happens to them. An AI vendor's servers are a storage location and the vendor is a third party; if the protocol does not name that path, it is not permitted, and the choices are to amend the protocol or not send.
+Your *IRB protocol* says where the data are stored, who accesses them, and what happens to them. An AI vendor's servers are a storage location and the vendor is a third party; if the protocol doesn't name that path, it isn't permitted, and the choices are to amend the protocol or not send.
 
 A *data-use agreement* with the data provider (a natality file from a statistics agency, a state registry, a claims database) usually forbids disclosure to third parties, storage outside named systems, and sometimes any processing by an AI service unless the provider consents. A DUA binds regardless of what your institution has approved: institutional coverage makes a vendor permissible under university policy, and the DUA can still say no.
 
@@ -1395,7 +1395,7 @@ Separate from whether a vendor may *see* your data is whether it may *train* on 
 | ChatGPT Free, Go, Plus, or Pro, including Codex under those plans | Yes, unless turned off | ChatGPT, Settings, Data controls, *Improve the model for everyone* |
 | ChatGPT Business, Enterprise, or Edu; the API | No | None needed |
 
-Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch does not change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
+Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch doesn't change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
 
 ## The rule, and its enforcement
 
@@ -1403,23 +1403,23 @@ The rule goes in the project file, where the agent reads it every session (§6):
 
 > `data/raw/natality/` is restricted. Never read, list, or copy it. Work only from `data/processed/synthetic-natality.parquet`.
 
-A sentence in a file is advice the agent will almost always take, and "almost always" is the wrong standard for a DUA. So the rule is enforced twice more, in ways that do not depend on what the model decides.
+A sentence in a file is advice the agent will almost always take, and "almost always" is the wrong standard for a DUA. So the rule is enforced twice more, in ways that don't depend on what the model decides.
 
-*A deny rule.* Claude Code's permission settings accept a rule that refuses any read of a path (`Read(./data/raw/**)` in the project's `.claude/settings.json`, which is committed so every session on every machine inherits it; §5 shows the file). The agent then cannot open the file even if asked to. Codex's sandbox bounds what the agent may *write* and whether it may reach the network, not what it may read, so for Codex the enforcement is the next one.
+*A deny rule.* Claude Code's permission settings accept a rule that refuses any read of a path (`Read(./data/raw/**)` in the project's `.claude/settings.json`, which is committed so every session on every machine inherits it; §5 shows the file). The agent then can't open the file even if asked to. Codex's sandbox bounds what the agent may *write* and whether it may reach the network, not what it may read, so for Codex the enforcement is the next one.
 
-*Location.* Restricted data lives outside the project folder, in a place the agent is never pointed at: an encrypted disk image you mount only for your own runs, or a folder owned by a different user account. The scripts reach it through a path variable that is set only in your session. The project folder holds the synthetic file. An agent cannot leak what it cannot reach, and this works for both agents and every mode.
+*Location.* Restricted data lives outside the project folder, in a place the agent is never pointed at: an encrypted disk image you mount only for your own runs, or a folder owned by a different user account. The scripts reach it through a path variable that is set only in your session. The project folder holds the synthetic file. An agent can't leak what it can't reach, and this works for both agents and every mode.
 
 Two smaller leaks are worth closing at the same time. Data files never go into git, because a push copies them to a third party; `data/raw/` is in `.gitignore` from the day the project is scaffolded (§7). And an agent with web access can carry a data value into a search query or a bug report without noticing; the rule "never send any file under `data/` to a web search or an external service" is in the §6 brief for that reason.
 
 ## Local models as the fallback
 
-When no covered vendor exists for the data, and the synthetic-data route will not do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. Codex can do this: `codex --oss` runs an open-weight model through Ollama, with the smaller model needing about 16 GB of memory. Claude Code has no local mode. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model does not change: a DUA that restricts processing by AI restricts it on your laptop too. Running the model yourself settles where the data went; it does not settle whether you were allowed to process it that way.
+When no covered vendor exists for the data, and the synthetic-data route won't do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. Codex can do this: `codex --oss` runs an open-weight model through Ollama, with the smaller model needing about 16 GB of memory. Claude Code has no local mode. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model doesn't change: a DUA that restricts processing by AI restricts it on your laptop too. Running the model yourself settles where the data went; it doesn't settle whether you were allowed to process it that way.
 
 > **Harvard.** Harvard classifies data in five levels; identifiable health data is Level 4, and so is contractually restricted data, which covers most DUAs. As of August 2026, HUIT's AI API gateway (pay-as-you-go, billed to a HUIT billing ID; the path Claude Code can use, Appendix D) and the HUIT AI Sandbox are approved for data up to Level 3, and the vendors behind them do not train on inputs. HMS guidance maps the tools by level: public and consumer tools for Level 1 only; the Sandbox, Claude, ChatGPT Edu, and Copilot for Level 3; special-request systems for Level 4; nothing for Level 5. The same guidance notes that a DUA may separately restrict a dataset's use with AI, and to ask the Office of Research Administration before using a restricted dataset. Check the current pages before relying on any of this; the levels are stable, the tool list is not.
 
 ## In order
 
-Classify the data first: the institution's level, then the DUA, then the protocol; the strictest of the three governs. Pick the path that classification allows: a covered gateway for de-identified data, synthetic data for the agent and your own runs on the real file for anything restricted, a local model if neither will do. Write the rule in the project file and enforce it with a deny rule and a location the agent cannot reach. Turn training off on any consumer plan you use, and note the date. Keep data out of git. Then, and only then, let the agent into the folder.
+Classify the data first: the institution's level, then the DUA, then the protocol; the strictest of the three governs. Pick the path that classification allows: a covered gateway for de-identified data, synthetic data for the agent and your own runs on the real file for anything restricted, a local model if neither will do. Write the rule in the project file and enforce it with a deny rule and a location the agent can't reach. Turn training off on any consumer plan you use, and note the date. Keep data out of git. Then, and only then, let the agent into the folder.
 
 # 17. Cost, and the map
 
@@ -1461,17 +1461,17 @@ Which one. The entry plan covers tiers 1 and 2 for most researchers most of the 
 
 On a subscription, cost arrives as an allowance rather than dollars: a rolling five-hour window that starts at your first prompt, plus a weekly cap, shared across everything you do with that vendor (Claude Code and the claude.ai chat draw from one bucket; Codex in the terminal and in the cloud likewise). The quotas change too often to print, but both agents show where you stand: `/usage` in Claude Code, `/status` in Codex. The metered path has no windows; it counts tokens, against a spending limit you set.
 
-What spends the allowance is not the number of requests but their weight. Every turn resends everything the session has read so far, so a long session with many files open costs more per message as it goes; a higher effort level and a larger model cost more per turn (§4); and a model fit that runs inside the agent's session, streaming output, spends the window while it waits. What saves it: one session per task, closed when the task is done; `/compact` when a session runs long; naming files rather than pasting them; a lower effort for mechanical work; and long fits run outside the agent, from a script, with the agent reading the log afterward (§12).
+What spends the allowance isn't the number of requests but their weight. Every turn resends everything the session has read so far, so a long session with many files open costs more per message as it goes; a higher effort level and a larger model cost more per turn (§4); and a model fit that runs inside the agent's session, streaming output, spends the window while it waits. What saves it: one session per task, closed when the task is done; `/compact` when a session runs long; naming files rather than pasting them; a lower effort for mechanical work; and long fits run outside the agent, from a script, with the agent reading the log afterward (§12).
 
 ## When not to bother
 
-Some work is cheaper without an agent, and knowing which is part of the judgment. A question with no project attached belongs in the chat window. A ten-line script you can write faster than describe is faster to write. A task whose result would take as long to check as to do (a one-off table you will read once) gains nothing from delegation, because the checking is the work. Anything touching data you cannot cover and cannot fake (§16) is off the table until you can do one or the other. And a project you are handing off next month does not need tier 3; it needs a README.
+Some work is cheaper without an agent, and knowing which is part of the judgment. A question with no project attached belongs in the chat window. A ten-line script you can write faster than describe is faster to write. A task whose result would take as long to check as to do (a one-off table you will read once) gains nothing from delegation, because the checking is the work. Anything touching data you can't cover and can't fake (§16) is off the table until you can do one or the other. And a project you are handing off next month doesn't need tier 3; it needs a README.
 
 The rule holds: climb only when the payoff justifies the friction. Most researchers reading this should live at tier 2, with tier 3 growing underneath the papers that will be deposited.
 
 ## Where to start
 
-Pick one task you already do badly and would not mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time, and the quickstart is its manual when you want it.
+Pick one task you already do badly and wouldn't mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time, and the quickstart is its manual when you want it.
 
 # 18. Failure modes and habits
 
@@ -1482,17 +1482,17 @@ COVERS: Confident-but-wrong. Context blow-up. Stale memory. The click-fest. Over
 VERIFY: `/compact` exists in both agents and `/context` in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's; no claim is made about Codex memory.
 -->
 
-Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures are not settings. They are the stance of §2, kept up on the days it is inconvenient.
+Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures aren't settings. They are the stance of §2, kept up on the days it is inconvenient.
 
 ## Confident but wrong
 
-The failure that matters is not the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it is not. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs is not code that is right (§2); a rule that fired is not a finding (§12); two numbers that agree are not two independent numbers (§13).
+The failure that matters isn't the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it isn't. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs isn't code that is right (§2); a rule that fired isn't a finding (§12); two numbers that agree aren't two independent numbers (§13).
 
-The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact does not exist, the claim is not yet true. The chapters of Part III are organized around what that artifact is for each stage, and each *What you check* section names the artifacts for its stage.
+The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact doesn't exist, the claim isn't yet true. The chapters of Part III are organized around what that artifact is for each stage, and each *What you check* section names the artifacts for its stage.
 
 ## Context blow-up
 
-An agent's working memory for a session (one conversation, from its start to `/exit`) is finite (§6), and a long session fills it: every file read, every command's output, every diff rides along on each subsequent turn. The symptoms are recognizable once you have seen them. The agent forgets a rule from the brief it followed an hour ago. It repeats work it already did. It contradicts an earlier answer without noticing. It slows, and on a metered plan it starts to cost (§17). Then, near the limit, the session is compacted into a summary, and whatever did not make the summary is gone.
+An agent's working memory for a session (one conversation, from its start to `/exit`) is finite (§6), and a long session fills it: every file read, every command's output, every diff rides along on each subsequent turn. The symptoms are recognizable once you have seen them. The agent forgets a rule from the brief it followed an hour ago. It repeats work it already did. It contradicts an earlier answer without noticing. It slows, and on a metered plan it starts to cost (§17). Then, near the limit, the session is compacted into a summary, and whatever didn't make the summary is gone.
 
 The habits: one session per task, closed when the task is done, with `STATUS.md` and `TASKS.md` as the hand-off to the next (§9). Name files rather than pasting them. When a session has to run long, compact it yourself with `/compact`, while you can still say what the summary should keep, rather than waiting for the automatic one; in Claude Code, `/context` shows what is filling the window (my own habit: glance at it once a session has run long, and compact when usage passes roughly 300,000 tokens). Keep the brief short (§6), because it is loaded every time. And treat a session that has started to forget as finished: restart, and let the files carry the state.
 
@@ -1504,31 +1504,31 @@ The habits: the file wins over the note, always, and a rule you rely on memory t
 
 ## The click-fest
 
-A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you would not fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have.
+A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you wouldn't fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have.
 
-The habits are the posture in §5: the routine allowed, the never denied, and prompts kept only for what you will actually read. The signal that the balance is wrong is your own behavior. Approving the same prompt for the tenth time means that action belongs on the allow list; approving something you would have refused had you read it means it belongs on the deny list. A prompt rate you cannot keep up with is a setting to change, not a discipline to summon.
+The habits are the posture in §5: the routine allowed, the never denied, and prompts kept only for what you will actually read. The signal that the balance is wrong is your own behavior. Approving the same prompt for the tenth time means that action belongs on the allow list; approving something you would have refused had you read it means it belongs on the deny list. A prompt rate you can't keep up with is a setting to change, not a discipline to summon.
 
 ## Over-delegation
 
 The agent will take whatever you hand it, including the parts of the work that were yours. Three hand-offs go wrong.
 
-*Delegating the judgment.* The estimand, the exclusion rule, the prior, the interpretation of a discrepancy between two implementations, the decision about what to do when a calibration fails. Asked, the agent decides, fluently, and the decision looks like analysis. These are yours, and the sign that one has slipped is a number in your table you cannot explain in your own words.
+*Delegating the judgment.* The estimand, the exclusion rule, the prior, the interpretation of a discrepancy between two implementations, the decision about what to do when a calibration fails. Asked, the agent decides, fluently, and the decision looks like analysis. These are yours, and the sign that one has slipped is a number in your table you can't explain in your own words.
 
 *Delegating the checking.* "Check that this is right" returns "it is right." An agent verifying its own work has the same blind spots the work has. The check comes from something else: a simulation with a known truth, a second implementation by a different session, a reference you opened, a build you ran yourself (§12, §13, §15).
 
-*Delegating the boundary.* Letting the agent write its own permission rules, edit the brief that constrains it, or decide which data are restricted. The boundary is set outside the session it binds (§5, §16), or it is not a boundary.
+*Delegating the boundary.* Letting the agent write its own permission rules, edit the brief that constrains it, or decide which data are restricted. The boundary is set outside the session it binds (§5, §16), or it isn't a boundary.
 
 There is a quieter form. Work that happens in the conversation and never reaches a script: a recode applied once, a filter agreed in chat, a table produced from a session and pasted into the manuscript. It is in the paper and nowhere in the repository. The rule from §15 is the cure: everything the paper reports comes from the build.
 
 ## The loop that fixes the wrong thing
 
-Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that will not merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
+Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
 
-The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened rather than satisfied, then the fix has introduced a worse problem than the one it closed. The instruction that prevents most of it is the one from §13, *report, do not reconcile*: a failing check is a finding for you, not a task for the agent.
+The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened rather than satisfied, then the fix has introduced a worse problem than the one it closed. The instruction that prevents most of it is the one from §13, *report, don't reconcile*: a failing check is a finding for you, not a task for the agent.
 
 ## The supervisor stance
 
-Most of this chapter is prevented by the stance §2 set out, held consistently. Describe the outcome and its constraints rather than the steps. Ask for a plan when the shape of the task is not obvious, and edit it before the agent starts. Let it run without narrating each step back to you. When it finishes, check the result against something other than its own account. Keep it inside a boundary you set in advance. Open and close every session with the two rituals of §9. And let nothing into the paper that the build cannot reproduce.
+Most of this chapter is prevented by the stance §2 set out, held consistently. Describe the outcome and its constraints rather than the steps. Ask for a plan when the shape of the task isn't obvious, and edit it before the agent starts. Let it run without narrating each step back to you. When it finishes, check the result against something other than its own account. Keep it inside a boundary you set in advance. Open and close every session with the two rituals of §9. And let nothing into the paper that the build can't reproduce.
 
 An agent is a research assistant with more speed and less judgment than any you have had. Treat it the way you would treat an assistant you have known for a week: clear instructions, real trust for the mechanical work, and your own eyes on everything that carries a claim. The difference is that this one never gets tired of being checked.
 
@@ -1547,7 +1547,7 @@ Five files to copy and edit, and a closing reference (A.6) with the full project
 
 ## A.1 The global file
 
-Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you do not actually hold; a rule you would not enforce on yourself teaches the agent to ignore the others.
+Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
 
 ```
 # How I work
@@ -1645,9 +1645,9 @@ it before the session ends.
 
 ## A.4 A minimal justfile
 
-Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you do not already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
+Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you don't already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer does not add it by default, and the agent can do that for you.
+[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.
@@ -1684,7 +1684,7 @@ for (s in scripts) {
 
 ## A.5 .gitignore
 
-Where it goes: the project root. It says what git does not carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one is not.
+Where it goes: the project root. It says what git doesn't carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one isn't.
 
 ```
 # Data never leaves the machine (§16); processed data is rebuilt by code/
@@ -1714,9 +1714,9 @@ SOURCE: tool-chain map v1.7, "Workspace structure" and "Project shapes and condi
 COVERS: The shape taxonomy; the full paper, data, and publishing layouts with canonical / recommended / optional parts; the five universal meta-files.
 -->
 
-§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape does not need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
+§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape doesn't need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
 
-The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions do not drift.
+The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions don't drift.
 
 *Paper shape* (statistical analysis ending in a manuscript). A representative layout:
 
@@ -1989,7 +1989,7 @@ Prompts that have worked, three to five per stage, each with the line that says 
 
 > Using the terms that appear in the included set, build a second round of queries and run them against the same sources. Report only records that are new after deduplication against what we already have, and screen them on the same criteria. If the round adds nothing that meets them, say so — that is the stopping rule, and I would rather hear it than have you keep going.
 
-*Rule on the borderline set.* When the agent brings back the ones it would not decide:
+*Rule on the borderline set.* When the agent brings back the ones it wouldn't decide:
 
 > For each borderline record, quote the sentence from the fetched abstract that makes it borderline, and name which criterion it sits on the edge of. Do not recommend include or exclude. I will decide, and then you record my reason in the screening log.
 
@@ -2012,7 +2012,7 @@ Every command runs in a *working directory*, the folder the shell is currently i
 
 ## Running things
 
-`Rscript code/model.R` runs an R script and prints what it prints; `stata-mp -b do model.do` runs a do-file in batch mode and writes its log beside it (§13). If the shell answers *command not found*, the program is installed but its folder is not on the `PATH`, the list of folders the shell searches for commands; on Windows, R's installer does not add its folder, and the agent can fix that when asked. Output can be sent to a file instead of the screen: `Rscript code/fit.R > logs/fit.log 2>&1` writes both the normal output and the errors to the log, which is how a long fit (§12) leaves a record the agent can read later. Control-C stops a running program.
+`Rscript code/model.R` runs an R script and prints what it prints; `stata-mp -b do model.do` runs a do-file in batch mode and writes its log beside it (§13). If the shell answers *command not found*, the program is installed but its folder isn't on the `PATH`, the list of folders the shell searches for commands; on Windows, R's installer doesn't add its folder, and the agent can fix that when asked. Output can be sent to a file instead of the screen: `Rscript code/fit.R > logs/fit.log 2>&1` writes both the normal output and the errors to the log, which is how a long fit (§12) leaves a record the agent can read later. Control-C stops a running program.
 
 An *environment variable* is a named value the shell hands to every program it starts, and it is where a key lives (§11): `export CENSUS_API_KEY=...` in the shell for this session, or a line in R's `.Renviron` file so every R session has it; on Windows PowerShell, `$env:CENSUS_API_KEY = "..."`. The agent refers to the variable by name and never needs the value.
 
@@ -2024,7 +2024,7 @@ Six git commands cover this guide. `git status` says what has changed since the 
 
 ## Windows
 
-Both CLIs run on Windows itself. One thing does not: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you do not want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.[^tc-term]
+Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you don't want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.[^tc-term]
 
 [^tc-term]: The quickstart's Appendix B covers the shell in more depth (standard streams, sourcing, subshells, startup files) for readers who go on to the full toolchain.
 
@@ -2042,7 +2042,7 @@ Both CLIs run on Windows itself. One thing does not: Claude Code's sandbox (§5)
 
 *Build.* The one command that produces every output the paper reports from the scripts and the data (§15). *One-command build* means the same.
 
-*Calibration.* Checking what a model says under a known truth before trusting what it says under an unknown one: recovery of known parameters, and the rate at which the decision rule fires when it should and when it should not (§12).
+*Calibration.* Checking what a model says under a known truth before trusting what it says under an unknown one: recovery of known parameters, and the rate at which the decision rule fires when it should and when it shouldn't (§12).
 
 *Commit.* A recorded snapshot of the project's tracked files, with a message; the unit of undo (§5, §9).
 
@@ -2097,13 +2097,13 @@ COVERS: HUIT gateway setup for Claude Code; keeping it from colliding with a per
 VERIFY: checked 2026-08-27. HUIT AI Services offers AWS Bedrock (Anthropic, Meta, Mistral), Azure OpenAI, OpenAI Direct, and Gemini gateways through the Harvard API Portal, pay-as-you-go with a HUIT billing ID or credit-based; the Bedrock API is approved for Level 3. Claude Code's Bedrock variables per its docs (ANTHROPIC_SMALL_FAST_MODEL is deprecated in favor of ANTHROPIC_DEFAULT_HAIKU_MODEL; WebSearch unavailable on Bedrock; sessions start in Manual, Auto in the cycle). Whether Codex can be pointed at HUIT's OpenAI gateways is NOT verified. Model IDs in the example date fastest: take them from the portal's Available Models page.
 -->
 
-What follows is specific to Harvard and dated August 2026; the body of the guide does not depend on it. It answers three questions: how to run Claude Code through the university's gateway rather than a personal plan, how to do that without breaking a personal plan you also have, and what data may go through it.
+What follows is specific to Harvard and dated August 2026; the body of the guide doesn't depend on it. It answers three questions: how to run Claude Code through the university's gateway rather than a personal plan, how to do that without breaking a personal plan you also have, and what data may go through it.
 
 ## What HUIT provides
 
 Harvard University Information Technology runs a set of AI gateways under the name *HUIT AI Services*, reached through the Harvard API Portal with a HarvardKey login. As of this writing there are four: AWS Bedrock, which serves Anthropic's Claude models along with Meta's and Mistral's; Azure OpenAI; OpenAI Direct; and Google Gemini. Access is pay as you go, billed to a HUIT billing ID (a `B` followed by five digits, obtained through the HUIT billing form), or credit-based where a school provides credits. Each gateway issues an API key of its own.
 
-Two facts matter for a researcher. The gateways are covered: the vendors behind them do not train on inputs, and the Bedrock gateway is approved for data up to Harvard's Level 3, which is the coverage §16 requires for de-identified data. And the cost is metered rather than an allowance (§17): a departmental account pays per token, and the HUIT portal shows the spend.
+Two facts matter for a researcher. The gateways are covered: the vendors behind them don't train on inputs, and the Bedrock gateway is approved for data up to Harvard's Level 3, which is the coverage §16 requires for de-identified data. And the cost is metered rather than an allowance (§17): a departmental account pays per token, and the HUIT portal shows the spend.
 
 ## Claude Code through the gateway
 
@@ -2123,21 +2123,21 @@ Claude Code can route through the Bedrock gateway instead of Anthropic's own ser
 }
 ```
 
-Line by line: the first turns on the Bedrock path; the second points it at Harvard's gateway rather than AWS; the third tells Claude Code not to attempt AWS's own authentication, because the gateway authenticates with the key instead; the fourth removes a header the gateway does not accept; the key is yours from the portal; and the two model lines pin which models run, using the exact IDs the portal lists for the gateway, because Claude Code's own defaults name models the gateway may not serve. The values are strings, in quotes, including the ones that look like numbers.
+Line by line: the first turns on the Bedrock path; the second points it at Harvard's gateway rather than AWS; the third tells Claude Code not to attempt AWS's own authentication, because the gateway authenticates with the key instead; the fourth removes a header the gateway doesn't accept; the key is yours from the portal; and the two model lines pin which models run, using the exact IDs the portal lists for the gateway, because Claude Code's own defaults name models the gateway may not serve. The values are strings, in quotes, including the ones that look like numbers.
 
 Where the file goes depends on whether you also have a personal plan.
 
 *No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway.
 
-*A personal plan as well.* Do not put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
+*A personal plan as well.* Don't put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
 
-On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool is not available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because you never logged in: the key in that file is what authenticates you, so deleting it is how you sign out.
+On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool isn't available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because you never logged in: the key in that file is what authenticates you, so deleting it is how you sign out.
 
 ## Codex
 
-HUIT's OpenAI gateways serve the OpenAI models to code through the API. Codex can be configured to use a provider other than OpenAI's own service, but whether it works through HUIT's gateways has not been verified for this guide, which makes no claim that it does. For Codex on institutional terms, the covered paths at Harvard are the ChatGPT Edu and Business plans that some schools provide, which HMS guidance lists as Level 3 tools alongside Claude; ask your school's IT group which you have. A personal ChatGPT plan is a consumer plan for the purposes of §16, whatever school you are in.
+HUIT's OpenAI gateways serve the OpenAI models to code through the API. Codex can be configured to use a provider other than OpenAI's own service, but whether it works through HUIT's gateways hasn't been verified for this guide, which makes no claim that it does. For Codex on institutional terms, the covered paths at Harvard are the ChatGPT Edu and Business plans that some schools provide, which HMS guidance lists as Level 3 tools alongside Claude; ask your school's IT group which you have. A personal ChatGPT plan is a consumer plan for the purposes of §16, whatever school you are in.
 
 ## Data levels
 
-Harvard classifies data in five levels, and the mapping to tools in §16's sidebar is the operative one: public and consumer tools for Level 1 only; the HUIT gateways and the HUIT AI Sandbox for up to Level 3; special-request systems for Level 4, which is where identifiable health data and contractually restricted data sit; nothing for Level 5. The gateway makes de-identified data permissible under university policy. It does not change what a data-use agreement says, and HMS guidance is explicit that a DUA may separately restrict a dataset's use with AI; ask the Office of Research Administration before a restricted dataset goes near any of it. All of this is on the HUIT and school IT pages, which are more current than this appendix; check them.
+Harvard classifies data in five levels, and the mapping to tools in §16's sidebar is the operative one: public and consumer tools for Level 1 only; the HUIT gateways and the HUIT AI Sandbox for up to Level 3; special-request systems for Level 4, which is where identifiable health data and contractually restricted data sit; nothing for Level 5. The gateway makes de-identified data permissible under university policy. It doesn't change what a data-use agreement says, and HMS guidance is explicit that a DUA may separately restrict a dataset's use with AI; ask the Office of Research Administration before a restricted dataset goes near any of it. All of this is on the HUIT and school IT pages, which are more current than this appendix; check them.
 
