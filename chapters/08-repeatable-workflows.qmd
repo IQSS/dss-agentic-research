@@ -8,16 +8,16 @@ title: "8. Repeatable workflows"
 
 <!--
 STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tool-chain §10 "Patterns and extension points worth knowing inside Claude Code" (skills, hooks); ~/.config/agents/skills/ (scaffold, eda, dag, review-plan, review-analysis, targets, pueue); the Claude Code skills and hooks docs and the Codex skills page, fetched 2026-08-27
+SOURCE: tool-chain §10 "Patterns and extension points worth knowing inside Claude Code" (skills, hooks); ~/.config/agents/skills/ (scaffold, eda, dag, review-plan, review-analysis, targets, pueue); the Claude Code skills and hooks docs, fetched 2026-08-27
 COVERS: Skills and slash commands: what to package once you have done a thing three times. Examples from my own set. Hooks in one paragraph.
-VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Codex: .agents/skills/ scanned from the working directory up to the repository root, ~/.agents/skills/ for personal; /skills picker, $name mention, automatic on description; custom prompts deprecated. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop; Codex hooks experimental (v0.114, March 2026, opt-in, not on Windows) per secondary sources only. Re-check at release.
+VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop. Re-check at release. (Codex skills/hooks specifics archived 2026-09-15.)
 -->
 
 Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it is where a piece of your workflow stops being a conversation and becomes a command.
 
 ## What a skill is
 
-A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report` in Claude Code or `$status-report` in Codex, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
+A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report`, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
 
 ```
 ---
@@ -37,13 +37,13 @@ The description is the part to write carefully. It decides when the agent invoke
 
 Both agents follow the same open format for the file, and differ only on where they look for it. Each skill is a folder named for the skill, holding `SKILL.md`, under:
 
-| | Claude Code | Codex |
-|:--|:--|:--|
-| Every project | `~/.claude/skills/` | `~/.agents/skills/` |
-| This project (committed) | `.claude/skills/` | `.agents/skills/` |
-| Run it | `/name`, or automatically | `$name`, `/skills` to browse, or automatically |
+| | Where |
+|:--|:--|
+| Every project | `~/.claude/skills/` |
+| This project (committed) | `.claude/skills/` |
+| Run it | `/name`, or automatically |
 
-The Claude app lists skills under the same slash menu. If you run both agents, one folder can serve both: keep the skill in one location and put a copy, or on a Mac a link, at the other. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+The Claude app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
 
 ## What to package
 
@@ -57,4 +57,4 @@ A skill that fails is a skill you edit, the same way a correction becomes a rule
 
 ## Hooks in one paragraph
 
-A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. In Codex, hooks are an opt-in experiment as of this writing, so the deny rules carry the enforcement there. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
+A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.

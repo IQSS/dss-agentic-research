@@ -10,7 +10,7 @@ title: "6. The files the agent reads"
 STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
 SOURCE: tool-chain §12 "AGENTS.md / CLAUDE.md hierarchy", "Context economy", "Anti-patterns" (hub-and-spoke figure, simplified), §17b "Task planner"; content bank framings/agent-metadata-my-way.md (folded in; module points back here); deck "You write your conventions once", "What goes in them"
 COVERS: Global vs project. AGENTS.md / CLAUDE.md; the ancillary files (writing, coding, modeling); STATUS.md (the current-state snapshot, read first) and TASKS.md (the task record); METHODOLOGY.md and PLAN.md; four files, four roles. What goes where. Context economy. Anti-patterns (the STATUS.md / TASKS.md seam under Duplicated state). Two worked examples: a 26-line global file for a researcher, and a project brief for a paper (full text in Appendix A).
-VERIFY: checked 2026-08-26 against the Claude Code memory docs and the Codex AGENTS.md docs: Claude Code reads CLAUDE.md, not AGENTS.md; `@path` imports load at launch; Windows symlinks need admin rights; ~/.claude/CLAUDE.md is the user file; auto memory on by default under ~/.claude/projects/; 200-line guidance. Codex reads ~/.codex/AGENTS.md then AGENTS.md from the git root down to the cwd, 32 KiB combined default. Both have /init. Re-check at release.
+VERIFY: checked 2026-08-26 against the Claude Code memory docs: Claude Code reads CLAUDE.md, not AGENTS.md; `@path` imports load at launch; Windows symlinks need admin rights; ~/.claude/CLAUDE.md is the user file; auto memory on by default under ~/.claude/projects/; 200-line guidance; has /init. Re-check at release. (Codex file-convention specifics archived 2026-09-15.)
 -->
 
 Anyone who has done this work for years asks the same question: how will it know to do things *my* way? A general model writes generic code and generic prose, and organizes a project the generic way. Your naming, your folder layout, your estimands and priors, your citation style, the journal's conventions: none of that is in the model. The answer is concrete. The agent reads a few plain-text files at the start of every session, and you write them once. This is most of what "setup" means.
@@ -25,15 +25,15 @@ The files are plain markdown in ordinary folders: no settings screen, no vendor 
 
 ## Where the files live
 
-The two agents agree on everything but the filename. Claude Code reads `CLAUDE.md`; Codex reads `AGENTS.md`. Each reads a global file from your home folder (written `~` below; `/Users/you` on a Mac, `C:\Users\you` on Windows) and a project file from the folder you point it at. Each also reads a file in a subfolder, so a rule can apply to `manuscript/` alone.
+Claude Code reads a file named `CLAUDE.md`. It reads a global file from your home folder (written `~` below; `/Users/you` on a Mac, `C:\Users\you` on Windows) and a project file from the folder you point it at. It also reads a file in a subfolder, so a rule can apply to `manuscript/` alone.
 
-| | Claude Code | Codex |
-|:--|:--|:--|
-| Global (how you work) | `~/.claude/CLAUDE.md` | `~/.codex/AGENTS.md` |
-| Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
-| A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
+| | Where |
+|:--|:--|
+| Global (how you work) | `~/.claude/CLAUDE.md` |
+| Project (what this is) | `CLAUDE.md` in the project folder |
+| A subfolder | `CLAUDE.md` there, read when the agent works in it |
 
-These two aren't the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
+`CLAUDE.md` isn't the only such name in the wild. `AGENTS.md` is an emerging cross-vendor standard other agents read directly, and tools have proposed their own over the years — Cursor's `rules.mdc`, GitHub's `copilot-instructions.md`. That is the case for keeping one file as the source of truth and bridging every expected name to it, so the brief ports when you or a coauthor works in a different agent.
 
 Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
 
@@ -41,9 +41,9 @@ Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that
 @AGENTS.md
 ```
 
-Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.
+Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies.
 
-Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it can't know are the rules you would have told a new assistant, and those are what you add.
+Claude Code has an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it can't know are the rules you would have told a new assistant, and those are what you add.
 
 ## What goes in the global file
 
@@ -154,7 +154,7 @@ Five more files do specific jobs. None is required on day one.
 
 ## Context economy
 
-An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that doesn't bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
+An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that doesn't bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines.
 
 The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. The pointers can sit together at the top of the file as a small dispatch index:
 

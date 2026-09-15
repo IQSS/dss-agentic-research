@@ -107,9 +107,6 @@
     { n: "C",  part: "A",   slug: "appendix-c-the-terminal-in-two-pages", title: "The terminal in two pages", ctl: "key",
       r: { hat: "none", eyes: "alert", arms: "hold", coat: "slate", gloves: "mustard", holds: "terminal", scene: null },
       body: "The desktop apps need none of this. If you run the agent in a terminal, you need about this much and no more." },
-    { n: "D",  part: "A",   slug: "appendix-d-institutional-access-at-harvard", title: "Institutional access at Harvard", ctl: "key",
-      r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "crimson", gloves: "cream", holds: "key", scene: null },
-      body: "Specific to Harvard and dated August 2026. How to run through the university's gateway, how to keep a personal plan intact, and what data may go through it." },
   ];
   const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null };
 
@@ -431,9 +428,9 @@
   heading(wr, "JUDGMENT", 101, 26);
   place(wr, [["16", 11, 70], ["17", 103, 66], ["18", 201, 70]]);          // 14 between controls, as on the left
   heading(wr, "APPENDICES", 119, 130);
-  // The keys keep their original 6-unit gap -- they read as one block, which is right for four
-  // appendices -- but the block is centred in the panel now rather than sitting inboard of it.
-  place(wr, [["A", 55, 160], ["B", 101, 160], ["C", 147, 160], ["D", 193, 160]]);
+  // Three keys now (Appendix D removed 2026-09-15). Same 46-unit centre-to-centre gap, the block
+  // re-centred on 124 so it still sits under the heading rather than shifting off to one side.
+  place(wr, [["A", 78, 160], ["B", 124, 160], ["C", 170, 160]]);
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");

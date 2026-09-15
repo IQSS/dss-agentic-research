@@ -10,7 +10,7 @@ title: "5. Boundaries"
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §13 introduction (banded security-layers figure, band 4 relabelled from "containment" to version control since containers are out of scope), §13a "Three tiers of command policy", "Conservative starting posture for new agent users", "The blind-click-fest failure mode", "Two write channels"; §13b sandbox role; §1b (git)
 COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragraph. Version control as the undo button. Why anything that must never happen should not be promptable. The .claude/settings.json deny file that §16 points to.
-VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. Codex: sandbox on by default (workspace-write in a git folder), rules file `~/.codex/rules/default.rules` with `prefix_rule` per the tool-chain map v1.5 (re-check the rules syntax at release; Codex's sandbox on native Windows not verified).
+VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. (Codex rules-file specifics archived 2026-09-15; see docs/archive.)
 -->
 
 Limiting what an agent can do. The question isn't whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others don't.
@@ -57,25 +57,7 @@ Here is that posture as the file §16 points to. It is `.claude/settings.json` i
 }
 ```
 
-The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind.
-
-Codex keeps the same posture in a rules file, `~/.codex/rules/default.rules`, one entry per rule with a justification that travels with it:
-
-```
-prefix_rule(
-    pattern = ["git", "reset", "--hard"],
-    decision = "forbidden",
-    justification = "Never discard a working tree from an agent session.",
-)
-
-prefix_rule(
-    pattern = ["git", "push"],
-    decision = "prompt",
-    justification = "Visible outside the machine; approve each push.",
-)
-```
-
-The decisions are `allow`, `prompt`, and `forbidden`. Codex has no read-deny of this kind; for restricted data on Codex, the enforcement is location (§16).
+The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind. Other agents keep the same posture in their own rules file; the forms differ, the idea doesn't.
 
 ## Why anything that must never happen should not be promptable
 
@@ -87,7 +69,7 @@ The aim is a prompt rate low enough that you read every prompt. Reaching it mean
 
 ## The sandbox in one paragraph
 
-A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. In Codex the sandbox is on by default, in a mode that allows writes inside the project folder and no network until you approve a host (§4). One caveat for both: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
+A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. (Some agents turn a sandbox on by default; the guarantee is the same.) One caveat: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
 
 ## Version control as the undo button
 

@@ -14,13 +14,13 @@ COVERS: The pitch, expanded. Bookkeeping, simulation, verification, plus the wri
 
 An AI chat assistant answers questions. An AI agent works inside your project: it creates files and folders, writes and runs code, reads errors, fixes them, keeps track of tasks and the current project status, all without you copying text back and forth between a chat window and your project files. This guide is about how to make that process work efficiently when the output is an academic paper or talk.
 
-You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more useful than a chat window.
+You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more reliable than a chat window.
 
 ## Where it pays to use an agent
 
 The best places to use an agent are those parts of the research lifecycle that are time-consuming or tedious for you to do yourself.
 
-*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list, and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
+*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
 
 *Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that doesn't fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
@@ -38,7 +38,7 @@ Agents don't know whether your data are sensitive. The agent doesn't know that a
 
 Agents don't know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but with accelerated speed: you can have many agents running tasks around the clock.
+Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but at far greater speed: you can have many agents running tasks around the clock.
 
 ::: {.needspace height="19cm"}
 :::
@@ -51,8 +51,8 @@ Everything in this guide serves one of four principles, and each principle maps 
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and institutional access at Harvard (D).
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), and a description of the terminal (C); institutional access is in §3.
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you wouldn't mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in Appendix D and in short sidebars. The guide makes no tool arguments and gives no install recipes: those live on a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
+A few conventions. This guide assumes **Claude** — the Claude desktop app and Claude Code. Almost everything here transfers to agents from other vendors, which work the same way; where a detail is Claude-specific, the text says so. File conventions stay agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in short sidebars, never in the body, so the guide ports to other institutions. The guide makes no tool arguments and gives no install recipes: those live on a companion website. Terms are defined at first use, and Appendix C ends with a glossary.

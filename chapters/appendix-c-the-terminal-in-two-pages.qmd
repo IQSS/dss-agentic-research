@@ -13,7 +13,7 @@ COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windo
 VERIFY: Claude Code's sandbox needs WSL2 on Windows (checked 2026-08-27); both CLIs otherwise run natively on Windows per the docs consulted for §4 and §5. Re-check native-Windows support at release.
 -->
 
-The desktop apps need none of this. If you run Claude Code or Codex in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
+The desktop app needs none of this. If you run Claude Code in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
 
 ## The terminal and the shell
 
@@ -29,7 +29,7 @@ An *environment variable* is a named value the shell hands to every program it s
 
 ## The agent, and git
 
-Start the agent in the project folder: `cd` there, then `claude` or `codex`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
+Start the agent in the project folder: `cd` there, then `claude`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
 
 Six git commands cover this guide. `git status` says what has changed since the last commit. `git diff` shows the changes. `git add -A` followed by `git commit -m "message"` records them as one commit (§9). `git log --oneline` lists the commits. `git restore code/model.R` puts one file back to its last committed state, the undo of §5. And `git clone <address> folder` copies a repository from GitHub into a new folder, which is the first step of the fresh-clone check in §15. The rest of git the agent can drive, with you reading the prompts.
 

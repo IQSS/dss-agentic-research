@@ -7,49 +7,39 @@ title: "3. Where to run it"
 # 3. Where to run it
 
 <!--
-STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: quickstart §4 (Claude Code, Codex), §5 (IDE-side agents; subscription vs API); tools/harvard-ai-setup; tool-chain §13a auth-path table; the Claude Code setup and desktop-app docs and the Codex docs, fetched 2026-08-27
-COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension), Codex app and CLI. Which for whom. What must be installed (git; the R / Python / Stata you already have). Personal subscription vs institutional gateway, and what each implies for data. Harvard sidebar pointing to Appendix D.
-VERIFY: checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires Pro, Max, Team, or Enterprise; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code and scoped by platform, not by surface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, which every surface shares. An earlier draft of the table filed it as a reason to use the terminal, which it is not. Codex: desktop app for macOS and, since March 2026, Windows; CLI (curl installer, brew, npm) on macOS, Linux, Windows; IDE extension; web; cloud; all sign in with a ChatGPT account. Vendor training defaults per §16 (checked 2026-08-27). Re-check surfaces at release; they change quarterly.
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D)
+SOURCE: quickstart §4-5 (surfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
+COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension, web/cloud). Which for whom. Which account — the institutional plan, not a personal one or an API key, and what each implies for data; Harvard sidebar (Claude Standard/Premium; Gemini and ChatGPT Edu named briefly). What must be installed (git; the R / Python / Stata you already have).
+VERIFY: Claude surfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not surface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across surfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check surfaces and the tool menu at release; they change quarterly.
 -->
 
-Two companies, four surfaces each, and the choice matters less than it looks. The same agent runs in a desktop app, inside your editor, and in a terminal; it reads the same files and obeys the same settings wherever it runs. What differs is what you see while it works and how you sign in, and the second of those decides what data may pass through it.
+The same agent runs in a desktop app, inside your editor, and in a terminal; it reads the same files and obeys the same settings wherever it runs. What differs is what you see while it works and how you sign in, with the latter determining what data may pass through it.
 
 ## The entry points
 
-As of August 2026:
+As of September 2026:
 
-| Surface | Claude | Codex | Who it suits |
-|:--|:--|:--|:--|
-| Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). Pick a folder; changes shown as a diff; mode selector. | The Codex app. Mac, and Windows since March 2026. | Most readers. Start here. |
-| In the editor | The Claude Code extension for VS Code and the editors built on it (Positron, Posit's successor to RStudio; VSCodium); a JetBrains plugin. | The Codex extension for the same editor family. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
-| Terminal | `claude`. Mac, Windows, Linux, and WSL2. | `codex`. Mac, Windows, Linux. | Readers who want scripts, automation, or the full command surface. Appendix C. |
-| Web and cloud | Claude Code on the web; cloud sessions from the app. | Codex cloud, from the ChatGPT site. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
+| Surface | What it is | Who it suits |
+|:--|:--|:--|
+| Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). | Most researchers. Start here. |
+| In the editor | The Claude Code extension for VS Code and Positron. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
+| Terminal | `claude`. Mac, Windows, Linux, and WSL2. | Readers who want the full command-line toolkit. Appendix C. |
+| Web and cloud | Claude Code on the web; cloud sessions from the app. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
 
-The surfaces are one agent: the desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. The sandbox (§5) is one of those shared settings rather than a feature of the terminal; what limits it is the platform, not the surface. It doesn't run on native Windows, so a Windows reader who wants it works inside WSL2, which is a terminal (Appendix C). The desktop apps need no terminal; for a reader who never opens Appendix C, they are the whole of this guide.
+The desktop app is a download from Anthropic and includes the agent; nothing else is needed. The command-line version has a one-line installer (a script from `claude.ai`, run in the terminal, or in PowerShell on Windows) and needs no other runtime installed first; it keeps itself updated. The desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and doesn't rely on installing anything else. Move to the terminal when you want the full command-line toolkit. Use the editor extension if Positron or VS Code is already where you write code.
 
-Which for whom. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and asks for nothing you don't have. Move to the terminal when a workflow becomes a script, or when you want the full command surface. Use the editor extension if Positron or VS Code is already where you write code. RStudio has no extension for either agent; RStudio users run the desktop app beside it, on the same files.
+## Which account
 
-## What must be installed
+The surface is half the picture; the account you sign in with is the other half, and it decides what data may pass through the agent. Use your institution's plan — not a personal one, and not an API key.
 
-Git. On a Mac it arrives with the command-line tools the first time anything asks for it; on Windows, install Git for Windows, which both the Claude app and Claude Code need. Nothing in this guide works without version control (§5), so it comes first.
+Universities license these agents under enterprise and education agreements a personal subscription can't match on the point that matters here: the vendor doesn't train on what you send, and the institution holds the contract that says so. That coverage is what lets confidential data reach the model at all (§16). A personal Pro or Plus account runs on consumer terms — fine for a statistics question or a paragraph to rephrase, not for anything an IRB, DUA, or BAA governs. An API key is a third thing again: it's for building software, carries weaker data assurances, and bills against a code, so it isn't the researcher's route. Getting on the institutional plan is usually one request form and then signing in with your normal university login; ask your school or department's IT group.
 
-Your language, as you already have it: R with RStudio or Positron, Stata, Python. The agent runs them from the command line, so they have to be findable there (Appendix C covers the usual exception, R on Windows).
+> **Harvard (FAS/SEAS), as of September 2026.** FAS licenses **Claude** at no cost to you; a school, department, or PI budget covers it. Request a seat through the FAS/GSAS/SEAS GenAI Tool License Request form, then sign in with HarvardKey. Two tiers: **Standard** — Claude Chat, Code, and Cowork under one license — is where everyone should start; **Premium** adds higher usage limits and Claude's most capable model, for a sustained heavy-use case. Signed in this way, Claude Chat and Code carry Harvard's data coverage (§16), which a personal account doesn't. HUIT is pairing Claude with **Google Gemini** as a second supported agent and winding down **ChatGPT Edu** (legacy, existing accounts only); those are the other institutional options, but this guide's examples use Claude. Other schools license their own set; the HUIT and school IT pages stay current.
 
-The agent. The desktop apps are downloads from the vendors and include the agent; nothing else is needed. The command-line versions have one-line installers (a script from `claude.ai` or `chatgpt.com`, run in the terminal, or in PowerShell on Windows) and need no other runtime installed first; Claude Code's keeps itself updated.
+## What else should be installed
 
-Optionally `just`, the command runner in Appendix A.4 (§15). Nothing else from the fuller toolchain: no dotfile manager, secrets manager, multiplexer, or runtime manager; the quickstart covers those.[^tc-run]
+Your analysis language: R, Stata, Python. The agent runs them from the command line, so they have to be findable there.
 
-[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes.
+Git. Version control for your project files provides a safety net. 
 
-## Signing in, and what it implies for data
-
-There are two ways in, and the choice is made before the first session on any project with restricted data.
-
-*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier doesn't include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans don't train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
-
-*A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key isn't covered by anything.
-
-Two consequences for how you work. Sessions start in a different mode: Auto on a Pro, Max, or Team plan, Manual on an Enterprise plan or a gateway (§4). And the two paths must be kept apart when you have both. A key set as an environment variable "to try it" overrides the plan for every session on the machine, silently, and bills the key. The key belongs in a project-local settings file (Appendix D).
-
-> **Harvard.** HUIT issues gateway keys (Anthropic's via AWS Bedrock, OpenAI's, Google's), billed to a department and approved to Level 3; Appendix D has the settings block. Dated August 2026.
+Optionally `just`, the command runner in Appendix A.4 (§15). 

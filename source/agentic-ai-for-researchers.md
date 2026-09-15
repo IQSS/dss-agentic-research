@@ -33,13 +33,13 @@ COVERS: The pitch, expanded. Bookkeeping, simulation, verification, plus the wri
 
 An AI chat assistant answers questions. An AI agent works inside your project: it creates files and folders, writes and runs code, reads errors, fixes them, keeps track of tasks and the current project status, all without you copying text back and forth between a chat window and your project files. This guide is about how to make that process work efficiently when the output is an academic paper or talk.
 
-You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more useful than a chat window.
+You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more reliable than a chat window.
 
 ## Where it pays to use an agent
 
 The best places to use an agent are those parts of the research lifecycle that are time-consuming or tedious for you to do yourself.
 
-*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list, and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
+*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
 
 *Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that doesn't fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
@@ -57,7 +57,7 @@ Agents don't know whether your data are sensitive. The agent doesn't know that a
 
 Agents don't know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but with accelerated speed: you can have many agents running tasks around the clock.
+Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but at far greater speed: you can have many agents running tasks around the clock.
 
 ::: {.needspace height="19cm"}
 :::
@@ -70,11 +70,11 @@ Everything in this guide serves one of four principles, and each principle maps 
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and institutional access at Harvard (D).
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), and a description of the terminal (C); institutional access is in §3.
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you wouldn't mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in Appendix D and in short sidebars. The guide makes no tool arguments and gives no install recipes: those live on a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
+A few conventions. This guide assumes **Claude** — the Claude desktop app and Claude Code. Almost everything here transfers to agents from other vendors, which work the same way; where a detail is Claude-specific, the text says so. File conventions stay agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in short sidebars, never in the body, so the guide ports to other institutions. The guide makes no tool arguments and gives no install recipes: those live on a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
 
 # 2. What an agent is
 
@@ -84,15 +84,13 @@ SOURCE: content bank concepts/three-paradigms.md (folded in; module points back 
 COVERS: Chat vs agent. The think/act/observe loop and why the agent "sees the real error". Three ways of working: messenger, driver, supervisor.
 -->
 
-A chat assistant and an agent run on the same models. What differs is what the model can see and do. In a chat window it sees what you paste and returns text you carry back by hand. An agent sits inside your project folder: it reads the files that are there, runs the code, reads what the code printed, and edits the files in place. The model didn't change. The room it works in did.
+A chat assistant and an agent run on the same models. The difference is reach: a chat window sees only what you paste into it and hands back text; an agent works inside your project. The model didn't change — its access to your files and your machine did.
 
 ## Chat versus agent
 
-Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so it guesses at column names and types. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you were the one carrying information across the gap: the file to the model, the model's code to the file, the error back to the model. The assistant was never wrong about anything it could see. It couldn't see anything.
+Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so you have to tell it the column names. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you carried information across the gap: the file to the model, the model's code to the file, the error back to the model. The chat assistant may not have been wrong about anything it could see. It just couldn't see the actual file you were working with.
 
-An agent closes that loop itself. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
-
-Four things change when the model can act in your project. It reads your actual files, so it knows the project rather than a pasted fragment of it. It runs your code, so it sees the real error message rather than a guess at one. It edits files directly, so there is no copy-and-paste round trip. And your job changes: from transcriber, carrying text between two windows, to supervisor, deciding what to ask for and checking what came back. The rest of the guide is about doing the last one well.
+An agent closes that gap because it can use *tools* that allow it to read and write files and execute commands on your computer. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
 
 ## The loop: think, act, observe
 
@@ -100,13 +98,11 @@ Earlier AI tools did one of two things. They reasoned without acting, which is h
 
 ![](figures/think-act-observe.svg){#fig-think-act-observe fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
 
-*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
+*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. An agent that can act is more reliable than a chat window: the loop keeps pulling it back to the facts on disk.
 
-Two limits follow from the same mechanism, and they run through every chapter in Part III.
+The loop verifies that something happened, not that it should have. A model that converged with a warning, a regression that answers the wrong research question, a merge that silently dropped a third of the rows: each of these *ran*. The observe step reports success because the script exited cleanly. Nothing in the loop knows the estimand, the design, or the data-use agreement. That knowledge has to come from you, in the files the agent reads (§6) and in the checks you run afterward (§12, §13).
 
-The loop verifies that something happened, not that it should have. A model that converged with a warning, a regression that answers the wrong question, a merge that silently dropped a third of the rows: each of these *ran*. The observe step reports success because the script exited cleanly. Nothing in the loop knows the estimand, the design, or the data-use agreement. That knowledge has to come from you, in the files the agent reads (§6) and in the checks you run afterward (§12, §13).
-
-And the loop can converge on the wrong target. Asked to make a failing script work, an agent will sometimes make the failure go away rather than fix its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the check that was failing. Each step looked like progress in the observe step. This is the most important habit of reading an agent's work: look at *how* it made the error disappear, not just that it did. §18 collects the patterns.
+And the loop can converge on the wrong target. Asked to make a failing script work, an agent will sometimes make the failure go away rather than fix its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the check that was failing. Each step looked like progress in the observe step. This is the most important habit in checking an agent's work: determine *how* it made an error disappear, not just that it did (§18).
 
 ## Three ways of working
 
@@ -115,74 +111,62 @@ The same models are reachable in three places, and the place determines your rol
 | | Chat window | Editor autocomplete | Agent |
 |:--|:--|:--|:--|
 | Where it lives | a browser tab | RStudio, VS Code, Positron | your project folder |
-| Project context | none; you paste | the open file, roughly | reads the whole project |
+| Project context | what you paste | the open files | reads the whole project |
 | Runs your code | no | no | yes |
 | Sees real errors | no | partly | yes |
 | Your role | messenger | driver | supervisor |
 
-The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. Flexible, and the right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it can't catch what wasn't pasted. As a *driver* the model suggests inside your editor and you stay at the wheel, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment.
+The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. The right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it can't catch what wasn't pasted. As a *driver* you stay at the wheel while the model makes suggestions inside your editor, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment. Moving rightward, the agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the focus of this guide.
 
-Moving rightward, the agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the point of this guide, and it is also its risk: the supervisor who stops checking is the failure mode every Part IV chapter comes back to.
-
-The supervisor's job, in one paragraph. Describe the outcome and its constraints, not the steps. When the shape of the task isn't obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it can't be talked around (§5, §16). Everything from here on is one of those five moves in detail.
+The supervisor's job is to describe the outcome and its constraints, not the steps. When the shape of the task isn't obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it can't be talked around (§5, §16). 
 
 # 3. Where to run it
 
 <!--
-STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: quickstart §4 (Claude Code, Codex), §5 (IDE-side agents; subscription vs API); tools/harvard-ai-setup; tool-chain §13a auth-path table; the Claude Code setup and desktop-app docs and the Codex docs, fetched 2026-08-27
-COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension), Codex app and CLI. Which for whom. What must be installed (git; the R / Python / Stata you already have). Personal subscription vs institutional gateway, and what each implies for data. Harvard sidebar pointing to Appendix D.
-VERIFY: checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires Pro, Max, Team, or Enterprise; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code and scoped by platform, not by surface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, which every surface shares. An earlier draft of the table filed it as a reason to use the terminal, which it is not. Codex: desktop app for macOS and, since March 2026, Windows; CLI (curl installer, brew, npm) on macOS, Linux, Windows; IDE extension; web; cloud; all sign in with a ChatGPT account. Vendor training defaults per §16 (checked 2026-08-27). Re-check surfaces at release; they change quarterly.
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D)
+SOURCE: quickstart §4-5 (surfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
+COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension, web/cloud). Which for whom. Which account — the institutional plan, not a personal one or an API key, and what each implies for data; Harvard sidebar (Claude Standard/Premium; Gemini and ChatGPT Edu named briefly). What must be installed (git; the R / Python / Stata you already have).
+VERIFY: Claude surfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not surface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across surfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check surfaces and the tool menu at release; they change quarterly.
 -->
 
-Two companies, four surfaces each, and the choice matters less than it looks. The same agent runs in a desktop app, inside your editor, and in a terminal; it reads the same files and obeys the same settings wherever it runs. What differs is what you see while it works and how you sign in, and the second of those decides what data may pass through it.
+The same agent runs in a desktop app, inside your editor, and in a terminal; it reads the same files and obeys the same settings wherever it runs. What differs is what you see while it works and how you sign in, with the latter determining what data may pass through it.
 
 ## The entry points
 
-As of August 2026:
+As of September 2026:
 
-| Surface | Claude | Codex | Who it suits |
-|:--|:--|:--|:--|
-| Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). Pick a folder; changes shown as a diff; mode selector. | The Codex app. Mac, and Windows since March 2026. | Most readers. Start here. |
-| In the editor | The Claude Code extension for VS Code and the editors built on it (Positron, Posit's successor to RStudio; VSCodium); a JetBrains plugin. | The Codex extension for the same editor family. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
-| Terminal | `claude`. Mac, Windows, Linux, and WSL2. | `codex`. Mac, Windows, Linux. | Readers who want scripts, automation, or the full command surface. Appendix C. |
-| Web and cloud | Claude Code on the web; cloud sessions from the app. | Codex cloud, from the ChatGPT site. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
+| Surface | What it is | Who it suits |
+|:--|:--|:--|
+| Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). | Most researchers. Start here. |
+| In the editor | The Claude Code extension for VS Code and Positron. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
+| Terminal | `claude`. Mac, Windows, Linux, and WSL2. | Readers who want the full command-line toolkit. Appendix C. |
+| Web and cloud | Claude Code on the web; cloud sessions from the app. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
 
-The surfaces are one agent: the desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. The sandbox (§5) is one of those shared settings rather than a feature of the terminal; what limits it is the platform, not the surface. It doesn't run on native Windows, so a Windows reader who wants it works inside WSL2, which is a terminal (Appendix C). The desktop apps need no terminal; for a reader who never opens Appendix C, they are the whole of this guide.
+The desktop app is a download from Anthropic and includes the agent; nothing else is needed. The command-line version has a one-line installer (a script from `claude.ai`, run in the terminal, or in PowerShell on Windows) and needs no other runtime installed first; it keeps itself updated. The desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and doesn't rely on installing anything else. Move to the terminal when you want the full command-line toolkit. Use the editor extension if Positron or VS Code is already where you write code.
 
-Which for whom. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and asks for nothing you don't have. Move to the terminal when a workflow becomes a script, or when you want the full command surface. Use the editor extension if Positron or VS Code is already where you write code. RStudio has no extension for either agent; RStudio users run the desktop app beside it, on the same files.
+## Which account
 
-## What must be installed
+The surface is half the picture; the account you sign in with is the other half, and it decides what data may pass through the agent. Use your institution's plan — not a personal one, and not an API key.
 
-Git. On a Mac it arrives with the command-line tools the first time anything asks for it; on Windows, install Git for Windows, which both the Claude app and Claude Code need. Nothing in this guide works without version control (§5), so it comes first.
+Universities license these agents under enterprise and education agreements a personal subscription can't match on the point that matters here: the vendor doesn't train on what you send, and the institution holds the contract that says so. That coverage is what lets confidential data reach the model at all (§16). A personal Pro or Plus account runs on consumer terms — fine for a statistics question or a paragraph to rephrase, not for anything an IRB, DUA, or BAA governs. An API key is a third thing again: it's for building software, carries weaker data assurances, and bills against a code, so it isn't the researcher's route. Getting on the institutional plan is usually one request form and then signing in with your normal university login; ask your school or department's IT group.
 
-Your language, as you already have it: R with RStudio or Positron, Stata, Python. The agent runs them from the command line, so they have to be findable there (Appendix C covers the usual exception, R on Windows).
+> **Harvard (FAS/SEAS), as of September 2026.** FAS licenses **Claude** at no cost to you; a school, department, or PI budget covers it. Request a seat through the FAS/GSAS/SEAS GenAI Tool License Request form, then sign in with HarvardKey. Two tiers: **Standard** — Claude Chat, Code, and Cowork under one license — is where everyone should start; **Premium** adds higher usage limits and Claude's most capable model, for a sustained heavy-use case. Signed in this way, Claude Chat and Code carry Harvard's data coverage (§16), which a personal account doesn't. HUIT is pairing Claude with **Google Gemini** as a second supported agent and winding down **ChatGPT Edu** (legacy, existing accounts only); those are the other institutional options, but this guide's examples use Claude. Other schools license their own set; the HUIT and school IT pages stay current.
 
-The agent. The desktop apps are downloads from the vendors and include the agent; nothing else is needed. The command-line versions have one-line installers (a script from `claude.ai` or `chatgpt.com`, run in the terminal, or in PowerShell on Windows) and need no other runtime installed first; Claude Code's keeps itself updated.
+## What else should be installed
 
-Optionally `just`, the command runner in Appendix A.4 (§15). Nothing else from the fuller toolchain: no dotfile manager, secrets manager, multiplexer, or runtime manager; the quickstart covers those.[^tc-run]
+Your analysis language: R, Stata, Python. The agent runs them from the command line, so they have to be findable there.
 
-[^tc-run]: The quickstart, §4 and §5, has the install and sign-in recipes.
+Git. Version control for your project files provides a safety net. 
 
-## Signing in, and what it implies for data
-
-There are two ways in, and the choice is made before the first session on any project with restricted data.
-
-*A plan.* You sign in with your Claude or ChatGPT account. Claude Code needs a paid plan (Pro, Max, Team, or Enterprise; the free tier doesn't include it); Codex is included in ChatGPT plans, limited on the free and Go tiers and expanded from Plus up (§17). Cost arrives as an allowance. On a personal plan the vendor may train on what you send unless you turn that off, and no personal plan is covered by a data-use agreement or a business-associate agreement (§16). Team and Enterprise plans don't train, add audit logging and data-residency controls, and may be covered, depending on what your institution signed.
-
-*A key.* An API key (a password-like token a program uses to call the vendor's service), from the vendor's developer console or from an institutional gateway (a service your institution runs in front of the vendor, under its own agreement). Cost is metered, per unit of text. No training, by the vendors' terms. Coverage depends on the arrangement behind the key: an institutional gateway is the path by which de-identified data becomes permissible (§16), and a personal developer key isn't covered by anything.
-
-Two consequences for how you work. Sessions start in a different mode: Auto on a Pro, Max, or Team plan, Manual on an Enterprise plan or a gateway (§4). And the two paths must be kept apart when you have both. A key set as an environment variable "to try it" overrides the plan for every session on the machine, silently, and bills the key. The key belongs in a project-local settings file (Appendix D).
-
-> **Harvard.** HUIT issues gateway keys (Anthropic's via AWS Bedrock, OpenAI's, Google's), billed to a department and approved to Level 3; Appendix D has the settings block. Dated August 2026.
+Optionally `just`, the command runner in Appendix A.4 (§15). 
 
 # 4. Modes
 
 <!--
 STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
 SOURCE: tool-chain §10 "Permission modes", "Plan mode", "Model and effort" (two-gears figure)
-COVERS: Permission modes (default, accept edits, plan, auto) in Claude Code; the /permissions presets in Codex. Plan mode: when, and when not. Model and effort as two gears that turn together with how scripted the task is.
-VERIFY: checked 2026-08-26 against the Claude Code permission-modes and model-config docs and the Codex approvals and slash-command docs. Claude Code: Manual (`default`) / Accept edits / Plan / Auto, Shift+Tab cycle, Auto is the starting mode on Pro, Max, and Team, Manual on Enterprise or an API key; effort low/medium/high/xhigh/max, default high, max session-only; aliases sonnet/opus/fable. Codex: the picker is now `/permissions` (was `/approvals`), presets Read-only / Auto / Full Access; `/plan`; `/model` bundles reasoning effort (minimal to xhigh, model-dependent). The Codex desktop app's mode surface was not verified. Re-check at release; model names date fastest.
+COVERS: Permission modes (Manual, Accept edits, Plan, Auto) in Claude Code. Plan mode: when, and when not. Model and effort as two gears that turn together with how scripted the task is. Other agents have analogous modes (noted once).
+VERIFY: checked 2026-08-26 against the Claude Code permission-modes and model-config docs. Claude Code: Manual (`default`) / Accept edits / Plan / Auto, Shift+Tab cycle, Auto is the starting mode on Pro, Max, and Team, Manual on Enterprise or an institutional gateway; effort low/medium/high/xhigh/max, default high, max session-only; aliases sonnet/opus/fable. Re-check at release; model names date fastest. (Codex mode/effort specifics archived 2026-09-15; see docs/archive.)
 -->
 
 Three settings shape a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. The first two are about oversight. The third is about how hard the model thinks. All three change in the session, in a few keystrokes, and the right setting changes with the task.
@@ -202,32 +186,21 @@ In Claude Code, four modes are in everyday use. You cycle through them with `Shi
 
 Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
 
-In Codex the setting is the `/permissions` picker, which offers three presets. Each bundles two dials: a *sandbox* (an operating-system fence around what a command can touch; §5) and an approval policy (when the agent stops to ask).
-
-| Preset | What runs without asking | Best for |
-|:--|:--|:--|
-| Read-only | Reads. Every edit, command, and network request prompts. | Chatting about the project; planning; your first sessions |
-| Auto | Reads, edits, and commands inside the project folder. Prompts before editing outside it or reaching the network. | Everyday work |
-| Full Access | Everything: no sandbox, no prompts. Marked *not recommended* in the picker. | Nothing on a machine with data on it |
-
-Codex picks its default sandbox from the folder: a folder under git starts in the workspace-write sandbox that Auto uses, a folder without git starts read-only. One more reason every project folder should be under version control (§5).
-
-Behind the picker, each preset bundles the two dials by name: Read-only is the `read-only` sandbox and asks beyond reading; Auto is `workspace-write` with `on-request` approvals; Full Access is `danger-full-access` with approvals set to `never`. And the launch flags behind the blanket modes, shown so you recognize them rather than type them:
+The launch flag behind those two blanket modes, shown so you recognize it rather than type it:
 
 ```
 claude --allow-dangerously-skip-permissions
-codex --dangerously-bypass-approvals-and-sandbox
 ```
 
-Codex's drops the sandbox along with the prompts, which makes it the blunter of the two.
+Other agents organize the same choices under different names — usually a few presets, each pairing how much runs without asking with an operating-system sandbox (§5) — but the reading is the same.
 
-Three things to hold onto across both agents. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the asymmetry: Claude Code hides its blanket bypass behind a launch flag, while Codex offers the equivalent as a preset. Don't pick it. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
+Three things to hold onto. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the blanket-bypass mode sits behind a launch flag and outside the normal cycle on purpose — leave it there; it has no place in an everyday launch. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
 
 My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I don't switch to Auto first and write the plan inside it.
 
 ## Plan mode
 
-For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Both agents build this in. In Claude Code, cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task; in Codex, type `/plan` followed by the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
+For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
 
 The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your `AGENTS.md` and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
 
@@ -235,26 +208,23 @@ Plan mode for: reorganizing a folder into the paper shape (§7); writing the sim
 
 ## Model and effort
 
-Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: both agents let you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
+Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
 
-In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. In Codex, one `/model` picker sets both the model and its reasoning effort, on a scale from `minimal` to `xhigh` depending on the model; `medium` is the usual starting point.
+In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. It can be pinned rather than picked each session: `effortLevel` in the settings file persists a level — any level but `max`, which the file refuses on purpose.
 
-Both can be pinned rather than picked each session: in Claude Code, `effortLevel` in the settings file persists a level (any level but `max`, which the file refuses on purpose); in Codex the same pin is `model_reasoning_effort` in the configuration file, and it can differ by task profile. The two scales nearly line up:
-
-| Effort | Claude Code | Codex |
-|:--|:--|:--|
-| `minimal` | Not offered | The floor: fastest, for trivial mechanical tasks |
-| `low` | High-volume or latency-sensitive work | Quick tasks where speed beats thoroughness |
-| `medium` | Balanced speed, cost, and quality | The default: everyday interactive coding |
-| `high` | The default: complex reasoning, quality over speed | Thorough reasoning on hard problems |
-| `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency doesn't matter |
-| `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
+| Effort | What it's for |
+|:--|:--|
+| `low` | High-volume or latency-sensitive work |
+| `medium` | Balanced speed, cost, and quality |
+| `high` | The default: complex reasoning, quality over speed |
+| `xhigh` | Deepest level that persists in settings |
+| `max` | Session-only ceiling: unconstrained thinking, resets when the session ends |
 
 ![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
 
 Think of them as two gears that turn together with how scripted the task is. A deterministic recipe, such as scaffolding a project whose shape is already written down (§7) or applying a known pattern across scripts, runs well on a smaller model at lower effort: it thinks less and does more, and is faster for it. A job where the agent has to work out its own approach and change course as evidence arrives wants the frontier model and the depth. What links the two gears is a single dimension: how much of the approach is given, and how much the agent has to invent.
 
-For research work the practical rule is simpler than the figure. Latency rarely matters; the real budget is your plan's usage allowance, which higher effort spends faster (§17). I pin both agents high and drop a session down when a task is clearly mechanical, rather than the reverse: a wrong turn on a statistical question costs more than the minutes saved. Two cautions. The names of the models change every few months, so treat the aliases as the stable part. And the top model tier may bill outside your plan's allowance (Claude Code says so in the `/model` picker when it does); check before an overnight run.
+For research work the practical rule is simpler than the figure. Latency rarely matters; the real budget is your plan's usage allowance, which higher effort spends faster (§17). I pin it high and drop a session down when a task is clearly mechanical, rather than the reverse: a wrong turn on a statistical question costs more than the minutes saved. Two cautions. The names of the models change every few months, so treat the aliases as the stable part. And the top model tier may bill outside your plan's allowance (Claude Code says so in the `/model` picker when it does); check before an overnight run.
 
 # 5. Boundaries
 
@@ -262,7 +232,7 @@ For research work the practical rule is simpler than the figure. Latency rarely 
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §13 introduction (banded security-layers figure, band 4 relabelled from "containment" to version control since containers are out of scope), §13a "Three tiers of command policy", "Conservative starting posture for new agent users", "The blind-click-fest failure mode", "Two write channels"; §13b sandbox role; §1b (git)
 COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragraph. Version control as the undo button. Why anything that must never happen should not be promptable. The .claude/settings.json deny file that §16 points to.
-VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. Codex: sandbox on by default (workspace-write in a git folder), rules file `~/.codex/rules/default.rules` with `prefix_rule` per the tool-chain map v1.5 (re-check the rules syntax at release; Codex's sandbox on native Windows not verified).
+VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. (Codex rules-file specifics archived 2026-09-15; see docs/archive.)
 -->
 
 Limiting what an agent can do. The question isn't whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others don't.
@@ -309,25 +279,7 @@ Here is that posture as the file §16 points to. It is `.claude/settings.json` i
 }
 ```
 
-The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind.
-
-Codex keeps the same posture in a rules file, `~/.codex/rules/default.rules`, one entry per rule with a justification that travels with it:
-
-```
-prefix_rule(
-    pattern = ["git", "reset", "--hard"],
-    decision = "forbidden",
-    justification = "Never discard a working tree from an agent session.",
-)
-
-prefix_rule(
-    pattern = ["git", "push"],
-    decision = "prompt",
-    justification = "Visible outside the machine; approve each push.",
-)
-```
-
-The decisions are `allow`, `prompt`, and `forbidden`. Codex has no read-deny of this kind; for restricted data on Codex, the enforcement is location (§16).
+The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind. Other agents keep the same posture in their own rules file; the forms differ, the idea doesn't.
 
 ## Why anything that must never happen should not be promptable
 
@@ -339,7 +291,7 @@ The aim is a prompt rate low enough that you read every prompt. Reaching it mean
 
 ## The sandbox in one paragraph
 
-A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. In Codex the sandbox is on by default, in a mode that allows writes inside the project folder and no network until you approve a host (§4). One caveat for both: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
+A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. (Some agents turn a sandbox on by default; the guarantee is the same.) One caveat: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
 
 ## Version control as the undo button
 
@@ -359,7 +311,7 @@ In order: the project folder under git, committed, and clean before each task. T
 STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
 SOURCE: tool-chain §12 "AGENTS.md / CLAUDE.md hierarchy", "Context economy", "Anti-patterns" (hub-and-spoke figure, simplified), §17b "Task planner"; content bank framings/agent-metadata-my-way.md (folded in; module points back here); deck "You write your conventions once", "What goes in them"
 COVERS: Global vs project. AGENTS.md / CLAUDE.md; the ancillary files (writing, coding, modeling); STATUS.md (the current-state snapshot, read first) and TASKS.md (the task record); METHODOLOGY.md and PLAN.md; four files, four roles. What goes where. Context economy. Anti-patterns (the STATUS.md / TASKS.md seam under Duplicated state). Two worked examples: a 26-line global file for a researcher, and a project brief for a paper (full text in Appendix A).
-VERIFY: checked 2026-08-26 against the Claude Code memory docs and the Codex AGENTS.md docs: Claude Code reads CLAUDE.md, not AGENTS.md; `@path` imports load at launch; Windows symlinks need admin rights; ~/.claude/CLAUDE.md is the user file; auto memory on by default under ~/.claude/projects/; 200-line guidance. Codex reads ~/.codex/AGENTS.md then AGENTS.md from the git root down to the cwd, 32 KiB combined default. Both have /init. Re-check at release.
+VERIFY: checked 2026-08-26 against the Claude Code memory docs: Claude Code reads CLAUDE.md, not AGENTS.md; `@path` imports load at launch; Windows symlinks need admin rights; ~/.claude/CLAUDE.md is the user file; auto memory on by default under ~/.claude/projects/; 200-line guidance; has /init. Re-check at release. (Codex file-convention specifics archived 2026-09-15.)
 -->
 
 Anyone who has done this work for years asks the same question: how will it know to do things *my* way? A general model writes generic code and generic prose, and organizes a project the generic way. Your naming, your folder layout, your estimands and priors, your citation style, the journal's conventions: none of that is in the model. The answer is concrete. The agent reads a few plain-text files at the start of every session, and you write them once. This is most of what "setup" means.
@@ -374,15 +326,15 @@ The files are plain markdown in ordinary folders: no settings screen, no vendor 
 
 ## Where the files live
 
-The two agents agree on everything but the filename. Claude Code reads `CLAUDE.md`; Codex reads `AGENTS.md`. Each reads a global file from your home folder (written `~` below; `/Users/you` on a Mac, `C:\Users\you` on Windows) and a project file from the folder you point it at. Each also reads a file in a subfolder, so a rule can apply to `manuscript/` alone.
+Claude Code reads a file named `CLAUDE.md`. It reads a global file from your home folder (written `~` below; `/Users/you` on a Mac, `C:\Users\you` on Windows) and a project file from the folder you point it at. It also reads a file in a subfolder, so a rule can apply to `manuscript/` alone.
 
-| | Claude Code | Codex |
-|:--|:--|:--|
-| Global (how you work) | `~/.claude/CLAUDE.md` | `~/.codex/AGENTS.md` |
-| Project (what this is) | `CLAUDE.md` in the project folder | `AGENTS.md` in the project folder |
-| A subfolder | `CLAUDE.md` there, read when the agent works in it | `AGENTS.md` there, read when Codex is started in it |
+| | Where |
+|:--|:--|
+| Global (how you work) | `~/.claude/CLAUDE.md` |
+| Project (what this is) | `CLAUDE.md` in the project folder |
+| A subfolder | `CLAUDE.md` there, read when the agent works in it |
 
-These two aren't the only names in the wild: other tools have proposed instruction files of their own over the years, Cursor's `rules.mdc` and GitHub's `copilot-instructions.md` among them. That is the case for keeping one file as the source of truth and bridging every expected name to it.
+`CLAUDE.md` isn't the only such name in the wild. `AGENTS.md` is an emerging cross-vendor standard other agents read directly, and tools have proposed their own over the years — Cursor's `rules.mdc`, GitHub's `copilot-instructions.md`. That is the case for keeping one file as the source of truth and bridging every expected name to it, so the brief ports when you or a coauthor works in a different agent.
 
 Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that imports it:
 
@@ -390,9 +342,9 @@ Keep `AGENTS.md` as the file you edit, and make `CLAUDE.md` a one-line file that
 @AGENTS.md
 ```
 
-Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies. If you run both agents, do the same globally: keep your conventions in `~/.codex/AGENTS.md` and have `~/.claude/CLAUDE.md` contain the single line `@~/.codex/AGENTS.md`.
+Claude Code expands the import when the session starts, as if the text were in `CLAUDE.md` itself, and anything you write below that line is Claude-specific. On a Mac a symlink (`ln -s AGENTS.md CLAUDE.md`, run in the project folder) does the same job; on Windows a symlink needs administrator rights, so use the import. Either way there is one file to maintain and no drift between two copies.
 
-Both agents have an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it can't know are the rules you would have told a new assistant, and those are what you add.
+Claude Code has an `/init` command that drafts a starting project file from what it finds in the folder. The draft describes the folder. What it can't know are the rules you would have told a new assistant, and those are what you add.
 
 ## What goes in the global file
 
@@ -503,7 +455,7 @@ Five more files do specific jobs. None is required on day one.
 
 ## Context economy
 
-An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that doesn't bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines; Codex stops adding instruction files once they total 32 KB.
+An agent's working memory for a session is its *context window*: everything it has read so far, from your files to the output of the last command, which it reasons over and which is finite. Every line loaded that doesn't bear on the task is a line not spent on the task, and a long brief is followed less reliably than a short one, not more. Claude Code's own guidance is to keep a `CLAUDE.md` under 200 lines.
 
 The pattern, then: keep the global file to the rules that apply to everything, link the rest, and let the agent pull in a convention file only when the task needs it. The pointers can sit together at the top of the file as a small dispatch index:
 
@@ -715,16 +667,16 @@ Whichever client you use, one rule covers the rest. Code and text travel by git;
 
 <!--
 STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tool-chain §10 "Patterns and extension points worth knowing inside Claude Code" (skills, hooks); ~/.config/agents/skills/ (scaffold, eda, dag, review-plan, review-analysis, targets, pueue); the Claude Code skills and hooks docs and the Codex skills page, fetched 2026-08-27
+SOURCE: tool-chain §10 "Patterns and extension points worth knowing inside Claude Code" (skills, hooks); ~/.config/agents/skills/ (scaffold, eda, dag, review-plan, review-analysis, targets, pueue); the Claude Code skills and hooks docs, fetched 2026-08-27
 COVERS: Skills and slash commands: what to package once you have done a thing three times. Examples from my own set. Hooks in one paragraph.
-VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Codex: .agents/skills/ scanned from the working directory up to the repository root, ~/.agents/skills/ for personal; /skills picker, $name mention, automatic on description; custom prompts deprecated. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop; Codex hooks experimental (v0.114, March 2026, opt-in, not on Windows) per secondary sources only. Re-check at release.
+VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop. Re-check at release. (Codex skills/hooks specifics archived 2026-09-15.)
 -->
 
 Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it is where a piece of your workflow stops being a conversation and becomes a command.
 
 ## What a skill is
 
-A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report` in Claude Code or `$status-report` in Codex, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
+A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report`, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
 
 ```
 ---
@@ -744,13 +696,13 @@ The description is the part to write carefully. It decides when the agent invoke
 
 Both agents follow the same open format for the file, and differ only on where they look for it. Each skill is a folder named for the skill, holding `SKILL.md`, under:
 
-| | Claude Code | Codex |
-|:--|:--|:--|
-| Every project | `~/.claude/skills/` | `~/.agents/skills/` |
-| This project (committed) | `.claude/skills/` | `.agents/skills/` |
-| Run it | `/name`, or automatically | `$name`, `/skills` to browse, or automatically |
+| | Where |
+|:--|:--|
+| Every project | `~/.claude/skills/` |
+| This project (committed) | `.claude/skills/` |
+| Run it | `/name`, or automatically |
 
-The Claude app lists skills under the same slash menu. If you run both agents, one folder can serve both: keep the skill in one location and put a copy, or on a Mac a link, at the other. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+The Claude app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
 
 ## What to package
 
@@ -764,7 +716,7 @@ A skill that fails is a skill you edit, the same way a correction becomes a rule
 
 ## Hooks in one paragraph
 
-A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. In Codex, hooks are an opt-in experiment as of this writing, so the deny rules carry the enforcement there. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
+A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
 
 <!-- ===================== PART III — THE WORK ===================== -->
 
@@ -774,7 +726,7 @@ A *hook* is a shell command the agent runs at a fixed moment: before a command e
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §17 (TASKS.md; four files, four roles), §12 (STATUS.md read first; the STATUS.md / TASKS.md seam), §15 "Reviewing what the agent changed" (the idea, not the pager tooling), §1b; ~/.config/agents/AGENTS.md § Task Management (session start and end)
 COVERS: Session start and end. STATUS.md then TASKS.md at the start; TASKS.md as the task record, STATUS.md rewritten only when the state moves. README, status, renames, migrations. Reviewing what changed in the app's diff view. Commit habits.
-VERIFY: Codex `/diff` per the Codex slash-command docs (checked 2026-08-26). Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff`. §3 (drafted 2026-08-27) verified the app surfaces.
+VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app surfaces.
 -->
 
 Bookkeeping is where to start with an agent, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand; in between it keeps the folder, the README, and the task list true. Tedious, and harmless when it gets a name wrong. It is also the habit that makes every other chapter's checks possible: you can review what the agent changed only if you know what the folder looked like before.
@@ -803,7 +755,7 @@ You read the diff (below), then commit, or let the agent commit with a prompt (�
 
 Reads `STATUS.md`, `TASKS.md`, and the git log, and summarizes. Writes the task lines and the dates. Rewrites the README sections that describe structure when structure changes. Runs renames with `git mv` and then finds every reference to the old name and updates it, including the ones in the build file and in comments. After a rename or a move, runs the build (§15) to confirm nothing broke, and reports the result rather than assuming it. Drafts the commit message from the diff.
 
-Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit; in Codex, `/diff` does the same and includes files git isn't yet tracking. The desktop apps and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
+Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit. The desktop app and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
 
 ## What you check
 
@@ -1121,7 +1073,7 @@ The failure worth guarding against isn't code that breaks; that you catch. It is
 
 The strongest check you have on whether a result is correct, rather than merely reproducible, is a second implementation in a second language. If you work in Stata, ask for the analysis in R; if in R, ask for Python or Stata. A mistake made while writing the analysis in one language rarely recurs, in the same place, in another: the two implementations fail independently, and that is what makes agreement mean something. Stata works well here. Agents write `.do` files competently, and they can run them without you: Stata's batch mode (`stata-mp -b do model.do` on a Mac, `StataMP-64.exe /e do model.do` on Windows) executes a do-file and writes a log of the same name, which the agent then reads in the observe step (§2).
 
-The language is necessary but not sufficient. What has to be independent is the *reasoning*. If the agent that wrote the R version translates its own code into Stata, the two carry the same misreading of the design and agree on the wrong answer. So the second implementation is written by a different agent, or at least a fresh session, working from the written specification and not from the first implementation's code. Two agents reasoning separately from the same specification keep their errors uncorrelated. Claude Code on one side and Codex on the other is the cleanest version; a fresh session of the same agent, told not to read `code/`, is the next best.
+The language is necessary but not sufficient. What has to be independent is the *reasoning*. If the agent that wrote the R version translates its own code into Stata, the two carry the same misreading of the design and agree on the wrong answer. So the second implementation is written by a different agent, or at least a fresh session, working from the written specification and not from the first implementation's code. Two agents reasoning separately from the same specification keep their errors uncorrelated. Two different agents — Claude and one from another vendor — is the cleanest version; a fresh session of the same agent, told not to read `code/`, is the next best.
 
 That puts weight on the specification. For the check to work, `METHODOLOGY.md` (§6) has to state what a second implementer needs and nothing they should infer: the estimand; the sample, with every exclusion in the order applied; how each variable is constructed; the model, down to the family, the fixed effects, the clustering, and the weights; and which quantity is the result (a coefficient, a marginal effect, an odds ratio, a predicted contrast). If the file can't say these things, that is a finding in itself, and it is the same finding a referee will make later.
 
@@ -1353,9 +1305,9 @@ The rule the audit turns on: *read, do not search.* A pattern search finds only 
 
 <!--
 STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tool-chain §13a "Data permissions" and the auth-path table; deck "Data confidentiality: what you can send, and where"; Harvard specifics new (sidebar pointing to Appendix D)
+SOURCE: tool-chain §13a "Data permissions" and the auth-path table; deck "Data confidentiality: what you can send, and where"; Harvard specifics (sidebar; the account path is §3)
 COVERS: IRB, DUA, BAA. Harvard data security levels (sidebar). What may reach a cloud model: identifiable, never; de-identified, only under coverage. The rule in AGENTS.md and its enforcement in permissions. Local models as the fallback. Vendor training defaults, dated.
-VERIFY: checked 2026-08-27. Anthropic: Free/Pro/Max, "including when they use Claude Code", train unless the setting is off (retention 5 years on, 30 days off); Work/Education/API/Bedrock/Vertex excluded (anthropic.com/news/updates-to-our-consumer-terms). OpenAI: ChatGPT data controls apply to Codex; Business/Enterprise/Edu/API excluded by default (help.openai.com "Using Codex with your ChatGPT plan"; the help center blocked direct fetch, so this is via search summary; re-fetch at release). Codex local models: `codex --oss` via Ollama, gpt-oss:20b at ~16 GB. Harvard: HUIT Bedrock API and AI Sandbox approved to Level 3; HMS guidance maps L1 public tools / L3 Sandbox, Claude, ChatGPT Edu, Copilot / L4 special-request / L5 none, and says a DUA may separately restrict AI use (it.hms.harvard.edu generative-AI guidelines; huit.harvard.edu pages blocked direct fetch). Re-verified 2026-08-27 in the browser: privsec.harvard.edu/classify-risk defines Level 4 as Restricted Personal Information (HIPAA-protected health information, identifiable genetic data, government IDs) and contractually restricted data, and Level 3 as sensitive confidential information including most personal data; chatgpt.com/pricing lists training with an opt-out on every consumer tier. Still not fetched directly: the HUIT guidelines and Sandbox pages and the OpenAI help center (the browser extension does not allow those domains); their claims rest on the HMS page and search summaries. Re-check at release; the sidebar carries the date.
+VERIFY: checked 2026-08-27, Harvard levels re-checked 2026-09-15. Anthropic: Free/Pro/Max, "including when they use Claude Code", train unless the setting is off (retention 5 years on, 30 days off); Work/Education/API/Bedrock/Vertex excluded (anthropic.com/news/updates-to-our-consumer-terms). Harvard levels: privsec.harvard.edu/classify-risk defines Level 4 as Restricted Personal Information (HIPAA-protected health information, identifiable genetic data, government IDs) and contractually restricted data, and Level 3 as sensitive confidential information including most personal data. Tool-by-level and the institutional Claude license: see §3 and the FAS/HUIT menu (compiled 2026-09-04); HMS guidance maps L1 public tools / L3 Sandbox, Claude, Gemini, Copilot, ChatGPT Edu / L4 special-request / L5 none, and says a DUA may separately restrict AI use. Some HUIT/HMS pages block direct fetch; those claims rest on the FAS/HMS documents and search summaries. Re-check at release; the sidebar carries the date. (OpenAI/Codex training and local-model specifics archived 2026-09-15.)
 -->
 
 The failure mode for this readership is specific: identifiable population or health data in a consumer chatbot. With an agent, no paste is needed. The agent reads whatever folder it is pointed at, and everything it reads goes to the model. So the question isn't whether this is risky but two concrete ones: what do your protocol and agreements permit, and is the vendor covered? This chapter answers them for the case where the sending happens without your hand on the keyboard.
@@ -1391,11 +1343,9 @@ Separate from whether a vendor may *see* your data is whether it may *train* on 
 | Sign-in | Used for training by default | The switch |
 |:--|:--|:--|
 | Claude Free, Pro, or Max, including Claude Code under those plans | Yes, unless turned off. Retention five years if on, thirty days if off. | claude.ai, Settings, Privacy |
-| Claude Team or Enterprise; the API; a Bedrock or Vertex gateway | No | None needed |
-| ChatGPT Free, Go, Plus, or Pro, including Codex under those plans | Yes, unless turned off | ChatGPT, Settings, Data controls, *Improve the model for everyone* |
-| ChatGPT Business, Enterprise, or Edu; the API | No | None needed |
+| Claude Team or Enterprise, or an institutional plan | No | None needed |
 
-Both vendors have changed these terms more than once, so treat the table as a snapshot and check the vendor's data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch doesn't change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
+Other vendors' consumer plans follow the same pattern — training on by default, an opt-out in the data-controls settings, and institutional plans excluded. Vendors change these terms more than once, so treat the table as a snapshot and check the data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch doesn't change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
 
 ## The rule, and its enforcement
 
@@ -1405,17 +1355,17 @@ The rule goes in the project file, where the agent reads it every session (§6):
 
 A sentence in a file is advice the agent will almost always take, and "almost always" is the wrong standard for a DUA. So the rule is enforced twice more, in ways that don't depend on what the model decides.
 
-*A deny rule.* Claude Code's permission settings accept a rule that refuses any read of a path (`Read(./data/raw/**)` in the project's `.claude/settings.json`, which is committed so every session on every machine inherits it; §5 shows the file). The agent then can't open the file even if asked to. Codex's sandbox bounds what the agent may *write* and whether it may reach the network, not what it may read, so for Codex the enforcement is the next one.
+*A deny rule.* Claude Code's permission settings accept a rule that refuses any read of a path (`Read(./data/raw/**)` in the project's `.claude/settings.json`, which is committed so every session on every machine inherits it; §5 shows the file). The agent then can't open the file even if asked to. (Not every agent has a read-deny of this kind; where one doesn't, the enforcement is the next one, location.)
 
-*Location.* Restricted data lives outside the project folder, in a place the agent is never pointed at: an encrypted disk image you mount only for your own runs, or a folder owned by a different user account. The scripts reach it through a path variable that is set only in your session. The project folder holds the synthetic file. An agent can't leak what it can't reach, and this works for both agents and every mode.
+*Location.* Restricted data lives outside the project folder, in a place the agent is never pointed at: an encrypted disk image you mount only for your own runs, or a folder owned by a different user account. The scripts reach it through a path variable that is set only in your session. The project folder holds the synthetic file. An agent can't leak what it can't reach, and this works for any agent and every mode.
 
 Two smaller leaks are worth closing at the same time. Data files never go into git, because a push copies them to a third party; `data/raw/` is in `.gitignore` from the day the project is scaffolded (§7). And an agent with web access can carry a data value into a search query or a bug report without noticing; the rule "never send any file under `data/` to a web search or an external service" is in the §6 brief for that reason.
 
 ## Local models as the fallback
 
-When no covered vendor exists for the data, and the synthetic-data route won't do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. Codex can do this: `codex --oss` runs an open-weight model through Ollama, with the smaller model needing about 16 GB of memory. Claude Code has no local mode. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model doesn't change: a DUA that restricts processing by AI restricts it on your laptop too. Running the model yourself settles where the data went; it doesn't settle whether you were allowed to process it that way.
+When no covered vendor exists for the data, and the synthetic-data route won't do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. This means an open-weight model served locally through an agent that supports one; Claude Code doesn't, so it means a different tool for this narrow case. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts. One thing a local model doesn't change: a DUA that restricts processing by AI restricts it on your laptop too. Running the model yourself settles where the data went; it doesn't settle whether you were allowed to process it that way.
 
-> **Harvard.** Harvard classifies data in five levels; identifiable health data is Level 4, and so is contractually restricted data, which covers most DUAs. As of August 2026, HUIT's AI API gateway (pay-as-you-go, billed to a HUIT billing ID; the path Claude Code can use, Appendix D) and the HUIT AI Sandbox are approved for data up to Level 3, and the vendors behind them do not train on inputs. HMS guidance maps the tools by level: public and consumer tools for Level 1 only; the Sandbox, Claude, ChatGPT Edu, and Copilot for Level 3; special-request systems for Level 4; nothing for Level 5. The same guidance notes that a DUA may separately restrict a dataset's use with AI, and to ask the Office of Research Administration before using a restricted dataset. Check the current pages before relying on any of this; the levels are stable, the tool list is not.
+> **Harvard.** Harvard classifies data in five levels; identifiable health data is Level 4, and so is contractually restricted data, which covers most DUAs. As of September 2026, the institutional Claude license (§3) — signed in with HarvardKey — is approved for data up to Level 3, and the vendor doesn't train on inputs; a personal account is Level 1 (public) only. HMS guidance maps the tools by level: public and consumer tools for Level 1 only; Claude, Google Gemini, the HUIT AI Sandbox, Copilot, and ChatGPT Edu for Level 3; special-request systems for Level 4; nothing for Level 5. The same guidance notes that a DUA may separately restrict a dataset's use with AI, and to ask the Office of Research Administration before using a restricted dataset. Check the current pages before relying on any of this; the levels are stable, the tool list is not.
 
 ## In order
 
@@ -1427,7 +1377,7 @@ Classify the data first: the institution's level, then the DUA, then the protoco
 STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: deck "The map, honestly costed", "Where to start"; tool-chain §14 (only the idea of usage windows)
 COVERS: Tiers: chat, editor agent, CLI agent, pipelines. Setup cost and money for each. Usage windows. When not to bother.
-VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). ChatGPT, from chatgpt.com/pricing read in the browser the same day: Free $0 with limited Codex access, Go $8 (limited Codex access), Plus $20 (expanded Codex usage), Pro from $100 at 5x or 20x; Business and Enterprise per seat; consumer tiers list training with an opt-out. Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, `/status` in Codex, per the tool-chain map §14. No wall-clock setup estimates by design (global rule).
+VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, per the tool-chain map §14. No wall-clock setup estimates by design (global rule). (ChatGPT/Codex pricing archived 2026-09-15.)
 -->
 
 Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter prices each tier, so that you climb as far as your work needs and no further.
@@ -1437,29 +1387,28 @@ Four tiers run from the chat window you already use to a pipeline that runs with
 | Tier | What it is | What it takes to set up | What it buys |
 |:--|:--|:--|:--|
 | 0. Chat | A browser tab. Where you already are. | Nothing. | Answers, drafts, explanations. You are the messenger (§2). |
-| 1. Editor agent | Claude Code or Codex inside VS Code or Positron, next to the file you are editing. | Install the extension, sign in, write a first project file (§6). | Edits in place, with the project in view. You are the driver. |
-| 2. Agent in a folder | The same agents in a terminal or the desktop app, pointed at a project folder. | Git, one project in the paper shape (§7), the global and project files (§6), a permission posture (§5). | Whole tasks delegated and checked. You are the supervisor. This guide. |
+| 1. Editor agent | Claude Code inside VS Code or Positron, next to the file you are editing. | Install the extension, sign in, write a first project file (§6). | Edits in place, with the project in view. You are the driver. |
+| 2. Agent in a folder | The same agent in a terminal or the desktop app, pointed at a project folder. | Git, one project in the paper shape (§7), the global and project files (§6), a permission posture (§5). | Whole tasks delegated and checked. You are the supervisor. This guide. |
 | 3. Pipeline | A one-command build with pinned packages that reproduces the paper (§15). | Grows over a project: the build command, the lockfile, assertions (§13). | Runs without the agent. The hand-off and the deposit. |
 
 Tier 1 pays for itself in the first hour. Tier 2 pays for itself in the first week, on bookkeeping alone, and it is where the three tasks in §1 (simulation, verification, literature) become possible. Tier 3 pays for itself on the second paper that reuses the pipeline, and at deposit, when a reviewer or a repository asks for the code to run. Nobody should build tier 3 in a week; it accretes, one build step at a time, and the agent does most of the accreting.
 
 ## Money
 
-The agents come with the chat plans; there is nothing separate to buy. As of August 2026:
+Claude comes with the chat plans; there is nothing separate to buy. As of August 2026:
 
-| | Claude | ChatGPT |
-|:--|:--|:--|
-| Free | Chat only | Chat, and limited Codex access |
-| Entry | Pro, \$20 a month; includes Claude Code | Plus, \$20 a month, with expanded Codex use (Go, \$8, has the limited access of Free) |
-| Heavy use | Max, \$100 or \$200 a month, at five and twenty times the Pro allowance | Pro, \$100 or \$200 a month, at five and twenty times Plus |
-| Institutional | Team, \$25 a seat; Enterprise, per seat plus usage | Business, Enterprise, and Edu, per seat |
-| Metered | The API, per token | The API, per token |
+| Tier | Claude |
+|:--|:--|
+| Free | Chat only |
+| Entry | Pro, \$20 a month; includes Claude Code |
+| Heavy use | Max, \$100 or \$200 a month, at five and twenty times the Pro allowance |
+| Institutional | Team, \$25 a seat; Enterprise, per seat plus usage |
 
-Which one. The entry plan covers tiers 1 and 2 for most researchers most of the time. Move up when you hit the usage window (next section) most days, not before. Move to the metered path when the data require it (an institutional gateway is what makes de-identified data permissible, §16) or when the institution is paying: an institutional gateway bills to a departmental account, pay as you go (Appendix D). Metered use is where the question "what does a session cost?" has a dollar answer, and the answer ranges from cents for a bookkeeping task to tens of dollars for a long session that reads a great deal; the vendor's dashboard shows it.
+Which one. At an institution that licenses Claude, that plan is the path (§3): it is provided, unit-funded, and it is what carries the data coverage §16 requires — so this table is mostly for work outside an institution, or before your license comes through. There, the entry plan covers tiers 1 and 2 for most researchers most of the time; move up only when you hit the usage window (next section) most days.
 
 ## Usage windows
 
-On a subscription, cost arrives as an allowance rather than dollars: a rolling five-hour window that starts at your first prompt, plus a weekly cap, shared across everything you do with that vendor (Claude Code and the claude.ai chat draw from one bucket; Codex in the terminal and in the cloud likewise). The quotas change too often to print, but both agents show where you stand: `/usage` in Claude Code, `/status` in Codex. The metered path has no windows; it counts tokens, against a spending limit you set.
+On a subscription, cost arrives as an allowance rather than dollars: a rolling five-hour window that starts at your first prompt, plus a weekly cap, shared across everything you do with the vendor (Claude Code and the claude.ai chat draw from one bucket). The quotas change too often to print, but the agent shows where you stand: `/usage` in Claude Code. A metered institutional plan counts tokens instead, against a spending limit the unit sets.
 
 What spends the allowance isn't the number of requests but their weight. Every turn resends everything the session has read so far, so a long session with many files open costs more per message as it goes; a higher effort level and a larger model cost more per turn (§4); and a model fit that runs inside the agent's session, streaming output, spends the window while it waits. What saves it: one session per task, closed when the task is done; `/compact` when a session runs long; naming files rather than pasting them; a lower effort for mechanical work; and long fits run outside the agent, from a script, with the agent reading the log afterward (§12).
 
@@ -1479,7 +1428,7 @@ Pick one task you already do badly and wouldn't mind seeing done differently: or
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §12 "Anti-patterns", §13a "The blind-click-fest failure mode", §10 "Context hygiene"; synthesizes §2, §5, §6, §9, §12, §13, §15 of this guide
 COVERS: Confident-but-wrong. Context blow-up. Stale memory. The click-fest. Over-delegation. The supervisor stance as the habit that prevents most of it.
-VERIFY: `/compact` exists in both agents and `/context` in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's; no claim is made about Codex memory.
+VERIFY: `/compact` and `/context` exist in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's.
 -->
 
 Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures aren't settings. They are the stance of §2, kept up on the days it is inconvenient.
@@ -1547,7 +1496,7 @@ Five files to copy and edit, and a closing reference (A.6) with the full project
 
 ## A.1 The global file
 
-Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
+Where it goes: `~/.claude/CLAUDE.md`, the global brief — or an agent-agnostic `AGENTS.md` it imports (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
 
 ```
 # How I work
@@ -2002,7 +1951,7 @@ COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windo
 VERIFY: Claude Code's sandbox needs WSL2 on Windows (checked 2026-08-27); both CLIs otherwise run natively on Windows per the docs consulted for §4 and §5. Re-check native-Windows support at release.
 -->
 
-The desktop apps need none of this. If you run Claude Code or Codex in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
+The desktop app needs none of this. If you run Claude Code in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
 
 ## The terminal and the shell
 
@@ -2018,7 +1967,7 @@ An *environment variable* is a named value the shell hands to every program it s
 
 ## The agent, and git
 
-Start the agent in the project folder: `cd` there, then `claude` or `codex`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
+Start the agent in the project folder: `cd` there, then `claude`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
 
 Six git commands cover this guide. `git status` says what has changed since the last commit. `git diff` shows the changes. `git add -A` followed by `git commit -m "message"` records them as one commit (§9). `git log --oneline` lists the commits. `git restore code/model.R` puts one file back to its last committed state, the undo of §5. And `git clone <address> folder` copies a repository from GitHub into a new folder, which is the first step of the fresh-clone check in §15. The rest of git the agent can drive, with you reading the prompts.
 
@@ -2087,57 +2036,3 @@ Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5),
 *Version control.* Git: the system that records every change to the project's files and can undo any of them (§5).
 
 *WSL2.* Windows Subsystem for Linux, a Linux environment inside Windows; where Claude Code's sandbox runs on a Windows machine (above).
-
-# Appendix D. Institutional access at Harvard
-
-<!--
-STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tools/harvard-ai-setup (README.md, claude-code.md, claude-code-settings.example.json); HUIT API portal overview pages; Claude Code's Amazon Bedrock docs
-COVERS: HUIT gateway setup for Claude Code; keeping it from colliding with a personal plan; data-security-level mapping; Codex. Dated.
-VERIFY: checked 2026-08-27. HUIT AI Services offers AWS Bedrock (Anthropic, Meta, Mistral), Azure OpenAI, OpenAI Direct, and Gemini gateways through the Harvard API Portal, pay-as-you-go with a HUIT billing ID or credit-based; the Bedrock API is approved for Level 3. Claude Code's Bedrock variables per its docs (ANTHROPIC_SMALL_FAST_MODEL is deprecated in favor of ANTHROPIC_DEFAULT_HAIKU_MODEL; WebSearch unavailable on Bedrock; sessions start in Manual, Auto in the cycle). Whether Codex can be pointed at HUIT's OpenAI gateways is NOT verified. Model IDs in the example date fastest: take them from the portal's Available Models page.
--->
-
-What follows is specific to Harvard and dated August 2026; the body of the guide doesn't depend on it. It answers three questions: how to run Claude Code through the university's gateway rather than a personal plan, how to do that without breaking a personal plan you also have, and what data may go through it.
-
-## What HUIT provides
-
-Harvard University Information Technology runs a set of AI gateways under the name *HUIT AI Services*, reached through the Harvard API Portal with a HarvardKey login. As of this writing there are four: AWS Bedrock, which serves Anthropic's Claude models along with Meta's and Mistral's; Azure OpenAI; OpenAI Direct; and Google Gemini. Access is pay as you go, billed to a HUIT billing ID (a `B` followed by five digits, obtained through the HUIT billing form), or credit-based where a school provides credits. Each gateway issues an API key of its own.
-
-Two facts matter for a researcher. The gateways are covered: the vendors behind them don't train on inputs, and the Bedrock gateway is approved for data up to Harvard's Level 3, which is the coverage §16 requires for de-identified data. And the cost is metered rather than an allowance (§17): a departmental account pays per token, and the HUIT portal shows the spend.
-
-## Claude Code through the gateway
-
-Claude Code can route through the Bedrock gateway instead of Anthropic's own service. The configuration is a block of environment variables in a settings file; nothing else changes about how you use it.
-
-```
-{
-  "env": {
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "ANTHROPIC_BEDROCK_BASE_URL": "https://go.apis.huit.harvard.edu/ais-bedrock-llm/v2",
-    "CLAUDE_CODE_SKIP_BEDROCK_AUTH": "1",
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
-    "ANTHROPIC_API_KEY": "your HUIT Bedrock key",
-    "ANTHROPIC_MODEL": "a model ID from the portal's Available Models page",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "the Haiku ID from the same page"
-  }
-}
-```
-
-Line by line: the first turns on the Bedrock path; the second points it at Harvard's gateway rather than AWS; the third tells Claude Code not to attempt AWS's own authentication, because the gateway authenticates with the key instead; the fourth removes a header the gateway doesn't accept; the key is yours from the portal; and the two model lines pin which models run, using the exact IDs the portal lists for the gateway, because Claude Code's own defaults name models the gateway may not serve. The values are strings, in quotes, including the ones that look like numbers.
-
-Where the file goes depends on whether you also have a personal plan.
-
-*No personal plan.* Put the block in `~/.claude/settings.json`, your user settings, and every session on the machine uses the gateway.
-
-*A personal plan as well.* Don't put it in the user settings, or the gateway overrides your plan everywhere. Put it in the project's `.claude/settings.local.json` instead: settings in a project folder take precedence, so sessions started in that folder use the gateway and sessions elsewhere use your plan. The *local* file, not `.claude/settings.json`, because the block contains your key, and the local file is the one git ignores (Appendix A.5); the shared settings file is committed and must never hold a key.
-
-On the gateway, sessions start in Manual mode rather than Auto (§4), with Auto available in the cycle. The built-in web search tool isn't available on Bedrock, so an agent asked to search the web will say so; fetching a page by address still works. And `/logout` does nothing, because you never logged in: the key in that file is what authenticates you, so deleting it is how you sign out.
-
-## Codex
-
-HUIT's OpenAI gateways serve the OpenAI models to code through the API. Codex can be configured to use a provider other than OpenAI's own service, but whether it works through HUIT's gateways hasn't been verified for this guide, which makes no claim that it does. For Codex on institutional terms, the covered paths at Harvard are the ChatGPT Edu and Business plans that some schools provide, which HMS guidance lists as Level 3 tools alongside Claude; ask your school's IT group which you have. A personal ChatGPT plan is a consumer plan for the purposes of §16, whatever school you are in.
-
-## Data levels
-
-Harvard classifies data in five levels, and the mapping to tools in §16's sidebar is the operative one: public and consumer tools for Level 1 only; the HUIT gateways and the HUIT AI Sandbox for up to Level 3; special-request systems for Level 4, which is where identifiable health data and contractually restricted data sit; nothing for Level 5. The gateway makes de-identified data permissible under university policy. It doesn't change what a data-use agreement says, and HMS guidance is explicit that a DUA may separately restrict a dataset's use with AI; ask the Office of Research Administration before a restricted dataset goes near any of it. All of this is on the HUIT and school IT pages, which are more current than this appendix; check them.
-

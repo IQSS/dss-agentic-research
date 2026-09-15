@@ -17,7 +17,7 @@ Five files to copy and edit, and a closing reference (A.6) with the full project
 
 ## A.1 The global file
 
-Where it goes: `~/.codex/AGENTS.md` for Codex, `~/.claude/CLAUDE.md` for Claude Code, or both, with the Claude file holding the single line `@~/.codex/AGENTS.md` (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
+Where it goes: `~/.claude/CLAUDE.md`, the global brief — or an agent-agnostic `AGENTS.md` it imports (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
 
 ```
 # How I work

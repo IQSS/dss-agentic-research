@@ -10,7 +10,7 @@ title: "18. Failure modes and habits"
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §12 "Anti-patterns", §13a "The blind-click-fest failure mode", §10 "Context hygiene"; synthesizes §2, §5, §6, §9, §12, §13, §15 of this guide
 COVERS: Confident-but-wrong. Context blow-up. Stale memory. The click-fest. Over-delegation. The supervisor stance as the habit that prevents most of it.
-VERIFY: `/compact` exists in both agents and `/context` in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's; no claim is made about Codex memory.
+VERIFY: `/compact` and `/context` exist in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's.
 -->
 
 Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures aren't settings. They are the stance of §2, kept up on the days it is inconvenient.
