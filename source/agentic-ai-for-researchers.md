@@ -37,11 +37,11 @@ You may already use AI chat for writing and for code. An agent is the same sort 
 
 ## Where it pays to use an agent
 
-The best places to use an agent are those parts of the research lifecycle that are time consuming or tedious for humans to do themselves. 
+The best places to use an agent are those parts of the research lifecycle that are time consuming or tedious for you to do yourself. 
 
 *Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list, and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
 
-*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone *should* do this few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
+*Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that does not fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
 *Verification.* Have the agent re-implement your analysis in a second language (Python if you work in R; R if you work in Stata) and compare the numbers. Two independent implementations that agree are strong evidence. A disagreement locates a bug you may not have found by reading (§13).
 
@@ -57,28 +57,24 @@ Agents don't know whether your data are sensitive. The agent doesn't know that a
 
 Agents do not know when they are confidently wrong. The same fluent tone comes with a correct answer and an invented one, and nothing in the output distinguishes them. Only a check does (§13, §18).
 
-Your job is the same one you already do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but the speed is increased: you can have many agents running around the clock.
+Your job is the same one you'd do with a human research assistant: specify the task, delegate it, check the result, and keep the assistant away from the restricted drive. The habits transfer, but the speed is increased: you can have many agents running tasks around the clock.
 
 ::: {.needspace height="19cm"}
 :::
 
 ## Four pillars
 
-Everything in this guide serves one of four principles, and each maps to the chapters that carry it out.
+Everything in this guide serves one of four principles, and each principle maps to the chapters that discuss it.
 
-![](figures/four-pillars.svg){#fig-four-pillars fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
-
-The first pillar is a stance. A messenger carries text between a chat window and an editor; a driver accepts or rejects each suggested line as it appears; a supervisor describes the outcome and judges the result (§2, §4). The second is preparation: conventions written down once, and projects that share one shape, so you and the agent both know where things are (§6, §7). The third is the scientific habit applied to a new source of error: simulation with a known truth, a second implementation, and a pipeline that still runs with the agent gone (§12, §13, §15). The fourth is the safety net: permissions that ask before anything destructive, a sandbox that limits what a command can touch, version control that makes any change reversible, and a data rule that is enforced rather than requested (§5, §16). The pillars come from the tool-chain map, which argues for them at length and for the tools underneath;[^tc-model] this guide takes them as given and shows the work.
-
-[^tc-model]: *Agentic AI Tool Chain: An Opinionated Ecosystem Map*: the companion document, written for data scientists, on what is in the stack and why. Its own companion, *Agentic AI Quickstart*, holds the install recipes. This is the one place the guide points at them; everything else here stands alone.
+![](figures/four-pillars.svg){#fig-four-pillars fig-alt="The four pillars: be a supervisor; teach agents your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II teaches the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a paper, from bookkeeping to hand-off (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and the failure modes that a supervisor's habits prevent (§18). The appendices hold files to copy and edit (A), prompts that have worked (B), the terminal in two pages for readers who choose that route (C), and institutional access at Harvard (D).
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from literature review to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and institutional access at Harvard (D).
 
-If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at. Everyone should read §16 before an agent goes near restricted data.
+If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you would not mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
-A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R, because R and Stata are the two this guide assumes and R reads more easily to a Stata user than the reverse. The agent translates either way, and §13 makes that translation a check rather than a chore. Harvard-specific detail lives in Appendix D and in short sidebars, never in the body. The guide makes no tool arguments and gives no install recipes: those live in its two companion documents, the tool-chain map and the quickstart. Terms are defined at first use, and Appendix C ends with a glossary.
+A few conventions. Where Claude Code and Codex differ, both are named; where they agree, the text says "the agent". File conventions are agent-agnostic (`AGENTS.md`, §6). Where a language has to be picked, the worked examples are in R. Harvard-specific detail lives in Appendix D and in short sidebars. The guide makes no tool arguments and gives no install recipes: those live in a companion website. Terms are defined at first use, and Appendix C ends with a glossary.
 
 # 2. What an agent is
 
