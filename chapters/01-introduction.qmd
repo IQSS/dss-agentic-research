@@ -47,7 +47,7 @@ That is your job, and it is the same job you already do with a research assistan
 
 Everything in this guide serves one of four principles, and each maps to the chapters that carry it out.
 
-![](figures/four-pillars.svg){fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
+![](figures/four-pillars.svg){#fig-four-pillars fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
 
 The first pillar is a stance. A messenger carries text between a chat window and an editor; a driver accepts or rejects each suggested line as it appears; a supervisor describes the outcome and judges the result (§2, §4). The second is preparation: conventions written down once, and projects that share one shape, so you and the agent both know where things are (§6, §7). The third is the scientific habit applied to a new source of error: simulation with a known truth, a second implementation, and a pipeline that still runs with the agent gone (§12, §13, §15). The fourth is the safety net: permissions that ask before anything destructive, a sandbox that limits what a command can touch, version control that makes any change reversible, and a data rule that is enforced rather than requested (§5, §16). The pillars come from the tool-chain map, which argues for them at length and for the tools underneath;[^tc-model] this guide takes them as given and shows the work.
 

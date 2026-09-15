@@ -15,7 +15,7 @@ VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing do
 
 Limiting what an agent can do. The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others do not.
 
-![](figures/four-boundaries.svg){fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
+![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
 
 The split that matters is between the first two and the last two. Rules and prompts bind a *cooperating* agent: a deny rule matches the command as the agent wrote it, and a prompt depends on a person reading it. Both are excellent against accidents. Neither is a wall. The sandbox and version control hold whatever the session has read and whatever the agent has decided, because the operating system and git enforce them rather than the agent's good behavior or your attention.
 

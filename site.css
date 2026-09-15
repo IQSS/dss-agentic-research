@@ -10,6 +10,14 @@ figure.quarto-float-fig > figcaption {
   display: none;
 }
 
+/* The same identifier makes Quarto mark the float `anchored`, and the theme's AnchorJS then hangs a
+   link icon off it on hover, as it does on headings. A figure nobody cross-references has no use for
+   a permalink, so the icon is hidden on figures alone; heading anchors are left as they are. AnchorJS
+   appends the link as the wrapper's last child, which is what the selector reaches. */
+.quarto-figure > .anchorjs-link {
+  display: none;
+}
+
 /* The empty anchor the filter puts before each subsection, so a §13c from another page lands on the
    heading rather than at the top of a long chapter. */
 .subsection-anchor {

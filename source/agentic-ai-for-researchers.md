@@ -66,7 +66,7 @@ That is your job, and it is the same job you already do with a research assistan
 
 Everything in this guide serves one of four principles, and each maps to the chapters that carry it out.
 
-![](figures/four-pillars.svg){fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
+![](figures/four-pillars.svg){#fig-four-pillars fig-alt="The four pillars: be a supervisor; teach the agent your way; verify and reproduce; keep it bounded — four panels connected top to bottom, each naming the chapters that carry it." above="6pt" below="6pt"}
 
 The first pillar is a stance. A messenger carries text between a chat window and an editor; a driver accepts or rejects each suggested line as it appears; a supervisor describes the outcome and judges the result (§2, §4). The second is preparation: conventions written down once, and projects that share one shape, so you and the agent both know where things are (§6, §7). The third is the scientific habit applied to a new source of error: simulation with a known truth, a second implementation, and a pipeline that still runs with the agent gone (§12, §13, §15). The fourth is the safety net: permissions that ask before anything destructive, a sandbox that limits what a command can touch, version control that makes any change reversible, and a data rule that is enforced rather than requested (§5, §16). The pillars come from the tool-chain map, which argues for them at length and for the tools underneath;[^tc-model] this guide takes them as given and shows the work.
 
@@ -102,7 +102,7 @@ Four things change when the model can act in your project. It reads your actual 
 
 Earlier AI tools did one of two things. They reasoned without acting, which is how a chat window produces confident code that has never been run, or they acted without reasoning, which is blind trial and error. An agent alternates the two in a loop.
 
-![](figures/think-act-observe.svg){fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
+![](figures/think-act-observe.svg){#fig-think-act-observe fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
 
 *Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. That is the whole reason an agent that can act is more reliable than a chat window, not less: the loop keeps pulling it back to the facts on disk.
 
@@ -254,7 +254,7 @@ Both can be pinned rather than picked each session: in Claude Code, `effortLevel
 | `xhigh` | Deepest level that persists in settings | The ceiling: longest thinking, where latency does not matter |
 | `max` | Session-only ceiling: unconstrained thinking, resets when the session ends | Not offered |
 
-![](figures/two-gears.svg){fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
+![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
 
 Think of them as two gears that turn together with how scripted the task is. A deterministic recipe, such as scaffolding a project whose shape is already written down (§7) or applying a known pattern across scripts, runs well on a smaller model at lower effort: it thinks less and does more, and is faster for it. A job where the agent has to work out its own approach and change course as evidence arrives wants the frontier model and the depth. What links the two gears is a single dimension: how much of the approach is given, and how much the agent has to invent.
 
@@ -271,7 +271,7 @@ VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing do
 
 Limiting what an agent can do. The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others do not.
 
-![](figures/four-boundaries.svg){fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
+![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
 
 The split that matters is between the first two and the last two. Rules and prompts bind a *cooperating* agent: a deny rule matches the command as the agent wrote it, and a prompt depends on a person reading it. Both are excellent against accidents. Neither is a wall. The sandbox and version control hold whatever the session has read and whatever the agent has decided, because the operating system and git enforce them rather than the agent's good behavior or your attention.
 
@@ -372,7 +372,7 @@ Anyone who has done this work for years asks the same question: how will it know
 
 Global files hold *how you work*: code style, prose voice, statistical defaults, file naming, the things you would tell any new research assistant on their first day. The agent reads them in every project, so you never restate them. A project file adds *what this project is*: what it is for, where things live, how to run it, and what is off limits. It is the onboarding document you would write for a new RA, except that you write it once and it is followed every time.
 
-![](figures/hub-and-spoke.svg){fig-alt="A global box holding AGENTS.md with three convention files linked to it, above a local box of three project types, with arrows running from global to local." above="6pt" below="6pt"}
+![](figures/hub-and-spoke.svg){#fig-hub-and-spoke fig-alt="A global box holding AGENTS.md with three convention files linked to it, above a local box of three project types, with arrows running from global to local." above="6pt" below="6pt"}
 
 The files are plain markdown in ordinary folders: no settings screen, no vendor format, readable by you, by a collaborator, and by whichever agent you run. That has a consequence beyond convenience. Conventions written down are conventions a collaborator, or you in a year, can reproduce. The brief that makes the agent consistent is also project documentation, and it outlasts any one session.
 

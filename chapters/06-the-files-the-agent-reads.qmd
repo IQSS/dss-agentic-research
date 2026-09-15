@@ -19,7 +19,7 @@ Anyone who has done this work for years asks the same question: how will it know
 
 Global files hold *how you work*: code style, prose voice, statistical defaults, file naming, the things you would tell any new research assistant on their first day. The agent reads them in every project, so you never restate them. A project file adds *what this project is*: what it is for, where things live, how to run it, and what is off limits. It is the onboarding document you would write for a new RA, except that you write it once and it is followed every time.
 
-![](figures/hub-and-spoke.svg){fig-alt="A global box holding AGENTS.md with three convention files linked to it, above a local box of three project types, with arrows running from global to local." above="6pt" below="6pt"}
+![](figures/hub-and-spoke.svg){#fig-hub-and-spoke fig-alt="A global box holding AGENTS.md with three convention files linked to it, above a local box of three project types, with arrows running from global to local." above="6pt" below="6pt"}
 
 The files are plain markdown in ordinary folders: no settings screen, no vendor format, readable by you, by a collaborator, and by whichever agent you run. That has a consequence beyond convenience. Conventions written down are conventions a collaborator, or you in a year, can reproduce. The brief that makes the agent consistent is also project documentation, and it outlasts any one session.
 
