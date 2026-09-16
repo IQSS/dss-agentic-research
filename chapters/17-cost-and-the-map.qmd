@@ -28,16 +28,7 @@ Tier 1 pays for itself in the first hour. Tier 2 pays for itself in the first we
 
 ## Money
 
-Claude comes with the chat plans; there is nothing separate to buy. As of August 2026:
-
-| Tier | Claude |
-|:--|:--|
-| Free | Chat only |
-| Entry | Pro, \$20 a month; includes Claude Code |
-| Heavy use | Max, \$100 or \$200 a month, at five and twenty times the Pro allowance |
-| Institutional | Team, \$25 a seat; Enterprise, per seat plus usage |
-
-Which one. At an institution that licenses Claude, that plan is the path (§3): it is provided, unit-funded, and it is what carries the data coverage §16 requires — so this table is mostly for work outside an institution, or before your license comes through. There, the entry plan covers tiers 1 and 2 for most researchers most of the time; move up only when you hit the usage window (next section) most days.
+Claude comes with the plan; there's nothing separate to buy. At an institution that licenses it, the plan is unit-funded — a school, department, or PI budget covers it (§3) — so for most researchers the cost question isn't dollars but the usage allowance the plan carries, which the next section is about.
 
 ## Usage windows
 
