@@ -124,37 +124,37 @@ The supervisor's job is to describe the outcome and its constraints, not the ste
 
 <!--
 STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D)
-SOURCE: quickstart §4-5 (surfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
+SOURCE: quickstart §4-5 (interfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
 COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension, web/cloud). Which for whom. Which account — the institutional plan, not a personal one or an API key, and what each implies for data; Harvard sidebar (Claude Standard/Premium; Gemini and ChatGPT Edu named briefly). What must be installed (git; the R / Python / Stata you already have).
-VERIFY: Claude surfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not surface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across surfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check surfaces and the tool menu at release; they change quarterly.
+VERIFY: Claude interfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not interface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across interfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check interfaces and the tool menu at release; they change quarterly.
 -->
 
-The same agent runs in a desktop app, inside your editor, and in a terminal; it reads the same files and obeys the same settings wherever it runs. The surface changes only what you see while it works. What governs the data is the account you sign in with.
+Claude Code runs as a desktop app, an editor extension, or a terminal command; whichever you use, it reads the same files and obeys the same settings. The interface changes only what you see while it works.
 
 ## The entry points
 
 As of September 2026:
 
-| Surface | What it is | Who it suits |
+| Interface | What it is | Who it suits |
 |:--|:--|:--|
 | Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). | Most researchers. Start here. |
 | In the editor | The Claude Code extension for VS Code and Positron. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
 | Terminal | `claude`. Mac, Windows, Linux, and WSL2. | Readers who want the full command-line toolkit. Appendix C. |
 | Web and cloud | Claude Code on the web; cloud sessions from the app. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
 
-The desktop app is a download from Anthropic and includes the agent; nothing else is needed. The command-line version has a one-line installer (a script from `claude.ai`, run in the terminal, or in PowerShell on Windows) and needs no other runtime installed first; it keeps itself updated. The desktop app and the terminal run the same engine, share the brief (§6), settings (§5), and skills (§8), and can be open on the same project at once. Start in the desktop app: it shows each change as a diff (the line-by-line list of what was altered), has the mode selector, and doesn't rely on installing anything else. Move to the terminal when you want the full command-line toolkit. Use the editor extension if Positron or VS Code is already where you write code.
+Start with the desktop app. It's graphical — you point and click rather than type commands. It's a download from Anthropic with nothing else to install, the controls (§4) are on menus, and it shows each change it made as a diff you can open and review (§9). Switch to the terminal when you want a fuller command-line toolkit (Appendix C): its one-line installer is a script from `claude.ai` (run in the terminal, or in PowerShell on Windows), it likewise needs nothing else installed, and it updates itself. If you prefer writing code in Positron or VS Code, use the editor extension there instead.
+
+You can move between the three, or keep two sessions open on one project, without redoing anything: all three share your settings (§5), brief (§6), and skills (§8).
 
 ## Which account
 
-Use your institution's plan — not a personal one, and not an API key.
-
-Universities license these agents under enterprise and education agreements a personal subscription can't match: the vendor doesn't train on what you send, and the institution holds the contract that says so. That coverage is what lets confidential data reach the model at all (§16). A personal Pro or Plus account runs on consumer terms — fine for a statistics question or a paragraph to rephrase, not for anything an IRB, DUA, or BAA governs. An API key is a different route: it's for building software, carries weaker data assurances, and bills against a code, so it isn't the researcher's. Getting on the institutional plan is usually one request form and then signing in with your normal university login; ask your school or department's IT group.
+Harvard licenses these agents under enterprise and education agreements: the vendor doesn't train on what you send. That coverage is what lets confidential level-3 data reach the agent (§16). Getting on the institutional plan is one request form and then signing in with your normal university login.
 
 > **Harvard (FAS/SEAS), as of September 2026.** FAS licenses **Claude** at no cost to you; a school, department, or PI budget covers it. Request a seat through the FAS/GSAS/SEAS GenAI Tool License Request form, then sign in with HarvardKey. Two tiers: **Standard** — Claude Chat, Code, and Cowork under one license — is where everyone should start; **Premium** adds higher usage limits and Claude's most capable model, for a sustained heavy-use case. Signed in this way, Claude Chat and Code carry Harvard's data coverage (§16), which a personal account doesn't. HUIT is pairing Claude with **Google Gemini** as a second supported agent and winding down **ChatGPT Edu** (legacy, existing accounts only); those are the other institutional options, but this guide's examples use Claude. Other schools license their own set; the HUIT and school IT pages stay current.
 
 ## What else should be installed
 
-Your analysis language: R, Stata, Python. The agent runs them from the command line, so they have to be findable there.
+Your analysis language: R, Stata, Python. 
 
 Git. Version control for your project files provides a safety net. 
 
@@ -726,7 +726,7 @@ A *hook* is a shell command the agent runs at a fixed moment: before a command e
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §17 (TASKS.md; four files, four roles), §12 (STATUS.md read first; the STATUS.md / TASKS.md seam), §15 "Reviewing what the agent changed" (the idea, not the pager tooling), §1b; ~/.config/agents/AGENTS.md § Task Management (session start and end)
 COVERS: Session start and end. STATUS.md then TASKS.md at the start; TASKS.md as the task record, STATUS.md rewritten only when the state moves. README, status, renames, migrations. Reviewing what changed in the app's diff view. Commit habits.
-VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app surfaces.
+VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app interfaces.
 -->
 
 Bookkeeping is where to start with an agent, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand; in between it keeps the folder, the README, and the task list true. Tedious, and harmless when it gets a name wrong. It is also the habit that makes every other chapter's checks possible: you can review what the agent changed only if you know what the folder looked like before.
@@ -1672,7 +1672,7 @@ The solution is a shape taxonomy, written down once where the agent can read it 
 |-- .here                          # 0-byte sentinel for here::here()
 |-- _targets.R                     # pipeline manifest (when targets is used)
 |-- _targets/                      # per-target object store (gitignored)
-|-- justfile                       # project-wide command surface
+|-- justfile                       # project-wide command interface
 |-- .graveyard/                    # transient working copies (gitignored)
 |-- code/
 |   |-- _startup/                  # tier 1: session-start bootstrap

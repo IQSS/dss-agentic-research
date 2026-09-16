@@ -10,7 +10,7 @@ title: "9. Bookkeeping"
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §17 (TASKS.md; four files, four roles), §12 (STATUS.md read first; the STATUS.md / TASKS.md seam), §15 "Reviewing what the agent changed" (the idea, not the pager tooling), §1b; ~/.config/agents/AGENTS.md § Task Management (session start and end)
 COVERS: Session start and end. STATUS.md then TASKS.md at the start; TASKS.md as the task record, STATUS.md rewritten only when the state moves. README, status, renames, migrations. Reviewing what changed in the app's diff view. Commit habits.
-VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app surfaces.
+VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app interfaces.
 -->
 
 Bookkeeping is where to start with an agent, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand; in between it keeps the folder, the README, and the task list true. Tedious, and harmless when it gets a name wrong. It is also the habit that makes every other chapter's checks possible: you can review what the agent changed only if you know what the folder looked like before.

@@ -202,7 +202,7 @@ The solution is a shape taxonomy, written down once where the agent can read it 
 |-- .here                          # 0-byte sentinel for here::here()
 |-- _targets.R                     # pipeline manifest (when targets is used)
 |-- _targets/                      # per-target object store (gitignored)
-|-- justfile                       # project-wide command surface
+|-- justfile                       # project-wide command interface
 |-- .graveyard/                    # transient working copies (gitignored)
 |-- code/
 |   |-- _startup/                  # tier 1: session-start bootstrap
