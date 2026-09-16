@@ -39,7 +39,7 @@ You may already use AI chat for writing and for code. An agent is the same sort 
 
 The best places to use an agent are those parts of the research lifecycle that are time-consuming or tedious for you to do yourself.
 
-*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list and status snapshot. This is the tedious underbelly of research; it isn't sexy, but it will save you tens of hours per project (§9).
+*Bookkeeping.* Modern research is files and folders. Agents are excellent project managers. They can design project structures, organize files, keep a running to-do list and status snapshot. This is the tedious, unglamorous part of research, and it will save you tens of hours per project (§9).
 
 *Simulation.* Simulate data from known parameters and see whether your model recovers them. Run a power analysis by simulation instead of a formula that doesn't fit your design. Everyone *should* do this but few do, because writing the simulation is tedious. The agent removes the tedium, and the known truth built into the simulation tells you whether it did the job right (§12).
 
@@ -70,7 +70,7 @@ Everything in this guide serves one of four principles, and each principle maps 
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), and a description of the terminal (C); institutional access is in §3.
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), how to install the two extra tools (D), and a glossary (E); institutional access is in §3.
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you wouldn't mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
@@ -158,7 +158,7 @@ Your analysis language: R, Stata, Python.
 
 Git. Version control for your project files provides a safety net. 
 
-Optionally `just`, the command runner in Appendix A.4 (§15). 
+Optionally `just` (the command runner, §15) and `pueue` (the job queue for long fits, §12). Appendix D installs both. 
 
 # 4. Modes
 
@@ -169,46 +169,34 @@ COVERS: Permission modes (Manual, Accept edits, Plan, Auto) in Claude Code. Plan
 VERIFY: checked 2026-08-26 against the Claude Code permission-modes and model-config docs. Claude Code: Manual (`default`) / Accept edits / Plan / Auto, Shift+Tab cycle, Auto is the starting mode on Pro, Max, and Team, Manual on Enterprise or an institutional gateway; effort low/medium/high/xhigh/max, default high, max session-only; aliases sonnet/opus/fable. Re-check at release; model names date fastest. (Codex mode/effort specifics archived 2026-09-15; see docs/archive.)
 -->
 
-Three settings shape a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. The first two are about oversight. The third is about how hard the model thinks. All three change in the session, in a few keystrokes, and the right setting changes with the task.
+Three settings shape a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. The first two are about oversight. The third is about how hard the model thinks. All three can change within a session, in a few keystrokes, and the right setting changes with the task.
 
 ## Permission modes
 
-A *permission mode* sets which actions the agent may take without asking you first. Every action an agent takes is one of four kinds: read a file, edit a file, run a command, or reach the network. The modes differ in which of those stop for a prompt. A prompt is a yes-or-no question in the session: *run this command?*, with the command shown.
+A *permission mode* sets which actions the agent may take without asking you first. Every action an agent takes is one of four kinds: read a file, edit a file, run a command, or reach the internet. The modes differ in which of those stop for a prompt. A prompt is a yes-or-no question in the session: *run this command?*, with the command shown.
 
-In Claude Code, four modes are in everyday use. You cycle through them with `Shift+Tab` in the CLI; the desktop app has a mode selector, and the VS Code extension a mode indicator.
+In Claude Code, four modes are in everyday use. The desktop app and VS Code extension have a mode selector button, and in the terminal you cycle through them with `Shift+Tab`; 
 
 | Mode | What runs without asking | Best for |
 |:--|:--|:--|
-| Manual | Reads only. Every edit and every command prompts. | Your first sessions; anything near restricted data |
-| Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Everyday work you are reviewing as it goes |
+| Manual | Reads only. Every edit and every command prompts. | Restricted data |
+| Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Potentially sensitive data |
 | Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape isn't obvious (next section) |
-| Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Long tasks with a plan, away from restricted data |
+| Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Most daily work |
 
-Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
+A starting mode can be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`.  Two further modes remove prompting, in opposite directions. `bypassPermissions` runs every tool call with no prompt and no safety check — recommended for isolated containers only, and reachable from the app's mode selector (behind a settings toggle) or a terminal flag (`claude --allow-dangerously-skip-permissions`). `dontAsk` does the reverse: it auto-denies anything that would have prompted and runs only what you pre-approved — recommended for scripts, and can be set only from a terminal (`claude --permission-mode dontAsk`). 
 
-The launch flag behind those two blanket modes, shown so you recognize it rather than type it:
-
-```
-claude --allow-dangerously-skip-permissions
-```
-
-Other agents organize the same choices under different names — usually a few presets, each pairing how much runs without asking with an operating-system sandbox (§5) — but the reading is the same.
-
-Three things to hold onto. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the blanket-bypass mode sits behind a launch flag and outside the normal cycle on purpose — leave it there; it has no place in an everyday launch. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
-
-My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I don't switch to Auto first and write the plan inside it.
+Three things to keep in mind. First, a mode only dictates which actions require the agent to stop and ask your permission; it doesn't block anything outright. If something must never happen it belongs in a deny rule (§5), which blocks the action in every mode, whatever the agent or its classifier decides. For example, a data rule for restricted paths should be a deny rule. Second, the blanket-bypass mode sits outside the normal cycle on purpose — it's not something designed for everyday work. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the resulting click-fest could be much worse than having Auto mode's classifier determine the risk (§5). The aim is a mode where every prompt you see is one you actually read.
 
 ## Plan mode
 
-For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
+For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: pick it in the app's mode selector (or cycle to Plan with `Shift+Tab` in the terminal) and describe the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing. The plan becomes a fleshed out starting prompt for the task.
 
-The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your `AGENTS.md` and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
-
-Plan mode for: reorganizing a folder into the paper shape (§7); writing the simulation study for a model (§12); converting an analysis to a second language (§13); anything touching `data/`. Not plan mode for: renaming a variable across scripts, fixing a typo, adding a missing `library()` call, copying a pattern from one script into another. The rule of thumb is that if the task is small and its shape is obvious to both of you, skip the plan; otherwise ask. The cost of asking when you didn't need to is one round trip. The cost of not asking when you did is rework on a wrong-shaped solution, and a diff too large to review.
+The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your global metadata files (§6) and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
 
 ## Model and effort
 
-Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
+Two settings govern how much thinking the agent brings to a task, and for both, the right level depends on how much of the method is already worked out and how much the agent has to invent. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
 
 In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. It can be pinned rather than picked each session: `effortLevel` in the settings file persists a level — any level but `max`, which the file refuses on purpose.
 
@@ -371,7 +359,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
 - No model is trusted until it recovers known parameters from simulated data.
-- Fits longer than a few minutes run outside the agent, from a script I start.
+- Fits longer than a few minutes run through pueue, not in the session; I read the log when it finishes.
 
 ## Writing
 - Short sentences. Point first, then the qualification. Prose, not bullets.
@@ -659,9 +647,7 @@ The mark must go on *before the folder fills*. Create the folder empty, mark it,
 
 OneDrive has no mark you can set yourself: as of this writing, folder exclusion is an administrator setting that is off by default, and the usual advice to make a folder "online-only" doesn't stop a repository from being uploaded. Keep the project outside OneDrive, in a plain local folder, and let GitHub carry the code and text between machines. The shared drive is then for what it is good at: the coauthor's Word drafts, and the data hand-off.
 
-Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.[^tc-sync]
-
-[^tc-sync]: The quickstart's per-project recipe (§7) gives the full sequence, including the language-environment folders.
+Whichever client you use, one rule covers the rest. Code and text travel by git; drafts and data travel by the shared folder; no file travels by both.
 
 # 8. Repeatable workflows
 
@@ -672,7 +658,7 @@ COVERS: Skills and slash commands: what to package once you have done a thing th
 VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop. Re-check at release. (Codex skills/hooks specifics archived 2026-09-15.)
 -->
 
-Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it is where a piece of your workflow stops being a conversation and becomes a command.
+Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it turns a request you keep retyping into a command you run by name.
 
 ## What a skill is
 
@@ -794,13 +780,13 @@ COVERS: Protocol before searching. Search, screen, extract into an evidence tabl
 VERIFY: the run described here was made on 2026-08-31 against OpenAlex, Crossref, PubMed and arXiv, on the question behind papers/worthington-journal-review-times; 15 queries, 604 records retrieved, 507 after deduplication, 37 included, 11 borderline, and the counts in the table are that run's. The three failures reported are all from it: the retrieval cap that stopped the run, the DataCite record reported as a probable fabrication, and the preprint pair deduplication missed. Rerun and re-check the counts if the protocol changes.
 -->
 
-Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: don't try to make it less likely. Make it impossible to miss.
+Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: not to make fabrication less likely, but to make it impossible to miss.
 
 ## What to ask for
 
 *The protocol, before a single query runs.* Write down the question, what counts as included and excluded, the date range, the languages, which sources will be searched, and what "done" means. Have the agent draft it from your description, then read it and approve it. This is the step you already know how to do, and it is what makes the search auditable, re-runnable, and arguable by a reviewer. Skipping it because the question looks simple is how you end up with a set of papers nobody can defend.
 
-Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it is a mood. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
+Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it names a topic, not the criteria that decide what is in and out. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
 
 *The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier.** Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but can't resolve goes to a quarantine file. It doesn't enter the table, and it isn't cited.
 
@@ -1026,7 +1012,7 @@ Read it row by row. Under no effect, the interval excludes zero 4.5 percent of t
 
 For a Bayesian model the script is the same shape with a different fit and a different rule (the posterior probability exceeding a threshold, the credible interval excluding zero), fewer simulated datasets because each fit is slower, and one more check: that the prior actually in force in the fitted model is the prior the paper says, because fitting software fills in defaults you didn't set.
 
-*Long fits run outside the agent.* A model that takes more than a few minutes to fit doesn't belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The agent writes the script; you start it yourself, from a terminal or from RStudio, with its output sent to a file in `logs/` (§7); when it finishes, you tell the agent where the log is and it reads the result. If a project accumulates many long fits, two tools from the fuller stack are built for this: `targets`, an R pipeline runner that reruns only the steps whose inputs changed and resumes a fit that was interrupted, and `pueue`, a job queue that keeps a job alive after the session that started it has gone. Both are outside this guide (the quickstart covers installation), and neither is needed for the check above.
+*Long fits run outside the agent.* A model that takes more than a few minutes to fit doesn't belong inside the agent's session. The session can reset, and the fit dies with it, silently; and while the fit runs, the session waits and spends your usage allowance doing nothing (§17). The fix is a job queue: `pueue` takes a command, runs it in the background, keeps it alive after the session or the terminal closes, and reports where each job stands. You don't drive it by hand. You tell the agent once, in your global file (§6, Appendix A.1), to run long fits through the queue rather than in the session, and from then on it submits each fit and reads the log when the job finishes, while you carry on. For a true one-off you can also start the script yourself, from a terminal or from RStudio, and point the agent at the log. Install is in Appendix D. (For a pipeline of many *dependent* steps rather than a queue of independent jobs, `targets` reruns only what changed and resumes an interrupted fit; it is the next tool up, and outside this guide.) None of this is needed for the calibration check above, which is fast.
 
 ## What you check
 
@@ -1263,7 +1249,7 @@ The agent helped build the analysis; the analysis has to run without it. A pipel
 
 Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two can't disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
 
-For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The quickstart (§8) has the recipes; the one command above is enough for most papers.
+For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. Both are outside this guide; the one command above is enough for most papers.
 
 ## What you check
 
@@ -1411,7 +1397,7 @@ The rule holds: climb only when the payoff justifies the friction. Most research
 
 ## Where to start
 
-Pick one task you already do badly and wouldn't mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time, and the quickstart is its manual when you want it.
+Pick one task you already do badly and wouldn't mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time.
 
 # 18. Failure modes and habits
 
@@ -1470,7 +1456,7 @@ The habit is one question, asked every time an error goes away: how? If the answ
 
 Most of this chapter is prevented by the stance §2 set out, held consistently. Describe the outcome and its constraints rather than the steps. Ask for a plan when the shape of the task isn't obvious, and edit it before the agent starts. Let it run without narrating each step back to you. When it finishes, check the result against something other than its own account. Keep it inside a boundary you set in advance. Open and close every session with the two rituals of §9. And let nothing into the paper that the build can't reproduce.
 
-An agent is a research assistant with more speed and less judgment than any you have had. Treat it the way you would treat an assistant you have known for a week: clear instructions, real trust for the mechanical work, and your own eyes on everything that carries a claim. The difference is that this one never gets tired of being checked.
+An agent is a research assistant with more speed and less judgment than any you have had. Treat it the way you would treat an assistant you have known for a week: clear instructions, real trust for the mechanical work, and your own eyes on everything that carries a claim. The difference is that you can apply that scrutiny to everything it does, where a person would resent it.
 
 <!-- ===================== APPENDICES ===================== -->
 
@@ -1508,7 +1494,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
 - No model is trusted until it recovers known parameters from simulated data.
-- Fits longer than a few minutes run outside the agent, from a script I start.
+- Fits longer than a few minutes run through pueue, not in the session; I read the log when it finishes.
 
 ## Writing
 - Short sentences. Point first, then the qualification. Prose, not bullets.
@@ -1587,7 +1573,7 @@ it before the session ends.
 
 Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you don't already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
+[^just]: Installing just is in Appendix D. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.
@@ -1937,8 +1923,8 @@ Prompts that have worked, three to five per stage, each with the line that says 
 
 <!--
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: quickstart Appendix B "Terminal Concepts", cut to what this guide's readers meet (no TTY history, no subshells, no aliases, no login shells); the glossary is new, built from the terms the guide defines at first use
-COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windows, the working directory and paths, running a script, output to a log, environment variables, starting the agent in a folder, six git commands, WSL2 in one paragraph. Glossary at the end.
+SOURCE: quickstart Appendix B "Terminal Concepts", cut to what this guide's readers meet (no TTY history, no subshells, no aliases, no login shells)
+COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windows, the working directory and paths, running a script, output to a log, environment variables, starting the agent in a folder, six git commands, WSL2 in one paragraph.
 VERIFY: Claude Code's sandbox needs WSL2 on Windows (checked 2026-08-27); both CLIs otherwise run natively on Windows per the docs consulted for §4 and §5. Re-check native-Windows support at release.
 -->
 
@@ -1964,11 +1950,71 @@ Six git commands cover this guide. `git status` says what has changed since the 
 
 ## Windows
 
-Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you don't want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.[^tc-term]
+Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you don't want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.
 
-[^tc-term]: The quickstart's Appendix B covers the shell in more depth (standard streams, sourcing, subshells, startup files) for readers who go on to the full toolchain.
+# Appendix D. Installing just and pueue
 
-## Glossary
+<!--
+STATUS: new · DRAFTED: 2026-09-16
+SOURCE: the just, pueue, and Homebrew install docs, checked 2026-09-16. This
+appendix makes the guide self-contained on install; earlier drafts pointed to
+the quickstart, which the guide no longer references.
+VERIFY (2026-09-16): brew formulae `just` and `pueue`; `winget install --id
+Casey.Just` (winget id Casey.Just, confirmed against two package listings);
+pueue ships binaries for macOS, Linux and Windows, but its project calls
+native-Windows support experimental, so WSL2 is the recommended path for pueue
+on Windows. Re-check package names at release.
+-->
+
+Two tools in this guide need installing: *just*, the command runner behind the
+one-command build (§15), and *pueue*, the queue that runs long fits outside the
+session (§12). Everything else the guide assumes you already have: git, and the
+language you analyze in. Install these once, and the agent uses them from then on.
+
+## Mac, and Windows inside WSL2
+
+Homebrew is the package manager for macOS and Linux, and WSL2 (§5, Appendix C) is
+a Linux environment, so one line installs both tools on any of them:
+
+```
+brew install just pueue
+```
+
+`pueue` runs a small background service, the daemon, that holds the queue. Start
+it once:
+
+```
+pueued -d
+```
+
+On a Mac, `brew services start pueue` starts the daemon and brings it back after
+a logout or reboot, so you never think about it again.
+
+## Native Windows
+
+If you set up WSL2 for the sandbox (§5, Appendix C), install both tools with the
+Homebrew line above, inside WSL2, where each is fully supported. That is the
+recommended path, and it is the same as on a Mac.
+
+Without WSL2, `just` still installs on Windows itself, from winget (which ships
+with Windows) or Scoop:
+
+```
+winget install --id Casey.Just
+```
+
+`pueue` is the exception: its project calls native-Windows support experimental,
+so this guide doesn't run the queue there. Use it inside WSL2, or fall back to
+the one-off route for a long fit (start the script yourself and point the agent
+at the log, §12).
+
+# Appendix E. Glossary
+
+<!--
+STATUS: adapt · DRAFTED: 2026-08-27 (moved out of Appendix C on 2026-09-16 to
+stand as its own appendix at the end). Built from the terms the guide defines at
+first use; keep it in step with those definitions.
+-->
 
 *Agent.* A model given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
 
@@ -1996,7 +2042,7 @@ Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5),
 
 *Effort.* How much the model reasons before it acts; a setting with levels (§4).
 
-*Environment variable.* A named value the shell passes to every program it starts; where an API key lives (§11, above).
+*Environment variable.* A named value the shell passes to every program it starts; where an API key lives (§11, Appendix C).
 
 *Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
 
@@ -2026,4 +2072,4 @@ Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5),
 
 *Version control.* Git: the system that records every change to the project's files and can undo any of them (§5).
 
-*WSL2.* Windows Subsystem for Linux, a Linux environment inside Windows; where Claude Code's sandbox runs on a Windows machine (above).
+*WSL2.* Windows Subsystem for Linux, a Linux environment inside Windows; where Claude Code's sandbox runs on a Windows machine (Appendix C).

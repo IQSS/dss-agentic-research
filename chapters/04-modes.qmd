@@ -13,46 +13,34 @@ COVERS: Permission modes (Manual, Accept edits, Plan, Auto) in Claude Code. Plan
 VERIFY: checked 2026-08-26 against the Claude Code permission-modes and model-config docs. Claude Code: Manual (`default`) / Accept edits / Plan / Auto, Shift+Tab cycle, Auto is the starting mode on Pro, Max, and Team, Manual on Enterprise or an institutional gateway; effort low/medium/high/xhigh/max, default high, max session-only; aliases sonnet/opus/fable. Re-check at release; model names date fastest. (Codex mode/effort specifics archived 2026-09-15; see docs/archive.)
 -->
 
-Three settings shape a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. The first two are about oversight. The third is about how hard the model thinks. All three change in the session, in a few keystrokes, and the right setting changes with the task.
+Three settings shape a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. The first two are about oversight. The third is about how hard the model thinks. All three can change within a session, in a few keystrokes, and the right setting changes with the task.
 
 ## Permission modes
 
-A *permission mode* sets which actions the agent may take without asking you first. Every action an agent takes is one of four kinds: read a file, edit a file, run a command, or reach the network. The modes differ in which of those stop for a prompt. A prompt is a yes-or-no question in the session: *run this command?*, with the command shown.
+A *permission mode* sets which actions the agent may take without asking you first. Every action an agent takes is one of four kinds: read a file, edit a file, run a command, or reach the internet. The modes differ in which of those stop for a prompt. A prompt is a yes-or-no question in the session: *run this command?*, with the command shown.
 
-In Claude Code, four modes are in everyday use. You cycle through them with `Shift+Tab` in the CLI; the desktop app has a mode selector, and the VS Code extension a mode indicator.
+In Claude Code, four modes are in everyday use. The desktop app and VS Code extension have a mode selector button, and in the terminal you cycle through them with `Shift+Tab`; 
 
 | Mode | What runs without asking | Best for |
 |:--|:--|:--|
-| Manual | Reads only. Every edit and every command prompts. | Your first sessions; anything near restricted data |
-| Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Everyday work you are reviewing as it goes |
+| Manual | Reads only. Every edit and every command prompts. | Restricted data |
+| Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Potentially sensitive data |
 | Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape isn't obvious (next section) |
-| Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Long tasks with a plan, away from restricted data |
+| Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Most daily work |
 
-Which mode a session starts in depends on how you are signed in: on a personal Pro, Max, or Team plan it starts in Auto; on an Enterprise plan or through an institutional gateway it starts in Manual. A starting mode can also be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`. Two further modes exist, *bypass permissions* and *don't ask*, which drop prompting entirely. The first is for isolated containers, the second for scripts. Neither belongs on a laptop with data on it, and you have to go out of your way to turn them on: both sit outside the `Shift+Tab` cycle and work only in a session launched with a flag (below), so enabling one is unmistakably deliberate.
+A starting mode can be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`.  Two further modes remove prompting, in opposite directions. `bypassPermissions` runs every tool call with no prompt and no safety check — recommended for isolated containers only, and reachable from the app's mode selector (behind a settings toggle) or a terminal flag (`claude --allow-dangerously-skip-permissions`). `dontAsk` does the reverse: it auto-denies anything that would have prompted and runs only what you pre-approved — recommended for scripts, and can be set only from a terminal (`claude --permission-mode dontAsk`). 
 
-The launch flag behind those two blanket modes, shown so you recognize it rather than type it:
-
-```
-claude --allow-dangerously-skip-permissions
-```
-
-Other agents organize the same choices under different names — usually a few presets, each pairing how much runs without asking with an operating-system sandbox (§5) — but the reading is the same.
-
-Three things to hold onto. First, a mode is a dial on prompts, not a fence. Deny rules (§5) block an action in every mode, whatever the agent or its classifier decides; the data rule for restricted paths belongs there, not in a mode. Second, the blanket-bypass mode sits behind a launch flag and outside the normal cycle on purpose — leave it there; it has no place in an everyday launch. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the click-fest that follows is a worse failure than a well-chosen Auto session (§5). The aim is a mode where every prompt you see is one you would actually read.
-
-My own routine: Manual for the first sessions in a new project, until I have seen what it asks for. Accept edits for everyday work. Auto only when I am implementing a plan that came out of plan mode and no restricted data is in reach. I don't switch to Auto first and write the plan inside it.
+Three things to keep in mind. First, a mode only dictates which actions require the agent to stop and ask your permission; it doesn't block anything outright. If something must never happen it belongs in a deny rule (§5), which blocks the action in every mode, whatever the agent or its classifier decides. For example, a data rule for restricted paths should be a deny rule. Second, the blanket-bypass mode sits outside the normal cycle on purpose — it's not something designed for everyday work. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the resulting click-fest could be much worse than having Auto mode's classifier determine the risk (§5). The aim is a mode where every prompt you see is one you actually read.
 
 ## Plan mode
 
-For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: cycle to Plan with `Shift+Tab` (or pick it in the app's mode selector) and describe the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing.
+For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: pick it in the app's mode selector (or cycle to Plan with `Shift+Tab` in the terminal) and describe the task. The agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, and waits. You edit the plan in place, then approve it, and only then does it start editing. The plan becomes a fleshed out starting prompt for the task.
 
-The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your `AGENTS.md` and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
-
-Plan mode for: reorganizing a folder into the paper shape (§7); writing the simulation study for a model (§12); converting an analysis to a second language (§13); anything touching `data/`. Not plan mode for: renaming a variable across scripts, fixing a typo, adding a missing `library()` call, copying a pattern from one script into another. The rule of thumb is that if the task is small and its shape is obvious to both of you, skip the plan; otherwise ask. The cost of asking when you didn't need to is one round trip. The cost of not asking when you did is rework on a wrong-shaped solution, and a diff too large to review.
+The payoff is catching the wrong-shaped solution at the plan stage instead of twenty file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your global metadata files (§6) and which from the surrounding code, what it intends to check when it is done, what it will do with the rows that don't merge. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
 
 ## Model and effort
 
-Two settings change how the agent approaches a task, and both track how much of the approach is already known. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
+Two settings govern how much thinking the agent brings to a task, and for both, the right level depends on how much of the method is already worked out and how much the agent has to invent. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
 
 In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. It can be pinned rather than picked each session: `effortLevel` in the settings file persists a level — any level but `max`, which the file refuses on purpose.
 

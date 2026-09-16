@@ -33,7 +33,7 @@ The agent helped build the analysis; the analysis has to run without it. A pipel
 
 Writes the build file and keeps it in step with the scripts. Adds the lockfile and updates it. Writes the run order into the README from the build file, so the two can't disagree. Runs the fresh-clone test and reports. Drafts the data README by reading the scripts for every column they use. And, for the deposit, does the reading that the audit turns on.
 
-For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. The quickstart (§8) has the recipes; the one command above is enough for most papers.
+For a project that has outgrown one command, two tools from the fuller stack take the next step. `targets` for R, and Snakemake for pipelines that mix languages, are runners that track which outputs are current, rerun only the steps whose inputs changed, and resume a run that was interrupted. They matter when a single step takes hours; for a pipeline of fast scripts, rerunning everything is cheaper than the setup. Both are outside this guide; the one command above is enough for most papers.
 
 ## What you check
 

@@ -42,4 +42,4 @@ Your analysis language: R, Stata, Python.
 
 Git. Version control for your project files provides a safety net. 
 
-Optionally `just`, the command runner in Appendix A.4 (§15). 
+Optionally `just` (the command runner, §15) and `pueue` (the job queue for long fits, §12). Appendix D installs both. 

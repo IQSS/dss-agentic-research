@@ -38,7 +38,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
 - No model is trusted until it recovers known parameters from simulated data.
-- Fits longer than a few minutes run outside the agent, from a script I start.
+- Fits longer than a few minutes run through pueue, not in the session; I read the log when it finishes.
 
 ## Writing
 - Short sentences. Point first, then the qualification. Prose, not bullets.
@@ -117,7 +117,7 @@ it before the session ends.
 
 Where it goes: the project root, as a file named `justfile`. This is the one-command build of §15: `just build` runs the pipeline from raw data to manuscript figures, in order, and stops at the first failure. `just` is a small program that runs named recipes; it installs in one step on Mac and Windows and it is the only tool in this guide that you don't already have.[^just] If you would rather not add one, the R script below the justfile does the same job.
 
-[^just]: The install recipe is in the quickstart. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
+[^just]: Installing just is in Appendix D. The recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you.
 
 ```
 # Command front door: `just` lists the recipes, `just build` runs the pipeline.

@@ -13,13 +13,13 @@ COVERS: Protocol before searching. Search, screen, extract into an evidence tabl
 VERIFY: the run described here was made on 2026-08-31 against OpenAlex, Crossref, PubMed and arXiv, on the question behind papers/worthington-journal-review-times; 15 queries, 604 records retrieved, 507 after deduplication, 37 included, 11 borderline, and the counts in the table are that run's. The three failures reported are all from it: the retrieval cap that stopped the run, the DataCite record reported as a probable fabrication, and the preprint pair deduplication missed. Rerun and re-check the counts if the protocol changes.
 -->
 
-Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: don't try to make it less likely. Make it impossible to miss.
+Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: not to make fabrication less likely, but to make it impossible to miss.
 
 ## What to ask for
 
 *The protocol, before a single query runs.* Write down the question, what counts as included and excluded, the date range, the languages, which sources will be searched, and what "done" means. Have the agent draft it from your description, then read it and approve it. This is the step you already know how to do, and it is what makes the search auditable, re-runnable, and arguable by a reviewer. Skipping it because the question looks simple is how you end up with a set of papers nobody can defend.
 
-Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it is a mood. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
+Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it names a topic, not the criteria that decide what is in and out. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
 
 *The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier.** Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but can't resolve goes to a quarantine file. It doesn't enter the table, and it isn't cited.
 
