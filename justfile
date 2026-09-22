@@ -32,15 +32,20 @@ check: render
 preview:
     quarto preview
 
-# Live local preview: one sync, then quarto serves and reloads the browser on save while
-# watchexec re-runs `just sync` whenever the upstream guide markdown or figures change -- so
-# editing ../../publishing/agentic-ai-for-researchers/source updates the local site with no
-# deploy. Ctrl-C stops both. Needs watchexec (brew install watchexec).
-watch: sync
+# Live local preview: syncs and serves, live-reloading as you edit -- no deploy, no commit.
+# Runs the chapter splitter with --allow-dirty (a plain `just sync` refuses a dirty source,
+# since SOURCE.lock must name a commit that contains the synced content) so uncommitted edits
+# show up; watchexec re-runs it on every save to the upstream markdown or figures while quarto
+# preview reloads the browser. Cost: SOURCE.lock names a commit without your edits while you
+# work, so `just check-upstream` nags until you commit -- then a plain `just sync` puts it right.
+# Ctrl-C stops both. Needs watchexec (brew install watchexec).
+watch:
     #!/usr/bin/env bash
     set -euo pipefail
     up=../../publishing/agentic-ai-for-researchers
-    watchexec --watch "$up/source" --watch "$up/figures" --exts md,svg -- just sync &
+    sync="../dss-training-ops/scripts/split-chapters.py --upstream $up --site . --allow-dirty"
+    $sync
+    watchexec --watch "$up/source" --watch "$up/figures" --exts md,svg -- $sync &
     watcher=$!
     trap 'kill "$watcher" 2>/dev/null || true' EXIT INT TERM
     quarto preview
