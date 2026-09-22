@@ -32,6 +32,19 @@ check: render
 preview:
     quarto preview
 
+# Live local preview: one sync, then quarto serves and reloads the browser on save while
+# watchexec re-runs `just sync` whenever the upstream guide markdown or figures change -- so
+# editing ../../publishing/agentic-ai-for-researchers/source updates the local site with no
+# deploy. Ctrl-C stops both. Needs watchexec (brew install watchexec).
+watch: sync
+    #!/usr/bin/env bash
+    set -euo pipefail
+    up=../../publishing/agentic-ai-for-researchers
+    watchexec --watch "$up/source" --watch "$up/figures" --exts md,svg -- just sync &
+    watcher=$!
+    trap 'kill "$watcher" 2>/dev/null || true' EXIT INT TERM
+    quarto preview
+
 # Publish to Cloudflare Pages -- project `dss-agentic-research`, https://dss-agentic-research.pages.dev
 # Direct upload, deliberately not a git integration: CI renders and checks but never publishes, so no
 # Cloudflare credential lives in the workflow. It depends on `verify`, so a site that is stale against
