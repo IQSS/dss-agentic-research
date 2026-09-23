@@ -70,7 +70,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
 - No model is trusted until it recovers known parameters from simulated data.
-- Fits longer than a few minutes run through pueue, not in the session; I read the log when it finishes.
+- Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
 
 ## Writing
 - Short sentences. Point first, then the qualification. Prose, not bullets.

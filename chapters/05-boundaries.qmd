@@ -77,6 +77,12 @@ Every change an agent makes is a git change, and that is what makes delegating t
 
 Two limits. Git undoes what it tracks, and it doesn't track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
 
+## When to reach for a container
+
+The four boundaries above cover the ordinary case: an agent that might go wrong on your own code and data. A few situations call for a heavier one, a *container*: a sealed environment with its own copy of the files and no path to the rest of your machine, so nothing that runs inside it can touch anything outside. Reach for one when the risk is the code or data itself rather than the agent. You are about to run something you don't trust: a reviewer's replication package, a scraped dataset, a repository you were sent. Or a task needs the agent to run with the prompts and the sandbox relaxed (§4), and you want that freedom walled off from everything else. Or you want to hand a collaborator an environment that runs the analysis exactly as yours does.
+
+This guide doesn't set one up: which container tool to use, and how to install it, is the companion guide's, *Extending Your Agent's Toolkit*. What belongs here is the judgment. The sandbox above already bounds what a command can write and reach, and for your own work that is enough; the container is the fence you add when you don't trust what you are about to run.
+
 ## A starting posture
 
 In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.

@@ -35,7 +35,7 @@ The habits: the file wins over the note, always, and a rule you rely on memory t
 
 ## The click-fest
 
-A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you wouldn't fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have.
+A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you wouldn't fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have. For code or data you actively distrust, rather than merely haven't vetted, the dependable fence isn't a prompt but a container that seals it off from the rest of your machine (§5).
 
 The habits are the posture in §5: the routine allowed, the never denied, and prompts kept only for what you will actually read. The signal that the balance is wrong is your own behavior. Approving the same prompt for the tenth time means that action belongs on the allow list; approving something you would have refused had you read it means it belongs on the deny list. A prompt rate you can't keep up with is a setting to change, not a discipline to summon.
 
@@ -45,7 +45,7 @@ The agent will take whatever you hand it, including the parts of the work that w
 
 *Delegating the judgment.* The estimand, the exclusion rule, the prior, the interpretation of a discrepancy between two implementations, the decision about what to do when a calibration fails. Asked, the agent decides, fluently, and the decision looks like analysis. These are yours, and the sign that one has slipped is a number in your table you can't explain in your own words.
 
-*Delegating the checking.* "Check that this is right" returns "it is right." An agent verifying its own work has the same blind spots the work has. The check comes from something else: a simulation with a known truth, a second implementation by a different session, a reference you opened, a build you ran yourself (§12, §13, §15).
+*Delegating the checking.* "Check that this is right" returns "it is right." An agent verifying its own work has the same blind spots the work has. The check comes from something else: a simulation with a known truth, a second implementation by a different session, a reference you opened, a build you ran yourself (§12, §13, §15). A second agent helps only if it is genuinely independent: a critic that shares the session's context tends to agree, and among several runs a majority isn't proof, since two agents can make the same mistake. Anchor the check to something outside them all, a known answer or a simulation (§13).
 
 *Delegating the boundary.* Letting the agent write its own permission rules, edit the brief that constrains it, or decide which data are restricted. The boundary is set outside the session it binds (§5, §16), or it isn't a boundary.
 

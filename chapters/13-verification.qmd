@@ -35,6 +35,8 @@ The tolerance is decided before the comparison, and it depends on the computatio
 
 Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it isn't for every intermediate step.
 
+The same logic scales up when the agent rebuilt more than the model. If it reassembled the dataset itself, a merged file or a cleaned extract, run the whole pipeline several times over, each in a fresh session that sees only the raw inputs and the specification, nothing an earlier run made, and in a different language where you can. Implementation slips are effectively random, so independent runs rarely repeat one, and quantities that agree across all of them (to rounding, or to Monte Carlo error) don't depend on which agent or which software produced them. If you already have a result you trust, anchor the runs to it: have each one reproduce the published table, or the number from the pipeline it replaces, before touching anything new. That anchor is the tie-breaker, because two agents can share a mistake, so a majority vote among runs settles nothing and a known answer does. A separate session can lay the runs side by side, one column each plus the known value, and flag every quantity that disagrees by more than the tolerance.
+
 ## What the agent does
 
 The second implementation is ordinary agent work: read the specification, read the data, write the do-file, run it, read the log, fix what failed, write the estimates out. The comparison is a short script that reads two files and prints a table. What makes the exercise different from any other task is only what the agent is *not* allowed to read, and what it isn't allowed to do when the numbers disagree.
@@ -93,6 +95,8 @@ Agreement rules out implementation error, not specification error. If `METHODOLO
 *Same name, different quantity.* The two files both have a column called `effect`, and one holds a coefficient while the other holds a marginal effect, or one a log-odds and the other an odds ratio, or one a conventional standard error and the other a clustered one. Compare the quantity the specification names, and make each file say which it holds.
 
 *The samples differ.* The most common discrepancy isn't in the model but in who is in it: a filter applied in one implementation and not the other, missing values dropped by default in one routine and kept in another. The first number to compare is the N, before any coefficient.
+
+*The vote.* Three runs agree, so the number must be right. But two agents can make the same mistake, most often a shared misreading of an ambiguous specification or source, which no amount of replication catches because every run reads the same words. The tie-breaker is a known answer, not a majority; and the guard against a shared misreading is a small hand check, tracing ten or twenty records, chosen to include the awkward cases (near-duplicate names, a boundary year, anything the codebook recoded), from the result back to the sources.
 
 *Verifying everything.* Doubling the cost of every intermediate step is how the practice gets abandoned. Verify the claims.
 

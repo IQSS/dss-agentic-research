@@ -7,7 +7,7 @@ title: "3. Where to run it"
 # 3. Where to run it
 
 <!--
-STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D)
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D, the HUIT API-gateway setup)
 SOURCE: quickstart §4-5 (interfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
 COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension, web/cloud). Which for whom. Which account — the institutional plan, not a personal one or an API key, and what each implies for data; Harvard sidebar (Claude Standard/Premium; Gemini and ChatGPT Edu named briefly). What must be installed (git; the R / Python / Stata you already have).
 VERIFY: Claude interfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not interface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across interfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check interfaces and the tool menu at release; they change quarterly.
@@ -38,8 +38,6 @@ Harvard licenses these agents under enterprise and education agreements: the ven
 
 ## What else should be installed
 
-Your analysis language: R, Stata, Python. 
+Your analysis language: R, Stata, Python, etc.
 
-Git. Version control for your project files provides a safety net. 
-
-Optionally `just` (the command runner, §15) and `pueue` (the job queue for long fits, §12). Appendix D installs both. 
+Git. Version control for your project files provides a safety net.  
