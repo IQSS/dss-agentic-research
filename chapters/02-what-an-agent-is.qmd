@@ -20,6 +20,8 @@ Consider what happens when a chat assistant writes you a cleaning script. It has
 
 An agent closes that gap because it can use *tools* that allow it to read and write files and execute commands on your computer. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
 
+An agent also changes what you can sustain across a long project, not just within one task. A chat has one context window, its working memory, and nothing behind it: as the conversation grows the earliest messages drop out of view, and past a certain length the assistant loses the thread. An agent keeps going. When the context window fills it compacts, summarizing the older turns so the essentials survive in less space, and it writes what matters to files on disk: a running to-do list, a status snapshot, notes to itself (§6, §9). Those files outlast the session, so a fresh agent the next day can read them and pick up where the last one left off.
+
 ## The loop: think, act, observe
 
 Earlier AI tools did one of two things. They reasoned without acting, which is how a chat window produces confident code that has never been run, or they acted without reasoning, which is blind trial and error. An agent alternates the two in a loop.

@@ -13,3 +13,4 @@ body.quarto-dark main img[src$="four-pillars.svg"] { content: url("figures/four-
 body.quarto-dark main img[src$="hub-and-spoke.svg"] { content: url("figures/hub-and-spoke-dark.svg"); }
 body.quarto-dark main img[src$="think-act-observe.svg"] { content: url("figures/think-act-observe-dark.svg"); }
 body.quarto-dark main img[src$="two-gears.svg"] { content: url("figures/two-gears-dark.svg"); }
+body.quarto-dark main img[src$="two-pipelines.svg"] { content: url("figures/two-pipelines-dark.svg"); }

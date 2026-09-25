@@ -33,7 +33,7 @@ COVERS: The pitch, expanded. Bookkeeping, simulation, verification, plus the wri
 
 An AI chat assistant answers questions. An AI agent works inside your project: it creates files and folders, writes and runs code, reads errors, fixes them, keeps track of tasks and the current project status, all without you copying text back and forth between a chat window and your project files. This guide is about how to make that process work efficiently when the output is an academic paper or talk.
 
-You may already use AI chat for writing and for code. An agent is the same sort of AI model, but with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more reliable than a chat window.
+You may already use AI chat for writing and for code. A chat assistant runs on a *large language model* (LLM), the AI that generates the text; an agent runs on the same LLM, with access to *tools*: the ability to read your files, run your code, and write results. Your job moves from transcriber to supervisor: you describe the goal and its constraints, let the agent work, and check the result rather than each step. §2 explains why an agent that can act is more reliable than a chat window.
 
 ## Where it pays to use an agent
 
@@ -76,7 +76,7 @@ A running tool also has to be kept up, fixed when it breaks, and supported for t
 
 ## How to read this guide
 
-Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), how to install the two extra tools (D), and a glossary (E); institutional access is in §3.
+Part I orients: what an agent is (§2), where to run one (§3), the modes it runs in (§4), and the boundaries that keep it safe (§5). Part II discusses the two things that make an agent useful and reliable, the files it reads (§6) and the shape of a project (§7), and then how to package a workflow you repeat (§8). Part III walks the stages of a research paper, from project setup to archival repository (§9–§15). Every chapter there uses the same four headings, so you can skim: *What to ask for*, *What the agent does*, *What you check*, *What goes wrong*. Part IV is judgment: confidentiality (§16), cost (§17), and failure modes (§18). The appendices hold files to copy and edit (A), prompts (B), a description of the terminal (C), and a glossary (D); institutional access is in §3.
 
 If you have never run an agent, read §2 through §4, then §6, §7, and §9, and start with a folder you wouldn't mind reorganizing. If you already use one, start at §6, then go to the Part III chapter for the stage you are at in your research project. Read §16 before an agent goes near restricted data.
 
@@ -97,6 +97,8 @@ A chat assistant and an agent run on the same models. The difference is reach: a
 Consider what happens when a chat assistant writes you a cleaning script. It has never seen your data, so you have to tell it the column names. You paste the script into RStudio and run it. It fails on line 14, because the ID column is character and the script treated it as numeric. You copy the error back into the chat, describe the column, and get a corrected script. Three or four rounds later it runs. Every round, you carried information across the gap: the file to the model, the model's code to the file, the error back to the model. The chat assistant may not have been wrong about anything it could see. It just couldn't see the actual file you were working with.
 
 An agent closes that gap because it can use *tools* that allow it to read and write files and execute commands on your computer. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
+
+An agent also changes what you can sustain across a long project, not just within one task. A chat has one context window, its working memory, and nothing behind it: as the conversation grows the earliest messages drop out of view, and past a certain length the assistant loses the thread. An agent keeps going. When the context window fills it compacts, summarizing the older turns so the essentials survive in less space, and it writes what matters to files on disk: a running to-do list, a status snapshot, notes to itself (§6, §9). Those files outlast the session, so a fresh agent the next day can read them and pick up where the last one left off.
 
 ## The loop: think, act, observe
 
@@ -1267,6 +1269,12 @@ VERIFY: `require` (Correia and Seay, Stata Journal 24(4), 2024; `require setup` 
 
 The agent helped build the analysis; the analysis has to run without it. A pipeline that works only with the agent in the loop, re-explaining and re-fixing as it goes, isn't reproducible. What you have is a record of a conversation, and nobody else can re-run a conversation. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables. This chapter is that test, and the hand-off that follows from passing it: to a coauthor, to a journal, to a repository.
 
+Reproducibility means two different things, and this chapter is about the harder one. The first: can someone get the same results from your raw data using the methods described in the paper? That needs no language, package, or environment pinned down; it needs the raw data and a clear written recipe. The second: can someone reproduce the entire analysis pipeline that produced the results? That needs everything pinned. The first would be enough if papers gave enough detail to reproduce the analysis, but they rarely do, so in practice we rely on the second: a replication package that runs. This chapter builds that package.
+
+Almost everything this chapter describes predates agents: the lockfiles, the containers, the pipeline runners. A determined researcher could always have set them up, and most never did, because the tools are technical and take time to wire together, and that time competes with the research itself. So reproducible practice stayed the exception. What an agent changes is the cost of entry: it handles the technical setup while you stay on the substantive questions. The bar to a reproducible project is lower now, and that is the reason to clear it, not evidence that it was ever optional.
+
+![](figures/two-pipelines.svg){#fig-two-pipelines .tall fig-alt="Two modes of analysis compared down a single column. A fork splits a task and your data into two branches: the LLM writes the code (deterministic) or the LLM does the analysis (stochastic). For each concern the code side (blue) and the model side (brown) are stacked: what happens, how to reproduce, how to verify, how it ages, and what to report." above="12pt" below="12pt"}
+
 ## What to ask for
 
 *One command.* Everything the paper reports is produced by a script, and one command runs the scripts in order and stops at the first failure. The zero-install version is a short `run-all.R` (Appendix A.4): it runs each script and halts on the first error, using only the R you already have. A command runner, `just`, does the same more cleanly, with named recipes anyone can list and run; it is a small install the companion guide, *Extending Your Agent's Toolkit*, covers. Ask for it early, when the project has two scripts, so that it grows with the project rather than being reconstructed at submission. The build is a contract, and the one file the agent shouldn't edit freely: it may propose changes, and you review each one, because a change to the build changes what "reproduced" means.
@@ -1277,7 +1285,7 @@ The agent helped build the analysis; the analysis has to run without it. A pipel
 
 *Re-run only what changed.* `run-all.R` and `just` rerun everything from the top. That is fine until a step takes hours or the steps grow interdependent, when rerunning the whole build to change one figure wastes time and the agent starts skipping steps to save it. The tool for this is a pipeline runner: it maps which step depends on which, reruns only the steps whose inputs changed, and resumes a build interrupted partway. In R that is `targets`; the cross-language equivalent is Snakemake. Reach for one past roughly ten interdependent steps, or when a single step takes long enough that you wouldn't want to rerun it needlessly. The command in front stays the same; what changes is that a rerun is cheap. Which runner, and how to set it up, is the companion guide's; the judgment here is when the pipeline earns the extra structure, which is rarely on a first paper and often by the third.
 
-*The model and the prompt.* Most of this guide has the agent write code, so what has to be reproducible is the code. Sometimes the model does a step of the analysis itself: it classifies documents, pulls a variable out of text, codes open-ended answers. Its output is then a result, not a script, and reproducing it takes the exact model version and the exact prompt, not just the code. Record both, and save the inputs and the raw outputs as data (§11). Check the output as you would any result: validate a sample by hand and report the agreement (§13), and disclose the model, its version, and the dates (§14). A hosted model can change or be withdrawn, so when the step is central to the paper, use an open-weight model you can pin (§16).
+*The LLM and the prompt.* When the LLM performs a step of the analysis itself rather than writing the code for it, what has to be reproduced is a result, not a script, and both reproducing it and checking it work differently. That case has a section of its own at the end of this chapter.
 
 *The acceptance check.* Before the work is called done, the whole pipeline runs clean from a fresh copy: not the folder you have been working in, with its accumulated state, but a clone of the repository into an empty directory, the environment restored from the lockfile, the one command run, and the outputs compared with the committed ones. Ask the agent to do exactly that in a temporary folder and report what happened, including whether the tables match to the decimal (they should; for sampling-based results, within Monte Carlo error, §13).
 
@@ -1324,6 +1332,18 @@ The rule the audit turns on: *read, do not search.* A pattern search finds only 
 *The late audit.* A deposit is public and, after a short window, permanent: Zenodo lets the depositor remove a version for thirty days and then not at all. Before the first tag every one of these problems costs a commit; after a DOI exists, the cheap fixes are gone. Audit before the tag, and if a deposit went out unaudited, audit it the same day.
 
 *Building the pipeline for a paper in review.* A near-final project with three fits left and no iteration ahead is below the line where a runner pays off; rerun by hand and finish. The one-command build pays for itself on the next paper, where it can be there from the first script.
+
+## When the LLM is in the loop
+
+Most of this guide has the agent write code, and what has to be reproducible is the code: rerun the script and the result returns. Sometimes the LLM does a step of the analysis itself. It sorts documents into categories, pulls a variable out of free text, codes open-ended answers. Now the LLM is not writing the instrument, it is the instrument, and its output is a result the paper rests on. Reproducing that result takes more than the script that called the LLM, and checking it is a measurement question rather than a code review. This case is a different pipeline, and it repays being treated as one.
+
+*Pin the model.* A result is reproducible only against a fixed model, and "the current Claude" is not fixed. There are two ways to pin it, and they promise different things. A hosted model is pinned by its exact version identifier: from the Claude 4.6 generation on, an identifier names one frozen snapshot and the weights behind it never change, so a run you pin today returns the same answer next year, for as long as that version still exists. An open-weight model, one whose weights you download and keep, is pinned harder: you record the exact release and a checksum of the files, and because the weights sit on your own disk, nothing upstream can alter them. Record the version either way, and with it the prompt, the temperature, and any random seed, since each of those shapes the output.
+
+*Build a gold set and score against it.* The hand-check from verification (§13), a sample you label yourself and compare the LLM against, becomes a standing asset here rather than a one-time test. Label a few hundred cases by hand, keep them, and score every run against them: percent agreement for a clear-cut task, a chance-corrected statistic such as Cohen's kappa when the categories are uneven. That agreement is the LLM's evaluation. It belongs in the methods (§14), and it is what you rerun whenever anything changes.
+
+*Plan for the model going away.* Hosted models are retired. Anthropic gives at least sixty days' notice and has committed to preserving old weights, but a retired model stops answering, and a pinned version that no longer runs reproduces nothing. An open-weight model cannot be retired out from under you: the copy you saved is the copy that runs. So the model you pick sets the result's shelf life, and for a step central to the paper, one a replicator will need years out, prefer an open-weight model you can archive beside the data. When you do change models, by choice or because the old one is leaving, do not simply switch: rerun the gold set on the candidate, compare its agreement to the model it replaces, and adopt it only if the agreement holds. The gold set is what makes a swap safe, and what turns "the model changed" from a silent risk into a number you can see.
+
+*Save the run, and disclose it.* The inputs the LLM saw and the raw outputs it returned are data, stored as data (§11), not regenerated on demand from a model that may be gone. The methods name the model, its version, and the dates it ran (§14), so a reader can see what was asked, what came back, and how closely it matched the hand-labeled truth. For one step in one paper, a script that calls the pinned model, saves its inputs and outputs, and prints the agreement against the gold set is the whole apparatus, and it sits in the one-command build above like any other step. When the loop grows, several models compared, the step rerun as new data arrives, an experiment tracker records each run and scores it for you; which tool, and how to set it up, is the companion guide's, *Extending Your Agent's Toolkit*. A hosted tracker is one more service the data travels to, so for restricted data the rule of §16 applies and a local option is the safer default.
 
 <!-- ===================== PART IV — JUDGMENT ===================== -->
 
@@ -2016,7 +2036,7 @@ stand as its own appendix at the end). Built from the terms the guide defines at
 first use; keep it in step with those definitions.
 -->
 
-*Agent.* A model given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
+*Agent.* An LLM given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
 
 *Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§13).
 
@@ -2050,7 +2070,11 @@ first use; keep it in step with those definitions.
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
 
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §15).
+
 *Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§15).
+
+*Model.* Two senses. The specific LLM an agent runs on, a tier such as Sonnet or Opus, pinned to a version when a result must be reproduced (§4, §15); and a *statistical model*, the specification fitted to data (§12).
 
 *Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§13).
 

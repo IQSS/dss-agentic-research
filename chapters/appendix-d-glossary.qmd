@@ -12,7 +12,7 @@ stand as its own appendix at the end). Built from the terms the guide defines at
 first use; keep it in step with those definitions.
 -->
 
-*Agent.* A model given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
+*Agent.* An LLM given the ability to read files, run commands, and edit files in a folder, and a loop in which to do so (§2). Distinct from a chat assistant, which only returns text.
 
 *Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§13).
 
@@ -46,7 +46,11 @@ first use; keep it in step with those definitions.
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
 
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §15).
+
 *Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§15).
+
+*Model.* Two senses. The specific LLM an agent runs on, a tier such as Sonnet or Opus, pinned to a version when a result must be reproduced (§4, §15); and a *statistical model*, the specification fitted to data (§12).
 
 *Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§13).
 
