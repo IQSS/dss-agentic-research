@@ -19,7 +19,7 @@ Reproducibility means two different things, and this chapter is about the harder
 
 Almost everything this chapter describes predates agents: the lockfiles, the containers, the pipeline runners. A determined researcher could always have set them up, and most never did, because the tools are technical and take time to wire together, and that time competes with the research itself. So reproducible practice stayed the exception. What an agent changes is the cost of entry: it handles the technical setup while you stay on the substantive questions. The bar to a reproducible project is lower now, and that is the reason to clear it, not evidence that it was ever optional.
 
-![](figures/two-pipelines.svg){#fig-two-pipelines .tall fig-alt="Two modes of analysis compared down a single column. A fork splits a task and your data into two branches: the LLM writes the code (deterministic) or the LLM does the analysis (stochastic). For each concern the code side (blue) and the model side (brown) are stacked: what happens, how to reproduce, how to verify, how it ages, and what to report." above="12pt" below="12pt"}
+![](figures/two-pipelines.svg){#fig-two-pipelines .tall width="90%" fig-align="center" fig-alt="Two modes of analysis compared down a single column. A fork splits a task and your data into two branches: the LLM writes the code (deterministic) or the LLM does the analysis (stochastic). For each concern the code side (blue) and the model side (brown) are stacked: what happens, how to reproduce, how to verify, how it ages, and what to report." above="12pt" below="12pt"}
 
 ## What to ask for
 
