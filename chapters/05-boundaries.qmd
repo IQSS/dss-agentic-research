@@ -7,82 +7,56 @@ title: "5. Boundaries"
 # 5. Boundaries
 
 <!--
-STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tool-chain §13 introduction (banded security-layers figure, band 4 relabelled from "containment" to version control since containers are out of scope), §13a "Three tiers of command policy", "Conservative starting posture for new agent users", "The blind-click-fest failure mode", "Two write channels"; §13b sandbox role; §1b (git)
-COVERS: Allow / prompt / deny as a starting posture. The sandbox in one paragraph. Version control as the undo button. Why anything that must never happen should not be promptable. The .claude/settings.json deny file that §16 points to.
-VERIFY: checked 2026-08-27 against the Claude Code permissions and sandboxing docs: rule forms `Bash(cmd *)`, `Read(./path/**)`, `Edit(path)`, `PowerShell(Cmdlet *)`; deny rules apply in every mode; the sandbox is built in, enabled with `/sandbox`, runs on macOS, Linux, and WSL2 but not native Windows; sandboxed commands write only to the project and temp by default; no network domains pre-allowed; auto-allow mode. (Codex rules-file specifics archived 2026-09-15; see docs/archive.)
+STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
+SOURCE: Claude permissions, sandboxing and security documentation; two-guide content audit
+COVERS: Data access, allow/ask/deny, sandbox limits and exceptions, harmless checks, git recovery, proportionate container use.
+VERIFY: Permissions and sandbox documentation checked 2026-09-26. The maintained configuration example belongs to the toolkit; this chapter does not claim that file rules alone contain arbitrary subprocesses.
 -->
 
-Limiting what an agent can do. The question isn't whether the agent is malicious but what it can touch if it goes wrong, because it will go wrong: it will misread a request, run a command that does more than it meant, or act on something it read in a file. Boundaries keep a mistake from being unrecoverable. There are four, and each covers a failure the others don't.
+Before delegating work, decide what the agent may read, change, and send elsewhere. An agent can misunderstand a request or follow misleading instructions embedded in a document. This chapter explains how permission rules and sandboxing limit its access, how to check those limits, and how version control helps you recover earlier versions of files.
 
-![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four boundaries in two groups: deny rules and prompts, which bind a cooperating agent; the sandbox and version control, which hold whatever the session has read." above="6pt" below="6pt"}
+![](figures/four-boundaries.svg){#fig-four-boundaries fig-alt="Four safeguards with different limits: permission rules, approval prompts, operating-system isolation for sandboxed commands, and recovery of tracked files through git." above="6pt" below="6pt"}
 
-The split that matters is between the first two and the last two. Rules and prompts bind a *cooperating* agent: a deny rule matches the command as the agent wrote it, and a prompt depends on a person reading it. Both are excellent against accidents. Neither is a wall. The sandbox and version control hold whatever the session has read and whatever the agent has decided, because the operating system and git enforce them rather than the agent's good behavior or your attention.
+## Decide what the agent may see
 
-## Allow, prompt, deny
+Selecting a project folder tells the agent where to work. It does not, by itself, prevent access to other readable files on the computer. A file's contents can reach the hosted model when a tool opens it or a script prints it, even if you never attach the file to a message.
 
-Every action an agent takes falls into one of three tiers, and the settings file is where you say which. *Allowed* actions run without asking. *Prompted* actions stop for a yes or no, with the command or the edit shown. *Denied* actions are refused, in every mode, and the agent is told so.
+Begin with public, synthetic, or explicitly approved material. Keep restricted inputs in storage the agent's process cannot access, unless you are working in an environment and service approved for that processing (§16). A folder elsewhere on the same drive may still be readable. An encrypted volume that is not mounted, or a separate account without permission to the data, can provide a stronger separation.
 
-A conservative starting posture for a researcher, in shape rather than as a copyable file:
+Preserving originals and preventing disclosure are different rules. Approved raw data may be read by an analysis, but should not be overwritten. Restricted data may need to be unreadable to the agent altogether. Derived data and aggregate tables need their own disclosure decision; neither is automatically safe to expose.
 
-- *Allow* what only reads or builds: reading files in the project, `git status`, `git diff`, `git log`, running your own scripts and the build command. With the sandbox on (below), most local commands can sit here because the sandbox bounds them.
-- *Prompt* on what is visible outside the machine or hard to undo: `git push`, installing or removing packages (system packages too: `brew`, `apt`, `winget`), deleting files, anything that reaches the network, any command that touches `data/`.
-- *Deny* the destructive set outright: `rm -rf`, `sudo`, `git push --force`, `git reset --hard`, `git clean`, and every read of a restricted data path (§16).
+## Allow, ask, and deny
 
-The relaxation path runs one way. When you notice you have approved the same prompt ten times without reading it, that command moves from prompt to allow, one at a time, as you come to trust the boundary. When you discover an action you would never have approved had you read the prompt, it moves to deny. Items rarely move from allow back to prompt, unless a tool turns out to do something you didn't expect.
+Permission rules determine which recognized actions are allowed, require approval, or are refused. Use them to keep routine work moving and make consequential actions explicit. A useful project policy permits ordinary work on approved inputs, asks before publishing or expanding access, and refuses destructive operations that would remove the recovery history.
 
-Here is that posture as the file §16 points to. It is `.claude/settings.json` in the project folder, committed to git so every session on every machine inherits it; the personal `settings.local.json` beside it holds machine-specific overrides and isn't committed (Appendix A.5). The same rules in `~/.claude/settings.json` apply to every project.
+These rules are evaluated by the agent software, not merely read as instructions by the LLM. Their coverage still has limits. A file rule can block the built-in file tools and recognized file commands without blocking every script that opens the same path indirectly. The [permissions documentation](https://code.claude.com/docs/en/permissions#read-and-edit) explains this distinction. The toolkit's *Keeping the agent's reach in proportion* section supplies the maintained configuration example and explains how to combine it with the sandbox.
 
-```
-{
-  "permissions": {
-    "allow": [
-      "Bash(Rscript *)",
-      "Bash(git status *)", "Bash(git diff *)", "Bash(git log *)",
-      "Bash(just build)"
-    ],
-    "ask": [
-      "Bash(git push *)",
-      "Bash(install.packages *)", "Bash(renv::install *)"
-    ],
-    "deny": [
-      "Read(./data/raw/**)",
-      "Edit(./data/raw/**)",
-      "Bash(rm -rf *)", "Bash(sudo *)",
-      "Bash(git push --force *)", "Bash(git reset --hard *)", "Bash(git clean *)",
-      "PowerShell(Remove-Item *)",
-      "Edit(./.claude/settings.json)"
-    ]
-  }
-}
-```
+Do not approve an unfamiliar request just to keep work moving. Ask what it will change and why the existing access is insufficient. Repeated approval requests may indicate a missing routine permission; they do not justify allowing every command. Changes to security settings deserve a separate review because they affect later tasks too.
 
-The rule form is the tool, then the command or path in parentheses, with `*` standing for whatever follows; `Read(./data/raw/**)` covers the folder and everything beneath it. Deny rules apply in every permission mode (§4), including Auto, which is why the data rule belongs here and not in a mode. And the last line denies the agent the ability to edit the file itself, so a rule can't be talked away in the session it is meant to bind. Other agents keep the same posture in their own rules file; the forms differ, the idea doesn't.
+## What the sandbox adds
 
-## Why anything that must never happen should not be promptable
+A *sandbox* restricts the programs running inside it at the operating-system level. Depending on its configuration, it limits file reads, writes, and network access, including access by subprocesses. It adds protection beyond matching the command the agent proposed.
 
-A prompt is only as good as the attention reading it, and attention is the resource an agent session spends fastest. A session that asks forty questions trains you to press yes; by the fortieth you are approving the shape of the dialog, not the content. This is the click-fest, and it is the ordinary failure of a permission system that prompts too much. Two facts make it worse than it sounds. A prompt gates an action before its content arrives: approving "run the script that fetches the page" happens before the page exists, so nothing that happens afterward can depend on asking again. And once a session has read something you wouldn't fully trust (a page it fetched, a README from a package, an issue thread, a collaborator's file), every subsequent request looks plausible, because the request is shaped by what was read.
+The qualification is important: those limits apply to sandboxed execution. A command exempted from the sandbox, a queued job launched by another service, or a separately connected tool may have different access. Read restrictions also have to be configured; do not assume the selected folder is the only readable location. See [Claude's sandbox documentation](https://code.claude.com/docs/en/sandboxing) and the toolkit's configuration section.
 
-What stays dependable at that point is what doesn't depend on reading the prompt: the deny rules, the sandbox, the version control. So the corollary: anything that must never happen shouldn't be promptable. The data rule is the clearest case. "Ask before reading `data/raw/`" is a prompt you will one day approve without reading. "Never read `data/raw/`" as a deny rule, with the data outside the folder besides, isn't.
+From the app, ask the agent to report which settings apply to the project, whether its command tool is sandboxed, and which exceptions exist. It should inspect the effective configuration, not infer protection from the mode's name. If a required control is unavailable in your app or institution's configuration, use only material safe for that environment while IT resolves the access requirement.
 
-The aim is a prompt rate low enough that you read every prompt. Reaching it means moving the safe routine to allow, the truly dangerous to deny, and leaving in the middle only the handful of actions you actually want to decide each time.
+## Check the boundary without sensitive data
 
-## The sandbox in one paragraph
+Use harmless test files to check a configuration before relying on it. For example, create a file containing an invented phrase in a path intended to be unreadable, and another approved file that the agent should read. Test both the direct file tool and a small script that tries to read the denied test file. The expected result is a refusal for the denied path and success for the approved one. Test write protection on a disposable file too.
 
-A *sandbox* is a fence the operating system puts around a command: inside it, the command can write only to the project folder and a temporary directory, and can reach only network hosts you have approved, and this holds for any program the command starts in turn. It is the third boundary, and what it adds is the kind of guarantee: a deny rule binds the command as written, a prompt binds what you catch, the sandbox binds what the process can physically do. In Claude Code the sandbox is built in and off until you turn it on with `/sandbox`; it runs on a Mac, on Linux, and on Windows inside WSL2, not on native Windows, and its auto-allow mode runs sandboxed commands without prompting, which is how you get fewer prompts *and* more safety at once. (Some agents turn a sandbox on by default; the guarantee is the same.) One caveat: the fence bounds writes and network, not reads. Inside it the agent can still read whatever is in the folder, which is why the data rule (§16) is a deny rule and a location, not a sandbox setting.
+Ask for the actual success or failure messages. If a call prompts to bypass the restriction, decline it; retrying outside the sandbox would test a different boundary. These checks can reveal a misconfiguration, but they do not certify every tool or future session. Repeat them when access settings or execution routes change. Never use a real confidential file as the test.
 
-## Version control as the undo button
+## Keep a recoverable version
 
-Every change an agent makes is a git change, and that is what makes delegating tolerable. Before a task, the working copy is clean: `git status` shows nothing, so whatever the agent does will show up, alone, as a diff. After the task, `git diff` is the review (§9 covers reading it, in the app or the terminal). A single file the agent got wrong comes back with `git restore <file>`. A whole task that went wrong comes back with `git revert` of its commit, and a task you approved but regret next week comes back the same way, because the history is still there. The habit that makes this work is a commit before every task you delegate and one after, so that each commit is one task and the undo is one command.
+Before a task, ask the agent to show any existing changes. Review them and record a checkpoint of the files you intend to track. After the task, inspect the diff and the outputs, then commit the accepted work. This makes it possible to distinguish the agent's changes from edits already in progress.
 
-Two limits. Git undoes what it tracks, and it doesn't track data files or model fits (§7), which is one more reason `data/raw/` is read-only and rebuildable outputs are rebuilt rather than restored. And the undo has to be protected from the agent: `git reset --hard`, `git clean`, and `git push --force` are the commands that destroy history or uncommitted work, and they are on the deny list for that reason. If the agent can run them, the history you were relying on to reverse its work is the thing at risk.
+You can ask for a single file to be restored, as in §3, or for a completed task's commit to be reversed. Name exactly what should be recovered and have the agent show the proposed scope first. §9 explains the review in more detail.
 
-## When to reach for a container
+Git protects files it tracks. It does not recover ignored data, reverse an upload, or substitute for a backup. Keep source data protected separately, and do not give routine tasks permission to erase uncommitted work or rewrite shared history.
 
-The four boundaries above cover the ordinary case: an agent that might go wrong on your own code and data. A few situations call for a heavier one, a *container*: a sealed environment with its own copy of the files and no path to the rest of your machine, so nothing that runs inside it can touch anything outside. Reach for one when the risk is the code or data itself rather than the agent. You are about to run something you don't trust: a reviewer's replication package, a scraped dataset, a repository you were sent. Or a task needs the agent to run with the prompts and the sandbox relaxed (§4), and you want that freedom walled off from everything else. Or you want to hand a collaborator an environment that runs the analysis exactly as yours does.
+## When a container helps
 
-This guide doesn't set one up: which container tool to use, and how to install it, is the companion guide's, *Extending Your Agent's Toolkit*. What belongs here is the judgment. The sandbox above already bounds what a command can write and reach, and for your own work that is enough; the container is the fence you add when you don't trust what you are about to run.
+A *container* supplies a separate software environment and can limit what a task reaches. It is useful for running an unfamiliar replication package or preparing an environment to hand to a collaborator. Its protection depends on the folders mounted into it, credentials passed to it, network access, and privileges. Anything made available through those routes remains available to the code inside.
 
-## A starting posture
-
-In order: the project folder under git, committed, and clean before each task. The deny file above in place, committed. The sandbox turned on. Restricted data outside the folder (§16). Manual mode for the first sessions (§4), until you have seen what the prompts look like. Then relax one prompt at a time, and never past the point where you stop reading them.
+The toolkit's container section explains the setup and its limits. A container is not permission to expose restricted data or to disregard the source of code you run. For ordinary tasks, start with approved inputs, the configured safeguards, and a recoverable checkpoint; add a container when the task needs that extra separation.

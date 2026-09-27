@@ -10,61 +10,61 @@ title: "9. Bookkeeping"
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §17 (TASKS.md; four files, four roles), §12 (STATUS.md read first; the STATUS.md / TASKS.md seam), §15 "Reviewing what the agent changed" (the idea, not the pager tooling), §1b; ~/.config/agents/AGENTS.md § Task Management (session start and end)
 COVERS: Session start and end. STATUS.md then TASKS.md at the start; TASKS.md as the task record, STATUS.md rewritten only when the state moves. README, status, renames, migrations. Reviewing what changed in the app's diff view. Commit habits.
-VERIFY: Claude Code has no diff command; the VS Code extension and the desktop app show changed files as diffs, and the terminal uses `git diff` (checked 2026-08-26). §3 (drafted 2026-08-27) verified the app interfaces.
+VERIFY: App diff route checked against Claude desktop documentation 2026-09-26; no terminal interface taught here.
 -->
 
-Bookkeeping is where to start with an agent, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand; in between it keeps the folder, the README, and the task list true. Tedious, and harmless when it gets a name wrong. It is also the habit that makes every other chapter's checks possible: you can review what the agent changed only if you know what the folder looked like before.
+Returning to a project after a few days often means reconstructing what was finished, what remains open, and which files changed. An agent can maintain those records as it works. This chapter covers starting and closing a session, keeping project documentation current, reviewing changes, and recording completed work in git.
 
 ## What to ask for
 
-Two rituals, one at each end of a session, and a handful of standing tasks between them.
+Give the agent a routine for starting and closing each session, along with instructions for keeping the documentation current during the work.
 
-*At the start.* The agent has no memory of Friday. `STATUS.md` says where the project stands, `TASKS.md` is Friday's memory, and git's log is the record of what actually changed, so the first request of every session is the same:
+*At the start.* Have the agent read the project records before proposing work. `STATUS.md` describes the current state, `TASKS.md` lists open and completed tasks, and git records changes to tracked files:
 
 > Read `STATUS.md`, then `TASKS.md`, and tell me where we are. Then run `git status` and tell me if anything is uncommitted.
 
-The agent summarizes what is in progress and what is next, and flags anything half-finished. You answer with the session's goal in one sentence, and ask for it to be added under *In Progress*. That sentence is the session's scope; when the agent drifts from it, you point back.
+Check the agent's summary for unfinished work, then state the session's goal and ask for it to be added under *In Progress*. Refer back to that goal if the agent begins making unrelated changes.
 
 *At the end.* Before you close the session, not after:
 
 > Update `TASKS.md`: move what is finished to Done with today's date, and on each In Progress item say what is left, not what was done. If that moved the project's state, rewrite the line of `STATUS.md` it changed, and the date. Then show me `git status` and propose a commit message.
 
-You read the diff (below), then commit, or let the agent commit with a prompt (§5). What you are protecting is Monday: a session that starts from a `TASKS.md` that wasn't updated on Friday will repeat work, or undo it.
+Review the changes as described below, then make a commit or authorize the agent to make one (§5). Updating the records before you leave helps the next session recognize completed work and resume anything unfinished.
 
-*Between.* The README stays true: when the folder's structure changes, the README says so, because the README is what a coauthor and a future you open first. Renames follow the conventions in your global file (§6), and a rename that touches more than one file (a variable used across scripts, a set of files that break the naming rule, a folder that moves) is done with a plan (§4) and with `git mv`, so that history follows the file. A migration a collaborator would need to know about gets a dated note in `docs/notes/`. And status reports come from the bookkeeping rather than from memory: "write a one-paragraph status for my coauthor from `TASKS.md` and the last two weeks of commits" produces a draft for `docs/responses/` that is right about dates.
+*During the work.* Ask the agent to update the README whenever the project structure or run instructions change. Renames should follow your conventions (§6). Plan changes that affect several files, such as moving a folder or renaming a variable used across scripts (§4). Have the agent use `git mv` for tracked file moves and check that their history remains available. Record reorganizations a collaborator needs to know about in a dated note in `docs/notes/`.
 
-*Commits.* One task, one commit, with a message that says what changed and why. A commit before you delegate a big task, so its diff is only the agent's work. No commit the agent makes unprompted, unless you have decided it may (a prompt on `git commit` is a one-line addition to the settings file in §5). No push without you.
+Use these records to draft status reports. For example, ask for a paragraph for your coauthor based on `TASKS.md` and the last two weeks of commits, saved in `docs/responses/`. Check the draft against those records before sharing it.
+
+*Commits.* Record each completed task in a commit with a message explaining what changed and why. Before delegating a substantial task, review and commit existing work so you can distinguish it from the agent's changes. Decide whether the agent may commit on its own or must ask each time. Require approval before it pushes commits to a remote repository, because that sends the tracked files to another service.
 
 ## What the agent does
 
-Reads `STATUS.md`, `TASKS.md`, and the git log, and summarizes. Writes the task lines and the dates. Rewrites the README sections that describe structure when structure changes. Runs renames with `git mv` and then finds every reference to the old name and updates it, including the ones in the build file and in comments. After a rename or a move, runs the build (§15) to confirm nothing broke, and reports the result rather than assuming it. Drafts the commit message from the diff.
-
-Where you see what it did depends on where you run it. In the terminal, `git diff` shows every change since the last commit. The desktop app and the VS Code extension show each session's changed files as a diff you click through. All of these are the same review, and none of them requires the terminal tooling that makes diffs nicer to read for people who live in them.
+The agent reads the project records and summarizes the next work. As tasks progress, it updates the task list and any affected documentation. After renaming a file, it searches for references to the old name, including in the build file and comments, and updates them. It then runs the build (§15), reports the result, and drafts a commit message from the changes.
 
 ## What you check
 
-The diff, but not every line of it. Read the parts where a silent, plausible-looking change would do damage: model code, data handling, anything under `data/` or `outputs/tables/`, the build file. Let the rerun catch the rest, which is what §15's one-command build is for. A diff that touches files the task had no reason to touch is the first thing to ask about.
+Open the app's changed-files view and inspect the diff. Ask the agent to identify any staged changes or earlier uncommitted work so you can distinguish this task from work already in the folder. Focus your review on consequential changes: model code, data handling, tables, and the build sequence. Review the affected outputs as well. Ask about any files the task had no reason to touch. Use the verification checks in §13 and the rerun in §15 alongside this review.
 
-`TASKS.md` against reality. Pick one item the agent moved to Done and confirm it: the file exists, the script ran, the figure changed. "Done" from an agent sometimes means "I wrote the code", and the difference is the one this chapter exists to catch.
+Pick an item the agent moved to Done and confirm the claimed result: the file exists, the script ran, or the figure changed. Writing the code is only part of a task that also requires running it and checking the output.
 
-The commit before it lands: one task, an accurate message, nothing unexpected staged. `git status` should list no data file, ever (§16), and no file from `outputs/models/` or `logs/`. If it does, the `.gitignore` is wrong (Appendix A.5), and that is the bug to fix, not the commit.
+Before committing, check that the proposed commit contains one completed task, an accurate message, and the expected files. Include data only if its sharing terms permit it (§16), and exclude generated model files and logs unless the project deliberately preserves them. A `.gitignore` does not stop tracking a file already committed; ask the agent to identify that case before proceeding (Appendix A.5).
 
-After a rename: a search for the old name across the project returns nothing, and `git log --follow` on the renamed file shows its history intact.
+After a rename, have the agent search the project for references to the old name and show that `git log --follow` can still trace the renamed file's history. Investigate any remaining references.
 
-The README, by using it: the run instructions work when you follow them without the agent.
+Test the README by following its run instructions without asking the agent to fill in missing steps.
 
 ## What goes wrong
 
 *Done means started.* The agent marks a task finished when the code is written, not when it ran clean. Ask for the evidence: the build output, the listing, the number in the table.
 
-*The task list becomes a diary.* Paragraphs of what happened, in `TASKS.md`. Keep it to task lines; the narrative belongs in `METHODOLOGY.md` if it is about why and in the git log if it is about what.
+*The task list becomes a diary.* Long accounts of each session make open tasks hard to find. Keep `TASKS.md` to task entries. Record the reasons for analytical decisions in `METHODOLOGY.md`; use commit messages to explain changes to files.
 
 *The bundled commit.* Three tasks in one commit, so the undo for one is the undo for all. Or the opposite: the agent commits mid-task, and the diff you review is half a change. A commit per task, at the end of the task.
 
-*The rename that missed one.* The Quarto file, the justfile, the coauthor's do-file, a string inside a plotting call. The search for the old name is the check; the build is the second check.
+*The rename that missed one.* A reference to the old name remains in the Quarto document, main script, coauthor's do-file, or plotting code. Search for the old name after the change, then run the build to check that the analysis still works.
 
 *The stale README.* It still describes `analysis_v2_USE_THIS`. Structure changes and the README doesn't, because nobody asked. Make "update the README" part of every structural task.
 
 *The unasked tidy.* Asked to fix one function, the agent reformats every file it opened, and the real change is buried in two hundred lines of whitespace. The rule for the global file: change only what the task requires, and never reformat a file the task didn't need to edit.
 
-*The session that didn't read.* A fresh session started in a hurry, without the opening ritual, repeats Friday's work or reverts it. The ritual is two lines; make it a habit before it is a loss.
+*The session that didn't read.* A fresh session repeats or reverses earlier work because it did not consult the project records. Begin by having the agent read the status and task files, even when the next task seems obvious.

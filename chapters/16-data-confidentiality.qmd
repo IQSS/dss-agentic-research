@@ -7,85 +7,52 @@ title: "16. Data confidentiality"
 # 16. Data confidentiality
 
 <!--
-STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: tool-chain §13a "Data permissions" and the auth-path table; deck "Data confidentiality: what you can send, and where"; Harvard specifics (sidebar; the account path is §3)
-COVERS: IRB, DUA, BAA. Harvard data security levels (sidebar). What may reach a cloud model: identifiable, never; de-identified, only under coverage. The rule in AGENTS.md and its enforcement in permissions. Local models for restricted data. Vendor training and retention, dated.
-VERIFY: checked 2026-08-27, Harvard levels re-checked 2026-09-15. Anthropic: Free/Pro/Max, "including when they use Claude Code", train unless the setting is off (retention 5 years on, 30 days off); Work/Education/API/Bedrock/Vertex excluded (anthropic.com/news/updates-to-our-consumer-terms). Harvard levels: privsec.harvard.edu/classify-risk defines Level 4 as Restricted Personal Information (HIPAA-protected health information, identifiable genetic data, government IDs) and contractually restricted data, and Level 3 as sensitive confidential information including most personal data. Tool-by-level and the institutional Claude license: see §3 and the FAS/HUIT menu (compiled 2026-09-04); HMS guidance maps L1 public tools / L3 Sandbox, Claude, Gemini, Copilot, ChatGPT Edu / L4 special-request / L5 none, and says a DUA may separately restrict AI use. Some HUIT/HMS pages block direct fetch; those claims rest on the FAS/HMS documents and search summaries. Re-check at release; the sidebar carries the date. (OpenAI/Codex training and local-model specifics archived 2026-09-15.) Retention (checked 2026-09-18): Anthropic commercial/edu tiers do not train; claude.ai content follows the org retention policy and persists until deleted, purged ~30 days after deletion; the most capable ("Covered") models keep data 30 days even under a zero-retention agreement (privacy.claude.com; CNBC 2026-09-01 on the policy churn). HUIT states it cannot read Claude conversations (huit.harvard.edu/claude, blocks direct fetch; rests on a search summary). Confirm the Harvard-specific retention/deletion path against the HUIT Claude page at release. Open-weight models (checked 2026-09-18 via search): Meta Muse Glimmer 30B (Apache 2.0, released 2026-08-10) and Google Gemma 4 (E2B–31B, Apache 2.0, 2026-04-02) both confirmed real; family licenses per HF/vendor pages — Qwen, Mistral, Gemma 4, Muse Glimmer Apache 2.0; DeepSeek, Phi MIT; Llama a community license with use restrictions. Model names date fast, so the table is a snapshot; older Gemma used stricter terms, hence "read the license".
+STATUS: mixed · PHASE: 1 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
+SOURCE: HUIT Claude guidance; Anthropic Enterprise retention documentation; two-guide audit
+COVERS: Service approval and project-specific restrictions; indirect disclosure; synthetic-data route; access controls and incident response. Local-model product table removed from the app-only guide.
+VERIFY: HUIT https://www.huit.harvard.edu/claude and Anthropic https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans checked 2026-09-26. Harvard-specific retention duration is not established here.
 -->
 
-The failure mode for this readership is specific: identifiable population or health data in a consumer chatbot. With an agent, no paste is needed. The agent reads whatever folder it is pointed at, and everything it reads goes to the model. So the question isn't whether this is risky but two concrete ones: what do your protocol and agreements permit, and is the vendor covered? This chapter answers them for the case where the sending happens without your hand on the keyboard.
+Decide what the agent may see before opening a research folder. This chapter explains how to check whether your account and project terms permit the planned work, use synthetic inputs when needed, and respond if information is exposed accidentally. Your institution's current rules determine what is allowed; the access controls in §5 help enforce that decision.
 
-## What "reach a model" means
+## What can reach the model
 
-An agent works by sending the model what it has read. Every file it opens, every command's output, and every error message becomes part of the context that travels to the vendor's servers on each turn (§6). That includes the first rows of a data file it opened "to see the columns", the row that an error message printed, the log a script wrote, and the summary table a session produced. There is no "just the code" once the code prints data. The unit of disclosure isn't the file you attached; it is whatever the agent looked at.
+The agent can expose information without you pasting it into a message. A tool may read the first rows of a file, a failed command may print a record, or a log may contain identifiers. That output can become context sent to the hosted model. An aggregate table can also disclose a small group or remain subject to a sharing restriction.
 
-Three documents decide what may be looked at, and by whom.
+Review code, dictionaries, filenames, logs, and derived outputs as well as data files. A synthetic dataset should contain invented records rather than lightly altered confidential ones. A dictionary can itself reveal sensitive project details and needs the same assessment.
 
-Your *IRB protocol* says where the data are stored, who accesses them, and what happens to them. An AI vendor's servers are a storage location and the vendor is a third party; if the protocol doesn't name that path, it isn't permitted, and the choices are to amend the protocol or not send.
+## Establish the permitted route
 
-A *data-use agreement* with the data provider (a natality file from a statistics agency, a state registry, a claims database) usually forbids disclosure to third parties, storage outside named systems, and sometimes any processing by an AI service unless the provider consents. A DUA binds regardless of what your institution has approved: institutional coverage makes a vendor permissible under university policy, and the DUA can still say no.
+Check the data classification, the service and account approved for it, and the terms governing this particular project. These may include consent, a data-use agreement, an IRB protocol, contractual confidentiality, or health-data requirements. If the intended AI processing is unclear, ask the responsible institutional office before proceeding. An account setting cannot override those terms.
 
-A *business associate agreement* is the HIPAA instrument. Protected health information may go only to a vendor that has signed one with your institution. Consumer plans never have one. Institutional arrangements sometimes do, and the arrangement, not the vendor's name, is what counts.
+> **Harvard, September 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3 and states that inputs are not used for training. It also requires security and privacy approval for connectors. Confirm the applicable account and project terms; do not infer that another account, feature, or connected service has the same approval.
 
-## What may reach a cloud model
+Record the decision in the project file: which inputs the agent may use, which processing is allowed, and which outputs may be shared. Distinguish approved public-data acquisition from ordinary analysis: the former can create a new original file and provenance entry, while the latter should preserve those originals.
 
-Two lines cover most cases, and the rest of the chapter is how to live inside them.
+## Training and retention are separate
 
-*Identifiable data: never.* Not through a consumer plan, not with training turned off, not "just the header". The exception is a path your institution has covered for that level of data *and* your DUA and protocol permit, which for most readers means no such path exists.
+A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
 
-*De-identified data: only under coverage.* Through an institutional agreement (an enterprise plan or a gateway) whose terms exclude training and are approved for that data's security level, and only if the DUA allows processing by the service. On a personal plan, the answer is still no.
+Deleting a conversation is not a substitute for having permission to submit the material. Nor does an opt-out setting on a personal account give it the coverage of an institutional agreement. Use the approved route established above.
 
-Everything else (code, text, public and aggregate data, synthetic data) can go where you like, with one caveat below about unpublished results.
+## Work with synthetic inputs when access is not permitted
 
-The rule that makes this workable is that the agent needs the *shape* of your data far more than the data itself. Give it the data dictionary and a synthetic file with the same columns, types, and plausible ranges, and it can write and test the entire pipeline (cleaning, model, figures, assertions) without ever seeing the real data. You then run the finished scripts on the real data yourself, in a session with no agent in it. §12 uses the same move for a different reason: simulated data with known parameters is how you check the model. In §12 the point is that you know the true values and can see whether the model recovers them. In this chapter the point is that none of your real data ever left your machine. For restricted data this is the default.
+The agent can write and test code using an approved schema and invented records with the relevant types and structure. Keep that work in a folder available to the agent. Run the resulting code on real data only in the approved environment, with no agent access unless separately authorized. Share only outputs that have been cleared for that purpose.
 
-## Training and retention, dated
+This is a development and testing route, not proof that the code will handle every feature of the real data. Check the actual run, and use the implementation and calibration checks in §13 within the permitted environment.
 
-Separate from whether a vendor may *see* your data is whether it may *train* on it, and the answer depends on how you sign in. As of August 2026:
+## Enforce and check the rule
 
-| Sign-in | Used for training by default | The switch |
-|:--|:--|:--|
-| Claude Free, Pro, or Max, including Claude Code under those plans | Yes, unless turned off. Retention five years if on, thirty days if off. | claude.ai, Settings, Privacy |
-| Claude Team or Enterprise, or an institutional plan | No | None needed |
+Write the restriction in `CLAUDE.md` or the imported project brief, but also use effective access controls (§5). A direct file-tool denial and a sandboxed subprocess restriction cover different execution routes. Check any exception that lets code run outside those restrictions.
 
-Other vendors' consumer plans follow the same pattern — training on by default, an opt-out in the data-controls settings, and institutional plans excluded. Vendors change these terms more than once, so treat the table as a snapshot and check the data-controls page at the start of each project. Two consequences. First, turn training off on any consumer plan you use for research, today, and record the date you did it in your global file (§6); it affects unpublished results and draft text, which are yours and not yet public. For a project under an NDA, IRB review, or client confidentiality, verify the state again when the project starts and record it in the project file, beside the data rule. Second, the switch doesn't change the disclosure question. A consumer plan with training off is still a consumer plan: uncovered, and not a permitted destination for restricted data.
+Keep data the agent must not access in storage its process cannot read. Merely choosing another project folder is insufficient. An unmounted encrypted volume or a separately permissioned account can prevent access; a read-only folder still allows its contents to be read. Test the arrangement with harmless files before using it for sensitive work.
 
-Whether a vendor trains on your data and whether it keeps a copy are two separate things. An institutional account answers the first (it does not train on your inputs) but not the second: your inputs are still stored. On a claude.ai plan, your conversations stay under the organization's retention policy until you delete them, and a deleted conversation is removed within about thirty days; the most capable models keep data for thirty days even under a zero-retention agreement. These terms changed more than once in 2026, so treat the numbers as current only. Deletion is always manual: your institution cannot read your conversations, but they do not disappear on their own, so delete the ones that held sensitive data yourself, and do not rely on a retention window to protect confidential data.
+Keep restricted data and credentials out of version-control history. A git ignore rule prevents accidental addition of untracked files; it does not remove files already tracked, block the agent from reading them, or make a remote service an approved destination.
 
-## The rule, and its enforcement
+## If material is exposed accidentally
 
-The rule goes in the project file, where the agent reads it every session (§6):
+Stop further agent access and any ongoing transfer. Record what was exposed, to which service and account, when, and through which tool. Use your institution's incident-reporting route promptly and follow its instructions for containment and record handling. Do not assume that deleting the conversation resolves the incident or erase the evidence needed to assess it.
 
-> `data/raw/natality/` is restricted. Never read, list, or copy it. Work only from `data/processed/synthetic-natality.parquet`.
+## When this app cannot support the task
 
-A sentence in a file is advice the agent will almost always take, and "almost always" is the wrong standard for a DUA. So the rule is enforced twice more, in ways that don't depend on what the model decides.
-
-*A deny rule.* Claude Code's permission settings accept a rule that refuses any read of a path (`Read(./data/raw/**)` in the project's `.claude/settings.json`, which is committed so every session on every machine inherits it; §5 shows the file). The agent then can't open the file even if asked to. (Not every agent has a read-deny of this kind; where one doesn't, the enforcement is the next one, location.)
-
-*Location.* Restricted data lives outside the project folder, in a place the agent is never pointed at: an encrypted disk image you mount only for your own runs, or a folder owned by a different user account. The scripts reach it through a path variable that is set only in your session. The project folder holds the synthetic file. An agent can't leak what it can't reach, and this works for any agent and every mode.
-
-Two smaller leaks are worth closing at the same time. Data files never go into git, because a push copies them to a third party; `data/raw/` is in `.gitignore` from the day the project is scaffolded (§7). And an agent with web access can carry a data value into a search query or a bug report without noticing; the rule "never send any file under `data/` to a web search or an external service" is in the §6 brief for that reason.
-
-## Local models for restricted data
-
-When no covered vendor exists for the data, and the synthetic-data route won't do (you need the agent's help interpreting a real anomaly, say), the remaining option is a model that runs on your own machine, so that nothing leaves it. This means an open-weight model served locally through an agent that supports one; Claude Code doesn't, so it means a different tool for this narrow case. Local models are weaker and slower than the cloud ones, which makes them a fit for the mechanical parts of the work (scaffolding, assertions, format conversion, first drafts of a cleaning script) rather than the judgment-heavy parts.
-
-Running a model locally has two advantages beyond confidentiality. First, it is the only way to make an LLM analysis step (§15) fully reproducible: a hosted model can change or be withdrawn, while an open-weight model has a fixed version you can pin and cite like any other dependency. Second, you control the hardware, and that is also the cost: a capable open-weight model needs a GPU, so you need a machine with one or a secure cluster (at Harvard, FASSE, §12), and someone has to run and maintain that server.
-
-Which model depends on the hardware you have and the license you need. As of September 2026:
-
-| Size | Where it runs | Examples |
-|:--|:--|:--|
-| Small (about 1–8B) | a laptop, on CPU or a modest GPU | Phi-4-mini, small Gemma 4, Qwen3 4–8B |
-| Mid (about 30B) | one consumer GPU, roughly 20–32 GB | Muse Glimmer, Gemma 4 31B, Qwen3 35B |
-| Large (70B and up) | a workstation GPU or a cluster | Llama 4, DeepSeek V4 |
-
-A bigger model is more capable and needs more hardware; a mid-size model on one GPU is enough for most of the mechanical work above. Licenses differ and matter here: Qwen, Mistral, Gemma 4, and Muse Glimmer are Apache 2.0, and DeepSeek and Phi are MIT, all permissive, while Llama carries a community license with use restrictions. Read the license before you rely on a model, and check that it allows what your DUA and IRB require. The names change every few months, so treat these as examples and check the current field; a bigger model will always cost more hardware, and the license will always decide whether you may use it the way you intend.
-
-Running a model locally does not settle the compliance question. A DUA that restricts AI processing restricts it on your laptop too: doing the processing yourself controls where the data went, not whether you were allowed to process it that way.
-
-> **Harvard.** Harvard classifies data in five levels; identifiable health data is Level 4, and so is contractually restricted data, which covers most DUAs. As of September 2026, the institutional Claude license (§3) — signed in with HarvardKey — is approved for data up to Level 3, and the vendor doesn't train on inputs; a personal account is Level 1 (public) only. HUIT cannot read your Claude conversations, but they stay until you delete them; remove any that held restricted data yourself. HMS guidance maps the tools by level: public and consumer tools for Level 1 only; Claude, Google Gemini, the HUIT AI Sandbox, Copilot, and ChatGPT Edu for Level 3; special-request systems for Level 4; nothing for Level 5. The same guidance notes that a DUA may separately restrict a dataset's use with AI, and to ask the Office of Research Administration before using a restricted dataset. Check the current pages before relying on any of this; the levels are stable, the tool list is not.
-
-## In order
-
-Classify the data first: the institution's level, then the DUA, then the protocol; the strictest of the three governs. Pick the path that classification allows: a covered gateway for de-identified data, synthetic data for the agent and your own runs on the real file for anything restricted, a local model if neither will do. Write the rule in the project file and enforce it with a deny rule and a location the agent can't reach. Turn training off on any consumer plan you use, and note the date. Keep data out of git. Then, and only then, let the agent into the folder.
+If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. It is a different setup, outside this guide's app-only path.

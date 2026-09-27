@@ -7,97 +7,114 @@ title: "13. Verification"
 # 13. Verification
 
 <!--
-STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: content bank judgment/verification-cross-language.md (folded in; module points back here); tool-chain §15 "Cross-implementation verification", "Validation, unit tests, and model checks"; deck "Verification: don't trust, re-run"
-COVERS: Cross-implementation: R vs Python vs Stata, with Stata first-class. Independence: a different agent, a different reasoning path, the written spec rather than each other's code. What counts as agreement: exact vs Monte Carlo error. Assertions and tests in one page.
-VERIFY: Stata batch mode checked 2026-08-27 against Stata's FAQs: `stata-mp -b do file.do` (Mac/Unix; executable name by flavor) and `StataMP-64.exe /e do file.do` (Windows) write a log of the same name. The worked-example table is illustrative, not from a real project.
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26 (implementation checks separated from methodological justification and statistical performance)
+SOURCE: content bank judgment/verification-cross-language.md (folded in; module points back here); author's 2026-09-26 verification structure; §12 simulation workflow
+COVERS: Independent implementations from original inputs and an agreed specification; data provenance, sample, model, and postestimation comparisons; assertions. Methodological justification through literature and critical consultation. Calibration across plausible truth worlds, including misspecification, with limits stated separately.
+VERIFY: Conceptual rewrite; no vendor controls or platform commands introduced. The comparison table lists checks, not empirical results. Deliberate exception to the usual Part III headings: two questions organize the chapter.
 -->
 
-The failure worth guarding against isn't code that breaks; that you catch. It is code that runs, passes a reading, and is still wrong: off by a merge key, a default argument, a silent type conversion. The output looks reasonable, so the error survives into the table. Reproducing the result doesn't catch it, because the same code re-run gives the same wrong answer (§15). The check is to require the result from *different* code, written independently, and to compare.
+Verification has two jobs. One is to establish whether the agent implemented the analysis you asked for. The other is to assess whether that analysis is appropriate for the research question and has the statistical properties you need. An analysis can pass the first check and fail the second.
 
-## What to ask for
+The practical check on implementation is to have two or three agents build the analysis independently from the same inputs and written specification, then compare what they produce. That makes substantial verification possible when the volume of generated code, or the language it uses, puts a complete manual review out of reach. Methodological judgment and simulation then address what agreement between implementations cannot.
 
-The strongest check you have on whether a result is correct, rather than merely reproducible, is a second implementation in a second language. If you work in Stata, ask for the analysis in R; if in R, ask for Python or Stata. A mistake made while writing the analysis in one language rarely recurs, in the same place, in another: the two implementations fail independently, and that is what makes agreement mean something. Stata works well here. Agents write `.do` files competently, and they can run them without you: Stata's batch mode (`stata-mp -b do model.do` on a Mac, `StataMP-64.exe /e do model.do` on Windows) executes a do-file and writes a log of the same name, which the agent then reads in the observe step (§2).
+## Did the agent implement what you asked for?
 
-The language is necessary but not sufficient. What has to be independent is the *reasoning*. If the agent that wrote the R version translates its own code into Stata, the two carry the same misreading of the design and agree on the wrong answer. So the second implementation is written by a different agent, or at least a fresh session, working from the written specification and not from the first implementation's code. Two agents reasoning separately from the same specification keep their errors uncorrelated. Two different agents — Claude and one from another vendor — is the cleanest version; a fresh session of the same agent, told not to read `code/`, is the next best.
+An agent can produce code that runs and yields plausible results while doing the wrong analysis. It might invent a missing column, substitute simulated values for observed ones, merge on the wrong identifier, or fit a different model from the one you specified. It might fit the right model and report the wrong quantity afterward: a coefficient where you requested an average marginal effect, or predictions for the wrong population.
 
-That puts weight on the specification. For the check to work, `METHODOLOGY.md` (§6) has to state what a second implementer needs and nothing they should infer: the estimand; the sample, with every exclusion in the order applied; how each variable is constructed; the model, down to the family, the fixed effects, the clustering, and the weights; and which quantity is the result (a coefficient, a marginal effect, an odds ratio, a predicted contrast). If the file can't say these things, that is a finding in itself, and it is the same finding a referee will make later.
+Re-running that code reproduces the error (§15). Independent implementation gives you another route from the inputs to the result, so you can check where those routes agree and where they diverge.
 
-The request has three parts, and they go to different sessions. To the first:
+### Give each agent the same written target
 
-> Working only from `METHODOLOGY.md` § Main model and the data in `data/processed/`, implement the main model in Stata. Do not read anything in `code/`. Write `code/stata/model.do`, run it in batch mode, and save every estimate you report to `outputs/verification/stata-main.csv` with six decimals.
+Start with `METHODOLOGY.md` (§6). It should state:
 
-The R side already exists, so ask its session to write the same estimates to `r-main.csv` in the same folder and layout. Then, to either session:
+- The research quantity to estimate (the *estimand*), including the population, comparison, and scale.
+- The input files and their meanings, the unit represented by each row, the merge keys, and the rules for constructing variables.
+- The sample restrictions and missing-data rules, including the order in which exclusions apply.
+- The model specification: outcome, predictors, interactions, fixed effects, weights, and relevant estimation settings.
+- The quantities to report after fitting: coefficients, uncertainty intervals, predictions, or contrasts, with any averaging population and uncertainty method specified.
 
-> Compare `outputs/verification/r-main.csv` with `stata-main.csv`. For every quantity, show both values, the difference, and whether it is within the tolerance in `METHODOLOGY.md` § Verification. Report; do not change either implementation.
+A request for “the effect of heat on birthweight” leaves too much to infer. A request for the average predicted difference between two stated heat exposures, averaged over a specified set of births, gives the implementers a common target. An agent can help you make the specification explicit; you decide whether it describes the analysis you intend.
 
-The tolerance is decided before the comparison, and it depends on the computation. Deterministic results (descriptive statistics, a least-squares or maximum-likelihood fit, a fixed transformation) should match to numerical precision; a difference past rounding is a real discrepancy to chase, not noise. Sampling-based results (Markov chain Monte Carlo, a bootstrap, multiple imputation, a simulation) won't match bit for bit, so the comparison is against *Monte Carlo error*, the sampling noise implied by the number of draws: posterior means and intervals should agree within it. Write the tolerance down first, so that a near miss isn't talked into a pass afterward.
+Keep a fixed copy of that specification for the comparison. If an implementer finds an ambiguity, resolve it and give the same clarification to every session. Letting each agent silently choose a different interpretation makes a later disagreement harder to diagnose.
 
-Do this for the results that carry a claim: the primary estimate, the model behind a decision, the number in the abstract. A second implementation roughly doubles the cost of that analysis, which is why it isn't for every intermediate step.
+### Have two or three agents implement it separately
 
-The same logic scales up when the agent rebuilt more than the model. If it reassembled the dataset itself, a merged file or a cleaned extract, run the whole pipeline several times over, each in a fresh session that sees only the raw inputs and the specification, nothing an earlier run made, and in a different language where you can. Implementation slips are effectively random, so independent runs rarely repeat one, and quantities that agree across all of them (to rounding, or to Monte Carlo error) don't depend on which agent or which software produced them. If you already have a result you trust, anchor the runs to it: have each one reproduce the published table, or the number from the pipeline it replaces, before touching anything new. That anchor is the tie-breaker, because two agents can share a mistake, so a majority vote among runs settles nothing and a known answer does. A separate session can lay the runs side by side, one column each plus the known value, and flag every quantity that disagrees by more than the tolerance.
+Open fresh Claude Code sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
 
-## What the agent does
+If the agent built the dataset as well as the model, each implementation should start from the original inputs and independently perform the cleaning, merges, and variable construction. Starting both from one agent's processed dataset leaves that processing unchecked. If you are checking only model fitting on an already verified dataset, the shared processed file is an appropriate starting point.
 
-The second implementation is ordinary agent work: read the specification, read the data, write the do-file, run it, read the log, fix what failed, write the estimates out. The comparison is a short script that reads two files and prints a table. What makes the exercise different from any other task is only what the agent is *not* allowed to read, and what it isn't allowed to do when the numbers disagree.
+Use only inputs the agent is permitted to access (§16). For restricted data, have the agents develop their implementations against a permitted synthetic example and data dictionary, then run the scripts independently on the real data in the approved environment. Review the comparison there; return only information that is permitted to leave.
 
-The agent also builds the cheaper layer of verification, the one that runs every time rather than once. These are *assertions*: one-line checks written into a script that stop it, loudly, when a stated expectation fails. In R, `stopifnot()`; in Stata, `assert`; in Python, `assert`. Ask for them at the points where analyses go silently wrong.
+Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, Python, and Stata are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
 
-```
-# after every merge or filter: the N you expect, stated
-dat <- left_join(births, heat, by = c("county", "year", "month"))
-stopifnot(nrow(dat) == 1214308)          # no rows gained or lost in the merge
-stopifnot(!anyDuplicated(dat$birth_id))  # one row per birth
-stopifnot(all(dat$bwt_g >= 200 & dat$bwt_g <= 7000, na.rm = TRUE))
-stopifnot(all(c("2010", "2020") %in% levels(dat$year)))
-```
+In each separate folder, put the approved starting files in `inputs/`. Adapt the language in this request:
 
-```
-* the same checks in Stata
-merge 1:1 county year month using "${root}/data/processed/heat.dta"
-assert _merge == 3
-drop _merge
-assert _N == 1214308
-isid birth_id
-assert inrange(bwt_g, 200, 7000) if !missing(bwt_g)
-```
+> Working only from `METHODOLOGY.md`, the data dictionary, and the files in `inputs/`, independently implement the complete analysis in Stata, from input processing through the reported estimates and postestimation quantities. Do not consult another implementation or its results. Stop and report any missing input or ambiguity; do not invent columns or values, or substitute simulated data. Save your code, a record of the inputs used, sample membership and exclusion counts, the derived analysis data, and labelled results at full available precision. Keep all outputs in this project folder.
 
-The expectations come from you (the N in the paper, the plausible range, the levels that must be present); the agent writes and places the checks. Two more belong in every project: a convergence check after each model fit, and a check that the sample size the model used is the sample size the paper reports. Formal unit tests, with a test runner such as `testthat`, are for functions you reuse across scripts; a paper doesn't need to become a package to be checked.
+Two implementations provide the first comparison. A third gives you another independent attempt, especially when the first two disagree. Let each finish before showing it anyone else's code or results. If there is already a primary implementation, a fresh attempt can check it; keep that fresh session separate from the original conversation.
 
-## What you check
+### Compare the data and the reported quantities
 
-Read the comparison table yourself. Every quantity, both values, the difference, the tolerance, pass or fail. "They agree" from the agent isn't a result; the table is.
+Once the implementations are complete, give their outputs to a separate comparison session. Ask it to compare the stages that lead to the main claim, as well as the final estimate. An invented covariate or a different exclusion rule may be obvious in a data comparison even when the headline estimates happen to be close.
 
-Check the independence. The second session's record shows which files it read; if the R model script is among them, the check is void and you run it again. Identical variable names, identical comment wording, and identical structure in the two implementations mean the same thing: the second implementation was copied from the first rather than written from `METHODOLOGY.md`, and it verifies nothing. For the primary result, put the first implementation out of reach: copy `METHODOLOGY.md` and `data/processed/` into a separate folder with nothing else in it and run the second implementation there.
+| What to compare | What a discrepancy can reveal |
+|:--|:--|
+| Input file versions and variable sources | A different extract, an invented field, or a synthetic file used in the real analysis |
+| Record identifiers and exclusion counts | Different samples, duplicate records, or a filter applied at the wrong stage |
+| Merge matches and derived values for each record | Wrong keys, units, recoding, or variable construction |
+| Model terms, weights, and fitting diagnostics | A different specification, an unintended default, or a failed fit |
+| Estimates, intervals, predictions, and contrasts | Different calculations or a different quantity reported after fitting |
 
-Here is what a comparison looks like when it has done its job.
+Matching sample sizes are not enough: two datasets can contain the same number of different records. Likewise, two columns called `effect` may hold different quantities. Require labels that identify what each result estimates, its units, and how its uncertainty was calculated.
 
-| Specification | R | Stata | Match |
-|:--|--:|--:|:--:|
-| OLS baseline | −0.423148 | −0.423148 | yes |
-| + county fixed effects | −0.384721 | −0.384921 | no |
-| + year fixed effects | −0.291553 | −0.291553 | yes |
+Set the comparison tolerances in advance, in `METHODOLOGY.md`. Record membership and categorical values should agree exactly. Numerical results from deterministic calculations should agree within a justified tolerance for numerical precision and the fitting algorithms. Results that use random draws, such as a bootstrap or posterior sampling, need a tolerance that accounts for *Monte Carlo error*: variation caused by using a finite number of draws. Compare full-precision results before rounding them for the paper.
 
-The second row is what the check was for. The implementations disagree at the fourth decimal on a deterministic fit, so at least one is wrong, and the disagreement says where to look: in what the two fixed-effects routines do differently. Here it was a default: one drops counties with a single observation before fitting and the other keeps them. Neither is wrong, but the paper has to say which sample the estimate is from, and the difference wouldn't have been found by reading either script.
+> Compare the completed implementations against `METHODOLOGY.md` and its verification tolerances. Check their input files, record membership, exclusions, derived variables, model specifications, and reported quantities. Produce a table of agreements and discrepancies, with the values from each implementation where applicable. For each discrepancy, identify the earliest stage at which the implementations diverge. Report your findings without changing either implementation or its outputs.
 
-That is the division of labor. The agent localizes the discrepancy; you interpret it and decide what to correct, and you write the resolution into `METHODOLOGY.md` so the next implementer doesn't rediscover it. The usual sources are worth knowing in advance, because most discrepancies on deterministic fits are one of them: small-sample corrections in clustered standard errors, which differ across packages by default; the flavor of robust variance estimator; the reference level of a factor; how missing values enter a mean or a merge; whether singleton groups are dropped; weights applied or not. A discrepancy that is one of these explains itself in ten minutes. One that is none of them is the bug you were looking for.
+Read that report yourself. If samples differ, resolve that before interpreting coefficient differences. If coefficients agree but standard errors do not, inspect the uncertainty calculation. If fitted models agree but predicted contrasts do not, inspect the exposure values, averaging population, and scale used for the contrasts. Ask the agent to show the relevant records, settings, or calculations so you can judge the discrepancy without reading every script.
 
-Agreement rules out implementation error, not specification error. If `METHODOLOGY.md` describes the wrong model, both implementations follow it faithfully and agree on the wrong answer. The check on the specification is a different one: simulate data from the model with known parameters and confirm the analysis recovers them (§12). Run both, and the two checks cover different failures.
+Correct against the written specification and the source data. Matching the first result is not itself a reason to change the second implementation. Document the explanation, make the justified correction, and rerun the affected comparisons. If the specification changes, every implementation must follow the revised version.
 
-## What goes wrong
+Agreement across independently built pipelines is strong evidence that they implemented the requested analysis consistently. Its strength comes from giving implementation mistakes a chance to produce observable differences. It is not a guarantee: agents can share a mistaken interpretation or use the same faulty software routine. Where available, compare against a trusted benchmark with the same definitions, or a small example whose answer is known. Trace a few deliberately chosen records through the transformations, including difficult cases such as duplicates, missing values, and boundary dates. These focused checks supplement the independent runs without requiring a manual audit of all the code.
 
-*The port.* Asked for a second implementation, the agent translates the first one, because it is right there in the folder. The result agrees perfectly and proves nothing. Tell it what not to read, check what it read, or use the separate folder.
+### Keep checks that run every time
 
-*Agreement by adjustment.* Seeing a mismatch, the agent changes options in the second implementation until the numbers match the first. That destroys the check while producing a clean table. The instruction is *report, don't reconcile*; reconciling is your decision, made in the open.
+Have the agent retain *assertions*: checks embedded in a script that stop the analysis when an expectation fails. Useful ones cover required columns, unique identifiers, permitted values, merge relationships, exclusions, and the sample actually used by the model. A required column that is absent should cause a failure; the agent should not manufacture it to keep the script running.
 
-*The tolerance moves.* A near miss becomes "close enough" after the fact. Set the tolerance before the comparison and write it in `METHODOLOGY.md`.
+Keep simulation code and synthetic outputs separate from the real-data analysis. Require the real-data pipeline to record the files it used and to stop if a required input is missing. After fitting, check convergence where applicable and confirm that the reported sample and model match what actually ran.
 
-*Same name, different quantity.* The two files both have a column called `effect`, and one holds a coefficient while the other holds a marginal effect, or one a log-odds and the other an odds ratio, or one a conventional standard error and the other a clustered one. Compare the quantity the specification names, and make each file say which it holds.
+The expectations need a basis in the specification, the source documentation, or a result you have independently checked. An assertion that merely repeats the number the agent just produced will not detect the error that produced it. For a calculation reused across analyses, ask for a small test with a known answer.
 
-*The samples differ.* The most common discrepancy isn't in the model but in who is in it: a filter applied in one implementation and not the other, missing values dropped by default in one routine and kept in another. The first number to compare is the N, before any coefficient.
+Concentrate independent implementation on the pipelines supporting substantive claims. Keep inexpensive checks throughout those pipelines and rerun the affected comparisons when inputs, code, or the specification change.
 
-*The vote.* Three runs agree, so the number must be right. But two agents can make the same mistake, most often a shared misreading of an ambiguous specification or source, which no amount of replication catches because every run reads the same words. The tie-breaker is a known answer, not a majority; and the guard against a shared misreading is a small hand check, tracing ten or twenty records, chosen to include the awkward cases (near-duplicate names, a boundary year, anything the codebook recoded), from the result back to the sources.
+## Is the requested analysis appropriate?
 
-*Verifying everything.* Doubling the cost of every intermediate step is how the practice gets abandoned. Verify the claims.
+All three agents can faithfully implement an analysis that does not answer your research question. Address that risk in two parts: justify the method, then assess its statistical behavior.
 
-*Mistaking reproduction for verification.* A pipeline that rebuilds the same tables from the same code (§15) has shown the result is stable, not that it is right. Both matter, and they are different chapters for that reason.
+### Justify the method
+
+Methodological justification starts with the research question and the literature. Does the estimand represent what you want to learn? Can this design identify it? Are the assumptions credible for these data? Does the model account for the sampling design, repeated observations, and missingness? If you intend a causal interpretation, what makes that interpretation defensible?
+
+Use agents to help investigate those questions before implementation (§12). Ask separate sessions to assess the proposed analysis, find relevant methodological literature, and look for objections. Give them the design and proposed specification so they can identify what information is missing. Follow their citations to the original sources and check that the methods apply to your setting (§10).
+
+> Review the analysis proposed in `METHODOLOGY.md` against the research question and study design. Identify assumptions needed for the intended interpretation, choices the available information does not justify, and relevant methodological literature. Explain where each source applies to this design and where it does not. List unresolved questions for a statistician. Do not change the specification.
+
+Independent consultations can broaden the objections you consider; agreement among agents does not establish that the method is appropriate. Ideally, discuss the design and unresolved questions with a human statistician, especially where the method or its assumptions are unfamiliar. Record the justification and remaining limitations in `METHODOLOGY.md`. This gives later implementation checks a target you have actually considered.
+
+### Assess statistical behavior with a calibration harness
+
+A *calibration harness* is an automated simulation workflow. It generates repeated datasets for which the relevant truth is known, applies your planned analysis to each, and measures how the estimates and decisions behave. §12 gives the worked example and the mechanics.
+
+Decide what acceptable behavior means for the quantities you will report. Does the estimator recover the target across a useful range of true values? How large is its bias? How often do its intervals contain the truth? Under a null condition, how often does the decision rule report an effect? How often does it detect effects of substantive interest? Record failed fits as well as successful ones, and report simulation uncertainty so that a small number of repetitions is not mistaken for a precise performance estimate.
+
+The simulated worlds must be plausible for the data. Preserve features that matter to the analysis: outcome bounds, cluster sizes, dependence, missingness, and the distribution of predictors. Include departures from the fitted model that concern you, such as nonlinear effects or unequal variances. A simulation drawn only from the model you plan to fit tests performance under those assumptions; it does not test how the method behaves when they fail.
+
+The harness also needs implementation checks. Confirm that the generated data have the intended properties and that the “known truth” is the quantity the analysis actually estimates. Check the simulation generator and truth calculation separately from the fitting code. Reusing the same mistaken formula in both can make recovery look perfect.
+
+> Propose a calibration plan for the estimand, analysis, and decision rule in `METHODOLOGY.md`. Include plausible data-generating scenarios and departures from the fitted model. For each scenario, state the known target, how you will calculate it, the performance measures, and how you will quantify simulation uncertainty. Explain how you will check that the generated data respect the design and outcome constraints. Keep simulated files separate from real-data inputs. Present the plan before running it; do not change the analysis to make it pass.
+
+A misspecified model can be well calibrated for a particular estimand or decision rule. For example, an imperfect description of individual outcomes may still yield an interval with the intended coverage for an average contrast. Calibration therefore does not establish that the model describes the data-generating process correctly. Nor does it establish that the estimand answers the scientific question, or that a causal interpretation is justified.
+
+Read the calibration results alongside the methodological justification. State which scenarios were checked, which properties were acceptable, and where performance failed. A failure may call for a different analysis, a narrower claim, or more information. That decision belongs to you; the agent should report the failure before changing the method.
+
+Keep the implementation comparison, methodological justification, and calibration results with the project. They answer different questions, and a satisfactory result in one does not substitute for the others.

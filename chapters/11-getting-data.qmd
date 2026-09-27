@@ -7,79 +7,80 @@ title: "11. Getting data"
 # 11. Getting data
 
 <!--
-STATUS: mixed · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
+STATUS: mixed · PHASE: 2 · DRAFTED: 2026-08-27; prose clarity pass 2026-09-27
 SOURCE: tool-chain §11 "The scraping ladder"; ~/.config/agents/CODING.md "Web scraping / data acquisition: method ladder" (the cross-cutting hygiene); tool-chain §15 "Data and artifact boundary"
-COVERS: The ladder: API, static fetch, headless browser, agent browser. Public sources common in population health (ACS, IPUMS, CDC WONDER, WHO GHO, World Bank). Terms of service and rate limits. Provenance log. Raw data read-only.
-VERIFY: checked 2026-08-27. Census Data API: 500 queries per IP per day without a key, a key beyond that; tidycensus no longer requires a key (Census user guide, tidycensus changelog). IPUMS terms fetched directly: redistribution needs permission except a subset published for a journal's data requirement; IPUMS International forbids it. CDC WONDER API page fetched directly (last reviewed 2026-08-25): consent parameter required, national data only for NVSS through the API, one query at a time about two minutes apart, credit WONDER. WHO GHO API page fetched directly: endpoint ghoapi.azureedge.net/api, no key, replacement announced without a date. World Bank: Indicators API, no key, WDI package (secondary). Re-check the table at release; access paths move.
+COVERS: Acquisition method, current access terms, source provenance, original-response preservation, and credential handling. No browser installation or API-key setup instructions.
+VERIFY: Current source links checked 2026-09-26: Census API user guide, IPUMS USA terms, CDC WONDER restrictions. Removed the product/access table; current requirements must be checked per acquisition.
 -->
 
-Getting data is where an agent first touches the outside world, and the boundary matters in both directions. What comes in must be recorded: where from, when, under what terms. What is already in must not be changed. The rule for the first is a provenance log, and the rule for the second is that raw data is read-only. Between them sits a ladder of ways to fetch, from a documented interface down to a browser, and the discipline is to stop at the highest rung that works.
+Downloading data for many places or time periods can involve repeating the same steps on a website. An agent can automate that work. This chapter explains how to choose a download method, record where each file came from and the conditions on its use, and preserve the downloaded files unchanged.
 
 ## What to ask for
 
-*The access path and the terms, before any download.* Every public source has a way it is meant to be reached and a page that says what you may do with what you get. Ask for both first:
+*Access and terms of use.* Before authorizing a download, ask the agent to find how the source provides its data and what its terms allow you to do with them. One option is an *API*: an interface through which a script can request data directly from the source.
 
-> Before downloading anything from IPUMS USA, tell me how it is meant to be accessed (an API, a bulk file, a query tool), whether it needs a key, and what its terms say about redistribution, attribution, and linking. Quote the terms; do not summarize them.
+> Before downloading anything from IPUMS USA, tell me how it is meant to be accessed (an API, a bulk file, a query tool), whether it needs a key, and what its terms say about redistribution, attribution, and linking. Link the current terms and quote the short clauses relevant to this request. Separate those clauses from your interpretation, and flag anything requiring my decision.
 
-Then decide, and only then fetch.
+Decide whether the proposed download and your intended use are permitted before asking the agent to proceed.
 
-*The ladder.* Four rungs, from the most robust to the least, and the instruction is to stop at the first that works.
+*Choosing a download method.* Ask the agent to consider these four methods in order and use the first that is permitted and can retrieve the data you need.
 
-1. *A structured source.* A documented API; a bulk export; or the address the page itself calls to get its data, visible in the browser's network panel, which turns many "needs a browser" jobs back into a plain request. Stable, typed, and usually what the terms sanction.
-2. *Fetch and parse.* When there is no interface, download the page and parse it. Works when the content is in the page as served.
-3. *A scripted browser.* Only when the content is drawn by JavaScript after the page loads, or the task needs a login or a scroll. Slow and fragile; even here, capture the data the page requests rather than the page as rendered.
-4. *The agent's own browser.* For a one-off, for finding out how a site is built (and so which rung above will work), and for anything that needs a person in the loop. Never for bulk collection: it is the slowest and least repeatable rung, and nothing it does is part of the pipeline.
+1. *A structured source.* Look for a documented API or bulk export. The address a webpage uses to request its data, visible in the browser's network panel, may also let a script request the data directly. Check that the source permits this use; a documented interface usually gives clearer instructions than extracting data from a displayed page.
+2. *Fetch and parse.* If there is no suitable data interface, download the webpage and extract its data with a script. This works when the data are already included in the downloaded page.
+3. *A scripted browser.* Use a script to control a browser when the data load only after the page opens, or when obtaining them requires logging in or scrolling. These scripts can be slow and can break when the site changes. Where possible, capture the data the page requests rather than extracting them from its display.
+4. *The agent's own browser.* Use the agent's browser for a one-off task, to explore how a site supplies its data, or when a person needs to complete part of the interaction. For recurring or bulk work, use the exploration to develop a permitted script with saved inputs, outputs, and failure handling.
 
-Rungs one to three are scripts, committed in `code/_data-acquisition/` and rerunnable; rung four is an action in a session.
+For the first three methods, save the acquisition script in `code/_data-acquisition/` and commit it so the download can be repeated. Actions the agent takes through its own browser do not by themselves produce a script you can rerun.
 
-*The sources.* For this readership, the common ones and what an agent needs to know about each, as of August 2026:
+*The sources.* Ask the agent to use current documentation for the source you need. For example, consult the [Census API guide](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS terms](https://usa.ipums.org/usa/terms.shtml), or [CDC WONDER data-use restrictions](https://wonder.cdc.gov/datause.html). Record the relevant access and sharing terms with the download. An undocumented endpoint visible in a browser is not automatically an authorized collection route.
 
-| Source | How it is reached | Terms worth knowing |
-|:--|:--|:--|
-| American Community Survey (Census Bureau) | The Census Data API; in R, `tidycensus`. Five hundred queries a day per address without a key; a key beyond that. | Public domain. Record the vintage: one-year versus five-year, and which years. |
-| IPUMS (USA, International, NHIS, NHGIS) | The IPUMS API with a key; in R, `ipumsr`. You define an extract, submit it, and download it. | Redistribution needs IPUMS's permission, with one allowance: a subset published to meet a journal's data requirement. IPUMS International forbids redistribution outright. The extract *definition* is shareable and is the reproducible object. Cite as they specify. |
-| CDC WONDER | A web query tool, with an API for some databases. Each API request carries your consent to the data-use restrictions; the API asks for one query at a time, about two minutes apart. | Sub-national vital statistics (state, county) can't be queried through the API, only the web tool. No linking to identify individuals; suppression rules apply; credit CDC WONDER when you publish. Microdata is separate, under a data user agreement. |
-| WHO Global Health Observatory | A documented API, no key, at a fixed address; a replacement has been announced, so have the agent read the current documentation page. | Attribution required. |
-| World Bank indicators | The Indicators API, no key; in R, `WDI`. | Open license with attribution. Record the indicator code and the download date; series are revised. |
+*The provenance log.* Ask the agent to record each download in `data/raw/sources.md`, introduced in §6. Each entry identifies the file's source and contains:
 
-*The provenance log.* `data/raw/sources.md` (it is in the §6 brief) has one entry per file: the source, the exact request (the API call, the extract definition, the query as saved from the web tool), the date, the vintage or version, the two lines of the terms that matter (redistribution, attribution), who fetched it, and a checksum (a fingerprint of the file's contents, so a changed file is detectable). The agent writes the entry when it fetches, not afterward:
+- The exact request: the API call, extract definition, or saved query from the web tool.
+- The download date and the data release or version.
+- The relevant conditions on use, including redistribution and attribution.
+- Who downloaded the file and its checksum. A checksum is a fingerprint of the file's contents that can be used to detect changes.
 
-> Fetch the 2018–2022 ACS five-year county estimates for the variables in `METHODOLOGY.md` § Covariates, through the Census API, with the script in `code/_data-acquisition/fetch-acs.R`. Save the response exactly as received to `data/raw/public/acs-5yr-2022.csv`, and add an entry to `data/raw/sources.md` with the request, the date, the vintage, and the file's checksum. Do not modify anything else in `data/raw/`.
+Have the agent write the entry as part of the download:
 
-*Raw data read-only.* What arrives is saved as received and never edited. Cleaning is a separate script that reads raw and writes to `data/processed/` (§7), so a mistake in cleaning costs a rerun rather than a refetch, and the file you deposit or cite is the file you got. A refetch is a new, dated file beside the old one, never an overwrite: next year's ACS release changes numbers, and the paper has to know which release it used. The permission rule that denies writes to `data/raw/` (§5) makes this hold whatever the agent decides.
+> Fetch the 2018–2022 ACS five-year county estimates for the variables in `METHODOLOGY.md` § Covariates, through the Census API, with the script in `code/_data-acquisition/fetch-acs.R`. Save the JSON response exactly as received to `data/raw/public/acs-5yr-2022.json`, and add an entry to `data/raw/sources.md` with the request, the date, the vintage, and the file's checksum. Do not modify anything else in `data/raw/`.
+
+*Preserve raw data.* Save each download exactly as received. Cleaning belongs in a separate script that reads from `data/raw/` and writes to `data/processed/` (§7). If cleaning goes wrong, you can rerun it using the saved original. If you download the data again, save a new, dated file beside the old one: later releases may change the numbers, and you need to know which release the paper used.
+
+During acquisition, allow the agent to add the files you have authorized and update the provenance log. During analysis, protect the originals from changes. A rule that prevents all writes to `data/raw/` would also block the approved download and log entry, so the access settings must match the task (§5).
 
 ## What the agent does
 
-Reads the source's documentation and finds the interface. Writes the fetch script with a pause between requests and a retry on failure, identifying itself honestly (a user-agent string that names the script, and an email address where the source asks for one). Saves the raw response first and parses it in a second pass, so a parsing bug never costs a refetch. For a long collection, saves a checkpoint so an interrupted run resumes instead of restarting. Writes the provenance entry. When a site needs the fourth rung, uses the browser to find the address the page calls and reports it, so the job moves back to the first rung and into a script.
+The agent reads the source's documentation and writes the acquisition script using the method you agreed on. The script pauses between requests and retries failed requests. It identifies itself to the source with a user-agent string that names the script, and an email address where the source asks for one.
 
-Keys are handled by name. An API key lives in an environment variable (`CENSUS_API_KEY`, `IPUMS_API_KEY`), set in a file the repository ignores or in the operating system's keychain; the script reads the variable, and the agent refers to it by name and never sees or prints the value. A key that appears in a script is in the repository's history for good.
+The script saves each response before extracting data from it, so an extraction error can be fixed using the saved response. For a long collection, it records progress so an interrupted run can resume without downloading everything again. It also writes the provenance entries. If the agent uses a browser to investigate the site, it reports whether it found a permitted way to request the data through a script.
+
+Keep API keys out of the script. Supply a key through an approved credential mechanism as an *environment variable*: a named value available to a running program. The script can then read, for example, `CENSUS_API_KEY` or `IPUMS_API_KEY`. Ask the agent to refer to the variable by name without printing the key itself. Code that receives a key can still expose it, so review access and logging. The toolkit's secrets section explains the setup. If a key enters repository history, revoke it and issue a replacement; deleting the current line is insufficient.
 
 ## What you check
 
-The terms, yourself, once per source: whether the processed extract may go in the deposit, what attribution text is required, and what may not be linked to what. This is the one thing in the chapter the agent can't decide for you, because the consequence of getting it wrong lands on you.
+Read the source's terms yourself. Check whether you may include the processed extract in a public deposit, what attribution is required, and whether there are restrictions on linking these data to other datasets. The agent can identify relevant clauses, but you need to decide whether your planned use complies with them.
 
-The provenance entry: complete enough that rerunning the request gives the same file, or a new dated one, and that the paper's data section can be written from it.
+Check that the provenance entry contains enough detail to repeat the request and write the paper's data section. Confirm which release, sample, or revision was used and that it is consistent across the files used in the analysis.
 
-The raw file is what the source sent. Row and column counts against the source's own description; one cell checked against the web tool by hand; no recoding, renaming, or filtering on the way in.
+Check the row and column counts against the source's description, and compare a value with the source's web tool by hand. Confirm that the saved original has not been recoded, renamed, or filtered during the download.
 
-The fetch is a script in the repository, rerunnable, and it touched nothing already in `data/raw/`. The key isn't in the script, and a search of the repository for the key's value finds nothing.
-
-The vintage is recorded, and the same one is used throughout: which ACS, which IPUMS sample, which WONDER data year, which indicator revision.
+Confirm that the acquisition script is saved in the repository, can be rerun, and has not changed any existing raw data files. Check that no credential appears in the scripts, outputs, or proposed commit. Use a local secret scan that reports locations without printing values; do not paste a secret into the agent conversation to search for it.
 
 ## What goes wrong
 
-*The browser did the collection.* Two thousand pages clicked through by the agent: slow, irreproducible, and not in the pipeline. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
+*The browser did the collection.* Two thousand pages clicked through without saved requests or extraction code leave a weak reproduction record. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
 
-*Scraping what had an interface.* Parsing rendered pages when the data were one request away, and being blocked or served stale content for the trouble. Ask for the access path first.
+*Scraping what had an interface.* The agent extracts data from displayed webpages even though the source provides an API or bulk download. Ask it to look for those options before writing a scraper.
 
 *The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal isn't a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
 
 *Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
 
-*Overwritten raw.* A refetch replaced last year's file, the numbers in Table 1 shifted, and the cause took a week to find. Dated files, and a deny rule on the folder.
+*Overwritten raw.* A refetch replaced last year's file, the numbers in Table 1 shifted, and the cause took a week to find. Use dated files and protect existing originals while permitting specifically authorized acquisitions.
 
-*The key in the repository.* In the script, or in a commit from the first week. Rotate it, and add the ignore rule before the next one.
+*The key in the repository.* A key appears in a script or remains in an earlier commit. Revoke it and issue a replacement. Keep the replacement out of tracked files, and exclude any local credential file from git before saving it.
 
-*Rate limits hit.* A script with no pause, blocked after an hour, and with it every address behind the institution's network. Throttle, identify yourself, and cache.
+*Rate limits hit.* The script sends requests too quickly and the source blocks access, potentially affecting colleagues who share the same network address. Have the script respect the source's request limits, identify itself as required, and reuse saved responses when possible.
 
-*The log written from memory.* Provenance filled in a month later, from what the agent or you recall. Write the entry in the same step that saves the file, or it will be written from memory.
+*The log written from memory.* You or the agent tries to reconstruct the download details a month later. Write the provenance entry in the same step that saves the file.

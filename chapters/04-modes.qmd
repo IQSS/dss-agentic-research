@@ -7,53 +7,49 @@ title: "4. Modes"
 # 4. Modes
 
 <!--
-STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-26 (first draft; needs a read-through)
-SOURCE: tool-chain §10 "Permission modes", "Plan mode", "Model and effort" (two-gears figure)
-COVERS: Permission modes (Manual, Accept edits, Plan, Auto, plus the two non-cycling modes bypassPermissions and dontAsk) in Claude Code. Plan mode: when, and when not. Model and effort as two gears that turn together with how scripted the task is. Other agents have analogous modes (noted once).
-VERIFY: checked 2026-08-26 against the Claude Code permission-modes and model-config docs. Claude Code: Manual (`default`) / Accept edits / Plan / Auto, Shift+Tab cycle, Auto is the starting mode on Pro, Max, and Team, Manual on Enterprise or an institutional gateway; effort low/medium/high/xhigh/max, default high, max session-only; aliases sonnet/opus/fable. The full six-mode set was re-confirmed 2026-09-22 against the Claude Code permissions docs: default/acceptEdits/plan/auto are the everyday Shift+Tab cycle, plus two non-cycling modes, bypassPermissions (auto-approves all; flag `--allow-dangerously-skip-permissions`) and dontAsk (auto-denies anything that would prompt, runs only reads and allow-rule pre-approvals; for unattended/CI runs, session never waits for input; flag `--permission-mode dontAsk`; not in the app picker or the Shift+Tab cycle). Re-check at release; model names date fastest. (Codex mode/effort specifics archived 2026-09-15; see docs/archive.)
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-26 · REVISED: 2026-09-26
+SOURCE: Claude desktop reference, permission-modes and model-config documentation; author-confirmed app-only scope
+COVERS: All permission modes, planning and critical review, model and effort; app operation only.
+VERIFY: Checked 2026-09-26 against https://code.claude.com/docs/en/desktop, /permission-modes and /model-config. Availability depends on account, model and managed policy. No terminal launch instructions retained.
 -->
 
-Three settings set the stage for a session before you type the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort level. The first two are about oversight. The third is about how hard and long the model thinks. All three can change within a session and the right settings change with the task.
+Three choices affect a session: how much the agent can do without asking, whether it should plan before acting, and how much reasoning to spend on the task. This chapter explains how to make those choices in the app and when to change them for different tasks. Access limits (§5) and verification (§13) remain necessary whichever settings you choose.
 
 ## Permission modes
 
-A *permission mode* sets which actions the agent may take without asking you first. Every action an agent takes is one of four kinds: read a file, edit a file, run a command, or reach the internet. The modes differ in which of those stop for a prompt. A prompt is a yes-or-no question in the session: *run this command?*, with the command shown.
+A *permission mode* determines when an action needs approval. Use the mode selector beside the app's prompt box. As of September 2026, the everyday choices are:
 
-In Claude Code, four modes are in everyday use. The desktop app and VS Code extension have a mode selector button, and in the terminal you cycle through them with `Shift+Tab`; 
-
-| Mode | What runs without asking | Best for |
+| Mode | What it changes | When it is useful |
 |:--|:--|:--|
-| Manual | Reads only. Every edit and every command prompts. | Restricted data |
-| Accept edits | Reads, file edits, and file housekeeping (`mkdir`, `mv`, `cp`) inside the project. Commands still prompt. | Potentially sensitive data |
-| Plan | Reads and read-only commands. No edits until you approve a plan. | Any task whose shape isn't obvious (next section) |
-| Auto | Everything, with a second model (a *classifier*) reviewing each action against your request and blocking the ones it judges unsafe. | Most daily work |
+| Manual | Usually asks before edits and commands, subject to existing rules | Learning the controls or deciding individual actions |
+| Accept edits | Allows file edits and common file operations; other commands may prompt | Work where edits are routine but command execution needs attention |
+| Plan | Explores the project and proposes an approach before changing the analysis | Work with unresolved scope or consequential choices |
+| Auto | Reviews actions automatically and permits routine work with fewer interruptions | Most daily work within established boundaries |
 
-The default mode on a fresh install is `auto`. A starting mode can be pinned with `defaultMode` in the settings file (§5), under the modes' setting names: `default`, `acceptEdits`, `plan`, `auto`.  Two further modes remove prompting, in opposite directions. `bypassPermissions` runs every tool call with no prompt and no safety check — recommended for isolated containers only with all data backed up, and reachable from the app's mode selector (behind a settings toggle) or a terminal flag (`claude --allow-dangerously-skip-permissions`). `dontAsk` does the reverse: it auto-denies anything that would have prompted and runs only what your allow rules pre-approved. That makes it the mode for running the agent unattended, from a shell script, a scheduled job, or a continuous integration pipeline, where no one is present to answer a prompt and the session never waits for one. It is not offered in the app; you set it at launch from the terminal (`claude --permission-mode dontAsk`). 
+The names and availability follow [Claude's permission-mode documentation](https://code.claude.com/docs/en/permission-modes). An institution may restrict the choices. Existing allow and deny rules also affect what happens, so Manual is not a promise to ask about every possible action, and Auto is not unrestricted access.
 
-Three things to keep in mind. First, a mode only dictates which actions require the agent to stop and ask your permission; it doesn't block anything outright. If something must never happen it belongs in a deny rule (§5), which blocks the action in every mode, whatever the agent or its classifier decides. For example, a data rule for restricted paths should be a deny rule. Second, the blanket-bypass mode sits outside the normal cycle on purpose — it's not something designed for everyday work. Third, more prompts aren't automatically safer. A session that asks forty questions trains you to answer yes without reading, and the resulting click-fest could be much worse than having Auto mode's classifier determine the risk (§5). The aim is a mode where every prompt you see is one you actually read.
+Two additional modes are worth understanding. *Bypass permissions* removes most permission checks; its availability is controlled by the app settings or your organization. It requires a separately isolated environment and is not the recommended mode for an ordinary local research project. *Don't ask* refuses actions that would otherwise need approval. It is intended for unattended use and has no app selector; the toolkit covers that terminal workflow. Neither is a substitute for setting the access limits in §5.
+
+For normal work, I use Auto after defining the permitted files and actions and checking the safeguards. I then review the result. Repeatedly approving routine edits adds little if I stop reading the prompts. For a genuinely consequential action, such as publishing results or changing a data-access boundary, I want a deliberate decision. If Auto is unavailable, use the modes your institution provides.
+
+A more cautious mode does not authorize the use of restricted data. Establish whether the service and the intended processing are permitted before opening those files (§16).
 
 ## Plan mode
 
-For any task whose shape isn't obvious to both you and the agent before work starts, ask for a plan before any edits. Claude Code builds this in: pick it in the app's mode selector (or cycle to Plan with `Shift+Tab` in the terminal) and describe the task. You can also ask your current agent to spin up a separate planning agent. The planning agent reads what it needs to, drafts a step-by-step plan naming the files it intends to touch and the changes it intends to make, but never starts implementation without your input. You edit the plan in place, then approve it, and only then does the agent start making changes. The plan becomes a fleshed out starting prompt for the task. It can also be useful to have a separate agent (either in a separate session or spun out by the current agent) antagonistically review the drafted plan and modify sections that can be improved. This process can iterate a few cycles until a consolidated plan is in place.
+Use Plan when the agent needs to make choices that you should review before implementation. Select it in the app and describe the result, constraints, and relevant files. Ask for a plan that names the proposed changes, unresolved questions, and evidence it will use to check the work.
 
-The payoff is catching the wrong-shaped solution at the plan stage instead of two-hundred file edits later. Even on tasks where you think the implementation is obvious, the plan surfaces assumptions the agent is making that you hadn't noticed: which files it considers in scope, which conventions it is inferring from your global metadata files (§6) and which from the surrounding code, and what it intends to check when it is done. If a step is wrong, you change it. If the scope drifted, you narrow it. If something is unsafe, you strike it. None of that requires unwinding edits.
+Read for assumptions, not just steps. Has it chosen the right input file? Does it intend to preserve the original sample? Has it silently replaced an expensive model with an easier one? Correct those choices, then authorize implementation and select an execution mode.
+
+For a difficult plan, give the proposal to a fresh session and ask it to look for omissions and counterarguments. Supply the research question and relevant literature as well as the plan. A critic that sees only the proposed answer can accept its assumptions too readily. You decide which criticisms require changes; agreement between agents is useful scrutiny, not methodological validation (§13).
+
+Routine work within a clear specification does not need a separate planning round. If you have already supplied the transformation rules, the agent can implement them and show the checks.
 
 ## Model and effort
 
-Two settings govern how much thinking the agent brings to a task, and for both, the right level depends on how much of the method is already worked out and how much the agent has to invent. The first is which *model* runs the job: Claude Code lets you pick in the session, from the vendor's most capable model (the frontier model) down to a smaller, faster one. The second is *effort*: how much the model reasons before it acts.
+The *model* is the LLM doing the work. *Effort* controls how much reasoning it uses. Pick the model in the app's model menu; use the effort control there when it is offered. Available models, effort levels, and defaults vary by account and model, so use the labels in your installation rather than memorizing a list. The [model documentation](https://code.claude.com/docs/en/model-config) explains the current options and usage implications.
 
-In Claude Code, `/model` picks the model, by name or by family alias (`sonnet`, `opus`, `fable`), and `/effort` picks the level: `low`, `medium`, `high`, `xhigh`, or `max`. The default is `high`; `max` is deliberately session-only and resets when you close the session. It can be pinned rather than picked each session: `effortLevel` in the settings file persists a level — any level but `max`, which the file refuses on purpose.
+![](figures/two-gears.svg){#fig-two-gears fig-alt="Model capability and reasoning effort can both increase as a task moves from a specified procedure to an open-ended problem." above="6pt" below="6pt"}
 
-| Effort | What it's for |
-|:--|:--|
-| `low` | High-volume or latency-sensitive work |
-| `medium` | Balanced speed, cost, and quality |
-| `high` | The default: complex reasoning, quality over speed |
-| `xhigh` | Deepest level that persists in settings |
-| `max` | Session-only ceiling: unconstrained thinking, resets when the session ends |
+A routine formatting change rarely needs the same resources as designing a calibration study or investigating conflicting estimates. I start consequential research work with a capable model and high effort, then reduce them for clearly specified, repetitive tasks. More reasoning can improve a difficult implementation, but it cannot supply evidence the agent has not read or make an unsuitable specification appropriate.
 
-![](figures/two-gears.svg){#fig-two-gears fig-alt="Two coupled bars, model and effort, each ramping from left to right beneath a scale that runs from scripted work to open-ended work." above="6pt" below="6pt"}
-
-Think of them as two gears that turn together with how scripted the task is. A deterministic recipe, such as scaffolding a project whose shape is already written down (§7) or applying a known pattern across scripts, runs well on a smaller model at lower effort: it thinks less and does more, and is faster for it. A job where the agent has to work out its own approach and change course as evidence arrives wants the frontier model and the depth. What links the two gears is a single dimension: how much of the approach is given, and how much the agent has to invent.
-
-For research work the practical rule is simpler than the figure. Latency rarely matters; the real budget is your plan's usage allowance, which higher effort spends faster (§17). I pin it high and drop a session down when a task is clearly mechanical, rather than the reverse: a wrong turn on a statistical question costs more than the minutes saved. Two cautions. The names of the models change every few months, so treat the aliases as the stable part. And the top model tier may bill outside your plan's allowance (Claude Code says so in the `/model` picker when it does); check before an overnight run.
+Check the account's usage display before launching several substantial tasks (§17). Model names change, and a newly offered model may have different usage terms. A faster response is useful only if the result still meets the checks you set.

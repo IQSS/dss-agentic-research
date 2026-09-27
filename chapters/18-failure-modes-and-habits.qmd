@@ -10,55 +10,53 @@ title: "18. Failure modes and habits"
 STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
 SOURCE: tool-chain §12 "Anti-patterns", §13a "The blind-click-fest failure mode", §10 "Context hygiene"; synthesizes §2, §5, §6, §9, §12, §13, §15 of this guide
 COVERS: Confident-but-wrong. Context blow-up. Stale memory. The click-fest. Over-delegation. The supervisor stance as the habit that prevents most of it.
-VERIFY: `/compact` and `/context` exist in Claude Code (checked 2026-08-26 against the slash-command docs). Auto memory is Claude Code's.
+VERIFY: App-only session guidance revised 2026-09-26; operational commands belong in toolkit Part V.
 -->
 
-Every failure in this chapter has appeared in an earlier one. What collects them here is a shared cause. The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures aren't settings. They are the stance of §2, kept up on the days it is inconvenient.
+An agent can report success after using an outdated instruction, changing the wrong file, or weakening a check until the code runs. This chapter brings together recurring failures from the guide, explains how to recognize them, and describes habits that help you catch them. Use it when a session goes wrong or when deciding what to review before accepting a result.
 
 ## Confident but wrong
 
-The failure that matters isn't the script that breaks; that one announces itself. It is the script that runs, the number that looks reasonable, and the summary that says the work is done, when it isn't. The agent's tone is the same for a correct answer and an invented one, so nothing in the output tells you which you have. Code that runs isn't code that is right (§2); a rule that fired isn't a finding (§12); two numbers that agree aren't two independent numbers (§13).
+Errors are harder to notice when a script runs, the result looks plausible, and the agent reports that the task is complete. Its confident tone gives you no reliable basis for accepting the result. Successful execution does not show that the requested analysis was implemented, and agreement between outputs is a weak check if both came from the same implementation (§13).
 
-The habit: never accept a report as a result. "Done", "they agree", "it works", and "I verified" are claims, and the response to each is the same question: show me. The listing, the build output, the comparison table, the simulation table, the opened reference. If the artifact doesn't exist, the claim isn't yet true. The chapters of Part III are organized around what that artifact is for each stage, and each *What you check* section names the artifacts for its stage.
+Ask for evidence of the claimed result: the saved file, execution log, comparison table, or source supporting a citation. Inspect that evidence yourself. The relevant Part III chapter identifies what to check for each task; a statement that the agent performed the check is insufficient on its own.
 
 ## Context blow-up
 
-An agent's working memory for a session (one conversation, from its start to `/exit`) is finite (§6), and a long session fills it: every file read, every command's output, every diff rides along on each subsequent turn. The symptoms are recognizable once you have seen them. The agent forgets a rule from the brief it followed an hour ago. It repeats work it already did. It contradicts an earlier answer without noticing. It slows, and on a metered plan it starts to cost (§17). Then, near the limit, the session is compacted into a summary, and whatever didn't make the summary is gone.
+Messages, file contents, and tool outputs accumulate during a session and use its limited context window (§6). In a long conversation, the agent may overlook an instruction, repeat completed work, or contradict an earlier answer. Longer context can also increase usage (§17). When the conversation is *compacted*, earlier material is replaced with a summary that may omit details you still need.
 
-The habits: one session per task, closed when the task is done, with `STATUS.md` and `TASKS.md` as the hand-off to the next (§9). Name files rather than pasting them. When a session has to run long, compact it yourself with `/compact`, while you can still say what the summary should keep, rather than waiting for the automatic one; in Claude Code, `/context` shows what is filling the window (my own habit: glance at it once a session has run long, and compact when usage passes roughly 300,000 tokens). Keep the brief short (§6), because it is loaded every time. And treat a session that has started to forget as finished: restart, and let the files carry the state.
+Keep the task record and decisions in project files, so a fresh session can resume without reconstructing the conversation (§9). Ask the agent to save the current state before starting a new app session on the same project. If a long session has begun to repeat work or forget constraints, reread the relevant files with a fresh session. There is no universal token threshold at which every model needs restarting.
 
 ## Stale memory
 
-Two kinds. The agent's own notes across sessions (§6), which record what it noticed, and can record a file that has since been renamed or a decision that has since been reversed. And the agent's assumptions from earlier in a session, formed when a file said one thing, and kept after you changed it. Both are worse than no memory, because the agent acts on them without flagging that they are memories.
+Outdated information can come from the agent's saved notes (§6) or from an earlier point in the current session. A note may refer to a file you have renamed; the agent may also continue using assumptions from a document you have since edited. It may not flag that it is relying on an old version.
 
-The habits: the file wins over the note, always, and a rule you rely on memory to keep belongs in the brief. Decisions are dated in `METHODOLOGY.md`, and a reversal is a new dated entry, not an edit of the old one, so the record shows which came later. After you change a file the agent has already read, say so; and open the agent's notes now and then and delete what has expired.
+Have the agent follow your maintained project instructions when they conflict with its notes, then correct the stale note. Keep important rules in the instruction file. Record a reversed methodological decision as a new dated entry in `METHODOLOGY.md` so the sequence remains clear. When you edit a file the agent has already read, ask it to read the new version before continuing.
 
 ## The click-fest
 
-A permission system that prompts too often trains you to approve without reading (§5). By the fortieth prompt you are approving the shape of the dialog. And a session that has read something you wouldn't fully trust makes every subsequent request look plausible, because the requests are shaped by what was read. At that point the prompts are the least dependable control you have. For code or data you actively distrust, rather than merely haven't vetted, the dependable fence isn't a prompt but a container that seals it off from the rest of your machine (§5).
+Frequent permission prompts can lead you to approve actions without reading them (§5). That is particularly risky when the agent has read untrusted material that could influence its next request. For code or data you distrust, use a suitably isolated environment with limited file access, credentials, and network access; approval prompts alone provide insufficient protection.
 
-The habits are the posture in §5: the routine allowed, the never denied, and prompts kept only for what you will actually read. The signal that the balance is wrong is your own behavior. Approving the same prompt for the tenth time means that action belongs on the allow list; approving something you would have refused had you read it means it belongs on the deny list. A prompt rate you can't keep up with is a setting to change, not a discipline to summon.
+Configure permissions so routine, bounded actions can proceed, prohibited actions are denied, and consequential choices require review. Repeated harmless prompts may justify a narrow allow rule. If you find yourself approving requests unread, revisit the configuration rather than broadening access indiscriminately. Pay particular attention when an action's consequences depend on which files or destination it uses.
 
 ## Over-delegation
 
-The agent will take whatever you hand it, including the parts of the work that were yours. Three hand-offs go wrong.
+Keep responsibility for methodological choices, acceptance of results, and access decisions, even when the agent helps with each. Three forms of delegation can obscure that responsibility.
 
-*Delegating the judgment.* The estimand, the exclusion rule, the prior, the interpretation of a discrepancy between two implementations, the decision about what to do when a calibration fails. Asked, the agent decides, fluently, and the decision looks like analysis. These are yours, and the sign that one has slipped is a number in your table you can't explain in your own words.
+*Delegating the judgment.* The agent chooses an estimand, exclusion rule, or prior without your review, or changes the analysis after a failed calibration. Have it identify those decisions explicitly and give its reasons for any proposal. You need to understand and justify the choices that determine the reported result (§13).
 
-*Delegating the checking.* "Check that this is right" returns "it is right." An agent verifying its own work has the same blind spots the work has. The check comes from something else: a simulation with a known truth, a second implementation by a different session, a reference you opened, a build you ran yourself (§12, §13, §15). A second agent helps only if it is genuinely independent: a critic that shares the session's context tends to agree, and among several runs a majority isn't proof, since two agents can make the same mistake. Anchor the check to something outside them all, a known answer or a simulation (§13).
+*Delegating the checking.* Asking the same agent to review its work can leave its original assumptions unchallenged. Use independent implementations, known-answer cases, opened sources, and documented reruns as appropriate to the task (§12, §13, §15). Separate implementations are a strong practical check, but they can still share a mistake or an unsuitable target. Assess methodological justification and statistical behavior separately (§13).
 
-*Delegating the boundary.* Letting the agent write its own permission rules, edit the brief that constrains it, or decide which data are restricted. The boundary is set outside the session it binds (§5, §16), or it isn't a boundary.
+*Delegating access decisions.* The agent changes its permission rules or project restrictions without your review, or decides which data it may process. You can ask it to propose a configuration, but review that proposal separately and protect both the active settings and any source used to recreate them (§5, §16).
 
-There is a quieter form. Work that happens in the conversation and never reaches a script: a recode applied once, a filter agreed in chat, a table produced from a session and pasted into the manuscript. It is in the paper and nowhere in the repository. The rule from §15 is the cure: everything the paper reports comes from the build.
+Also check for work that happened only in the conversation: a recode applied once, an exclusion agreed in chat, or a table pasted into the manuscript without saving how it was produced. Preserve the decisions, outputs, and steps needed to repeat that work (§15), including LLM responses used as measurements.
 
 ## The loop that fixes the wrong thing
 
-Asked to make a failing script work, an agent can make the failure disappear instead of fixing its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the assertion that fired, change an option until the numbers match the other implementation, adjust the model until the calibration passes (§2, §12, §13). Every step looked like progress in the loop's own terms, and the report says the problem is solved.
+An agent trying to fix a failing script may suppress the error, discard rows that do not merge, or relax a check. It may change a model option until estimates agree or alter the analysis until calibration passes (§2, §12, §13). The new run appears successful because the agent changed what was being tested.
 
-The habit is one question, asked every time an error goes away: how? If the answer is that the check was weakened rather than satisfied, then the fix has introduced a worse problem than the one it closed. The instruction that prevents most of it is the one from §13, *report, don't reconcile*: a failing check is a finding for you, not a task for the agent.
+When an error disappears, ask the agent to show its cause and the change that fixed it. Inspect whether the correction preserved the intended sample, specification, and checks. Have the agent report a failed check before proposing changes to the analysis or acceptance criteria (§13).
 
 ## The supervisor stance
 
-Most of this chapter is prevented by the stance §2 set out, held consistently. Describe the outcome and its constraints rather than the steps. Ask for a plan when the shape of the task isn't obvious, and edit it before the agent starts. Let it run without narrating each step back to you. When it finishes, check the result against something other than its own account. Keep it inside a boundary you set in advance. Open and close every session with the two rituals of §9. And let nothing into the paper that the build can't reproduce.
-
-An agent is a research assistant with more speed and less judgment than any you have had. Treat it the way you would treat an assistant you have known for a week: clear instructions, real trust for the mechanical work, and your own eyes on everything that carries a claim. The difference is that you can apply that scrutiny to everything it does, where a person would resent it.
+Before delegating, state the outcome, constraints, and evidence you will use to judge completion. Request a plan when important choices remain unresolved. Afterward, use that evidence to decide what to accept and have the agent update the project records (§9). Over time, repeated errors should lead to more precise instructions or stronger checks, so the same failure is less likely in the next task.

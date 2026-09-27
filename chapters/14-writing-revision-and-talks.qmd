@@ -13,75 +13,72 @@ COVERS: Drafting from METHODOLOGY.md and results. The Word-collaborator reality 
 VERIFY: disclosure table checked 2026-08-27, then re-verified the same day. Primary wording now for ICMJE, Elsevier, PLOS, NIH NOT-OD-25-132 and NOT-OD-23-149, Science (editorial-policies page read in the browser: AI section under Image and Text Integrity), Nature Portfolio (policy page fetched with curl past the cookie wall: the Springer Nature risk-assessment framework, which replaced the older Methods/Acknowledgments wording), and JAMA's 2024 reporting guidance (Acknowledgment: platform, version, manufacturer, dates, use, portions; Methods for research use) plus the opinion-piece ban from the instructions page. Still secondary: JAMA's August 2026 bans on peer review and clinical images. pandoc's `--track-changes` and docx/pptx writers as of pandoc 3.
 -->
 
-The paper is the artifact the agent should touch least and can help with most. It drafts fast and fluently, which is exactly the property to distrust in a methods section. The rules are three. The agent writes from your files (`METHODOLOGY.md`, the tables the build produced, the figure captions) and never from its own sense of what papers like yours usually say. You rewrite what it drafts. And what goes to the journal says what the agent did, in the form the journal asks for.
+An agent can turn your analysis records and saved results into draft text, reviewer responses, and slides. This chapter explains how to supply the evidence it should use, review its wording and claims, work with coauthors' documents, and disclose its contribution. You remain responsible for ensuring that the final text describes the research you actually did.
 
 ## What to ask for
 
-*Drafts from the files.* The methods section from `METHODOLOGY.md` and the scripts: the estimand and the model as fitted, equation first and then the prose that explains it, with every choice the file records and none it doesn't. The results from `outputs/tables/`: every number read from the file and placed, never typed from memory, and a bracketed gap wherever the file has no number for a sentence. A first pass at the discussion only from the results and a list of limitations you write yourself. The instruction that makes this work is one line, and it goes in every request:
+*Drafts from the files.* Ask for methods text based on `METHODOLOGY.md` and the analysis scripts, describing the estimand, fitted model, and recorded decisions. Put the model equation before the prose that explains it. For the results section, have the agent take numbers from `outputs/tables/` and mark any claim for which the files provide no support. Supply your own list of limitations alongside the results when requesting a discussion draft.
+
+Make the source restriction explicit in each request:
 
 > Use only what is in `METHODOLOGY.md`, `outputs/tables/`, and the figure captions. Where a claim, a number, or a reference is not in those files, leave a bracketed gap and list it at the end. Do not fill it from what you know.
 
-*The voice.* The rules that transfer from a conventions file to a manuscript are short (§6, Appendix A). Short sentences; the point first, then the qualification; concrete over abstract, with the number, the file, the date. Sparse emphasis. No throat-clearing ("it is worth noting that"), no conspicuous vocabulary, no three-part lists in every paragraph. Methods equation-first. Results in the past tense, interpretation in the present, and no drifting between them. Limitations stated before a reviewer states them. A paragraph that reads as the agent's rather than yours has usually broken one of these, and the fix is to name the rule in the global file so the next draft doesn't.
+*Your writing conventions.* Give the agent the style guidance you maintain (§6, Appendix A). Ask it to state the point directly, name what each claim refers to, and explain the connections between ideas. A short sentence still needs enough context to be understood. Remove repeated explanations and decorative closing lines. Include conventions specific to the manuscript, such as tense, terminology, and the placement of limitations. When you make a recurring correction, record it in the relevant instruction file.
 
-*The Word round trip.* Coauthors work in Word, with tracked changes, and no amount of markdown enthusiasm changes that. The pipeline that respects both sides: you write in markdown (or Quarto), and pandoc produces the `.docx`, with a reference document that carries the journal's styles. The coauthor edits and returns a `.docx`. Then pandoc reads it back, either showing the tracked changes or accepting them, and the agent produces the diff against your markdown and a list of the substantive edits, separated from the typographic ones. Each round trip is a dated pair in `manuscript/` (§7). Figures are PDFs from the build (§15), placed by Word; they are never redrawn in Word.
+*If you write in Word.* Keep the manuscript in Word. Give the agent an approved section and the supporting results, and ask for proposed wording with a record of what changed and why. You can paste accepted passages into the document yourself, preserving tracked changes and the coauthor workflow. For direct document editing, work on a copy and inspect the returned file in Word, including comments, citations, equations, and layout.
 
-*Reviewer responses.* Each comment quoted, then the response, with the substantive answer first and the courtesies after (or not at all), and line numbers for every change. The agent drafts from two inputs: your bullet notes on what to do about each comment, and the text that changed. The decisions are yours, and each one that changes the analysis gets a dated entry in `METHODOLOGY.md` (§6), because the next revision, or the next paper, will need the reasoning.
+If you already write in markdown or Quarto, you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
+
+*Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§6), so their reasons remain available at the next revision.
 
 > Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
 
-*Talks.* A deck isn't the paper in bullets. Ask for an outline first, one claim per slide, drawn from the paper's sections, with the figure that carries each claim named from `outputs/figures/`; cut it by half; then ask for the slides. The output can be PowerPoint from pandoc, a web deck from Quarto, or Beamer (the LaTeX slide format), and the choice is the venue's, not the agent's. A deck built this way comes out of the same markdown and the same build as the paper, which is the point: the claim on the slide and the number in the table have one source.
+*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the LaTeX slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
 
 ## What the agent does
 
-Reads the files and writes markdown; places numbers by reading the tables; runs the conversions (`pandoc paper.md -o paper.docx` with the reference document; the reverse with tracked changes accepted or shown); diffs the returned draft against yours and sorts the edits; drafts the responses from your notes; builds the outline and then the deck. The conversion steps are mechanical and reliable. The drafting is where the one-line instruction above does its work: an agent told to use only the files will leave gaps, and the gaps are the list of what you haven't yet decided or measured.
+It drafts from the supplied evidence, traces numbers to saved outputs, and identifies missing support. It can compare manuscript versions, prepare responses from your decisions, and propose a talk outline using the existing figures. Keep a source file and a returned document for each editing round so that changes remain reviewable. A request to leave unsupported claims blank reduces invention but does not guarantee it; check the draft.
 
 ## What you check
 
-Every number, against the file it came from. Ask for the check as a table (number, file, row, column) and read it; a number the agent can't trace is a number it typed.
+Ask for a table tracing each reported number to its source file, row, and column. Check those locations against the manuscript, and investigate any number the agent cannot trace.
 
-Every reference, opened. The invented citation is the failure specific to this stage, and the rule from §10 holds for every sentence the agent wrote: if a reference wasn't in your files, it isn't in the paper until you have opened it.
+Open every cited source and confirm that it supports the associated claim (§10). Do this for references added during drafting as well as those already in the project.
 
-The methods against the scripts. The section must describe the model as fitted, defaults included (§12), not the model as intended; the agent can produce the cross-check by reading the script beside the paragraph.
+Compare the methods section with the scripts, including software defaults (§12). The agent can help by reading each paragraph beside the relevant code and listing discrepancies. Resolve any difference between the intended analysis and what actually ran before finalizing the description.
 
-The voice, by reading a paragraph aloud. If it isn't how you write, it isn't done.
+Read a paragraph aloud to check whether it uses your language and explains the point as you would. Revise phrasing that sounds unlike you or leaves the reader to infer a connection.
 
-The disclosure, below, and its placement, which differs by journal.
+Check the AI-use disclosure and its placement against the journal's instructions, as described below.
 
 ### Disclosure
 
-Every journal that matters to this readership now asks the same three things in different places: that AI-assisted tools aren't authors, that their use is disclosed with enough detail to be understood, and that the authors take responsibility for everything the tools produced. The differences are where the statement goes and what it must contain. As of August 2026:
+Check the target journal's current instructions at submission. Policies differ in the uses they permit, the details required, and where the statement belongs. As of September 2026, [ICMJE's author guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html) calls for disclosure of AI assistance, human responsibility for the submitted work, and no AI authorship. Use the journal's own instructions to determine the applicable wording.
 
-| Body | What it asks | Where it goes |
-|:--|:--|:--|
-| ICMJE (recommendations updated January 2026) | Disclose at submission whether AI-assisted technologies were used and how. AI isn't an author. Authors are responsible for accuracy and for the absence of plagiarism, including in AI-produced text and images. | The cover letter and the submitted work: the acknowledgments for writing assistance; the methods for data collection, analysis, or figures. |
-| Nature Portfolio (the Springer Nature risk framework) | Use is governed by risk, not by tool. Language polishing, formatting, translation, and data cleaning are permitted; uses that shape interpretation (suggesting analyses, drafting summaries, extensive writing support) are permitted with human oversight and disclosure; presenting AI reasoning as your own, fabricated data or citations, AI authorship, delegating peer review, and photorealistic AI images aren't permitted. Reviewers may not put manuscripts into public AI tools. | Authors disclose AI use; the framework fixes no single location, so follow the journal's instructions. |
-| Elsevier journals | Permitted to improve language and readability and for some organizing tasks, with author oversight. AI-generated primary research images prohibited. No AI authors. Reviewers may not upload manuscripts. | A separate declaration section before the references, naming the tool and the purpose, which appears in the published article. |
-| JAMA Network (guidance of August 2026) | Report the platform, version, manufacturer, dates of use, what it did, and on which portions; confirm responsibility. Barred outright: peer review, opinion pieces, clinical images. | The acknowledgment; the methods when the tool is part of the research design. |
-| Science journals | AI as a component of the research or an aid to writing is permitted with disclosure. No AI authors, and no AI-authored sources in the reference list. AI-generated images and multimedia aren't permitted without the editors' explicit permission. Reviewers may not enter any part of a manuscript into an AI tool. Accountable for accuracy, citation, and plagiarism. | The cover letter, and the methods or acknowledgments; the AAAS guidelines for AI use say which for each use. |
-| PLOS | Report the tools, how they were used and evaluated, and which parts of the study or article were affected. Not authors. The hypotheses, interpretations, and conclusions are the authors' own. | A dedicated section of the methods; the acknowledgments where there is no methods section. |
-| NIH, applications (NOT-OD-25-132, effective 25 September 2025) | Applications substantially developed by AI aren't the applicant's original ideas. Limited assistive use may be appropriate. Six applications per investigator per year. | No disclosure field; detection and post-award enforcement. |
-| NIH, peer review (NOT-OD-23-149, June 2023) | Reviewers may not use generative AI to analyze or critique applications, and may not upload any part of one. | Not applicable: a prohibition. |
+Keep a record of the tool and model information available, dates, tasks performed, affected parts of the work, and how the authors checked them. Distinguish language assistance, code generation, and an LLM used to produce measurements (§15). The last requires enough methodological detail to assess the measurement procedure, not just an acknowledgment.
 
-Most policies were written for text and images and say little about code; treat code assistance as a "component of the research" and disclose it in the methods, with the verification that stands behind it, which is a stronger statement than most authors can make. And a generic sentence ("AI tools were used in preparing this manuscript") satisfies none of them. The statement names the tool and version, the vendor, the period, what it did and to which parts, and who checked it. For the paper of §6:
+An adaptable disclosure template is:
 
-> The authors used Claude Code (Anthropic; Claude Opus 5; May to August 2026) to draft and test the analysis code in `code/` from the authors' written specification, and to edit the language of the Methods and Results sections. All code was verified by an independent re-implementation in Stata, all analyses were re-run by the authors from the raw data, and the authors take full responsibility for the content.
+> We used [tool and observed model/version; dates] to [specified tasks]. The authors reviewed [affected text or outputs] and checked the analysis using [checks actually completed]. For LLM-derived measurements, the Methods describe the inputs, prompts, evaluation, and human review. The authors take responsibility for the reported work.
 
-Adapt the location to the journal. And note the two prohibitions that are absolute: a manuscript you are reviewing never goes into any tool (NIH, Elsevier, JAMA, and most others), and your own unpublished text never goes into a consumer plan with training on (§16).
+Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§15), even when private working notes are removed.
+
+Treat peer-review material separately. This guide's conservative working rule is to keep confidential manuscripts and applications you are reviewing out of agent sessions. Follow the journal's or funder's current reviewer policy; permission to use an agent on your own work does not authorize its use on someone else's confidential submission.
 
 ## What goes wrong
 
-*Numbers typed by the model.* A transposed digit, a rounded value, an estimate from nowhere that reads exactly like the real one. The traceability table catches it after the fact; the one-line instruction above stops it happening.
+*An unsupported or altered number.* The draft contains a transposed digit, an incorrectly rounded value, or an estimate absent from the results. Requiring the agent to use saved outputs reduces this risk; checking each number against its source is still necessary.
 
 *The invented reference.* Plausible authors, a real journal, a year, and no such paper (§10). Open every one.
 
 *Methods for the model you meant.* The section describes the intended model; the script ran another (a default, a dropped term, a different clustering). Cross-check against the code, not against `METHODOLOGY.md` alone.
 
-*The voice of the machine.* The reviewer notices before you do. Read aloud; put the broken rule in the global file.
+*Prose that does not sound like you.* The draft uses generic phrasing or explanations you would not give. Revise it and record recurring corrections in your writing instructions.
 
 *The round trip that loses edits.* The agent accepts the coauthor's tracked changes silently, or overwrites the returned draft with a regenerated one. Keep every returned `.docx`, dated; diff before anything is merged.
 
-*The generic disclosure.* "AI was used." Tool, version, vendor, dates, purpose, parts, checker.
+*The generic disclosure.* “AI was used” leaves the reader unable to assess its role. State the tool and available version information, dates, tasks, affected parts of the work, and checks the authors performed, following the journal's requirements.
 
-*The manuscript under review in a tool.* A paper you are reviewing is someone else's unpublished work, and it goes into no tool, ever. That is a confidentiality breach whatever the tool's terms say.
+*Confidential review material enters the session.* Check the reviewer policy before exposing any material, including correspondence and quotations in notes. The conservative rule above avoids assuming permission from the account alone.
 
-*The deck that is the abstract in bullets.* The agent's default. One claim per slide, one figure per claim, half the slides you first asked for.
+*Slides that repeat the abstract.* A sequence of dense text slides gives the audience little help following the results. Return to the outline and identify the claim and supporting evidence each slide needs to convey.

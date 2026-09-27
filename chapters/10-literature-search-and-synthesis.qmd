@@ -13,67 +13,90 @@ COVERS: Protocol before searching. Search, screen, extract into an evidence tabl
 VERIFY: the run described here was made on 2026-08-31 against OpenAlex, Crossref, PubMed and arXiv, on the question behind papers/worthington-journal-review-times; 15 queries, 604 records retrieved, 507 after deduplication, 37 included, 11 borderline, and the counts in the table are that run's. The three failures reported are all from it: the retrieval cap that stopped the run, the DataCite record reported as a probable fabrication, and the preprint pair deduplication missed. Rerun and re-check the counts if the protocol changes.
 -->
 
-Literature search is where the agent's speed and its worst habit meet. It can search, fetch, screen and tabulate faster than you can read the first abstract. It can also produce a citation that is perfectly formatted, plausibly titled, published in a journal that exists, and attributed to authors who work in the field. The paper doesn't exist. Everything in this chapter follows from one decision about that: not to make fabrication less likely, but to make it impossible to miss.
+An agent can help search for papers, screen records, and organize findings, but it can also invent citations or misrepresent a source. This chapter explains how to specify the search, obtain a record of the screening decisions, verify sources, and request a synthesis whose claims can be traced to the papers themselves.
+
+First specify the kind of search. A reading list for background and a systematic review have different coverage requirements. The run below illustrates discovery and screening for a research project; it is not a universal review protocol. If completeness supports the paper's claim, involve a librarian or information specialist and follow the relevant review standard. The [Cochrane search chapter](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04) explains the importance of coverage, search design, and information-specialist input.
 
 ## What to ask for
 
-*The protocol, before a single query runs.* Write down the question, what counts as included and excluded, the date range, the languages, which sources will be searched, and what "done" means. Have the agent draft it from your description, then read it and approve it. This is the step you already know how to do, and it is what makes the search auditable, re-runnable, and arguable by a reviewer. Skipping it because the question looks simple is how you end up with a set of papers nobody can defend.
+*The protocol, before searching.* Give the agent the question, inclusion and exclusion criteria, date range, languages, sources to search, and stopping rule. Have it draft the protocol from your description, then review and approve it before any query runs. The written protocol lets you inspect the agent's screening decisions and repeat the search.
 
 Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it names a topic, not the criteria that decide what is in and out. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
 
-*The rule that makes the rest work.* State it in the protocol, in one line: **no record enters the evidence table without a resolved identifier.** Every included row carries a DOI, a PubMed ID, or an arXiv ID that was fetched from a live interface, and whose title, first author and year were compared against what the table claims. Anything the agent believes but can't resolve goes to a quarantine file. It doesn't enter the table, and it isn't cited.
+*Verify each source.* Usually the quickest route is to resolve its DOI, PubMed ID, or arXiv ID and compare the title, authors, and year. Legitimate books, reports, and historical material may have none of these. For those, record a stable catalog or publisher record, a copy or location a reader can inspect, and who checked it. Unresolved records remain flagged until reviewed; lacking an identifier is not itself a reason to exclude relevant evidence.
 
-*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex and Crossref are cross-domain, free, and need no account: OpenAlex for finding, Crossref for confirming. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a license, so if you have one, say so and use it; if you don't, record their absence as a gap rather than pretending the search was exhaustive.
+*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex can help discover records across fields, and Crossref can help check DOI metadata. Ask the agent to consult their current access requirements and limits rather than assume that every request is anonymous or free. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a license, so if you have one, say so and use it; if you don't, record their absence as a gap rather than pretending the search was exhaustive.
 
-*What you want back.* A dated, self-contained directory, not a chat answer: the protocol; every query string with its source and date; the raw responses, unmodified; a screening log with a recorded reason for every exclusion; the evidence table; the quarantine; and a bibliography in both `.bib` and `.ris`, because no single format is universal.
+*What you want back.* Ask the agent to save its work in a dated directory: the protocol; every query with its source and date; unmodified responses; a screening log with a reason for every exclusion; and an evidence table summarizing the included studies. Keep unresolved records in a separate file for review, called `unverified.md` in the example below. Request the bibliography in both `.bib` and `.ris` formats so it can be imported into different writing and reference tools.
 
-> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with a note of where it came from, and is not cited. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation. Leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
+> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with its source and a proposed manual-verification route. Do not cite an unverified record. Do not exclude a relevant book or report solely because it lacks an identifier. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation. Leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
 
-Three parts of that request carry the weight. *Show me the protocol first*, because approval before searching is the only cheap moment to change the scope. *Record a reason from the protocol for every exclusion*, because an exclusion without a reason is indistinguishable from an oversight, and 459 of them are impossible to audit after the fact. And *leave a cell empty*, because an empty cell is a reading task, while a guessed one is a fabrication with more steps.
+Reviewing the protocol first lets you correct the scope before the search produces hundreds of records. Recorded exclusion reasons let you check whether the agent applied that protocol. Empty evidence cells identify information that still needs to be extracted; guessing would conceal that unfinished work.
 
 ## What the agent does
 
-It queries the interfaces rather than answering from what it has read. That distinction is the whole chapter: a model asked "what does the literature say" will produce fluent, sourced-looking prose from memory, and a model asked to query OpenAlex will return records that exist.
+The agent searches the specified sources and saves the returned records. It uses those records for screening and extraction, so you can inspect the material behind its decisions. A general answer about the literature, without retrieved sources, does not provide that record.
 
 Run on the question behind a real paper (how submission-to-acceptance times vary across fields, publishers, and journal prestige), the stages produced this:
 
 | stage | n |
 |:--|--:|
 | retrieved, across 15 queries | 604 |
-| dropped: no identifier | 6 |
+| set aside for lacking an identifier in the original run | 6 |
 | after deduplication | 507 |
 | excluded at screening | 459 |
 | borderline, referred back for a ruling | 11 |
 | included | 37 |
 
-Of the 37, twenty-five were screened on an abstract the agent actually fetched and twelve on the title alone, because no abstract came back. The table says which, in a column, for every row. That column is the difference between a reading plan and a list of things somebody skimmed.
+The original run used an identifier-only inclusion rule. Under the broader practice recommended here, its six unresolved records would need manual verification before any exclusion on that basis. These counts describe the historical run, not a rerun with that correction.
+
+Of the 37 included records, twenty-five were screened using a retrieved abstract and twelve using only the title because no abstract was returned. A column in the evidence table records which text was available for each decision, so the title-only records can be identified for further review.
 
 The exclusions aren't a black box either. They resolve into the protocol's own categories: 424 with no duration outcome at all, 26 measuring the wrong interval (grant review, cancer treatment delay, time to tuberculosis diagnosis), 7 with no data, and 2 single-journal reports.
 
-Then the verification pass re-fetches every surviving record by its identifier and compares. This is mechanical and belongs in a script rather than in a conversation, because you will run it more than once and because a check you can rerun is a check you will rerun.
+The verification script then retrieves each remaining record by its identifier and compares the title, first author, and year with the saved record. Saving this check as a script lets you rerun it when the search results change.
 
 ## What you check
 
-*That the verifier passed, and what it said.* Not "the agent said it verified them". The output should name a count and the checks it ran.
+*The verification output.* Read the saved report. It should state how many records were checked, which comparisons were made, and which records remain unresolved.
 
-*The quarantine, especially when it is empty.* Ask for the number every time. Zero records reaching the table from the model is the result you want, and you only know it because somebody counted. A quarantine that is quietly deleted when empty teaches you nothing; one that is reported at zero teaches you the check ran.
+*Unverified records.* Inspect `unverified.md` and decide how to check each unresolved source. Require the verification report to state the unresolved count even when it is zero; an absent file does not tell you whether the check ran. Confirm that unresolved records have not been presented as verified evidence.
 
-*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. That is fine at this stage, and it isn't fine in the sentence you write about it.
+*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. Refer it for abstract or full-text retrieval rather than treating a missing abstract as evidence of ineligibility. A title alone cannot support a synthesis claim.
 
-*Whether the counts reconcile.* Records in, records after deduplication, records excluded with reasons, records included. If they don't add up, one of the stages is lying.
+*Whether the counts reconcile.* Account for retrieved records, duplicates, exclusions, borderline cases, unresolved records, and included studies. If the counts do not add up, ask the agent to identify the missing or double-counted records.
 
-*Every reference you cite.* Open it. Not all 37; the ones that end up in the paper. Verification proves a record exists and its metadata matches; it doesn't prove the paper supports what the row claims about it. That last step is yours, and it is done by reading the paper.
+*Every reference you cite.* Open the sources used in your manuscript and check the passages supporting its claims. Matching a citation to a real record does not establish that the paper supports the agent's summary.
+
+*Coverage and exclusions.* Give the agent a few known relevant studies and check whether the search recovered them. Inspect a sample of exclusions, especially borderline cases and records without abstracts. Check cited sources for corrections or retractions. A query expansion returning nothing new is useful information, but it does not establish completeness.
+
+### From full texts to a synthesis
+
+Ask for a claim-to-source table before prose: the proposed claim, the source, the supporting page or passage, and the limitation or disagreement that constrains it. Distinguish “the study did not report this” from “the agent has not extracted it.”
+
+For example, imagine two *invented teaching sources*, A and B, supplied as full texts:
+
+| Source passage | Extracted evidence | Limit on the claim |
+|:--|:--|:--|
+| A, p. 4, Results | Median submission-to-first-decision time: 42 days across all submissions | Includes desk rejections |
+| B, p. 6, Table 2 and note | Median submission-to-acceptance time: 110 days among accepted papers | Excludes rejected papers; uses a later endpoint |
+
+A defensible synthesis would read: “The two studies measured different stages of review. A reported a median of 42 days to first decision across submissions (p. 4), while B reported 110 days to acceptance among accepted papers (p. 6, Table 2). These figures do not establish that B's journals reviewed comparable submissions more slowly.”
+
+The source labels and numbers above are invented solely to show the requested output. In your project, each label should resolve to an actual verified full text. If papers disagree on a comparable result, preserve that disagreement and identify the relevant differences; do not ask the agent to smooth them into a consensus.
+
+> Using only the verified full texts, draft a synthesis of the findings relevant to our question. First give a table linking each claim to its supporting page, table, or passage. Distinguish reported limitations from information not yet extracted. Preserve disagreements and differences in outcome definitions or samples. Flag corrections, retractions, and sources unavailable in full text. Leave unsupported claims out of the draft and list them as open questions.
 
 ## What goes wrong
 
-*The citation that doesn't exist.* The failure this chapter is built around. It doesn't look like an error: the formatting is right, the journal is real, the authors publish in the field, and the year is plausible. It can't be caught by reading carefully, because careful reading is what it is designed to survive. It can only be caught by resolution, which means asking the registrar whether that identifier exists. That is why the rule is mechanical rather than a matter of vigilance.
+*The citation that doesn't exist.* An invented citation can have correct formatting, a real journal name, and authors who publish in the field. Inspecting the citation alone may not reveal the problem. Resolve the identifier where one exists, then compare the actual source with the citation. For other material, inspect the catalog or publisher record and the source itself.
 
-*The accusation that was wrong.* On the run above, the verifier reported a real and directly relevant paper as a probable fabrication. It wasn't: the record is registered with DataCite, and the verifier had asked only Crossref, which is one registrar among several. Had that message been believed, a good paper would have been thrown away. A tool that cries fabrication has to be right: "it didn't resolve" must mean that no registrar has it, not that the first place asked didn't. Treat a fabrication verdict as a claim to check, not a fact.
+*The accusation that was wrong.* In the run above, the verifier reported a real and directly relevant paper as a probable fabrication. Its record was registered with DataCite, but the verifier had asked only Crossref. A failed lookup can also reflect an unavailable service or incorrect metadata. Investigate the failed check before accepting a fabrication verdict or excluding the paper.
 
-*The constraint that was the wrong instrument.* The protocol for that run set a cap on how many records could be retrieved. It fired, 604 against a cap of 300, and stopping was correct. The cap itself was the mistake, and it was withdrawn rather than raised. A retrieval cap doesn't constrain a search methodologically; the question and the criteria do that. What it does is make your evidence base a function of each interface's relevance ranking, which is opaque and differs between them. "The first 300 by relevance" isn't a defensible sampling frame. Bound the search with the criteria and a stopping rule, and if you want a number, make it a checkpoint that reports and continues rather than a wall.
+*An arbitrary retrieval limit.* The protocol for that run capped retrieval at 300 records. The agent stopped when retrieval reached 604, as instructed, but the cap was then removed. Limiting the search to the first records returned would make inclusion depend on each source's relevance ranking. Define the search through the question, criteria, and stopping rule. A record count can trigger a progress review without becoming a reason to discard the remaining results.
 
 *The duplicate that survived.* Deduplication matched on identifier, then on title and year, and still let through a preprint and its published version, because the two titles differ by a single word. Both would have been counted. Cross-field and cross-repository work is full of these, and the fix is a human eye on the borderline set rather than a cleverer rule.
 
-*Screening from memory.* If the agent excludes a paper because it knows the paper, the exclusion is unauditable and probably wrong. The instruction is that a screening decision cites the text that was fetched, and that where no abstract came back the record was screened on title, with the table saying so.
+*Screening from memory.* The agent excludes a paper using its recollection instead of the retrieved text. Require it to cite the text supporting each screening decision and record whether it used the title, abstract, or full text.
 
-*The empty column read as a finding.* In the run above, the limitation column was empty for all 37 rows, because no retrieved abstract stated one. That is a gap in what was read, not a property of the literature. An empty cell is honest; the danger is reading a column of blanks as though the papers had no limitations.
+*The empty column read as a finding.* In the run above, the limitation column was empty for all 37 rows because no retrieved abstract stated one. Those blanks identify information still to be extracted from the full texts; they do not show that the studies had no limitations.

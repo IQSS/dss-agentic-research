@@ -13,11 +13,11 @@ COVERS: Skills and slash commands: what to package once you have done a thing th
 VERIFY: checked 2026-08-27. Claude Code: skills at ~/.claude/skills/<name>/SKILL.md (personal) and .claude/skills/<name>/SKILL.md (project); frontmatter name and description; /name to invoke, automatic when the description matches; custom commands merged into skills; the body loads only when used; the Agent Skills open standard; the desktop app lists skills under "/"; Cowork and cloud sessions do not read personal skills. Hooks: Claude Code hooks block in settings.json, events PreToolUse (exit 2 blocks), PostToolUse, Notification, SessionStart, Stop. Re-check at release. (Codex skills/hooks specifics archived 2026-09-15.)
 -->
 
-Once you have asked for the same thing three times, write it down as a *skill*: a named, packaged instruction that the agent runs when you call it, or picks up itself when a task matches it. After the brief and the task list (§6), it is the next file worth writing, and it turns a request you keep retyping into a command you run by name.
+Once a procedure works and you find yourself repeating it, consider saving it as a *skill*: a named set of instructions the agent can load for that task. This chapter explains what to put in a skill, how to use it from the app, and when an automatic check may help. Skills are optional until you have a procedure worth reusing.
 
 ## What a skill is
 
-A folder with one required file, `SKILL.md`: a short header that says what the skill is called and when it applies, then the procedure, written the way a good request is written (§9–§15 and Appendix B). You run it by name, `/status-report`, and the agent also reaches for it on its own when your request matches the description. Unlike the brief, which is loaded every session, a skill's body is loaded only when it is used, so a long procedure costs nothing until you need it (§6).
+A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §§9–15 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§6).
 
 ```
 ---
@@ -35,7 +35,7 @@ is still under In Progress. Show me the draft; send nothing.
 
 The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with the same discipline: where the output goes, what to report, what not to do.
 
-Both agents follow the same open format for the file, and differ only on where they look for it. Each skill is a folder named for the skill, holding `SKILL.md`, under:
+For Claude Code, ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
 
 | | Where |
 |:--|:--|
@@ -47,14 +47,16 @@ The Claude app lists skills under the same slash menu. A skill that needs more t
 
 ## What to package
 
-The rule is three. The first time you write a request, it is a request; the second, you copy it from your notes or from Appendix B; the third, it becomes a skill. The candidates in this guide are already written: the session rituals (§9), a fetch with its provenance entry (§11), the calibration check (§12), the second implementation and its comparison (§13), the number-traceability table (§14), the fresh-clone check and the pre-deposit audit (§15). Each prompt in Appendix B is a skill body waiting for a header.
+Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§9), a fetch with its provenance entry (§11), the calibration check (§12), the second implementation and its comparison (§13), the number-traceability table (§14), the fresh-clone check and the pre-deposit audit (§15). Each prompt in Appendix B is a skill body waiting for a header.
 
-Facts about a project (where things live, what is restricted) don't belong in a skill; they are the brief's, and a skill that hard-codes them breaks in the next project. Nor do standing rules (how you write, what to never do); they are the global file's, and a skill that repeats them drifts from it. A skill holds a *procedure*, and reads the facts and the rules from the files that hold them.
+Keep project-specific facts, such as file locations and data restrictions, in the project instructions. A reusable skill should tell the agent to consult those instructions. Similarly, refer to your global conventions rather than copying them into each skill. This lets you reuse the procedure across projects and update a rule in one place.
 
-My own set, as examples of the shape. `/scaffold` builds a new project in the paper layout, the demonstration in §7. `/eda` renders a first-look report on a new dataset (types, missingness, distributions, correlations, outliers) into `outputs/eda/`, dated, the afternoon the data arrive. `/dag` draws a causal diagram from a written graph, with the adjustment set computed rather than guessed. `/review-plan` is a Reviewer 2 critique of an analysis plan before the work is done, and `/review-analysis` an audit of an analysis after it is done: identification, convergence, conventions. `/targets` and `/pueue` are the pipeline and long-job helpers from the fuller stack, outside this guide. Each is a hundred to two hundred lines, most of it the checks; each started as a prompt I had typed three times.
+My own skills illustrate the kinds of procedures you can save. `/scaffold` creates a project in the paper layout described in §7. `/eda` produces a dated report on a dataset's types, missingness, distributions, correlations, and outliers. `/dag` draws a causal diagram from a written graph and computes the adjustment set. `/review-plan` critiques an analysis plan before implementation, while `/review-analysis` audits a completed analysis for issues with identification, convergence, and project conventions. I also use `/targets` and `/pueue` for pipelines and long jobs, whose tools are covered in the companion. Each skill began as a repeated request and includes checks specific to its task.
 
-A skill that fails is a skill you edit, the same way a correction becomes a rule in the brief (§6). Keep each one to a screen or two, and put anything longer (a template, a checklist the agent reads in full) in a file beside it.
+When a skill produces an unsatisfactory result, revise the instructions or checks that allowed the problem. Keep the main procedure to a screen or two, and put longer templates or checklists in files beside it.
 
-## Hooks in one paragraph
+## When an automatic check helps
 
-A *hook* is a shell command the agent runs at a fixed moment: before a command executes, after a file is edited, when a session starts, when the agent is waiting for you. What distinguishes it from anything in the brief is that it always runs; it doesn't depend on the agent choosing to follow an instruction, which makes it an enforcement mechanism of the same standing as a deny rule (§5). Three uses cover most of what a researcher would want. A hook that blocks any edit to a protected path, alongside the deny rule on `data/raw/` (§16), so that two mechanisms would have to fail together. A hook that runs the build (§15) after the agent edits a script, so a broken change is caught in the session that made it. And a notification when the agent needs you, so you can leave it running. In Claude Code, hooks are a block in the same settings file as the permission rules, personal or per project, and a hook that exits with the code 2 blocks the action it was checking. Most readers need none of this at first; the protected-path hook is the one to add when restricted data are in play.
+A *hook* runs a configured action at a supported event, such as before a tool call or after an edit. It can help run a quick check or notify you that the agent needs attention. Whether it can block an action depends on the event and configuration; a check after an edit cannot prevent that edit from having occurred. Hooks also need testing and protected configuration. They do not replace the access limits in §5.
+
+Most readers can begin by asking for the appropriate checks at the end of a task. Add automation when a repeated omission justifies it, and avoid a hook that launches a full expensive analysis after every small edit. The toolkit covers tool-specific configuration; Claude's [hooks documentation](https://code.claude.com/docs/en/hooks) describes the current event behavior.

@@ -7,41 +7,30 @@ title: "17. Cost, and the map"
 # 17. Cost, and the map
 
 <!--
-STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: deck "The map, honestly costed", "Where to start"; tool-chain §14 (only the idea of usage windows)
-COVERS: Tiers: chat, editor agent, CLI agent, pipelines. Setup cost and money for each. Usage windows. When not to bother.
-VERIFY: prices checked 2026-08-27. Claude: Pro $20/month ($17 annual), Max $100 and $200, Team $25/seat ($20 annual), Enterprise per seat plus usage (claude.com/pricing). Usage windows: rolling five-hour plus weekly, `/usage` in Claude Code, per the tool-chain map §14. No wall-clock setup estimates by design (global rule). (ChatGPT/Codex pricing archived 2026-09-15.)
+STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
+SOURCE: Original usage guidance; Claude desktop documentation; HUIT Claude guidance
+COVERS: Selective adoption, app usage controls, proportionate delegation, reproducibility for existing projects.
+VERIFY: App usage controls and HUIT account limits checked against current documentation 2026-09-26. Exact quotas and model prices intentionally omitted.
 -->
 
-Four tiers run from the chat window you already use to a pipeline that runs without you. Each costs something to set up and something to run, and the payoff at each rung has to justify the friction of getting there. This chapter prices each tier, so that you climb as far as your work needs and no further.
+This chapter helps you choose which tasks to delegate, manage the account's usage allowance, and decide when additional tools are worth setting up. Start with work that takes your time repeatedly and produces a result you can check. Add structure and tools as you encounter a need for them.
 
-## Four tiers
+## A useful progression
 
-| Tier | What it is | What it takes to set up | What it buys |
-|:--|:--|:--|:--|
-| 0. Chat | A browser tab. Where you already are. | Nothing. | Answers, drafts, explanations. You are the messenger (§2). |
-| 1. Editor agent | Claude Code inside VS Code or Positron, next to the file you are editing. | Install the extension, sign in, write a first project file (§6). | Edits in place, with the project in view. You are the driver. |
-| 2. Agent in a folder | The same agent in a terminal or the desktop app, pointed at a project folder. | Git, one project in the paper shape (§7), the global and project files (§6), a permission posture (§5). | Whole tasks delegated and checked. You are the supervisor. This guide. |
-| 3. Pipeline | A one-command build with pinned packages that reproduces the paper (§15). | Grows over a project: the build command, the lockfile, assertions (§13). | Runs without the agent. The hand-off and the deposit. |
+First complete the app exercise in §3. Then bring one bounded task from an existing project, with a short instruction file and a recoverable checkpoint. Once the agent is useful, record recurring conventions (§6), preserve the analysis sequence (§15), and package repeated procedures as skills (§8).
 
-Tier 1 pays for itself in the first hour. Tier 2 pays for itself in the first week, on bookkeeping alone, and it is where the three tasks in §1 (simulation, verification, literature) become possible. Tier 3 pays for itself on the second paper that reuses the pipeline, and at deposit, when a reviewer or a repository asks for the code to run. Nobody should build tier 3 in a week; it accretes, one build step at a time, and the agent does most of the accreting.
+The toolkit is a reference for a need you have encountered: preserving a software environment, managing long fits, rendering documents, or coordinating dependent steps. These are not levels every researcher must climb. A Stata project with a documented master do-file may have no need for an R pipeline runner.
 
-## Money
+## Usage and cost
 
-Claude comes with the plan; there's nothing separate to buy. At an institution that licenses it, the plan is unit-funded — a school, department, or PI budget covers it (§3) — so for most researchers the cost question isn't dollars but the usage allowance the plan carries, which the next section is about.
+Use the app's usage display to see the applicable allowance and reset information; the [desktop reference](https://code.claude.com/docs/en/desktop#check-usage) describes its location. Available models and extra usage can have different terms, so check what the account offers before a large task. For Harvard, the current license route is in §3.
 
-## Usage windows
+Large inputs, lengthy outputs, higher reasoning effort, and several concurrent agents can increase usage. The accounting also depends on caching and the plan, so message count is a poor proxy for cost. Keep requests focused, refer to files rather than pasting repeated copies, and save results and decisions outside the conversation.
 
-On a subscription, cost arrives as an allowance rather than dollars: a rolling five-hour window that starts at your first prompt, plus a weekly cap, shared across everything you do with the vendor (Claude Code and the claude.ai chat draw from one bucket). The quotas change too often to print, but the agent shows where you stand: `/usage` in Claude Code. A metered institutional plan counts tokens instead, against a spending limit the unit sets.
+A long computation does not inherently consume LLM tokens while it runs. Repeated progress queries and large logs can, however, use the agent unnecessarily. Let a suitable application or queue run the saved script, then have the agent inspect the relevant log and outputs (§12). Verify that the job actually completed.
 
-What spends the allowance isn't the number of requests but their weight. Every turn resends everything the session has read so far, so a long session with many files open costs more per message as it goes; a higher effort level and a larger model cost more per turn (§4); and a model fit that runs inside the agent's session, streaming output, spends the window while it waits. What saves it: one session per task, closed when the task is done; `/compact` when a session runs long; naming files rather than pasting them; a lower effort for mechanical work; and long fits run outside the agent, from a script, with the agent reading the log afterward (§12). Running several agents at once, or the same analysis several times to verify it (§13), multiplies the spend, so save it for the results that carry a claim.
+## When extra setup can wait
 
-## When not to bother
+A small, occasional task may be quicker to do yourself. A sophisticated runner may also be unnecessary for a nearly finished paper. That paper still needs the inputs, environment record, and repeatable sequence required for hand-off; a README should explain a procedure that someone has actually tested (§15).
 
-Some work is cheaper without an agent, and knowing which is part of the judgment. A question with no project attached belongs in the chat window. A ten-line script you can write faster than describe is faster to write. A task whose result would take as long to check as to do (a one-off table you will read once) gains nothing from delegation, because the checking is the work. Anything touching data you can't cover and can't fake (§16) is off the table until you can do one or the other. And a project you are handing off next month doesn't need tier 3; it needs a README.
-
-The rule holds: climb only when the payoff justifies the friction. Most researchers reading this should live at tier 2, with tier 3 growing underneath the papers that will be deposited.
-
-## Where to start
-
-Pick one task you already do badly and wouldn't mind seeing done differently: organizing a project folder, drafting a reviewer response from your notes, writing the simulation you keep meaning to write. Watch the agent do it once, in Manual mode (§4), reading every prompt. Write down the conventions the first time you correct it; that file is the start of your global file (§6), and Appendix A has one to copy. Then read the Part III chapter for the next stage of the paper you are on. Tier 3 accretes from there, one build step at a time.
+Use the simplest arrangement that meets the research and collaboration needs. Keep a working lab environment when it is adequate, and make a migration a separate decision with its own checks.

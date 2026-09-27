@@ -1,38 +1,72 @@
 ---
-title: "Appendix C. The terminal in two pages"
+title: "Appendix C. Glossary"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#4f6478;--coat-dk:#3b4c5c;--coat-lt:#6a8098;--gloves:#c8a23c;--gloves-dk:#8f7228"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="11" fill="#6fa3e6"/><circle class="iris" cx="624" cy="86" r="11" fill="#6fa3e6"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><rect x="597" y="24" width="6" height="28" fill="var(--c-metal-2)"/><circle cx="600" cy="22" r="7" fill="var(--c-mustard)"/><circle cx="600" cy="22" r="3" fill="var(--c-mustard-2)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><rect x="-40" y="-30" width="80" height="60" rx="4" fill="var(--c-metal-3)"/><rect x="-34" y="-24" width="68" height="46" fill="var(--c-screen)"/><text x="-28" y="-8" class="scr" style="font-size:9px">$ just build</text><text x="-28" y="6" class="scr" style="font-size:9px">ok: 3 scripts</text><rect x="-28" y="10" width="6" height="8" fill="var(--c-phosphor)"/></g></g></svg></div>
 
-# Appendix C. The terminal in two pages
+# Appendix C. Glossary
 
 <!--
-STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: quickstart Appendix B "Terminal Concepts", cut to what this guide's readers meet (no TTY history, no subshells, no aliases, no login shells)
-COVERS: For readers who choose the CLI path: opening a terminal on Mac and Windows, the working directory and paths, running a script, output to a log, environment variables, starting the agent in a folder, six git commands, WSL2 in one paragraph.
-VERIFY: Claude Code's sandbox needs WSL2 on Windows (checked 2026-08-27); both CLIs otherwise run natively on Windows per the docs consulted for §4 and §5. Re-check native-Windows support at release.
+STATUS: revised · PHASE: 2 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
+SOURCE: Terms defined in the guide.
+COVERS: App-based research workflow vocabulary. Terminal primer moved to toolkit Part V.
+VERIFY: Cross-checked with revised chapters; product definitions share their linked sources.
 -->
 
-The desktop app needs none of this. If you run Claude Code in a terminal, you need about this much and no more: the vocabulary is old and odd, but the set of things you actually do is small.
+*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§2).
 
-## The terminal and the shell
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§13).
 
-A *terminal* is a window that shows text and takes typed commands; a *shell* is the program inside it that reads each command, runs it, and prints the result. On a Mac the terminal is the Terminal app (Command-Space, type Terminal) and the shell is `zsh`; on Windows it is Windows Terminal (or PowerShell from the Start menu) and the shell is PowerShell. The line ending in `%`, `$`, or `>` is the *prompt*: the shell waiting for a command. Type one, press Return, read what comes back.
+*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§4).
 
-Every command runs in a *working directory*, the folder the shell is currently in. `pwd` prints it (on Windows too); `cd heat-birthweight` moves into a folder, `cd ..` moves up one, and `ls` (Windows: `dir`, or `ls` in PowerShell) lists what is there. A *path* names a file by its folders: `code/model.R` is relative to the working directory, `~` is your home folder, and a path beginning with `/` (Windows: `C:\`) is absolute. Nearly everything in this guide assumes the working directory is the project folder, and the first command in any session is the `cd` that gets you there.
+*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §6.
 
-## Running things
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§15). *One-command build* means the same.
 
-`Rscript code/model.R` runs an R script and prints what it prints; `stata-mp -b do model.do` runs a do-file in batch mode and writes its log beside it (§13). If the shell answers *command not found*, the program is installed but its folder isn't on the `PATH`, the list of folders the shell searches for commands; on Windows, R's installer doesn't add its folder, and the agent can fix that when asked. Output can be sent to a file instead of the screen: `Rscript code/fit.R > logs/fit.log 2>&1` writes both the normal output and the errors to the log, which is how a long fit (§12) leaves a record the agent can read later. Control-C stops a running program.
+*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§12, §13).
 
-An *environment variable* is a named value the shell hands to every program it starts, and it is where a key lives (§11): `export CENSUS_API_KEY=...` in the shell for this session, or a line in R's `.Renviron` file so every R session has it; on Windows PowerShell, `$env:CENSUS_API_KEY = "..."`. The agent refers to the variable by name and never needs the value.
+*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§5, §9).
 
-## The agent, and git
+*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§6, §18).
 
-Start the agent in the project folder: `cd` there, then `claude`. Everything the agent reads and writes is relative to that folder, and the brief it loads is the one there (§6). `/exit` or Control-C twice leaves it.
+*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§12).
 
-Six git commands cover this guide. `git status` says what has changed since the last commit. `git diff` shows the changes. `git add -A` followed by `git commit -m "message"` records them as one commit (§9). `git log --oneline` lists the commits. `git restore code/model.R` puts one file back to its last committed state, the undo of §5. And `git clone <address> folder` copies a repository from GitHub into a new folder, which is the first step of the fresh-clone check in §15. The rest of git the agent can drive, with you reading the prompts.
+*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§5).
 
-## Windows
+*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§9).
 
-Both CLIs run on Windows itself. One thing doesn't: Claude Code's sandbox (§5), which needs WSL2, a Linux environment inside Windows with its own terminal and files. If you want the sandbox, install WSL2 (`wsl --install` in an administrator PowerShell, then restart), open the Ubuntu app it adds, and do everything in this appendix there; the commands are then the Mac ones, and the project folder lives on the Linux side. If you don't want the sandbox, stay in PowerShell and use the deny rules and Manual mode (§4, §5) as your boundaries.
+*Effort.* How much the model reasons before it acts; a setting with levels (§4).
+
+*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§11).
+
+*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
+
+*Global file.* An instruction file holding conventions that apply across your projects (§6). Project-specific instructions belong in the project file, defined here under *brief*.
+
+*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
+
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §15).
+
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§15).
+
+*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§4, §15); and a statistical model fitted to data (§12).
+
+*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§13).
+
+*Permission mode.* The setting that decides which actions the agent may take without asking (§4).
+
+*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§4).
+
+*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §5); and, in Appendix B, a request you type to the agent.
+
+*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§11).
+
+*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §11).
+
+*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§5).
+
+*Session.* One conversation with the agent, with its own context window (§18).
+
+*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§17).
+
+*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§5).

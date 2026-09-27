@@ -7,37 +7,56 @@ title: "3. Where to run it"
 # 3. Where to run it
 
 <!--
-STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-15 (reoriented to Claude; the account section replaces the old Appendix D, the HUIT API-gateway setup)
-SOURCE: quickstart §4-5 (interfaces); the Claude Code setup and desktop-app docs, fetched 2026-08-27; FAS/HUIT "AI Tools: A Menu for the Harvard FAS/SEAS Community" (compiled 2026-09-04) and the HUIT/FAS AI pages, for the account sidebar
-COVERS: Entry points: Claude desktop app, Claude Code (CLI, IDE extension, web/cloud). Which for whom. Which account — the institutional plan, not a personal one or an API key, and what each implies for data; Harvard sidebar (Claude Standard/Premium; Gemini and ChatGPT Edu named briefly). What must be installed (git; the R / Python / Stata you already have).
-VERIFY: Claude interfaces checked 2026-08-27. Claude desktop app: Chat, Cowork, Code tabs; macOS, Windows, Linux (beta); the Code tab requires a paid plan; shares CLAUDE.md, settings, skills with the CLI; Git required on Windows for local sessions. Claude Code CLI: native installer for macOS, Linux, WSL, and Windows (PowerShell and CMD); Git for Windows optional (enables the Bash tool, otherwise PowerShell); auto-updates. Sandbox (re-checked 2026-09-02 against code.claude.com/docs/en/sandboxing): built into Claude Code, scoped by platform not interface — macOS, Linux and WSL2, not native Windows; configured with /sandbox and settings.json, shared across interfaces. Account (Harvard, checked 2026-09-15 against the FAS/HUIT menu compiled 2026-09-04): FAS licenses Claude (Standard = Chat/Code/Cowork; Premium adds usage and the top model), unit-funded, requested via the FAS/GSAS/SEAS GenAI Tool License Request form, HarvardKey sign-in, approved to Harvard Level 3; personal accounts are Level 1 only; HUIT pairing Claude with Gemini and winding down ChatGPT Edu (legacy). Re-check interfaces and the tool menu at release; they change quarterly.
+STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
+SOURCE: Claude desktop quickstart; HUIT Claude guidance; two-guide content audit
+COVERS: Supported Mac app and institutional account; prerequisites; a harmless first session with a checkpoint, edit, review, undo, and restart.
+VERIFY: Documentation checked 2026-09-26 at https://code.claude.com/docs/en/desktop-quickstart and https://www.huit.harvard.edu/claude. This walkthrough has not yet been observed end to end with a new reader. The author's last recorded app observation was v2.2553.1 on macOS (2026-09-21), with no integrated terminal pane. Recheck labels and record the app version and Harvard account tier during the reader trial.
 -->
 
-Claude Code runs as a desktop app, an editor extension, or a terminal command; whichever you use, it reads the same files and obeys the same settings. The interface changes only what you see while it works.
+This chapter gets you started with Claude Code in the Claude desktop app on a Mac. It covers the account and software you need, then takes you through a practice session: creating files, reviewing an edit, undoing it, and resuming work in a new session. You describe the work in the app; the agent can run your existing R, Stata, or Python installation without you opening a terminal.
 
-## The entry points
+## Before opening a project
 
-As of September 2026:
+Use your institutional account and a folder whose contents you are permitted to share with that service. A local session runs commands on your Mac, but the agent sends material it reads to the hosted model. “Local” describes where the tools run; it does not mean the model stays on your computer. Read §5 before using a research folder, and §16 for the full data decision.
 
-| Interface | What it is | Who it suits |
-|:--|:--|:--|
-| Desktop app | The Claude app, *Code* tab. Mac, Windows, Linux (beta). | Most researchers. Start here. |
-| In the editor | The Claude Code extension for VS Code and Positron. | Readers who already write code in Positron or VS Code: the driver's seat (§2). |
-| Terminal | `claude`. Mac, Windows, Linux, and WSL2. | Readers who want the full command-line toolkit. Appendix C. |
-| Web and cloud | Claude Code on the web; cloud sessions from the app. | Tasks that should keep running when the laptop closes. Not for restricted data (§16). |
+The starting requirements are the Claude app, git from Apple's Command Line Tools, and the analysis language you already use. The exercise below needs only the app and git. If either is missing, follow your institution's setup instructions before continuing; no other tool is needed here.
 
-Start with the desktop app. It's graphical — you point and click rather than type commands. It's a download from Anthropic with nothing else to install, the controls (§4) are on menus, and it shows each change it made as a diff you can open and review (§9). Switch to the terminal when you want a fuller command-line toolkit (Appendix C): its one-line installer is a script from `claude.ai` (run in the terminal, or in PowerShell on Windows), it likewise needs nothing else installed, and it updates itself. If you prefer writing code in Positron or VS Code, use the editor extension there instead.
+> **Harvard, September 2026.** Request Claude through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Standard is the usual starting tier; Premium provides more capacity for sustained use. Confirm that the app is signed into the Harvard account. HUIT approves Claude Chat and Code for data up to Level 3 and states that submitted data are not used for model training. Your project's consent, DUA, IRB, or other terms may impose narrower limits (§16).
 
-You can move between the three, or keep two sessions open on one project, without redoing anything: all three share your settings (§5), brief (§6), and skills (§8).
+## A first session you can undo
 
-## Which account
+Use this exercise to learn the controls before opening a working research project. Experienced users can skip it and go to §6 or the research task they need.
 
-Harvard licenses these agents under enterprise and education agreements: the vendor doesn't train on what you send. That coverage is what lets confidential level-3 data reach the agent (§16). Getting on the institutional plan is one request form and then signing in with your normal university login.
+### Open an empty folder
 
-> **Harvard (FAS/SEAS), as of September 2026.** FAS licenses **Claude** at no cost to you; a school, department, or PI budget covers it. Request a seat through the FAS/GSAS/SEAS GenAI Tool License Request form, then sign in with HarvardKey. Two tiers: **Standard** — Claude Chat, Code, and Cowork under one license — is where everyone should start; **Premium** adds higher usage limits and Claude's most capable model, for a sustained heavy-use case. Signed in this way, Claude Chat and Code carry Harvard's data coverage (§16), which a personal account doesn't. HUIT is pairing Claude with **Google Gemini** as a second supported agent and winding down **ChatGPT Edu** (legacy, existing accounts only); those are the other institutional options, but this guide's examples use Claude. Other schools license their own set; the HUIT and school IT pages stay current.
+In Finder, create a folder called `agent-practice` in a local location outside your shared research folders. In Claude, select *Code*, choose *Local*, and select that folder. Choose *Manual* for this demonstration so that you can see a proposed edit before it happens; §4 explains the modes, including the Auto mode I recommend for ordinary work. These controls follow the [desktop getting-started instructions](https://code.claude.com/docs/en/desktop-quickstart).
 
-## What else should be installed
+Give the agent this request:
 
-Your analysis language: R, Stata, Python, etc.
+> This is an empty practice folder. Create `notes.md` with exactly these three lines: “Meeting: Friday.” “Bring: draft figure.” “Open question: label units.” Create a short `CLAUDE.md` saying that this folder contains invented practice notes, that only files in this folder are in scope, and that nothing should be published or sent to another service. Initialize git, review which files will be tracked, and make an initial local commit. Do not set up a remote repository.
 
-Git. Version control for your project files provides a safety net.  
+Read the proposed changes and approve them. Open `notes.md` in the app or Finder and check the three lines. Ask the agent to show the commit identifier, the list of tracked files, and whether any changes remain uncommitted. You should have a small folder and a recorded starting version. If git asks for a name and email, supply the identity you use for research work; the agent should not invent them.
+
+### Make and inspect one change
+
+Now ask:
+
+> In `notes.md`, change Friday to Monday and turn the open question into a checkbox. Keep the other wording. Show the changes, but do not commit them yet.
+
+The proposed edit should affect only those two lines. Once you approve it, open the changed file and the app's change view. A *diff* shows what was added and removed; §9 explains how to read one. Check the file itself as well as the agent's summary.
+
+If you need to interrupt an action, use the stop button. You can also send a correction while the agent works. Stopping does not reverse edits already made, so ask what changed before deciding how to continue. These controls and the change view are described in the [desktop reference](https://code.claude.com/docs/en/desktop).
+
+### Undo, then keep an edit
+
+Practice recovery while the file is disposable:
+
+> Restore only `notes.md` to its initial committed version. Leave every other file alone. Show the restored contents and confirm that this file has no remaining changes.
+
+Open it and check that Friday and the original question are back. Then repeat the Monday-and-checkbox request. This time, once you have reviewed the result, ask the agent to commit only that edit. A commit records an approved version locally; it does not publish anything.
+
+### Resume with a fresh session
+
+Ask the agent to create `TASKS.md` with a short record of the completed exercise and one open task: add the figure's units when you provide them. Commit that file. Start a new Code session on the same folder and ask it to read `CLAUDE.md` and `TASKS.md`, then summarize the next task without changing anything.
+
+The new session should identify the missing units rather than invent them. You have now supplied a task, reviewed an edit, restored a file, and resumed from a written record. These are the same habits used in the larger research examples.

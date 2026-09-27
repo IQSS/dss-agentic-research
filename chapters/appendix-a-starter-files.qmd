@@ -8,16 +8,16 @@ title: "Appendix A. Starter files"
 
 <!--
 STATUS: new · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: A.1 and A.2 are the §6 worked files, copied verbatim by the build-time splice (edit them in §6, then re-run the splice; do not edit here). A.3–A.5 derived from ~/.config/agents/ (AGENTS.md, TEMPLATES.md paper template) cut to a researcher's needs.
-COVERS: Global AGENTS.md (researcher edition). Project AGENTS.md for a paper. TASKS.md. A minimal justfile (with a no-extra-tool R alternative). A .gitignore. Copy and edit.
-VERIFY: `set windows-shell` is a documented just setting; Stata batch-mode forms per §13's VERIFY note. Re-check the just syntax at release.
+SOURCE: A.1 and A.2 repeat the §6 worked files; keep the copies identical when editing. Remaining examples adapted from project conventions.
+COVERS: Optional global and project instructions, task record, existing-language execution script, git exclusions, and adaptable layouts. Revised 2026-09-26.
+VERIFY: Instruction-file loading checked against Claude memory documentation 2026-09-26. Examples are teaching templates, not a tested complete analysis package.
 -->
 
-Five files to copy and edit, and a closing reference (A.6) with the full project layouts that §7 cut down. The first two files are the worked examples from §6, reproduced without change so you can take them from here. Each file's lead says where it goes. Every line in them is a decision you can reverse; the point of starting from a file rather than a blank page is that the decisions are visible.
+This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §6. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects.
 
 ## A.1 The global file
 
-Where it goes: `~/.claude/CLAUDE.md`, the global brief — or an agent-agnostic `AGENTS.md` it imports (§6). Replace the first paragraph with your own description, and cut any rule you don't actually hold; a rule you wouldn't enforce on yourself teaches the agent to ignore the others.
+Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it imports (§6). Replace the first paragraph with your own description and retain only rules you want the agent to follow across your projects.
 
 ```
 # How I work
@@ -32,12 +32,13 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 
 ## Code
 - R: tidyverse style, the native pipe `|>`, one script per stage.
-- Packages pinned with `renv`. Never install one without updating the lockfile.
+- Preserve the project environment. Record package versions before changes.
+- Use the existing lockfile tool; see the toolkit for adding one.
 - Comment what a block is for, not what each line does.
 
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
-- No model is trusted until it recovers known parameters from simulated data.
+- Assess the method with a calibration plan before substantive use (§13).
 - Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
 
 ## Writing
@@ -45,10 +46,12 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 - Methods: the equation first, then the prose that explains it.
 - American spelling. Oxford comma.
 
-## Never
-- Never read, print, or copy `data/raw/`, or anything a project marks restricted.
-- Never delete or overwrite a data file. Never rewrite git history.
-- Ask before anything that takes more than a few minutes or reaches the network.
+## Access and limits
+- Read only inputs approved for this service. Never expose restricted files.
+- Public-data acquisition may add approved new files; preserve originals.
+- Never overwrite original data. Rebuild derived files from recorded scripts.
+- Never rewrite shared git history.
+- Ask before publishing, adding a service, or exceeding the agreed resources.
 
 ## Every session
 - Read `STATUS.md`, then `TASKS.md`, at the start.
@@ -57,7 +60,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 
 ## A.2 The project file for a paper
 
-Where it goes: `AGENTS.md` in the project folder, with a `CLAUDE.md` beside it containing the line `@AGENTS.md`. The example is the paper from §6 and §7; every path and name is specific to it, and that is what makes it useful. Replace the description, the layout, and the conventions with yours; keep the four headings. If the raw data are restricted, the working file named under *Where things live* is the synthetic file of §16, and the *Off limits* section is where the restricted path is named.
+Save this in the project's `CLAUDE.md`, or in `AGENTS.md` with the import described in §6. Replace the example paper's details with your own, using the headings to organize its description, file locations, conventions, and access limits. For restricted-data work, follow the synthetic-input approach in §16 and keep real inputs inaccessible to the agent's process. Naming an off-limits path does not prevent the agent from reading it.
 
 ```
 # heat-birthweight
@@ -67,9 +70,10 @@ Target: Demography. Decisions live in METHODOLOGY.md, the current state in
 STATUS.md, open tasks in TASKS.md.
 
 ## Where things live
-- `data/raw/natality/`: restricted microdata under a DUA. See Off limits below.
+- Restricted microdata is held separately in approved storage, unavailable here.
 - `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
-- `data/processed/`: what we build. Working file: `natality-county.parquet`.
+- `data/processed/`: derived files. Use `synthetic-natality.parquet` here.
+  It contains invented records, not a de-identified extract.
 - `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
   `run-all.R` runs all three in order.
 - `outputs/`: figures and tables the manuscript reads.
@@ -83,14 +87,14 @@ STATUS.md, open tasks in TASKS.md.
 - Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
 
 ## Off limits
-- `data/raw/natality/` is restricted. Never read, list, or copy it.
-- Work only from `data/processed/natality-county.parquet`.
+- Work only from the synthetic file and approved public downloads above.
+- Do not substitute real natality inputs or request access to restricted storage.
 - Never send any file under `data/` to a web search or an external service.
 ```
 
 ## A.3 TASKS.md
 
-Where it goes: the project root. Three headings, one line per task, a date on each finished item. The agent reads it at the start of every session, after `STATUS.md`, and updates it as it works (§6, §9); you read it to remember where you were. The comment at the top tells the agent the conventions and costs nothing.
+Save this in the project root. Use the three headings shown, a short entry for each task, and a date on each finished item. Have the agent read it after `STATUS.md` at the start of a session and update it as work progresses (§6, §9). The opening comment explains how to maintain the list.
 
 ```
 # Tasks
@@ -113,51 +117,30 @@ it before the session ends.
 - 2026-08-27 — Scaffolded the project in the paper shape (guide §7).
 ```
 
-## A.4 A minimal justfile
+## A.4 A minimal execution script
 
-The one-command build of §15, in two forms, both shown below. The zero-install form is `run-all.R`: it runs each script in order, stops at the first failure, and needs only the R you already have. If you add a command runner, `just` (which the companion guide sets up), the same build is a `justfile` at the project root, whose named recipes `just` lists and runs.[^just] Use whichever you have.
-
-[^just]: The just recipes need Rscript on your PATH; on Windows, R's installer doesn't add it by default, and the agent can do that for you. Installing just itself is in the companion guide.
+Use the language and entry point your project already has. This R example runs three existing scripts in order. Save it as `run-all.R` at the project root and ask the agent to run it from that folder. It stops when a script raises an error; it cannot detect an incorrect result unless the scripts include the relevant checks.
 
 ```
-# Command front door: `just` lists the recipes, `just build` runs the pipeline.
-set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
-
-# Rebuild everything from raw data to manuscript figures, in order.
-build:
-    Rscript code/clean-natality.R
-    Rscript code/model-heat-bwt.R
-    Rscript code/_final/figures.R
-
-# Manuscript figures and tables only, from saved results.
-figures:
-    Rscript code/_final/figures.R
-
-# The Stata mirror of the main model, in batch mode (guide §13). The log is
-# written next to the do-file. Windows: replace the command with
-#   & "C:\Program Files\Stata19\StataMP-64.exe" /e do code/stata/model.do
-stata:
-    stata-mp -b do code/stata/model.do
-```
-
-The same build without `just`: save the script below as `code/run-all.R` and run it from the project root with Rscript.
-
-```
-# run-all.R: the one-command build. Stops at the first script that fails.
-scripts <- c("code/clean-natality.R", "code/model-heat-bwt.R",
-             "code/_final/figures.R")
-for (s in scripts) {
-  message("== ", s)
-  if (system2("Rscript", s) != 0) stop("Failed: ", s)
+scripts <- c(
+  "code/clean-natality.R",
+  "code/model-heat-bwt.R",
+  "code/_final/figures.R"
+)
+for (script in scripts) {
+  message("Running ", script)
+  source(script, local = new.env(parent = globalenv()))
 }
 ```
 
+The scripts should read and write their declared files rather than rely on objects left over from an interactive session. A Stata project can use a master do-file for the same purpose. Add required validation steps to the documented sequence (§15); a quick plotting command need not rerun them all. The toolkit explains command runners and dependency tracking if the project grows beyond this arrangement.
+
 ## A.5 .gitignore
 
-Where it goes: the project root. It says what git doesn't carry: data, because a push copies it to a third party (§16); rebuildable outputs and logs, because they are large and the code remakes them (§7); and the files RStudio and the operating system leave behind. The shared agent settings file is committed so every session inherits the deny rule (§5, §16); the personal one isn't.
+Where it goes: the project root. This conservative starting example excludes data, generated models, logs, and personal settings. Adapt it to the project's sharing policy: an approved public input or provenance manifest may belong in the repository. Ignoring a path does not restrict agent access and does not remove an already tracked file. Review shared settings before committing them; managed policy and local settings also affect what a session enforces (§5).
 
 ```
-# Data never leaves the machine (§16); processed data is rebuilt by code/
+# Exclude inputs by default; share approved files deliberately (§16)
 data/raw/
 data/processed/
 
@@ -170,140 +153,66 @@ _old/
 .Rproj.user/
 .Rhistory
 .DS_Store
-Thumbs.db
 
 # Personal agent settings; the shared .claude/settings.json is committed
 .claude/settings.local.json
 ```
 
-## A.6 The full project shapes
+## A.6 Adaptable project layouts
 
-<!--
-STATUS: adapt · DRAFTED: 2026-09-06 (ported essentially verbatim from the tool-chain map's §12 in the dedup; this appendix is now the canonical home of the templates — the map no longer carries them)
-SOURCE: tool-chain map v1.7, "Workspace structure" and "Project shapes and conditional propagation", section references adapted to this guide
-COVERS: The shape taxonomy; the full paper, data, and publishing layouts with canonical / recommended / optional parts; the five universal meta-files.
--->
+These are examples for projects that have outgrown the minimal folder in §3. Keep an established lab layout when it already makes inputs, code, outputs, and decisions easy to find. Add a directory because the project needs its contents, rather than creating empty folders to match a template.
 
-§7 taught a cut-down paper layout; this appendix is the full version, with the two other shapes I use most beside it. Different kinds of projects need different scaffolds. A paper project has a manuscript, a methodology file, a code directory, and a strict reproducibility expectation. A web-scrape project has a data directory, numbered scripts, log files, and pinned dependencies. A publishing project (a guide, a report, a deck) has a template, a build file, and a single source. Forcing one universal template onto all of them either over-builds (a scrape doesn't need `manuscript/`) or under-builds (a paper without `METHODOLOGY.md` loses the methodological audit trail).
-
-The solution is a shape taxonomy, written down once where the agent can read it (the global file, or a `TEMPLATES.md` beside it, §6). Each shape has a name; a directory layout; a set of canonical root files; and optional conditional rules ("if the project uses a pipeline runner, scaffold its manifest"). When an agent starts a new project, it is told the shape or it asks; it never guesses, because wrong-shape scaffolding is annoying to undo and the question costs one sentence. The result: every project of the same shape looks the same, an agent walking into any of them knows where everything is, and conventions don't drift.
-
-*Paper shape* (statistical analysis ending in a manuscript). A representative layout:
+### A research paper
 
 ```
-<workspace-root>/papers/lee-test-project/
-|-- AGENTS.md                      # project brief
-|-- CLAUDE.md     -> AGENTS.md     # symlink (or the one-line import, §6)
-|-- README.md
-|-- METHODOLOGY.md                 # dated entries: *why* behind choices
-|-- STATUS.md                      # current state, one screen; rewritten in place
-|-- TASKS.md                       # to do / in progress / done; accumulates
-|-- proj-lee-test-project.Rproj
-|-- .here                          # 0-byte sentinel for here::here()
-|-- _targets.R                     # pipeline manifest (when targets is used)
-|-- _targets/                      # per-target object store (gitignored)
-|-- justfile                       # project-wide command interface
-|-- .graveyard/                    # transient working copies (gitignored)
+heat-birthweight/
+|-- CLAUDE.md              # purpose, access rules, existing commands
+|-- README.md             # collaborator's starting point
+|-- TASKS.md               # unfinished work and completed tasks
+|-- METHODOLOGY.md         # decisions and their reasons, when needed
+|-- run-all.R              # or the existing master do-file
 |-- code/
-|   |-- _startup/                  # tier 1: session-start bootstrap
-|   |   |-- init.R                 # entry: sources the rest in order
-|   |   |-- functions.R            # project helpers (defines load_pkgs())
-|   |   |-- packages.R             # load_pkgs() calls
-|   |   |-- options.R              # options() — sampler defaults, mc.cores
-|   |   |-- data.R                 # read + prep the project dataset(s)
-|   |   |-- specifications.R       # spec registry (model_templates etc.)
-|   |   `-- pipeline-helpers.R     # parameterized callables for _targets.R
-|   |-- _experiments/              # investigative work (sourced on demand)
-|   |-- _data-acquisition/         # external-data fetchers
-|   |-- _final/                    # tier 3: figure assembly (figures.R)
-|   |-- _report/                   # tier 3: working Quarto summary
-|   `-- <topic>-<variant>.R        # tier 2: analyses (semantic kebab-case)
-|-- dags/                          # causal DAG sources + measurement model
+|   |-- validation/        # checks required for the reported results
+|   |-- _experiments/      # investigations not in the final analysis
+|   `-- ...                # cleaning, modeling, and figure scripts
 |-- data/
-|   |-- raw/                       # original data, never modified
-|   `-- processed/                 # transformations (often empty)
+|   |-- raw/               # approved originals; preserve unchanged
+|   `-- processed/         # generated by recorded code
 |-- outputs/
-|   |-- archive/zenodo-vN/         # archival snapshots (own repo)
-|   |-- eda/                       # first-look EDA reports
-|   |-- figures/{final/,working/}  # publication-ready + diagnostic
-|   |-- models/<script>/           # saved fits (gitignored)
-|   |-- results/                   # serialized analysis bundles (gitignored)
-|   `-- tables/                    # committed; exact versions matter
-|-- logs/                          # long-running-job logs (gitignored)
-|-- manuscript/                    # drafts, response letters
-`-- docs/
-    |-- briefs/                    # dated · collaborator-facing incoming
-    |-- responses/                 # dated · collaborator-facing outgoing
-    |-- findings/                  # dated · internal: results, decisions
-    |-- notes/                     # evergreen reference material
-    `-- references/                # methodology PDFs
+|   |-- figures/
+|   `-- tables/
+`-- manuscript/            # Word, Quarto, or the existing format
 ```
 
-Canonical for this shape: the meta files (`AGENTS.md`, `CLAUDE.md`, `README.md`, `STATUS.md`, `TASKS.md`, `METHODOLOGY.md`, the `.Rproj`, `.here`), `code/_startup/` with its seven canonical files, `code/`, `data/`, `outputs/` with its six subdirectories (`archive/`, `eda/`, `figures/`, `models/`, `results/`, `tables/`), `manuscript/`, `renv.lock`. The three-tier `code/` layout (`_startup/`, then the top-level analyses, then `_final/` + `_report/`), the two non-tier sibling directories (`_experiments/` for investigative work, `_data-acquisition/` for external-data fetchers), and the per-script subdirectories under `outputs/figures/working/` and `outputs/models/` are paper-shape convention. Recommended: `_targets.R` + `_targets/` + `justfile` for projects with a pipeline runner (§15), `logs/` (Bayesian fits run long enough that you want the job output captured somewhere, §12), `dags/` (when the project uses a causal-DAG identification strategy), `docs/` (four-way split: `briefs/`, `responses/`, `findings/`, `notes/`, meaning dated collaborator-facing incoming, dated collaborator-facing outgoing, dated internal, evergreen reference). Optional: `.graveyard/`, `outputs/archive/zenodo-vN/` (only when depositing, §15).
+Keep restricted inputs in approved storage that the agent process cannot reach. Document how authorized researchers can obtain them in the input manifest (§15). Record environment versions, and add a current-state file when the task list no longer explains where the project stands. The optional global/project convention from §6 can replace the single `CLAUDE.md` as needed.
 
-*Data shape* (web scrape or data-collection pipeline ending in a structured dataset). A representative layout:
+### Data acquisition or curation
 
 ```
-<workspace-root>/data/example-scrape/
-|-- AGENTS.md
-|-- CLAUDE.md     -> AGENTS.md
-|-- README.md
-|-- STATUS.md                      # current state, one screen; rewritten in place
-|-- TASKS.md                       # to do / in progress / done; accumulates
-|-- pyproject.toml                 # uv project manifest
-|-- uv.lock                        # pinned dependency closure (committed)
-|-- .python-version                # interpreter version pin (committed)
-|-- .venv/                         # virtual env (gitignored; sync-ignored)
-|-- .graveyard/                    # transient working copies (gitignored)
-|-- justfile                       # command front door: just build
-|-- scripts/                       # numbered pipeline scripts
-|   |-- 01-collect-source-a.py
-|   |-- 02-collect-source-b.py
-|   `-- 03-merge.py
+county-data/
+|-- CLAUDE.md
+|-- README.md              # acquisition and rebuild instructions
+|-- TASKS.md
+|-- code/                  # acquire, validate, transform
 |-- data/
-|   |-- sources/                   # raw per-source downloads
-|   |-- checkpoints/               # resumable collection state (JSON)
-|   `-- validation/                # independent validation checks
-|-- outputs/
-|   |-- eda/                       # first-look EDA reports
-|   |-- figures/                   # interactive HTML + PNG
-|   |-- reports/                   # assembled PDFs + writeups
-|   `-- tables/                    # target lists, summary CSV/XLSX
-|-- logs/                          # pipeline progress logs
-|-- site/                          # built dashboard (when applicable)
-|-- templates/                     # Jinja2 templates for dashboards
-`-- docs/
-    |-- briefs/                    # dated · collaborator-facing incoming
-    |-- responses/                 # dated · collaborator-facing outgoing
-    |-- findings/                  # dated · internal: QA, decisions, results
-    `-- notes/                     # evergreen reference material
+|   |-- sources.md         # origin, request, date, terms, checksum
+|   |-- raw/               # approved original responses
+|   `-- processed/         # documented transformed files
+`-- outputs/
+    `-- reports/           # counts, missingness, and exceptions
 ```
 
-Canonical for this shape: the meta files, `justfile` (the command front door, §15, where `just build` / `just scrape` wrap the pipeline), `pyproject.toml` + `uv.lock` + `.python-version` (the pinned Python environment, §15), `scripts/`, `data/`, `data/sources/`, `data/checkpoints/`. The numbered-script convention (`01-`, `02-`, and so on) signals execution order to anyone reading the project, including agents. Recommended: `outputs/` with its four standard subdirectories (`eda/`, `figures/`, `reports/`, `tables/`), `logs/` (scrape scripts almost always run long enough that you want the job output captured somewhere), `docs/` (the same four-way split as the paper shape). Optional: `site/` + `templates/` (only if the project produces a deployable dashboard), `.graveyard/`. The `.venv/` directory exists locally but is gitignored, and when the project sits in a synced folder it is also kept out of sync (§7): the environment contains thousands of files that would otherwise storm a service like Dropbox. For projects whose dependencies include conda-forge / CUDA / Bioconda / R-mixed components, a `pixi` variant (`pixi.toml` + `pixi.lock` + `.pixi/`) replaces the `uv` files, and the rest of the shape is identical.
+Keep identifiers, source requests, and transformation decisions inspectable. Add checkpoints if acquisition can be interrupted. Environment managers, queues, and runners are optional additions from the toolkit; the provenance record is needed regardless of the tools.
 
-*Publishing shape* (markdown to pandoc to XeTeX to PDF, for design-controlled standalone publishing). A representative layout:
+### A text or presentation project
 
 ```
-<workspace-root>/publishing/methods-guide/
-|-- AGENTS.md
-|-- CLAUDE.md             -> AGENTS.md
-|-- README.md
-|-- STATUS.md                            # current state, one screen; rewritten in place
-|-- TASKS.md                             # to do / in progress / done; accumulates
-|-- source/                              # markdown source
-|   `-- methods-guide.md
-|-- assets/                              # images, logos, embedded resources
-|-- filters/                             # project pandoc Lua filters
-|-- template.tex                         # custom XeLaTeX template
-|-- justfile                             # build front door: just build
-|-- output/                              # the PDF deliverable (committed)
-|   `-- methods-guide.pdf
-`-- docs/                                # working notes (recommended)
-    |-- briefs/                          # dated incoming
-    |-- responses/                       # dated outgoing
-    `-- notes/                           # evergreen reference
+research-brief/
+|-- CLAUDE.md
+|-- README.md              # how to produce the deliverable
+|-- source/                # editable text or slides
+|-- assets/                # images, references, and other inputs
+`-- output/                # reviewed deliverables
 ```
 
-Canonical for this shape: the meta files, `template.tex`, `justfile`, `source/`, `output/` (committed, since the PDF is the deliverable and the exact version matters). Recommended: `filters/` (any pandoc Lua filters the document needs; most documents need none), `assets/` (anything the template embeds), and `docs/` for any project that will accumulate audit reports, draft outlines, collaborator feedback, or decision logs over time; the `briefs/` / `responses/` / `notes/` split mirrors the paper shape, and filenames are `YYYY-MM-DD-<slug>.md`. Trivial one-off documents (CVs, single-shot reports) can omit `docs/` entirely. Filters worth reusing across projects belong in a shared location rather than copied per project. One compatibility note: with TeX Live 2026 and later, a pandoc-driven `template.tex` must define a `none` counter for `\LTcaptype` (newer `longtable` and `caption` releases validate it), or tables without captions fail the build.
-
-The pattern across shapes is the same: `AGENTS.md`, `CLAUDE.md` (the bridge to it), `STATUS.md`, `TASKS.md`, `README.md` are universal. Five files, whatever the shape. Shape-specific files (`METHODOLOGY.md` for papers, the numbered `scripts/` and the lockfile pair for data projects, `template.tex` + `justfile` for publishing projects) come from the shape's template.
+Keep the team's existing Word or slide workflow if it serves the collaboration. A plain-text publishing pipeline may add a template and a build command, as described in the toolkit. Preserve the reviewed deliverable when its exact appearance matters; generated caches and temporary renders need not be shared with it.

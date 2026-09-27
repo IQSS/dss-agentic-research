@@ -12,7 +12,7 @@ SOURCE: content bank concepts/three-paradigms.md (folded in; module points back 
 COVERS: Chat vs agent. The think/act/observe loop and why the agent "sees the real error". Three ways of working: messenger, driver, supervisor.
 -->
 
-A chat assistant and an agent run on the same models. The difference is reach: a chat window sees only what you paste into it and hands back text; an agent works inside your project. The model didn't change — its access to your files and your machine did.
+A chat assistant and an agent can use the same language model. In the chat-only workflow considered here, you supply the relevant material and carry answers back to your project. An agent has tools that can work directly with project files. Products can combine these capabilities; the useful distinction is what access the assistant has and what work you delegate.
 
 ## Chat versus agent
 
@@ -20,23 +20,23 @@ Consider what happens when a chat assistant writes you a cleaning script. It has
 
 An agent closes that gap because it can use *tools* that allow it to read and write files and execute commands on your computer. Given the same task, it opens the data file, reads the first rows, notices the ID column is character, writes the script accordingly, runs it, reads the output, and fixes what failed. You see the finished script and the log of what it did. You have stopped conversing with an assistant and started delegating to a process that acts in your project.
 
-An agent also changes what you can sustain across a long project, not just within one task. A chat has one context window, its working memory, and nothing behind it: as the conversation grows the earliest messages drop out of view, and past a certain length the assistant loses the thread. An agent keeps going. When the context window fills it compacts, summarizing the older turns so the essentials survive in less space, and it writes what matters to files on disk: a running to-do list, a status snapshot, notes to itself (§6, §9). Those files outlast the session, so a fresh agent the next day can read them and pick up where the last one left off.
+An agent also changes what you can sustain across a long project, not just within one task. A long conversation can lose important context, even when the product offers memory or summarization. An agent can maintain explicit project records: a running to-do list, a status snapshot, and decision notes (§6, §9). These provide a source to consult when a conversation is summarized or replaced. Those files outlast the session, so a fresh agent the next day can read them and pick up where the last one left off.
 
 ## The loop: think, act, observe
 
-Earlier AI tools did one of two things. They reasoned without acting, which is how a chat window produces confident code that has never been run, or they acted without reasoning, which is blind trial and error. An agent alternates the two in a loop.
+An agent works through a repeated sequence: choose an action, carry it out with a tool, and use the result to decide what to do next. This lets it test and revise its work within the project.
 
 ![](figures/think-act-observe.svg){#fig-think-act-observe fig-alt="The agent's loop: three boxes, Think, Act and Observe, with a repeat arrow returning from Observe to Think." above="6pt" below="6pt"}
 
-*Think* is the plan for the next step. *Act* is a concrete operation in your project: read a file, run a script, list a folder, edit a line. *Observe* is reading what actually came back. Then the loop repeats, with the observation feeding the next plan. The observe step is what keeps the agent tied to your project rather than to a guess about it. When the agent reads a file, it sees the actual contents; when it runs a script, it sees the actual error output. A chat model reasons about a plausible file and a plausible error; an agent reasons about the real ones. An agent that can act is more reliable than a chat window: the loop keeps pulling it back to the facts on disk.
+*Think* means deciding on the next step. *Act* means performing an operation in your project: reading a file, running a script, listing a folder, or editing a line. *Observe* means reading what the tool returned, such as file contents or an error message. The agent uses that information to decide on its next action. This feedback can catch errors that would survive in an untested chat answer. Its value depends on what the agent inspects and which checks it runs.
 
-The loop verifies that something happened, not that it should have. A model that converged with a warning, a regression that answers the wrong research question, a merge that silently dropped a third of the rows: each of these *ran*. The observe step reports success because the script exited cleanly. Nothing in the loop knows the estimand, the design, or the data-use agreement. That knowledge has to come from you, in the files the agent reads (§6) and in the checks you run afterward (§12, §13).
+A script can finish without an error even though a model produced a convergence warning, a regression answers the wrong research question, or a merge dropped a third of the rows. If the agent checks only whether the script ran, it can miss these problems. Give it the estimand, design, and data-use restrictions in the project instructions (§6), and specify checks that address the results you need (§12, §13).
 
-And the loop can converge on the wrong target. Asked to make a failing script work, an agent will sometimes make the failure go away rather than fix its cause: wrap the call so the error is swallowed, drop the rows that won't merge, relax the check that was failing. Each step looked like progress in the observe step. This is the most important habit in checking an agent's work: determine *how* it made an error disappear, not just that it did (§18).
+An agent asked to make a failing script work may suppress an error message, drop rows that will not merge, or relax the check that was failing. The script then runs, but the original problem remains or the analysis has changed. When an agent reports that it fixed an error, inspect how it did so (§18).
 
 ## Three ways of working
 
-The same models are reachable in three places, and the place determines your role.
+You can use AI in three ways, each giving you a different role in the work. A single product may support more than one of these workflows.
 
 | | Chat window | Editor autocomplete | Agent |
 |:--|:--|:--|:--|
@@ -46,13 +46,15 @@ The same models are reachable in three places, and the place determines your rol
 | Sees real errors | no | partly | yes |
 | Your role | messenger | driver | supervisor |
 
-The roles matter more than the tools. As a *messenger* you carry context in and answers out by hand. The right shape for a question with no project attached (a statistics question, a paragraph to rephrase), but the model never sees the project, so it can't catch what wasn't pasted. As a *driver* you stay at the wheel while the model makes suggestions inside your editor, accepting or rejecting a line at a time; good for code you are actively writing and reading. As a *supervisor* you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Less typing, more judgment. Moving rightward, the agent does more of the work, and your attention shifts from producing it to directing and checking it. That shift is the focus of this guide. The same role scales past one agent: a planner checked by a critic, or several independent runs compared against a known answer, are this supervision applied to a team (§4, §13).
+As a *messenger*, you supply the context and carry answers back to your project by hand. This works for a question that needs no project access, such as a statistics question or a paragraph to rephrase. The assistant cannot check anything you have not supplied. As a *driver*, you accept or reject suggestions inside your editor as you write. This works for code you are actively writing and reading.
 
-The supervisor's job is to describe the outcome and its constraints, not the steps. When the shape of the task isn't obvious, ask for a plan first and edit it before the agent starts (§4). Let it run without narrating each step back to you. When it finishes, check the result against something other than its own report: a folder listing, a simulation with a known answer, a second implementation, a reference you opened. And keep it inside a boundary you set in advance: one project folder, under version control, with the data rule written where the agent reads it and enforced where it can't be talked around (§5, §16). 
+As a *supervisor*, you delegate a task with a defined outcome, then review what the agent did and decide what to keep. Your attention shifts from producing the work to directing and checking it. That shift is the focus of this guide. You can supervise several agents in the same way: have one critique another's plan, or compare independent implementations against a known answer (§4, §13).
+
+Describe the outcome and constraints, including any procedure the agent must follow. Ask for a plan when important choices remain unresolved (§4), then let the agent carry out the agreed work. Check the result using evidence such as the resulting files, a simulation with a known answer, an independent implementation, or a source you opened. Specify the project folder and permitted inputs in advance, check the access controls, and keep recoverable versions of the files (§5, §16).
 
 ## The tools are programs on your machine
 
-An agent is a large language model with access to tools that enable it to read, edit, and write files, as well as run any programs installed on your machine. What the agent can do therefore depends on which tools you have available. The analysis language you use (e.g., R, Python, Stata) and `git` are the two tools covered in this guide. But there is a rich ecosystem of command line tools that cover other jobs a research project throws up, and installing one gives the agent something new it can do:
+An agent is a large language model with access to tools that enable it to read, edit, and write files, as well as run programs available within its execution environment and permissions. What the agent can do therefore depends on which tools you have available. The analysis language you use (e.g., R, Python, Stata) and `git` are the two tools covered in this guide. But there is a rich ecosystem of command line tools that cover other jobs a research project throws up, and installing one gives the agent something new it can do:
 
 | The job | The kind of tool | Examples |
 |:--|:--|:--|
@@ -62,6 +64,6 @@ An agent is a large language model with access to tools that enable it to read, 
 | Re-run only what changed | a pipeline runner | targets, Snakemake |
 | Reproduce your analysis environment | a lockfile manager | `renv`, `uv` |
 | Query data and API responses | a data processor | `jq`, `yq` |
-| Keep API keys out of your files | a secrets store | 1Password, direnv |
+| Keep API keys out of your files | a secrets store | 1Password |
 
 You need none of these to start, but the companion tool-kit guide provides a catalog of tools that will make your research more efficient and reproducible.
