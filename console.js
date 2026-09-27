@@ -79,7 +79,7 @@
       body: "Where an agent first touches the outside world. What comes in gets a provenance log; what is already in is read-only. Between them, a ladder of ways to fetch, from a documented interface down to a browser." },
     { n: "12", part: "III", slug: "12-analysis-data-models-and-figures", title: "Analysis: data, models, and figures", ctl: "scope",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
-      body: "The agent writes the scripts; you own the model. Before a model is trusted with the real data, simulate from known parameters, fit the planned model, and see whether it recovers them." },
+      body: "Data preparation, model fitting, and figures use one delegation pattern: give the agent the inputs and your decisions, have it surface the choices it would otherwise make for you, then inspect the evidence. Before a model meets the real data, simulate from known parameters and check that it recovers them." },
     { n: "13", part: "III", slug: "13-verification", title: "Verification", ctl: "twinmeters",
       r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "sage", gloves: "mustard", holds: "magnifier", scene: null },
       body: "The failure to guard against is code that runs, passes a reading, and is still wrong. Re-running gives the same wrong answer. The check is to require the result from different code, in Stata, from the methods write-up alone." },
@@ -430,8 +430,8 @@
   heading(wr, "APPENDICES", 119, 130);
   // Three keys: the terminal appendix moved to the toolkit and the glossary became C (2026-09-27);
   // before that the install appendix dropped and the glossary moved to D (2026-09-23).
-  // 44-unit centre-to-centre gap, the block spanning the wing under the heading.
-  place(wr, [["A", 53, 160], ["B", 97, 160], ["C", 141, 160]]);
+  // 44-unit centre-to-centre gap, centred on the heading's x (119) as the four-key row was.
+  place(wr, [["A", 75, 160], ["B", 119, 160], ["C", 163, 160]]);
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");
