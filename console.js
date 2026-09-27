@@ -77,7 +77,7 @@
     { n: "11", part: "III", slug: "11-getting-data", title: "Getting data", ctl: "jacks",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "mustard", holds: "key", scene: "database" },
       body: "Where an agent first touches the outside world. What comes in gets a provenance log; what is already in is read-only. Between them, a ladder of ways to fetch, from a documented interface down to a browser." },
-    { n: "12", part: "III", slug: "12-analysis-simulation-first", title: "Analysis, simulation first", ctl: "scope",
+    { n: "12", part: "III", slug: "12-analysis-data-models-and-figures", title: "Analysis: data, models, and figures", ctl: "scope",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
       body: "The agent writes the scripts; you own the model. Before a model is trusted with the real data, simulate from known parameters, fit the planned model, and see whether it recovers them." },
     { n: "13", part: "III", slug: "13-verification", title: "Verification", ctl: "twinmeters",
@@ -104,10 +104,7 @@
     { n: "B",  part: "A",   slug: "appendix-b-prompt-bank", title: "Prompt bank", ctl: "key",
       r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
       body: "Prompts that have worked, three to five per stage, each with the line that says when to use it. None asks the agent to confirm its own work." },
-    { n: "C",  part: "A",   slug: "appendix-c-the-terminal-in-two-pages", title: "The terminal in two pages", ctl: "key",
-      r: { hat: "none", eyes: "alert", arms: "hold", coat: "slate", gloves: "mustard", holds: "terminal", scene: null },
-      body: "The desktop apps need none of this. If you run the agent in a terminal, you need about this much and no more." },
-    { n: "D",  part: "A",   slug: "appendix-d-glossary", title: "Glossary", ctl: "key",
+    { n: "C",  part: "A",   slug: "appendix-c-glossary", title: "Glossary", ctl: "key",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
       body: "Every term the guide defines, in one place. Reach for it when a word needs pinning down." },
   ];
@@ -431,9 +428,10 @@
   heading(wr, "JUDGMENT", 101, 26);
   place(wr, [["16", 11, 70], ["17", 103, 66], ["18", 201, 70]]);          // 14 between controls, as on the left
   heading(wr, "APPENDICES", 119, 130);
-  // Four keys (the install appendix dropped and the glossary moved to D, 2026-09-23).
+  // Three keys: the terminal appendix moved to the toolkit and the glossary became C (2026-09-27);
+  // before that the install appendix dropped and the glossary moved to D (2026-09-23).
   // 44-unit centre-to-centre gap, the block spanning the wing under the heading.
-  place(wr, [["A", 53, 160], ["B", 97, 160], ["C", 141, 160], ["D", 185, 160]]);
+  place(wr, [["A", 53, 160], ["B", 97, 160], ["C", 141, 160]]);
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");
