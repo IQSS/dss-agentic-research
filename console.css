@@ -31,7 +31,7 @@
   --c-hat-bowler: #4a5358;
   --c-hat-bowler-2: #626b70;
   --c-sole: #1f2424;
-  --c-shirt: #efe9d8;
+  --c-shirt: #dcb8b2;   /* dusty rose: the cream it replaced vanished on the paper ground (2026-09-28) */
   --c-screen: #0f1a14;
   --c-phosphor: #9fd8a8;
   --c-glass: rgba(90, 124, 176, 0.18);
@@ -65,6 +65,7 @@ body.quarto-dark {
   --c-paper: #e9e4d8;
   --c-glass: rgba(143, 176, 224, 0.16);
   --c-ground: #14181e;
+  --c-shirt: #efe9d8;   /* dark keeps the cream, which reads well on the dark ground */
 }
 
 /* The landing page uses page-layout: custom, which drops the theme's grid, so the wrapper sets the
