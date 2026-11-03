@@ -7,11 +7,10 @@
 (function () {
   const SITE = "chapters/";
   const PARTS = {
-    I:   { name: "Part I · Orientation",          dot: "var(--c-blue-2)" },
-    II:  { name: "Part II · Teach them your way", dot: "var(--c-mustard)" },
-    III: { name: "Part III · The work",           dot: "var(--c-rose)" },
-    IV:  { name: "Part IV · Judgment",            dot: "var(--c-olive)" },
-    A:   { name: "Appendices",                    dot: "var(--c-muted)" },
+    I: { name: "Part I · Start", dot: "var(--c-blue-2)" },
+    II: { name: "Part II · Direct the work", dot: "var(--c-mustard)" },
+    III: { name: "Part III · Do the research", dot: "var(--c-rose)" },
+    A: { name: "Reference", dot: "var(--c-muted)" },
   };
   const COATS = {
     sage:    { c: "#6f7f76", dk: "#55635b", lt: "#8a9a90" },
@@ -44,69 +43,63 @@
 
   // ---- chapters: a recipe for the figure and a control on the console ----
   const CH = [
-    { n: "1",  part: "I",   slug: "01-introduction", title: "Introduction", ctl: "dome",
+    { n: "1",  part: "I",   slug: "research-uses", title: "How agents can help your research", ctl: "dome",
       r: { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null },
-      body: "A chat assistant answers questions. An agent does work inside your project: it creates the folders, writes and runs the code, reads the error, fixes it, and updates the status file. This guide is about what follows from that when the output is a paper or a talk." },
-    { n: "2",  part: "I",   slug: "02-what-an-agent-is", title: "What an agent is", ctl: "crt",
-      r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "sage", gloves: "mustard", holds: null, scene: "screens" },
-      body: "Same models as the chat window. What differs is what the model can see and do: it reads the files that are there, runs the code, reads what the code printed, and edits in place. The model did not change. The room it works in did." },
-    { n: "3",  part: "I",   slug: "03-where-to-run-it", title: "Where to run it", ctl: "lampgrid",
+      body: "Research often slows down between the substantive decisions: locating the right files, implementing a revision, checking what changed, and getting the new results into a manuscript. An agent can do much of that work inside your project. The opportunity is to spend less time moving information between applications and more time deciding what the research should establish and whether the evidence supports it." },
+    { n: "2",  part: "I",   slug: "first-session", title: "Your first agent session", ctl: "lampgrid",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "slate", gloves: "cream", holds: "terminal", scene: null },
-      body: "Two companies, four surfaces each, and the choice matters less than it looks. What differs is what you see while it works and how you sign in, and the second decides what data may pass through it." },
-    { n: "4",  part: "I",   slug: "04-modes", title: "Modes", ctl: "rotary",
-      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", gloves: "brown", holds: "dial", scene: null },
-      body: "Three settings shape a session before the first request: how much the agent may do before it stops to ask, whether it plans before it edits, and which model runs at what effort. All three change in a few keystrokes." },
-    { n: "5",  part: "I",   slug: "05-boundaries", title: "Boundaries", ctl: "toggles",
+      body: "A small, disposable task lets you learn how to give instructions, inspect a saved result, and correct it before entrusting an agent with research work. You need an account with access to Claude Code and the desktop app. This exercise uses invented notes, so it needs neither research data nor an analysis language, terminal, or git repository." },
+    { n: "3",  part: "I",   slug: "research-limits", title: "Set the limits for your research", ctl: "toggles",
       r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "slate", gloves: "mustard", holds: null, scene: "glassbox" },
-      body: "The question is not whether the agent is malicious but what it can touch if it goes wrong, because it will. Four boundaries, each covering a failure the others do not, keep a mistake from being unrecoverable." },
-    { n: "6",  part: "II",  slug: "06-the-files-the-agent-reads", title: "The files the agent reads", ctl: "cardslot",
+      body: "Delegating a task should not put data outside the terms under which you received them or make an ordinary mistake irreversible. Decide what the agent may process and change, enforce those decisions through the available controls, and keep a recoverable version of the work." },
+    { n: "4",  part: "I",   slug: "directing-work", title: "Give the agent a task you can assess", ctl: "rotary",
+      r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", gloves: "brown", holds: "dial", scene: null },
+      body: "A clear request prevents the agent from spending time solving a different problem. Specify the research outcome and its constraints, then choose how much planning, reasoning, and supervision the task needs." },
+    { n: "5",  part: "II",  slug: "project-context", title: "Keep a project understandable across sessions", ctl: "cardslot",
       r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "How will it know to do things your way? A few plain-text files the agent reads at the start of every session: who you are, how you work, what this project is, and what is open." },
-    { n: "7",  part: "II",  slug: "07-project-structure", title: "Project structure", ctl: "dpad",
+      body: "Returning to research after a week should not require reconstructing which data were used, why records were excluded, or what remains unfinished. An agent can maintain a short project record as it works. That record lets both you and a new session resume from the current evidence rather than an old conversation." },
+    { n: "6",  part: "II",  slug: "shared-conventions", title: "Apply your conventions across projects", ctl: "dpad",
       r: { hat: "hardhat", eyes: "calm", arms: "rest", coat: "mustard", gloves: "slate", holds: null, scene: "tree" },
-      body: "An agent walking into a cloud-shared folder has the same problem a new RA does, with less context. Agree on one structure, use it for every project, and have the agent build it." },
-    { n: "8",  part: "II",  slug: "08-repeatable-workflows", title: "Repeatable workflows", ctl: "keys",
+      body: "Repeatedly correcting the same coding style, reporting convention, or prose habit wastes attention you could spend on the research. Save instructions that apply across projects in one shared place. Each new project can then supply its own question, data, and analytical decisions without restating your working preferences." },
+    { n: "7",  part: "II",  slug: "reusable-procedures", title: "Reuse research procedures you trust", ctl: "keys",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "rose", gloves: "slate", holds: "gear", scene: null },
-      body: "Once you have asked for the same thing three times, write it down as a skill: a named, packaged instruction the agent runs when you call it. A piece of your workflow stops being a conversation and becomes a command." },
-    { n: "9",  part: "III", slug: "09-bookkeeping", title: "Bookkeeping", ctl: "counter",
-      r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", gloves: "brown", holds: "clipboard", scene: null },
-      body: "Where to start, and it never stops. Every session begins with the agent finding out where things stand and ends with it writing down where they now stand. The habit that makes every other chapter's checks possible." },
-    { n: "10", part: "III", slug: "10-literature-search-and-synthesis", title: "Literature search and synthesis", ctl: "ledbar",
+      body: "When a useful procedure recurs, saving its instructions reduces the effort of setting it up again and makes omissions easier to spot. A skill packages those instructions for the agent. It is worth creating after you have a procedure whose inputs, output, and checks you trust." },
+    { n: "8", part: "III", slug: "literature", title: "Find and assess research literature", ctl: "ledbar",
       r: { hat: "beret", eyes: "alert", arms: "hold", coat: "slate", gloves: "cream", holds: "books", scene: null },
-      body: "Where the agent's speed and its worst habit meet. It can screen faster than you can read the first abstract, and it can produce a perfectly formatted citation for a paper that does not exist. One decision follows." },
-    { n: "11", part: "III", slug: "11-getting-data", title: "Getting data", ctl: "jacks",
+      body: "A literature search is useful when you can explain how the evidence was found and check what it supports. An agent can reduce the work of retrieval, screening, and extraction, provided it leaves the source record and uncertainty visible." },
+    { n: "9", part: "III", slug: "data-acquisition", title: "Acquire data with a record of its origin", ctl: "jacks",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "mustard", holds: "key", scene: "database" },
-      body: "Where an agent first touches the outside world. What comes in gets a provenance log; what is already in is read-only. Between them, a ladder of ways to fetch, from a documented interface down to a browser." },
-    { n: "12", part: "III", slug: "12-analysis-data-models-and-figures", title: "Analysis: data, models, and figures", ctl: "scope",
+      body: "Automating acquisition is useful when it saves repeated work without losing the identity or meaning of the data. Preserve the source response and the request that produced it so a later analysis can explain which extract it used." },
+    { n: "10", part: "III", slug: "research-workflows", title: "Build an analysis you can rerun selectively", ctl: "scope",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
-      body: "Data preparation, model fitting, and figures use one delegation pattern: give the agent the inputs and your decisions, have it surface the choices it would otherwise make for you, then inspect the evidence. Before a model meets the real data, simulate from known parameters and check that it recovers them." },
-    { n: "13", part: "III", slug: "13-verification", title: "Verification", ctl: "twinmeters",
+      body: "A research analysis changes repeatedly: a coauthor requests another sample, a reviewer asks for a sensitivity check, or a figure needs new labels. If every change reruns a large script from import to manuscript, revisions become slow and hard to inspect. Ask the agent to build small steps with saved inputs and outputs, and commands that run the part you need." },
+    { n: "11", part: "III", slug: "checking-analysis", title: "Check that the agent did the intended analysis", ctl: "twinmeters",
       r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "sage", gloves: "mustard", holds: "magnifier", scene: null },
-      body: "The failure to guard against is code that runs, passes a reading, and is still wrong. Re-running gives the same wrong answer. The check is to require the result from different code, in Stata, from the methods write-up alone." },
-    { n: "14", part: "III", slug: "14-writing-revision-and-talks", title: "Writing, revision, and talks", ctl: "printer",
-      r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
-      body: "The artifact the agent should touch least and can help with most. It writes from your files, never from its sense of what papers like yours usually say. You rewrite what it drafts." },
-    { n: "15", part: "III", slug: "15-reproducibility-and-hand-off", title: "Reproducibility and hand-off", ctl: "lever",
+      body: "A runnable workflow lets you repeat what the agent built. To trust its results, you also need evidence that it implements the requested analysis. Begin with small cases whose answers you can establish independently, then compare consequential analyses built separately from the same specification." },
+    { n: "12", part: "III", slug: "llm-measurements", title: "Use LLM outputs as research measurements", ctl: "lever",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "brown", holds: "package", scene: null },
-      body: "The analysis has to run without the agent. The test is a reviewer in five years with the folder and no chat history, who runs one command and gets the paper's tables." },
-    { n: "16", part: "IV",  slug: "16-data-confidentiality", title: "Data confidentiality", ctl: "keyswitch",
-      r: { hat: "fedora", eyes: "alarmed", arms: "hold", coat: "slate", gloves: "cream", holds: "lock", scene: null },
-      body: "The agent reads whatever folder it is pointed at, and everything it reads goes to the model. Two concrete questions: what do your protocol and agreements permit, and is the vendor covered?" },
-    { n: "17", part: "IV",  slug: "17-cost-and-the-map", title: "Cost, and the map", ctl: "gauge",
-      r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "mustard", gloves: "slate", holds: "meter", scene: null },
-      body: "Four tiers run from the chat window you already use to a pipeline that runs without you. Each is priced, so that you climb as far as your work needs and no further." },
-    { n: "18", part: "IV",  slug: "18-failure-modes-and-habits", title: "Failure modes and habits", ctl: "stop",
-      r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", gloves: "brown", holds: null, scene: null },
-      body: "The agent is fluent, tireless, and confident, and those are exactly the qualities that make a supervisor stop supervising. The habits that prevent the failures are not settings." },
-    { n: "A",  part: "A",   slug: "appendix-a-starter-files", title: "Starter files", ctl: "key",
+      body: "LLMs can make it feasible to code or assess more research material than you could review manually. Once their answers become variables in an analysis, however, errors in those answers affect the evidence. You need to control how the measurements are produced and establish whether they are adequate for the question." },
+    { n: "13", part: "III", slug: "research-writing", title: "Write and revise from the research record", ctl: "printer",
+      r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
+      body: "Research revisions are incomplete if the analysis changes but the manuscript still describes the earlier result. Give the agent a maintained source for each substantive claim and number, then check the rendered manuscript against that record." },
+    { n: "14",  part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "counter",
+      r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", gloves: "brown", holds: "clipboard", scene: null },
+      body: "A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. A clean-copy test exposes dependencies that your familiar working folder can hide." },
+    { n: "A",  part: "A",   slug: "starter-files", title: "Starter files", ctl: "key",
       r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Five files to copy and edit, plus the full project layouts. Every line is a decision you can reverse; starting from a file rather than a blank page makes the decisions visible." },
-    { n: "B",  part: "A",   slug: "appendix-b-prompt-bank", title: "Prompt bank", ctl: "key",
+      body: "This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §5. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects." },
+    { n: "B",  part: "A",   slug: "prompt-index", title: "Requests by research task", ctl: "key",
       r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
-      body: "Prompts that have worked, three to five per stage, each with the line that says when to use it. None asks the agent to confirm its own work." },
-    { n: "C",  part: "A",   slug: "appendix-c-glossary", title: "Glossary", ctl: "key",
+      body: "Find copyable requests beside their explanation and expected evidence:" },
+    { n: "C",  part: "A",   slug: "glossary", title: "Glossary", ctl: "key",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Every term the guide defines, in one place. Reach for it when a word needs pinning down." },
+      body: "Agent. An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1)." },
+    { n: "D", part: "A", slug: "calibration-example", title: "A worked calibration study", ctl: "key",
+      r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
+      body: "### Delegate a calibration study" },
+    { n: "E", part: "A",  slug: "troubleshooting", title: "Troubleshooting", ctl: "key",
+      r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", gloves: "brown", holds: null, scene: null },
+      body: "Use the observed failure to choose the next check. Preserve the current files and useful error output before asking the agent to try again." },
   ];
   const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null };
 
@@ -404,34 +397,29 @@
 
   // Left wing: Part I. Local coordinates, x in [-260, 0], y in [0, 196].
   const wl = document.getElementById("wingL");
-  heading(wl, "ORIENTATION", -101, 26);
+  heading(wl, "START", -101, 26);
   // Spacing set against a mock-up, 2026-09-13. Every row is distributed with an even gap and centred
   // in the panel rather than pushed to one end. The panel face is longer than the join line suggests --
   // the mitre extends it, to lx +43 at the top row's depth and +17 at the bottom row's -- so the inner
   // end had ~59 units of dead panel on the top row and ~44 on the bottom. Top row: 14 between controls.
   // Bottom row: the slack split three ways. Control 3 stops short of the mitre on purpose; at a wider
   // gap its lower inner corner crosses the panel edge, which slants with depth.
-  place(wl, [["1", -212, 70], ["2", -120, 70], ["3", -18, 62], ["4", -191, 148], ["5", -86, 150]]);
+  place(wl, [["1", -190, 70], ["2", -65, 70], ["3", -190, 150], ["4", -65, 150]]);
 
   // Centre: Part II left of the divider, Part III right of it.
   const ce = document.getElementById("centre");
   // The heading keeps its height; only the controls drop (8), so the label does not crowd them.
   // x pulled left from 366: "THEM" is two characters longer than "IT" and ran 7 units past the
   // Part II | Part III divider at 540.
-  heading(ce, "TEACH THEM YOUR WAY", 417, 408);
-  place(ce, [["6", 378, 450], ["7", 492, 460], ["8", 420, 520]]);
-  heading(ce, "THE WORK", 662, 408);   // a third along Part III, not its midpoint
-  place(ce, [["9", 598, 438], ["10", 686, 438], ["11", 766, 438], ["15", 832, 474], ["12", 600, 512], ["13", 694, 512], ["14", 775, 512]]);
+  heading(ce, "DIRECT THE WORK", 417, 408);
+  place(ce, [["5", 378, 450], ["6", 492, 460], ["7", 420, 520]]);
+  heading(ce, "DO THE RESEARCH", 662, 408);   // a third along Part III, not its midpoint
+  place(ce, [["8", 598, 438], ["9", 686, 438], ["10", 766, 438], ["14", 832, 474], ["11", 600, 512], ["12", 694, 512], ["13", 775, 512]]);
 
   // Right wing: Part IV above, the appendices as a keypad below.
   const wr = document.getElementById("wingR");
-  heading(wr, "JUDGMENT", 101, 26);
-  place(wr, [["16", 11, 70], ["17", 103, 66], ["18", 201, 70]]);          // 14 between controls, as on the left
-  heading(wr, "APPENDICES", 119, 130);
-  // Three keys: the terminal appendix moved to the toolkit and the glossary became C (2026-09-27);
-  // before that the install appendix dropped and the glossary moved to D (2026-09-23).
-  // 44-unit centre-to-centre gap, centred on the heading's x (119) as the four-key row was.
-  place(wr, [["A", 75, 160], ["B", 119, 160], ["C", 163, 160]]);
+  heading(wr, "REFERENCE", 119, 26);
+  place(wr, [["A", 60, 80], ["B", 120, 80], ["C", 180, 80], ["D", 90, 145], ["E", 150, 145]]);
 
   // decorative status strip on the centre panel
   const ss = document.getElementById("statusStrip");

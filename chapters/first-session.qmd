@@ -1,62 +1,63 @@
 ---
-title: "3. Where to run it"
+title: "2. Your first agent session"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#4f6478;--coat-dk:#3b4c5c;--coat-lt:#6a8098;--gloves:#e3d9c1;--gloves-dk:#c9bda0"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><ellipse cx="600" cy="53" rx="76" ry="7" fill="var(--c-hat-bowler)"/><path d="M542 53 A58 46 0 0 1 658 53 Z" fill="var(--c-hat-bowler)"/><path d="M552 46 A48 38 0 0 1 648 46" fill="none" stroke="var(--c-hat-bowler-2)" stroke-width="2"/><rect x="546" y="42" width="108" height="8" fill="var(--c-rose)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><rect x="-40" y="-30" width="80" height="60" rx="4" fill="var(--c-metal-3)"/><rect x="-34" y="-24" width="68" height="46" fill="var(--c-screen)"/><text x="-28" y="-8" class="scr" style="font-size:9px">$ just build</text><text x="-28" y="6" class="scr" style="font-size:9px">ok: 3 scripts</text><rect x="-28" y="10" width="6" height="8" fill="var(--c-phosphor)"/></g></g></svg></div>
 
-# 3. Where to run it
+# 2. Your first agent session
 
-<!--
-STATUS: mixed · PHASE: 3 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
-SOURCE: Claude desktop quickstart; HUIT Claude guidance; two-guide content audit
-COVERS: Supported Mac app and institutional account; prerequisites; a harmless first session with a checkpoint, edit, review, undo, and restart.
-VERIFY: Documentation checked 2026-09-26 at https://code.claude.com/docs/en/desktop-quickstart and https://www.huit.harvard.edu/claude. This walkthrough has not yet been observed end to end with a new reader. The author's last recorded app observation was v2.2553.1 on macOS (2026-09-21), with no integrated terminal pane. Recheck labels and record the app version and Harvard account tier during the reader trial.
--->
+A small, disposable task lets you learn how to give instructions, inspect a saved result, and correct it before entrusting an agent with research work. You need an account with access to Claude Code and the desktop app. This exercise uses invented notes, so it needs neither research data nor an analysis language, terminal, or git repository.
 
-This chapter gets you started with Claude Code in the Claude desktop app on a Mac. It covers the account and software you need, then takes you through a practice session: creating files, reviewing an edit, undoing it, and resuming work in a new session. You describe the work in the app; the agent can run your existing R, Stata, or Python installation without you opening a terminal.
+You will ask the agent to save a meeting note, change the meeting day, restore the original, and leave a record for a new session. The evidence is three short files you can open yourself.
 
-## Before opening a project
+## Install the app and open a folder
 
-Use your institutional account and a folder whose contents you are permitted to share with that service. A local session runs commands on your Mac, but the agent sends material it reads to the hosted model. “Local” describes where the tools run; it does not mean the model stays on your computer. Read §5 before using a research folder, and §16 for the full data decision.
+Download the Mac app from the [official desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart), install it, and sign in with the account authorized for your work. Open the *Code* tab. If it is unavailable, check your account's access with your administrator; a chat-only account may not provide it. The desktop app includes Code, so a separate command-line installation is unnecessary.
 
-The starting requirements are the Claude app, git from Apple's Command Line Tools, and the analysis language you already use. The exercise below needs only the app and git. If either is missing, follow your institution's setup instructions before continuing; no other tool is needed here.
+In Finder, make an empty folder named `agent-practice`. In Code, select a *Local* environment and open that folder using the folder selector. Choose *Auto* mode if your account offers it. Auto lets routine work proceed while the app evaluates actions for risk; it does not grant unrestricted access. If Auto is unavailable, use the offered approval-based mode and approve only this exercise's file changes. §4 explains the choices.
 
-> **Harvard, September 2026.** Request Claude through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Standard is the usual starting tier; Premium provides more capacity for sustained use. Confirm that the app is signed into the Harvard account. HUIT approves Claude Chat and Code for data up to Level 3 and states that submitted data are not used for model training. Your project's consent, DUA, IRB, or other terms may impose narrower limits (§16).
+> **Harvard.** Request access through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using your school's or unit's form. Sign into the Harvard account. Features and modes can depend on institutional settings. Data eligibility is a separate decision, covered in §3.
 
-## A first session you can undo
+The control names above follow the current documentation. If your layout differs, use the quickstart's layout guidance. A fresh-account walkthrough remains part of this guide's pre-release checks; the exercise below is an authored teaching example.
 
-Use this exercise to learn the controls before opening a working research project. Experienced users can skip it and go to §6 or the research task they need.
+## Create something you can inspect
 
-### Open an empty folder
+Send this request:
 
-In Finder, create a folder called `agent-practice` in a local location outside your shared research folders. In Claude, select *Code*, choose *Local*, and select that folder. Choose *Manual* for this demonstration so that you can see a proposed edit before it happens; §4 explains the modes, including the Auto mode I recommend for ordinary work. These controls follow the [desktop getting-started instructions](https://code.claude.com/docs/en/desktop-quickstart).
+> This is a disposable practice folder containing no research data. Create `notes.md` with exactly three lines: “Meeting: Friday.” “Bring: draft figure.” “Open question: label units.” Save an identical copy as `notes-original.md`. Work only in this folder; do not publish, send messages, install software, or set up git. Tell me which files you created.
 
-Give the agent this request:
+Open both files in Finder or the app's file view. A `.md` file is ordinary text; the extension identifies Markdown. Check that both contain the requested three lines. The agent's claim that it finished is not a substitute for opening the files.
 
-> This is an empty practice folder. Create `notes.md` with exactly these three lines: “Meeting: Friday.” “Bring: draft figure.” “Open question: label units.” Create a short `CLAUDE.md` saying that this folder contains invented practice notes, that only files in this folder are in scope, and that nothing should be published or sent to another service. Initialize git, review which files will be tracked, and make an initial local commit. Do not set up a remote repository.
+Now send:
 
-Read the proposed changes and approve them. Open `notes.md` in the app or Finder and check the three lines. Ask the agent to show the commit identifier, the list of tracked files, and whether any changes remain uncommitted. You should have a small folder and a recorded starting version. If git asks for a name and email, supply the identity you use for research work; the agent should not invent them.
+> In `notes.md`, change Friday to Monday. Replace the last line with `- [ ] Add units to the figure.` Keep the middle line unchanged. Leave `notes-original.md` untouched.
 
-### Make and inspect one change
+Your edited file should read:
 
-Now ask:
+```
+Meeting: Monday.
+Bring: draft figure.
+- [ ] Add units to the figure.
+```
 
-> In `notes.md`, change Friday to Monday and turn the open question into a checkbox. Keep the other wording. Show the changes, but do not commit them yet.
+The original copy should still say Friday. You have checked a specific change and a preservation requirement without reading code.
 
-The proposed edit should affect only those two lines. Once you approve it, open the changed file and the app's change view. A *diff* shows what was added and removed; §9 explains how to read one. Check the file itself as well as the agent's summary.
+## Correct or undo a change
 
-If you need to interrupt an action, use the stop button. You can also send a correction while the agent works. Stopping does not reverse edits already made, so ask what changed before deciding how to continue. These controls and the change view are described in the [desktop reference](https://code.claude.com/docs/en/desktop).
+If the result differs, name the discrepancy: “You changed the middle line too. Restore its original wording.” You can steer the agent during a task or use the stop control to interrupt it. Stopping does not undo earlier file changes.
 
-### Undo, then keep an edit
+Practice recovery:
 
-Practice recovery while the file is disposable:
+> Restore `notes.md` from `notes-original.md`. Leave the original copy intact. Show the restored note.
 
-> Restore only `notes.md` to its initial committed version. Leave every other file alone. Show the restored contents and confirm that this file has no remaining changes.
+Open the file and check Friday and the original question. Then request the Monday-and-checkbox change again. A copy is adequate recovery for this tiny exercise. For a real project, use agent-maintained version control to retain a sequence of recoverable states (§3 and [toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html)).
 
-Open it and check that Friday and the original question are back. Then repeat the Monday-and-checkbox request. This time, once you have reviewed the result, ask the agent to commit only that edit. A commit records an approved version locally; it does not publish anything.
+## Resume from a written record
 
-### Resume with a fresh session
+Send:
 
-Ask the agent to create `TASKS.md` with a short record of the completed exercise and one open task: add the figure's units when you provide them. Commit that file. Start a new Code session on the same folder and ask it to read `CLAUDE.md` and `TASKS.md`, then summarize the next task without changing anything.
+> Create `TASKS.md`. Record that the practice note was created and corrected. Leave one open task: add the figure's units after I supply them. Record that `notes-original.md` is the recovery copy. Do not invent the missing units.
 
-The new session should identify the missing units rather than invent them. You have now supplied a task, reviewed an edit, restored a file, and resumed from a written record. These are the same habits used in the larger research examples.
+Start a new Code session on the same folder and ask it to read `notes.md` and `TASKS.md`, then tell you the next task without editing anything. It should identify the missing units. The session can resume because the record is in files, not because you retold the conversation.
+
+For real work, first establish what the agent may access (§3). Project instructions and a maintained status record (§5) make this handoff easier as a project grows. Other app surfaces, including Chat, Cowork, and Science, may offer useful capabilities; this guide's local Code route is chosen so the agent can work with your existing research files and programs.

@@ -1,23 +1,32 @@
 ---
-title: "12. Analysis: data, models, and figures"
+title: "10. Build an analysis you can rerun selectively"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b8963a;--coat-dk:#8f7228;--coat-lt:#d1b05a;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/><rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/><rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/><path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><g transform="rotate(-12)"><rect x="-30" y="-30" width="44" height="44" rx="7" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><g fill="#262c2d"><circle cx="-19" cy="-19" r="3.5"/><circle cx="3" cy="-19" r="3.5"/><circle cx="-8" cy="-8" r="3.5"/><circle cx="-19" cy="3" r="3.5"/><circle cx="3" cy="3" r="3.5"/></g></g><g transform="translate(24,18) rotate(20)"><rect x="-16" y="-16" width="32" height="32" rx="5" fill="var(--c-rose)" stroke="#4f5856" stroke-width="2"/><g fill="var(--c-paper)"><circle cx="-7" cy="-7" r="3"/><circle cx="7" cy="7" r="3"/></g></g></g></g></svg></div>
 
-# 12. Analysis: data, models, and figures
+# 10. Build an analysis you can rerun selectively
 
-<!--
-STATUS: mixed · PHASE: 2 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
-SOURCE: Agreed analysis playbook in the two-guide audit; original calibration example; Morris, White and Crowther (2019)
-COVERS: Shared delegation pattern; data understanding and cleaning; model and figure implementation; LLM measurement; calibration demonstration and its limits; long computation.
-VERIFY: The calibration code and numeric table are unchanged from the 2026-08-27 run recorded in docs/notes/sim-main-model-run.md (R 4.6.1, fixest 0.14.2; synthetic 25-county design). Its normal-cutoff inference is now explicitly distinguished from finite-cluster procedures. New cleaning, visualization and LLM examples are instructional examples, not claims of completed analyses.
--->
+A research analysis changes repeatedly: a coauthor requests another sample, a reviewer asks for a sensitivity check, or a figure needs new labels. If every change reruns a large script from import to manuscript, revisions become slow and hard to inspect. Ask the agent to build small steps with saved inputs and outputs, and commands that run the part you need.
 
-Data preparation, model fitting, and visualization use the same delegation pattern. Give the agent the inputs, decisions, and intended result; have it identify unresolved choices; let it implement the agreed work; then inspect evidence of what it did. What changes between tasks is the specification and the evidence you need back.
+In the heat-and-birthweight example, changing a plot label should read the saved prediction table and redraw the figure. Changing the sample restriction should rebuild the analysis file, fit the affected models, and update their outputs. Both are repeatable workflows, but they require different work.
 
-You already know the research problem. The purpose of this chapter is to make that knowledge usable by an agent and to expose places where it has substituted its own choices. §13 separates checking the implementation from justifying the method and assessing its statistical behavior.
+![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Many small analysis scripts and one recipes file support two routes: redraw a figure from saved estimates, or rebuild the sample and rerun the affected analysis."}
 
-## What to ask for
+## Save steps that can run separately
+
+Give each script one coherent job: acquire a source, construct the analysis sample, fit a specified model, calculate a contrast, or draw a figure. A script can serve one project-specific task; it need not become a general software package. Name its inputs and outputs and make it fail clearly when a required input is absent.
+
+A small command file can name the useful routes through those scripts. [Toolkit chapter 6](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) uses `just`; a master do-file, an existing build command, or a short R driver may already be sufficient. The researcher should be able to run a saved command without asking an agent to remember the sequence. A dependency runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) adds automatic decisions about which steps are stale.
+
+| Requested change | Work to repeat | Work to reuse |
+|:--|:--|:--|
+| Change Figure 2's labels | Figure script and visual check | Saved predictions and fit |
+| Change an approved sample rule | Sample construction, affected fits, predictions, reporting | Unchanged source acquisition |
+| Correct the manuscript's formatting | Document build and rendered-page check | Checked results |
+
+> Organize the approved analysis into scripts with explicit inputs and outputs. Keep related operations together, but separate costly fits from plotting and reporting. Give me commands for the main analysis, the figures from saved estimates, and the quick checks. Demonstrate which files each command changes. Preserve the current results and explain any discrepancy.
+
+## Specify the research work
 
 Start with the permitted input files, their documentation, and your project's conventions. State the output you need and the decisions already made. Ask the agent to flag ambiguities that affect the result, while proceeding with routine work within that specification. An extra approval round is useful when something is unresolved; it need not precede every transformation or plot.
 
@@ -39,7 +48,7 @@ Once the rules are settled, give them explicitly:
 
 > Implement the approved cleaning rules in `METHODOLOGY.md`. Preserve the original files. Join each birth to its county-month heat record, requiring at most one heat record for each key. Keep unmatched births flagged for review; do not drop them or fill their exposure values. Save the derived file, the script, and a report of duplicate keys, unmatched records, row counts before and after each step, and checks on the derived values. Stop if a join duplicates birth records. Do not replace missing inputs with simulated values.
 
-The resulting report should let you account for the sample and trace each derived value to a recorded transformation. For a consequential pipeline, ask fresh agents to implement it independently from the same original inputs and agreed rules (§13). Agreement supports implementation fidelity; it does not establish that the exclusion or transformation rules were scientifically appropriate.
+The resulting report should let you account for the sample and trace each derived value to a recorded transformation. For a consequential pipeline, ask fresh agents to implement it independently from the same original inputs and agreed rules (§11). Agreement supports implementation fidelity; it does not establish that the exclusion or transformation rules were scientifically appropriate.
 
 ### Fit a model and produce the requested quantities
 
@@ -55,101 +64,11 @@ A plotting task should identify which results to display and what comparison the
 
 Inspect the plotting data beside the rendered figure. Check selected points and interval endpoints against the saved results, and confirm that the labels and scale describe the actual quantities.
 
-### When the LLM supplies a measurement
-
-If the LLM labels interview responses or extracts values from documents, its answers become research data. Matching two code implementations is then insufficient: the labels themselves need evaluation. §15 gives a worked example using human labels, separate development and evaluation samples, and an explicit route for uncertain cases. You can learn and apply those checks in the app; automated model-serving setup is a separate tooling task.
-
-### Delegate a calibration study
-
-Calibration assesses how the requested method behaves in specified scenarios. Ask for a written plan before a large run: the estimand, plausible data-generating processes, candidate methods, performance measures, and the precision needed for the comparison. Check the generated outcomes' range, dispersion, dependence, and missingness before interpreting fitted results. A convenient simulation can be a poor representation of the quantity you measure.
-
-The [ADEMP framework](https://pmc.ncbi.nlm.nih.gov/articles/PMC6492164/) provides a useful structure for this plan. §13 explains how calibration differs from implementation verification and methodological justification, including why a misspecified model can still perform adequately for a particular estimand or decision rule.
-
-The compact example below demonstrates the workflow. It uses an entirely synthetic county-month design and 200 repetitions per effect size. Its intervals deliberately use the normal cutoff 1.96 with county-clustered standard errors. This is the procedure being evaluated; it is not a demonstration of a finite-cluster t interval or bootstrap. If your intended procedure uses either, the calibration must use it too.
-
-> Reproduce the teaching calibration in `code/_experiments/simulate-main-model.R` using the synthetic county-month design. Use the three stated effect sizes, 200 repetitions each, and the specified normal-cutoff intervals with county-clustered standard errors. Save bias, coverage, rejection rate, and Monte Carlo uncertainty. Identify which features of the demonstration would need changing for the actual analysis. Do not read restricted data, modify the empirical pipeline, or describe this small demonstration as validation of the paper's method.
-
-## What the agent does
-
-It writes scripts that preserve the original inputs, run the agreed transformations and calculations, and save reviewable outputs. For cleaning, that includes an account of sample changes. For modeling, it includes the implemented specification and quantities. For figures, it includes the plotting data. The work should remain repeatable after the conversation ends.
-
-For the calibration request, this is the original teaching script, retained with the results of its recorded run:
-
-```
-# code/_experiments/simulate-main-model.R
-# Does the planned model recover a known effect on this design? (guide §12)
-library(here); library(dplyr); library(tidyr); library(purrr); library(fixest)
-
-design <- readRDS(here("data", "processed", "county-month-design.rds"))
-# columns: county, year, month, hot_days (the real design; no outcome)
-
-simulate_once <- function(design, beta) {
-  cs <- unique(design$county); ys <- unique(design$year)
-  county_u <- tibble(county = cs, u_c = rnorm(length(cs), 0, 40))
-  year_u   <- tibble(year = ys,   u_y = rnorm(length(ys), 0, 15))
-  design |>
-    left_join(county_u, by = "county") |>
-    left_join(year_u, by = "year") |>
-    mutate(bwt = 3300 + beta * hot_days + u_c + u_y + rnorm(n(), 0, 60))
-}
-
-fit_once <- function(dat) {
-  m <- feols(bwt ~ hot_days | county + year, data = dat, cluster = ~county)
-  tibble(est = coef(m)[["hot_days"]], se = se(m)[["hot_days"]])
-}
-
-truths <- c(none = 0, small = -1, main = -15)   # grams per additional hot day
-M <- 200
-
-results <- expand_grid(truth = names(truths), sim = seq_len(M)) |>
-  mutate(fit = map2(truth, sim, function(t, s) {
-    set.seed(s)
-    fit_once(simulate_once(design, truths[[t]]))
-  })) |>
-  unnest(fit) |>
-  mutate(beta = truths[truth])
-
-summary <- results |>
-  group_by(truth) |>
-  summarise(bias     = mean(est - beta),
-            coverage = mean(abs(est - beta) <= 1.96 * se),
-            reject   = mean(abs(est / se) > 1.96),
-            mc_se    = sqrt(reject * (1 - reject) / M))
-
-readr::write_csv(summary, here("outputs", "tables", "sim-main-model.csv"))
-```
-
-On the synthetic design of 25 counties, five years, and 1,500 county-months, the recorded run produced:
-
-| truth | bias | coverage | reject | mc\_se |
-|:--|--:|--:|--:|--:|
-| none (0) | −0.04 | 0.955 | 0.045 | 0.015 |
-| small (−1) | −0.04 | 0.955 | 0.545 | 0.035 |
-| main (−15) | −0.04 | 0.955 | 1.00 | 0 |
-
-Under the null, the estimated rejection rate is 0.045, with a Monte Carlo standard error of about 0.015. That is consistent with 0.05 but too imprecise to distinguish 0.05 from 0.06. Coverage of 0.955 is also an estimate from these scenarios, not proof that the standard errors behave well under other forms of dependence or misspecification.
-
-At the small effect, estimated power is 0.545; at the large effect all 200 runs reject. The plug-in standard error printed as zero in the last row does not imply certainty. A substantive report needs an interval suitable for a proportion at the boundary. The repeated bias across rows reflects the shared random draws and this linear construction.
-
-For a real calibration study, choose the repetition count from the precision required for the decision. Near a rate of 0.05, about 1,900 independent repetitions give a Monte Carlo standard error of 0.005. Slow models may require staged runs or a narrower comparison; they do not make an imprecise rate more conclusive. Preserve the planned scenarios, failed fits, and changes to the study rather than reporting only the favorable cells.
-
-### Long computation
-
-For a long fit, have the agent save a runnable script and a log. Without extra tools, run it in your existing RStudio or Stata application and bring the permitted output back to the agent. A job queue can manage recurring long jobs; the toolkit's queue section explains submission, resource limits, and status checks. A queue runs locally and does not make a laptop compute while asleep or survive every reboot with its processes intact.
-
-Compacting a conversation, closing an app, and terminating a process are different events. Do not infer job status from the chat. Check the process or queue state, the log, and the expected output before reporting completion. A pipeline runner (§15) can reuse completed steps after an interruption; resuming a fit within a step requires the fitting program's own checkpoint support.
-
-When the work exceeds local resources, follow your institution's research-computing route. The agent can draft a job script, but the resource request, permitted environment, and resulting files still need review.
-
-> **Harvard.** Consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/) for compute access and the appropriate environment for the data. Use the current cluster guidance for submission and data restrictions; an agent-generated job script is not evidence that either is correct.
-
 ## What you check
 
-Compare the deliverables with the request. For a join, account for unmatched and duplicated records. For a model, compare the sample, settings, and exact reported quantities. For a figure, check how the values in the source table appear as points, lines, or intervals in the plot. Use independent implementations for important results, with suitable exact, numerical, or Monte Carlo tolerances (§13).
+Compare the deliverables with the request. For a join, account for unmatched and duplicated records. For a model, compare the sample, settings, and exact reported quantities. For a figure, check how the values in the source table appear as points, lines, or intervals in the plot. Use independent implementations for important results, with suitable exact, numerical, or Monte Carlo tolerances (§11).
 
-For calibration, check the simulated worlds before the performance table. Then check that the fitting procedure and decision rule match the intended analysis, and that Monte Carlo uncertainty is small enough to support the conclusion. Record what passed, under which scenarios, and what remains uncertain.
-
-Method comparison by simulation is legitimate when the candidate methods, scenarios, and criteria address the research question. The problem is quietly changing them until a preferred conclusion passes. Document changes and evaluate a revised method across the full relevant set of scenarios.
+Simulation checks and independent implementations belong in the saved workflow too (§11). Rerun them when the relevant method or inputs change, not whenever a caption changes.
 
 Keep exploratory scripts in `_experiments/`. Once a check supports the reported analysis, make it part of the documented validation sequence, for example under `code/validation/`, and record when it must rerun. A figure-label edit need not rerun a large calibration study; a change to the estimator may.
 
@@ -162,3 +81,19 @@ Keep exploratory scripts in `_experiments/`. Once a check supports the reported 
 *The check changes until it passes.* A comparison tolerance grows, an assertion disappears, or difficult scenarios are removed. Have the agent report the failure and its cause before proposing a change.
 
 *The output looks convincing.* A clean table, a converged fit, and a polished figure can all implement the wrong request. Check the underlying quantities and sample, not the presentation alone.
+
+## Keep long jobs moving
+
+For a long fit, have the agent save a runnable script and a log. Without extra tools, run it in your existing RStudio or Stata application and bring the permitted output back to the agent. A job queue can manage recurring long jobs; the toolkit's queue section explains submission, resource limits, and status checks. A queue runs locally and does not make a laptop compute while asleep or survive every reboot with its processes intact.
+
+Compacting a conversation, closing an app, and terminating a process are different events. Do not infer job status from the chat. Check the process or queue state, the log, and the expected output before reporting completion. A pipeline runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) can reuse completed steps after an interruption; resuming a fit within a step requires the fitting program's own checkpoint support.
+
+When the work exceeds local resources, follow your institution's research-computing route. The agent can draft a job script, but the resource request, permitted environment, and resulting files still need review.
+
+> **Harvard.** Consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/) for compute access and the appropriate environment for the data. Use the current cluster guidance for submission and data restrictions; an agent-generated job script is not evidence that either is correct.
+
+## When an agent step itself runs unattended
+
+Some batches need an agent to perform a bounded task for each item, rather than just run saved analysis code. A headless invocation accepts a request, performs the task without an interactive conversation, and saves a result. For example, it could turn each approved document into a structured extraction with a failure record when the required fields are missing.
+
+Record the request and inputs, set limits on permitted tools and retries, and check a small batch before submitting the rest. [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html) covers the mechanics. If those extractions become research measurements, control the information available to each run and evaluate their quality (§12). Headless execution makes a task unattended; it does not itself make the context isolated.

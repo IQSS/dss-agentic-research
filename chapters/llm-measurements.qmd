@@ -1,78 +1,18 @@
 ---
-title: "15. Reproducibility and hand-off"
+title: "12. Use LLM outputs as research measurements"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#4f6478;--coat-dk:#3b4c5c;--coat-lt:#6a8098;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard-3)"/><rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard)" opacity="0.5"/><rect x="-34" y="-4" width="68" height="10" fill="var(--c-paper)" opacity="0.85"/><rect x="-6" y="-26" width="12" height="56" fill="var(--c-paper)" opacity="0.85"/><rect x="10" y="8" width="20" height="14" fill="var(--c-paper)"/><text x="12" y="19" class="tiny" style="font-size:8px;fill:#262c2d">v1.0</text></g></g></svg></div>
 
-# 15. Reproducibility and hand-off
+# 12. Use LLM outputs as research measurements
 
-<!--
-STATUS: adapt · PHASE: 2 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
-SOURCE: Two-guide audit; original reproducibility chapter; Zenodo record management; Anthropic glossary
-COVERS: Runnable analysis and accessible inputs; pinned environments; proportional validation; transparent deposit; saved LLM measurements, rerunning inference, and held-out evaluation.
-VERIFY: Zenodo metadata and deletion distinctions checked 2026-09-26 at https://help.zenodo.org/docs/deposit/manage-records/. Non-determinism checked against https://platform.claude.com/docs/en/about-claude/glossary. Evaluation counts below are an explicitly invented teaching example.
--->
+LLMs can make it feasible to code or assess more research material than you could review manually. Once their answers become variables in an analysis, however, errors in those answers affect the evidence. You need to control how the measurements are produced and establish whether they are adequate for the question.
 
-A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. This chapter explains how to assemble and test that package, prepare it for sharing, and preserve and evaluate measurements produced by an LLM.
+In my project comparing AI and human peer reviews, separate headless runs generated AI reviews and judged reviews. The purpose was to give each run its assigned material and protocol without carrying a previous review's conversation into the next. This is a research-design reason for a controlled agent environment, beyond the convenience of unattended execution.
 
-Keep this reproduction test distinct from independent implementation (§13). A fresh implementation tests whether the written method is sufficiently precise and whether separately built analyses agree. Rerunning the original code tests whether a collaborator can reproduce the supplied analysis. Both require the right inputs and enough detail about software-dependent behavior; neither establishes the scientific validity of the method.
+## Keep three questions separate
 
-The agent can inspect the project, record the sequence that produces its results, and identify missing inputs or software. Have it save those details as run instructions and test them before hand-off.
-
-![](figures/two-pipelines.svg){#fig-two-pipelines .tall width="90%" fig-align="center" fig-alt="Two analysis workflows: an LLM writes code that is then executed, or its answers become measurements. Both need saved inputs and settings. LLM measurements additionally need saved responses and evaluation against independently labeled cases; neither workflow guarantees identical reruns." above="12pt" below="12pt"}
-
-## What to ask for
-
-*An execution sequence.* For a small R project, `run-all.R` can run the scripts in order and stop on an error (Appendix A.4). In Stata, a master do-file serves the same purpose. Have the agent identify any manual input or hidden dependency and document it. A nearly finished paper still needs a repeatable sequence, even if a sophisticated runner would add little value.
-
-*The environment.* Record the language version, packages, and relevant system dependencies before changing a working setup. A lockfile records package versions for restoration: `renv.lock` for an R project using renv, or `uv.lock` for Python using uv. The toolkit's environment section covers installation and use. For Stata, record the Stata version, the do-files' version settings, and the versions and sources of community commands. A version statement alone does not preserve user-written packages.
-
-*An input manifest.* For every required input, record its version or checksum, how an authorized researcher obtains it, and where the analysis expects it. A fresh copy of the code will not contain inputs excluded from git. Public downloads may change, so preserve the version used when sharing terms allow it. For restricted data, provide access instructions and a synthetic example that tests execution without disclosing the real records.
-
-*Proportionate checks.* Keep a quick check for routine edits, a way to rerun affected steps, and a full reproduction check for a release. Required calibration and validation scripts belong in that documented sequence, with the conditions that trigger a rerun. Pipeline runners such as targets or Snakemake become useful when dependencies or expensive steps make this difficult to manage; the toolkit explains them.
-
-> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and their approved acquisition route before running anything. Restore the recorded environment without upgrading it. For shareable inputs, run the documented analysis and compare the reported quantities with the saved results using the agreed tolerances. For restricted inputs unavailable here, run only the synthetic smoke test and state that real-data reproduction remains to be completed in the approved environment. Save commands, logs, and discrepancies. Report failures without changing the analysis or comparison criteria.
-
-*A reviewable deposit.* Assemble a separate snapshot folder before uploading to OSF, Dataverse, Zenodo, or the repository your field uses. Include the code, environment records, input manifest, data documentation, run instructions, and the inputs and outputs you are allowed to share. Document where access restrictions prevent a public reproduction. Decide with coauthors which contributors and licenses belong on the record.
-
-## What the agent does
-
-It turns the actual scripts into an execution sequence, checks that the README describes that sequence, and records what the environment and inputs require. It runs the permitted clean-copy test and saves evidence of the outcome. For a deposit, it inventories the snapshot, traces reported results to files, and flags material that needs a human decision before release.
-
-The package should distinguish rebuilding the published tables from rerunning an expensive fit or querying a model service again. If a table is reconstructed from saved fit objects or saved LLM responses, say so. Those saved objects are inputs to that reproduction route and need to be preserved and documented accordingly.
-
-## What you check
-
-Inspect the execution log and comparison results. A successful exit is insufficient if the sample, coefficients, labels, or plotted values differ. Use exact comparison for identifiers and deterministic counts, suitable numerical tolerances for floating-point calculations, and justified Monte Carlo tolerances for stochastic analyses (§13). Record which environment and input versions were actually tested.
-
-A synthetic smoke test establishes that the supplied example runs. It does not reproduce the restricted-data results. Have an authorized researcher complete and record that test in the approved environment before claiming the empirical analysis reproduces.
-
-For a public snapshot, review both its contents and its claims:
-
-- Remove credentials, restricted records, confidential correspondence, personal paths, and working notes that do not belong in the release. If the release includes repository history, review the history as well as the current files.
-- Preserve scientific provenance: AI-use disclosure, the model and prompts used for measurement, the evaluation procedure, and the checks on generated code. Removing an agent authorship trailer is separate from documenting its role in the research.
-- Confirm that the README describes the implemented model, units, inputs, and outputs. Check that filenames resolve and that access instructions are usable.
-- Check authors, affiliations, licenses, and the relationship between the deposit version and manuscript version.
-
-Use searches to locate likely problems and read the surrounding material. Neither a keyword sweep nor a complete read guarantees that a credential or misleading statement will be found; combine them with an inventory and the reproduction test.
-
-> Review the proposed deposit folder against the manuscript, code, and input manifest. Report confidential material, credentials, unresolved paths, missing dependencies, incomplete input-access instructions, and claims the code does not support. Preserve relevant AI disclosure and research provenance, including prompts and model-evaluation records. Check contributor metadata and licenses. Do not upload, delete files, rewrite history, or remove methodological documentation; propose specific corrections for review.
-
-## What goes wrong
-
-*A hidden input makes the original folder special.* A cached fit or local data file never appeared in the manifest. The clean-copy test should identify it and record how it is supplied.
-
-*A conversation supplies an undocumented step.* A recode or manual exclusion reaches the results but never reaches a script or decision record. Ask the agent to trace each reported output back through its inputs and transformations.
-
-*Reproduction is overstated.* Only the synthetic example ran, or only the table-rendering step ran from saved results. Report exactly what was tested and what remains necessary.
-
-*An archive is cleaned too aggressively.* Removing every mention of an agent erases disclosure or a measurement procedure. Remove irrelevant working material while preserving what a reader needs to understand and assess the research.
-
-*A correction is needed after deposit.* Check the repository's policy rather than assuming all changes are impossible. As of September 2026, [Zenodo permits edits to published metadata](https://help.zenodo.org/docs/deposit/manage-records/), including creators, without changing the DOI. Replacing research files involves different versioning rules. Owners can delete a record within its initial 30-day window; later removal requests go through support and need justification. Review before publication because a correction cannot recall copies already downloaded.
-
-## When the LLM is in the loop
-
-When an LLM codes responses, classifies documents, or extracts a variable from text, its answers become measurements. Keep three questions separate:
+When an LLM codes responses, classifies documents, or extracts a variable from text, ask:
 
 1. Can a reader recover the published results from the saved measurements?
 2. Can someone rerun the inference procedure that produced them?
@@ -80,7 +20,25 @@ When an LLM codes responses, classifies documents, or extracts a variable from t
 
 Saving the responses helps answer the first. Recording the model and procedure helps with the second. Evaluation addresses the third. Success on one does not imply success on the others.
 
-### Preserve the run
+## Control what each reviewer or judge receives
+
+Review generation and judging are distinct stages. A reviewer receives the review instructions and the assigned manuscript. A judge receives the judging rubric and the material that its task requires. A pairwise judgment can deliberately include two reviews of one manuscript; excluding other runs' context does not mean every call receives only one document.
+
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Separate reviewer runs receive a protocol and an assigned manuscript. Separate judging runs receive a rubric and the assigned review set. Other cases and prior conversations are excluded by the intended protocol, which must be tested."}
+
+The project's recorded wrappers used a new subprocess and a temporary working directory for each call, explicit prompts, and controls intended to avoid persistent sessions and restrict tools. Generation and judging supplied their own assigned inputs. Those are recorded implementation choices, not a claim that a new directory alone excludes every source of context. Current agent tools can also load personal instructions, memory, plugins, and service connections; a read-only process may still read unwanted information.
+
+For a teaching implementation, write down what each run may receive and test the actual configuration. Include loaded instructions, memory or resumed sessions, accessible files, tool permissions, and any connected service. [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html) supplies the setup and harmless marker tests. Save the evidence for the routes tested and identify anything untested. Do not call a run isolated merely because it is headless or starts a fresh conversation.
+
+| Stage | Deliberately supplied | Kept outside that run |
+|:--|:--|:--|
+| Generate a review | Review protocol; assigned manuscript; approved tools | Other reviews, earlier conversations, judging outcomes |
+| Judge a review set | Rubric; assigned reviews; manuscript if the protocol requires it | Other cases and prior judgments; authorship labels if blinded |
+| Analyze judgments | Saved responses, parsing rules, case identifiers | New model inference unless explicitly requested |
+
+A direct scripted model call may be simpler when the task needs no tools or agent loop. Either route still needs input control, failure handling, and measurement evaluation. Context separation does not establish statistical independence, remove shared model biases, or make a judgment valid.
+
+## Preserve the run
 
 Save the exact inputs presented to the LLM, prompts and examples, raw responses, parsing and postprocessing code, dates, model information, and available generation settings. Keep failures, retries, and human corrections traceable to the original case. Apply the same access rules to these records as to the source data.
 
@@ -88,7 +46,7 @@ Use an exact model identifier when the interface exposes one, and record limitat
 
 Keeping open model weights can preserve access after a hosted model is retired, but repeatability also depends on preprocessing, runtime, numerical precision, quantization, and generation settings. Choose a model for demonstrated performance on the task as well as its availability and licensing. Reevaluate any replacement. This guide does not require a different model service or teach its installation.
 
-### Evaluate a labeling task
+## Evaluate a labeling task
 
 Suppose you want to label whether a response describes an unmet service need. Write a rubric defining that category, exclusions, and ambiguous cases. Have two people apply it independently to a development sample, discuss disagreements, and record any adjudication. Human labels are a reference with their own uncertainty, not unquestionable truth.
 
@@ -109,4 +67,12 @@ Decide acceptable error rates and how uncertain cases will be handled before ins
 
 > Apply the frozen labeling rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. Once labeling is complete, compare with the independently adjudicated reference. Report the confusion table, errors by category, uncertainty, referral rate, and the prespecified acceptance criteria. Do not tune the prompt on this sample or drop difficult cases. List disagreements for human review.
 
-If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§14).
+If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§13).
+
+## Check sensitivity to the measurement procedure
+
+A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. For text coding, changing a boundary definition can reveal that the construct is underspecified.
+
+Keep each alternative's outputs and failures. Report meaningful changes in the substantive conclusion rather than selecting the prompt that yields a preferred answer. Repeated identical inputs can also reveal variation, but consistent outputs are not necessarily valid outputs.
+
+For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§13–14).

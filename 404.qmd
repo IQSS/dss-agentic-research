@@ -10,4 +10,4 @@ There is no page at that address.
 The link is probably mistyped, or out of date. Every chapter is listed in the
 sidebar, and the search box is in the top bar.
 
-[Back to the console](index.html) · [Introduction](chapters/01-introduction.html)
+[Back to the console](index.html) · [Introduction](chapters/research-uses.html)

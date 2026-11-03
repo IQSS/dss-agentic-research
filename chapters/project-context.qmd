@@ -1,0 +1,106 @@
+---
+title: "5. Keep a project understandable across sessions"
+---
+
+<div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#6f7f76;--coat-dk:#55635b;--coat-lt:#8a9a90;--gloves:#e3d9c1;--gloves-dk:#c9bda0"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g transform="rotate(-8)"><rect x="-30" y="-38" width="60" height="76" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><text x="-22" y="-20" class="tiny" style="fill:#262c2d">AGENTS.md</text><g fill="#cfc8b9"><rect x="-22" y="-12" width="44" height="3"/><rect x="-22" y="-4" width="36" height="3"/><rect x="-22" y="4" width="42" height="3"/><rect x="-22" y="12" width="28" height="3"/><rect x="-22" y="20" width="40" height="3"/></g></g></g></svg></div>
+
+# 5. Keep a project understandable across sessions
+
+<!-- REVISED: 2026-11-02. SOURCE: former chapters 6, 7, and 9. The worked project is illustrative. -->
+
+Returning to research after a week should not require reconstructing which data were used, why records were excluded, or what remains unfinished. An agent can maintain a short project record as it works. That record lets both you and a new session resume from the current evidence rather than an old conversation.
+
+Suppose the heat-and-birthweight paper has a checked main analysis, an unfinished sensitivity analysis, and two folders of figures. A fresh agent needs to know which results are current before changing a caption. A short status file can identify the saved results and the next task; a methods record can explain the inclusion rule without making the agent infer it from filenames.
+
+![](figures/project-context.svg){#fig-project-context fig-alt="Project instructions, current status, and tasks survive the conversation; checked work updates the record." above="8pt" below="8pt"}
+
+## Start with the project you have
+
+Keep a working lab layout. Ask the agent to identify the analysis entry point, permitted inputs, current outputs, and unresolved decisions. Put that description in a short `CLAUDE.md` in the project folder. Review it before relying on it: an invented filename or exclusion rule becomes a recurring error if saved as an instruction.
+
+> Read the README and the files I have identified as current. Propose a short project instruction file stating the research purpose, permitted inputs, analysis entry point, outputs, and decisions that require my input. Mark anything you cannot establish as unknown. Preserve the existing layout and files.
+
+For a new project, folders for inputs, code, outputs, and manuscript source may be enough. Keep original inputs unchanged and rebuild derived files through scripts. The fuller layouts in [Starter files](#starter-files) are references to adapt, not a required folder hierarchy. If the project is cloud-synced, consult the toolkit's [version-control chapter](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) before creating repository metadata or large generated environments there.
+
+## Give the files distinct jobs
+
+| File | What belongs there |
+|---|---|
+| `CLAUDE.md` or an imported `AGENTS.md` | Project instructions, permitted inputs, entry points, and pointers to the other records |
+| `STATUS.md` | Current state: which analysis and outputs are current, what is underway, and what is blocked |
+| `TASKS.md` | To Do, In Progress, and Done, with dates and evidence for finished tasks |
+| `METHODOLOGY.md` | Reasons for analytical choices, changes, and rejected alternatives |
+| `README.md` | A collaborator's introduction and instructions for using the project |
+
+Start with the instruction file and add the others when needed. A larger project may also need a `PLAN.md` for the analysis sequence and milestones. It should point to the task list and methods record rather than repeat their contents.
+
+Here is the project brief for the invented running example. Its model specification illustrates what to record; it is not a justification of that model for a real causal question.
+
+```
+# heat-birthweight
+
+Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
+Target: Demography. Decisions live in METHODOLOGY.md, the current state in
+STATUS.md, open tasks in TASKS.md.
+
+## Where things live
+- Restricted microdata is held separately in approved storage, unavailable here.
+- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
+- `data/processed/`: derived files. Use `synthetic-natality.parquet` here.
+  It contains invented records, not a de-identified extract.
+- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
+  `run-all.R` runs all three in order.
+- `outputs/`: figures and tables the manuscript reads.
+- `manuscript/`: the paper, Quarto to Word for the coauthor.
+
+## This project
+- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
+  The two must agree before a number goes in the paper.
+- Estimand: the effect of one more third-trimester day above 35 °C on county
+  mean birthweight. Two-way fixed effects with county-clustered standard errors.
+- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+
+## Off limits
+- Work only from the synthetic file and approved public downloads above.
+- Do not substitute real natality inputs or request access to restricted storage.
+- Never send any file under `data/` to a web search or an external service.
+```
+
+You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current Claude versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
+
+## Update the record while doing the work
+
+At the start of a session, ask:
+
+> Read `STATUS.md`, then `TASKS.md`. Summarize the current analysis, unfinished work, and next task. Check that the named files exist. Flag conflicting or stale records before using them. Do not change the analysis yet.
+
+After setting the task, have the agent record it as In Progress. Before closing the session, ask:
+
+> Update the task list from the work actually completed. For each finished item, record the date and evidence; for unfinished items, state what remains. Rewrite the affected status lines and date if the project state changed. Record new analytical decisions in `METHODOLOGY.md` and changed run instructions in the README. Do not mark a task finished just because its code was written.
+
+For example, an illustrative status update might be:
+
+| Before the task | After the task and its checks |
+|---|---|
+| Figure 2 uses the previous labels. | Figure 2 rebuilt from the saved predictions with the approved labels. |
+| Next: correct labels; then review the sensitivity analysis. | Next: review the sensitivity analysis; no model refit was needed for the label change. |
+
+The task list receives the dated completion entry. The status file describes the resulting state, without accumulating a second history of the task. If version control is in use, the standing instruction from §3 can have the agent record a version after completing the task. Neither maintaining these records nor producing a status report requires git.
+
+Open one claimed output and check it against the request. If an analysis was supposed to run, inspect its actual result or failure record. After a rename, have the agent find references to the old path and test the affected command. Update the README in the same task.
+
+## Keep enough context without loading everything
+
+The context window is the material available to the model during a session: messages, loaded instructions, file content, and tool results. Long histories can crowd out the information needed for the next task. Keep the project brief short and point to detailed records by purpose. Give the agent a current file path rather than pasting a copy that will become stale.
+
+A written pointer tells the agent when to consult a file; an `@` import loads the referenced instructions as part of the instruction file. Use imports deliberately. Keep global style and modeling conventions in the next chapter's shared files rather than copying them into every project.
+
+Auto memory is another source of carried-over context. Ask the agent to show relevant saved notes when its assumptions conflict with the project record. Correct stale notes and keep consequential decisions in the maintained project files. Starting a new conversation does not establish that no prior information will be loaded; §12 explains deliberate context control for research measurements.
+
+## Reorganize only when it helps the work
+
+If the current layout is usable, documenting it may be sufficient. If several folders compete to be the current analysis, first make a recoverable copy outside the folder. Ask for an inventory and a table of proposed old and new paths with reasons. Review ambiguous duplicates and save the agreed table before authorizing moves.
+
+Preserve originals and put uncertain duplicates aside. After moving files, update their references and rerun the affected work. Keep the earlier copy until the required outputs rebuild. Reorganizing a folder should not silently change the analytical sample or methods.
+
+For several papers under one grant, each paper still needs its own methods, input-version record, and checks. A coordinating workspace can help identify which papers depend on a shared dataset; it does not replace those records. Claude's [Projects documentation](https://code.claude.com/docs/en/claude-projects) describes the current multi-repository option. Chat Projects can also retrieve passages from an uploaded reference collection; ask for the supporting passages and check them, as in §8.

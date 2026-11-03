@@ -1,31 +1,40 @@
 ---
-title: "13. Verification"
+title: "11. Check that the agent did the intended analysis"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#6f7f76;--coat-dk:#55635b;--coat-lt:#8a9a90;--gloves:#c8a23c;--gloves-dk:#8f7228"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="11" fill="#6fa3e6"/><circle class="iris" cx="624" cy="86" r="11" fill="#6fa3e6"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><circle cx="-8" cy="-8" r="22" fill="var(--c-glass)" stroke="var(--c-ink)" stroke-width="5"/><circle cx="-14" cy="-14" r="6" fill="#fff" opacity="0.5"/><line x1="8" y1="8" x2="32" y2="32" stroke="var(--c-ink)" stroke-width="8" stroke-linecap="round"/></g></g></svg></div>
 
-# 13. Verification
+# 11. Check that the agent did the intended analysis
 
-<!--
-STATUS: adapt · PHASE: 1 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26 (implementation checks separated from methodological justification and statistical performance)
-SOURCE: content bank judgment/verification-cross-language.md (folded in; module points back here); author's 2026-09-26 verification structure; §12 simulation workflow
-COVERS: Independent implementations from original inputs and an agreed specification; data provenance, sample, model, and postestimation comparisons; assertions. Methodological justification through literature and critical consultation. Calibration across plausible truth worlds, including misspecification, with limits stated separately.
-VERIFY: Conceptual rewrite; no vendor controls or platform commands introduced. The comparison table lists checks, not empirical results. Deliberate exception to the usual Part III headings: two questions organize the chapter.
--->
+A runnable workflow lets you repeat what the agent built. To trust its results, you also need evidence that it implements the requested analysis. Begin with small cases whose answers you can establish independently, then compare consequential analyses built separately from the same specification.
 
-Verification has two jobs. One is to establish whether the agent implemented the analysis you asked for. The other is to assess whether that analysis is appropriate for the research question and has the statistical properties you need. An analysis can pass the first check and fail the second.
-
-The practical check on implementation is to have two or three agents build the analysis independently from the same inputs and written specification, then compare what they produce. That makes substantial verification possible when the volume of generated code, or the language it uses, puts a complete manual review out of reach. Methodological judgment and simulation then address what agreement between implementations cannot.
+For example, a county-month join may silently duplicate births when the exposure table contains a repeated key. A five-row test can make that error obvious even when the full analysis produces plausible estimates. A second implementation can then check the transformations and reported quantities across the complete pipeline.
 
 ## Did the agent implement what you asked for?
 
 An agent can produce code that runs and yields plausible results while doing the wrong analysis. It might invent a missing column, substitute simulated values for observed ones, merge on the wrong identifier, or fit a different model from the one you specified. It might fit the right model and report the wrong quantity afterward: a coefficient where you requested an average marginal effect, or predictions for the wrong population.
 
-Re-running that code reproduces the error (§15). Independent implementation gives you another route from the inputs to the result, so you can check where those routes agree and where they diverge.
+Re-running that code reproduces the error (§14). Independent implementation gives you another route from the inputs to the result, so you can check where those routes agree and where they diverge.
+
+### Start with an answer you know
+
+Choose a small case with an expected result derived from the research rules, not copied from the program being tested. In this invented join example, three births match two distinct county-month exposure records; one birth is unmatched. The correct output has four births, preserves the unmatched record for review, and does not invent an exposure.
+
+| Test input | Expected behavior |
+|:--|:--|
+| Unique county-month exposure keys | Preserve all four births; three match, one stays flagged |
+| One duplicated exposure key | Stop before fitting; identify the duplicated key |
+| A missing required exposure file | Fail clearly; do not substitute simulated observations |
+
+> Create these small fixtures separately from the analysis inputs. Run the saved preparation code on them and compare its behavior with the stated expectations. Keep the failing case as a regression check. Report the observed output and exit status; do not weaken the test to make it pass.
+
+Larger simulations can pass data with known truth through the entire workflow. Check the generator and the truth calculation separately: otherwise the same error can appear on both sides of the comparison. These tests address implementation. Repeated simulation also supports a separate assessment of statistical behavior, discussed below and in Appendix D.
+
+![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="A stated expected answer and synthetic test input go through the saved research workflow. A comparison reports agreement or a discrepancy to investigate."}
 
 ### Give each agent the same written target
 
-Start with `METHODOLOGY.md` (§6). It should state:
+Start with `METHODOLOGY.md` (§5). It should state:
 
 - The research quantity to estimate (the *estimand*), including the population, comparison, and scale.
 - The input files and their meanings, the unit represented by each row, the merge keys, and the rules for constructing variables.
@@ -39,11 +48,14 @@ Keep a fixed copy of that specification for the comparison. If an implementer fi
 
 ### Have two or three agents implement it separately
 
+![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and written specification feed two separate implementations. Only their completed outputs enter the comparison."}
+
+
 Open fresh Claude Code sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
 
 If the agent built the dataset as well as the model, each implementation should start from the original inputs and independently perform the cleaning, merges, and variable construction. Starting both from one agent's processed dataset leaves that processing unchecked. If you are checking only model fitting on an already verified dataset, the shared processed file is an appropriate starting point.
 
-Use only inputs the agent is permitted to access (§16). For restricted data, have the agents develop their implementations against a permitted synthetic example and data dictionary, then run the scripts independently on the real data in the approved environment. Review the comparison there; return only information that is permitted to leave.
+Use only inputs the agent is permitted to access (§3). For restricted data, have the agents develop their implementations against a permitted synthetic example and data dictionary, then run the scripts independently on the real data in the approved environment. Review the comparison there; return only information that is permitted to leave.
 
 Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, Python, and Stata are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
 
@@ -95,7 +107,7 @@ All three agents can faithfully implement an analysis that does not answer your 
 
 Methodological justification starts with the research question and the literature. Does the estimand represent what you want to learn? Can this design identify it? Are the assumptions credible for these data? Does the model account for the sampling design, repeated observations, and missingness? If you intend a causal interpretation, what makes that interpretation defensible?
 
-Use agents to help investigate those questions before implementation (§12). Ask separate sessions to assess the proposed analysis, find relevant methodological literature, and look for objections. Give them the design and proposed specification so they can identify what information is missing. Follow their citations to the original sources and check that the methods apply to your setting (§10).
+Use agents to help investigate those questions before implementation (§4). Ask separate sessions to assess the proposed analysis, find relevant methodological literature, and look for objections. Give them the design and proposed specification so they can identify what information is missing. Follow their citations to the original sources and check that the methods apply to your setting (§8).
 
 > Review the analysis proposed in `METHODOLOGY.md` against the research question and study design. Identify assumptions needed for the intended interpretation, choices the available information does not justify, and relevant methodological literature. Explain where each source applies to this design and where it does not. List unresolved questions for a statistician. Do not change the specification.
 
@@ -103,7 +115,7 @@ Independent consultations can broaden the objections you consider; agreement amo
 
 ### Assess statistical behavior with a calibration harness
 
-A *calibration harness* is an automated simulation workflow. It generates repeated datasets for which the relevant truth is known, applies your planned analysis to each, and measures how the estimates and decisions behave. §12 gives the worked example and the mechanics.
+A *calibration harness* is an automated simulation workflow. It generates repeated datasets for which the relevant truth is known, applies your planned analysis to each, and measures how the estimates and decisions behave. Appendix D preserves the worked example and its recorded results.
 
 Decide what acceptable behavior means for the quantities you will report. Does the estimator recover the target across a useful range of true values? How large is its bias? How often do its intervals contain the truth? Under a null condition, how often does the decision rule report an effect? How often does it detect effects of substantive interest? Record failed fits as well as successful ones, and report simulation uncertainty so that a small number of repetitions is not mistaken for a precise performance estimate.
 

@@ -6,67 +6,62 @@ title: "Appendix C. Glossary"
 
 # Appendix C. Glossary
 
-<!--
-STATUS: revised · PHASE: 2 · DRAFTED: 2026-08-27 · REVISED: 2026-09-26
-SOURCE: Terms defined in the guide.
-COVERS: App-based research workflow vocabulary. Terminal primer moved to toolkit Part V.
-VERIFY: Cross-checked with revised chapters; product definitions share their linked sources.
--->
+*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
 
-*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§2).
-
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§13).
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§11).
 
 *Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§4).
 
-*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §6.
+*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §5.
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§15). *One-command build* means the same.
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§14). *One-command build* means the same.
 
-*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§12, §13).
+*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§10, §11).
 
-*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§5, §9).
+*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §5).
 
-*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§6, §18).
+*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§5, §4).
 
-*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§12).
+*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§10).
 
-*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§5).
+*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§3).
 
-*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§9).
+*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§5).
 
 *Effort.* How much the model reasons before it acts; a setting with levels (§4).
 
-*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§11).
+*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§9).
 
-*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§12).
+*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§10).
 
-*Global file.* An instruction file holding conventions that apply across your projects (§6). Project-specific instructions belong in the project file, defined here under *brief*.
+*Global file.* An instruction file holding conventions that apply across your projects (§5). Project-specific instructions belong in the project file, defined here under *brief*.
 
-*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§6).
+*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§5).
 
-*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §15).
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §14).
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§15).
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§14).
 
-*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§4, §15); and a statistical model fitted to data (§12).
+*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§4, §14); and a statistical model fitted to data (§10).
 
-*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§13).
+*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§11).
 
 *Permission mode.* The setting that decides which actions the agent may take without asking (§4).
 
 *Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§4).
 
-*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §5); and, in Appendix B, a request you type to the agent.
+*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §3); and, in Appendix B, a request you type to the agent.
 
-*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§11).
+*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§9).
 
-*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §11).
+*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§5).
 
-*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§5).
+*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§5, §9).
 
-*Session.* One conversation with the agent, with its own context window (§18).
+*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§3).
 
-*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§17).
+*Session.* One conversation with the agent, with its own context window (§4).
 
-*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§5).
+*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§4).
+
+*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).

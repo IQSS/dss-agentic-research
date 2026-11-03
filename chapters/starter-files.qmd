@@ -6,18 +6,11 @@ title: "Appendix A. Starter files"
 
 # Appendix A. Starter files
 
-<!--
-STATUS: new · PHASE: 1 · DRAFTED: 2026-08-27 (first draft; needs a read-through)
-SOURCE: A.1 and A.2 repeat the §6 worked files; keep the copies identical when editing. Remaining examples adapted from project conventions.
-COVERS: Optional global and project instructions, task record, existing-language execution script, git exclusions, and adaptable layouts. Revised 2026-09-26.
-VERIFY: Instruction-file loading checked against Claude memory documentation 2026-09-26. Examples are teaching templates, not a tested complete analysis package.
--->
-
-This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §6. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects.
+This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §5. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects.
 
 ## A.1 The global file
 
-Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it imports (§6). Replace the first paragraph with your own description and retain only rules you want the agent to follow across your projects.
+Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it imports (§5). Replace the first paragraph with your own description and retain only rules you want the agent to follow across your projects.
 
 ```
 # How I work
@@ -25,7 +18,7 @@ Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it 
 Quantitative social scientist. R first, Stata for collaborators, some Python.
 
 ## Projects
-- One folder per paper, under git. Its AGENTS.md says where things live.
+- One folder per paper; use version control when agreed. Its AGENTS.md says where things live.
 - `data/raw/` is read-only. Derived files go in `data/processed/`.
 - Paths via `here::here()`. No `setwd()`, no absolute paths.
 - Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
@@ -38,7 +31,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 
 ## Statistics
 - State the estimand before fitting. Report every estimate with an interval.
-- Assess the method with a calibration plan before substantive use (§13).
+- Assess the method with a calibration plan before substantive use (§11).
 - Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
 
 ## Writing
@@ -60,7 +53,7 @@ Quantitative social scientist. R first, Stata for collaborators, some Python.
 
 ## A.2 The project file for a paper
 
-Save this in the project's `CLAUDE.md`, or in `AGENTS.md` with the import described in §6. Replace the example paper's details with your own, using the headings to organize its description, file locations, conventions, and access limits. For restricted-data work, follow the synthetic-input approach in §16 and keep real inputs inaccessible to the agent's process. Naming an off-limits path does not prevent the agent from reading it.
+Save this in the project's `CLAUDE.md`, or in `AGENTS.md` with the import described in §5. Replace the example paper's details with your own, using the headings to organize its description, file locations, conventions, and access limits. For restricted-data work, follow the synthetic-input approach in §3 and keep real inputs inaccessible to the agent's process. Naming an off-limits path does not prevent the agent from reading it.
 
 ```
 # heat-birthweight
@@ -94,7 +87,7 @@ STATUS.md, open tasks in TASKS.md.
 
 ## A.3 TASKS.md
 
-Save this in the project root. Use the three headings shown, a short entry for each task, and a date on each finished item. Have the agent read it after `STATUS.md` at the start of a session and update it as work progresses (§6, §9). The opening comment explains how to maintain the list.
+Save this in the project root. Use the three headings shown, a short entry for each task, and a date on each finished item. Have the agent read it after `STATUS.md` at the start of a session and update it as work progresses (§5). The opening comment explains how to maintain the list.
 
 ```
 # Tasks
@@ -133,14 +126,14 @@ for (script in scripts) {
 }
 ```
 
-The scripts should read and write their declared files rather than rely on objects left over from an interactive session. A Stata project can use a master do-file for the same purpose. Add required validation steps to the documented sequence (§15); a quick plotting command need not rerun them all. The toolkit explains command runners and dependency tracking if the project grows beyond this arrangement.
+The scripts should read and write their declared files rather than rely on objects left over from an interactive session. A Stata project can use a master do-file for the same purpose. Add required validation steps to the documented sequence (§14); a quick plotting command need not rerun them all. The toolkit explains command runners and dependency tracking if the project grows beyond this arrangement.
 
 ## A.5 .gitignore
 
-Where it goes: the project root. This conservative starting example excludes data, generated models, logs, and personal settings. Adapt it to the project's sharing policy: an approved public input or provenance manifest may belong in the repository. Ignoring a path does not restrict agent access and does not remove an already tracked file. Review shared settings before committing them; managed policy and local settings also affect what a session enforces (§5).
+Where it goes: the project root. This conservative starting example excludes data, generated models, logs, and personal settings. Adapt it to the project's sharing policy: an approved public input or provenance manifest may belong in the repository. Ignoring a path does not restrict agent access and does not remove an already tracked file. Review shared settings before committing them; managed policy and local settings also affect what a session enforces (§3).
 
 ```
-# Exclude inputs by default; share approved files deliberately (§16)
+# Exclude inputs by default; share approved files deliberately (chapter 3)
 data/raw/
 data/processed/
 
@@ -160,7 +153,7 @@ _old/
 
 ## A.6 Adaptable project layouts
 
-These are examples for projects that have outgrown the minimal folder in §3. Keep an established lab layout when it already makes inputs, code, outputs, and decisions easy to find. Add a directory because the project needs its contents, rather than creating empty folders to match a template.
+These are examples for projects that have outgrown the minimal folder in §2. Keep an established lab layout when it already makes inputs, code, outputs, and decisions easy to find. Add a directory because the project needs its contents, rather than creating empty folders to match a template.
 
 ### A research paper
 
@@ -184,7 +177,7 @@ heat-birthweight/
 `-- manuscript/            # Word, Quarto, or the existing format
 ```
 
-Keep restricted inputs in approved storage that the agent process cannot reach. Document how authorized researchers can obtain them in the input manifest (§15). Record environment versions, and add a current-state file when the task list no longer explains where the project stands. The optional global/project convention from §6 can replace the single `CLAUDE.md` as needed.
+Keep restricted inputs in approved storage that the agent process cannot reach. Document how authorized researchers can obtain them in the input manifest (§14). Record environment versions, and add a current-state file when the task list no longer explains where the project stands. The optional global/project convention from §5 can replace the single `CLAUDE.md` as needed.
 
 ### Data acquisition or curation
 
