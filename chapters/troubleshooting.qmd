@@ -19,7 +19,7 @@ For example, an R job that never writes its first message needs a process or lau
 | The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
 | A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
 | A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
-| R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit Appendix A](https://dss-agentic-toolkit.pages.dev/chapters/working-environment.html) |
+| R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit troubleshooting](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
 | Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |
 

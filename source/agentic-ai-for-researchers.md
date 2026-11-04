@@ -1109,7 +1109,7 @@ Saving the responses helps answer the first. Recording the model and procedure h
 
 A *headless agent* runs from a saved request without an interactive app conversation. A script supplies its inputs, starts the run, and collects its result. This is useful when the same protocol must be applied to many cases: generate a review, judge a review pair, or extract specified evidence from a document. It also lets you record the exact procedure and rerun selected cases.
 
-Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. Claude Code's [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html).
+Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. Claude Code's [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html).
 
 For the peer-review study, the research requirement is that the next reviewer does not inherit the previous reviewer's conversation, and a judge receives only the material allowed by the judging protocol. Write that requirement before choosing a launcher. Treat review generation, judging, and subsequent statistical analysis as separate stages with separately saved outputs.
 
@@ -1121,7 +1121,7 @@ Review generation and judging are distinct stages. A reviewer receives the revie
 
 The project's recorded wrappers used a new subprocess and a temporary working directory for each call, explicit prompts, and controls intended to avoid persistent sessions and restrict tools. Generation and judging supplied their own assigned inputs. Those are recorded implementation choices, not a claim that a new directory alone excludes every source of context. Current agent tools can also load personal instructions, memory, plugins, and service connections; a read-only process may still read unwanted information.
 
-For a teaching implementation, write down what each run may receive and test the actual configuration. Include loaded instructions, memory or resumed sessions, accessible files, tool permissions, and any connected service. [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html) supplies the setup and harmless marker tests. Save the evidence for the routes tested and identify anything untested. Do not call a run isolated merely because it is headless or starts a fresh conversation.
+For a teaching implementation, write down what each run may receive and test the actual configuration. Include loaded instructions, memory or resumed sessions, accessible files, tool permissions, and any connected service. [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) supplies the setup and harmless marker tests. Save the evidence for the routes tested and identify anything untested. Do not call a run isolated merely because it is headless or starts a fresh conversation.
 
 | Stage | Deliberately supplied | Kept outside that run |
 |:--|:--|:--|
@@ -1188,7 +1188,7 @@ Running a model yourself can give you control over where research material is pr
 
 Suppose your team is coding interview excerpts for unmet service needs, using the rubric evaluated in §16. The approved environment may exclude an external model service, making local inference useful. Separately, the team may have enough reviewed examples to investigate whether training improves the model's coding. Moving the model onto approved hardware addresses where processing happens; an evaluation addresses whether the coding is adequate.
 
-You can run an unchanged open-weight model locally. Fine-tuning is optional, and it still requires the research checks in §16. This chapter explains those choices; the [toolkit](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers local runtime setup.
+You can run an unchanged open-weight model locally. Fine-tuning is optional, and it still requires the research checks in §16. This chapter explains those choices; the [toolkit](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers local runtime setup.
 
 ## Choose where the model runs {#local-models}
 
@@ -1233,11 +1233,11 @@ Record the exact weights and license, precision or quantization, runtime, contex
 
 A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
 
-[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
+[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
 
 ### Apple’s built-in on-device model
 
-Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#apple-on-device).
+Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#apple-on-device).
 
 Candidate research tasks include extracting dates and organizations, tagging documents, or classifying short survey responses against a fixed rubric. Apple’s [capability guidance](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models) identifies these language-understanding tasks and cautions against relying on the on-device model for code generation or logical reasoning. Evaluate the particular task on held-out examples, save the original responses, and record the device, operating-system version, and available model information. Local availability is a deployment benefit; the measurement still needs evidence of adequate quality.
 
@@ -1884,7 +1884,7 @@ For example, an R job that never writes its first message needs a process or lau
 | The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
 | A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
 | A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
-| R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit Appendix A](https://dss-agentic-toolkit.pages.dev/chapters/working-environment.html) |
+| R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit troubleshooting](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
 | Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |
 
