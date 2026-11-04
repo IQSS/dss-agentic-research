@@ -1,76 +1,93 @@
 ---
-title: "6. Apply your conventions across projects"
+title: "8. Apply your conventions across projects"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b8963a;--coat-dk:#8f7228;--coat-lt:#d1b05a;--gloves:#4f6478;--gloves-dk:#3b4c5c"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/><rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/><rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/><path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/></g></g></g></svg></div>
 
-# 6. Apply your conventions across projects
+# 8. Apply your conventions across projects
 
-<!-- REVISED: 2026-11-02. SOURCE: former chapter 6 and the shared-lab-conventions draft. -->
+Shared conventions prevent you from correcting the same coding style, reporting rule, or prose habit in every project. They give the agent a consistent way to work while leaving each paper's question, data, and decisions in its own records.
 
-Repeatedly correcting the same coding style, reporting convention, or prose habit wastes attention you could spend on the research. Save instructions that apply across projects in one shared place. Each new project can then supply its own question, data, and analytical decisions without restating your working preferences.
+For example, you might require uncertainty alongside estimates, project-relative paths, and a saved environment record. Those conventions apply to the birthweight paper and another project. The particular exposure contrast and current analysis sample belong only in the birthweight project's specification.
 
-Suppose three papers should report uncertainty alongside every estimate and preserve existing package environments. Those rules can be shared. The estimand, exclusion rule, and current model for each paper belong in that paper's record. Changing the lab's reporting convention should not require finding and editing three copies of it.
+![](figures/shared-conventions.svg){#fig-shared-conventions fig-alt="A short global instruction file points to specialist conventions. Several projects use those conventions while retaining separate questions, status, tasks, and decisions."}
 
-![](figures/shared-conventions.svg){#fig-shared-conventions fig-alt="One set of global or lab conventions applies across three projects, each of which retains its own question, inputs, and decisions." above="8pt" below="8pt"}
+## Start with a short shared instruction file {#shared-instructions}
 
-## Write rules you can recognize in the result
+Write rules whose application you can recognize. “Preserve the existing environment and report any required package change” gives the agent something more concrete than “be reproducible.” Add rules to solve recurring problems, rather than anticipating every possible task.
 
-Include recurring preferences about code, writing, file naming, reporting, and access. Make them specific enough to assess. “Preserve the project environment and report any required package change” is more useful than “be reproducible.” A new convention should address a recurring problem, not anticipate every possible task.
+In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
 
-In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app, and inspect it. The [memory documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions and how they are loaded. Existing institutional instructions may also apply.
-
-Here is an optional starting file for an R researcher. Adapt it to your actual language and conventions.
-
+<!-- starter:global -->
 ```
 # How I work
 
-Quantitative social scientist. R first, Stata for collaborators, some Python.
+[Describe your research role and the software you normally use.]
 
-## Projects
-- One folder per paper; use version control when agreed. Its AGENTS.md says where things live.
-- `data/raw/` is read-only. Derived files go in `data/processed/`.
-- Paths via `here::here()`. No `setwd()`, no absolute paths.
-- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+## Before a task
+- Read the project's instructions and current state. Preserve accepted work.
+- Identify the requested result, constraints, and evidence needed to accept it.
+- Ask about consequential ambiguity; do not silently substitute another analysis.
 
-## Code
-- R: tidyverse style, the native pipe `|>`, one script per stage.
-- Preserve the project environment. Record package versions before changes.
-- Use the existing lockfile tool; see the toolkit for adding one.
-- Comment what a block is for, not what each line does.
+## Conventions
+- Read CONVENTIONS.md when organizing a project or naming files.
+- Read CODING.md before writing or changing code.
+- Read MODELING.md before statistical modeling or simulation.
+- Read WRITING.md before drafting prose for people to read.
+- Read TOOLCHAIN.md before adding or changing software.
 
-## Statistics
-- State the estimand before fitting. Report every estimate with an interval.
-- Assess the method with a calibration plan before substantive use (§11).
-- Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
+These files sit beside this file. If a needed file is absent, report the gap.
 
-## Writing
-- Short sentences. Point first, then the qualification. Prose, not bullets.
-- Methods: the equation first, then the prose that explains it.
-- American spelling. Oxford comma.
+## Research work
+- Preserve original data. Derive new files with saved code.
+- Use independently runnable steps with declared inputs and outputs.
+- Keep scientific decisions and their reasons in the project record.
+- Verify observed outputs before reporting success. Keep failed checks visible.
 
-## Access and limits
-- Read only inputs approved for this service. Never expose restricted files.
-- Public-data acquisition may add approved new files; preserve originals.
-- Never overwrite original data. Rebuild derived files from recorded scripts.
-- Never rewrite shared git history.
-- Ask before publishing, adding a service, or exceeding the agreed resources.
+## Limits
+- Use only inputs and services approved for the project.
+- Ask before publishing, sending messages, expanding access, or adding a service.
+- Do not delete recovery copies or rewrite shared history without approval.
 
-## Every session
-- Read `STATUS.md`, then `TASKS.md`, at the start.
-- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+## Finishing
+- Update the task list and current-state record from evidence.
+- Report what changed, how it was checked, and what remains unresolved.
 ```
+<!-- /starter:global -->
 
-These instructions guide behavior; they do not enforce the access controls in §3. A statistical convention also needs scientific judgment: the project must define which estimand and uncertainty calculation answer its question.
+This short file can point to more detailed conventions. The specialist filenames below are ordinary Markdown files; their names alone do not make the agent load them. The main instructions should explain when and where to read them. Use one maintained copy of each rule.
 
-## Split detailed conventions by subject
+## Put detailed conventions in specialist files {#specialist-conventions}
 
-When a topic outgrows the short global file, move it to a named file such as `WRITING.md`, `CODING.md`, or `MODELING.md`. Leave a pointer explaining when to read it. For a manuscript edit, the agent can consult the writing guidance without loading a long modeling reference.
+| File | Recurring problem it addresses | Example instruction and when to consult it |
+|---|---|---|
+| `CONVENTIONS.md` | Projects have inconsistent layouts, names, or output locations. | Before scaffolding or restructuring, use the appropriate paper, data, or website shape; distinguish original inputs from generated files. |
+| `CODING.md` | Each session changes the language style or invents a new execution arrangement. | Before editing source, use the project's language conventions, reusable functions, root-relative paths, and existing package environment. |
+| `MODELING.md` | Modeling and reporting requirements have to be repeated. | Before fitting or interpreting a model, state the estimand, distinguish it from coefficients, and apply the required simulation and uncertainty checks. |
+| `WRITING.md` | Drafts repeatedly need the same voice and reporting corrections. | Before writing prose, use direct sentences, define technical terms, and distinguish an estimate from its interpretation. |
+| `TOOLCHAIN.md` | The agent installs a tool already available or proposes an incompatible alternative. | Before setup or troubleshooting, inspect the inventory and preserve an adequate existing tool. |
+| `WORKSPACE.md` | The agent cannot locate related projects or shared inputs. | Before cross-project work, consult the project index and then check that access to the identified location is authorized. |
 
-Ask the agent to apply one new rule to a small task and show the relevant evidence. For example, have it revise a short paragraph under the writing conventions, or report the environment record before editing an analysis script. Merely creating the file does not demonstrate that the session read or followed it.
+You do not need all six files immediately. Start with the convention you repeatedly explain, then split a topic when the main instruction file becomes too long. A manuscript edit may need writing guidance without the full modeling reference. An inventory such as `TOOLCHAIN.md` supplies facts; `CODING.md` prescribes working rules. Keep both current, but do not confuse them.
+
+For the running example, the shared modeling file might require a simulation before relying on an unfamiliar estimator. The project specification supplies the age-dependent heat contrast, outcome model, and scenarios. The specialist file should not dictate one birthweight model for every future paper.
+
+<!-- prompt:shared-conventions -->
+::: {#request-shared-conventions .prompt}
+> Review these project instructions for conventions I use across projects. Propose a short global instruction file that points to specialist files for coding, modeling, writing, project structure, and installed tools. Keep this study’s scientific decisions and access exceptions in the project. Identify duplicated or conflicting rules and show proposed changes before applying them.
+:::
+<!-- /prompt:shared-conventions -->
+
+## Check that the convention is used
+
+Apply one new rule to a small task and inspect the result. Ask the agent to identify the instruction it consulted, revise a paragraph under the writing guidance, or show the environment record before changing an analysis script. Creating a file does not demonstrate that the session loaded or followed it.
+
+Instructions guide behavior; [chapter 4's access controls](#agent-access) enforce particular technical restrictions. A statistical convention also needs scientific judgment: the project still has to justify the question, assumptions, and estimator.
 
 ## Share conventions within a lab
 
-A lab can maintain shared conventions and reusable procedures in a repository that members synchronize to their computers. Review changes in one place, then configure each person's agent instructions to reference the relevant local files. Synchronizing a folder alone does not tell the agent to read it.
+A lab can maintain shared files and skills in a repository, review changes together, and make them available locally to members. Each person's agent instructions then point to the relevant files. Synchronizing a folder alone does not configure the agent to read it.
 
-Keep each paper's design and current state in that project's records (§5). Where a project needs an exception to a lab convention, document the reason and ask the agent to flag conflicting instructions instead of silently choosing one. The toolkit's [shared-settings chapter](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) covers an optional tool for managing configuration across machines; a lab need not adopt it to share a few instruction files.
+Keep paper-specific exceptions in the paper's record, including the reason. Have the agent flag a conflict rather than silently changing a convention for every project. When a shared rule changes, consider which ongoing projects actually need an update; a completed analysis should not change simply because the lab adopted a new default.
+
+The toolkit's [shared-settings chapter](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) describes an optional tool for maintaining configuration across machines. Sharing a few instruction files does not require adopting that whole setup.

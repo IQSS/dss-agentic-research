@@ -8,18 +8,28 @@ body.quarto-dark main img[src*="figures/"] {
   filter: none;
 }
 
+body.quarto-dark img[src$="agent-access.svg"] { content: url("figures/agent-access-dark.svg"); }
+body.quarto-dark img[src$="agent-loop.svg"] { content: url("figures/agent-loop-dark.svg"); }
+body.quarto-dark img[src$="chat-to-agent.svg"] { content: url("figures/chat-to-agent-dark.svg"); }
 body.quarto-dark img[src$="controlled-review-runs.svg"] { content: url("figures/controlled-review-runs-dark.svg"); }
+body.quarto-dark img[src$="deposit-review.svg"] { content: url("figures/deposit-review-dark.svg"); }
 body.quarto-dark img[src$="four-boundaries.svg"] { content: url("figures/four-boundaries-dark.svg"); }
 body.quarto-dark img[src$="four-pillars.svg"] { content: url("figures/four-pillars-dark.svg"); }
 body.quarto-dark img[src$="hub-and-spoke.svg"] { content: url("figures/hub-and-spoke-dark.svg"); }
 body.quarto-dark img[src$="independent-implementations.svg"] { content: url("figures/independent-implementations-dark.svg"); }
 body.quarto-dark img[src$="known-answer-check.svg"] { content: url("figures/known-answer-check-dark.svg"); }
+body.quarto-dark img[src$="manuscript-trace.svg"] { content: url("figures/manuscript-trace-dark.svg"); }
 body.quarto-dark img[src$="model-effort.svg"] { content: url("figures/model-effort-dark.svg"); }
 body.quarto-dark img[src$="project-context.svg"] { content: url("figures/project-context-dark.svg"); }
+body.quarto-dark img[src$="reproduction-routes.svg"] { content: url("figures/reproduction-routes-dark.svg"); }
 body.quarto-dark img[src$="research-data-routes.svg"] { content: url("figures/research-data-routes-dark.svg"); }
+body.quarto-dark img[src$="research-handoff.svg"] { content: url("figures/research-handoff-dark.svg"); }
 body.quarto-dark img[src$="research-uses.svg"] { content: url("figures/research-uses-dark.svg"); }
 body.quarto-dark img[src$="selective-workflows.svg"] { content: url("figures/selective-workflows-dark.svg"); }
 body.quarto-dark img[src$="shared-conventions.svg"] { content: url("figures/shared-conventions-dark.svg"); }
 body.quarto-dark img[src$="think-act-observe.svg"] { content: url("figures/think-act-observe-dark.svg"); }
 body.quarto-dark img[src$="two-gears.svg"] { content: url("figures/two-gears-dark.svg"); }
 body.quarto-dark img[src$="two-pipelines.svg"] { content: url("figures/two-pipelines-dark.svg"); }
+body.quarto-dark img[src$="use-ideas.svg"] { content: url("figures/use-ideas-dark.svg"); }
+body.quarto-dark img[src$="use-model.svg"] { content: url("figures/use-model-dark.svg"); }
+body.quarto-dark img[src$="use-workflows.svg"] { content: url("figures/use-workflows-dark.svg"); }

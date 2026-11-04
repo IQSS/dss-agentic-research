@@ -1,67 +1,81 @@
 ---
-title: "Appendix C. Glossary"
+title: "Appendix D. Glossary"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#6f7f76;--coat-dk:#55635b;--coat-lt:#8a9a90;--gloves:#e3d9c1;--gloves-dk:#c9bda0"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><ellipse cx="600" cy="53" rx="76" ry="7" fill="var(--c-hat-bowler)"/><path d="M542 53 A58 46 0 0 1 658 53 Z" fill="var(--c-hat-bowler)"/><path d="M552 46 A48 38 0 0 1 648 46" fill="none" stroke="var(--c-hat-bowler-2)" stroke-width="2"/><rect x="546" y="42" width="108" height="8" fill="var(--c-rose)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g transform="rotate(-8)"><rect x="-30" y="-38" width="60" height="76" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><text x="-22" y="-20" class="tiny" style="fill:#262c2d">AGENTS.md</text><g fill="#cfc8b9"><rect x="-22" y="-12" width="44" height="3"/><rect x="-22" y="-4" width="36" height="3"/><rect x="-22" y="4" width="42" height="3"/><rect x="-22" y="12" width="28" height="3"/><rect x="-22" y="20" width="40" height="3"/></g></g></g></svg></div>
 
-# Appendix C. Glossary
+# Appendix D. Glossary
+
+Use these definitions when a term interrupts the research workflow. For example, an *estimand* names the quantity you intend to report; an *estimator* is the procedure used to calculate it. The chapter references return you to the term in use.
 
 *Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
 
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§11).
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§15).
 
-*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§4).
+*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
 
-*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §5.
+*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§14). *One-command build* means the same.
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§18). *One-command build* means the same.
 
-*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§10, §11).
+*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§14).
 
-*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §5).
+*Chain of custody.* The record of where protected data and their copies travel, who or what can access them, and how retention and deletion can be established (§3).
 
-*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§5, §4).
+*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§17).
 
-*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§10).
+*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
 
-*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§3).
+*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§7, §5).
 
-*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§5).
+*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§13).
 
-*Effort.* How much the model reasons before it acts; a setting with levels (§4).
+*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§4).
 
-*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§9).
+*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§7).
+
+*Effort.* How much the model reasons before it acts; a setting with levels (§5).
+
+*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§12).
 
 *Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§10).
 
-*Global file.* An instruction file holding conventions that apply across your projects (§5). Project-specific instructions belong in the project file, defined here under *brief*.
+*Estimator.* A procedure that uses the data to estimate the specified research quantity (§10).
 
-*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§5).
+*Global file.* An instruction file holding conventions that apply across your projects (§8). Project-specific instructions belong in the project file, defined here under *brief*.
 
-*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §14).
+*Headless agent.* An agent run from a saved request without an interactive conversation. Headless execution does not itself control all the context or tools available to the run (§16).
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§14).
+*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§7).
 
-*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§4, §14); and a statistical model fitted to data (§10).
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§5, §16).
 
-*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§11).
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§18).
 
-*Permission mode.* The setting that decides which actions the agent may take without asking (§4).
+*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§5, §16); and a statistical model fitted to data (§13).
 
-*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§4).
+*Modular workflow.* Independently runnable research steps with explicit inputs and saved outputs; each step performs a coherent operation and can reuse shared functions (§13).
 
-*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §3); and, in Appendix B, a request you type to the agent.
+*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§15).
 
-*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§9).
+*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§16).
 
-*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§5).
+*Permission mode.* The setting that decides which actions the agent may take without asking (§5).
 
-*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§5, §9).
+*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§5).
 
-*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§3).
+*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§5, §3); and, in Appendix B, a request you type to the agent.
 
-*Session.* One conversation with the agent, with its own context window (§4).
+*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§12).
 
-*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§4).
+*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§7).
+
+*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §12).
+
+*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§4).
+
+*Session.* One conversation with the agent, with its own context window (§5).
+
+*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§5).
 
 *Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).

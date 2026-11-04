@@ -1,0 +1,162 @@
+{
+  "prompts": [
+    {
+      "id": "scaffold-project",
+      "chapter": 6,
+      "title": "Start a new research project",
+      "purpose": "Establish a project structure that fits the intended output."
+    },
+    {
+      "id": "restructure-project",
+      "chapter": 6,
+      "title": "Organize an existing project",
+      "purpose": "Make a recoverable reorganization without changing the research."
+    },
+    {
+      "id": "project-context",
+      "chapter": 7,
+      "title": "Write project instructions",
+      "purpose": "Make a new session useful without retelling the whole project."
+    },
+    {
+      "id": "resume-project",
+      "chapter": 7,
+      "title": "Resume a project",
+      "purpose": "Use the saved state to choose the next task."
+    },
+    {
+      "id": "close-session",
+      "chapter": 7,
+      "title": "Leave a useful handoff",
+      "purpose": "Record enough evidence for the next session."
+    },
+    {
+      "id": "shared-conventions",
+      "chapter": 8,
+      "title": "Separate shared and project instructions",
+      "purpose": "Avoid copying changing rules across every project."
+    },
+    {
+      "id": "status-skill",
+      "chapter": 9,
+      "title": "Turn a checked procedure into a skill",
+      "purpose": "Reuse a procedure after confirming it works."
+    },
+    {
+      "id": "research-specification",
+      "chapter": 10,
+      "title": "Make the research specification explicit",
+      "purpose": "Give implementation and verification the same written target."
+    },
+    {
+      "id": "literature-search",
+      "chapter": 11,
+      "title": "Search and verify the literature",
+      "purpose": "Keep source discovery separate from verified evidence."
+    },
+    {
+      "id": "literature-synthesis",
+      "chapter": 11,
+      "title": "Synthesize the papers actually read",
+      "purpose": "Connect each literature claim to supporting material."
+    },
+    {
+      "id": "bring-data",
+      "chapter": 12,
+      "title": "Bring approved data into the project",
+      "purpose": "Preserve originals and establish provenance before analysis."
+    },
+    {
+      "id": "modular-workflow",
+      "chapter": 13,
+      "title": "Build a modular analysis workflow",
+      "purpose": "Make meaningful analysis steps independently runnable."
+    },
+    {
+      "id": "simulation-plan",
+      "chapter": 14,
+      "title": "Plan and run known-truth checks",
+      "purpose": "Assess implementation and statistical behavior separately."
+    },
+    {
+      "id": "independent-implementation",
+      "chapter": 15,
+      "title": "Implement the analysis independently",
+      "purpose": "Give a fresh agent only the common specification and inputs."
+    },
+    {
+      "id": "compare-implementations",
+      "chapter": 15,
+      "title": "Compare completed implementations",
+      "purpose": "Locate the first meaningful disagreement."
+    },
+    {
+      "id": "controlled-llm-runs",
+      "chapter": 16,
+      "title": "Design controlled LLM research runs",
+      "purpose": "Specify what each headless run may receive."
+    },
+    {
+      "id": "evaluate-labeling",
+      "chapter": 16,
+      "title": "Evaluate a frozen labeling procedure",
+      "purpose": "Keep evaluation separate from prompt development."
+    },
+    {
+      "id": "trace-manuscript",
+      "chapter": 17,
+      "title": "Trace numbers into the manuscript",
+      "purpose": "Find stale values and unsupported claims in the rendered document."
+    },
+    {
+      "id": "draft-from-results",
+      "chapter": 17,
+      "title": "Draft from the research record",
+      "purpose": "Keep evidence gaps visible while writing."
+    },
+    {
+      "id": "reviewer-response",
+      "chapter": 17,
+      "title": "Draft a response from your decisions",
+      "purpose": "Preserve the author\u2019s decisions and link replies to revisions."
+    },
+    {
+      "id": "reproduce-project",
+      "chapter": 18,
+      "title": "Test a clean-copy handoff",
+      "purpose": "Establish what another researcher can actually rerun."
+    },
+    {
+      "id": "review-deposit",
+      "chapter": 18,
+      "title": "Review a proposed deposit",
+      "purpose": "Check the snapshot before publication."
+    }
+  ],
+  "starters": [
+    {
+      "id": "global",
+      "file": "global-AGENTS.md"
+    },
+    {
+      "id": "project",
+      "file": "project-AGENTS.md"
+    },
+    {
+      "id": "status",
+      "file": "STATUS.md"
+    },
+    {
+      "id": "tasks",
+      "file": "TASKS.md"
+    },
+    {
+      "id": "methodology",
+      "file": "METHODOLOGY.md"
+    },
+    {
+      "id": "gitignore",
+      "file": "gitignore.txt"
+    }
+  ]
+}

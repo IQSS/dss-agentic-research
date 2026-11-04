@@ -3,124 +3,121 @@ title: Doing Research with AI Agents
 title-page: |
   Doing Research\
   with AI Agents
-version: "1.7 draft"
+version: "1.8 draft"
 ---
 
-<!-- ===================== PART I — START ===================== -->
+<!-- ===================== PART I — ORIENTATION ===================== -->
 
 # 1. How agents can help your research {#research-uses}
 
-Research often slows down between the substantive decisions: locating the right files, implementing a revision, checking what changed, and getting the new results into a manuscript. An agent can do much of that work inside your project. The opportunity is to spend less time moving information between applications and more time deciding what the research should establish and whether the evidence supports it.
+Research depends on more than getting an answer quickly. We need to know what was done, whether it matches the question, and whether someone can reproduce it. An agent can help maintain that connection while doing much of the coding, searching, checking, and documentation. Used well, it can make research faster, more robust, reproducible, and auditable.
 
-Suppose a collaborator asks for a figure with a different age grouping. An agent can find the saved estimates, identify whether they support that grouping, revise the relevant script, run it, and open the figure. If the grouping requires a new analysis, it should say so. The useful result is a checked figure and a saved way to recreate it, with a record of what changed.
+Suppose a collaborator changes an inclusion rule. The agent can identify the affected analysis steps, rerun them, compare the outputs, and update the manuscript's numbers and methods. It should leave the code, checks, and decision record behind. You can then inspect the consequences and repeat the work without reconstructing a conversation.
 
 ## Three research uses
 
-*Develop ideas.* Use an agent to explore explanations, find counterexamples, or challenge a proposed design. Supply your question and the constraints that matter. Treat the suggestions as possibilities to investigate: the model can generate a plausible account without establishing that it is true.
+::: {.research-use}
+![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="An agent examining research ideas."}
 
-*Develop and run research code.* Delegate data preparation, analysis scripts, figures, document builds, and project maintenance. You choose the research question and method; the agent implements them and supplies evidence about its work. A saved workflow lets you repeat that work without another agent conversation.
+*Develop ideas.* Ask an agent to explore explanations, find counterexamples, or challenge a proposed design. Supply the question and the constraints that matter. Treat its suggestions as possibilities to investigate: a plausible account needs support from research evidence.
+:::
 
-*Use a model within the research method.* An LLM might classify interview passages, extract information from documents, or judge a set of reviews. Its outputs then become research measurements. You need a recorded protocol and evidence about the measurements' quality, not just evidence that the software ran (§12).
+::: {.research-use}
+![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
 
-These uses can occur in the same project, but they need different checks. An idea needs substantive support. A program needs to implement the intended analysis. A model-generated measurement needs evaluation against the construct you intend to measure.
+*Build research workflows.* Delegate data preparation, analysis scripts, figures, document builds, and project maintenance. You choose the research question and method; the agent implements them and supplies evidence about its work. Saved code and commands make that work repeatable.
+:::
 
-![](figures/research-uses.svg){#fig-research-uses fig-alt="Three research uses: explore ideas, build executable research workflows, and produce model-based measurements. Each has a different source of evidence."}
+::: {.research-use}
+![](figures/use-model.svg){.use-icon width="64px" fig-alt="A model processing research material."}
+
+*Use an LLM within the research method.* A model might classify interview passages, extract information from documents, or judge reviews. Its outputs become research material that needs evaluation against the construct you intend to study. A functioning program does not establish the quality of those judgments ([chapter 16](#llm-measurements)).
+:::
 
 ## How an agent works
 
-An agent combines a language model with tools and a loop: choose an action, use a tool, inspect the result, and decide what to do next. Tools let it read files, edit them, run programs, search sources, and view outputs. The available tools and permissions determine its reach.
+An agent combines a language model with tools and a repeated action-and-feedback cycle. It can read files, edit code, run programs, and inspect their outputs, within the access available to it. The diagrams show how that changes the work you can delegate.
 
-For example, a script fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent can read the error and the data dictionary, propose the intended mapping, change the script, and run it again. It has feedback from the project. That feedback makes correction possible; it does not establish that the resulting analysis answers the right question.
+![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent can use tools to perform those steps in the project."}
 
-A chat product may also have tools. The useful distinction is whether the assistant can do the delegated work in your project, rather than requiring you to carry each answer into another application. You can use your existing R, Stata, or Python workflow; adopting an agent does not require changing research languages.
+![](figures/agent-loop.svg){#fig-agent-loop fig-alt="A research request enters a loop: the model chooses an action, a tool performs it, and the result returns to the model. The agent continues or reports the outcome."}
+
+For example, an analysis fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent reads the error and data dictionary, identifies the intended variable, edits the script, and runs it again. The tool output tells it whether execution succeeded; checks against the specification establish whether the change was appropriate.
+
+A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing R, Stata, or Python software; adopting an agent does not require changing research languages.
 
 ## Your role
 
-State the result you want, the constraints, and the evidence you will use to accept it. Review consequential choices and inspect the outputs. Write down project decisions so they survive a conversation. Keep material outside the agent's reach when the service is not permitted to process it.
+State the result you want, the constraints, and the evidence you will use to accept it. Review consequential choices and inspect the outputs. Save project decisions so they survive a conversation. Keep material outside the agent's reach when the service is not permitted to process it.
 
-You do not have to read every generated line of code to supervise well. Known-answer examples, comparisons, source checks, and reproducible runs provide evidence about behavior. When they expose a discrepancy, inspecting a particular calculation can help explain it (§11).
+You do not have to read every generated line of code to supervise well. Known-answer cases and independent comparisons check the analysis; opened sources check its evidential basis, and reruns check reproducibility. When they expose a discrepancy, inspecting a particular calculation can help explain it. The simulation and independent-implementation chapters develop those checks separately.
 
-Some research ends in a dashboard, interactive tool, or service rather than a paper. The same practices apply, with an additional commitment: someone must maintain the tool, support its users, and manage the information it collects. Establish that responsibility and the applicable institutional requirements before involving users.
+Some research ends in a dashboard, interactive tool, or service rather than a paper. The same practices apply, with an additional commitment: someone must maintain it, support its users, and manage the information it collects. Establish that responsibility and the relevant institutional requirements before involving users.
 
 ## A route through the guide
 
-Start with a harmless first session (§2), establish the limits for real research material (§3), and learn to direct a task (§4). Then give the agent project context, shared conventions, and reusable procedures (§§5–7). The research chapters follow sources and data through execution, checking, writing, and handoff (§§8–14). The reference pages hold starter files, links to requests, a glossary, the full calibration example, and troubleshooting.
+*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
-The examples use Claude Code in the Mac desktop app. No terminal or git knowledge is needed to begin. Version control is strongly recommended once you work on a real project; the agent can maintain it. Harvard access details appear beside the relevant topic. The companion [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) supplies additional tools when a research task calls for them.
+The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
 
-# 2. Your first agent session {#first-session}
+# 2. Get started with the app {#first-session}
 
-A small, disposable task lets you learn how to give instructions, inspect a saved result, and correct it before entrusting an agent with research work. You need an account with access to Claude Code and the desktop app. This exercise uses invented notes, so it needs neither research data nor an analysis language, terminal, or git repository.
+You can use an agent with familiar research files and software without first learning a terminal. This chapter introduces the app and its main controls, so that later instructions about a folder, a session, or a permission mode have a clear meaning.
 
-You will ask the agent to save a meeting note, change the meeting day, restore the original, and leave a record for a new session. The evidence is three short files you can open yourself.
+Imagine opening the folder for a paper you already work on. You need to know which folder the agent will use, where to describe a task, and where to inspect the files it changes. You also need to recognize the account and execution environment before making research material available. We will establish those boundaries next, then start the project in [chapter 6](#project-organization).
 
-## Install the app and open a folder
+## Install and sign in
 
-Download the Mac app from the [official desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart), install it, and sign in with the account authorized for your work. Open the *Code* tab. If it is unavailable, check your account's access with your administrator; a chat-only account may not provide it. The desktop app includes Code, so a separate command-line installation is unnecessary.
+Download the Mac app through the [official desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart), install it, and sign in with the account intended for your research. Open Code in the sidebar. Code is included in the desktop app; a separate terminal installation is unnecessary for this guide.
 
-In Finder, make an empty folder named `agent-practice`. In Code, select a *Local* environment and open that folder using the folder selector. Choose *Auto* mode if your account offers it. Auto lets routine work proceed while the app evaluates actions for risk; it does not grant unrestricted access. If Auto is unavailable, use the offered approval-based mode and approve only this exercise's file changes. §4 explains the choices.
+If Code is unavailable or the app asks you to upgrade, check that you have signed into the intended account and that it includes access. A feature advertised publicly may still be unavailable under an institution's settings.
 
-> **Harvard.** Request access through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using your school's or unit's form. Sign into the Harvard account. Features and modes can depend on institutional settings. Data eligibility is a separate decision, covered in §3.
+> **Harvard.** Request a license through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Use the Harvard account for institutionally covered work. Access to a license does not settle whether a particular research dataset may be processed; [chapter 3](#research-limits) covers that decision.
 
-The control names above follow the current documentation. If your layout differs, use the quickstart's layout guidance. A fresh-account walkthrough remains part of this guide's pre-release checks; the exercise below is an authored teaching example.
+## Chat, Cowork, and Code
 
-## Create something you can inspect
+Chat is useful for a conversation; Cowork offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
 
-Send this request:
+## Recognize the main controls
 
-> This is a disposable practice folder containing no research data. Create `notes.md` with exactly three lines: “Meeting: Friday.” “Bring: draft figure.” “Open question: label units.” Save an identical copy as `notes-original.md`. Work only in this folder; do not publish, send messages, install software, or set up git. Tell me which files you created.
+The [desktop reference](https://code.claude.com/docs/en/desktop) explains the current layout. Locate these controls in your installation; their positions and availability can change.
 
-Open both files in Finder or the app's file view. A `.md` file is ordinary text; the extension identifies Markdown. Check that both contain the requested three lines. The agent's claim that it finished is not a substitute for opening the files.
+| Control or view | What you need to know |
+|---|---|
+| Environment | Where tools will run. The Local route works with files on your computer; it does not mean the language model runs locally. |
+| Project folder | The folder the session starts from. Select the intended project after establishing the boundaries in chapters 3–4. |
+| Message box | Where you describe the task, add relevant files, and steer the work. |
+| Permission mode | How actions are approved. Chapter 5 explains when to use the available modes. |
+| Model and effort | Which model does the work and, where offered, how much reasoning it uses. |
+| Conversation and tool activity | The request, the agent's explanation, and evidence of actions it has taken. |
+| Changed-files view | The files edited in the session and the changes within them. Open resulting figures and documents in their usual applications too. |
+| Session list | Earlier conversations. Saved project records will help a new session resume without relying on the entire conversation. |
 
-Now send:
+For the main route, choose a Local environment and the project-folder selector when you are ready to begin. Cloud and remote environments are different execution routes; use them only after checking where their files, tools, and model requests go. Selecting a folder is not a guarantee that every available tool is confined to it.
 
-> In `notes.md`, change Friday to Monday. Replace the last line with `- [ ] Add units to the figure.` Keep the middle line unchanged. Leave `notes-original.md` untouched.
+## Steer the work and inspect the result
 
-Your edited file should read:
+You can send a correction while the agent is working or use the stop control to interrupt it. Stopping does not undo changes already made. Ask it to identify the completed actions and affected files before deciding what to keep or restore.
 
-```
-Meeting: Monday.
-Bring: draft figure.
-- [ ] Add units to the figure.
-```
+For example, if the agent begins changing the analysis when you requested only new figure labels, stop that work and restate the scope. Inspect the changed files and the figure. Later chapters show how to save recoverable versions and specify tasks whose completion you can check.
 
-The original copy should still say Friday. You have checked a specific change and a preservation requirement without reading code.
+You are ready for the next chapters when you can identify the intended account, environment and folder controls, mode/model controls, and the places to review activity and changed files. There is no practice-folder assignment here. The first project task will either establish a new research folder or organize an existing one.
 
-## Correct or undo a change
+# 3. Know where your data goes {#research-limits}
 
-If the result differs, name the discrepancy: “You changed the middle line too. Restore its original wording.” You can steer the agent during a task or use the stop control to interrupt it. Stopping does not undo earlier file changes.
+Protected research material can reach an external service through an agent's normal work. Before using it, establish where the information will go, whether that processing is permitted, and what copies may remain. These decisions affect the research environment you choose and the records you need to keep.
 
-Practice recovery:
+For example, a birth-records agreement might prohibit sending individual records to a hosted model. A no-training commitment would not remove that restriction. You could develop code with invented records and an approved schema, then run it in the restricted environment. If the model must read the real material to perform the analysis, you need an approved processing route for that task.
 
-> Restore `notes.md` from `notes-original.md`. Leave the original copy intact. Show the restored note.
-
-Open the file and check Friday and the original question. Then request the Monday-and-checkbox change again. A copy is adequate recovery for this tiny exercise. For a real project, use agent-maintained version control to retain a sequence of recoverable states (§3 and [toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html)).
-
-## Resume from a written record
-
-Send:
-
-> Create `TASKS.md`. Record that the practice note was created and corrected. Leave one open task: add the figure's units after I supply them. Record that `notes-original.md` is the recovery copy. Do not invent the missing units.
-
-Start a new Code session on the same folder and ask it to read `notes.md` and `TASKS.md`, then tell you the next task without editing anything. It should identify the missing units. The session can resume because the record is in files, not because you retold the conversation.
-
-For real work, first establish what the agent may access (§3). Project instructions and a maintained status record (§5) make this handoff easier as a project grows. Other app surfaces, including Chat, Cowork, and Science, may offer useful capabilities; this guide's local Code route is chosen so the agent can work with your existing research files and programs.
-
-# 3. Set the limits for your research {#research-limits}
-
-Delegating a task should not put data outside the terms under which you received them or make an ordinary mistake irreversible. Decide what the agent may process and change, enforce those decisions through the available controls, and keep a recoverable version of the work.
-
-For example, a birth-records agreement may prohibit sending records to an outside service. You could ask a hosted agent to develop code using an approved schema and invented observations, then run that saved code in the restricted environment. An institutional promise not to train on your data would not, by itself, authorize sending those records or retaining their contents elsewhere.
-
-![](figures/research-data-routes.svg){#fig-research-data-routes fig-alt="A hosted agent receives approved synthetic inputs and may retain context. Saved code crosses into a separate restricted environment, where real records remain inaccessible to that agent."}
+![](figures/research-data-routes.svg){#fig-research-data-routes fig-alt="Approved synthetic records enter a hosted model's context, which may be retained. Saved code runs on real records in a separate restricted environment. A locally hosted model is a different deployment route whose tools and records still need controls."}
 
 ## Establish the permitted route
 
-Check the data classification, the service and account approved for it, and the terms governing this particular project. These may include consent, a data-use agreement, an IRB protocol, contractual confidentiality, or health-data requirements. If the intended AI processing is unclear, ask the responsible institutional office before proceeding. An account setting cannot override those terms.
+Check any applicable federal grant or funder requirements, the data classification, the service and account approved for it, and the terms governing this particular project. These may include consent, a data-use agreement, an IRB protocol, contractual confidentiality, or health-data requirements. If the intended AI processing is unclear, ask the responsible institutional office before proceeding. An account setting cannot override those terms.
 
 Assess every processing route, including connected services and hosted models used by local tools.
 
-> **Harvard, checked November 2, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and Cowork up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
+> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and Cowork up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
 
 Record the decision in the project file: which inputs the agent may use, which processing is allowed, and which outputs may be shared. Distinguish approved public-data acquisition from ordinary analysis: the former can create a new original file and provenance entry, while the latter should preserve those originals.
 
@@ -132,15 +129,59 @@ Review dictionaries, code, filenames, logs, and derived outputs as well as data 
 
 ## Training and retention are separate
 
-A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
+A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. Claude Code's [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
 
 Deleting a conversation is not a substitute for having permission to submit the material. Nor does an opt-out setting on a personal account give it the coverage of an institutional agreement. Use the approved route established above.
+
+## Establish a chain of custody {#data-chain-of-custody}
+
+For data entrusted to you, keep a record of where they go and who or what can access them. Include copies and sensitive derivatives in prompts, context, tool responses, logs, exports, and backups. Two practical questions guide this record: can you locate the material after the analysis, and what can you then do with it, including deletion where required?
+
+| Record | Example question |
+|---|---|
+| Source and authority | Which dataset version, agreement, consent, or protocol governs the work? |
+| Recipient and route | Which model service, account, connected tool, or local process receives the information? |
+| Copies and retention | Where are conversations, outputs, logs, and backups stored, and for how long? |
+| Control afterward | Who can retrieve or delete each copy, what does deletion cover, and what cannot be confirmed? |
+| Closure | What must be retained for the research record, and what must be removed when access ends? |
+
+Establish these facts before submitting protected material. A deletion button may remove a visible conversation without immediately removing every retained copy. Record unresolved retention or deletion conditions and get them settled through the responsible service or institutional office.
+
+Keep the custody record in approved project storage. Describe the allowed route in the agent's project instructions without including confidential details it is not permitted to see. The handoff chapter returns to this record when closing or transferring the work.
 
 ## Work with synthetic inputs when access is not permitted
 
 The agent can write and test code using an approved schema and invented records with the relevant types and structure. Keep that work in a folder available to the agent. Run the resulting code on real data only in the approved environment, with no agent access unless separately authorized. Share only outputs that have been cleared for that purpose.
 
-This is a development and testing route, not proof that the code will handle every feature of the real data. Check the actual run, and use the implementation and calibration checks in §11 within the permitted environment.
+This is a development and testing route, not proof that the code will handle every feature of the real data. Check the actual run, and use the simulation and independent-implementation checks in chapters 14–15 within the permitted environment.
+
+## When this app cannot support the task
+
+If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 16 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
+
+## If material is exposed accidentally
+
+Stop further agent access and any ongoing transfer. Record what was exposed, to which service and account, when, and through which tool. Use your institution's incident-reporting route promptly and follow its instructions for containment and record handling. Do not assume that deleting the conversation resolves the incident or erase the evidence needed to assess it.
+
+# 4. Control what the agent can do {#agent-access}
+
+An agent needs enough access to do the assigned work, while unrelated projects, protected inputs, and recovery copies remain outside its reach. Define which files it can read or change, which programs it can run, and which services it can use. Those controls help enforce the data decisions from the preceding chapter.
+
+For the synthetic birthweight project, ordinary work may include reading the invented data, editing analysis scripts, and writing figures. The agent has no reason to read a separate protected birth-records folder, change another paper, or send project files through a browser. Access should match that distinction even when the agent is working unattended.
+
+![](figures/agent-access.svg){#fig-agent-access fig-alt="The agent and research project sit within a configured boundary. Approved file and tool routes remain available; unrelated files and unapproved services remain outside it."}
+
+## Specify files, tools, and connections {#access-scope}
+
+| Route | Research decision |
+|---|---|
+| Files | Which inputs may be read, which directories may be changed, and which paths must be inaccessible? |
+| Commands | Which research programs and saved commands are needed, and what can their subprocesses reach? |
+| Browser and network | Is the task searching public sources, downloading permitted inputs, or interacting with an authenticated service? What may it send? |
+| Connected services | What account, records, and actions does each enabled connection expose? |
+| Queues or remote execution | Where does submitted work run, and which restrictions apply there? |
+
+Write the intended scope in the project instructions, then configure and check the mechanisms that enforce it. Instructions influence the model; they are not a technical barrier. A browser with an authenticated session may expose information that is absent from the project folder. A search query can itself disclose material, even when no file is uploaded.
 
 ## Allow, ask, and deny
 
@@ -176,25 +217,19 @@ Git protects tracked versions. It does not recover ignored data, reverse an uplo
 
 A *container* supplies a separate software environment and can limit what a task reaches. It is useful for running an unfamiliar replication package or preparing an environment to hand to a collaborator. Its protection depends on the folders mounted into it, credentials passed to it, network access, and privileges. Anything made available through those routes remains available to the code inside.
 
-The toolkit's container section explains the setup and its limits. A container is not permission to expose restricted data or to disregard the source of code you run. For ordinary tasks, start with approved inputs, the configured safeguards, and a recoverable checkpoint; add a container when the task needs that extra separation.
+The toolkit's [container chapter](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) explains the setup and its limits. A container is not permission to expose restricted data or to disregard the source of code you run. For ordinary tasks, start with approved inputs, the configured safeguards, and a recoverable checkpoint; add a container when the task needs that extra separation.
 
+## Ask for an access report {#access-report}
 
+> Inspect the settings that apply to this project. Report which files can be read or changed, which tools and connections are enabled, and which commands run outside the sandbox. Compare that with my intended scope. Propose any necessary changes before applying them, then check the agreed controls with harmless files and report the actual outcomes.
 
-Decide what the agent may see before opening a research folder. This chapter explains how to check whether your account and project terms permit the planned work, use synthetic inputs when needed, and respond if information is exposed accidentally. Your institution's current rules determine what is allowed; the access controls in §3 help enforce that decision.
+Keep the report with the project setup record and revisit it when the execution route or configuration changes. Chapter 5 explains the everyday mode choices once these access boundaries are established.
 
-## If material is exposed accidentally
+# 5. Choose the right settings for the task {#directing-work}
 
-Stop further agent access and any ongoing transfer. Record what was exposed, to which service and account, when, and through which tool. Use your institution's incident-reporting route promptly and follow its instructions for containment and record handling. Do not assume that deleting the conversation resolves the incident or erase the evidence needed to assess it.
+Settings affect how much the agent plans, how it gets approval, and how much model capacity it spends. Choose them to suit the research task. A few deliberate choices can reduce interruptions and wasted work without weakening the evidence you expect at the end.
 
-## When this app cannot support the task
-
-If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. It is a different setup, outside this guide's app-only path. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§12).
-
-# 4. Give the agent a task you can assess {#directing-work}
-
-A clear request prevents the agent from spending time solving a different problem. Specify the research outcome and its constraints, then choose how much planning, reasoning, and supervision the task needs.
-
-For example, “update the main figure” leaves the source estimates, sample, and intended change unspecified. “Redraw Figure 2 from the saved estimates, label the effect in grams per additional hot day, and keep the sample and model unchanged” gives the agent a task you can assess. Check the figure and the saved estimates; a successful rendering command alone is insufficient.
+Changing a figure label is a specified edit. Investigating conflicting estimates leaves more decisions open and may justify a plan and greater reasoning effort. Both tasks still operate within the access boundaries established in chapter 4.
 
 ## Permission modes
 
@@ -209,7 +244,7 @@ A *permission mode* determines when an action needs approval. Use the mode selec
 
 The names and availability follow [Claude's permission-mode documentation](https://code.claude.com/docs/en/permission-modes). An institution may restrict the choices. Existing allow and deny rules also affect what happens, so Manual is not a promise to ask about every possible action, and Auto is not unrestricted access.
 
-Two additional modes are worth understanding. *Bypass permissions* removes most permission checks; its availability is controlled by the app settings or your organization. It requires a separately isolated environment and is not the recommended mode for an ordinary local research project. *Don't ask* refuses actions that would otherwise need approval. It is intended for unattended use and has no app selector; the toolkit covers that terminal workflow. Neither is a substitute for setting the access limits in §3.
+Two additional modes are worth understanding. *Bypass permissions* removes most permission checks; its availability is controlled by the app settings or your organization. It requires a separately isolated environment and is not the recommended mode for an ordinary local research project. *Don't ask* refuses actions that would otherwise need approval. It is intended for unattended use and has no app selector; the toolkit covers that terminal workflow. Neither is a substitute for setting the access limits in chapter 4.
 
 For normal work, I use Auto after defining the permitted files and actions and checking the safeguards. I then review the result. Repeatedly approving routine edits adds little if I stop reading the prompts. For a genuinely consequential action, such as publishing results or changing a data-access boundary, I want a deliberate decision. If Auto is unavailable, use the modes your institution provides.
 
@@ -221,9 +256,9 @@ Use Plan when either the goal or the approach needs clarification. Select it in 
 
 Read for assumptions, not just steps. Has it chosen the right input file? Does it intend to preserve the original sample? Has it silently replaced an expensive model with an easier one? Correct those choices, then authorize implementation and select an execution mode.
 
-For a difficult plan, ask one or two fresh agent sessions to challenge its assumptions, identify failure cases, and propose alternatives. Supply the research question, constraints, and relevant literature as well as the plan. A critic that sees only the proposed answer can accept its assumptions too readily. Reconcile the critiques into a revised plan, resolving disagreements using evidence and the project's requirements. You decide which changes to accept. Agreement between agents does not establish methodological validity (§11).
+For a difficult plan, ask one or two fresh agent sessions to challenge its assumptions, identify failure cases, and propose alternatives. Supply the research question, constraints, and relevant literature as well as the plan. A critic that sees only the proposed answer can accept its assumptions too readily. Reconcile the critiques into a revised plan, resolving disagreements using evidence and the project's requirements. You decide which changes to accept. Agreement between agents does not establish methodological validity (§§14–15).
 
-When the goal and method are clear, a direct instruction is usually enough. Use Auto within the established access limits when it is available. If you have already supplied the transformation rules, the agent can implement them and show the checks without a separate planning round.
+When the goal and method are clear, a direct instruction is usually enough. Use Auto within the established access limits from chapter 4 when it is available. If you have already supplied the transformation rules, the agent can implement them and show the checks without a separate planning round.
 
 ## Model and effort
 
@@ -235,7 +270,7 @@ A routine formatting change rarely needs the same resources as designing a calib
 
 Both choices respond to how much the agent must work out along the way. They can be adjusted separately: a capable model can still be useful at lower effort when the procedure and checks are clear. Task consequences and the evidence needed to verify the result also matter.
 
-Check the account's usage display before launching several substantial tasks (§4). Model names change, and a newly offered model may have different usage terms. A faster response is useful only if the result still meets the checks you set.
+Check the account's usage display before launching several substantial tasks. Model names change, and a newly offered model may have different usage terms. A faster response is useful only if the result still meets the checks you set.
 
 ## Usage and cost
 
@@ -247,31 +282,125 @@ As of October 2026, Claude documents both a five-hour session limit and a weekly
 
 Large inputs, lengthy outputs, higher reasoning effort, and several concurrent agents can increase usage. The accounting also depends on caching and the plan, so message count is a poor proxy for cost. Keep requests focused, refer to files rather than pasting repeated copies, and save results and decisions outside the conversation.
 
-A long computation does not inherently consume LLM tokens while it runs. Repeated progress queries and large logs can, however, use the agent unnecessarily. Let a suitable application or queue run the saved script, then have the agent inspect the relevant log and outputs (§10). Verify that the job actually completed.
+A long computation does not inherently consume LLM tokens while it runs. Repeated progress queries and large logs can, however, use the agent unnecessarily. Let a suitable application or queue run the saved script, then have the agent inspect the relevant log and outputs (§13). Verify that the job actually completed.
 
 ## The supervisor stance
 
-Before delegating, state the outcome, constraints, and evidence you will use to judge completion. Request a plan when important choices remain unresolved. Afterward, use that evidence to decide what to accept and have the agent update the project records (§5). Over time, repeated errors should lead to more precise instructions or stronger checks, so the same failure is less likely in the next task.
+Before delegating, state the outcome, constraints, and evidence you will use to judge completion. Request a plan when important choices remain unresolved. Afterward, use that evidence to decide what to accept and have the agent update the project records (§7). Over time, repeated errors should lead to more precise instructions or stronger checks, so the same failure is less likely in the next task.
 
 <!-- ===================== PART II — DIRECT THE WORK ===================== -->
 
-# 5. Keep a project understandable across sessions {#project-context}
+# 6. Organize your research projects {#project-organization}
 
-<!-- REVISED: 2026-11-02. SOURCE: former chapters 6, 7, and 9. The worked project is illustrative. -->
+A consistent project structure helps both you and an agent identify the current inputs, code, and outputs. It reduces the chance of editing an obsolete script or reporting a figure from the wrong analysis. These are useful research habits in their own right; agents make the value of recording them more obvious.
+
+Consider a heat-and-birthweight project with `analysis-final/`, `analysis-new/`, and three figure folders. You may remember which files belong together. An agent sees competing candidates. Establishing one documented arrangement gives it a reliable starting point, whether you are beginning a new paper or bringing it into work already underway.
+
+## Give projects a place in a workspace {#workspace-layout}
+
+A *workspace* is a parent folder containing your projects. Grouping projects by their intended output makes them easier to find and lets you reuse a suitable structure. For example:
+
+```
+workspace/
+  papers/
+    heat-birthweight/
+    neighborhood-health/
+  data/
+    weather-extracts/
+  publishing/
+    lab-website/
+    conference-talk/
+```
+
+Use separate folders for independently maintained projects. A short workspace index can list each project's purpose and location, including dependencies such as two papers using the same curated dataset. Open the relevant project in the app. An index helps navigation; it does not grant permission to read every listed project.
+
+Several papers under a grant can share conventions and input sources while retaining their own methods, status, and record of the data version used. Keep shared data in an agreed location and record that dependency in each paper. A multi-project app feature may help coordinate work, but the ordinary folders and records should remain understandable without it.
+
+## Match the structure to the output {#project-shapes}
+
+The structure should make the work easy to locate. A paper needs manuscript source and analysis outputs; a data project needs acquisition code and provenance; a website needs editable content and a build destination. They can share naming conventions without having identical directories.
+
+For the example paper:
+
+```
+heat-birthweight/
+  CLAUDE.md          # starting instructions and pointers
+  README.md          # purpose and execution instructions
+  STATUS.md          # current state
+  TASKS.md           # open and completed work
+  METHODOLOGY.md     # analytical choices and their reasons
+  .here              # project-root marker
+  data/
+    raw/             # inputs preserved as received
+    processed/       # inputs derived by saved code
+  code/              # data preparation, models, and shared functions
+  outputs/
+    figures/
+    tables/
+    models/
+  manuscript/        # editable paper source
+  docs/              # provenance, specifications, and references
+```
+
+Use only the parts the project needs. The next chapter explains the record files; [Starter files](#starter-files) supplies adaptable templates and layouts.
+
+Preserve originals and produce derived files through code. If a derived variable is wrong, correct the script and rebuild the file. Keep manuscript figures and tables associated with the result version that produced them. Decide deliberately which large fits, logs, or inputs belong in version control and which need another preservation route; neither file size nor a directory name settles their scientific value.
+
+Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in R; other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
+
+## Start a new project with a scaffold {#scaffold-project}
+
+A *scaffold* creates the initial folders and record files for a particular kind of output. A reusable scaffold skill can apply your or your lab's conventions, so you do not have to describe the same layout for every paper. You can use an existing skill before learning to author one in chapter 9.
+
+<!-- prompt:scaffold-project -->
+::: {#request-scaffold-project .prompt}
+> Create a project for the research described below, using our established workspace and conventions. Propose a small folder structure suited to the deliverable, then create the approved structure and initial project instructions. Preserve any existing files. Record missing scientific decisions instead of inventing them, and show me where inputs, code, results, and the manuscript belong.
+:::
+<!-- /prompt:scaffold-project -->
+
+Check the resulting tree and the facts written into the records. A scaffold should leave unknown methods, collaborators, or data permissions marked as unknown. It must not turn a plausible guess into a project instruction. The synthetic example contains invented records; a real project's input permissions require their own decision.
+
+## Bring an agent into an existing project {#restructure-project}
+
+Keep an established lab layout if it already makes the current work clear. For a genuinely confusing folder, ask the agent to help restructure it before using it as the basis for repeated analysis tasks.
+
+Begin with a recoverable copy outside the folder being reorganized. Identify the manuscript and outputs you consider current, then ask for a before-to-after map. Modification dates and filenames are clues, not proof of which analysis is authoritative. The agent should inspect script references and ask about unresolved competing versions.
+
+<!-- prompt:restructure-project -->
+::: {#request-restructure-project .prompt}
+> Inspect this project and propose a clearer structure that preserves original data and accepted work. Identify scripts, outputs, duplicates, and uncertain files; do not decide that uncertain files are disposable. After I approve the plan, make a recovery checkpoint, reorganize the files, update affected paths, and save a before-to-after file map. Check that the existing analysis still runs and report unresolved dependencies.
+:::
+<!-- /prompt:restructure-project -->
+
+Retain originals and uncertain duplicates in a documented holding location. After moving files, update paths in scripts, manuscript source, and run instructions. Rerun the work needed to reproduce the current outputs and investigate failures. A successful move must not silently alter the sample or method. Keep the earlier copy until those checks succeed.
+
+A coauthor can continue sending files in their preferred format. Keep an incoming area, preserve what arrived, and record how it maps into the project. The full research procedure includes reviewing ambiguities; a short live demonstration may omit that stop for presentation purposes.
+
+## Keep synchronization separate from recovery
+
+A synced folder is not a substitute for version history or a tested backup. Environment libraries and caches can contain thousands of changing files; two machines should not edit the same Git metadata through a sync service. A plain local working folder is a straightforward starting point, with backups and approved sharing handled separately.
+
+If the project already uses Dropbox or another sync service, preserve that working arrangement while checking how generated directories and repository metadata are handled. The toolkit's [version-control chapter](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers the configuration details. Reorganizing research files should not become an unplanned migration of the machine's software environment.
+
+# 7. Give the agent context for your project {#project-context}
 
 Returning to research after a week should not require reconstructing which data were used, why records were excluded, or what remains unfinished. An agent can maintain a short project record as it works. That record lets both you and a new session resume from the current evidence rather than an old conversation.
 
-Suppose the heat-and-birthweight paper has a checked main analysis, an unfinished sensitivity analysis, and two folders of figures. A fresh agent needs to know which results are current before changing a caption. A short status file can identify the saved results and the next task; a methods record can explain the inclusion rule without making the agent infer it from filenames.
+Suppose the synthetic heat-and-birthweight project has a checked main analysis and an unfinished sensitivity analysis. A fresh agent needs to know which results are current before changing a caption. A short status file can identify the saved results and the next task; a methods record can explain the inclusion rule without making the agent infer it from filenames.
 
 ![](figures/project-context.svg){#fig-project-context fig-alt="Project instructions, current status, and tasks survive the conversation; checked work updates the record." above="8pt" below="8pt"}
 
-## Start with the project you have
+## Orient the agent to the project {#project-orientation}
 
-Keep a working lab layout. Ask the agent to identify the analysis entry point, permitted inputs, current outputs, and unresolved decisions. Put that description in a short `CLAUDE.md` in the project folder. Review it before relying on it: an invented filename or exclusion rule becomes a recurring error if saved as an instruction.
+The previous chapter established the folder and identified the current work. Now give the agent enough context to act on that record. Explain the research purpose, permitted inputs, current entry points, and decisions that require your involvement. A new project has more unknowns; an existing one may need conflicting records reconciled first.
 
-> Read the README and the files I have identified as current. Propose a short project instruction file stating the research purpose, permitted inputs, analysis entry point, outputs, and decisions that require my input. Mark anything you cannot establish as unknown. Preserve the existing layout and files.
+A *context window* is the material available to the model during a session: messages, loaded instructions, file content, and tool results. Project files preserve information beyond that window. They should describe the work as it is now, not rely on what you remember saying in a previous conversation.
 
-For a new project, folders for inputs, code, outputs, and manuscript source may be enough. Keep original inputs unchanged and rebuild derived files through scripts. The fuller layouts in [Starter files](#starter-files) are references to adapt, not a required folder hierarchy. If the project is cloud-synced, consult the toolkit's [version-control chapter](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) before creating repository metadata or large generated environments there.
+<!-- prompt:project-context -->
+::: {#request-project-context .prompt}
+> Read the project files and draft a concise project instruction file describing the purpose, current commands, file locations, scientific specification, and access limits. Separate observed facts from questions for me. Link to detailed records rather than copying them into the instructions. Preserve existing authored instructions and show proposed revisions before replacing them.
+:::
+<!-- /prompt:project-context -->
 
 ## Give the files distinct jobs
 
@@ -285,37 +414,43 @@ For a new project, folders for inputs, code, outputs, and manuscript source may 
 
 Start with the instruction file and add the others when needed. A larger project may also need a `PLAN.md` for the analysis sequence and milestones. It should point to the task list and methods record rather than repeat their contents.
 
-Here is the project brief for the invented running example. Its model specification illustrates what to record; it is not a justification of that model for a real causal question.
+Here is a starting brief for the synthetic example. Its scientific specification lives in a separate file so that the short instructions do not have to reproduce the whole analysis plan.
 
+<!-- starter:project -->
 ```
 # heat-birthweight
 
-Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
-Target: Demography. Decisions live in METHODOLOGY.md, the current state in
-STATUS.md, open tasks in TASKS.md.
+Synthetic teaching study of heat exposure and birthweight. Every individual
+record is invented; results are not evidence about actual pregnancies.
 
-## Where things live
-- Restricted microdata is held separately in approved storage, unavailable here.
-- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
-- `data/processed/`: derived files. Use `synthetic-natality.parquet` here.
-  It contains invented records, not a de-identified extract.
-- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
-  `run-all.R` runs all three in order.
-- `outputs/`: figures and tables the manuscript reads.
-- `manuscript/`: the paper, Quarto to Word for the coauthor.
+## Read first
+- specification.md: estimands, estimator, input rules, uncertainty, and checks.
+- STATUS.md: current state and next decision.
+- TASKS.md: work remaining and dated completions.
+- METHODOLOGY.md: scientific decisions and their reasons.
 
-## This project
-- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
-  The two must agree before a number goes in the paper.
-- Estimand: the effect of one more third-trimester day above 35 °C on county
-  mean birthweight. Two-way fixed effects with county-clustered standard errors.
-- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+## Files
+- data/raw/: approved original synthetic data; preserve unchanged.
+- code/: saved analysis and validation steps.
+- outputs/: fits, contrasts, figures, and verification records.
+- manuscript/: text linked to the saved outputs.
+- README.md: actual commands and environment restoration instructions.
 
-## Off limits
-- Work only from the synthetic file and approved public downloads above.
-- Do not substitute real natality inputs or request access to restricted storage.
-- Never send any file under `data/` to a web search or an external service.
+## Working rules
+- Follow the written specification. Report missing inputs or ambiguities.
+- Do not invent observations, alter the estimand, or weaken a failed check.
+- Save full-precision results; apply rounding only for presentation.
+- Keep simulation outputs separate from the single-dataset analysis.
+- Record the exact input and software versions used.
+- Inspect changed outputs and record verification before reporting completion.
+
+## Access
+Only approved synthetic material belongs in this project. No protected birth
+records are available here. Ask before adding external services or publishing.
+These instructions do not enforce file or network permissions; use the
+configured access controls for those boundaries.
 ```
+<!-- /starter:project -->
 
 You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current Claude versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
 
@@ -323,123 +458,147 @@ You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral in
 
 At the start of a session, ask:
 
-> Read `STATUS.md`, then `TASKS.md`. Summarize the current analysis, unfinished work, and next task. Check that the named files exist. Flag conflicting or stale records before using them. Do not change the analysis yet.
+<!-- prompt:resume-project -->
+::: {#request-resume-project .prompt}
+> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Tell me the current state, any conflict between the records and the files, and the next useful action. Do not treat an unverified claim of completion as evidence that a check passed.
+:::
+<!-- /prompt:resume-project -->
 
 After setting the task, have the agent record it as In Progress. Before closing the session, ask:
 
-> Update the task list from the work actually completed. For each finished item, record the date and evidence; for unfinished items, state what remains. Rewrite the affected status lines and date if the project state changed. Record new analytical decisions in `METHODOLOGY.md` and changed run instructions in the README. Do not mark a task finished just because its code was written.
+<!-- prompt:close-session -->
+::: {#request-close-session .prompt}
+> Update TASKS.md with completed and remaining work. Rewrite the affected parts of STATUS.md to describe the current state, without adding a running history. Record scientific decisions and their reasons in METHODOLOGY.md. Include the outputs checked, failures or gaps, and the next action; do not mark work complete without evidence.
+:::
+<!-- /prompt:close-session -->
 
-For example, an illustrative status update might be:
+For example, after a figure-label task:
 
 | Before the task | After the task and its checks |
 |---|---|
 | Figure 2 uses the previous labels. | Figure 2 rebuilt from the saved predictions with the approved labels. |
 | Next: correct labels; then review the sensitivity analysis. | Next: review the sensitivity analysis; no model refit was needed for the label change. |
 
-The task list receives the dated completion entry. The status file describes the resulting state, without accumulating a second history of the task. If version control is in use, the standing instruction from §3 can have the agent record a version after completing the task. Neither maintaining these records nor producing a status report requires git.
+The task list receives the dated completion entry. The status file describes the resulting state, without accumulating a second history of the task. If version control is in use, the recovery arrangement from chapter 4 can have the agent record a version after completing the task. Neither maintaining these records nor producing a status report requires git.
 
 Open one claimed output and check it against the request. If an analysis was supposed to run, inspect its actual result or failure record. After a rename, have the agent find references to the old path and test the affected command. Update the README in the same task.
 
 ## Keep enough context without loading everything
 
-The context window is the material available to the model during a session: messages, loaded instructions, file content, and tool results. Long histories can crowd out the information needed for the next task. Keep the project brief short and point to detailed records by purpose. Give the agent a current file path rather than pasting a copy that will become stale.
+Long histories can crowd out the information needed for the next task. Keep the project brief short and point to detailed records by purpose. Give the agent a current file path rather than pasting a copy that will become stale.
 
 A written pointer tells the agent when to consult a file; an `@` import loads the referenced instructions as part of the instruction file. Use imports deliberately. Keep global style and modeling conventions in the next chapter's shared files rather than copying them into every project.
 
-Auto memory is another source of carried-over context. Ask the agent to show relevant saved notes when its assumptions conflict with the project record. Correct stale notes and keep consequential decisions in the maintained project files. Starting a new conversation does not establish that no prior information will be loaded; §12 explains deliberate context control for research measurements.
+Auto memory is another source of carried-over context. Ask the agent to show relevant saved notes when its assumptions conflict with the project record. Correct stale notes and keep consequential decisions in the maintained project files. Starting a new conversation does not establish that no prior information will be loaded; §16 explains deliberate context control for research measurements.
 
-## Reorganize only when it helps the work
 
-If the current layout is usable, documenting it may be sufficient. If several folders compete to be the current analysis, first make a recoverable copy outside the folder. Ask for an inventory and a table of proposed old and new paths with reasons. Review ambiguous duplicates and save the agreed table before authorizing moves.
+## Keep the record trustworthy
 
-Preserve originals and put uncertain duplicates aside. After moving files, update their references and rerun the affected work. Keep the earlier copy until the required outputs rebuild. Reorganizing a folder should not silently change the analytical sample or methods.
+Check a task marked Done against its claimed output. If the agent wrote code but did not run it, record that unfinished work. After a rename, test the affected command rather than treating the new folder tree as proof of success.
 
-For several papers under one grant, each paper still needs its own methods, input-version record, and checks. A coordinating workspace can help identify which papers depend on a shared dataset; it does not replace those records. Claude's [Projects documentation](https://code.claude.com/docs/en/claude-projects) describes the current multi-repository option. Chat Projects can also retrieve passages from an uploaded reference collection; ask for the supporting passages and check them, as in §8.
+Preserve unrelated working changes, keep a checkpoint's scope clear, and review consequential edits and their outputs before accepting them. Do not let a small fix become a general reformatting pass that hides the change. Use the toolkit for Git mechanics; the important habit is to retain enough evidence to explain what changed and recover an earlier state.
 
-# 6. Apply your conventions across projects {#shared-conventions}
+If an agent's memory conflicts with the current files, inspect the saved note and correct its source. Keep a reversal of a methodological decision as a new dated entry so the reason for the change remains visible. Ask the agent to reread files you have edited during the session. The context-control discussion in chapter 16 explains why a fresh conversation alone is insufficient for an isolated research run.
 
-<!-- REVISED: 2026-11-02. SOURCE: former chapter 6 and the shared-lab-conventions draft. -->
+# 8. Apply your conventions across projects {#shared-conventions}
 
-Repeatedly correcting the same coding style, reporting convention, or prose habit wastes attention you could spend on the research. Save instructions that apply across projects in one shared place. Each new project can then supply its own question, data, and analytical decisions without restating your working preferences.
+Shared conventions prevent you from correcting the same coding style, reporting rule, or prose habit in every project. They give the agent a consistent way to work while leaving each paper's question, data, and decisions in its own records.
 
-Suppose three papers should report uncertainty alongside every estimate and preserve existing package environments. Those rules can be shared. The estimand, exclusion rule, and current model for each paper belong in that paper's record. Changing the lab's reporting convention should not require finding and editing three copies of it.
+For example, you might require uncertainty alongside estimates, project-relative paths, and a saved environment record. Those conventions apply to the birthweight paper and another project. The particular exposure contrast and current analysis sample belong only in the birthweight project's specification.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions fig-alt="One set of global or lab conventions applies across three projects, each of which retains its own question, inputs, and decisions." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions fig-alt="A short global instruction file points to specialist conventions. Several projects use those conventions while retaining separate questions, status, tasks, and decisions."}
 
-## Write rules you can recognize in the result
+## Start with a short shared instruction file {#shared-instructions}
 
-Include recurring preferences about code, writing, file naming, reporting, and access. Make them specific enough to assess. “Preserve the project environment and report any required package change” is more useful than “be reproducible.” A new convention should address a recurring problem, not anticipate every possible task.
+Write rules whose application you can recognize. “Preserve the existing environment and report any required package change” gives the agent something more concrete than “be reproducible.” Add rules to solve recurring problems, rather than anticipating every possible task.
 
-In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app, and inspect it. The [memory documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions and how they are loaded. Existing institutional instructions may also apply.
+In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
 
-Here is an optional starting file for an R researcher. Adapt it to your actual language and conventions.
-
+<!-- starter:global -->
 ```
 # How I work
 
-Quantitative social scientist. R first, Stata for collaborators, some Python.
+[Describe your research role and the software you normally use.]
 
-## Projects
-- One folder per paper; use version control when agreed. Its AGENTS.md says where things live.
-- `data/raw/` is read-only. Derived files go in `data/processed/`.
-- Paths via `here::here()`. No `setwd()`, no absolute paths.
-- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+## Before a task
+- Read the project's instructions and current state. Preserve accepted work.
+- Identify the requested result, constraints, and evidence needed to accept it.
+- Ask about consequential ambiguity; do not silently substitute another analysis.
 
-## Code
-- R: tidyverse style, the native pipe `|>`, one script per stage.
-- Preserve the project environment. Record package versions before changes.
-- Use the existing lockfile tool; see the toolkit for adding one.
-- Comment what a block is for, not what each line does.
+## Conventions
+- Read CONVENTIONS.md when organizing a project or naming files.
+- Read CODING.md before writing or changing code.
+- Read MODELING.md before statistical modeling or simulation.
+- Read WRITING.md before drafting prose for people to read.
+- Read TOOLCHAIN.md before adding or changing software.
 
-## Statistics
-- State the estimand before fitting. Report every estimate with an interval.
-- Assess the method with a calibration plan before substantive use (§11).
-- Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
+These files sit beside this file. If a needed file is absent, report the gap.
 
-## Writing
-- Short sentences. Point first, then the qualification. Prose, not bullets.
-- Methods: the equation first, then the prose that explains it.
-- American spelling. Oxford comma.
+## Research work
+- Preserve original data. Derive new files with saved code.
+- Use independently runnable steps with declared inputs and outputs.
+- Keep scientific decisions and their reasons in the project record.
+- Verify observed outputs before reporting success. Keep failed checks visible.
 
-## Access and limits
-- Read only inputs approved for this service. Never expose restricted files.
-- Public-data acquisition may add approved new files; preserve originals.
-- Never overwrite original data. Rebuild derived files from recorded scripts.
-- Never rewrite shared git history.
-- Ask before publishing, adding a service, or exceeding the agreed resources.
+## Limits
+- Use only inputs and services approved for the project.
+- Ask before publishing, sending messages, expanding access, or adding a service.
+- Do not delete recovery copies or rewrite shared history without approval.
 
-## Every session
-- Read `STATUS.md`, then `TASKS.md`, at the start.
-- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+## Finishing
+- Update the task list and current-state record from evidence.
+- Report what changed, how it was checked, and what remains unresolved.
 ```
+<!-- /starter:global -->
 
-These instructions guide behavior; they do not enforce the access controls in §3. A statistical convention also needs scientific judgment: the project must define which estimand and uncertainty calculation answer its question.
+This short file can point to more detailed conventions. The specialist filenames below are ordinary Markdown files; their names alone do not make the agent load them. The main instructions should explain when and where to read them. Use one maintained copy of each rule.
 
-## Split detailed conventions by subject
+## Put detailed conventions in specialist files {#specialist-conventions}
 
-When a topic outgrows the short global file, move it to a named file such as `WRITING.md`, `CODING.md`, or `MODELING.md`. Leave a pointer explaining when to read it. For a manuscript edit, the agent can consult the writing guidance without loading a long modeling reference.
+| File | Recurring problem it addresses | Example instruction and when to consult it |
+|---|---|---|
+| `CONVENTIONS.md` | Projects have inconsistent layouts, names, or output locations. | Before scaffolding or restructuring, use the appropriate paper, data, or website shape; distinguish original inputs from generated files. |
+| `CODING.md` | Each session changes the language style or invents a new execution arrangement. | Before editing source, use the project's language conventions, reusable functions, root-relative paths, and existing package environment. |
+| `MODELING.md` | Modeling and reporting requirements have to be repeated. | Before fitting or interpreting a model, state the estimand, distinguish it from coefficients, and apply the required simulation and uncertainty checks. |
+| `WRITING.md` | Drafts repeatedly need the same voice and reporting corrections. | Before writing prose, use direct sentences, define technical terms, and distinguish an estimate from its interpretation. |
+| `TOOLCHAIN.md` | The agent installs a tool already available or proposes an incompatible alternative. | Before setup or troubleshooting, inspect the inventory and preserve an adequate existing tool. |
+| `WORKSPACE.md` | The agent cannot locate related projects or shared inputs. | Before cross-project work, consult the project index and then check that access to the identified location is authorized. |
 
-Ask the agent to apply one new rule to a small task and show the relevant evidence. For example, have it revise a short paragraph under the writing conventions, or report the environment record before editing an analysis script. Merely creating the file does not demonstrate that the session read or followed it.
+You do not need all six files immediately. Start with the convention you repeatedly explain, then split a topic when the main instruction file becomes too long. A manuscript edit may need writing guidance without the full modeling reference. An inventory such as `TOOLCHAIN.md` supplies facts; `CODING.md` prescribes working rules. Keep both current, but do not confuse them.
+
+For the running example, the shared modeling file might require a simulation before relying on an unfamiliar estimator. The project specification supplies the age-dependent heat contrast, outcome model, and scenarios. The specialist file should not dictate one birthweight model for every future paper.
+
+<!-- prompt:shared-conventions -->
+::: {#request-shared-conventions .prompt}
+> Review these project instructions for conventions I use across projects. Propose a short global instruction file that points to specialist files for coding, modeling, writing, project structure, and installed tools. Keep this study’s scientific decisions and access exceptions in the project. Identify duplicated or conflicting rules and show proposed changes before applying them.
+:::
+<!-- /prompt:shared-conventions -->
+
+## Check that the convention is used
+
+Apply one new rule to a small task and inspect the result. Ask the agent to identify the instruction it consulted, revise a paragraph under the writing guidance, or show the environment record before changing an analysis script. Creating a file does not demonstrate that the session loaded or followed it.
+
+Instructions guide behavior; [chapter 4's access controls](#agent-access) enforce particular technical restrictions. A statistical convention also needs scientific judgment: the project still has to justify the question, assumptions, and estimator.
 
 ## Share conventions within a lab
 
-A lab can maintain shared conventions and reusable procedures in a repository that members synchronize to their computers. Review changes in one place, then configure each person's agent instructions to reference the relevant local files. Synchronizing a folder alone does not tell the agent to read it.
+A lab can maintain shared files and skills in a repository, review changes together, and make them available locally to members. Each person's agent instructions then point to the relevant files. Synchronizing a folder alone does not configure the agent to read it.
 
-Keep each paper's design and current state in that project's records (§5). Where a project needs an exception to a lab convention, document the reason and ask the agent to flag conflicting instructions instead of silently choosing one. The toolkit's [shared-settings chapter](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) covers an optional tool for managing configuration across machines; a lab need not adopt it to share a few instruction files.
+Keep paper-specific exceptions in the paper's record, including the reason. Have the agent flag a conflict rather than silently changing a convention for every project. When a shared rule changes, consider which ongoing projects actually need an update; a completed analysis should not change simply because the lab adopted a new default.
 
-# 7. Reuse research procedures you trust {#reusable-procedures}
+The toolkit's [shared-settings chapter](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) describes an optional tool for maintaining configuration across machines. Sharing a few instruction files does not require adopting that whole setup.
 
-
+# 9. Reuse research procedures you trust {#reusable-procedures}
 
 When a useful procedure recurs, saving its instructions reduces the effort of setting it up again and makes omissions easier to spot. A skill packages those instructions for the agent. It is worth creating after you have a procedure whose inputs, output, and checks you trust.
 
-For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§5). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a git history nor a later research chapter.
+For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a git history nor a later research chapter.
 
 ## What a skill is
 
 A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an R or Python function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
 
-A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §5, §8, §9, §10, §11, §13, §14 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§5).
+A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §17, §18 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
 
 ```
 ---
@@ -458,11 +617,15 @@ Show the draft. Send nothing and do not change the project records.
 
 With a project record saying “fit complete; figure labels unresolved,” an illustrative draft might be: “The main model fit is saved and its checks pass. Figure 2 still needs unit labels. Next I will redraw it from the saved estimates; please confirm the wording for the caption.” If no check report exists, the draft must not say the checks passed.
 
-> Create this project skill and run it on our current records. Show the draft and the records supporting each claim. Flag any discrepancy for me to resolve.
+<!-- prompt:status-skill -->
+::: {#request-status-skill .prompt}
+> Create a project-status skill from the handoff procedure we have checked. It should read the project instructions and state files, verify relevant outputs, update the task list and snapshot, and report unresolved issues. Keep the instructions short, name the evidence required, and stop if the project cannot be identified. Test it on this project and show the resulting changes before treating it as reusable.
+:::
+<!-- /prompt:status-skill -->
 
 
 
-The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with the same discipline: where the output goes, what to report, what not to do.
+The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with clear instructions about where the output goes, what to report, and when to ask for a decision.
 
 For Claude Code, ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
 
@@ -476,13 +639,13 @@ The Claude app lists skills under the same slash menu. A skill that needs more t
 
 ## What to package
 
-Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§5), a fetch with its provenance entry (§9), the calibration check (§11), the second implementation and its comparison (§11), the number-traceability table (§13), the clean-copy check and the pre-deposit audit (§14). Appendix B links to the maintained requests. Adapt a request only after its procedure works for you.
+Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§17), the clean-copy check and the pre-deposit audit (§18). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
 
 Keep project-specific facts, such as file locations and data restrictions, in the project instructions. A reusable skill should tell the agent to consult those instructions. Similarly, refer to your global conventions rather than copying them into each skill. This lets you reuse the procedure across projects and update a rule in one place.
 
-For example, a research-folder skill could inventory files and propose a structure, pause for your review and approval, then reorganize and verify file preservation (§5). It could include a saved checksum script alongside its instructions. Each new project's proposed changes still need review; the skill preserves the procedure, not approval of those changes.
+For example, a research-folder skill could inventory files and propose a structure, pause for your review and approval, then reorganize and verify file preservation (§6). It could include a saved checksum script alongside its instructions. Each new project's proposed changes still need review; the skill preserves the procedure, not approval of those changes.
 
-My own skills illustrate the kinds of procedures you can save. `/scaffold` creates a project in the paper layout described in §5. `/eda` produces a dated report on a dataset's types, missingness, distributions, correlations, and outliers. `/dag` draws a causal diagram from a written graph and computes the adjustment set. `/review-plan` critiques an analysis plan before implementation, while `/review-analysis` audits a completed analysis for issues with identification, convergence, and project conventions. I also use `/targets` and `/pueue` for pipelines and long jobs, whose tools are covered in the companion. Each skill began as a repeated request and includes checks specific to its task.
+My own skills illustrate the kinds of procedures you can save. `/scaffold` creates a project in the paper layout described in §6. `/eda` produces a dated report on a dataset's types, missingness, distributions, correlations, and outliers. `/dag` draws a causal diagram from a written graph and computes the adjustment set. `/review-plan` critiques an analysis plan before implementation, while `/review-analysis` audits a completed analysis for issues with identification, convergence, and project conventions. I also use `/targets` and `/pueue` for pipelines and long jobs, whose tools are covered in the companion. Each skill began as a repeated request and includes checks specific to its task.
 
 When a skill produces an unsatisfactory result, revise the instructions or checks that allowed the problem. Keep the main procedure to a screen or two, and put longer templates or checklists in files beside it.
 
@@ -492,328 +655,351 @@ Before writing a new skill, look for one that already covers the task in a maint
 
 ## When an automatic check helps
 
-A *hook* runs a configured action at a supported event, such as before a tool call or after an edit. It can help run a quick check or notify you that the agent needs attention. Whether it can block an action depends on the event and configuration; a check after an edit cannot prevent that edit from having occurred. Hooks also need testing and protected configuration. They do not replace the access limits in §3.
+A *hook* runs a configured action at a supported event, such as before a tool call or after an edit. It can help run a quick check or notify you that the agent needs attention. Whether it can block an action depends on the event and configuration; a check after an edit cannot prevent that edit from having occurred. Hooks also need testing and protected configuration. They do not replace the access limits in chapter 4.
 
 Most readers can begin by asking for the appropriate checks at the end of a task. Add automation when a repeated omission justifies it, and avoid a hook that launches a full expensive analysis after every small edit. The toolkit covers tool-specific configuration; Claude's [hooks documentation](https://code.claude.com/docs/en/hooks) describes the current event behavior.
 
-
-
 <!-- ===================== PART III — DO THE RESEARCH ===================== -->
 
-# 8. Find and assess research literature {#literature}
+# 10. The research project we’ll follow {#example-project}
 
-A literature search is useful when you can explain how the evidence was found and check what it supports. An agent can reduce the work of retrieval, screening, and extraction, provided it leaves the source record and uncertainty visible.
+A shared example makes the consequences of each workflow decision visible. We will carry one project from a scientific specification through sources, data, analysis, checks, and manuscript output. The point is to see what the agent receives, what it produces, and what evidence lets you accept the work.
 
-The recorded example below searched for studies of peer-review duration. A paper measuring grant-review delays belongs in a different category from one measuring journal submission-to-acceptance time. Written criteria and saved exclusion reasons let you see whether the agent respected that distinction.
+The project asks how heat exposure relates to birthweight, and whether that relationship varies with maternal age. Every individual record in the downloadable example is synthetic. Its relationships are deliberately constructed for teaching; its estimates are not evidence about actual pregnancies or the health effects of heat.
 
-First specify the kind of search. A reading list for background and a systematic review have different coverage requirements. The run below illustrates discovery and screening for a research project; it is not a universal review protocol. If completeness supports the paper's claim, involve a librarian or information specialist and follow the relevant review standard. The [Cochrane search chapter](https://www.cochrane.org/authors/handbooks-and-manuals/handbook/current/chapter-04) explains the importance of coverage, search design, and information-specialist input.
+[Download the complete synthetic research project](resources/heat-birthweight.zip){.download-button download="heat-birthweight.zip"}
 
-## What to ask for
+The package includes the specification, original invented records, both implementations, pinned software records, simulation results, and verification evidence. Its README distinguishes checks already run from environment-restoration work still to test. You can read the saved artifacts before installing any additional tools.
 
-*The protocol, before searching.* Give the agent the question, inclusion and exclusion criteria, date range, languages, sources to search, and stopping rule. Have it draft the protocol from your description, then review and approve it before any query runs. The written protocol lets you inspect the agent's screening decisions and repeat the search.
+## The question and the quantity of interest {#example-specification}
 
-Vagueness is the thing to fix here rather than later. "Papers about social mobility" isn't a protocol; it names a topic, not the criteria that decide what is in and out. If the agent can't tell from your question whether a single-journal study counts, it will guess, and the guess will be invisible in the output.
+The example contains independent synthetic birth records with maternal age, smoking status, a count of third-trimester hot days, and birthweight in grams. Maternal ages cover 18–40 years; hot-day counts range from 0 to 20. The scientific specification distinguishes the quantity to report from the model used to estimate it.
 
-*Verify each source.* Usually the quickest route is to resolve its DOI, PubMed ID, or arXiv ID and compare the title, authors, and year. Legitimate books, reports, and historical material may have none of these. For those, record a stable catalog or publisher record, a copy or location a reader can inspect, and who checked it. Unresolved records remain flagged until reviewed; lacking an identifier is not itself a reason to exclude relevant evidence.
+| Item | Specification |
+|---|---|
+| Question | What is the mean birthweight difference between 10 and 5 hot days, and how does it vary with maternal age? |
+| Primary estimand | The predicted mean difference, 10 minus 5 hot days, standardized over the observed age and smoking distribution of this synthetic sample. It is a sample-standardized contrast. |
+| Secondary estimands | The same 10-minus-5 contrast at specified maternal ages, using the sample's smoking distribution. |
+| Estimator | Least squares with a quadratic age term, a hot-days-by-age interaction, and smoking as an adjustment variable; counterfactual predictions supply the contrasts. |
+| Uncertainty | 95% confidence intervals using a heteroskedasticity-robust covariance estimate. Simulation checks their behavior under the declared scenarios. |
+| Primary outputs | A contrast table, an age-specific contrast figure, a simulation summary, an independent comparison, and a short manuscript results passage. |
 
-*Which sources.* Name them, because coverage is a claim you will have to defend. OpenAlex can help discover records across fields, and Crossref can help check DOI metadata. Ask the agent to consult their current access requirements and limits rather than assume that every request is anonymous or free. Add PubMed for anything health-related, arXiv for preprints, and SSRN, RePEc or NBER where your field lives there. Web of Science and Scopus need a license, so if you have one, say so and use it; if you don't, record their absence as a gap rather than pretending the search was exhaustive.
+The estimand is a difference in mean birthweight over a stated distribution. It is not automatically the coefficient of hot days when that coefficient interacts with age. The estimator must calculate the requested contrasts from the fitted model.
 
-> **Claude Science, September 2026.** [Claude Science](https://claude.com/docs/claude-science/overview) combines literature work with R and Python analysis and records of how outputs were produced. Its [featured data connections](https://claude.com/docs/claude-science/connectors-and-skills) emphasize life sciences, including genomics, proteins, and chemistry. Literature sources include OpenAlex, arXiv, and PubMed; [full-text access](https://claude.com/docs/claude-science/literature-access) also uses open repositories and authorized publisher or library access. Its usefulness for your review depends on coverage of your field and access through your account. Apply this chapter's requirements to its literature tools: approve the search protocol, retain queries and screening decisions, and check claims against retrieved papers. A built-in review tool does not establish completeness or verify every claim for you. Confirm that the service is approved for any unpublished or restricted material you supply (§3).
+This is not automatically a population-average causal effect. A real study would need a defined target population and defensible assumptions about confounding, exposure and outcome measurement, selection, and support for the contrast. The synthetic generator specifies those relationships; it cannot establish the corresponding assumptions for real records.
 
-*What you want back.* Ask the agent to save its work in a dated directory: the protocol; every query with its source and date; unmodified responses; a screening log with a reason for every exclusion; and an evidence table summarizing the included studies. Keep unresolved records in a separate file for review, called `unverified.md` in the example below. Request the bibliography in both `.bib` and `.ris` formats so it can be imported into different writing and reference tools.
+## The known relationships used for testing
 
-> Run a literature search on how long peer review takes and what it varies with. Write `protocol.md` first and show it to me before running any query: the question, inclusion and exclusion criteria, 2000 onwards, English, and which sources. Search OpenAlex and Crossref, plus PubMed. Save every raw response and log every query with its date. Deduplicate by identifier then by title and year. Screen on title, then abstract, recording a reason from the protocol for every exclusion, and bring me the borderline set rather than deciding it. Then re-fetch every surviving record by its identifier and check the title, first author and year against what you have; anything that will not resolve goes in `unverified.md` with its source and a proposed manual-verification route. Do not cite an unverified record. Do not exclude a relevant book or report solely because it lacks an identifier. Extract one row per included paper with design, data source, coverage, period, which interval was measured, which determinants were examined, the finding, and the stated limitation. Leave a cell empty rather than filling it from an abstract that does not say. Emit `references.bib` and `references.ris`.
+The main synthetic scenario has a curvilinear age relationship and a heat contrast that varies with age. Outcomes are positive and their dispersion varies with their mean. The generator, its parameters, and an independent calculation of the true contrasts belong in the example's simulation record.
 
-Reviewing the protocol first lets you correct the scope before the search produces hundreds of records. Recorded exclusion reasons let you check whether the agent applied that protocol. Empty evidence cells identify information that still needs to be extracted; guessing would conceal that unfinished work.
+Chapter 14 examines both a null heat effect and the specified age-dependent relationship, then a stress scenario whose relationship is more flexible than the proposed estimator. That last case should reveal a limitation rather than be silently modified until the analysis passes. Scenario definitions precede the repeated runs; generated results are labeled as simulation output.
 
-## What the agent does
+## Keep the specification and the work together
 
-The agent searches the specified sources and saves the returned records. It uses those records for screening and extraction, so you can inspect the material behind its decisions. A general answer about the literature, without retrieved sources, does not provide that record.
+The project begins with the folder and context files introduced in chapters 6–7. Its scientific specification is a maintained file, while `METHODOLOGY.md` records decisions and revisions. A literature finding or data limitation may justify a change, but the agent should propose it and record the reason rather than quietly substitute a different question.
 
-Run on the question behind a real paper (how submission-to-acceptance times vary across fields, publishers, and journal prestige), the stages produced this:
+<!-- prompt:research-specification -->
+::: {#request-research-specification .prompt}
+> Turn my research decisions into specification.md: state the estimands, population or averaging sample, exposure comparisons, estimator, sample rules, required inputs, uncertainty method, and reported outputs. Identify ambiguities for me rather than choosing silently. Add the agreed verification tolerances and simulation questions. Do not begin fitting until I have reviewed the scientific specification.
+:::
+<!-- /prompt:research-specification -->
 
-| stage | n |
-|:--|--:|
-| retrieved, across 15 queries | 604 |
-| set aside for lacking an identifier in the original run | 6 |
-| after deduplication | 507 |
-| excluded at screening | 459 |
-| borderline, referred back for a ruling | 11 |
-| included | 37 |
+## Follow the artifacts through the chapters
 
-The original run used an identifier-only inclusion rule. Under the broader practice recommended here, its six unresolved records would need manual verification before any exclusion on that basis. These counts describe the historical run, not a rerun with that correction.
+| Work | Artifact carried forward |
+|---|---|
+| Literature | Search record, verified references, and evidence relevant to the question and assumptions. |
+| Data | Original synthetic inputs, a dictionary, and a record of their source and generation. |
+| Modular analysis | Separately runnable preparation, fitting, contrast, figure, and reporting steps. |
+| Simulation | Known targets, saved runs, failures, and comparisons of recovered quantities with truth. |
+| Independent implementation | A separate implementation from the same inputs and specification, with a comparison report. |
+| Writing | A link from the chosen result file and entry to each reported number and figure. |
+| Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |
 
-Of the 37 included records, twenty-five were screened using a retrieved abstract and twelve using only the title because no abstract was returned. A column in the evidence table records which text was available for each decision, so the title-only records can be identified for further review.
+The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.
 
-The exclusions aren't a black box either. They resolve into the protocol's own categories: 424 with no duration outcome at all, 26 measuring the wrong interval (grant review, cancer treatment delay, time to tuberculosis diagnosis), 7 with no data, and 2 single-journal reports.
+# 11. Find and assess research literature {#literature}
 
-The verification script then retrieves each remaining record by its identifier and compares the title, first author, and year with the saved record. Saving this check as a script lets you rerun it when the search results change.
+A literature search is useful when you can explain how the evidence was found and check what it supports. An agent can reduce retrieval, screening, and extraction work, provided it preserves the sources and the decisions behind its synthesis.
 
-## What you check
+For the heat-and-birthweight project, a study of low birthweight is not automatically evidence about a difference in mean birthweight. Exposure windows, temperature definitions, and study populations may differ too. A useful search identifies those distinctions instead of producing a fluent paragraph that treats every heat-related result as interchangeable.
 
-*The verification output.* Read the saved report. It should state how many records were checked, which comparisons were made, and which records remain unresolved.
+## Specify the search before running it {#literature-protocol}
 
-*Unverified records.* Inspect `unverified.md` and decide how to check each unresolved source. Require the verification report to state the unresolved count even when it is zero; an absent file does not tell you whether the check ran. Confirm that unresolved records have not been presented as verified evidence.
+Give the agent the question, inclusion and exclusion criteria, date range, languages, sources, and stopping rule. Have it draft a protocol, then resolve ambiguous choices before searching. Background reading and a systematic review have different coverage requirements; involve an information specialist when completeness supports a substantive claim.
 
-*The evidence level, row by row.* Any row screened on title alone is a paper nobody has read. Refer it for abstract or full-text retrieval rather than treating a missing abstract as evidence of ineligibility. A title alone cannot support a synthesis claim.
+Name the sources and record gaps. Crossref can help verify DOI metadata; OpenAlex and field-specific databases support discovery. PubMed is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
 
-*Whether the counts reconcile.* Account for retrieved records, duplicates, exclusions, borderline cases, unresolved records, and included studies. If the counts do not add up, ask the agent to identify the missing or double-counted records.
+<!-- prompt:literature-search -->
+::: {#request-literature-search .prompt}
+> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
+:::
+<!-- /prompt:literature-search -->
 
-*Every reference you cite.* Open the sources used in your manuscript and check the passages supporting its claims. Matching a citation to a real record does not establish that the paper supports the agent's summary.
+Save the protocol, queries and dates, unmodified search responses, deduplication decisions, screening reasons, unresolved records, and an evidence table. Keep bibliography exports in formats your writing tools can use, such as BibTeX and RIS. Ask for a progress review when a search becomes larger than expected; an arbitrary cap on returned records can make inclusion depend on a database's ranking.
 
-*Coverage and exclusions.* Give the agent a few known relevant studies and check whether the search recovered them. Inspect a sample of exclusions, especially borderline cases and records without abstracts. Check cited sources for corrections or retractions. A query expansion returning nothing new is useful information, but it does not establish completeness.
+## Verify the citation and then the claim {#verify-citations}
 
-### From full texts to a synthesis
+Require a verified DOI for each cited journal article when one exists. Resolve it and compare the title, authors, year, and publication with the retrieved record. A plausible DOI string or a well-formatted citation is insufficient. For legitimate material without a DOI, use a verified alternative such as a PMID, arXiv identifier, or stable publisher/catalog record. Keep unresolved sources explicitly flagged.
 
-Ask for a claim-to-source table before prose: the proposed claim, the source, the supporting page or passage, and the limitation or disagreement that constrains it. Distinguish “the study did not report this” from “the agent has not extracted it.”
+For a concrete example, the DOI [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811) identifies Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes in *The BMJ*. Its [publisher record](https://www.bmj.com/content/371/bmj.m3811) supplies the title, authors, date, and DOI for comparison. It is a real source relevant to the topic, not evidence that our synthetic age relationship or chosen contrast describes real births.
 
-For example, imagine two *invented teaching sources*, A and B, supplied as full texts:
+Matching metadata establishes which work the citation identifies. Open the source and inspect the passage, table, or figure supporting the proposed claim. Record whether screening used a title, abstract, or full text. A title-only decision is not a completed reading of the paper, and an empty extraction cell may mean “not yet extracted” rather than “not reported.”
 
-| Source passage | Extracted evidence | Limit on the claim |
+If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with DataCite was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
+
+## Build a synthesis with traceable support {#literature-synthesis}
+
+Have the agent prepare a claim-to-source table before drafting prose. For the running project, useful columns include the population, exposure definition and window, birth outcome, study design, reported quantity, supporting location, and limitations. Preserve disagreements and differences in definitions instead of forcing a consensus.
+
+| Proposed use of evidence | What the agent must distinguish |
+|---|---|
+| Motivate studying heat and birth outcomes | Evidence concerning pregnancy outcomes generally versus mean birthweight specifically. |
+| Choose an exposure window | A reported trimester or weekly window versus the one our example happens to use. |
+| Consider age moderation | An analysis that actually examines effect variation versus an unsupported assumption about a subgroup. |
+| Interpret a numerical contrast | An odds ratio for low birthweight versus a difference in mean birthweight in grams. |
+
+<!-- prompt:literature-synthesis -->
+::: {#request-literature-synthesis .prompt}
+> Using the verified papers and reading records, summarize the evidence relevant to our research question and proposed method. Link each substantive claim to the source and passage that supports it. Distinguish study design, population, estimand, and limitations; report disagreements and missing evidence. Do not infer full-text findings from an abstract or fill gaps from memory.
+:::
+<!-- /prompt:literature-synthesis -->
+
+Check the sources you will cite and the passages supporting the manuscript. Sample exclusions, especially borderline records or those without abstracts. Supply known relevant studies to check retrieval. Reconcile retrieved, duplicate, excluded, unresolved, and included counts. None of these checks turns a limited discovery search into an exhaustive review.
+
+## Reuse the procedure as a skill {#literature-skill}
+
+Search, screen, verify, extract, and preserve the evidence: these requirements recur even when the research question changes. That makes literature work a strong candidate for a skill. The DSS `litsearch` procedure packages this process; give it the project-specific question and criteria, then inspect its protocol, verification report, and evidence outputs.
+
+<!-- RELEASE: replace this note with the verified public DSS litsearch repository link before publication; the current repository is private. -->
+
+You should understand the procedure before relying on the skill. Read its current instructions and check that it preserves unresolved sources and your intended scope. [Chapter 9](#reusable-procedures) explains how to adopt and adapt a skill; the skill should remain the maintained implementation rather than being copied wholesale into this chapter.
+
+## An earlier recorded search
+
+The previous guide included a real search about peer-review duration. Its counts remain useful as an example of an auditable run: 604 records retrieved across 15 queries, six set aside for missing identifiers, 507 after deduplication, 459 excluded, 11 referred for a decision, and 37 included. Those are historical results, not a heat-and-birthweight search or a new run.
+
+That run's identifier-only rule needs the broader treatment above: an absent identifier should trigger a manual-verification route, not automatic exclusion. Twenty-five included records had retrieved abstracts; twelve had only titles and needed further reading. The limitation field was empty because the abstracts did not supply the information, not because the studies had no limitations. These distinctions are why the saved evidence matters as much as the final prose.
+
+# 12. Bring data into the project {#data-acquisition}
+
+The agent needs to work from the intended inputs, with a record of where they came from and how they may be used. That applies whether you receive files from a collaborator, start with data already on disk, or ask the agent to acquire a new extract.
+
+Our example begins with a supplied synthetic birth-record file and its generator. Before fitting anything, the agent should establish that the file contains the promised variables and records, retain the original, and document its origin. Calling the file “births” does not make it observed data; that distinction must survive into the methods and results.
+
+## Start with the required inputs {#identify-inputs}
+
+Use the research specification to identify the observation unit, population, dates, variables, units, and documentation needed. Ask the agent to inspect the actual files and their dictionaries. It should surface conflicts with the specification before transforming them.
+
+For received data, record who supplied the files, when, which release or extract they represent, and what restrictions accompany them. For a file already on disk, establish its identity from the available evidence and mark missing provenance as unknown. Do not invent a retrospective download history.
+
+<!-- prompt:bring-data -->
+::: {#request-bring-data .prompt}
+> Inspect the approved inputs and their documentation. Record where each came from, the version or acquisition date, permitted use, expected units and identifiers, and a file fingerprint. Preserve the originals and create separate scripted checks for the required columns, record keys, ranges, and missingness rules in specification.md. Report discrepancies before transforming or excluding records; never replace missing research inputs with simulated observations.
+:::
+<!-- /prompt:bring-data -->
+
+The synthetic example's raw CSV should have 1,200 unique ids, ages 18–40, hot-day counts between 0 and 20, a binary smoking indicator, and positive birthweight. Those are the declared properties of this teaching input. An agent should fail visibly if the supplied file contradicts them, rather than silently dropping records or replacing values.
+
+## Choose a suitable acquisition route {#acquisition-ladder}
+
+When the project needs web-based data, use the first suitable, permitted method in this order:
+
+1. *API or structured source.* Look for a documented API, bulk download, CSV export, or structured response used by the page. It is usually easier to preserve and repeat a request for data than to interpret a rendered page.
+2. *Fetch and parse a static page.* Save the HTML, then extract its data with a script when the required content is already in that response.
+3. *Scripted browser.* Use a browser script for genuinely dynamic content or required interaction. Where permitted, capture the structured responses requested by the page rather than scraping its display.
+4. *Agent-interactive browser.* Use the agent's browser for reconnaissance, a small one-off task, visual judgment, or a step requiring human participation. It may help discover a structured route for the first tier. It is not the default for thousands of repeated page visits.
+
+The first three can leave repeatable acquisition code. Interactive browser actions alone do not. Preserve useful exploration by turning a recurring task into a permitted script with explicit inputs, saved responses, and failure handling.
+
+Check the source's terms and request limits before collecting. An endpoint visible in a browser is not automatically an authorized route. Sources such as the [Census API](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS](https://usa.ipums.org/usa/terms.shtml), and [CDC WONDER](https://wonder.cdc.gov/datause.html) have their own access and use conditions. A refusal is not an invitation to bypass the source's restrictions through another interface.
+
+## Preserve originals and document provenance {#data-provenance}
+
+Save a response exactly as received before parsing or cleaning it. Write derived files separately, so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one instead of overwriting the input behind a published result.
+
+| Record | Synthetic example |
+|---|---|
+| Source | Invented records generated for this teaching project; no observed pregnancies. |
+| Original | `data/raw/births.csv`, preserved unchanged after generation. |
+| Reconstruction | Saved generator, seed, and R version in the provenance record. |
+| File identity | A checksum recorded when the original is created. |
+| Documentation | Variable definitions and the analysis specification. |
+| Derived files | Created by recorded scripts; never relabeled as original observations. |
+
+For empirical data, add the actual source address, release/extract identifier, request, retrieval date, and conditions on use and redistribution. Write the provenance entry when the file is saved. A checksum identifies changed bytes; it does not establish whether the source or analysis is correct.
+
+Allow specifically authorized acquisitions and provenance updates, then protect the originals during analysis. Read-only access prevents changes but still permits disclosure. Apply the [chain-of-custody decisions](#data-chain-of-custody) to received files, connected services, and any protected derivatives.
+
+## Make collection repeatable without wasting requests
+
+Have acquisition code respect request limits, identify itself as required, save raw responses, and record progress. Reuse cached responses and resume interrupted collections. A missing page or failed request should appear in a failure record, not disappear from the resulting dataset. For long collections, the toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) explains unattended execution and completion checks.
+
+Keep credentials out of source code, logs, and conversations. Use the existing approved credential mechanism; the toolkit's [credential chapter](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) covers setup. If a key enters repository history, removing the current line is insufficient: revoke and replace it through the service's process.
+
+## Check what actually arrived
+
+Compare the saved files with the requested population, period, units, variables, and release. Inspect record counts, key uniqueness, and any unexplained missing inputs. For a web extract, compare selected values with the source's own display or documentation. Confirm the original was not recoded during acquisition.
+
+Keep unmatched or ambiguous records visible for a decision. The next chapter shows how to implement approved transformations as modular steps; it should not begin from an undocumented cleaning decision hidden in a download script.
+
+# 13. Build a modular analysis workflow {#research-workflows}
+
+Research analyses change repeatedly. A monolithic script can be convenient for interactive exploration, but rerunning its imports, transformations, model fits, and figures for every small edit wastes work and makes errors harder to locate. A modular workflow lets an agent change and run the relevant operation while preserving the inputs and outputs needed to check it.
+
+In the birthweight example, changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the model, recalculating contrasts, and updating the figure and manuscript. The difference should be visible in the saved workflow, rather than reconstructed by the agent each time.
+
+![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Several modular analysis scripts and one small command file support selective execution: redraw from saved contrasts, or rebuild all affected steps after a sample change."}
+
+## Make each research operation independently runnable {#modular-steps}
+
+Separate coherent operations with explicit inputs and saved outputs. Reuse common functions instead of copying them between scripts. Each step should start from recorded inputs, not from objects left in an interactive session or decisions remembered only in chat.
+
+| Operation | Reads | Leaves behind |
+|---|---|---|
+| Prepare the analysis file | Original records, dictionary, approved sample and transformation rules | Derived data, sample ids, and checks. |
+| Fit the specified model | Analysis file and specification | Saved fit, settings, and diagnostics. |
+| Calculate reported quantities | Fit and defined exposure contrasts | Full-precision estimates and uncertainty. |
+| Draw the figure | Saved contrasts and figure specification | Plotting data and rendered figure. |
+| Check manuscript values | Selected results, manuscript source, and result-to-location map | Comparison report and discrepancies. |
+
+Modularity is not a target number of files. Two related operations may reasonably share a script, and a function may serve several analyses. The useful property is that the operation you need can run on its own, with its dependencies supplied. These steps remain useful in an IDE as well as for an agent.
+
+## Build or refactor without changing the analysis {#build-modular-workflow}
+
+For a new project, have the agent implement the scientific specification in that structure. For an existing project, preserve a known set of outputs, then refactor before making substantive revisions. Compare samples and results before and after the structural change. Moving code should not quietly change a missing-value rule or model option.
+
+<!-- prompt:modular-workflow -->
+::: {#request-modular-workflow .prompt}
+> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+:::
+<!-- /prompt:modular-workflow -->
+
+The researcher supplies consequential choices. For this example that includes the 10-minus-5 hot-day contrast, its standardization distribution, age-specific comparisons, and the HC3 uncertainty calculation. “Report the effect” is too vague if the agent could substitute a regression coefficient for the requested contrast.
+
+Require failure when a necessary input is absent or a stated check fails. An empirical workflow must never substitute simulated data just to finish. In this wholly synthetic teaching project, the generator is an explicit input-producing step with its own provenance.
+
+## Save commands for the useful routes {#saved-commands}
+
+A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains `just` setup and use.
+
+| Request | Repeat | Reuse |
+|---|---|---|
+| Change the figure's labels | Figure code and visual check | Fit and contrast table. |
+| Revise an approved sample rule | Sample, fit, contrasts, figure, and affected manuscript checks | Unchanged original acquisition. |
+| Change the estimator | Fit, postestimation, relevant simulation and independent checks, downstream outputs | Permitted unchanged inputs. |
+| Correct document formatting | Document build and rendered-page check | Checked research results. |
+
+An existing Stata master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as `targets` or Snakemake determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
+
+## Inspect the outputs at the affected steps
+
+Ask the agent to identify which files each command reads and changes. Check the resulting figure against its saved plotting table. After a data change, check the analysis sample and derived values before interpreting the estimates. When a result differs, the saved intermediate outputs help locate where the implementations diverged.
+
+Keep exploratory work identifiable. Once a check supports the reported analysis, include it in the documented validation sequence and say when it must rerun. A caption change should not trigger a costly simulation; a change in the estimator may require one. The next two chapters explain simulation and independent implementation in detail.
+
+## Keep long jobs moving {#unattended-jobs}
+
+Save the command, inputs, outputs, and log before launching a long calculation. A queue such as `pueue` can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
+
+Control parallelism according to each job's memory and CPU needs; a slot is not necessarily one core. A local queue does not make a sleeping computer calculate or preserve running processes through every reboot. For work beyond local resources, use your institution's approved research-computing service; at Harvard, consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/).
+
+Judge completion from the queue/process state, log, and expected outputs. A chat saying that a command was submitted is not evidence that the result exists. Reusing completed pipeline steps after an interruption is different from resuming an individual model fit, which needs support from the fitting program.
+
+Some tasks require a model or agent for every item rather than execution of saved analysis code. [Chapter 16](#headless-agents) discusses headless agents, controlled inputs, and how to assess those outputs.
+
+# 14. Test the analysis against known truth {#simulation}
+
+<!-- aliases: calibration-example -->
+
+Simulation gives an agent's analysis a test with an answer you can establish before fitting the model. It can expose broken processing and reporting, and it can show how the proposed estimator behaves under conditions that matter to your research. Those are separate questions: a workflow may run correctly while its estimates perform poorly.
+
+In the heat-and-birthweight example, maternal age has a curved relationship with expected birthweight and modifies the heat association. We can create data with those features, then ask whether the saved workflow recovers the specified exposure contrast. A second world adds curvature to the age-dependent heat association that the fitted model does not include.
+
+## Start with a small, known answer
+
+Before running hundreds of simulated studies, check that one dataset passes through the saved workflow and produces the expected files. Use a small calculation whose answer follows directly from the specification. In this example, the modeled difference between ten and five hot days at age 28 is five times the heat coefficient. At age 36, it also includes the heat-by-age interaction. Comparing those calculations with the saved prediction contrasts checks the reported quantity separately from fitting the model.
+
+Known-answer checks also belong before fitting. A join with a duplicated key should fail where the specification requires one row per person; a missing exposure file should cause a clear failure. It should never trigger the invention of observations to keep the analysis moving. Keep small failing inputs separate from the study data and retain them as regression tests.
+
+![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="A checked synthetic world supplies data to the saved analysis workflow. The workflow's estimates are compared with separately calculated truth. Repeating the process assesses statistical behavior."}
+
+The expected answer must come from the research rules or a separately checked calculation. A test that copies the agent's first result into its expected value will preserve that result, including its mistakes.
+
+## Specify the simulated worlds {#calibration-example}
+
+A *calibration harness* generates repeated datasets, applies the same analysis to each, and records how estimates and decisions behave. The agent can build and run it from a written plan. You choose the relevant worlds and the properties that would make the analysis adequate for its intended use.
+
+The example holds the 1,200 synthetic individuals' ages, smoking indicators, and exposure values fixed while generating a new birthweight for every person in every repetition. Its performance statements therefore concern these covariate values. They do not describe every possible population or sampling design.
+
+| World | Relationship built into the data | What the comparison examines |
 |:--|:--|:--|
-| A, p. 4, Results | Median submission-to-first-decision time: 42 days across all submissions | Includes desk rejections |
-| B, p. 6, Table 2 and note | Median submission-to-acceptance time: 110 days among accepted papers | Excludes rejected papers; uses a later endpoint |
+| No heat association | Curved maternal-age relationship and a smoking association; heat contributes nothing | Bias near zero, interval coverage, and false-positive rate |
+| Age-dependent heat association | The heat slope changes linearly with centered age | Recovery of the average contrast and the contrasts at ages 22, 28, and 36 |
+| Curved age-dependent heat association | The heat slope also changes quadratically with centered age | Performance when the fitted interaction omits a feature of the generating process |
 
-A defensible synthesis would read: “The two studies measured different stages of review. A reported a median of 42 days to first decision across submissions (p. 4), while B reported 110 days to acceptance among accepted papers (p. 6, Table 2). These figures do not establish that B's journals reviewed comparable submissions more slowly.”
+All three worlds generate positive birthweights with right-skewed noise whose spread grows with the conditional mean. The fitted model includes the curved main association with age and the linear heat-by-age interaction. Its HC3 uncertainty calculation and normal-reference intervals stay the same across worlds. The stress test is useful precisely because the agent does not quietly change the estimator to match it.
 
-The source labels and numbers above are invented solely to show the requested output. In your project, each label should resolve to an actual verified full text. If papers disagree on a comparable result, preserve that disagreement and identify the relevant differences; do not ask the agent to smooth them into a consensus.
+The generator describes an invented teaching population. Its coefficients are not empirical estimates of heat effects, and its ranges alone do not establish biological plausibility. For your research, check that the simulated world can represent the measured quantity: outcome bounds, plausible dispersion, clustering, exposure support, and any constraints between variables. Inspect generated values and distributions before interpreting recovery results. Add missingness, measurement error, dependence, or other complications when they are relevant to the planned claim.
 
-> Using only the verified full texts, draft a synthesis of the findings relevant to our question. First give a table linking each claim to its supporting page, table, or passage. Distinguish reported limitations from information not yet extracted. Preserve disagreements and differences in outcome definitions or samples. Flag corrections, retractions, and sources unavailable in full text. Leave unsupported claims out of the draft and list them as open questions.
+## Calculate truth separately
 
-## What goes wrong
+The example's estimand is the mean predicted difference between ten and five hot days, averaged over the observed age and smoking distribution (§10). For each simulated world, calculate its true value directly from the generating conditional mean, before adding random noise. Calculate the age-specific contrasts from that same mean at the stated ages.
 
-*The citation that doesn't exist.* An invented citation can have correct formatting, a real journal name, and authors who publish in the field. Inspecting the citation alone may not reveal the problem. Resolve the identifier where one exists, then compare the actual source with the citation. For other material, inspect the catalog or publisher record and the source itself.
+Check this truth calculation independently of the fitted-model code. Reusing the fitting function to supply both the estimate and its supposed truth can reproduce the same mistake on both sides. Also distinguish the target from the random outcome difference in one simulated sample: that sample contains noise.
 
-*The accusation that was wrong.* In the run above, the verifier reported a real and directly relevant paper as a probable fabrication. Its record was registered with DataCite, but the verifier had asked only Crossref. A failed lookup can also reflect an unavailable service or incorrect metadata. Investigate the failed check before accepting a fabrication verdict or excluding the paper.
+For a different research problem, the truth may require integration or a very large reference population. Record that approximation and its numerical uncertainty. A coefficient is the correct target only if a coefficient is what the study intends to report.
 
-*An arbitrary retrieval limit.* The protocol for that run capped retrieval at 300 records. The agent stopped when retrieval reached 604, as instructed, but the cap was then removed. Limiting the search to the first records returned would make inclusion depend on each source's relevance ranking. Define the search through the question, criteria, and stopping rule. A record count can trigger a progress review without becoming a reason to discard the remaining results.
+## Assess recovery and decisions
 
-*The duplicate that survived.* Deduplication matched on identifier, then on title and year, and still let through a preprint and its published version, because the two titles differ by a single word. Both would have been counted. Cross-field and cross-repository work is full of these, and the fix is a human eye on the borderline set rather than a cleverer rule.
+Recovery concerns whether estimates track the target across useful values. Examine bias, root mean squared error, and the distribution of estimates. Decision-rule calibration concerns interval coverage and, if the analysis uses a significance threshold, rejection under null and non-null worlds. Neither assessment substitutes for the other.
 
-*Screening from memory.* The agent excludes a paper using its recollection instead of the retrieved text. Require it to cite the text supporting each screening decision and record whether it used the title, abstract, or full text.
+The example runs 400 repetitions per world. A coverage estimate near 95 percent then has a Monte Carlo standard error of about 1.1 percentage points. That is simulation uncertainty from a finite run, not the uncertainty interval for the research estimate. Report uncertainty for rates near zero or one too; observing no failures in 400 runs does not establish a failure probability of zero.
 
-*The empty column read as a finding.* In the run above, the limitation column was empty for all 37 rows because no retrieved abstract stated one. Those blanks identify information still to be extracted from the full texts; they do not show that the studies had no limitations.
+Keep failed fits in the record. Report how many were attempted, what failed, and which denominator was used for each performance measure. Quietly calculating coverage only among successful fits can make an unstable procedure look reliable.
 
-# 9. Acquire data with a record of its origin {#data-acquisition}
+<!-- prompt:simulation-plan -->
+::: {#request-simulation-plan .prompt}
+> Propose a simulation plan for specification.md. Define plausible generating worlds, separately calculated truth, estimator-recovery measures, interval or decision-rule checks, and Monte Carlo uncertainty. Check outcome support and dispersion before running; count failures as well as successes. After I approve the plan, run the saved analysis unchanged in each world and report where it fails. Keep simulated files separate from study inputs and do not change the method to make a check pass.
+:::
+<!-- /prompt:simulation-plan -->
 
-Automating acquisition is useful when it saves repeated work without losing the identity or meaning of the data. Preserve the source response and the request that produced it so a later analysis can explain which extract it used.
+## Read the results before changing the method
 
-For example, a county-month heat series might be downloaded in yearly batches. If the provider revises a year, a filename alone cannot tell you which values supported the paper. A retrieval date, request, checksum, and transformation record distinguish the original response from the derived analysis file.
+<!-- example:simulation-results -->
+The saved run completed 400 repetitions in each world, with no failed fits. The table shows two of the four reported quantities; the download includes every quantity, replicate, and failure check.
 
-## What to ask for
+| World | Quantity | Truth (g) | Bias (g) | Coverage | Monte Carlo 95% interval |
+|---|---|---:|---:|---:|---|
+| Null | Sample average | 0.0 | -0.2 | 94.5% | 91.8%–96.3% |
+| Null | Age 28 | 0.0 | 0.1 | 94.0% | 91.2%–95.9% |
+| Main | Sample average | -37.8 | 1.0 | 94.2% | 91.5%–96.1% |
+| Main | Age 28 | -40.0 | 1.0 | 94.8% | 92.1%–96.5% |
+| Curved | Sample average | -10.8 | 2.4 | 93.5% | 90.6%–95.5% |
+| Curved | Age 28 | -40.0 | 28.3 | 75.8% | 71.3%–79.7% |
 
-*Access and terms of use.* Before authorizing a download, ask the agent to find how the source provides its data and what its terms allow you to do with them. One option is an *API*: an interface through which a script can request data directly from the source.
+The curved world exposes a limitation: the fitted linear modifier misses the contrast at age 28, although the sample-average contrast performs much better. A satisfactory average can conceal an inadequate age-specific result. These are measured simulation outcomes under the stated invented worlds, not empirical health findings.
 
-> Before downloading anything from IPUMS USA, tell me how it is meant to be accessed (an API, a bulk file, a query tool), whether it needs a key, and what its terms say about redistribution, attribution, and linking. Link the current terms and quote the short clauses relevant to this request. Separate those clauses from your interpretation, and flag anything requiring my decision.
+![](resources/example-plots/simulation-bias.png){fig-alt="Measured simulation bias for the sample and age-specific contrasts in three invented worlds. The curved-modifier world produces substantial positive bias at age 28."}
+<!-- /example:simulation-results -->
 
-Decide whether the proposed download and your intended use are permitted before asking the agent to proceed.
+When a result fails the planned check, locate the cause. An incorrect formula, an impossible simulated world, and a method that performs badly under a plausible world call for different responses. Ask the agent to show the relevant data, target calculation, and saved estimates. Preserve the failing run before making a correction.
 
-*Choosing a download method.* Ask the agent to consider these four methods in order and use the first that is permitted and can retrieve the data you need.
+A model can recover a particular estimand under the worlds tested while describing some individual outcomes poorly. Conversely, an implementation can follow the specification exactly and still have poor coverage or miss an age-dependent association. Record the scenarios, performance, and limitations in `METHODOLOGY.md`; any change to the estimator needs a research justification and a new evaluation.
 
-1. *A structured source.* Look for a documented API or bulk export. The address a webpage uses to request its data, visible in the browser's network panel, may also let a script request the data directly. Check that the source permits this use; a documented interface usually gives clearer instructions than extracting data from a displayed page.
-2. *Fetch and parse.* If there is no suitable data interface, download the webpage and extract its data with a script. This works when the data are already included in the downloaded page.
-3. *A scripted browser.* Use a script to control a browser when the data load only after the page opens, or when obtaining them requires logging in or scrolling. These scripts can be slow and can break when the site changes. Where possible, capture the data the page requests rather than extracting them from its display.
-4. *The agent's own browser.* Use the agent's browser for a one-off task, to explore how a site supplies its data, or when a person needs to complete part of the interaction. For recurring or bulk work, use the exploration to develop a permitted script with saved inputs, outputs, and failure handling.
+Simulation cannot establish that the estimand answers the substantive question or that an observational design supports a causal claim. Those judgments remain part of the study design. The next chapter addresses a different uncertainty: whether independently built implementations carry out that design in the same way.
 
-For the first three methods, save the acquisition script in `code/_data-acquisition/` and commit it so the download can be repeated. Actions the agent takes through its own browser do not by themselves produce a script you can rerun.
+# 15. Check the agent with independent implementations {#checking-analysis}
 
-*The sources.* Ask the agent to use current documentation for the source you need. For example, consult the [Census API guide](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS terms](https://usa.ipums.org/usa/terms.shtml), or [CDC WONDER data-use restrictions](https://wonder.cdc.gov/datause.html). Record the relevant access and sharing terms with the download. An undocumented endpoint visible in a browser is not automatically an authorized collection route.
+Two independently built implementations can expose mistakes that a rerun of the same code will preserve. Each starts from the research specification and approved inputs, works through the analysis separately, and saves comparable outputs. Agreement provides evidence about implementation; discrepancies give you something concrete to investigate.
 
-*The provenance log.* Ask the agent to record each download in `data/raw/sources.md`, introduced in §5. Each entry identifies the file's source and contains:
+For the heat-and-birthweight project, one fresh agent builds the analysis in R and another in Python. Both must calculate the same ten-minus-five-day contrasts, using the same records and uncertainty method. Neither sees the other's code or results before finishing. This can reveal a wrong contrast, an unintended software default, or a different analysis sample even when both programs run without an error.
 
-- The exact request: the API call, extract definition, or saved query from the web tool.
-- The download date and the data release or version.
-- The relevant conditions on use, including redistribution and attribution.
-- Who downloaded the file and its checksum. A checksum is a fingerprint of the file's contents that can be used to detect changes.
+An agent might also invent a missing column, substitute simulated values for observed ones, or change the model to get a result. The comparison should follow the stages that support the claim, rather than comparing only a final number. Small known-answer cases and simulation (§14) supply additional checks; a majority vote among agents is not a reference answer.
 
-Have the agent write the entry as part of the download:
+## Give each agent the same written target
 
-> Fetch the 2018–2022 ACS five-year county estimates for the variables in `METHODOLOGY.md` § Covariates, through the Census API, with the script in `code/_data-acquisition/fetch-acs.R`. Save the JSON response exactly as received to `data/raw/public/acs-5yr-2022.json`, and add an entry to `data/raw/sources.md` with the request, the date, the vintage, and the file's checksum. Do not modify anything else in `data/raw/`.
-
-*Preserve raw data.* Save each download exactly as received. Cleaning belongs in a separate script that reads from `data/raw/` and writes to `data/processed/` (§5). If cleaning goes wrong, you can rerun it using the saved original. If you download the data again, save a new, dated file beside the old one: later releases may change the numbers, and you need to know which release the paper used.
-
-During acquisition, allow the agent to add the files you have authorized and update the provenance log. During analysis, protect the originals from changes. A rule that prevents all writes to `data/raw/` would also block the approved download and log entry, so the access settings must match the task (§3).
-
-## What the agent does
-
-The agent reads the source's documentation and writes the acquisition script using the method you agreed on. The script pauses between requests and retries failed requests. It identifies itself to the source with a user-agent string that names the script, and an email address where the source asks for one.
-
-The script saves each response before extracting data from it, so an extraction error can be fixed using the saved response. For a long collection, it records progress so an interrupted run can resume without downloading everything again. It also writes the provenance entries. If the agent uses a browser to investigate the site, it reports whether it found a permitted way to request the data through a script.
-
-Keep API keys out of the script. Supply a key through an approved credential mechanism as an *environment variable*: a named value available to a running program. The script can then read, for example, `CENSUS_API_KEY` or `IPUMS_API_KEY`. Ask the agent to refer to the variable by name without printing the key itself. Code that receives a key can still expose it, so review access and logging. The toolkit's secrets section explains the setup. If a key enters repository history, revoke it and issue a replacement; deleting the current line is insufficient.
-
-## Read the provenance entry
-
-An illustrative entry for a synthetic teaching extract could look like this:
-
-| Field | Example record |
-|:--|:--|
-| Source | Synthetic county-month heat example; not an observed dataset |
-| Request | Counties 001 and 003; January–December 2025 |
-| Retrieved or generated | 2026-11-02; generator and seed recorded alongside the file |
-| Original | `data/raw/heat-example.csv`; checksum recorded on creation |
-| Derived | `data/processed/heat-monthly.csv`; created by `code/prepare-heat.R` |
-| Checks | County-month keys unique; all requested months accounted for |
-
-For a real source, record its address, extract identifier, version, access terms, and actual request instead. Do not copy this invented provenance into an empirical project.
-
-## What you check
-
-Read the source's terms yourself. Check whether you may include the processed extract in a public deposit, what attribution is required, and whether there are restrictions on linking these data to other datasets. The agent can identify relevant clauses, but you need to decide whether your planned use complies with them.
-
-Check that the provenance entry contains enough detail to repeat the request and write the paper's data section. Confirm which release, sample, or revision was used and that it is consistent across the files used in the analysis.
-
-Check the row and column counts against the source's description, and compare a value with the source's web tool by hand. Confirm that the saved original has not been recoded, renamed, or filtered during the download.
-
-Confirm that the acquisition script is saved in the repository, can be rerun, and has not changed any existing raw data files. Check that no credential appears in the scripts, outputs, or proposed commit. Use a local secret scan that reports locations without printing values; do not paste a secret into the agent conversation to search for it.
-
-## What goes wrong
-
-*The browser did the collection.* Two thousand pages clicked through without saved requests or extraction code leave a weak reproduction record. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
-
-*Scraping what had an interface.* The agent extracts data from displayed webpages even though the source provides an API or bulk download. Ask it to look for those options before writing a scraper.
-
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal isn't a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
-
-*Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
-
-*Overwritten raw.* A refetch replaced last year's file, the numbers in Table 1 shifted, and the cause took a week to find. Use dated files and protect existing originals while permitting specifically authorized acquisitions.
-
-*The key in the repository.* A key appears in a script or remains in an earlier commit. Revoke it and issue a replacement. Keep the replacement out of tracked files, and exclude any local credential file from git before saving it.
-
-*Rate limits hit.* The script sends requests too quickly and the source blocks access, potentially affecting colleagues who share the same network address. Have the script respect the source's request limits, identify itself as required, and reuse saved responses when possible.
-
-*The log written from memory.* You or the agent tries to reconstruct the download details a month later. Write the provenance entry in the same step that saves the file.
-
-# 10. Build an analysis you can rerun selectively {#research-workflows}
-
-
-
-A research analysis changes repeatedly: a coauthor requests another sample, a reviewer asks for a sensitivity check, or a figure needs new labels. If every change reruns a large script from import to manuscript, revisions become slow and hard to inspect. Ask the agent to build small steps with saved inputs and outputs, and commands that run the part you need.
-
-In the heat-and-birthweight example, changing a plot label should read the saved prediction table and redraw the figure. Changing the sample restriction should rebuild the analysis file, fit the affected models, and update their outputs. Both are repeatable workflows, but they require different work.
-
-![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Many small analysis scripts and one recipes file support two routes: redraw a figure from saved estimates, or rebuild the sample and rerun the affected analysis."}
-
-## Save steps that can run separately
-
-Give each script one coherent job: acquire a source, construct the analysis sample, fit a specified model, calculate a contrast, or draw a figure. A script can serve one project-specific task; it need not become a general software package. Name its inputs and outputs and make it fail clearly when a required input is absent.
-
-A small command file can name the useful routes through those scripts. [Toolkit chapter 6](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) uses `just`; a master do-file, an existing build command, or a short R driver may already be sufficient. The researcher should be able to run a saved command without asking an agent to remember the sequence. A dependency runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) adds automatic decisions about which steps are stale.
-
-| Requested change | Work to repeat | Work to reuse |
-|:--|:--|:--|
-| Change Figure 2's labels | Figure script and visual check | Saved predictions and fit |
-| Change an approved sample rule | Sample construction, affected fits, predictions, reporting | Unchanged source acquisition |
-| Correct the manuscript's formatting | Document build and rendered-page check | Checked results |
-
-> Organize the approved analysis into scripts with explicit inputs and outputs. Keep related operations together, but separate costly fits from plotting and reporting. Give me commands for the main analysis, the figures from saved estimates, and the quick checks. Demonstrate which files each command changes. Preserve the current results and explain any discrepancy.
-
-## Specify the research work
-
-Start with the permitted input files, their documentation, and your project's conventions. State the output you need and the decisions already made. Ask the agent to flag ambiguities that affect the result, while proceeding with routine work within that specification. An extra approval round is useful when something is unresolved; it need not precede every transformation or plot.
-
-| Task | Specify | Ask to see |
-|:--|:--|:--|
-| Data understanding and cleaning | Whether to inspect or modify data; documented variable meanings; approved transformations; unresolved codes or joins | Questions tied to specific files and fields, transformation records, unmatched records, sample changes, checks on derived values |
-| Modeling | Sample, specification, estimation settings, exact postestimation quantities | Implemented specification, sample membership, diagnostics, saved estimates, calibration and independent comparisons |
-| Visualization | Source quantities, intended comparison, labels, scales, uncertainty | Plotting data, mapping from columns to visual elements, rendered figure, checks against saved estimates |
-
-### Understand and clean a dataset
-
-When a dataset is unfamiliar, separate learning what it contains from changing it. Ask for questions tied to particular fields and documentation. “The value 9 appears in this field, but the codebook describes only 0 and 1” is useful. Silently treating 9 as missing is a research decision made without you.
-
-For the heat-and-birthweight example, use approved public or synthetic files:
-
-> Inspect the synthetic birth records and county-month heat file named in `CLAUDE.md`, alongside their data dictionaries. Identify the observation unit, key fields, duplicate keys, missing-value codes, and any discrepancy between the files and documentation. Do not alter data yet. List questions that affect the planned join or derived variables, with the field and evidence behind each question.
-
-Once the rules are settled, give them explicitly:
-
-> Implement the approved cleaning rules in `METHODOLOGY.md`. Preserve the original files. Join each birth to its county-month heat record, requiring at most one heat record for each key. Keep unmatched births flagged for review; do not drop them or fill their exposure values. Save the derived file, the script, and a report of duplicate keys, unmatched records, row counts before and after each step, and checks on the derived values. Stop if a join duplicates birth records. Do not replace missing inputs with simulated values.
-
-The resulting report should let you account for the sample and trace each derived value to a recorded transformation. For a consequential pipeline, ask fresh agents to implement it independently from the same original inputs and agreed rules (§11). Agreement supports implementation fidelity; it does not establish that the exclusion or transformation rules were scientifically appropriate.
-
-### Fit a model and produce the requested quantities
-
-Name the estimand and the model as precisely as you would in an analysis plan. Include weights, clustering, missing-data handling, finite-sample corrections, and the quantities you want after estimation. “Fit the model and report the effect” leaves room for the agent to choose a coefficient when you wanted a standardized contrast.
-
-> Implement the main model in `METHODOLOGY.md` on the approved analysis file. Save the exact specification, estimation sample identifiers, software settings, diagnostics, and the postestimation quantities listed there at full precision. Flag any unavailable option or unidentified parameter rather than substituting another specification. Keep the real-data analysis separate from all simulation code. Report discrepancies without adjusting the model to remove them.
-
-### Draw a figure from saved results
-
-A plotting task should identify which results to display and what comparison the figure should support. This avoids a polished plot that quietly changes the denominator, aggregates away a subgroup, or omits uncertainty.
-
-> Build the planned exposure-response figure from the saved prediction table, without refitting the model. Use hot days on the horizontal axis and predicted birthweight in grams on the vertical axis. Show the saved interval bounds and the groups specified in the figure plan. Save the plotting script, the exact plotting data, and the figure. Report any missing groups or intervals; do not interpolate missing estimates or change the scale without asking.
-
-Inspect the plotting data beside the rendered figure. Check selected points and interval endpoints against the saved results, and confirm that the labels and scale describe the actual quantities.
-
-## What you check
-
-Compare the deliverables with the request. For a join, account for unmatched and duplicated records. For a model, compare the sample, settings, and exact reported quantities. For a figure, check how the values in the source table appear as points, lines, or intervals in the plot. Use independent implementations for important results, with suitable exact, numerical, or Monte Carlo tolerances (§11).
-
-Simulation checks and independent implementations belong in the saved workflow too (§11). Rerun them when the relevant method or inputs change, not whenever a caption changes.
-
-Keep exploratory scripts in `_experiments/`. Once a check supports the reported analysis, make it part of the documented validation sequence, for example under `code/validation/`, and record when it must rerun. A figure-label edit need not rerun a large calibration study; a change to the estimator may.
-
-## What goes wrong
-
-*An undocumented choice keeps the pipeline moving.* The agent guesses a missing-value code, drops an unmatched record, simplifies the model, or changes a plot denominator. Ask it to surface unresolved decisions and show the evidence for completed steps.
-
-*Simulation enters the real-data pipeline.* An unavailable input is replaced with plausible values and the analysis finishes. Keep simulation inputs and outputs separate, and require the empirical pipeline to fail when required inputs are absent.
-
-*The check changes until it passes.* A comparison tolerance grows, an assertion disappears, or difficult scenarios are removed. Have the agent report the failure and its cause before proposing a change.
-
-*The output looks convincing.* A clean table, a converged fit, and a polished figure can all implement the wrong request. Check the underlying quantities and sample, not the presentation alone.
-
-## Keep long jobs moving
-
-For a long fit, have the agent save a runnable script and a log. Without extra tools, run it in your existing RStudio or Stata application and bring the permitted output back to the agent. A job queue can manage recurring long jobs; the toolkit's queue section explains submission, resource limits, and status checks. A queue runs locally and does not make a laptop compute while asleep or survive every reboot with its processes intact.
-
-Compacting a conversation, closing an app, and terminating a process are different events. Do not infer job status from the chat. Check the process or queue state, the log, and the expected output before reporting completion. A pipeline runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) can reuse completed steps after an interruption; resuming a fit within a step requires the fitting program's own checkpoint support.
-
-When the work exceeds local resources, follow your institution's research-computing route. The agent can draft a job script, but the resource request, permitted environment, and resulting files still need review.
-
-> **Harvard.** Consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/) for compute access and the appropriate environment for the data. Use the current cluster guidance for submission and data restrictions; an agent-generated job script is not evidence that either is correct.
-
-## When an agent step itself runs unattended
-
-Some batches need an agent to perform a bounded task for each item, rather than just run saved analysis code. A headless invocation accepts a request, performs the task without an interactive conversation, and saves a result. For example, it could turn each approved document into a structured extraction with a failure record when the required fields are missing.
-
-Record the request and inputs, set limits on permitted tools and retries, and check a small batch before submitting the rest. [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html) covers the mechanics. If those extractions become research measurements, control the information available to each run and evaluate their quality (§12). Headless execution makes a task unattended; it does not itself make the context isolated.
-
-# 11. Check that the agent did the intended analysis {#checking-analysis}
-
-
-
-A runnable workflow lets you repeat what the agent built. To trust its results, you also need evidence that it implements the requested analysis. Begin with small cases whose answers you can establish independently, then compare consequential analyses built separately from the same specification.
-
-For example, a county-month join may silently duplicate births when the exposure table contains a repeated key. A five-row test can make that error obvious even when the full analysis produces plausible estimates. A second implementation can then check the transformations and reported quantities across the complete pipeline.
-
-## Did the agent implement what you asked for?
-
-An agent can produce code that runs and yields plausible results while doing the wrong analysis. It might invent a missing column, substitute simulated values for observed ones, merge on the wrong identifier, or fit a different model from the one you specified. It might fit the right model and report the wrong quantity afterward: a coefficient where you requested an average marginal effect, or predictions for the wrong population.
-
-Re-running that code reproduces the error (§14). Independent implementation gives you another route from the inputs to the result, so you can check where those routes agree and where they diverge.
-
-### Start with an answer you know
-
-Choose a small case with an expected result derived from the research rules, not copied from the program being tested. In this invented join example, three births match two distinct county-month exposure records; one birth is unmatched. The correct output has four births, preserves the unmatched record for review, and does not invent an exposure.
-
-| Test input | Expected behavior |
-|:--|:--|
-| Unique county-month exposure keys | Preserve all four births; three match, one stays flagged |
-| One duplicated exposure key | Stop before fitting; identify the duplicated key |
-| A missing required exposure file | Fail clearly; do not substitute simulated observations |
-
-> Create these small fixtures separately from the analysis inputs. Run the saved preparation code on them and compare its behavior with the stated expectations. Keep the failing case as a regression check. Report the observed output and exit status; do not weaken the test to make it pass.
-
-Larger simulations can pass data with known truth through the entire workflow. Check the generator and the truth calculation separately: otherwise the same error can appear on both sides of the comparison. These tests address implementation. Repeated simulation also supports a separate assessment of statistical behavior, discussed below and in Appendix D.
-
-![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="A stated expected answer and synthetic test input go through the saved research workflow. A comparison reports agreement or a discrepancy to investigate."}
-
-### Give each agent the same written target
-
-Start with `METHODOLOGY.md` (§5). It should state:
+Start with `METHODOLOGY.md` (§7). It should state:
 
 - The research quantity to estimate (the *estimand*), including the population, comparison, and scale.
 - The input files and their meanings, the unit represented by each row, the merge keys, and the rules for constructing variables.
@@ -825,7 +1011,7 @@ A request for “the effect of heat on birthweight” leaves too much to infer. 
 
 Keep a fixed copy of that specification for the comparison. If an implementer finds an ambiguity, resolve it and give the same clarification to every session. Letting each agent silently choose a different interpretation makes a later disagreement harder to diagnose.
 
-### Have two or three agents implement it separately
+## Have two or three agents implement it separately
 
 ![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and written specification feed two separate implementations. Only their completed outputs enter the comparison."}
 
@@ -838,13 +1024,17 @@ Use only inputs the agent is permitted to access (§3). For restricted data, hav
 
 Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, Python, and Stata are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
 
-In each separate folder, put the approved starting files in `inputs/`. Adapt the language in this request:
+In each separate folder, put the approved starting files in `inputs/`. The example uses identical copies of `data/raw/births.csv` and `specification.md`. Adapt the language and paths in this request:
 
-> Working only from `METHODOLOGY.md`, the data dictionary, and the files in `inputs/`, independently implement the complete analysis in Stata, from input processing through the reported estimates and postestimation quantities. Do not consult another implementation or its results. Stop and report any missing input or ambiguity; do not invent columns or values, or substitute simulated data. Save your code, a record of the inputs used, sample membership and exclusion counts, the derived analysis data, and labelled results at full available precision. Keep all outputs in this project folder.
+<!-- prompt:independent-implementation -->
+::: {#request-independent-implementation .prompt}
+> Working only from specification.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+:::
+<!-- /prompt:independent-implementation -->
 
 Two implementations provide the first comparison. A third gives you another independent attempt, especially when the first two disagree. Let each finish before showing it anyone else's code or results. If there is already a primary implementation, a fresh attempt can check it; keep that fresh session separate from the original conversation.
 
-### Compare the data and the reported quantities
+## Compare the data and the reported quantities
 
 Once the implementations are complete, give their outputs to a separate comparison session. Ask it to compare the stages that lead to the main claim, as well as the final estimate. An invented covariate or a different exclusion rule may be obvious in a data comparison even when the headline estimates happen to be close.
 
@@ -860,7 +1050,11 @@ Matching sample sizes are not enough: two datasets can contain the same number o
 
 Set the comparison tolerances in advance, in `METHODOLOGY.md`. Record membership and categorical values should agree exactly. Numerical results from deterministic calculations should agree within a justified tolerance for numerical precision and the fitting algorithms. Results that use random draws, such as a bootstrap or posterior sampling, need a tolerance that accounts for *Monte Carlo error*: variation caused by using a finite number of draws. Compare full-precision results before rounding them for the paper.
 
-> Compare the completed implementations against `METHODOLOGY.md` and its verification tolerances. Check their input files, record membership, exclusions, derived variables, model specifications, and reported quantities. Produce a table of agreements and discrepancies, with the values from each implementation where applicable. For each discrepancy, identify the earliest stage at which the implementations diverge. Report your findings without changing either implementation or its outputs.
+<!-- prompt:compare-implementations -->
+::: {#request-compare-implementations .prompt}
+> Compare the completed implementations against specification.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+:::
+<!-- /prompt:compare-implementations -->
 
 Read that report yourself. If samples differ, resolve that before interpreting coefficient differences. If coefficients agree but standard errors do not, inspect the uncertainty calculation. If fitted models agree but predicted contrasts do not, inspect the exposure values, averaging population, and scale used for the contrasts. Ask the agent to show the relevant records, settings, or calculations so you can judge the discrepancy without reading every script.
 
@@ -868,7 +1062,24 @@ Correct against the written specification and the source data. Matching the firs
 
 Agreement across independently built pipelines is strong evidence that they implemented the requested analysis consistently. Its strength comes from giving implementation mistakes a chance to produce observable differences. It is not a guarantee: agents can share a mistaken interpretation or use the same faulty software routine. Where available, compare against a trusted benchmark with the same definitions, or a small example whose answer is known. Trace a few deliberately chosen records through the transformations, including difficult cases such as duplicates, missing values, and boundary dates. These focused checks supplement the independent runs without requiring a manual audit of all the code.
 
-### Keep checks that run every time
+## The example: two fresh implementations
+
+<!-- example:independent-results -->
+Two fresh agents received only the same original synthetic CSV and written specification. One built the R analysis; the other built the Python analysis. Neither received the other's implementation or results while building. The completed comparison retained all 1,200 ids and matched every design-matrix value exactly.
+
+| Quantity | R estimate (g) | Python estimate (g) | 95% interval (g), rounded |
+|---|---:|---:|---|
+| sample | -31.639627 | -31.639627 | -74.3 to 11.0 |
+| age_22 | -34.325612 | -34.325612 | -93.8 to 25.1 |
+| age_28 | -31.978065 | -31.978065 | -74.9 to 10.9 |
+| age_36 | -28.848003 | -28.848003 | -90.7 to 33.0 |
+
+Across the contrasts, standard errors, and interval endpoints, the largest absolute difference was 3e-12, below the prespecified tolerance of 0.000001. The package also compares coefficients, covariance, and fitted values at full precision.
+
+The checks still found details to correct or document. Python's postestimation package supplied t-based intervals by default; its implementation calculated the required normal intervals explicitly. Review of the R input checks found an age-range check that was too broad and an unrequested integer restriction on exposure. Correcting those checks left the numerical results unchanged. Agreement on this dataset would not have detected those boundary mistakes by itself.
+<!-- /example:independent-results -->
+
+## Keep checks that run every time
 
 Have the agent retain *assertions*: checks embedded in a script that stop the analysis when an expectation fails. Useful ones cover required columns, unique identifiers, permitted values, merge relationships, exclusions, and the sample actually used by the model. A required column that is absent should cause a failure; the agent should not manufacture it to keep the script running.
 
@@ -878,39 +1089,7 @@ The expectations need a basis in the specification, the source documentation, or
 
 Concentrate independent implementation on the pipelines supporting substantive claims. Keep inexpensive checks throughout those pipelines and rerun the affected comparisons when inputs, code, or the specification change.
 
-## Is the requested analysis appropriate?
-
-All three agents can faithfully implement an analysis that does not answer your research question. Address that risk in two parts: justify the method, then assess its statistical behavior.
-
-### Justify the method
-
-Methodological justification starts with the research question and the literature. Does the estimand represent what you want to learn? Can this design identify it? Are the assumptions credible for these data? Does the model account for the sampling design, repeated observations, and missingness? If you intend a causal interpretation, what makes that interpretation defensible?
-
-Use agents to help investigate those questions before implementation (§4). Ask separate sessions to assess the proposed analysis, find relevant methodological literature, and look for objections. Give them the design and proposed specification so they can identify what information is missing. Follow their citations to the original sources and check that the methods apply to your setting (§8).
-
-> Review the analysis proposed in `METHODOLOGY.md` against the research question and study design. Identify assumptions needed for the intended interpretation, choices the available information does not justify, and relevant methodological literature. Explain where each source applies to this design and where it does not. List unresolved questions for a statistician. Do not change the specification.
-
-Independent consultations can broaden the objections you consider; agreement among agents does not establish that the method is appropriate. Ideally, discuss the design and unresolved questions with a human statistician, especially where the method or its assumptions are unfamiliar. Record the justification and remaining limitations in `METHODOLOGY.md`. This gives later implementation checks a target you have actually considered.
-
-### Assess statistical behavior with a calibration harness
-
-A *calibration harness* is an automated simulation workflow. It generates repeated datasets for which the relevant truth is known, applies your planned analysis to each, and measures how the estimates and decisions behave. Appendix D preserves the worked example and its recorded results.
-
-Decide what acceptable behavior means for the quantities you will report. Does the estimator recover the target across a useful range of true values? How large is its bias? How often do its intervals contain the truth? Under a null condition, how often does the decision rule report an effect? How often does it detect effects of substantive interest? Record failed fits as well as successful ones, and report simulation uncertainty so that a small number of repetitions is not mistaken for a precise performance estimate.
-
-The simulated worlds must be plausible for the data. Preserve features that matter to the analysis: outcome bounds, cluster sizes, dependence, missingness, and the distribution of predictors. Include departures from the fitted model that concern you, such as nonlinear effects or unequal variances. A simulation drawn only from the model you plan to fit tests performance under those assumptions; it does not test how the method behaves when they fail.
-
-The harness also needs implementation checks. Confirm that the generated data have the intended properties and that the “known truth” is the quantity the analysis actually estimates. Check the simulation generator and truth calculation separately from the fitting code. Reusing the same mistaken formula in both can make recovery look perfect.
-
-> Propose a calibration plan for the estimand, analysis, and decision rule in `METHODOLOGY.md`. Include plausible data-generating scenarios and departures from the fitted model. For each scenario, state the known target, how you will calculate it, the performance measures, and how you will quantify simulation uncertainty. Explain how you will check that the generated data respect the design and outcome constraints. Keep simulated files separate from real-data inputs. Present the plan before running it; do not change the analysis to make it pass.
-
-A misspecified model can be well calibrated for a particular estimand or decision rule. For example, an imperfect description of individual outcomes may still yield an interval with the intended coverage for an average contrast. Calibration therefore does not establish that the model describes the data-generating process correctly. Nor does it establish that the estimand answers the scientific question, or that a causal interpretation is justified.
-
-Read the calibration results alongside the methodological justification. State which scenarios were checked, which properties were acceptable, and where performance failed. A failure may call for a different analysis, a narrower claim, or more information. That decision belongs to you; the agent should report the failure before changing the method.
-
-Keep the implementation comparison, methodological justification, and calibration results with the project. They answer different questions, and a satisfactory result in one does not substitute for the others.
-
-# 12. Use LLM outputs as research measurements {#llm-measurements}
+# 16. When the LLM does the analysis {#llm-measurements}
 
 LLMs can make it feasible to code or assess more research material than you could review manually. Once their answers become variables in an analysis, however, errors in those answers affect the evidence. You need to control how the measurements are produced and establish whether they are adequate for the question.
 
@@ -926,7 +1105,15 @@ When an LLM codes responses, classifies documents, or extracts a variable from t
 
 Saving the responses helps answer the first. Recording the model and procedure helps with the second. Evaluation addresses the third. Success on one does not imply success on the others.
 
-## Control what each reviewer or judge receives
+## Use headless agents for controlled research runs {#headless-agents}
+
+A *headless agent* runs from a saved request without an interactive app conversation. A script supplies its inputs, starts the run, and collects its result. This is useful when the same protocol must be applied to many cases: generate a review, judge a review pair, or extract specified evidence from a document. It also lets you record the exact procedure and rerun selected cases.
+
+Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. Claude Code's [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html).
+
+For the peer-review study, the research requirement is that the next reviewer does not inherit the previous reviewer's conversation, and a judge receives only the material allowed by the judging protocol. Write that requirement before choosing a launcher. Treat review generation, judging, and subsequent statistical analysis as separate stages with separately saved outputs.
+
+### Control what each reviewer or judge receives
 
 Review generation and judging are distinct stages. A reviewer receives the review instructions and the assigned manuscript. A judge receives the judging rubric and the material that its task requires. A pairwise judgment can deliberately include two reviews of one manuscript; excluding other runs' context does not mean every call receives only one document.
 
@@ -944,13 +1131,49 @@ For a teaching implementation, write down what each run may receive and test the
 
 A direct scripted model call may be simpler when the task needs no tools or agent loop. Either route still needs input control, failure handling, and measurement evaluation. Context separation does not establish statistical independence, remove shared model biases, or make a judgment valid.
 
+<!-- prompt:controlled-llm-runs -->
+::: {#request-controlled-llm-runs .prompt}
+> For this review-generation and judging protocol, list the exact inputs, prompts, instructions, tools, and connected services allowed in each stage. Design fresh runs that do not inherit other cases’ conversations or outputs. Propose harmless marker tests for unintended file, memory, instruction, and tool access, including an allowed-input positive control. Save raw responses, failures, retries, configuration, and model information. Report untested routes; headless execution alone is not evidence of isolation.
+:::
+<!-- /prompt:controlled-llm-runs -->
+
+## Choose where the model runs {#local-models}
+
+If a hosted LLM reads a transcript or manuscript to analyze it, that material enters the provider's inference system. A commitment not to train on it does not settle retention, subcontracting, deletion, or the other obligations discussed in §3. Synthetic data can help an agent develop analysis code without reading protected records. It cannot replace the actual text when the research task is to classify that text.
+
+An *open-weight model* makes trained model weights available under specified terms. You may be able to run it on your computer or on an institution's approved infrastructure, keeping inference within that environment. Using an open-weight model through somebody else's hosted API still sends the inputs to that service. “Local” in an agent app can also describe where tools run while the model remains hosted.
+
+| Route | Research use | What must be established |
+|:--|:--|:--|
+| Approved hosted model | Strong task performance without maintaining model hardware | Applicable agreement, data permissions, retention, and the actual endpoint |
+| Model on your computer | Smaller approved workloads; control over saved weights and local inference | Sufficient memory, tested task quality, and the agent's remaining network/tool access |
+| Model on controlled institutional infrastructure | Larger models or protected workloads requiring managed resources | Approved compute and storage, access controls, logging, and a reproducible model/runtime record |
+
+Return to the chain of custody in §3 for every route. Prompts, model responses, temporary files, caches, and backups can contain protected material even when inference is local. Local execution gives you more control over those copies; it does not itself authorize their use or deletion schedule. Tool permissions (§4) must match the research protocol too.
+
+### Kimi, DeepSeek, and the model you can actually run
+
+Model families include different releases with different capabilities and hardware requirements. [Kimi K2](https://github.com/MoonshotAI/Kimi-K2) is an example of released weights intended for tasks including agentic tool use; deploying its large models is a research-computing decision. [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1) includes the full model and smaller distilled releases. A small distilled model is not the same model with a cheaper hosting bill: evaluate that particular release on your task.
+
+Record the exact weights and license, precision or quantization, runtime, context limit, and prompting format. Reducing numerical precision can make weights fit available memory, but it changes the configuration being evaluated. Long documents and several simultaneous jobs also consume memory beyond the stored weights. Ask research computing to assess the intended model and workload when a laptop is insufficient.
+
+A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
+
+[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
+
+### Apple’s built-in on-device model
+
+Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#apple-on-device).
+
+Candidate research tasks include extracting dates and organizations, tagging documents, or classifying short survey responses against a fixed rubric. Apple’s [capability guidance](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models) identifies these language-understanding tasks and cautions against relying on the on-device model for code generation or logical reasoning. Evaluate the particular task on held-out examples, save the original responses, and record the device, operating-system version, and available model information. Local availability is a deployment benefit; the measurement still needs evidence of adequate quality.
+
 ## Preserve the run
 
 Save the exact inputs presented to the LLM, prompts and examples, raw responses, parsing and postprocessing code, dates, model information, and available generation settings. Keep failures, retries, and human corrections traceable to the original case. Apply the same access rules to these records as to the source data.
 
 Use an exact model identifier when the interface exposes one, and record limitations when it does not. A model name in an app menu may be less specific than a version identifier. Do not claim to have pinned information you could not observe. Pinning reduces one source of change; it does not guarantee the same answer on a rerun. Anthropic notes that [outputs can vary even at temperature zero](https://platform.claude.com/docs/en/about-claude/glossary#temperature).
 
-Keeping open model weights can preserve access after a hosted model is retired, but repeatability also depends on preprocessing, runtime, numerical precision, quantization, and generation settings. Choose a model for demonstrated performance on the task as well as its availability and licensing. Reevaluate any replacement. This guide does not require a different model service or teach its installation.
+Keeping an exact copy of open weights can preserve access after a service changes. Repeatability still depends on preprocessing, runtime, numerical precision, and generation settings. Reevaluate a replacement rather than assuming a newer or larger model produces interchangeable measurements.
 
 ## Evaluate a labeling task
 
@@ -971,9 +1194,13 @@ Ask for category-specific errors and uncertainty, including the uncertainty arou
 
 Decide acceptable error rates and how uncertain cases will be handled before inspecting the evaluation result. For example, the rubric may require a human decision when the response lacks context or contains conflicting statements. Save the abstention or referral as a distinct outcome, report its frequency and workload, and include those cases when describing performance. The LLM's self-reported confidence is not an established error probability.
 
-> Apply the frozen labeling rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. Once labeling is complete, compare with the independently adjudicated reference. Report the confusion table, errors by category, uncertainty, referral rate, and the prespecified acceptance criteria. Do not tune the prompt on this sample or drop difficult cases. List disagreements for human review.
+<!-- prompt:evaluate-labeling -->
+::: {#request-evaluate-labeling .prompt}
+> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+:::
+<!-- /prompt:evaluate-labeling -->
 
-If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§13).
+If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§17).
 
 ## Check sensitivity to the measurement procedure
 
@@ -981,28 +1208,37 @@ A result can depend on model choice, prompt wording, examples, or presentation o
 
 Keep each alternative's outputs and failures. Report meaningful changes in the substantive conclusion rather than selecting the prompt that yields a preferred answer. Repeated identical inputs can also reveal variation, but consistent outputs are not necessarily valid outputs.
 
-For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§13–14).
+For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§17–18).
 
-# 13. Write and revise from the research record {#research-writing}
+# 17. Write and revise from the research record {#research-writing}
 
 Research revisions are incomplete if the analysis changes but the manuscript still describes the earlier result. Give the agent a maintained source for each substantive claim and number, then check the rendered manuscript against that record.
 
 For example, correcting a sample rule may change an estimate in a results file while leaving the old number in an abstract, table note, or slide. Ask for those uses to be traced and updated together, with unresolved claims flagged. You remain responsible for the interpretation and final wording.
 
-<!-- Revised 2026-10-01: manuscript drift, retained provenance, an approved
-inclusion-criteria revision, and teaching advice about full-draft generation.
-Adapted downstream into the HCPDS deck and its writing content module. -->
+## Do the right numbers make it to the manuscript? {#trace-manuscript}
 
-## Follow a number into the manuscript
+The analysis can be correct while the manuscript reports an old value, the wrong contrast, or an interval copied from a different run. Ask the agent to preserve a trace from each number to its saved result, including abstract text, captions, supplements, and slides.
 
-This invented trace shows the record to request, not an empirical finding:
+![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="A saved result and its file fingerprint connect to a named table entry, the manuscript text, and the final rendered document. A changed source triggers review of every use."}
 
-| Result source | Quantity | Manuscript use | Check |
-|:--|:--|:--|:--|
-| `outputs/tables/main-estimates.csv`, row `heat_contrast` | −12.4 grams; interval −18.1 to −6.7 | Table 1 and Results paragraph 2 | Value, units, direction, interval, and rounding match |
-| Same row and analysis sample record | Defined exposure contrast and population | Figure caption and Methods | Wording describes the quantity actually calculated |
+<!-- example:manuscript-results -->
+For the synthetic example, `outputs/analysis/contrasts.csv`, row `sample`, supplies this sentence:
 
-> Trace every main result in the manuscript to its saved source, including the abstract and captions. Report mismatches in values, units, samples, uncertainty, or interpretation. Update only from verified outputs; list claims with no supporting source.
+> In the synthetic sample, the estimated mean birthweight difference between ten and five hot days was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the observed age and smoking distribution.
+
+The saved source has a SHA-256 fingerprint beginning `48ce37057432`. The example's comparison record retains the full-precision values. The sentence identifies the contrast and averaging sample and labels the result as synthetic; it does not turn this teaching calculation into an empirical claim.
+<!-- /example:manuscript-results -->
+
+A *checksum* is a digital fingerprint calculated from a file's contents. Save it with the source path, run identifier, and exact row and column used. If the contents change, the fingerprint usually changes too. It helps establish which file supplied the number; it does not establish that the file, selected entry, or interpretation is correct. Two exports with different formatting can have different checksums but the same estimates.
+
+Have the agent compare both the source manuscript and the final PDF or Word document with the saved outputs. Check signs, units, interval endpoints, sample sizes, rounding, and labels. For a figure, confirm the plotted quantity, axis scale, legend, and caption. An automatic insertion can faithfully transfer the wrong entry, so retain a check on meaning as well as bytes.
+
+<!-- prompt:trace-manuscript -->
+::: {#request-trace-manuscript .prompt}
+> Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
+:::
+<!-- /prompt:trace-manuscript -->
 
 ## What to ask for
 
@@ -1010,9 +1246,13 @@ This invented trace shows the record to request, not an empirical finding:
 
 Make the source restriction explicit in each request:
 
-> Use only what is in `METHODOLOGY.md`, `outputs/tables/`, and the figure captions. Where a claim, a number, or a reference is not in those files, leave a bracketed gap and list it at the end. Do not fill it from what you know.
+<!-- prompt:draft-from-results -->
+::: {#request-draft-from-results .prompt}
+> Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
+:::
+<!-- /prompt:draft-from-results -->
 
-*Your writing conventions.* Give the agent the style guidance you maintain (§6, Appendix A). Ask it to state the point directly, name what each claim refers to, and explain the connections between ideas. A short sentence still needs enough context to be understood. Remove repeated explanations and decorative closing lines. Include conventions specific to the manuscript, such as tense, terminology, and the placement of limitations. When you make a recurring correction, record it in the relevant instruction file.
+*Your writing conventions.* Give the agent the style guidance you maintain (§8, Appendix A). Ask it to state the point directly, name what each claim refers to, and explain the connections between ideas. A short sentence still needs enough context to be understood. Remove repeated explanations and decorative closing lines. Include conventions specific to the manuscript, such as tense, terminology, and the placement of limitations. When you make a recurring correction, record it in the relevant instruction file.
 
 *Keep the manuscript consistent with the analysis.* Copying results by hand can introduce errors, and later analysis changes can leave old numbers or claims in the text. Ask the agent to transfer values from saved outputs and retain their provenance: the source file and version or run, exact table entry, units, and any rounding or transformation. Link methods statements to the code that ran and the recorded decisions; link research claims to results or literature sources. Keep these links with the manuscript so a changed result can be traced to every affected passage, table, and caption. Flag missing support for review.
 
@@ -1026,23 +1266,23 @@ For a formatted Office deliverable, [Cowork](https://claude.com/docs/cowork/over
 
 If you already write in markdown or Quarto, you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
 
-*Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§5), so their reasons remain available at the next revision.
+*Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§7), so their reasons remain available at the next revision.
 
-> Draft the response to reviewer 2 in `docs/briefs/2026-09-02-r2-response.md`. Quote each comment in full, then respond. My decisions are in the bullets under each comment in `docs/notes/r2-plan.md`; do not add concessions I did not make. Where the manuscript changed, cite the new line numbers from `manuscript/revision-1.docx`. Lead each response with the answer.
+<!-- prompt:reviewer-response -->
+::: {#request-reviewer-response .prompt}
+> Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
+:::
+<!-- /prompt:reviewer-response -->
 
 *Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the LaTeX slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
-
-## What the agent does
-
-It drafts from the supplied evidence, traces numbers to saved outputs, and identifies missing support. It can compare manuscript versions, prepare responses from your decisions, and propose a talk outline using the existing figures. Keep a source file and a returned document for each editing round so that changes remain reviewable. A request to leave unsupported claims blank reduces invention but does not guarantee it; check the draft.
 
 ## What you check
 
 Ask for a table tracing each reported number to its source file, row, and column. Check those locations against the manuscript, and investigate any number the agent cannot trace.
 
-Open every cited source and confirm that it supports the associated claim (§8). Do this for references added during drafting as well as those already in the project.
+Open every cited source and confirm that it supports the associated claim (§11). Do this for references added during drafting as well as those already in the project.
 
-Compare the methods section with the scripts, including software defaults (§10). The agent can help by reading each paragraph beside the relevant code and listing discrepancies. Resolve any difference between the intended analysis and what actually ran before finalizing the description.
+Compare the methods section with the scripts, including software defaults (§13). The agent can help by reading each paragraph beside the relevant code and listing discrepancies. Resolve any difference between the intended analysis and what actually ran before finalizing the description.
 
 Read a paragraph aloud to check whether it uses your language and explains the point as you would. Revise phrasing that sounds unlike you or leaves the reader to infer a connection.
 
@@ -1052,482 +1292,605 @@ Check the AI-use disclosure and its placement against the journal's instructions
 
 Check the target journal's current instructions at submission. Policies differ in the uses they permit, the details required, and where the statement belongs. As of September 2026, [ICMJE's author guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html) calls for disclosure of AI assistance, human responsibility for the submitted work, and no AI authorship. Use the journal's own instructions to determine the applicable wording.
 
-Keep a record of the tool and model information available, dates, tasks performed, affected parts of the work, and how the authors checked them. Distinguish language assistance, code generation, and an LLM used to produce measurements (§14). The last requires enough methodological detail to assess the measurement procedure, not just an acknowledgment.
+Keep a record of the tool and model information available, dates, tasks performed, affected parts of the work, and how the authors checked them. Distinguish language assistance, code generation, and an LLM used to produce measurements (§16). The last requires enough methodological detail to assess the measurement procedure, not just an acknowledgment.
 
 An adaptable disclosure template is:
 
 > We used [tool and observed model/version; dates] to [specified tasks]. The authors reviewed [affected text or outputs] and checked the analysis using [checks actually completed]. For LLM-derived measurements, the Methods describe the inputs, prompts, evaluation, and human review. The authors take responsibility for the reported work.
 
-Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§14), even when private working notes are removed.
+Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§18), even when private working notes are removed.
 
 Treat peer-review material separately. This guide's conservative working rule is to keep confidential manuscripts and applications you are reviewing out of agent sessions. Follow the journal's or funder's current reviewer policy; permission to use an agent on your own work does not authorize its use on someone else's confidential submission.
 
-## What goes wrong
+## Preserve the coauthor record
 
-*An unsupported or altered number.* The draft contains a transposed digit, an incorrectly rounded value, or an estimate absent from the results. Requiring the agent to use saved outputs reduces this risk; checking each number against its source is still necessary.
+Keep every returned manuscript before reconciling edits. A regenerated document can overwrite a coauthor's changes, comments, or accepted wording. Compare versions, propose the reconciliation, and inspect the accepted copy in the application your collaborators use. Record any scientific decision that changes the analysis in `METHODOLOGY.md` and rerun the affected checks.
 
-*The invented reference.* Plausible authors, a real journal, a year, and no such paper (§8). Open every one.
+A gap in the evidence should remain visible. If the agent cannot locate a reported value, verify a reference, or reconcile the written method with the executed code, resolve that gap before polishing the sentence around it.
 
-*Methods for the model you meant.* The section describes the intended model; the script ran another (a default, a dropped term, a different clustering). Cross-check against the code, not against `METHODOLOGY.md` alone.
+# 18. Reproduce and hand off the research {#research-handoff}
 
-*Prose that does not sound like you.* The draft uses generic phrasing or explanations you would not give. Revise it and record recurring corrections in your writing instructions.
+A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff exposes dependencies that your familiar working folder can hide. It also gives your future self a usable record when a reviewer asks for a revision.
 
-*The round trip that loses edits.* The agent accepts the coauthor's tracked changes silently, or overwrites the returned draft with a regenerated one. Keep every returned `.docx`, dated; diff before anything is merged.
+For example, the heat-contrast figure may build because yesterday's fitted model is still cached on your laptop. In a separate copy, it fails because neither the model nor the command that creates it is supplied. A clean-copy test turns that hidden dependency into something you can preserve or rebuild.
 
-*The generic disclosure.* “AI was used” leaves the reader unable to assess its role. State the tool and available version information, dates, tasks, affected parts of the work, and checks the authors performed, following the journal's requirements.
+## Preserve a route from inputs to results
 
-*Confidential review material enters the session.* Check the reviewer policy before exposing any material, including correspondence and quotations in notes. The conservative rule above avoids assuming permission from the account alone.
+![](figures/research-handoff.svg){#fig-research-handoff fig-alt="A research package contains approved inputs or access instructions, code and commands, a software record, and reference results. These travel together to a separate copy for reproduction."}
 
-*Slides that repeat the abstract.* A sequence of dense text slides gives the audience little help following the results. Return to the outline and identify the claim and supporting evidence each slide needs to convey.
+The recipient needs the inputs or their permitted acquisition route, the software record, the commands, and the results to compare. An existing project may have gaps: an unexplained exclusion, a missing source file, or an undocumented manual step. Ask the agent to inventory what exists and mark those gaps. Do not invent past decisions or backdate a record.
 
-# 14. Reproduce and hand off the research {#research-handoff}
-
-A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. A clean-copy test exposes dependencies that your familiar working folder can hide.
-
-For example, the figure builds on your laptop because an old fit object is cached there. In a separate copy, the same command fails because neither that object nor the command that creates it is supplied. The failure identifies something to preserve or document before handoff.
-
-Keep this reproduction test distinct from independent implementation (§11). A fresh implementation tests whether the written method is sufficiently precise and whether separately built analyses agree. Rerunning the original code tests whether a collaborator can reproduce the supplied analysis. Both require the right inputs and enough detail about software-dependent behavior; neither establishes the scientific validity of the method.
-
-The agent can inspect the project, record the sequence that produces its results, and identify missing inputs or software. Have it save those details as run instructions and test them before hand-off.
-
-
-## Start from the state you actually have
-
-An existing project may lack a useful history. Ask the agent to inventory the current inputs, code, software, outputs, and known decisions. Distinguish documented facts from plausible reconstructions. Mark an unexplained exclusion or missing input as a gap; do not invent past decisions or backdate a record. You can start version control now, but that first checkpoint records the current state.
-
-| Handoff item | What the recipient needs |
+| Preserve | Include |
 |:--|:--|
-| Inputs | Identity, permitted access route, expected location |
-| Software | Language/package versions and restoration instructions |
-| Commands | Which steps rebuild fits, tables, and figures |
-| Evidence | Checks performed, discrepancies, and untested routes |
-| Known gaps | Missing history or inputs and who can resolve them |
+| Inputs | Versions or fingerprints, a data dictionary, expected paths, and access instructions |
+| Code and commands | The actual scripts and their execution order, including checks |
+| Software | Language and package versions, system dependencies, and restoration instructions |
+| Reference results | The selected tables, figures, and supporting numerical outputs |
+| Evidence | What was rerun, where, discrepancies, and any untested route |
 
-## What to ask for
+The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as `targets` or Snakemake track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
 
-*An execution sequence.* For a small R project, `run-all.R` can run the scripts in order and stop on an error (Appendix A.4). In Stata, a master do-file serves the same purpose. Have the agent identify any manual input or hidden dependency and document it. A nearly finished paper still needs a repeatable sequence, even if a sophisticated runner would add little value.
+Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for R and Python restoration. Record relevant system libraries too. In Stata, record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
 
-*The environment.* Record the language version, packages, and relevant system dependencies before changing a working setup. A lockfile records package versions for restoration: `renv.lock` for an R project using renv, or `uv.lock` for Python using uv. The toolkit's environment section covers installation and use. For Stata, record the Stata version, the do-files' version settings, and the versions and sources of community commands. A version statement alone does not preserve user-written packages.
+## Say what kind of reproduction you tested
 
-*An input manifest.* For every required input, record its version or checksum, how an authorized researcher obtains it, and where the analysis expects it. A fresh copy of the code will not contain inputs excluded from git. Public downloads may change, so preserve the version used when sharing terms allow it. For restricted data, provide access instructions and a synthetic example that tests execution without disclosing the real records.
+![](figures/reproduction-routes.svg){#fig-reproduction-routes fig-alt="Three reproduction routes start at different points: saved estimates rebuild a table, approved inputs rerun the analysis, and assigned documents rerun model inference. Each route has its own test and evidence."}
 
-*Proportionate checks.* Keep a quick check for routine edits, a way to rerun affected steps, and a full reproduction check for a release. Required calibration and validation scripts belong in that documented sequence, with the conditions that trigger a rerun. Pipeline runners such as targets or Snakemake become useful when dependencies or expensive steps make this difficult to manage; the toolkit explains them.
+Rebuilding a table from saved estimates, rerunning the complete analysis from approved data, and obtaining new responses from an LLM are different operations. Name the starting point. Saved fit objects or model responses become inputs when you choose a route that starts from them.
 
-> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and their approved acquisition route before running anything. Restore the recorded environment without upgrading it. For shareable inputs, run the documented analysis and compare the reported quantities with the saved results using the agreed tolerances. For restricted inputs unavailable here, run only the synthetic smoke test and state that real-data reproduction remains to be completed in the approved environment. Save commands, logs, and discrepancies. Report failures without changing the analysis or comparison criteria.
+Keep these tests distinct from independent implementation (§15). A fresh implementation checks the written specification and agreement between separately built analyses. Reproduction runs the supplied code and asks whether another researcher can obtain its results. Neither establishes the scientific validity of the method.
 
-*A reviewable deposit.* Assemble a separate snapshot folder before uploading to OSF, Dataverse, Zenodo, or the repository your field uses. Include the code, environment records, input manifest, data documentation, run instructions, and the inputs and outputs you are allowed to share. Document where access restrictions prevent a public reproduction. Decide with coauthors which contributors and licenses belong on the record.
+<!-- prompt:reproduce-project -->
+::: {#request-reproduce-project .prompt}
+> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
+:::
+<!-- /prompt:reproduce-project -->
 
-## What the agent does
+Inspect the resulting output comparisons as well as the exit status. Identifiers and deterministic counts should match exactly; numerical estimates need suitable tolerances, and stochastic methods may require a comparison that accounts for Monte Carlo variation. Record the actual environment and input versions used. Investigate a discrepancy before updating the reference result to match the new run.
 
-It turns the actual scripts into an execution sequence, checks that the README describes that sequence, and records what the environment and inputs require. It runs the permitted clean-copy test and saves evidence of the outcome. For a deposit, it inventories the snapshot, traces reported results to files, and flags material that needs a human decision before release.
+For restricted data, provide instructions for authorized access and a synthetic example that exercises the code. Running that example establishes that the example runs. It does not reproduce results from protected records. Have an authorized researcher complete the latter test within the approved environment and record the outcome.
 
-The package should distinguish rebuilding the published tables from rerunning an expensive fit or querying a model service again. If a table is reconstructed from saved fit objects or saved LLM responses, say so. Those saved objects are inputs to that reproduction route and need to be preserved and documented accordingly.
+## Prepare a reviewable research deposit
 
-## What you check
+Assemble a separate snapshot for the repository your field uses, such as Dataverse, OSF, or Zenodo. Include the documentation, code, environment records, and permitted inputs and outputs. State what access restrictions prevent a public reader from reproducing. Agree the contributors, affiliations, licenses, and relationship to the manuscript version with your coauthors.
 
-Inspect the execution log and comparison results. A successful exit is insufficient if the sample, coefficients, labels, or plotted values differ. Use exact comparison for identifiers and deterministic counts, suitable numerical tolerances for floating-point calculations, and justified Monte Carlo tolerances for stochastic analyses (§11). Record which environment and input versions were actually tested.
+![](figures/deposit-review.svg){#fig-deposit-review fig-alt="A separate deposit snapshot is reviewed for permitted contents, complete instructions, scientific provenance, and correct metadata before publication."}
 
-A synthetic smoke test establishes that the supplied example runs. It does not reproduce the restricted-data results. Have an authorized researcher complete and record that test in the approved environment before claiming the empirical analysis reproduces.
+<!-- prompt:review-deposit -->
+::: {#request-review-deposit .prompt}
+> Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.
+:::
+<!-- /prompt:review-deposit -->
 
-For a public snapshot, review both its contents and its claims:
+Review both the contents and their claims. Remove credentials, confidential correspondence, personal paths, and restricted records from the proposed public copy. If the deposit includes repository history, review that history too. Preserve AI-use disclosure and any prompts, model details, and evaluation records needed to understand the research. Removing irrelevant working notes should not erase a measurement procedure or its limitations.
 
-- Remove credentials, restricted records, confidential correspondence, personal paths, and working notes that do not belong in the release. If the release includes repository history, review the history as well as the current files.
-- Preserve scientific provenance: AI-use disclosure, the model and prompts used for measurement, the evaluation procedure, and the checks on generated code. Removing an agent authorship trailer is separate from documenting its role in the research.
-- Confirm that the README describes the implemented model, units, inputs, and outputs. Check that filenames resolve and that access instructions are usable.
-- Check authors, affiliations, licenses, and the relationship between the deposit version and manuscript version.
+Test the snapshot's instructions, not just those in the original project. Check filenames, input access, reported units, and the intended model. A successful reproduction from the working folder does not establish that all necessary files reached the deposit.
 
-Use searches to locate likely problems and read the surrounding material. Neither a keyword sweep nor a complete read guarantees that a credential or misleading statement will be found; combine them with an inventory and the reproduction test.
-
-> Review the proposed deposit folder against the manuscript, code, and input manifest. Report confidential material, credentials, unresolved paths, missing dependencies, incomplete input-access instructions, and claims the code does not support. Preserve relevant AI disclosure and research provenance, including prompts and model-evaluation records. Check contributor metadata and licenses. Do not upload, delete files, rewrite history, or remove methodological documentation; propose specific corrections for review.
-
-## What goes wrong
-
-*A hidden input makes the original folder special.* A cached fit or local data file never appeared in the manifest. The clean-copy test should identify it and record how it is supplied.
-
-*A conversation supplies an undocumented step.* A recode or manual exclusion reaches the results but never reaches a script or decision record. Ask the agent to trace each reported output back through its inputs and transformations.
-
-*Reproduction is overstated.* Only the synthetic example ran, or only the table-rendering step ran from saved results. Report exactly what was tested and what remains necessary.
-
-*An archive is cleaned too aggressively.* Removing every mention of an agent erases disclosure or a measurement procedure. Remove irrelevant working material while preserving what a reader needs to understand and assess the research.
-
-*A correction is needed after deposit.* Check the repository's policy rather than assuming all changes are impossible. As of September 2026, [Zenodo permits edits to published metadata](https://help.zenodo.org/docs/deposit/manage-records/), including creators, without changing the DOI. Replacing research files involves different versioning rules. Owners can delete a record within its initial 30-day window; later removal requests go through support and need justification. Review before publication because a correction cannot recall copies already downloaded.
+Publish only after this review. A later repository correction cannot recall copies already downloaded. Keep the deposited version and the tested manuscript version linked so that a subsequent revision begins from a known state.
 
 <!-- ===================== REFERENCE ===================== -->
 
 # Appendix A. Starter files {#starter-files}
 
-This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §5. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects.
+Use these starter files to establish a small, readable project record. Replace the example details with your own, and keep conventions your lab already uses. The files are instructions and documentation; they do not enforce access controls.
 
-## A.1 The global file
+For the heat-and-birthweight project, the project file points to the scientific specification and the saved analysis commands. The global file instead points to conventions that should apply across studies. Download either file below, then adapt it before asking the agent to use it.
 
-Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it imports (§5). Replace the first paragraph with your own description and retain only rules you want the agent to follow across your projects.
+## A.1 Global instructions
 
+Chapter 8 explains the global location and how specialist files are loaded. Save the adapted content as your global `CLAUDE.md`, or use `AGENTS.md` with the explicit import described there. The references to specialist files are routing instructions; create only the files you intend to maintain.
+
+[Download global instructions](resources/starter-files/global-AGENTS.md){.download-button download="AGENTS.md"}
+
+<!-- starter:global -->
 ```
 # How I work
 
-Quantitative social scientist. R first, Stata for collaborators, some Python.
+[Describe your research role and the software you normally use.]
 
-## Projects
-- One folder per paper; use version control when agreed. Its AGENTS.md says where things live.
-- `data/raw/` is read-only. Derived files go in `data/processed/`.
-- Paths via `here::here()`. No `setwd()`, no absolute paths.
-- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+## Before a task
+- Read the project's instructions and current state. Preserve accepted work.
+- Identify the requested result, constraints, and evidence needed to accept it.
+- Ask about consequential ambiguity; do not silently substitute another analysis.
 
-## Code
-- R: tidyverse style, the native pipe `|>`, one script per stage.
-- Preserve the project environment. Record package versions before changes.
-- Use the existing lockfile tool; see the toolkit for adding one.
-- Comment what a block is for, not what each line does.
+## Conventions
+- Read CONVENTIONS.md when organizing a project or naming files.
+- Read CODING.md before writing or changing code.
+- Read MODELING.md before statistical modeling or simulation.
+- Read WRITING.md before drafting prose for people to read.
+- Read TOOLCHAIN.md before adding or changing software.
 
-## Statistics
-- State the estimand before fitting. Report every estimate with an interval.
-- Assess the method with a calibration plan before substantive use (§11).
-- Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
+These files sit beside this file. If a needed file is absent, report the gap.
 
-## Writing
-- Short sentences. Point first, then the qualification. Prose, not bullets.
-- Methods: the equation first, then the prose that explains it.
-- American spelling. Oxford comma.
+## Research work
+- Preserve original data. Derive new files with saved code.
+- Use independently runnable steps with declared inputs and outputs.
+- Keep scientific decisions and their reasons in the project record.
+- Verify observed outputs before reporting success. Keep failed checks visible.
 
-## Access and limits
-- Read only inputs approved for this service. Never expose restricted files.
-- Public-data acquisition may add approved new files; preserve originals.
-- Never overwrite original data. Rebuild derived files from recorded scripts.
-- Never rewrite shared git history.
-- Ask before publishing, adding a service, or exceeding the agreed resources.
+## Limits
+- Use only inputs and services approved for the project.
+- Ask before publishing, sending messages, expanding access, or adding a service.
+- Do not delete recovery copies or rewrite shared history without approval.
 
-## Every session
-- Read `STATUS.md`, then `TASKS.md`, at the start.
-- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+## Finishing
+- Update the task list and current-state record from evidence.
+- Report what changed, how it was checked, and what remains unresolved.
 ```
+<!-- /starter:global -->
 
-## A.2 The project file for a paper
+## A.2 Project instructions
 
-Save this in the project's `CLAUDE.md`, or in `AGENTS.md` with the import described in §5. Replace the example paper's details with your own, using the headings to organize its description, file locations, conventions, and access limits. For restricted-data work, follow the synthetic-input approach in §3 and keep real inputs inaccessible to the agent's process. Naming an off-limits path does not prevent the agent from reading it.
+Save the adapted content in the project's `CLAUDE.md`, or in `AGENTS.md` with an explicit import (§7). Replace the example paths with commands and files that exist in your project. Keep protected inputs in approved storage beyond the agent's configured reach when the service may not process them (§§3–4).
 
+[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="AGENTS.md"}
+
+<!-- starter:project -->
 ```
 # heat-birthweight
 
-Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
-Target: Demography. Decisions live in METHODOLOGY.md, the current state in
-STATUS.md, open tasks in TASKS.md.
+Synthetic teaching study of heat exposure and birthweight. Every individual
+record is invented; results are not evidence about actual pregnancies.
 
-## Where things live
-- Restricted microdata is held separately in approved storage, unavailable here.
-- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
-- `data/processed/`: derived files. Use `synthetic-natality.parquet` here.
-  It contains invented records, not a de-identified extract.
-- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
-  `run-all.R` runs all three in order.
-- `outputs/`: figures and tables the manuscript reads.
-- `manuscript/`: the paper, Quarto to Word for the coauthor.
+## Read first
+- specification.md: estimands, estimator, input rules, uncertainty, and checks.
+- STATUS.md: current state and next decision.
+- TASKS.md: work remaining and dated completions.
+- METHODOLOGY.md: scientific decisions and their reasons.
 
-## This project
-- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
-  The two must agree before a number goes in the paper.
-- Estimand: the effect of one more third-trimester day above 35 °C on county
-  mean birthweight. Two-way fixed effects with county-clustered standard errors.
-- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+## Files
+- data/raw/: approved original synthetic data; preserve unchanged.
+- code/: saved analysis and validation steps.
+- outputs/: fits, contrasts, figures, and verification records.
+- manuscript/: text linked to the saved outputs.
+- README.md: actual commands and environment restoration instructions.
 
-## Off limits
-- Work only from the synthetic file and approved public downloads above.
-- Do not substitute real natality inputs or request access to restricted storage.
-- Never send any file under `data/` to a web search or an external service.
+## Working rules
+- Follow the written specification. Report missing inputs or ambiguities.
+- Do not invent observations, alter the estimand, or weaken a failed check.
+- Save full-precision results; apply rounding only for presentation.
+- Keep simulation outputs separate from the single-dataset analysis.
+- Record the exact input and software versions used.
+- Inspect changed outputs and record verification before reporting completion.
+
+## Access
+Only approved synthetic material belongs in this project. No protected birth
+records are available here. Ask before adding external services or publishing.
+These instructions do not enforce file or network permissions; use the
+configured access controls for those boundaries.
 ```
+<!-- /starter:project -->
 
-## A.3 TASKS.md
+## A.3 Current state
 
-Save this in the project root. Use the three headings shown, a short entry for each task, and a date on each finished item. Have the agent read it after `STATUS.md` at the start of a session and update it as work progresses (§5). The opening comment explains how to maintain the list.
+Save this as `STATUS.md` at the project root. Rewrite it as the state changes; keep task history in `TASKS.md` and scientific reasoning in `METHODOLOGY.md`.
 
+[Download STATUS.md](resources/starter-files/STATUS.md){.download-button download="STATUS.md"}
+
+<!-- starter:status -->
 ```
-# Tasks
+# STATUS
 
-<!--
-One line per task. Move lines between sections as status changes; never
-delete a line, move it to Done with the date. An In Progress line says
-what is left, not what was done. Read this file at session start; update
-it before the session ends.
--->
+Last updated: [date]
+
+## Current state
+[What exists and what the evidence establishes. Keep this a short snapshot.]
+
+## Next decision or action
+[The next substantive step and any required input.]
+
+## Blocked or unverified
+[Missing inputs, unresolved decisions, or claims not yet checked.]
+
+## Standing facts
+[A few facts needed to resume. Keep decisions and their reasons in METHODOLOGY.md.]
+```
+<!-- /starter:status -->
+
+## A.4 Tasks
+
+Save this as `TASKS.md`. Keep unfinished work visible, and date completed entries. A short list is easier to use than an exhaustive transcript of agent actions.
+
+[Download TASKS.md](resources/starter-files/TASKS.md){.download-button download="TASKS.md"}
+
+<!-- starter:tasks -->
+```
+# TASKS
+
+Move tasks between these sections as their status changes. Add a date when a
+task finishes. An in-progress entry states what remains to be done.
 
 ## To Do
-- Write the simulation study for the main model (guide §12).
-- Stata mirror of the main model, from METHODOLOGY.md only (guide §13).
+- Confirm the scientific specification and the approved inputs.
+- Implement the analysis and its verification plan.
 
 ## In Progress
-- (nothing)
 
 ## Done
-- 2026-08-27 — Scaffolded the project in the paper shape (guide §7).
 ```
+<!-- /starter:tasks -->
 
-## A.4 A minimal execution script
+## A.5 Scientific decisions
 
-Use the language and entry point your project already has. This R example runs three existing scripts in order. Save it as `run-all.R` at the project root and ask the agent to run it from that folder. It stops when a script raises an error; it cannot detect an incorrect result unless the scripts include the relevant checks.
+Save this as `METHODOLOGY.md`. Record a decision when it changes what the study estimates, how it is implemented, or how its evidence should be interpreted. Link to the maintained specification rather than keeping inconsistent copies.
 
+[Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
+
+<!-- starter:methodology -->
 ```
-scripts <- c(
-  "code/clean-natality.R",
-  "code/model-heat-bwt.R",
-  "code/_final/figures.R"
-)
-for (script in scripts) {
-  message("Running ", script)
-  source(script, local = new.env(parent = globalenv()))
-}
+# METHODOLOGY
+
+## Current specification
+[Link to the maintained estimands, estimator, sample, input rules, and checks.]
+
+## Decisions
+
+### [Date]: [Decision]
+- Question or discrepancy:
+- Evidence considered:
+- Decision and reason:
+- Affected code, outputs, and manuscript passages:
+- Verification and remaining limitations:
 ```
+<!-- /starter:methodology -->
 
-The scripts should read and write their declared files rather than rely on objects left over from an interactive session. A Stata project can use a master do-file for the same purpose. Add required validation steps to the documented sequence (§14); a quick plotting command need not rerun them all. The toolkit explains command runners and dependency tracking if the project grows beyond this arrangement.
+## A.6 Git exclusions
 
-## A.5 .gitignore
+Save this as `.gitignore` and adapt it to the project's sharing policy. This conservative example excludes inputs by default; permitted synthetic or public inputs and provenance records may belong in a repository. An ignore rule neither blocks agent access nor removes a file already tracked in git.
 
-Where it goes: the project root. This conservative starting example excludes data, generated models, logs, and personal settings. Adapt it to the project's sharing policy: an approved public input or provenance manifest may belong in the repository. Ignoring a path does not restrict agent access and does not remove an already tracked file. Review shared settings before committing them; managed policy and local settings also affect what a session enforces (§3).
+[Download the exclusion file](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 
+<!-- starter:gitignore -->
 ```
-# Exclude inputs by default; share approved files deliberately (chapter 3)
+# Exclude research inputs by default; share permitted files deliberately.
 data/raw/
 data/processed/
 
-# Rebuildable or large
+# Rebuildable environments and caches
+.venv/
+renv/library/
+renv/staging/
 outputs/models/
 logs/
-_old/
-
-# Editor and OS leftovers
 .Rproj.user/
 .Rhistory
 .DS_Store
 
-# Personal agent settings; the shared .claude/settings.json is committed
+# Personal settings and secrets
 .claude/settings.local.json
+.env
+.env.*
+!.env.example
 ```
+<!-- /starter:gitignore -->
 
-## A.6 Adaptable project layouts
+## A.7 Adapt the structure to the output
 
-These are examples for projects that have outgrown the minimal folder in §2. Keep an established lab layout when it already makes inputs, code, outputs, and decisions easy to find. Add a directory because the project needs its contents, rather than creating empty folders to match a template.
+Chapter 6 shows a paper project with original and processed data, code, outputs, and a manuscript. A data-curation project needs acquisition scripts, source records, validation reports, and rebuild instructions. A presentation or website project needs editable source, assets, and reviewed deliverables. Keep an established structure when it already makes these roles clear.
 
-### A research paper
+For execution, use the project's existing master do-file or runner. The downloadable research example (§10) supplies runnable commands and its environment records; chapter 13 explains how to make meaningful steps independently runnable. A generic script that lists filenames cannot substitute for documenting the dependencies in your actual project.
 
-```
-heat-birthweight/
-|-- CLAUDE.md              # purpose, access rules, existing commands
-|-- README.md             # collaborator's starting point
-|-- TASKS.md               # unfinished work and completed tasks
-|-- METHODOLOGY.md         # decisions and their reasons, when needed
-|-- run-all.R              # or the existing master do-file
-|-- code/
-|   |-- validation/        # checks required for the reported results
-|   |-- _experiments/      # investigations not in the final analysis
-|   `-- ...                # cleaning, modeling, and figure scripts
-|-- data/
-|   |-- raw/               # approved originals; preserve unchanged
-|   `-- processed/         # generated by recorded code
-|-- outputs/
-|   |-- figures/
-|   `-- tables/
-`-- manuscript/            # Word, Quarto, or the existing format
-```
+# Appendix B. Prompt bank {#prompt-index}
 
-Keep restricted inputs in approved storage that the agent process cannot reach. Document how authorized researchers can obtain them in the input manifest (§14). Record environment versions, and add a current-state file when the task list no longer explains where the project stands. The optional global/project convention from §5 can replace the single `CLAUDE.md` as needed.
+These requests are starting points to adapt to your project. Each is also shown beside its explanation in the guide, with a link here to that exact location. Supply the relevant files and decisions before pasting a request; a prompt does not configure permissions or establish scientific validity.
 
-### Data acquisition or curation
+[Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
-```
-county-data/
-|-- CLAUDE.md
-|-- README.md              # acquisition and rebuild instructions
-|-- TASKS.md
-|-- code/                  # acquire, validate, transform
-|-- data/
-|   |-- sources.md         # origin, request, date, terms, checksum
-|   |-- raw/               # approved original responses
-|   `-- processed/         # documented transformed files
-`-- outputs/
-    `-- reports/           # counts, missingness, and exceptions
-```
+<!-- collection:prompts -->
+## Start a new research project
 
-Keep identifiers, source requests, and transformation decisions inspectable. Add checkpoints if acquisition can be interrupted. Environment managers, queues, and runners are optional additions from the toolkit; the provenance record is needed regardless of the tools.
+Establish a project structure that fits the intended output.
 
-### A text or presentation project
+[Explanation and checks in chapter 6](#request-scaffold-project).
 
-```
-research-brief/
-|-- CLAUDE.md
-|-- README.md              # how to produce the deliverable
-|-- source/                # editable text or slides
-|-- assets/                # images, references, and other inputs
-`-- output/                # reviewed deliverables
-```
+::: {.prompt}
+> Create a project for the research described below, using our established workspace and conventions. Propose a small folder structure suited to the deliverable, then create the approved structure and initial project instructions. Preserve any existing files. Record missing scientific decisions instead of inventing them, and show me where inputs, code, results, and the manuscript belong.
+:::
 
-Keep the team's existing Word or slide workflow if it serves the collaboration. A plain-text publishing pipeline may add a template and a build command, as described in the toolkit. Preserve the reviewed deliverable when its exact appearance matters; generated caches and temporary renders need not be shared with it.
+## Organize an existing project
 
-# Appendix B. Requests by research task {#prompt-index}
+Make a recoverable reorganization without changing the research.
 
-Find copyable requests beside their explanation and expected evidence:
+[Explanation and checks in chapter 6](#request-restructure-project).
 
-- [First session](#first-session).
-- [Project context](#project-context).
-- [Reusable procedures](#reusable-procedures).
-- [Literature](#literature).
-- [Data acquisition](#data-acquisition).
-- [Analysis workflows](#research-workflows).
-- [Checking analysis](#checking-analysis).
-- [LLM measurements](#llm-measurements).
-- [Writing](#research-writing).
-- [Handoff](#research-handoff).
+::: {.prompt}
+> Inspect this project and propose a clearer structure that preserves original data and accepted work. Identify scripts, outputs, duplicates, and uncertain files; do not decide that uncertain files are disposable. After I approve the plan, make a recovery checkpoint, reorganize the files, update affected paths, and save a before-to-after file map. Check that the existing analysis still runs and report unresolved dependencies.
+:::
 
-# Appendix C. Glossary {#glossary}
+## Write project instructions
 
-*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
+Make a new session useful without retelling the whole project.
 
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§11).
+[Explanation and checks in chapter 7](#request-project-context).
 
-*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§4).
+::: {.prompt}
+> Read the project files and draft a concise project instruction file describing the purpose, current commands, file locations, scientific specification, and access limits. Separate observed facts from questions for me. Link to detailed records rather than copying them into the instructions. Preserve existing authored instructions and show proposed revisions before replacing them.
+:::
 
-*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §5.
+## Resume a project
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§14). *One-command build* means the same.
+Use the saved state to choose the next task.
 
-*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§10, §11).
+[Explanation and checks in chapter 7](#request-resume-project).
 
-*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §5).
+::: {.prompt}
+> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Tell me the current state, any conflict between the records and the files, and the next useful action. Do not treat an unverified claim of completion as evidence that a check passed.
+:::
 
-*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§5, §4).
+## Leave a useful handoff
 
-*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§10).
+Record enough evidence for the next session.
 
-*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§3).
+[Explanation and checks in chapter 7](#request-close-session).
 
-*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§5).
+::: {.prompt}
+> Update TASKS.md with completed and remaining work. Rewrite the affected parts of STATUS.md to describe the current state, without adding a running history. Record scientific decisions and their reasons in METHODOLOGY.md. Include the outputs checked, failures or gaps, and the next action; do not mark work complete without evidence.
+:::
 
-*Effort.* How much the model reasons before it acts; a setting with levels (§4).
+## Separate shared and project instructions
 
-*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§9).
+Avoid copying changing rules across every project.
 
-*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§10).
+[Explanation and checks in chapter 8](#request-shared-conventions).
 
-*Global file.* An instruction file holding conventions that apply across your projects (§5). Project-specific instructions belong in the project file, defined here under *brief*.
+::: {.prompt}
+> Review these project instructions for conventions I use across projects. Propose a short global instruction file that points to specialist files for coding, modeling, writing, project structure, and installed tools. Keep this study’s scientific decisions and access exceptions in the project. Identify duplicated or conflicting rules and show proposed changes before applying them.
+:::
 
-*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§5).
+## Turn a checked procedure into a skill
 
-*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§4, §14).
+Reuse a procedure after confirming it works.
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§14).
+[Explanation and checks in chapter 9](#request-status-skill).
 
-*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§4, §14); and a statistical model fitted to data (§10).
+::: {.prompt}
+> Create a project-status skill from the handoff procedure we have checked. It should read the project instructions and state files, verify relevant outputs, update the task list and snapshot, and report unresolved issues. Keep the instructions short, name the evidence required, and stop if the project cannot be identified. Test it on this project and show the resulting changes before treating it as reusable.
+:::
 
-*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§11).
+## Make the research specification explicit
 
-*Permission mode.* The setting that decides which actions the agent may take without asking (§4).
+Give implementation and verification the same written target.
 
-*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§4).
+[Explanation and checks in chapter 10](#request-research-specification).
 
-*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§4, §3); and, in Appendix B, a request you type to the agent.
+::: {.prompt}
+> Turn my research decisions into specification.md: state the estimands, population or averaging sample, exposure comparisons, estimator, sample rules, required inputs, uncertainty method, and reported outputs. Identify ambiguities for me rather than choosing silently. Add the agreed verification tolerances and simulation questions. Do not begin fitting until I have reviewed the scientific specification.
+:::
 
-*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§9).
+## Search and verify the literature
 
-*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§5).
+Keep source discovery separate from verified evidence.
 
-*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§5, §9).
+[Explanation and checks in chapter 11](#request-literature-search).
 
-*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§3).
+::: {.prompt}
+> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
+:::
 
-*Session.* One conversation with the agent, with its own context window (§4).
+## Synthesize the papers actually read
 
-*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§4).
+Connect each literature claim to supporting material.
 
-*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).
+[Explanation and checks in chapter 11](#request-literature-synthesis).
 
-# Appendix D. A worked calibration study {#calibration-example}
+::: {.prompt}
+> Using the verified papers and reading records, summarize the evidence relevant to our research question and proposed method. Link each substantive claim to the source and passage that supports it. Distinguish study design, population, estimand, and limitations; report disagreements and missing evidence. Do not infer full-text findings from an abstract or fill gaps from memory.
+:::
 
-### Delegate a calibration study
+## Bring approved data into the project
 
-Calibration assesses how the requested method behaves in specified scenarios. Ask for a written plan before a large run: the estimand, plausible data-generating processes, candidate methods, performance measures, and the precision needed for the comparison. Check the generated outcomes' range, dispersion, dependence, and missingness before interpreting fitted results. A convenient simulation can be a poor representation of the quantity you measure.
+Preserve originals and establish provenance before analysis.
 
-The [ADEMP framework](https://pmc.ncbi.nlm.nih.gov/articles/PMC6492164/) provides a useful structure for this plan. §11 explains how calibration differs from implementation verification and methodological justification, including why a misspecified model can still perform adequately for a particular estimand or decision rule.
+[Explanation and checks in chapter 12](#request-bring-data).
 
-The compact example below demonstrates the workflow. It uses an entirely synthetic county-month design and 200 repetitions per effect size. Its intervals deliberately use the normal cutoff 1.96 with county-clustered standard errors. This is the procedure being evaluated; it is not a demonstration of a finite-cluster t interval or bootstrap. If your intended procedure uses either, the calibration must use it too.
+::: {.prompt}
+> Inspect the approved inputs and their documentation. Record where each came from, the version or acquisition date, permitted use, expected units and identifiers, and a file fingerprint. Preserve the originals and create separate scripted checks for the required columns, record keys, ranges, and missingness rules in specification.md. Report discrepancies before transforming or excluding records; never replace missing research inputs with simulated observations.
+:::
 
-> Reproduce the teaching calibration in `code/_experiments/simulate-main-model.R` using the synthetic county-month design. Use the three stated effect sizes, 200 repetitions each, and the specified normal-cutoff intervals with county-clustered standard errors. Save bias, coverage, rejection rate, and Monte Carlo uncertainty. Identify which features of the demonstration would need changing for the actual analysis. Do not read restricted data, modify the empirical pipeline, or describe this small demonstration as validation of the paper's method.
+## Build a modular analysis workflow
 
-## The recorded teaching run
+Make meaningful analysis steps independently runnable.
 
-For the calibration request, this is the original teaching script, retained with the results of its recorded run:
+[Explanation and checks in chapter 13](#request-modular-workflow).
 
-```
-# code/_experiments/simulate-main-model.R
-# Does the planned model recover a known effect on this design? (guide §12)
-library(here); library(dplyr); library(tidyr); library(purrr); library(fixest)
+::: {.prompt}
+> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+:::
 
-design <- readRDS(here("data", "processed", "county-month-design.rds"))
-# columns: county, year, month, hot_days (the real design; no outcome)
+## Plan and run known-truth checks
 
-simulate_once <- function(design, beta) {
-  cs <- unique(design$county); ys <- unique(design$year)
-  county_u <- tibble(county = cs, u_c = rnorm(length(cs), 0, 40))
-  year_u   <- tibble(year = ys,   u_y = rnorm(length(ys), 0, 15))
-  design |>
-    left_join(county_u, by = "county") |>
-    left_join(year_u, by = "year") |>
-    mutate(bwt = 3300 + beta * hot_days + u_c + u_y + rnorm(n(), 0, 60))
-}
+Assess implementation and statistical behavior separately.
 
-fit_once <- function(dat) {
-  m <- feols(bwt ~ hot_days | county + year, data = dat, cluster = ~county)
-  tibble(est = coef(m)[["hot_days"]], se = se(m)[["hot_days"]])
-}
+[Explanation and checks in chapter 14](#request-simulation-plan).
 
-truths <- c(none = 0, small = -1, main = -15)   # grams per additional hot day
-M <- 200
+::: {.prompt}
+> Propose a simulation plan for specification.md. Define plausible generating worlds, separately calculated truth, estimator-recovery measures, interval or decision-rule checks, and Monte Carlo uncertainty. Check outcome support and dispersion before running; count failures as well as successes. After I approve the plan, run the saved analysis unchanged in each world and report where it fails. Keep simulated files separate from study inputs and do not change the method to make a check pass.
+:::
 
-results <- expand_grid(truth = names(truths), sim = seq_len(M)) |>
-  mutate(fit = map2(truth, sim, function(t, s) {
-    set.seed(s)
-    fit_once(simulate_once(design, truths[[t]]))
-  })) |>
-  unnest(fit) |>
-  mutate(beta = truths[truth])
+## Implement the analysis independently
 
-summary <- results |>
-  group_by(truth) |>
-  summarise(bias     = mean(est - beta),
-            coverage = mean(abs(est - beta) <= 1.96 * se),
-            reject   = mean(abs(est / se) > 1.96),
-            mc_se    = sqrt(reject * (1 - reject) / M))
+Give a fresh agent only the common specification and inputs.
 
-readr::write_csv(summary, here("outputs", "tables", "sim-main-model.csv"))
-```
+[Explanation and checks in chapter 15](#request-independent-implementation).
 
-On the synthetic design of 25 counties, five years, and 1,500 county-months, the recorded run produced:
+::: {.prompt}
+> Working only from specification.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+:::
 
-| truth | bias | coverage | reject | mc\_se |
-|:--|--:|--:|--:|--:|
-| none (0) | −0.04 | 0.955 | 0.045 | 0.015 |
-| small (−1) | −0.04 | 0.955 | 0.545 | 0.035 |
-| main (−15) | −0.04 | 0.955 | 1.00 | 0 |
+## Compare completed implementations
 
-Under the null, the estimated rejection rate is 0.045, with a Monte Carlo standard error of about 0.015. That is consistent with 0.05 but too imprecise to distinguish 0.05 from 0.06. Coverage of 0.955 is also an estimate from these scenarios, not proof that the standard errors behave well under other forms of dependence or misspecification.
+Locate the first meaningful disagreement.
 
-At the small effect, estimated power is 0.545; at the large effect all 200 runs reject. The plug-in standard error printed as zero in the last row does not imply certainty. A substantive report needs an interval suitable for a proportion at the boundary. The repeated bias across rows reflects the shared random draws and this linear construction.
+[Explanation and checks in chapter 15](#request-compare-implementations).
 
-For a real calibration study, choose the repetition count from the precision required for the decision. Near a rate of 0.05, about 1,900 independent repetitions give a Monte Carlo standard error of 0.005. Slow models may require staged runs or a narrower comparison; they do not make an imprecise rate more conclusive. Preserve the planned scenarios, failed fits, and changes to the study rather than reporting only the favorable cells.
+::: {.prompt}
+> Compare the completed implementations against specification.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+:::
 
-For larger studies, save the execution route described in §10 and use the [toolkit queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) when a batch needs unattended scheduling.
+## Design controlled LLM research runs
 
-# Appendix E. Troubleshooting {#troubleshooting}
+Specify what each headless run may receive.
 
-Use the observed failure to choose the next check. Preserve the current files and useful error output before asking the agent to try again.
+[Explanation and checks in chapter 16](#request-controlled-llm-runs).
+
+::: {.prompt}
+> For this review-generation and judging protocol, list the exact inputs, prompts, instructions, tools, and connected services allowed in each stage. Design fresh runs that do not inherit other cases’ conversations or outputs. Propose harmless marker tests for unintended file, memory, instruction, and tool access, including an allowed-input positive control. Save raw responses, failures, retries, configuration, and model information. Report untested routes; headless execution alone is not evidence of isolation.
+:::
+
+## Evaluate a frozen labeling procedure
+
+Keep evaluation separate from prompt development.
+
+[Explanation and checks in chapter 16](#request-evaluate-labeling).
+
+::: {.prompt}
+> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+:::
+
+## Trace numbers into the manuscript
+
+Find stale values and unsupported claims in the rendered document.
+
+[Explanation and checks in chapter 17](#request-trace-manuscript).
+
+::: {.prompt}
+> Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
+:::
+
+## Draft from the research record
+
+Keep evidence gaps visible while writing.
+
+[Explanation and checks in chapter 17](#request-draft-from-results).
+
+::: {.prompt}
+> Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
+:::
+
+## Draft a response from your decisions
+
+Preserve the author’s decisions and link replies to revisions.
+
+[Explanation and checks in chapter 17](#request-reviewer-response).
+
+::: {.prompt}
+> Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
+:::
+
+## Test a clean-copy handoff
+
+Establish what another researcher can actually rerun.
+
+[Explanation and checks in chapter 18](#request-reproduce-project).
+
+::: {.prompt}
+> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
+:::
+
+## Review a proposed deposit
+
+Check the snapshot before publication.
+
+[Explanation and checks in chapter 18](#request-review-deposit).
+
+::: {.prompt}
+> Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.
+:::
+<!-- /collection:prompts -->
+
+# Appendix C. Troubleshooting {#troubleshooting}
+
+A failed action is easier to diagnose when you preserve what happened. Keep the current files and useful error output, then choose a check that distinguishes a tool problem from a research problem.
+
+For example, an R job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
 
 | What happened | Next action | Where the fuller explanation lives |
 |:--|:--|:--|
-| The answer sounds certain but has no evidence | Ask for the source or saved output; keep unsupported claims out of the manuscript | §§8, 11, 13 |
-| The session loses track of decisions | Save the current state and next action, then start a focused session | §5 |
-| Old memory conflicts with current files | Identify and correct the stale record; inspect which instructions loaded | §§5–6 |
-| Routine work asks for approval repeatedly | Inspect the effective mode and permissions; adjust only the required scope | §4; [toolkit chapter 2](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) |
-| The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§4, 11 |
-| A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §11 |
-| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §10; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
+| The answer sounds certain but has no evidence | Ask for the source or saved output; keep unsupported claims out of the manuscript | §§11, 15, 17 |
+| The session loses track of decisions | Save the current state and next action, then start a focused session | §7 |
+| Old memory conflicts with current files | Identify and correct the stale record; inspect which instructions loaded | §§7–8 |
+| Routine work asks for approval repeatedly | Inspect the effective mode and permissions; adjust only the required scope | §§4–5; [toolkit chapter 2](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) |
+| The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
+| A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
+| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
 | R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit Appendix A](https://dss-agentic-toolkit.pages.dev/chapters/working-environment.html) |
-| An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–4 |
+| An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
 | Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |
 
 If the same problem recurs, improve the instruction or check that would have prevented it. Repeatedly restarting the conversation without changing its inputs usually preserves the cause.
+
+# Appendix D. Glossary {#glossary}
+
+Use these definitions when a term interrupts the research workflow. For example, an *estimand* names the quantity you intend to report; an *estimator* is the procedure used to calculate it. The chapter references return you to the term in use.
+
+*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
+
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§15).
+
+*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
+
+*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
+
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§18). *One-command build* means the same.
+
+*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§14).
+
+*Chain of custody.* The record of where protected data and their copies travel, who or what can access them, and how retention and deletion can be established (§3).
+
+*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§17).
+
+*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
+
+*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§7, §5).
+
+*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§13).
+
+*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§4).
+
+*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§7).
+
+*Effort.* How much the model reasons before it acts; a setting with levels (§5).
+
+*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§12).
+
+*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§10).
+
+*Estimator.* A procedure that uses the data to estimate the specified research quantity (§10).
+
+*Global file.* An instruction file holding conventions that apply across your projects (§8). Project-specific instructions belong in the project file, defined here under *brief*.
+
+*Headless agent.* An agent run from a saved request without an interactive conversation. Headless execution does not itself control all the context or tools available to the run (§16).
+
+*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§7).
+
+*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§5, §16).
+
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§18).
+
+*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§5, §16); and a statistical model fitted to data (§13).
+
+*Modular workflow.* Independently runnable research steps with explicit inputs and saved outputs; each step performs a coherent operation and can reuse shared functions (§13).
+
+*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§15).
+
+*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§16).
+
+*Permission mode.* The setting that decides which actions the agent may take without asking (§5).
+
+*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§5).
+
+*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§5, §3); and, in Appendix B, a request you type to the agent.
+
+*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§12).
+
+*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§7).
+
+*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §12).
+
+*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§4).
+
+*Session.* One conversation with the agent, with its own context window (§5).
+
+*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§5).
+
+*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).

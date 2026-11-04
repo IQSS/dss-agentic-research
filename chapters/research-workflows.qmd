@@ -1,99 +1,70 @@
 ---
-title: "10. Build an analysis you can rerun selectively"
+title: "13. Build a modular analysis workflow"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b8963a;--coat-dk:#8f7228;--coat-lt:#d1b05a;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/><rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/><rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/><path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><g transform="rotate(-12)"><rect x="-30" y="-30" width="44" height="44" rx="7" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><g fill="#262c2d"><circle cx="-19" cy="-19" r="3.5"/><circle cx="3" cy="-19" r="3.5"/><circle cx="-8" cy="-8" r="3.5"/><circle cx="-19" cy="3" r="3.5"/><circle cx="3" cy="3" r="3.5"/></g></g><g transform="translate(24,18) rotate(20)"><rect x="-16" y="-16" width="32" height="32" rx="5" fill="var(--c-rose)" stroke="#4f5856" stroke-width="2"/><g fill="var(--c-paper)"><circle cx="-7" cy="-7" r="3"/><circle cx="7" cy="7" r="3"/></g></g></g></g></svg></div>
 
-# 10. Build an analysis you can rerun selectively
+# 13. Build a modular analysis workflow
 
-A research analysis changes repeatedly: a coauthor requests another sample, a reviewer asks for a sensitivity check, or a figure needs new labels. If every change reruns a large script from import to manuscript, revisions become slow and hard to inspect. Ask the agent to build small steps with saved inputs and outputs, and commands that run the part you need.
+Research analyses change repeatedly. A monolithic script can be convenient for interactive exploration, but rerunning its imports, transformations, model fits, and figures for every small edit wastes work and makes errors harder to locate. A modular workflow lets an agent change and run the relevant operation while preserving the inputs and outputs needed to check it.
 
-In the heat-and-birthweight example, changing a plot label should read the saved prediction table and redraw the figure. Changing the sample restriction should rebuild the analysis file, fit the affected models, and update their outputs. Both are repeatable workflows, but they require different work.
+In the birthweight example, changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the model, recalculating contrasts, and updating the figure and manuscript. The difference should be visible in the saved workflow, rather than reconstructed by the agent each time.
 
-![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Many small analysis scripts and one recipes file support two routes: redraw a figure from saved estimates, or rebuild the sample and rerun the affected analysis."}
+![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Several modular analysis scripts and one small command file support selective execution: redraw from saved contrasts, or rebuild all affected steps after a sample change."}
 
-## Save steps that can run separately
+## Make each research operation independently runnable {#modular-steps}
 
-Give each script one coherent job: acquire a source, construct the analysis sample, fit a specified model, calculate a contrast, or draw a figure. A script can serve one project-specific task; it need not become a general software package. Name its inputs and outputs and make it fail clearly when a required input is absent.
+Separate coherent operations with explicit inputs and saved outputs. Reuse common functions instead of copying them between scripts. Each step should start from recorded inputs, not from objects left in an interactive session or decisions remembered only in chat.
 
-A small command file can name the useful routes through those scripts. [Toolkit chapter 6](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) uses `just`; a master do-file, an existing build command, or a short R driver may already be sufficient. The researcher should be able to run a saved command without asking an agent to remember the sequence. A dependency runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) adds automatic decisions about which steps are stale.
+| Operation | Reads | Leaves behind |
+|---|---|---|
+| Prepare the analysis file | Original records, dictionary, approved sample and transformation rules | Derived data, sample ids, and checks. |
+| Fit the specified model | Analysis file and specification | Saved fit, settings, and diagnostics. |
+| Calculate reported quantities | Fit and defined exposure contrasts | Full-precision estimates and uncertainty. |
+| Draw the figure | Saved contrasts and figure specification | Plotting data and rendered figure. |
+| Check manuscript values | Selected results, manuscript source, and result-to-location map | Comparison report and discrepancies. |
 
-| Requested change | Work to repeat | Work to reuse |
-|:--|:--|:--|
-| Change Figure 2's labels | Figure script and visual check | Saved predictions and fit |
-| Change an approved sample rule | Sample construction, affected fits, predictions, reporting | Unchanged source acquisition |
-| Correct the manuscript's formatting | Document build and rendered-page check | Checked results |
+Modularity is not a target number of files. Two related operations may reasonably share a script, and a function may serve several analyses. The useful property is that the operation you need can run on its own, with its dependencies supplied. These steps remain useful in an IDE as well as for an agent.
 
-> Organize the approved analysis into scripts with explicit inputs and outputs. Keep related operations together, but separate costly fits from plotting and reporting. Give me commands for the main analysis, the figures from saved estimates, and the quick checks. Demonstrate which files each command changes. Preserve the current results and explain any discrepancy.
+## Build or refactor without changing the analysis {#build-modular-workflow}
 
-## Specify the research work
+For a new project, have the agent implement the scientific specification in that structure. For an existing project, preserve a known set of outputs, then refactor before making substantive revisions. Compare samples and results before and after the structural change. Moving code should not quietly change a missing-value rule or model option.
 
-Start with the permitted input files, their documentation, and your project's conventions. State the output you need and the decisions already made. Ask the agent to flag ambiguities that affect the result, while proceeding with routine work within that specification. An extra approval round is useful when something is unresolved; it need not precede every transformation or plot.
+<!-- prompt:modular-workflow -->
+::: {#request-modular-workflow .prompt}
+> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+:::
+<!-- /prompt:modular-workflow -->
 
-| Task | Specify | Ask to see |
-|:--|:--|:--|
-| Data understanding and cleaning | Whether to inspect or modify data; documented variable meanings; approved transformations; unresolved codes or joins | Questions tied to specific files and fields, transformation records, unmatched records, sample changes, checks on derived values |
-| Modeling | Sample, specification, estimation settings, exact postestimation quantities | Implemented specification, sample membership, diagnostics, saved estimates, calibration and independent comparisons |
-| Visualization | Source quantities, intended comparison, labels, scales, uncertainty | Plotting data, mapping from columns to visual elements, rendered figure, checks against saved estimates |
+The researcher supplies consequential choices. For this example that includes the 10-minus-5 hot-day contrast, its standardization distribution, age-specific comparisons, and the HC3 uncertainty calculation. “Report the effect” is too vague if the agent could substitute a regression coefficient for the requested contrast.
 
-### Understand and clean a dataset
+Require failure when a necessary input is absent or a stated check fails. An empirical workflow must never substitute simulated data just to finish. In this wholly synthetic teaching project, the generator is an explicit input-producing step with its own provenance.
 
-When a dataset is unfamiliar, separate learning what it contains from changing it. Ask for questions tied to particular fields and documentation. “The value 9 appears in this field, but the codebook describes only 0 and 1” is useful. Silently treating 9 as missing is a research decision made without you.
+## Save commands for the useful routes {#saved-commands}
 
-For the heat-and-birthweight example, use approved public or synthetic files:
+A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains `just` setup and use.
 
-> Inspect the synthetic birth records and county-month heat file named in `CLAUDE.md`, alongside their data dictionaries. Identify the observation unit, key fields, duplicate keys, missing-value codes, and any discrepancy between the files and documentation. Do not alter data yet. List questions that affect the planned join or derived variables, with the field and evidence behind each question.
+| Request | Repeat | Reuse |
+|---|---|---|
+| Change the figure's labels | Figure code and visual check | Fit and contrast table. |
+| Revise an approved sample rule | Sample, fit, contrasts, figure, and affected manuscript checks | Unchanged original acquisition. |
+| Change the estimator | Fit, postestimation, relevant simulation and independent checks, downstream outputs | Permitted unchanged inputs. |
+| Correct document formatting | Document build and rendered-page check | Checked research results. |
 
-Once the rules are settled, give them explicitly:
+An existing Stata master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as `targets` or Snakemake determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
 
-> Implement the approved cleaning rules in `METHODOLOGY.md`. Preserve the original files. Join each birth to its county-month heat record, requiring at most one heat record for each key. Keep unmatched births flagged for review; do not drop them or fill their exposure values. Save the derived file, the script, and a report of duplicate keys, unmatched records, row counts before and after each step, and checks on the derived values. Stop if a join duplicates birth records. Do not replace missing inputs with simulated values.
+## Inspect the outputs at the affected steps
 
-The resulting report should let you account for the sample and trace each derived value to a recorded transformation. For a consequential pipeline, ask fresh agents to implement it independently from the same original inputs and agreed rules (§11). Agreement supports implementation fidelity; it does not establish that the exclusion or transformation rules were scientifically appropriate.
+Ask the agent to identify which files each command reads and changes. Check the resulting figure against its saved plotting table. After a data change, check the analysis sample and derived values before interpreting the estimates. When a result differs, the saved intermediate outputs help locate where the implementations diverged.
 
-### Fit a model and produce the requested quantities
+Keep exploratory work identifiable. Once a check supports the reported analysis, include it in the documented validation sequence and say when it must rerun. A caption change should not trigger a costly simulation; a change in the estimator may require one. The next two chapters explain simulation and independent implementation in detail.
 
-Name the estimand and the model as precisely as you would in an analysis plan. Include weights, clustering, missing-data handling, finite-sample corrections, and the quantities you want after estimation. “Fit the model and report the effect” leaves room for the agent to choose a coefficient when you wanted a standardized contrast.
+## Keep long jobs moving {#unattended-jobs}
 
-> Implement the main model in `METHODOLOGY.md` on the approved analysis file. Save the exact specification, estimation sample identifiers, software settings, diagnostics, and the postestimation quantities listed there at full precision. Flag any unavailable option or unidentified parameter rather than substituting another specification. Keep the real-data analysis separate from all simulation code. Report discrepancies without adjusting the model to remove them.
+Save the command, inputs, outputs, and log before launching a long calculation. A queue such as `pueue` can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
 
-### Draw a figure from saved results
+Control parallelism according to each job's memory and CPU needs; a slot is not necessarily one core. A local queue does not make a sleeping computer calculate or preserve running processes through every reboot. For work beyond local resources, use your institution's approved research-computing service; at Harvard, consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 
-A plotting task should identify which results to display and what comparison the figure should support. This avoids a polished plot that quietly changes the denominator, aggregates away a subgroup, or omits uncertainty.
+Judge completion from the queue/process state, log, and expected outputs. A chat saying that a command was submitted is not evidence that the result exists. Reusing completed pipeline steps after an interruption is different from resuming an individual model fit, which needs support from the fitting program.
 
-> Build the planned exposure-response figure from the saved prediction table, without refitting the model. Use hot days on the horizontal axis and predicted birthweight in grams on the vertical axis. Show the saved interval bounds and the groups specified in the figure plan. Save the plotting script, the exact plotting data, and the figure. Report any missing groups or intervals; do not interpolate missing estimates or change the scale without asking.
-
-Inspect the plotting data beside the rendered figure. Check selected points and interval endpoints against the saved results, and confirm that the labels and scale describe the actual quantities.
-
-## What you check
-
-Compare the deliverables with the request. For a join, account for unmatched and duplicated records. For a model, compare the sample, settings, and exact reported quantities. For a figure, check how the values in the source table appear as points, lines, or intervals in the plot. Use independent implementations for important results, with suitable exact, numerical, or Monte Carlo tolerances (§11).
-
-Simulation checks and independent implementations belong in the saved workflow too (§11). Rerun them when the relevant method or inputs change, not whenever a caption changes.
-
-Keep exploratory scripts in `_experiments/`. Once a check supports the reported analysis, make it part of the documented validation sequence, for example under `code/validation/`, and record when it must rerun. A figure-label edit need not rerun a large calibration study; a change to the estimator may.
-
-## What goes wrong
-
-*An undocumented choice keeps the pipeline moving.* The agent guesses a missing-value code, drops an unmatched record, simplifies the model, or changes a plot denominator. Ask it to surface unresolved decisions and show the evidence for completed steps.
-
-*Simulation enters the real-data pipeline.* An unavailable input is replaced with plausible values and the analysis finishes. Keep simulation inputs and outputs separate, and require the empirical pipeline to fail when required inputs are absent.
-
-*The check changes until it passes.* A comparison tolerance grows, an assertion disappears, or difficult scenarios are removed. Have the agent report the failure and its cause before proposing a change.
-
-*The output looks convincing.* A clean table, a converged fit, and a polished figure can all implement the wrong request. Check the underlying quantities and sample, not the presentation alone.
-
-## Keep long jobs moving
-
-For a long fit, have the agent save a runnable script and a log. Without extra tools, run it in your existing RStudio or Stata application and bring the permitted output back to the agent. A job queue can manage recurring long jobs; the toolkit's queue section explains submission, resource limits, and status checks. A queue runs locally and does not make a laptop compute while asleep or survive every reboot with its processes intact.
-
-Compacting a conversation, closing an app, and terminating a process are different events. Do not infer job status from the chat. Check the process or queue state, the log, and the expected output before reporting completion. A pipeline runner ([toolkit chapter 8](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html)) can reuse completed steps after an interruption; resuming a fit within a step requires the fitting program's own checkpoint support.
-
-When the work exceeds local resources, follow your institution's research-computing route. The agent can draft a job script, but the resource request, permitted environment, and resulting files still need review.
-
-> **Harvard.** Consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/) for compute access and the appropriate environment for the data. Use the current cluster guidance for submission and data restrictions; an agent-generated job script is not evidence that either is correct.
-
-## When an agent step itself runs unattended
-
-Some batches need an agent to perform a bounded task for each item, rather than just run saved analysis code. A headless invocation accepts a request, performs the task without an interactive conversation, and saves a result. For example, it could turn each approved document into a structured extraction with a failure record when the required fields are missing.
-
-Record the request and inputs, set limits on permitted tools and retries, and check a small batch before submitting the rest. [Toolkit chapter 18](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html) covers the mechanics. If those extractions become research measurements, control the information available to each run and evaluate their quality (§12). Headless execution makes a task unattended; it does not itself make the context isolated.
+Some tasks require a model or agent for every item rather than execution of saved analysis code. [Chapter 16](#headless-agents) discusses headless agents, controlled inputs, and how to assess those outputs.

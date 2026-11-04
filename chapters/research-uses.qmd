@@ -6,40 +6,52 @@ title: "1. How agents can help your research"
 
 # 1. How agents can help your research
 
-Research often slows down between the substantive decisions: locating the right files, implementing a revision, checking what changed, and getting the new results into a manuscript. An agent can do much of that work inside your project. The opportunity is to spend less time moving information between applications and more time deciding what the research should establish and whether the evidence supports it.
+Research depends on more than getting an answer quickly. We need to know what was done, whether it matches the question, and whether someone can reproduce it. An agent can help maintain that connection while doing much of the coding, searching, checking, and documentation. Used well, it can make research faster, more robust, reproducible, and auditable.
 
-Suppose a collaborator asks for a figure with a different age grouping. An agent can find the saved estimates, identify whether they support that grouping, revise the relevant script, run it, and open the figure. If the grouping requires a new analysis, it should say so. The useful result is a checked figure and a saved way to recreate it, with a record of what changed.
+Suppose a collaborator changes an inclusion rule. The agent can identify the affected analysis steps, rerun them, compare the outputs, and update the manuscript's numbers and methods. It should leave the code, checks, and decision record behind. You can then inspect the consequences and repeat the work without reconstructing a conversation.
 
 ## Three research uses
 
-*Develop ideas.* Use an agent to explore explanations, find counterexamples, or challenge a proposed design. Supply your question and the constraints that matter. Treat the suggestions as possibilities to investigate: the model can generate a plausible account without establishing that it is true.
+::: {.research-use}
+![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="An agent examining research ideas."}
 
-*Develop and run research code.* Delegate data preparation, analysis scripts, figures, document builds, and project maintenance. You choose the research question and method; the agent implements them and supplies evidence about its work. A saved workflow lets you repeat that work without another agent conversation.
+*Develop ideas.* Ask an agent to explore explanations, find counterexamples, or challenge a proposed design. Supply the question and the constraints that matter. Treat its suggestions as possibilities to investigate: a plausible account needs support from research evidence.
+:::
 
-*Use a model within the research method.* An LLM might classify interview passages, extract information from documents, or judge a set of reviews. Its outputs then become research measurements. You need a recorded protocol and evidence about the measurements' quality, not just evidence that the software ran (§12).
+::: {.research-use}
+![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
 
-These uses can occur in the same project, but they need different checks. An idea needs substantive support. A program needs to implement the intended analysis. A model-generated measurement needs evaluation against the construct you intend to measure.
+*Build research workflows.* Delegate data preparation, analysis scripts, figures, document builds, and project maintenance. You choose the research question and method; the agent implements them and supplies evidence about its work. Saved code and commands make that work repeatable.
+:::
 
-![](figures/research-uses.svg){#fig-research-uses fig-alt="Three research uses: explore ideas, build executable research workflows, and produce model-based measurements. Each has a different source of evidence."}
+::: {.research-use}
+![](figures/use-model.svg){.use-icon width="64px" fig-alt="A model processing research material."}
+
+*Use an LLM within the research method.* A model might classify interview passages, extract information from documents, or judge reviews. Its outputs become research material that needs evaluation against the construct you intend to study. A functioning program does not establish the quality of those judgments ([chapter 16](#llm-measurements)).
+:::
 
 ## How an agent works
 
-An agent combines a language model with tools and a loop: choose an action, use a tool, inspect the result, and decide what to do next. Tools let it read files, edit them, run programs, search sources, and view outputs. The available tools and permissions determine its reach.
+An agent combines a language model with tools and a repeated action-and-feedback cycle. It can read files, edit code, run programs, and inspect their outputs, within the access available to it. The diagrams show how that changes the work you can delegate.
 
-For example, a script fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent can read the error and the data dictionary, propose the intended mapping, change the script, and run it again. It has feedback from the project. That feedback makes correction possible; it does not establish that the resulting analysis answers the right question.
+![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent can use tools to perform those steps in the project."}
 
-A chat product may also have tools. The useful distinction is whether the assistant can do the delegated work in your project, rather than requiring you to carry each answer into another application. You can use your existing R, Stata, or Python workflow; adopting an agent does not require changing research languages.
+![](figures/agent-loop.svg){#fig-agent-loop fig-alt="A research request enters a loop: the model chooses an action, a tool performs it, and the result returns to the model. The agent continues or reports the outcome."}
+
+For example, an analysis fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent reads the error and data dictionary, identifies the intended variable, edits the script, and runs it again. The tool output tells it whether execution succeeded; checks against the specification establish whether the change was appropriate.
+
+A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing R, Stata, or Python software; adopting an agent does not require changing research languages.
 
 ## Your role
 
-State the result you want, the constraints, and the evidence you will use to accept it. Review consequential choices and inspect the outputs. Write down project decisions so they survive a conversation. Keep material outside the agent's reach when the service is not permitted to process it.
+State the result you want, the constraints, and the evidence you will use to accept it. Review consequential choices and inspect the outputs. Save project decisions so they survive a conversation. Keep material outside the agent's reach when the service is not permitted to process it.
 
-You do not have to read every generated line of code to supervise well. Known-answer examples, comparisons, source checks, and reproducible runs provide evidence about behavior. When they expose a discrepancy, inspecting a particular calculation can help explain it (§11).
+You do not have to read every generated line of code to supervise well. Known-answer cases and independent comparisons check the analysis; opened sources check its evidential basis, and reruns check reproducibility. When they expose a discrepancy, inspecting a particular calculation can help explain it. The simulation and independent-implementation chapters develop those checks separately.
 
-Some research ends in a dashboard, interactive tool, or service rather than a paper. The same practices apply, with an additional commitment: someone must maintain the tool, support its users, and manage the information it collects. Establish that responsibility and the applicable institutional requirements before involving users.
+Some research ends in a dashboard, interactive tool, or service rather than a paper. The same practices apply, with an additional commitment: someone must maintain it, support its users, and manage the information it collects. Establish that responsibility and the relevant institutional requirements before involving users.
 
 ## A route through the guide
 
-Start with a harmless first session (§2), establish the limits for real research material (§3), and learn to direct a task (§4). Then give the agent project context, shared conventions, and reusable procedures (§§5–7). The research chapters follow sources and data through execution, checking, writing, and handoff (§§8–14). The reference pages hold starter files, links to requests, a glossary, the full calibration example, and troubleshooting.
+*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
-The examples use Claude Code in the Mac desktop app. No terminal or git knowledge is needed to begin. Version control is strongly recommended once you work on a real project; the agent can maintain it. Harvard access details appear beside the relevant topic. The companion [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) supplies additional tools when a research task calls for them.
+The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.

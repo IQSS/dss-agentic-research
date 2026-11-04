@@ -1,0 +1,1 @@
+Update TASKS.md with completed and remaining work. Rewrite the affected parts of STATUS.md to describe the current state, without adding a running history. Record scientific decisions and their reasons in METHODOLOGY.md. Include the outputs checked, failures or gaps, and the next action; do not mark work complete without evidence.

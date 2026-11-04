@@ -1,96 +1,67 @@
 ---
-title: "9. Acquire data with a record of its origin"
+title: "12. Bring data into the project"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#4f6478;--coat-dk:#3b4c5c;--coat-lt:#6a8098;--gloves:#c8a23c;--gloves-dk:#8f7228"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g transform="rotate(-30)"><circle cx="-22" cy="0" r="14" fill="none" stroke="var(--c-mustard)" stroke-width="7"/><rect x="-8" y="-4" width="46" height="8" fill="var(--c-mustard)"/><rect x="24" y="4" width="6" height="10" fill="var(--c-mustard)"/><rect x="34" y="4" width="6" height="8" fill="var(--c-mustard)"/></g></g></svg></div>
 
-# 9. Acquire data with a record of its origin
+# 12. Bring data into the project
 
-Automating acquisition is useful when it saves repeated work without losing the identity or meaning of the data. Preserve the source response and the request that produced it so a later analysis can explain which extract it used.
+The agent needs to work from the intended inputs, with a record of where they came from and how they may be used. That applies whether you receive files from a collaborator, start with data already on disk, or ask the agent to acquire a new extract.
 
-For example, a county-month heat series might be downloaded in yearly batches. If the provider revises a year, a filename alone cannot tell you which values supported the paper. A retrieval date, request, checksum, and transformation record distinguish the original response from the derived analysis file.
+Our example begins with a supplied synthetic birth-record file and its generator. Before fitting anything, the agent should establish that the file contains the promised variables and records, retain the original, and document its origin. Calling the file “births” does not make it observed data; that distinction must survive into the methods and results.
 
-## What to ask for
+## Start with the required inputs {#identify-inputs}
 
-*Access and terms of use.* Before authorizing a download, ask the agent to find how the source provides its data and what its terms allow you to do with them. One option is an *API*: an interface through which a script can request data directly from the source.
+Use the research specification to identify the observation unit, population, dates, variables, units, and documentation needed. Ask the agent to inspect the actual files and their dictionaries. It should surface conflicts with the specification before transforming them.
 
-> Before downloading anything from IPUMS USA, tell me how it is meant to be accessed (an API, a bulk file, a query tool), whether it needs a key, and what its terms say about redistribution, attribution, and linking. Link the current terms and quote the short clauses relevant to this request. Separate those clauses from your interpretation, and flag anything requiring my decision.
+For received data, record who supplied the files, when, which release or extract they represent, and what restrictions accompany them. For a file already on disk, establish its identity from the available evidence and mark missing provenance as unknown. Do not invent a retrospective download history.
 
-Decide whether the proposed download and your intended use are permitted before asking the agent to proceed.
+<!-- prompt:bring-data -->
+::: {#request-bring-data .prompt}
+> Inspect the approved inputs and their documentation. Record where each came from, the version or acquisition date, permitted use, expected units and identifiers, and a file fingerprint. Preserve the originals and create separate scripted checks for the required columns, record keys, ranges, and missingness rules in specification.md. Report discrepancies before transforming or excluding records; never replace missing research inputs with simulated observations.
+:::
+<!-- /prompt:bring-data -->
 
-*Choosing a download method.* Ask the agent to consider these four methods in order and use the first that is permitted and can retrieve the data you need.
+The synthetic example's raw CSV should have 1,200 unique ids, ages 18–40, hot-day counts between 0 and 20, a binary smoking indicator, and positive birthweight. Those are the declared properties of this teaching input. An agent should fail visibly if the supplied file contradicts them, rather than silently dropping records or replacing values.
 
-1. *A structured source.* Look for a documented API or bulk export. The address a webpage uses to request its data, visible in the browser's network panel, may also let a script request the data directly. Check that the source permits this use; a documented interface usually gives clearer instructions than extracting data from a displayed page.
-2. *Fetch and parse.* If there is no suitable data interface, download the webpage and extract its data with a script. This works when the data are already included in the downloaded page.
-3. *A scripted browser.* Use a script to control a browser when the data load only after the page opens, or when obtaining them requires logging in or scrolling. These scripts can be slow and can break when the site changes. Where possible, capture the data the page requests rather than extracting them from its display.
-4. *The agent's own browser.* Use the agent's browser for a one-off task, to explore how a site supplies its data, or when a person needs to complete part of the interaction. For recurring or bulk work, use the exploration to develop a permitted script with saved inputs, outputs, and failure handling.
+## Choose a suitable acquisition route {#acquisition-ladder}
 
-For the first three methods, save the acquisition script in `code/_data-acquisition/` and commit it so the download can be repeated. Actions the agent takes through its own browser do not by themselves produce a script you can rerun.
+When the project needs web-based data, use the first suitable, permitted method in this order:
 
-*The sources.* Ask the agent to use current documentation for the source you need. For example, consult the [Census API guide](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS terms](https://usa.ipums.org/usa/terms.shtml), or [CDC WONDER data-use restrictions](https://wonder.cdc.gov/datause.html). Record the relevant access and sharing terms with the download. An undocumented endpoint visible in a browser is not automatically an authorized collection route.
+1. *API or structured source.* Look for a documented API, bulk download, CSV export, or structured response used by the page. It is usually easier to preserve and repeat a request for data than to interpret a rendered page.
+2. *Fetch and parse a static page.* Save the HTML, then extract its data with a script when the required content is already in that response.
+3. *Scripted browser.* Use a browser script for genuinely dynamic content or required interaction. Where permitted, capture the structured responses requested by the page rather than scraping its display.
+4. *Agent-interactive browser.* Use the agent's browser for reconnaissance, a small one-off task, visual judgment, or a step requiring human participation. It may help discover a structured route for the first tier. It is not the default for thousands of repeated page visits.
 
-*The provenance log.* Ask the agent to record each download in `data/raw/sources.md`, introduced in §5. Each entry identifies the file's source and contains:
+The first three can leave repeatable acquisition code. Interactive browser actions alone do not. Preserve useful exploration by turning a recurring task into a permitted script with explicit inputs, saved responses, and failure handling.
 
-- The exact request: the API call, extract definition, or saved query from the web tool.
-- The download date and the data release or version.
-- The relevant conditions on use, including redistribution and attribution.
-- Who downloaded the file and its checksum. A checksum is a fingerprint of the file's contents that can be used to detect changes.
+Check the source's terms and request limits before collecting. An endpoint visible in a browser is not automatically an authorized route. Sources such as the [Census API](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS](https://usa.ipums.org/usa/terms.shtml), and [CDC WONDER](https://wonder.cdc.gov/datause.html) have their own access and use conditions. A refusal is not an invitation to bypass the source's restrictions through another interface.
 
-Have the agent write the entry as part of the download:
+## Preserve originals and document provenance {#data-provenance}
 
-> Fetch the 2018–2022 ACS five-year county estimates for the variables in `METHODOLOGY.md` § Covariates, through the Census API, with the script in `code/_data-acquisition/fetch-acs.R`. Save the JSON response exactly as received to `data/raw/public/acs-5yr-2022.json`, and add an entry to `data/raw/sources.md` with the request, the date, the vintage, and the file's checksum. Do not modify anything else in `data/raw/`.
+Save a response exactly as received before parsing or cleaning it. Write derived files separately, so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one instead of overwriting the input behind a published result.
 
-*Preserve raw data.* Save each download exactly as received. Cleaning belongs in a separate script that reads from `data/raw/` and writes to `data/processed/` (§5). If cleaning goes wrong, you can rerun it using the saved original. If you download the data again, save a new, dated file beside the old one: later releases may change the numbers, and you need to know which release the paper used.
+| Record | Synthetic example |
+|---|---|
+| Source | Invented records generated for this teaching project; no observed pregnancies. |
+| Original | `data/raw/births.csv`, preserved unchanged after generation. |
+| Reconstruction | Saved generator, seed, and R version in the provenance record. |
+| File identity | A checksum recorded when the original is created. |
+| Documentation | Variable definitions and the analysis specification. |
+| Derived files | Created by recorded scripts; never relabeled as original observations. |
 
-During acquisition, allow the agent to add the files you have authorized and update the provenance log. During analysis, protect the originals from changes. A rule that prevents all writes to `data/raw/` would also block the approved download and log entry, so the access settings must match the task (§3).
+For empirical data, add the actual source address, release/extract identifier, request, retrieval date, and conditions on use and redistribution. Write the provenance entry when the file is saved. A checksum identifies changed bytes; it does not establish whether the source or analysis is correct.
 
-## What the agent does
+Allow specifically authorized acquisitions and provenance updates, then protect the originals during analysis. Read-only access prevents changes but still permits disclosure. Apply the [chain-of-custody decisions](#data-chain-of-custody) to received files, connected services, and any protected derivatives.
 
-The agent reads the source's documentation and writes the acquisition script using the method you agreed on. The script pauses between requests and retries failed requests. It identifies itself to the source with a user-agent string that names the script, and an email address where the source asks for one.
+## Make collection repeatable without wasting requests
 
-The script saves each response before extracting data from it, so an extraction error can be fixed using the saved response. For a long collection, it records progress so an interrupted run can resume without downloading everything again. It also writes the provenance entries. If the agent uses a browser to investigate the site, it reports whether it found a permitted way to request the data through a script.
+Have acquisition code respect request limits, identify itself as required, save raw responses, and record progress. Reuse cached responses and resume interrupted collections. A missing page or failed request should appear in a failure record, not disappear from the resulting dataset. For long collections, the toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) explains unattended execution and completion checks.
 
-Keep API keys out of the script. Supply a key through an approved credential mechanism as an *environment variable*: a named value available to a running program. The script can then read, for example, `CENSUS_API_KEY` or `IPUMS_API_KEY`. Ask the agent to refer to the variable by name without printing the key itself. Code that receives a key can still expose it, so review access and logging. The toolkit's secrets section explains the setup. If a key enters repository history, revoke it and issue a replacement; deleting the current line is insufficient.
+Keep credentials out of source code, logs, and conversations. Use the existing approved credential mechanism; the toolkit's [credential chapter](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) covers setup. If a key enters repository history, removing the current line is insufficient: revoke and replace it through the service's process.
 
-## Read the provenance entry
+## Check what actually arrived
 
-An illustrative entry for a synthetic teaching extract could look like this:
+Compare the saved files with the requested population, period, units, variables, and release. Inspect record counts, key uniqueness, and any unexplained missing inputs. For a web extract, compare selected values with the source's own display or documentation. Confirm the original was not recoded during acquisition.
 
-| Field | Example record |
-|:--|:--|
-| Source | Synthetic county-month heat example; not an observed dataset |
-| Request | Counties 001 and 003; January–December 2025 |
-| Retrieved or generated | 2026-11-02; generator and seed recorded alongside the file |
-| Original | `data/raw/heat-example.csv`; checksum recorded on creation |
-| Derived | `data/processed/heat-monthly.csv`; created by `code/prepare-heat.R` |
-| Checks | County-month keys unique; all requested months accounted for |
-
-For a real source, record its address, extract identifier, version, access terms, and actual request instead. Do not copy this invented provenance into an empirical project.
-
-## What you check
-
-Read the source's terms yourself. Check whether you may include the processed extract in a public deposit, what attribution is required, and whether there are restrictions on linking these data to other datasets. The agent can identify relevant clauses, but you need to decide whether your planned use complies with them.
-
-Check that the provenance entry contains enough detail to repeat the request and write the paper's data section. Confirm which release, sample, or revision was used and that it is consistent across the files used in the analysis.
-
-Check the row and column counts against the source's description, and compare a value with the source's web tool by hand. Confirm that the saved original has not been recoded, renamed, or filtered during the download.
-
-Confirm that the acquisition script is saved in the repository, can be rerun, and has not changed any existing raw data files. Check that no credential appears in the scripts, outputs, or proposed commit. Use a local secret scan that reports locations without printing values; do not paste a secret into the agent conversation to search for it.
-
-## What goes wrong
-
-*The browser did the collection.* Two thousand pages clicked through without saved requests or extraction code leave a weak reproduction record. Use the browser to work out how the site serves its data, then write a script that asks for it the same way.
-
-*Scraping what had an interface.* The agent extracts data from displayed webpages even though the source provides an API or bulk download. Ask it to look for those options before writing a scraper.
-
-*The restriction treated as an obstacle.* The API refuses county-level vital statistics, so the agent drives the web tool by script to get them. That refusal isn't a technical limit to work around; it is the provider saying you may not have those data that way. What the web tool allows by hand and what a script may do with it are different questions, and the terms answer the second.
-
-*Cleaned on the way in.* The "raw" file has been recoded, filtered, and renamed by the fetch script, and no one can say what the source sent. A file is raw only if it is exactly what the source sent; anything you have altered belongs in `data/processed/` instead.
-
-*Overwritten raw.* A refetch replaced last year's file, the numbers in Table 1 shifted, and the cause took a week to find. Use dated files and protect existing originals while permitting specifically authorized acquisitions.
-
-*The key in the repository.* A key appears in a script or remains in an earlier commit. Revoke it and issue a replacement. Keep the replacement out of tracked files, and exclude any local credential file from git before saving it.
-
-*Rate limits hit.* The script sends requests too quickly and the source blocks access, potentially affecting colleagues who share the same network address. Have the script respect the source's request limits, identify itself as required, and reuse saved responses when possible.
-
-*The log written from memory.* You or the agent tries to reconstruct the download details a month later. Write the provenance entry in the same step that saves the file.
+Keep unmatched or ambiguous records visible for a decision. The next chapter shows how to implement approved transformations as modular steps; it should not begin from an undocumented cleaning decision hidden in a download script.

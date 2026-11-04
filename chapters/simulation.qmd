@@ -1,0 +1,88 @@
+---
+title: "14. Test the analysis against known truth"
+aliases:
+  - /chapters/calibration-example.html
+---
+
+<div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b8963a;--coat-dk:#8f7228;--coat-lt:#d1b05a;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/><rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/><rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/><path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><g transform="rotate(-12)"><rect x="-30" y="-30" width="44" height="44" rx="7" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><g fill="#262c2d"><circle cx="-19" cy="-19" r="3.5"/><circle cx="3" cy="-19" r="3.5"/><circle cx="-8" cy="-8" r="3.5"/><circle cx="-19" cy="3" r="3.5"/><circle cx="3" cy="3" r="3.5"/></g></g><g transform="translate(24,18) rotate(20)"><rect x="-16" y="-16" width="32" height="32" rx="5" fill="var(--c-rose)" stroke="#4f5856" stroke-width="2"/><g fill="var(--c-paper)"><circle cx="-7" cy="-7" r="3"/><circle cx="7" cy="7" r="3"/></g></g></g></g></svg></div>
+
+# 14. Test the analysis against known truth
+
+<!-- aliases: calibration-example -->
+
+Simulation gives an agent's analysis a test with an answer you can establish before fitting the model. It can expose broken processing and reporting, and it can show how the proposed estimator behaves under conditions that matter to your research. Those are separate questions: a workflow may run correctly while its estimates perform poorly.
+
+In the heat-and-birthweight example, maternal age has a curved relationship with expected birthweight and modifies the heat association. We can create data with those features, then ask whether the saved workflow recovers the specified exposure contrast. A second world adds curvature to the age-dependent heat association that the fitted model does not include.
+
+## Start with a small, known answer
+
+Before running hundreds of simulated studies, check that one dataset passes through the saved workflow and produces the expected files. Use a small calculation whose answer follows directly from the specification. In this example, the modeled difference between ten and five hot days at age 28 is five times the heat coefficient. At age 36, it also includes the heat-by-age interaction. Comparing those calculations with the saved prediction contrasts checks the reported quantity separately from fitting the model.
+
+Known-answer checks also belong before fitting. A join with a duplicated key should fail where the specification requires one row per person; a missing exposure file should cause a clear failure. It should never trigger the invention of observations to keep the analysis moving. Keep small failing inputs separate from the study data and retain them as regression tests.
+
+![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="A checked synthetic world supplies data to the saved analysis workflow. The workflow's estimates are compared with separately calculated truth. Repeating the process assesses statistical behavior."}
+
+The expected answer must come from the research rules or a separately checked calculation. A test that copies the agent's first result into its expected value will preserve that result, including its mistakes.
+
+## Specify the simulated worlds {#calibration-example}
+
+A *calibration harness* generates repeated datasets, applies the same analysis to each, and records how estimates and decisions behave. The agent can build and run it from a written plan. You choose the relevant worlds and the properties that would make the analysis adequate for its intended use.
+
+The example holds the 1,200 synthetic individuals' ages, smoking indicators, and exposure values fixed while generating a new birthweight for every person in every repetition. Its performance statements therefore concern these covariate values. They do not describe every possible population or sampling design.
+
+| World | Relationship built into the data | What the comparison examines |
+|:--|:--|:--|
+| No heat association | Curved maternal-age relationship and a smoking association; heat contributes nothing | Bias near zero, interval coverage, and false-positive rate |
+| Age-dependent heat association | The heat slope changes linearly with centered age | Recovery of the average contrast and the contrasts at ages 22, 28, and 36 |
+| Curved age-dependent heat association | The heat slope also changes quadratically with centered age | Performance when the fitted interaction omits a feature of the generating process |
+
+All three worlds generate positive birthweights with right-skewed noise whose spread grows with the conditional mean. The fitted model includes the curved main association with age and the linear heat-by-age interaction. Its HC3 uncertainty calculation and normal-reference intervals stay the same across worlds. The stress test is useful precisely because the agent does not quietly change the estimator to match it.
+
+The generator describes an invented teaching population. Its coefficients are not empirical estimates of heat effects, and its ranges alone do not establish biological plausibility. For your research, check that the simulated world can represent the measured quantity: outcome bounds, plausible dispersion, clustering, exposure support, and any constraints between variables. Inspect generated values and distributions before interpreting recovery results. Add missingness, measurement error, dependence, or other complications when they are relevant to the planned claim.
+
+## Calculate truth separately
+
+The example's estimand is the mean predicted difference between ten and five hot days, averaged over the observed age and smoking distribution (§10). For each simulated world, calculate its true value directly from the generating conditional mean, before adding random noise. Calculate the age-specific contrasts from that same mean at the stated ages.
+
+Check this truth calculation independently of the fitted-model code. Reusing the fitting function to supply both the estimate and its supposed truth can reproduce the same mistake on both sides. Also distinguish the target from the random outcome difference in one simulated sample: that sample contains noise.
+
+For a different research problem, the truth may require integration or a very large reference population. Record that approximation and its numerical uncertainty. A coefficient is the correct target only if a coefficient is what the study intends to report.
+
+## Assess recovery and decisions
+
+Recovery concerns whether estimates track the target across useful values. Examine bias, root mean squared error, and the distribution of estimates. Decision-rule calibration concerns interval coverage and, if the analysis uses a significance threshold, rejection under null and non-null worlds. Neither assessment substitutes for the other.
+
+The example runs 400 repetitions per world. A coverage estimate near 95 percent then has a Monte Carlo standard error of about 1.1 percentage points. That is simulation uncertainty from a finite run, not the uncertainty interval for the research estimate. Report uncertainty for rates near zero or one too; observing no failures in 400 runs does not establish a failure probability of zero.
+
+Keep failed fits in the record. Report how many were attempted, what failed, and which denominator was used for each performance measure. Quietly calculating coverage only among successful fits can make an unstable procedure look reliable.
+
+<!-- prompt:simulation-plan -->
+::: {#request-simulation-plan .prompt}
+> Propose a simulation plan for specification.md. Define plausible generating worlds, separately calculated truth, estimator-recovery measures, interval or decision-rule checks, and Monte Carlo uncertainty. Check outcome support and dispersion before running; count failures as well as successes. After I approve the plan, run the saved analysis unchanged in each world and report where it fails. Keep simulated files separate from study inputs and do not change the method to make a check pass.
+:::
+<!-- /prompt:simulation-plan -->
+
+## Read the results before changing the method
+
+<!-- example:simulation-results -->
+The saved run completed 400 repetitions in each world, with no failed fits. The table shows two of the four reported quantities; the download includes every quantity, replicate, and failure check.
+
+| World | Quantity | Truth (g) | Bias (g) | Coverage | Monte Carlo 95% interval |
+|---|---|---:|---:|---:|---|
+| Null | Sample average | 0.0 | -0.2 | 94.5% | 91.8%–96.3% |
+| Null | Age 28 | 0.0 | 0.1 | 94.0% | 91.2%–95.9% |
+| Main | Sample average | -37.8 | 1.0 | 94.2% | 91.5%–96.1% |
+| Main | Age 28 | -40.0 | 1.0 | 94.8% | 92.1%–96.5% |
+| Curved | Sample average | -10.8 | 2.4 | 93.5% | 90.6%–95.5% |
+| Curved | Age 28 | -40.0 | 28.3 | 75.8% | 71.3%–79.7% |
+
+The curved world exposes a limitation: the fitted linear modifier misses the contrast at age 28, although the sample-average contrast performs much better. A satisfactory average can conceal an inadequate age-specific result. These are measured simulation outcomes under the stated invented worlds, not empirical health findings.
+
+![](resources/example-plots/simulation-bias.png){fig-alt="Measured simulation bias for the sample and age-specific contrasts in three invented worlds. The curved-modifier world produces substantial positive bias at age 28."}
+<!-- /example:simulation-results -->
+
+When a result fails the planned check, locate the cause. An incorrect formula, an impossible simulated world, and a method that performs badly under a plausible world call for different responses. Ask the agent to show the relevant data, target calculation, and saved estimates. Preserve the failing run before making a correction.
+
+A model can recover a particular estimand under the worlds tested while describing some individual outcomes poorly. Conversely, an implementation can follow the specification exactly and still have poor coverage or miss an age-dependent association. Record the scenarios, performance, and limitations in `METHODOLOGY.md`; any change to the estimator needs a research justification and a new evaluation.
+
+Simulation cannot establish that the estimand answers the substantive question or that an observational design supports a causal claim. Those judgments remain part of the study design. The next chapter addresses a different uncertainty: whether independently built implementations carry out that design in the same way.

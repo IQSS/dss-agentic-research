@@ -1,0 +1,97 @@
+---
+title: "6. Organize your research projects"
+---
+
+<div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#6f7f76;--coat-dk:#55635b;--coat-lt:#8a9a90;--gloves:#e3d9c1;--gloves-dk:#c9bda0"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g transform="rotate(-8)"><rect x="-30" y="-38" width="60" height="76" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><text x="-22" y="-20" class="tiny" style="fill:#262c2d">AGENTS.md</text><g fill="#cfc8b9"><rect x="-22" y="-12" width="44" height="3"/><rect x="-22" y="-4" width="36" height="3"/><rect x="-22" y="4" width="42" height="3"/><rect x="-22" y="12" width="28" height="3"/><rect x="-22" y="20" width="40" height="3"/></g></g></g></svg></div>
+
+# 6. Organize your research projects
+
+A consistent project structure helps both you and an agent identify the current inputs, code, and outputs. It reduces the chance of editing an obsolete script or reporting a figure from the wrong analysis. These are useful research habits in their own right; agents make the value of recording them more obvious.
+
+Consider a heat-and-birthweight project with `analysis-final/`, `analysis-new/`, and three figure folders. You may remember which files belong together. An agent sees competing candidates. Establishing one documented arrangement gives it a reliable starting point, whether you are beginning a new paper or bringing it into work already underway.
+
+## Give projects a place in a workspace {#workspace-layout}
+
+A *workspace* is a parent folder containing your projects. Grouping projects by their intended output makes them easier to find and lets you reuse a suitable structure. For example:
+
+```
+workspace/
+  papers/
+    heat-birthweight/
+    neighborhood-health/
+  data/
+    weather-extracts/
+  publishing/
+    lab-website/
+    conference-talk/
+```
+
+Use separate folders for independently maintained projects. A short workspace index can list each project's purpose and location, including dependencies such as two papers using the same curated dataset. Open the relevant project in the app. An index helps navigation; it does not grant permission to read every listed project.
+
+Several papers under a grant can share conventions and input sources while retaining their own methods, status, and record of the data version used. Keep shared data in an agreed location and record that dependency in each paper. A multi-project app feature may help coordinate work, but the ordinary folders and records should remain understandable without it.
+
+## Match the structure to the output {#project-shapes}
+
+The structure should make the work easy to locate. A paper needs manuscript source and analysis outputs; a data project needs acquisition code and provenance; a website needs editable content and a build destination. They can share naming conventions without having identical directories.
+
+For the example paper:
+
+```
+heat-birthweight/
+  CLAUDE.md          # starting instructions and pointers
+  README.md          # purpose and execution instructions
+  STATUS.md          # current state
+  TASKS.md           # open and completed work
+  METHODOLOGY.md     # analytical choices and their reasons
+  .here              # project-root marker
+  data/
+    raw/             # inputs preserved as received
+    processed/       # inputs derived by saved code
+  code/              # data preparation, models, and shared functions
+  outputs/
+    figures/
+    tables/
+    models/
+  manuscript/        # editable paper source
+  docs/              # provenance, specifications, and references
+```
+
+Use only the parts the project needs. The next chapter explains the record files; [Starter files](#starter-files) supplies adaptable templates and layouts.
+
+Preserve originals and produce derived files through code. If a derived variable is wrong, correct the script and rebuild the file. Keep manuscript figures and tables associated with the result version that produced them. Decide deliberately which large fits, logs, or inputs belong in version control and which need another preservation route; neither file size nor a directory name settles their scientific value.
+
+Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in R; other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
+
+## Start a new project with a scaffold {#scaffold-project}
+
+A *scaffold* creates the initial folders and record files for a particular kind of output. A reusable scaffold skill can apply your or your lab's conventions, so you do not have to describe the same layout for every paper. You can use an existing skill before learning to author one in chapter 9.
+
+<!-- prompt:scaffold-project -->
+::: {#request-scaffold-project .prompt}
+> Create a project for the research described below, using our established workspace and conventions. Propose a small folder structure suited to the deliverable, then create the approved structure and initial project instructions. Preserve any existing files. Record missing scientific decisions instead of inventing them, and show me where inputs, code, results, and the manuscript belong.
+:::
+<!-- /prompt:scaffold-project -->
+
+Check the resulting tree and the facts written into the records. A scaffold should leave unknown methods, collaborators, or data permissions marked as unknown. It must not turn a plausible guess into a project instruction. The synthetic example contains invented records; a real project's input permissions require their own decision.
+
+## Bring an agent into an existing project {#restructure-project}
+
+Keep an established lab layout if it already makes the current work clear. For a genuinely confusing folder, ask the agent to help restructure it before using it as the basis for repeated analysis tasks.
+
+Begin with a recoverable copy outside the folder being reorganized. Identify the manuscript and outputs you consider current, then ask for a before-to-after map. Modification dates and filenames are clues, not proof of which analysis is authoritative. The agent should inspect script references and ask about unresolved competing versions.
+
+<!-- prompt:restructure-project -->
+::: {#request-restructure-project .prompt}
+> Inspect this project and propose a clearer structure that preserves original data and accepted work. Identify scripts, outputs, duplicates, and uncertain files; do not decide that uncertain files are disposable. After I approve the plan, make a recovery checkpoint, reorganize the files, update affected paths, and save a before-to-after file map. Check that the existing analysis still runs and report unresolved dependencies.
+:::
+<!-- /prompt:restructure-project -->
+
+Retain originals and uncertain duplicates in a documented holding location. After moving files, update paths in scripts, manuscript source, and run instructions. Rerun the work needed to reproduce the current outputs and investigate failures. A successful move must not silently alter the sample or method. Keep the earlier copy until those checks succeed.
+
+A coauthor can continue sending files in their preferred format. Keep an incoming area, preserve what arrived, and record how it maps into the project. The full research procedure includes reviewing ambiguities; a short live demonstration may omit that stop for presentation purposes.
+
+## Keep synchronization separate from recovery
+
+A synced folder is not a substitute for version history or a tested backup. Environment libraries and caches can contain thousands of changing files; two machines should not edit the same Git metadata through a sync service. A plain local working folder is a straightforward starting point, with backups and approved sharing handled separately.
+
+If the project already uses Dropbox or another sync service, preserve that working arrangement while checking how generated directories and repository metadata are handled. The toolkit's [version-control chapter](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers the configuration details. Reorganizing research files should not become an unplanned migration of the machine's software environment.

@@ -1,0 +1,1 @@
+Review these project instructions for conventions I use across projects. Propose a short global instruction file that points to specialist files for coding, modeling, writing, project structure, and installed tools. Keep this study’s scientific decisions and access exceptions in the project. Identify duplicated or conflicting rules and show proposed changes before applying them.

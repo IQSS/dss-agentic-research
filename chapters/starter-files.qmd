@@ -6,206 +6,200 @@ title: "Appendix A. Starter files"
 
 # Appendix A. Starter files
 
-This appendix provides files you can copy and adapt: agent instructions, a task list, an execution script, git exclusions, and project layouts. Each example explains where to save it. Choose only what you need; a new project can begin with the short instruction file in §5. The first two examples repeat that chapter's longer worked files, and A.6 gives layouts for larger projects.
+Use these starter files to establish a small, readable project record. Replace the example details with your own, and keep conventions your lab already uses. The files are instructions and documentation; they do not enforce access controls.
 
-## A.1 The global file
+For the heat-and-birthweight project, the project file points to the scientific specification and the saved analysis commands. The global file instead points to conventions that should apply across studies. Download either file below, then adapt it before asking the agent to use it.
 
-Save this in `~/.claude/CLAUDE.md`, or in an agent-agnostic `AGENTS.md` that it imports (§5). Replace the first paragraph with your own description and retain only rules you want the agent to follow across your projects.
+## A.1 Global instructions
 
+Chapter 8 explains the global location and how specialist files are loaded. Save the adapted content as your global `CLAUDE.md`, or use `AGENTS.md` with the explicit import described there. The references to specialist files are routing instructions; create only the files you intend to maintain.
+
+[Download global instructions](resources/starter-files/global-AGENTS.md){.download-button download="AGENTS.md"}
+
+<!-- starter:global -->
 ```
 # How I work
 
-Quantitative social scientist. R first, Stata for collaborators, some Python.
+[Describe your research role and the software you normally use.]
 
-## Projects
-- One folder per paper; use version control when agreed. Its AGENTS.md says where things live.
-- `data/raw/` is read-only. Derived files go in `data/processed/`.
-- Paths via `here::here()`. No `setwd()`, no absolute paths.
-- Lowercase, hyphenated file names: `clean-acs-2022.R`, not `Clean ACS 2022.R`.
+## Before a task
+- Read the project's instructions and current state. Preserve accepted work.
+- Identify the requested result, constraints, and evidence needed to accept it.
+- Ask about consequential ambiguity; do not silently substitute another analysis.
 
-## Code
-- R: tidyverse style, the native pipe `|>`, one script per stage.
-- Preserve the project environment. Record package versions before changes.
-- Use the existing lockfile tool; see the toolkit for adding one.
-- Comment what a block is for, not what each line does.
+## Conventions
+- Read CONVENTIONS.md when organizing a project or naming files.
+- Read CODING.md before writing or changing code.
+- Read MODELING.md before statistical modeling or simulation.
+- Read WRITING.md before drafting prose for people to read.
+- Read TOOLCHAIN.md before adding or changing software.
 
-## Statistics
-- State the estimand before fitting. Report every estimate with an interval.
-- Assess the method with a calibration plan before substantive use (§11).
-- Fits longer than a few minutes run outside the session, not inside it; I read the log when it finishes.
+These files sit beside this file. If a needed file is absent, report the gap.
 
-## Writing
-- Short sentences. Point first, then the qualification. Prose, not bullets.
-- Methods: the equation first, then the prose that explains it.
-- American spelling. Oxford comma.
+## Research work
+- Preserve original data. Derive new files with saved code.
+- Use independently runnable steps with declared inputs and outputs.
+- Keep scientific decisions and their reasons in the project record.
+- Verify observed outputs before reporting success. Keep failed checks visible.
 
-## Access and limits
-- Read only inputs approved for this service. Never expose restricted files.
-- Public-data acquisition may add approved new files; preserve originals.
-- Never overwrite original data. Rebuild derived files from recorded scripts.
-- Never rewrite shared git history.
-- Ask before publishing, adding a service, or exceeding the agreed resources.
+## Limits
+- Use only inputs and services approved for the project.
+- Ask before publishing, sending messages, expanding access, or adding a service.
+- Do not delete recovery copies or rewrite shared history without approval.
 
-## Every session
-- Read `STATUS.md`, then `TASKS.md`, at the start.
-- Update `TASKS.md` before finishing; rewrite `STATUS.md` if the state moved.
+## Finishing
+- Update the task list and current-state record from evidence.
+- Report what changed, how it was checked, and what remains unresolved.
 ```
+<!-- /starter:global -->
 
-## A.2 The project file for a paper
+## A.2 Project instructions
 
-Save this in the project's `CLAUDE.md`, or in `AGENTS.md` with the import described in §5. Replace the example paper's details with your own, using the headings to organize its description, file locations, conventions, and access limits. For restricted-data work, follow the synthetic-input approach in §3 and keep real inputs inaccessible to the agent's process. Naming an off-limits path does not prevent the agent from reading it.
+Save the adapted content in the project's `CLAUDE.md`, or in `AGENTS.md` with an explicit import (§7). Replace the example paths with commands and files that exist in your project. Keep protected inputs in approved storage beyond the agent's configured reach when the service may not process them (§§3–4).
 
+[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="AGENTS.md"}
+
+<!-- starter:project -->
 ```
 # heat-birthweight
 
-Paper with J. Smith: county-level heat exposure and birthweight, US 2010–2020.
-Target: Demography. Decisions live in METHODOLOGY.md, the current state in
-STATUS.md, open tasks in TASKS.md.
+Synthetic teaching study of heat exposure and birthweight. Every individual
+record is invented; results are not evidence about actual pregnancies.
 
-## Where things live
-- Restricted microdata is held separately in approved storage, unavailable here.
-- `data/raw/public/`: ACS and PRISM downloads; `data/raw/sources.md` logs each.
-- `data/processed/`: derived files. Use `synthetic-natality.parquet` here.
-  It contains invented records, not a de-identified extract.
-- `code/`: `clean-natality.R`, `model-heat-bwt.R`, then `_final/figures.R`.
-  `run-all.R` runs all three in order.
-- `outputs/`: figures and tables the manuscript reads.
-- `manuscript/`: the paper, Quarto to Word for the coauthor.
+## Read first
+- specification.md: estimands, estimator, input rules, uncertainty, and checks.
+- STATUS.md: current state and next decision.
+- TASKS.md: work remaining and dated completions.
+- METHODOLOGY.md: scientific decisions and their reasons.
 
-## This project
-- Coauthor works in Stata. Every R model has a `.do` mirror in `code/stata/`.
-  The two must agree before a number goes in the paper.
-- Estimand: the effect of one more third-trimester day above 35 °C on county
-  mean birthweight. Two-way fixed effects with county-clustered standard errors.
-- Variable names: `bwt_` prefix for outcomes, `heat_` for exposures.
+## Files
+- data/raw/: approved original synthetic data; preserve unchanged.
+- code/: saved analysis and validation steps.
+- outputs/: fits, contrasts, figures, and verification records.
+- manuscript/: text linked to the saved outputs.
+- README.md: actual commands and environment restoration instructions.
 
-## Off limits
-- Work only from the synthetic file and approved public downloads above.
-- Do not substitute real natality inputs or request access to restricted storage.
-- Never send any file under `data/` to a web search or an external service.
+## Working rules
+- Follow the written specification. Report missing inputs or ambiguities.
+- Do not invent observations, alter the estimand, or weaken a failed check.
+- Save full-precision results; apply rounding only for presentation.
+- Keep simulation outputs separate from the single-dataset analysis.
+- Record the exact input and software versions used.
+- Inspect changed outputs and record verification before reporting completion.
+
+## Access
+Only approved synthetic material belongs in this project. No protected birth
+records are available here. Ask before adding external services or publishing.
+These instructions do not enforce file or network permissions; use the
+configured access controls for those boundaries.
 ```
+<!-- /starter:project -->
 
-## A.3 TASKS.md
+## A.3 Current state
 
-Save this in the project root. Use the three headings shown, a short entry for each task, and a date on each finished item. Have the agent read it after `STATUS.md` at the start of a session and update it as work progresses (§5). The opening comment explains how to maintain the list.
+Save this as `STATUS.md` at the project root. Rewrite it as the state changes; keep task history in `TASKS.md` and scientific reasoning in `METHODOLOGY.md`.
 
+[Download STATUS.md](resources/starter-files/STATUS.md){.download-button download="STATUS.md"}
+
+<!-- starter:status -->
 ```
-# Tasks
+# STATUS
 
-<!--
-One line per task. Move lines between sections as status changes; never
-delete a line, move it to Done with the date. An In Progress line says
-what is left, not what was done. Read this file at session start; update
-it before the session ends.
--->
+Last updated: [date]
+
+## Current state
+[What exists and what the evidence establishes. Keep this a short snapshot.]
+
+## Next decision or action
+[The next substantive step and any required input.]
+
+## Blocked or unverified
+[Missing inputs, unresolved decisions, or claims not yet checked.]
+
+## Standing facts
+[A few facts needed to resume. Keep decisions and their reasons in METHODOLOGY.md.]
+```
+<!-- /starter:status -->
+
+## A.4 Tasks
+
+Save this as `TASKS.md`. Keep unfinished work visible, and date completed entries. A short list is easier to use than an exhaustive transcript of agent actions.
+
+[Download TASKS.md](resources/starter-files/TASKS.md){.download-button download="TASKS.md"}
+
+<!-- starter:tasks -->
+```
+# TASKS
+
+Move tasks between these sections as their status changes. Add a date when a
+task finishes. An in-progress entry states what remains to be done.
 
 ## To Do
-- Write the simulation study for the main model (guide §12).
-- Stata mirror of the main model, from METHODOLOGY.md only (guide §13).
+- Confirm the scientific specification and the approved inputs.
+- Implement the analysis and its verification plan.
 
 ## In Progress
-- (nothing)
 
 ## Done
-- 2026-08-27 — Scaffolded the project in the paper shape (guide §7).
 ```
+<!-- /starter:tasks -->
 
-## A.4 A minimal execution script
+## A.5 Scientific decisions
 
-Use the language and entry point your project already has. This R example runs three existing scripts in order. Save it as `run-all.R` at the project root and ask the agent to run it from that folder. It stops when a script raises an error; it cannot detect an incorrect result unless the scripts include the relevant checks.
+Save this as `METHODOLOGY.md`. Record a decision when it changes what the study estimates, how it is implemented, or how its evidence should be interpreted. Link to the maintained specification rather than keeping inconsistent copies.
 
+[Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
+
+<!-- starter:methodology -->
 ```
-scripts <- c(
-  "code/clean-natality.R",
-  "code/model-heat-bwt.R",
-  "code/_final/figures.R"
-)
-for (script in scripts) {
-  message("Running ", script)
-  source(script, local = new.env(parent = globalenv()))
-}
+# METHODOLOGY
+
+## Current specification
+[Link to the maintained estimands, estimator, sample, input rules, and checks.]
+
+## Decisions
+
+### [Date]: [Decision]
+- Question or discrepancy:
+- Evidence considered:
+- Decision and reason:
+- Affected code, outputs, and manuscript passages:
+- Verification and remaining limitations:
 ```
+<!-- /starter:methodology -->
 
-The scripts should read and write their declared files rather than rely on objects left over from an interactive session. A Stata project can use a master do-file for the same purpose. Add required validation steps to the documented sequence (§14); a quick plotting command need not rerun them all. The toolkit explains command runners and dependency tracking if the project grows beyond this arrangement.
+## A.6 Git exclusions
 
-## A.5 .gitignore
+Save this as `.gitignore` and adapt it to the project's sharing policy. This conservative example excludes inputs by default; permitted synthetic or public inputs and provenance records may belong in a repository. An ignore rule neither blocks agent access nor removes a file already tracked in git.
 
-Where it goes: the project root. This conservative starting example excludes data, generated models, logs, and personal settings. Adapt it to the project's sharing policy: an approved public input or provenance manifest may belong in the repository. Ignoring a path does not restrict agent access and does not remove an already tracked file. Review shared settings before committing them; managed policy and local settings also affect what a session enforces (§3).
+[Download the exclusion file](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 
+<!-- starter:gitignore -->
 ```
-# Exclude inputs by default; share approved files deliberately (chapter 3)
+# Exclude research inputs by default; share permitted files deliberately.
 data/raw/
 data/processed/
 
-# Rebuildable or large
+# Rebuildable environments and caches
+.venv/
+renv/library/
+renv/staging/
 outputs/models/
 logs/
-_old/
-
-# Editor and OS leftovers
 .Rproj.user/
 .Rhistory
 .DS_Store
 
-# Personal agent settings; the shared .claude/settings.json is committed
+# Personal settings and secrets
 .claude/settings.local.json
+.env
+.env.*
+!.env.example
 ```
+<!-- /starter:gitignore -->
 
-## A.6 Adaptable project layouts
+## A.7 Adapt the structure to the output
 
-These are examples for projects that have outgrown the minimal folder in §2. Keep an established lab layout when it already makes inputs, code, outputs, and decisions easy to find. Add a directory because the project needs its contents, rather than creating empty folders to match a template.
+Chapter 6 shows a paper project with original and processed data, code, outputs, and a manuscript. A data-curation project needs acquisition scripts, source records, validation reports, and rebuild instructions. A presentation or website project needs editable source, assets, and reviewed deliverables. Keep an established structure when it already makes these roles clear.
 
-### A research paper
-
-```
-heat-birthweight/
-|-- CLAUDE.md              # purpose, access rules, existing commands
-|-- README.md             # collaborator's starting point
-|-- TASKS.md               # unfinished work and completed tasks
-|-- METHODOLOGY.md         # decisions and their reasons, when needed
-|-- run-all.R              # or the existing master do-file
-|-- code/
-|   |-- validation/        # checks required for the reported results
-|   |-- _experiments/      # investigations not in the final analysis
-|   `-- ...                # cleaning, modeling, and figure scripts
-|-- data/
-|   |-- raw/               # approved originals; preserve unchanged
-|   `-- processed/         # generated by recorded code
-|-- outputs/
-|   |-- figures/
-|   `-- tables/
-`-- manuscript/            # Word, Quarto, or the existing format
-```
-
-Keep restricted inputs in approved storage that the agent process cannot reach. Document how authorized researchers can obtain them in the input manifest (§14). Record environment versions, and add a current-state file when the task list no longer explains where the project stands. The optional global/project convention from §5 can replace the single `CLAUDE.md` as needed.
-
-### Data acquisition or curation
-
-```
-county-data/
-|-- CLAUDE.md
-|-- README.md              # acquisition and rebuild instructions
-|-- TASKS.md
-|-- code/                  # acquire, validate, transform
-|-- data/
-|   |-- sources.md         # origin, request, date, terms, checksum
-|   |-- raw/               # approved original responses
-|   `-- processed/         # documented transformed files
-`-- outputs/
-    `-- reports/           # counts, missingness, and exceptions
-```
-
-Keep identifiers, source requests, and transformation decisions inspectable. Add checkpoints if acquisition can be interrupted. Environment managers, queues, and runners are optional additions from the toolkit; the provenance record is needed regardless of the tools.
-
-### A text or presentation project
-
-```
-research-brief/
-|-- CLAUDE.md
-|-- README.md              # how to produce the deliverable
-|-- source/                # editable text or slides
-|-- assets/                # images, references, and other inputs
-`-- output/                # reviewed deliverables
-```
-
-Keep the team's existing Word or slide workflow if it serves the collaboration. A plain-text publishing pipeline may add a template and a build command, as described in the toolkit. Preserve the reviewed deliverable when its exact appearance matters; generated caches and temporary renders need not be shared with it.
+For execution, use the project's existing master do-file or runner. The downloadable research example (§10) supplies runnable commands and its environment records; chapter 13 explains how to make meaningful steps independently runnable. A generic script that lists filenames cannot substitute for documenting the dependencies in your actual project.

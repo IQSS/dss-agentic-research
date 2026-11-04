@@ -1,0 +1,1 @@
+Read the project files and draft a concise project instruction file describing the purpose, current commands, file locations, scientific specification, and access limits. Separate observed facts from questions for me. Link to detailed records rather than copying them into the instructions. Preserve existing authored instructions and show proposed revisions before replacing them.
