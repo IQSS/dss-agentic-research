@@ -30,7 +30,7 @@ check: render
 
 # Serve locally, rebuilding on save
 preview:
-    quarto preview
+    python3 scripts/render-site.py --preview
 
 # Live local preview: syncs and serves, live-reloading as you edit -- no deploy, no commit.
 # Runs the chapter splitter with --allow-dirty (a plain `just sync` refuses a dirty source,
@@ -48,7 +48,7 @@ watch:
     watchexec --watch "$up/source" --watch "$up/figures" --watch "$up/resources" --exts md,svg,json,zip,txt -- $sync &
     watcher=$!
     trap 'kill "$watcher" 2>/dev/null || true' EXIT INT TERM
-    quarto preview
+    python3 scripts/render-site.py --preview
 
 # Publish to Cloudflare Pages -- project `dss-agentic-research`, https://dss-agentic-research.pages.dev
 # Direct upload, deliberately not a git integration: CI renders and checks but never publishes, so no
