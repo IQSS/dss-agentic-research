@@ -10,9 +10,9 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
 
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§15).
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in [R](https://www.r-project.org/), `assert` in [Stata](https://www.stata.com/) and [Python](https://www.python.org/) (§15).
 
-*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
+*Auto mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
 
 *Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
@@ -84,4 +84,4 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§5).
 
-*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).
+*Version control.* A system such as [git](https://git-scm.com/) that records chosen versions of tracked files, allowing comparison and restoration (§3).

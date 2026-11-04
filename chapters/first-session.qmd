@@ -20,7 +20,7 @@ If Code is unavailable or the app asks you to upgrade, check that you have signe
 
 ## Chat, Cowork, and Code
 
-Chat is useful for a conversation; Cowork offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
+Chat is useful for a conversation; [Cowork](https://claude.com/docs/cowork/overview) offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
 
 ## Recognize the main controls
 

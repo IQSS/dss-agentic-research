@@ -54,7 +54,7 @@ The project begins with the folder and context files introduced in chapters 6–
 | Literature | Search record, verified references, and evidence relevant to the question and assumptions. |
 | Data | Original synthetic inputs, a dictionary, and a record of their source and generation. |
 | Modular analysis | Separately runnable preparation, fitting, contrast, figure, and reporting steps. |
-| Simulation | Known targets, saved runs, failures, and comparisons of recovered quantities with truth. |
+| Simulation | Known [targets](https://docs.ropensci.org/targets/), saved runs, failures, and comparisons of recovered quantities with truth. |
 | Independent implementation | A separate implementation from the same inputs and specification, with a comparison report. |
 | Writing | A link from the chosen result file and entry to each reported number and figure. |
 | Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |

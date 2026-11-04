@@ -8,11 +8,11 @@ title: "9. Reuse research procedures you trust"
 
 When a useful procedure recurs, saving its instructions reduces the effort of setting it up again and makes omissions easier to spot. A skill packages those instructions for the agent. It is worth creating after you have a procedure whose inputs, output, and checks you trust.
 
-For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a git history nor a later research chapter.
+For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a [git](https://git-scm.com/) history nor a later research chapter.
 
 ## What a skill is
 
-A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an R or Python function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
+A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an [R](https://www.r-project.org/) or [Python](https://www.python.org/) function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
 
 A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §18, §19 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
 
@@ -43,7 +43,7 @@ With a project record saying “fit complete; figure labels unresolved,” an il
 
 The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with clear instructions about where the output goes, what to report, and when to ask for a decision.
 
-For Claude Code, ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
+For [Claude Code](https://code.claude.com/docs/en/overview), ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
 
 | | Where |
 |:--|:--|
@@ -51,7 +51,7 @@ For Claude Code, ask the agent to place the skill in the appropriate location. E
 | This project (committed) | `.claude/skills/` |
 | Run it | `/name`, or automatically |
 
-The Claude app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+The [Claude](https://claude.ai/) app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
 
 ## What to package
 

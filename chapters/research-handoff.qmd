@@ -24,9 +24,9 @@ The recipient needs the inputs or their permitted acquisition route, the softwar
 | Reference results | The selected tables, figures, and supporting numerical outputs |
 | Evidence | What was rerun, where, discrepancies, and any untested route |
 
-The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as `targets` or Snakemake track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
+The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
 
-Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for R and Python restoration. Record relevant system libraries too. In Stata, record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
+Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for [R](https://www.r-project.org/) and [Python](https://www.python.org/) restoration. Record relevant system libraries too. In [Stata](https://www.stata.com/), record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
 
 ## Say what kind of reproduction you tested
 

@@ -40,7 +40,7 @@ An agent combines a language model with tools and a repeated action-and-feedback
 
 For example, an analysis fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent reads the error and data dictionary, identifies the intended variable, edits the script, and runs it again. The tool output tells it whether execution succeeded; checks against the specification establish whether the change was appropriate.
 
-A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing R, Stata, or Python software; adopting an agent does not require changing research languages.
+A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing [R](https://www.r-project.org/), [Stata](https://www.stata.com/), or [Python](https://www.python.org/) software; adopting an agent does not require changing research languages.
 
 ## Your role
 
@@ -54,4 +54,4 @@ Some research ends in a dashboard, interactive tool, or service rather than a pa
 
 *Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. Chapters 16–17 extend the discussion to LLM research measurements and running or adapting models. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
-The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
+The main route uses [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You need no terminal or [git](https://git-scm.com/) knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.

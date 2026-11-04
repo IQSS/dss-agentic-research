@@ -48,7 +48,7 @@ Ask for the actual success or failure messages. If a call prompts to bypass the 
 
 ## Keep a recoverable version
 
-For a real project, strongly consider git from the start. Ask the agent to maintain local checkpoints of the files you intend to track, keep unrelated edits separate, and describe the scope of each checkpoint. After a task, inspect the changed outputs and any consequential implementation detail. Have the agent record the accepted state; you need not learn git commands first. [Toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers setup and recovery.
+For a real project, strongly consider [git](https://git-scm.com/) from the start. Ask the agent to maintain local checkpoints of the files you intend to track, keep unrelated edits separate, and describe the scope of each checkpoint. After a task, inspect the changed outputs and any consequential implementation detail. Have the agent record the accepted state; you need not learn git commands first. [Toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers setup and recovery.
 
 Without version control, make a dated copy of the working folder before substantial edits, preserving original data separately. This is a workable beginning, though it becomes harder to distinguish changes as the project grows. Ask for recovery of named files, not a blanket reset of the whole project.
 

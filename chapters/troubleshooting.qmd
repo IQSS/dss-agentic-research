@@ -8,7 +8,7 @@ title: "Appendix C. Troubleshooting"
 
 A failed action is easier to diagnose when you preserve what happened. Keep the current files and useful error output, then choose a check that distinguishes a tool problem from a research problem.
 
-For example, an R job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
+For example, an [R](https://www.r-project.org/) job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
 
 | What happened | Next action | Where the fuller explanation lives |
 |:--|:--|:--|
@@ -18,7 +18,7 @@ For example, an R job that never writes its first message needs a process or lau
 | Routine work asks for approval repeatedly | Inspect the effective mode and permissions; adjust only the required scope | §§4–5; [toolkit chapter 2](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) |
 | The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
 | A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
-| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
+| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
 | R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit troubleshooting](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
 | Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |

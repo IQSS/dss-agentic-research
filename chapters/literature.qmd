@@ -14,7 +14,7 @@ For the heat-and-birthweight project, a study of low birthweight is not automati
 
 Give the agent the question, inclusion and exclusion criteria, date range, languages, sources, and stopping rule. Have it draft a protocol, then resolve ambiguous choices before searching. Background reading and a systematic review have different coverage requirements; involve an information specialist when completeness supports a substantive claim.
 
-Name the sources and record gaps. Crossref can help verify DOI metadata; OpenAlex and field-specific databases support discovery. PubMed is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
+Name the sources and record gaps. [Crossref](https://www.crossref.org/) can help verify DOI metadata; [OpenAlex](https://openalex.org/) and field-specific databases support discovery. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
 
 <!-- prompt:literature-search -->
 ::: {#request-literature-search .prompt}
@@ -32,7 +32,7 @@ For a concrete example, the DOI [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.
 
 Matching metadata establishes which work the citation identifies. Open the source and inspect the passage, table, or figure supporting the proposed claim. Record whether screening used a title, abstract, or full text. A title-only decision is not a completed reading of the paper, and an empty extraction cell may mean “not yet extracted” rather than “not reported.”
 
-If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with DataCite was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
+If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with [DataCite](https://datacite.org/) was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
 
 ## Build a synthesis with traceable support {#literature-synthesis}
 

@@ -45,7 +45,7 @@ Save a response exactly as received before parsing or cleaning it. Write derived
 |---|---|
 | Source | Invented records generated for this teaching project; no observed pregnancies. |
 | Original | `data/raw/births.csv`, preserved unchanged after generation. |
-| Reconstruction | Saved generator, seed, and R version in the provenance record. |
+| Reconstruction | Saved generator, seed, and [R](https://www.r-project.org/) version in the provenance record. |
 | File identity | A checksum recorded when the original is created. |
 | Documentation | Variable definitions and the analysis specification. |
 | Derived files | Created by recorded scripts; never relabeled as original observations. |

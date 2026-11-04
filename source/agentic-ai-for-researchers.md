@@ -44,7 +44,7 @@ An agent combines a language model with tools and a repeated action-and-feedback
 
 For example, an analysis fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent reads the error and data dictionary, identifies the intended variable, edits the script, and runs it again. The tool output tells it whether execution succeeded; checks against the specification establish whether the change was appropriate.
 
-A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing R, Stata, or Python software; adopting an agent does not require changing research languages.
+A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing [R](https://www.r-project.org/), [Stata](https://www.stata.com/), or [Python](https://www.python.org/) software; adopting an agent does not require changing research languages.
 
 ## Your role
 
@@ -58,7 +58,7 @@ Some research ends in a dashboard, interactive tool, or service rather than a pa
 
 *Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. Chapters 16–17 extend the discussion to LLM research measurements and running or adapting models. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
-The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
+The main route uses [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You need no terminal or [git](https://git-scm.com/) knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
 
 # 2. Get started with the app {#first-session}
 
@@ -76,7 +76,7 @@ If Code is unavailable or the app asks you to upgrade, check that you have signe
 
 ## Chat, Cowork, and Code
 
-Chat is useful for a conversation; Cowork offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
+Chat is useful for a conversation; [Cowork](https://claude.com/docs/cowork/overview) offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
 
 ## Recognize the main controls
 
@@ -117,7 +117,7 @@ Check any applicable federal grant or funder requirements, the data classificati
 
 Assess every processing route, including connected services and hosted models used by local tools.
 
-> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and Cowork up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
+> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and [Cowork](https://claude.com/docs/cowork/overview) up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
 
 Record the decision in the project file: which inputs the agent may use, which processing is allowed, and which outputs may be shared. Distinguish approved public-data acquisition from ordinary analysis: the former can create a new original file and provenance entry, while the latter should preserve those originals.
 
@@ -129,7 +129,7 @@ Review dictionaries, code, filenames, logs, and derived outputs as well as data 
 
 ## Training and retention are separate
 
-A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. Claude Code's [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
+A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. [Claude Code](https://code.claude.com/docs/en/overview)'s [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
 
 Deleting a conversation is not a substitute for having permission to submit the material. Nor does an opt-out setting on a personal account give it the coverage of an institutional agreement. Use the approved route established above.
 
@@ -207,7 +207,7 @@ Ask for the actual success or failure messages. If a call prompts to bypass the 
 
 ## Keep a recoverable version
 
-For a real project, strongly consider git from the start. Ask the agent to maintain local checkpoints of the files you intend to track, keep unrelated edits separate, and describe the scope of each checkpoint. After a task, inspect the changed outputs and any consequential implementation detail. Have the agent record the accepted state; you need not learn git commands first. [Toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers setup and recovery.
+For a real project, strongly consider [git](https://git-scm.com/) from the start. Ask the agent to maintain local checkpoints of the files you intend to track, keep unrelated edits separate, and describe the scope of each checkpoint. After a task, inspect the changed outputs and any consequential implementation detail. Have the agent record the accepted state; you need not learn git commands first. [Toolkit chapter 4](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers setup and recovery.
 
 Without version control, make a dated copy of the working folder before substantial edits, preserving original data separately. This is a workable beginning, though it becomes harder to distinguish changes as the project grows. Ask for recovery of named files, not a blanket reset of the whole project.
 
@@ -346,7 +346,7 @@ Use only the parts the project needs. The next chapter explains the record files
 
 Preserve originals and produce derived files through code. If a derived variable is wrong, correct the script and rebuild the file. Keep manuscript figures and tables associated with the result version that produced them. Decide deliberately which large fits, logs, or inputs belong in version control and which need another preservation route; neither file size nor a directory name settles their scientific value.
 
-Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in R; other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
+Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in [R](https://www.r-project.org/); other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
 
 ## Start a new project with a scaffold {#scaffold-project}
 
@@ -452,7 +452,7 @@ configured access controls for those boundaries.
 ```
 <!-- /starter:project -->
 
-You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current Claude versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
+You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current [Claude](https://claude.ai/) versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
 
 ## Update the record while doing the work
 
@@ -512,7 +512,7 @@ For example, you might require uncertainty alongside estimates, project-relative
 
 Write rules whose application you can recognize. “Preserve the existing environment and report any required package change” gives the agent something more concrete than “be reproducible.” Add rules to solve recurring problems, rather than anticipating every possible task.
 
-In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
+In [Claude Code](https://code.claude.com/docs/en/overview), personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
 
 <!-- starter:global -->
 ```
@@ -592,11 +592,11 @@ The toolkit's [shared-settings chapter](https://dss-agentic-toolkit.pages.dev/ch
 
 When a useful procedure recurs, saving its instructions reduces the effort of setting it up again and makes omissions easier to spot. A skill packages those instructions for the agent. It is worth creating after you have a procedure whose inputs, output, and checks you trust.
 
-For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a git history nor a later research chapter.
+For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a [git](https://git-scm.com/) history nor a later research chapter.
 
 ## What a skill is
 
-A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an R or Python function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
+A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an [R](https://www.r-project.org/) or [Python](https://www.python.org/) function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
 
 A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §18, §19 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
 
@@ -627,7 +627,7 @@ With a project record saying “fit complete; figure labels unresolved,” an il
 
 The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with clear instructions about where the output goes, what to report, and when to ask for a decision.
 
-For Claude Code, ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
+For [Claude Code](https://code.claude.com/docs/en/overview), ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
 
 | | Where |
 |:--|:--|
@@ -635,7 +635,7 @@ For Claude Code, ask the agent to place the skill in the appropriate location. E
 | This project (committed) | `.claude/skills/` |
 | Run it | `/name`, or automatically |
 
-The Claude app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+The [Claude](https://claude.ai/) app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
 
 ## What to package
 
@@ -711,7 +711,7 @@ The project begins with the folder and context files introduced in chapters 6–
 | Literature | Search record, verified references, and evidence relevant to the question and assumptions. |
 | Data | Original synthetic inputs, a dictionary, and a record of their source and generation. |
 | Modular analysis | Separately runnable preparation, fitting, contrast, figure, and reporting steps. |
-| Simulation | Known targets, saved runs, failures, and comparisons of recovered quantities with truth. |
+| Simulation | Known [targets](https://docs.ropensci.org/targets/), saved runs, failures, and comparisons of recovered quantities with truth. |
 | Independent implementation | A separate implementation from the same inputs and specification, with a comparison report. |
 | Writing | A link from the chosen result file and entry to each reported number and figure. |
 | Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |
@@ -728,7 +728,7 @@ For the heat-and-birthweight project, a study of low birthweight is not automati
 
 Give the agent the question, inclusion and exclusion criteria, date range, languages, sources, and stopping rule. Have it draft a protocol, then resolve ambiguous choices before searching. Background reading and a systematic review have different coverage requirements; involve an information specialist when completeness supports a substantive claim.
 
-Name the sources and record gaps. Crossref can help verify DOI metadata; OpenAlex and field-specific databases support discovery. PubMed is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
+Name the sources and record gaps. [Crossref](https://www.crossref.org/) can help verify DOI metadata; [OpenAlex](https://openalex.org/) and field-specific databases support discovery. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
 
 <!-- prompt:literature-search -->
 ::: {#request-literature-search .prompt}
@@ -746,7 +746,7 @@ For a concrete example, the DOI [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.
 
 Matching metadata establishes which work the citation identifies. Open the source and inspect the passage, table, or figure supporting the proposed claim. Record whether screening used a title, abstract, or full text. A title-only decision is not a completed reading of the paper, and an empty extraction cell may mean “not yet extracted” rather than “not reported.”
 
-If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with DataCite was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
+If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with [DataCite](https://datacite.org/) was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
 
 ## Build a synthesis with traceable support {#literature-synthesis}
 
@@ -822,7 +822,7 @@ Save a response exactly as received before parsing or cleaning it. Write derived
 |---|---|
 | Source | Invented records generated for this teaching project; no observed pregnancies. |
 | Original | `data/raw/births.csv`, preserved unchanged after generation. |
-| Reconstruction | Saved generator, seed, and R version in the provenance record. |
+| Reconstruction | Saved generator, seed, and [R](https://www.r-project.org/) version in the provenance record. |
 | File identity | A checksum recorded when the original is created. |
 | Documentation | Variable definitions and the analysis specification. |
 | Derived files | Created by recorded scripts; never relabeled as original observations. |
@@ -881,7 +881,7 @@ Require failure when a necessary input is absent or a stated check fails. An emp
 
 ## Save commands for the useful routes {#saved-commands}
 
-A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains `just` setup and use.
+A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains [`just`](https://just.systems/) setup and use.
 
 | Request | Repeat | Reuse |
 |---|---|---|
@@ -890,7 +890,7 @@ A small `justfile` can expose consistent commands for the researcher and agent. 
 | Change the estimator | Fit, postestimation, relevant simulation and independent checks, downstream outputs | Permitted unchanged inputs. |
 | Correct document formatting | Document build and rendered-page check | Checked research results. |
 
-An existing Stata master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as `targets` or Snakemake determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
+An existing [Stata](https://www.stata.com/) master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
 
 ## Inspect the outputs at the affected steps
 
@@ -900,7 +900,7 @@ Keep exploratory work identifiable. Once a check supports the reported analysis,
 
 ## Keep long jobs moving {#unattended-jobs}
 
-Save the command, inputs, outputs, and log before launching a long calculation. A queue such as `pueue` can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
+Save the command, inputs, outputs, and log before launching a long calculation. A queue such as [`pueue`](https://github.com/Nukesor/pueue) can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
 
 Control parallelism according to each job's memory and CPU needs; a slot is not necessarily one core. A local queue does not make a sleeping computer calculate or preserve running processes through every reboot. For work beyond local resources, use your institution's approved research-computing service; at Harvard, consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 
@@ -993,7 +993,7 @@ Simulation cannot establish that the estimand answers the substantive question o
 
 Two independently built implementations can expose mistakes that a rerun of the same code will preserve. Each starts from the research specification and approved inputs, works through the analysis separately, and saves comparable outputs. Agreement provides evidence about implementation; discrepancies give you something concrete to investigate.
 
-For the heat-and-birthweight project, one fresh agent builds the analysis in R and another in Python. Both must calculate the same ten-minus-five-day contrasts, using the same records and uncertainty method. Neither sees the other's code or results before finishing. This can reveal a wrong contrast, an unintended software default, or a different analysis sample even when both programs run without an error.
+For the heat-and-birthweight project, one fresh agent builds the analysis in [R](https://www.r-project.org/) and another in Python. Both must calculate the same ten-minus-five-day contrasts, using the same records and uncertainty method. Neither sees the other's code or results before finishing. This can reveal a wrong contrast, an unintended software default, or a different analysis sample even when both programs run without an error.
 
 An agent might also invent a missing column, substitute simulated values for observed ones, or change the model to get a result. The comparison should follow the stages that support the claim, rather than comparing only a final number. Small known-answer cases and simulation (§14) supply additional checks; a majority vote among agents is not a reference answer.
 
@@ -1016,13 +1016,13 @@ Keep a fixed copy of that specification for the comparison. If an implementer fi
 ![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and written specification feed two separate implementations. Only their completed outputs enter the comparison."}
 
 
-Open fresh Claude Code sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
+Open fresh [Claude Code](https://code.claude.com/docs/en/overview) sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
 
 If the agent built the dataset as well as the model, each implementation should start from the original inputs and independently perform the cleaning, merges, and variable construction. Starting both from one agent's processed dataset leaves that processing unchecked. If you are checking only model fitting on an already verified dataset, the shared processed file is an appropriate starting point.
 
 Use only inputs the agent is permitted to access (§3). For restricted data, have the agents develop their implementations against a permitted synthetic example and data dictionary, then run the scripts independently on the real data in the approved environment. Review the comparison there; return only information that is permitted to leave.
 
-Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, Python, and Stata are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
+Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, [Python](https://www.python.org/), and [Stata](https://www.stata.com/) are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
 
 In each separate folder, put the approved starting files in `inputs/`. The example uses identical copies of `data/raw/births.csv` and `specification.md`. Adapt the language and paths in this request:
 
@@ -1109,7 +1109,7 @@ Saving the responses helps answer the first. Recording the model and procedure h
 
 A *headless agent* runs from a saved request without an interactive app conversation. A script supplies its inputs, starts the run, and collects its result. This is useful when the same protocol must be applied to many cases: generate a review, judge a review pair, or extract specified evidence from a document. It also lets you record the exact procedure and rerun selected cases.
 
-Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. Claude Code's [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html).
+Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. [Claude Code](https://code.claude.com/docs/en/overview)'s [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html).
 
 For the peer-review study, the research requirement is that the next reviewer does not inherit the previous reviewer's conversation, and a judge receives only the material allowed by the judging protocol. Write that requirement before choosing a launcher. Treat review generation, judging, and subsequent statistical analysis as separate stages with separately saved outputs.
 
@@ -1233,7 +1233,7 @@ Record the exact weights and license, precision or quantization, runtime, contex
 
 A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
 
-[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
+[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and [Claude Code](https://code.claude.com/docs/en/overview)'s terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
 
 ### Apple’s built-in on-device model
 
@@ -1335,7 +1335,7 @@ I would usually avoid asking an agent for a complete manuscript draft. Its prose
 
 For a formatted Office deliverable, [Cowork](https://claude.com/docs/cowork/overview) provides a prepared environment for creating editable Word documents, PowerPoint decks, and Excel workbooks. Code can also create these formats directly using [document skills](https://github.com/anthropics/skills) and the tools they require. Cowork may save setup when those tools are absent from your Mac; the toolkit's document-production section covers additional tooling for Code. With either route, supply approved inputs (§3) and inspect the returned file in the application your collaborators will use.
 
-If you already write in markdown or Quarto, you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
+If you already write in markdown or [Quarto](https://quarto.org/), you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
 
 *Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§7), so their reasons remain available at the next revision.
 
@@ -1345,7 +1345,7 @@ If you already write in markdown or Quarto, you can keep that as the source and 
 :::
 <!-- /prompt:reviewer-response -->
 
-*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the LaTeX slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
+*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the [LaTeX](https://www.latex-project.org/) slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
 
 ## What you check
 
@@ -1399,9 +1399,9 @@ The recipient needs the inputs or their permitted acquisition route, the softwar
 | Reference results | The selected tables, figures, and supporting numerical outputs |
 | Evidence | What was rerun, where, discrepancies, and any untested route |
 
-The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as `targets` or Snakemake track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
+The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
 
-Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for R and Python restoration. Record relevant system libraries too. In Stata, record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
+Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for [R](https://www.r-project.org/) and [Python](https://www.python.org/) restoration. Record relevant system libraries too. In [Stata](https://www.stata.com/), record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
 
 ## Say what kind of reproduction you tested
 
@@ -1873,7 +1873,7 @@ Check the snapshot before publication.
 
 A failed action is easier to diagnose when you preserve what happened. Keep the current files and useful error output, then choose a check that distinguishes a tool problem from a research problem.
 
-For example, an R job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
+For example, an [R](https://www.r-project.org/) job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
 
 | What happened | Next action | Where the fuller explanation lives |
 |:--|:--|:--|
@@ -1883,7 +1883,7 @@ For example, an R job that never writes its first message needs a process or lau
 | Routine work asks for approval repeatedly | Inspect the effective mode and permissions; adjust only the required scope | §§4–5; [toolkit chapter 2](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) |
 | The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
 | A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
-| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit chapter 9](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
+| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
 | R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit troubleshooting](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
 | Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |
@@ -1896,9 +1896,9 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
 
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in R, `assert` in Stata and Python (§15).
+*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in [R](https://www.r-project.org/), `assert` in [Stata](https://www.stata.com/) and [Python](https://www.python.org/) (§15).
 
-*Auto mode.* A Claude Code permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
+*Auto mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
 
 *Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
@@ -1970,4 +1970,4 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§5).
 
-*Version control.* A system such as git that records chosen versions of tracked files, allowing comparison and restoration (§3).
+*Version control.* A system such as [git](https://git-scm.com/) that records chosen versions of tracked files, allowing comparison and restoration (§3).

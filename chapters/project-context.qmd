@@ -74,7 +74,7 @@ configured access controls for those boundaries.
 ```
 <!-- /starter:project -->
 
-You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current Claude versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
+You can keep this directly in `CLAUDE.md`. If the lab maintains agent-neutral instructions in `AGENTS.md`, a `CLAUDE.md` containing `@AGENTS.md` is a supported way to load that one maintained copy. Current [Claude](https://claude.ai/) versions can also load `AGENTS.md` directly under specified conditions; ask the agent to verify what the installed session actually loaded. The [instruction-file documentation](https://code.claude.com/docs/en/memory#agentsmd) describes both routes. Do not maintain two independently edited copies.
 
 ## Update the record while doing the work
 

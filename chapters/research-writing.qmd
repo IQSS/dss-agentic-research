@@ -58,7 +58,7 @@ I would usually avoid asking an agent for a complete manuscript draft. Its prose
 
 For a formatted Office deliverable, [Cowork](https://claude.com/docs/cowork/overview) provides a prepared environment for creating editable Word documents, PowerPoint decks, and Excel workbooks. Code can also create these formats directly using [document skills](https://github.com/anthropics/skills) and the tools they require. Cowork may save setup when those tools are absent from your Mac; the toolkit's document-production section covers additional tooling for Code. With either route, supply approved inputs (§3) and inspect the returned file in the application your collaborators will use.
 
-If you already write in markdown or Quarto, you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
+If you already write in markdown or [Quarto](https://quarto.org/), you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
 
 *Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§7), so their reasons remain available at the next revision.
 
@@ -68,7 +68,7 @@ If you already write in markdown or Quarto, you can keep that as the source and 
 :::
 <!-- /prompt:reviewer-response -->
 
-*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the LaTeX slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
+*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the [LaTeX](https://www.latex-project.org/) slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
 
 ## What you check
 

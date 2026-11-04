@@ -55,7 +55,7 @@ Record the exact weights and license, precision or quantization, runtime, contex
 
 A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
 
-[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
+[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and [Claude Code](https://code.claude.com/docs/en/overview)'s terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
 
 ### Apple’s built-in on-device model
 

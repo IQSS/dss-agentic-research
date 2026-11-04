@@ -60,7 +60,7 @@ Use only the parts the project needs. The next chapter explains the record files
 
 Preserve originals and produce derived files through code. If a derived variable is wrong, correct the script and rebuild the file. Keep manuscript figures and tables associated with the result version that produced them. Decide deliberately which large fits, logs, or inputs belong in version control and which need another preservation route; neither file size nor a directory name settles their scientific value.
 
-Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in R; other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
+Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in [R](https://www.r-project.org/); other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
 
 ## Start a new project with a scaffold {#scaffold-project}
 

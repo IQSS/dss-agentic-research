@@ -16,7 +16,7 @@ For example, you might require uncertainty alongside estimates, project-relative
 
 Write rules whose application you can recognize. “Preserve the existing environment and report any required package change” gives the agent something more concrete than “be reproducible.” Add rules to solve recurring problems, rather than anticipating every possible task.
 
-In Claude Code, personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
+In [Claude Code](https://code.claude.com/docs/en/overview), personal instructions can live in `~/.claude/CLAUDE.md`; the tilde means your home folder. Ask the agent to create or edit the file from the app and inspect the result. The [instruction-file documentation](https://code.claude.com/docs/en/memory) describes personal, project, and managed instructions. Your institution may supply additional rules.
 
 <!-- starter:global -->
 ```

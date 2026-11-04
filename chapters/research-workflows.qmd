@@ -42,7 +42,7 @@ Require failure when a necessary input is absent or a stated check fails. An emp
 
 ## Save commands for the useful routes {#saved-commands}
 
-A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains `just` setup and use.
+A small `justfile` can expose consistent commands for the researcher and agent. It does not need to contain the analysis itself. The toolkit's [project-commands chapter](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) explains [`just`](https://just.systems/) setup and use.
 
 | Request | Repeat | Reuse |
 |---|---|---|
@@ -51,7 +51,7 @@ A small `justfile` can expose consistent commands for the researcher and agent. 
 | Change the estimator | Fit, postestimation, relevant simulation and independent checks, downstream outputs | Permitted unchanged inputs. |
 | Correct document formatting | Document build and rendered-page check | Checked research results. |
 
-An existing Stata master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as `targets` or Snakemake determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
+An existing [Stata](https://www.stata.com/) master do-file or other project command can be adequate if it exposes the required steps. Preserve a working arrangement. A command runner provides named routes; a dependency-aware runner such as [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) determines which affected steps need rebuilding. A `justfile` alone does not make a monolithic script selective or infer every dependency. See the toolkit's [dependency chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) when that additional capability is useful.
 
 ## Inspect the outputs at the affected steps
 
@@ -61,7 +61,7 @@ Keep exploratory work identifiable. Once a check supports the reported analysis,
 
 ## Keep long jobs moving {#unattended-jobs}
 
-Save the command, inputs, outputs, and log before launching a long calculation. A queue such as `pueue` can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
+Save the command, inputs, outputs, and log before launching a long calculation. A queue such as [`pueue`](https://github.com/Nukesor/pueue) can start waiting jobs automatically as execution slots become free. That is useful for a set of simulation runs or model specifications that would otherwise wait for you to start them. The toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) covers submission, resources, failures, and completion checks.
 
 Control parallelism according to each job's memory and CPU needs; a slot is not necessarily one core. A local queue does not make a sleeping computer calculate or preserve running processes through every reboot. For work beyond local resources, use your institution's approved research-computing service; at Harvard, consult [FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 

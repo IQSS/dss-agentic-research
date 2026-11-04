@@ -18,7 +18,7 @@ Check any applicable federal grant or funder requirements, the data classificati
 
 Assess every processing route, including connected services and hosted models used by local tools.
 
-> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and Cowork up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
+> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and [Cowork](https://claude.com/docs/cowork/overview) up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
 
 Record the decision in the project file: which inputs the agent may use, which processing is allowed, and which outputs may be shared. Distinguish approved public-data acquisition from ordinary analysis: the former can create a new original file and provenance entry, while the latter should preserve those originals.
 
@@ -30,7 +30,7 @@ Review dictionaries, code, filenames, logs, and derived outputs as well as data 
 
 ## Training and retention are separate
 
-A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. Claude Code's [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
+A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. [Claude Code](https://code.claude.com/docs/en/overview)'s [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
 
 Deleting a conversation is not a substitute for having permission to submit the material. Nor does an opt-out setting on a personal account give it the coverage of an institutional agreement. Use the approved route established above.
 

@@ -8,7 +8,7 @@ title: "15. Check the agent with independent implementations"
 
 Two independently built implementations can expose mistakes that a rerun of the same code will preserve. Each starts from the research specification and approved inputs, works through the analysis separately, and saves comparable outputs. Agreement provides evidence about implementation; discrepancies give you something concrete to investigate.
 
-For the heat-and-birthweight project, one fresh agent builds the analysis in R and another in Python. Both must calculate the same ten-minus-five-day contrasts, using the same records and uncertainty method. Neither sees the other's code or results before finishing. This can reveal a wrong contrast, an unintended software default, or a different analysis sample even when both programs run without an error.
+For the heat-and-birthweight project, one fresh agent builds the analysis in [R](https://www.r-project.org/) and another in Python. Both must calculate the same ten-minus-five-day contrasts, using the same records and uncertainty method. Neither sees the other's code or results before finishing. This can reveal a wrong contrast, an unintended software default, or a different analysis sample even when both programs run without an error.
 
 An agent might also invent a missing column, substitute simulated values for observed ones, or change the model to get a result. The comparison should follow the stages that support the claim, rather than comparing only a final number. Small known-answer cases and simulation (§14) supply additional checks; a majority vote among agents is not a reference answer.
 
@@ -31,13 +31,13 @@ Keep a fixed copy of that specification for the comparison. If an implementer fi
 ![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and written specification feed two separate implementations. Only their completed outputs enter the comparison."}
 
 
-Open fresh Claude Code sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
+Open fresh [Claude Code](https://code.claude.com/docs/en/overview) sessions in separate project folders. Each gets the specification, the data dictionary, and the same approved input files. Keep the other implementations' code, processed datasets, and results out of those folders. The sessions can run one after another or in parallel; you do not need an agent orchestration tool since files are written in separate folders.
 
 If the agent built the dataset as well as the model, each implementation should start from the original inputs and independently perform the cleaning, merges, and variable construction. Starting both from one agent's processed dataset leaves that processing unchecked. If you are checking only model fitting on an already verified dataset, the shared processed file is an appropriate starting point.
 
 Use only inputs the agent is permitted to access (§3). For restricted data, have the agents develop their implementations against a permitted synthetic example and data dictionary, then run the scripts independently on the real data in the approved environment. Review the comparison there; return only information that is permitted to leave.
 
-Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, Python, and Stata are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
+Different languages or statistical packages add a useful check on software defaults and implementation choices. If R, [Python](https://www.python.org/), and [Stata](https://www.stata.com/) are already available, use one for each implementation. Fresh sessions using the same language are still useful. Independence begins with each agent working out the implementation from the specification; translating the first agent's code carries its decisions into the second version.
 
 In each separate folder, put the approved starting files in `inputs/`. The example uses identical copies of `data/raw/births.csv` and `specification.md`. Adapt the language and paths in this request:
 
