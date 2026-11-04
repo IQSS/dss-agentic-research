@@ -67,6 +67,7 @@ website:
           - chapters/simulation.qmd
           - chapters/checking-analysis.qmd
           - chapters/llm-measurements.qmd
+          - chapters/research-models.qmd
           - chapters/research-writing.qmd
           - chapters/research-handoff.qmd
       - section: "Reference"
@@ -95,8 +96,9 @@ chapter-map:
   "14": /chapters/simulation.qmd
   "15": /chapters/checking-analysis.qmd
   "16": /chapters/llm-measurements.qmd
-  "17": /chapters/research-writing.qmd
-  "18": /chapters/research-handoff.qmd
+  "17": /chapters/research-models.qmd
+  "18": /chapters/research-writing.qmd
+  "19": /chapters/research-handoff.qmd
   "A": /chapters/starter-files.qmd
   "B": /chapters/prompt-index.qmd
   "C": /chapters/troubleshooting.qmd
@@ -105,6 +107,7 @@ chapter-map:
 anchor-map:
   "agent-access": /chapters/agent-access.qmd
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
+  "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "headless-agents": /chapters/llm-measurements.qmd#headless-agents
   "llm-measurements": /chapters/llm-measurements.qmd
   "project-organization": /chapters/project-organization.qmd

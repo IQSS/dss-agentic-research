@@ -14,7 +14,7 @@ For example, a coauthor asks for a short status update each week. The project al
 
 A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an R or Python function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
 
-A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §17, §18 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
+A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §18, §19 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
 
 ```
 ---
@@ -55,7 +55,7 @@ The Claude app lists skills under the same slash menu. A skill that needs more t
 
 ## What to package
 
-Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§17), the clean-copy check and the pre-deposit audit (§18). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
+Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§18), the clean-copy check and the pre-deposit audit (§19). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
 
 Keep project-specific facts, such as file locations and data restrictions, in the project instructions. A reusable skill should tell the agent to consult those instructions. Similarly, refer to your global conventions rather than copying them into each skill. This lets you reuse the procedure across projects and update a rule in one place.
 

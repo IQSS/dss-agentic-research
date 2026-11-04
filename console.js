@@ -91,10 +91,13 @@
     { n: "16", part: "III", slug: "llm-measurements", title: "When the LLM does the analysis", ctl: "lever",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "brown", holds: "package", scene: null },
       body: "LLMs can make it feasible to code or assess more research material than you could review manually. Once their answers become variables in an analysis, however, errors in those answers affect the evidence. You need to control how the measurements are produced and establish whether they are adequate for the question." },
-    { n: "17", part: "III", slug: "research-writing", title: "Write and revise from the research record", ctl: "printer",
+    { n: "17", part: "III", slug: "research-models", title: "Run and adapt models for your research", ctl: "rotary",
+      r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "slate", gloves: "brown", holds: "gear", scene: null },
+      body: "Running a model yourself can give you control over where research material is processed and preserve access to the particular weights used in a study. Adapting a model can also improve how it performs a recurring research task. These benefits require separate decisions about data permissions, hardware, and evidence of useful performance." },
+    { n: "18", part: "III", slug: "research-writing", title: "Write and revise from the research record", ctl: "printer",
       r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
       body: "Research revisions are incomplete if the analysis changes but the manuscript still describes the earlier result. Give the agent a maintained source for each substantive claim and number, then check the rendered manuscript against that record." },
-    { n: "18", part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "counter",
+    { n: "19", part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "counter",
       r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", gloves: "brown", holds: "clipboard", scene: null },
       body: "A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff exposes dependencies that your familiar working folder can hide. It also gives your future self a usable record when a reviewer asks for a revision." },
     { n: "A", part: "A", slug: "starter-files", title: "Starter files", ctl: "key",
@@ -434,7 +437,7 @@
   heading(ce, "DIRECT THE WORK", 417, 408);
   place(ce, [["6", 380, 450], ["7", 485, 450], ["8", 380, 520], ["9", 485, 520]]);
   heading(ce, "DO THE RESEARCH", 662, 408);   // a third along Part III, not its midpoint
-  place(ce, [["10", 590, 438], ["11", 690, 438], ["12", 790, 438], ["13", 590, 484], ["14", 690, 484], ["15", 790, 484], ["16", 590, 530], ["17", 690, 530], ["18", 790, 530]]);
+  place(ce, [["10", 590, 438], ["11", 690, 438], ["12", 790, 438], ["13", 590, 484], ["14", 690, 484], ["15", 790, 484], ["16", 580, 530], ["17", 655, 530], ["18", 730, 530], ["19", 805, 530]]);
 
   // Right wing: Part IV above, the appendices as a keypad below.
   const wr = document.getElementById("wingR");

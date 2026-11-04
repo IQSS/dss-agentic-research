@@ -52,36 +52,6 @@ A direct scripted model call may be simpler when the task needs no tools or agen
 :::
 <!-- /prompt:controlled-llm-runs -->
 
-## Choose where the model runs {#local-models}
-
-If a hosted LLM reads a transcript or manuscript to analyze it, that material enters the provider's inference system. A commitment not to train on it does not settle retention, subcontracting, deletion, or the other obligations discussed in §3. Synthetic data can help an agent develop analysis code without reading protected records. It cannot replace the actual text when the research task is to classify that text.
-
-An *open-weight model* makes trained model weights available under specified terms. You may be able to run it on your computer or on an institution's approved infrastructure, keeping inference within that environment. Using an open-weight model through somebody else's hosted API still sends the inputs to that service. “Local” in an agent app can also describe where tools run while the model remains hosted.
-
-| Route | Research use | What must be established |
-|:--|:--|:--|
-| Approved hosted model | Strong task performance without maintaining model hardware | Applicable agreement, data permissions, retention, and the actual endpoint |
-| Model on your computer | Smaller approved workloads; control over saved weights and local inference | Sufficient memory, tested task quality, and the agent's remaining network/tool access |
-| Model on controlled institutional infrastructure | Larger models or protected workloads requiring managed resources | Approved compute and storage, access controls, logging, and a reproducible model/runtime record |
-
-Return to the chain of custody in §3 for every route. Prompts, model responses, temporary files, caches, and backups can contain protected material even when inference is local. Local execution gives you more control over those copies; it does not itself authorize their use or deletion schedule. Tool permissions (§4) must match the research protocol too.
-
-### Kimi, DeepSeek, and the model you can actually run
-
-Model families include different releases with different capabilities and hardware requirements. [Kimi K2](https://github.com/MoonshotAI/Kimi-K2) is an example of released weights intended for tasks including agentic tool use; deploying its large models is a research-computing decision. [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1) includes the full model and smaller distilled releases. A small distilled model is not the same model with a cheaper hosting bill: evaluate that particular release on your task.
-
-Record the exact weights and license, precision or quantization, runtime, context limit, and prompting format. Reducing numerical precision can make weights fit available memory, but it changes the configuration being evaluated. Long documents and several simultaneous jobs also consume memory beyond the stored weights. Ask research computing to assess the intended model and workload when a laptop is insufficient.
-
-A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
-
-[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
-
-### Apple’s built-in on-device model
-
-Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#apple-on-device).
-
-Candidate research tasks include extracting dates and organizations, tagging documents, or classifying short survey responses against a fixed rubric. Apple’s [capability guidance](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models) identifies these language-understanding tasks and cautions against relying on the on-device model for code generation or logical reasoning. Evaluate the particular task on held-out examples, save the original responses, and record the device, operating-system version, and available model information. Local availability is a deployment benefit; the measurement still needs evidence of adequate quality.
-
 ## Preserve the run
 
 Save the exact inputs presented to the LLM, prompts and examples, raw responses, parsing and postprocessing code, dates, model information, and available generation settings. Keep failures, retries, and human corrections traceable to the original case. Apply the same access rules to these records as to the source data.
@@ -90,7 +60,7 @@ Use an exact model identifier when the interface exposes one, and record limitat
 
 Keeping an exact copy of open weights can preserve access after a service changes. Repeatability still depends on preprocessing, runtime, numerical precision, and generation settings. Reevaluate a replacement rather than assuming a newer or larger model produces interchangeable measurements.
 
-## Evaluate a labeling task
+## Evaluate a labeling task {#evaluate-llm-labeling}
 
 Suppose you want to label whether a response describes an unmet service need. Write a rubric defining that category, exclusions, and ambiguous cases. Have two people apply it independently to a development sample, discuss disagreements, and record any adjudication. Human labels are a reference with their own uncertainty, not unquestionable truth.
 
@@ -115,12 +85,14 @@ Decide acceptable error rates and how uncertain cases will be handled before ins
 :::
 <!-- /prompt:evaluate-labeling -->
 
-If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§17).
+If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§18).
 
 ## Check sensitivity to the measurement procedure
 
-A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. For text coding, changing a boundary definition can reveal that the construct is underspecified.
+A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. [Zheng et al.](https://arxiv.org/abs/2306.05685) documented position and verbosity biases when LLMs judged chatbot responses. Their study motivates checking those effects in a research judging task; it does not establish their size for your protocol. For text coding, changing a boundary definition can reveal that the construct is underspecified.
 
 Keep each alternative's outputs and failures. Report meaningful changes in the substantive conclusion rather than selecting the prompt that yields a preferred answer. Repeated identical inputs can also reveal variation, but consistent outputs are not necessarily valid outputs.
 
-For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§17–18).
+For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§18–19).
+
+The same measurement checks apply whether inference uses a hosted service or a model you run yourself. Chapter 17 develops the reasons to choose a local model or adapt one; neither choice replaces the evaluation here.

@@ -52,6 +52,6 @@ Some research ends in a dashboard, interactive tool, or service rather than a pa
 
 ## A route through the guide
 
-*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
+*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. Chapters 16–17 extend the discussion to LLM research measurements and running or adapting models. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
 The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.

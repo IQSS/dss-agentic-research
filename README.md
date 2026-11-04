@@ -4,7 +4,7 @@ The website is generated from the canonical manuscript in `workspace/publishing/
 
 ## Local reading draft
 
-The November 2, 2026 revision has 19 chapter/reference pages, a landing page, and a 404 page. The complete local render and link/source checks pass. Author review and account/platform trials precede the planned November 19 public release. The source lock records the committed reading draft. The visual organization of the landing-page table of contents will be revisited after the author confirms the chapter structure.
+The November 3, 2026 revision has 19 chapters and four appendices, plus the landing page, a 404 page, and a legacy redirect. LLM measurement and model deployment/adaptation have separate chapters. Author review and account/platform trials precede the planned November 19 public release. Local preview syncs may include uncommitted upstream edits, which the source lock records explicitly. The visual organization of the landing-page table of contents will be revisited after the author confirms the chapter structure.
 
 ## Build and check
 

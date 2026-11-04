@@ -59,4 +59,4 @@ The project begins with the folder and context files introduced in chapters 6–
 | Writing | A link from the chosen result file and entry to each reported number and figure. |
 | Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |
 
-The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.
+The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. Its labeling example continues into chapter 17 to explain when local execution or model adaptation may help. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.

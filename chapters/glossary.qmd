@@ -16,13 +16,13 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§18). *One-command build* means the same.
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§19). *One-command build* means the same.
 
 *Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§14).
 
 *Chain of custody.* The record of where protected data and their copies travel, who or what can access them, and how retention and deletion can be established (§3).
 
-*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§17).
+*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§18).
 
 *Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
 
@@ -44,13 +44,17 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Global file.* An instruction file holding conventions that apply across your projects (§8). Project-specific instructions belong in the project file, defined here under *brief*.
 
+*Fine-tuning.* Additional training that adapts an existing model using a dataset. It changes learned parameters; supplying context alone does not (§17).
+
 *Headless agent.* An agent run from a saved request without an interactive conversation. Headless execution does not itself control all the context or tools available to the run (§16).
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§7).
 
 *LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§5, §16).
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§18).
+*LoRA.* Low-Rank Adaptation, a fine-tuning method that learns compact adjustments while keeping the base model's weights fixed. The saved adjustments are an adapter (§17).
+
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§19).
 
 *Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§5, §16); and a statistical model fitted to data (§13).
 
@@ -58,7 +62,9 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§15).
 
-*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§16).
+*Open-source AI.* Under the Open Source Initiative's definition, a system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this (§17).
+
+*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§17).
 
 *Permission mode.* The setting that decides which actions the agent may take without asking (§5).
 

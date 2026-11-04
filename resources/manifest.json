@@ -104,31 +104,31 @@
     },
     {
       "id": "trace-manuscript",
-      "chapter": 17,
+      "chapter": 18,
       "title": "Trace numbers into the manuscript",
       "purpose": "Find stale values and unsupported claims in the rendered document."
     },
     {
       "id": "draft-from-results",
-      "chapter": 17,
+      "chapter": 18,
       "title": "Draft from the research record",
       "purpose": "Keep evidence gaps visible while writing."
     },
     {
       "id": "reviewer-response",
-      "chapter": 17,
+      "chapter": 18,
       "title": "Draft a response from your decisions",
-      "purpose": "Preserve the author\u2019s decisions and link replies to revisions."
+      "purpose": "Preserve the author’s decisions and link replies to revisions."
     },
     {
       "id": "reproduce-project",
-      "chapter": 18,
+      "chapter": 19,
       "title": "Test a clean-copy handoff",
       "purpose": "Establish what another researcher can actually rerun."
     },
     {
       "id": "review-deposit",
-      "chapter": 18,
+      "chapter": 19,
       "title": "Review a proposed deposit",
       "purpose": "Check the snapshot before publication."
     }

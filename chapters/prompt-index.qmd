@@ -185,7 +185,7 @@ Keep evaluation separate from prompt development.
 
 Find stale values and unsupported claims in the rendered document.
 
-[Explanation and checks in chapter 17](#request-trace-manuscript).
+[Explanation and checks in chapter 18](#request-trace-manuscript).
 
 ::: {.prompt}
 > Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
@@ -195,7 +195,7 @@ Find stale values and unsupported claims in the rendered document.
 
 Keep evidence gaps visible while writing.
 
-[Explanation and checks in chapter 17](#request-draft-from-results).
+[Explanation and checks in chapter 18](#request-draft-from-results).
 
 ::: {.prompt}
 > Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
@@ -205,7 +205,7 @@ Keep evidence gaps visible while writing.
 
 Preserve the author’s decisions and link replies to revisions.
 
-[Explanation and checks in chapter 17](#request-reviewer-response).
+[Explanation and checks in chapter 18](#request-reviewer-response).
 
 ::: {.prompt}
 > Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
@@ -215,7 +215,7 @@ Preserve the author’s decisions and link replies to revisions.
 
 Establish what another researcher can actually rerun.
 
-[Explanation and checks in chapter 18](#request-reproduce-project).
+[Explanation and checks in chapter 19](#request-reproduce-project).
 
 ::: {.prompt}
 > Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
@@ -225,7 +225,7 @@ Establish what another researcher can actually rerun.
 
 Check the snapshot before publication.
 
-[Explanation and checks in chapter 18](#request-review-deposit).
+[Explanation and checks in chapter 19](#request-review-deposit).
 
 ::: {.prompt}
 > Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.

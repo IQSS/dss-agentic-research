@@ -56,7 +56,7 @@ Some research ends in a dashboard, interactive tool, or service rather than a pa
 
 ## A route through the guide
 
-*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
+*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. Chapters 16–17 extend the discussion to LLM research measurements and running or adapting models. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
 
 The main route uses Claude Code in the Mac desktop app. You need no terminal or git knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
 
@@ -157,7 +157,7 @@ This is a development and testing route, not proof that the code will handle eve
 
 ## When this app cannot support the task
 
-If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 16 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
+If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 17 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
 
 ## If material is exposed accidentally
 
@@ -598,7 +598,7 @@ For example, a coauthor asks for a short status update each week. The project al
 
 A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an R or Python function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
 
-A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §17, §18 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
+A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §18, §19 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
 
 ```
 ---
@@ -639,7 +639,7 @@ The Claude app lists skills under the same slash menu. A skill that needs more t
 
 ## What to package
 
-Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§17), the clean-copy check and the pre-deposit audit (§18). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
+Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§18), the clean-copy check and the pre-deposit audit (§19). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
 
 Keep project-specific facts, such as file locations and data restrictions, in the project instructions. A reusable skill should tell the agent to consult those instructions. Similarly, refer to your global conventions rather than copying them into each skill. This lets you reuse the procedure across projects and update a rule in one place.
 
@@ -716,7 +716,7 @@ The project begins with the folder and context files introduced in chapters 6–
 | Writing | A link from the chosen result file and entry to each reported number and figure. |
 | Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |
 
-The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.
+The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. Its labeling example continues into chapter 17 to explain when local execution or model adaptation may help. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.
 
 # 11. Find and assess research literature {#literature}
 
@@ -1137,36 +1137,6 @@ A direct scripted model call may be simpler when the task needs no tools or agen
 :::
 <!-- /prompt:controlled-llm-runs -->
 
-## Choose where the model runs {#local-models}
-
-If a hosted LLM reads a transcript or manuscript to analyze it, that material enters the provider's inference system. A commitment not to train on it does not settle retention, subcontracting, deletion, or the other obligations discussed in §3. Synthetic data can help an agent develop analysis code without reading protected records. It cannot replace the actual text when the research task is to classify that text.
-
-An *open-weight model* makes trained model weights available under specified terms. You may be able to run it on your computer or on an institution's approved infrastructure, keeping inference within that environment. Using an open-weight model through somebody else's hosted API still sends the inputs to that service. “Local” in an agent app can also describe where tools run while the model remains hosted.
-
-| Route | Research use | What must be established |
-|:--|:--|:--|
-| Approved hosted model | Strong task performance without maintaining model hardware | Applicable agreement, data permissions, retention, and the actual endpoint |
-| Model on your computer | Smaller approved workloads; control over saved weights and local inference | Sufficient memory, tested task quality, and the agent's remaining network/tool access |
-| Model on controlled institutional infrastructure | Larger models or protected workloads requiring managed resources | Approved compute and storage, access controls, logging, and a reproducible model/runtime record |
-
-Return to the chain of custody in §3 for every route. Prompts, model responses, temporary files, caches, and backups can contain protected material even when inference is local. Local execution gives you more control over those copies; it does not itself authorize their use or deletion schedule. Tool permissions (§4) must match the research protocol too.
-
-### Kimi, DeepSeek, and the model you can actually run
-
-Model families include different releases with different capabilities and hardware requirements. [Kimi K2](https://github.com/MoonshotAI/Kimi-K2) is an example of released weights intended for tasks including agentic tool use; deploying its large models is a research-computing decision. [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1) includes the full model and smaller distilled releases. A small distilled model is not the same model with a cheaper hosting bill: evaluate that particular release on your task.
-
-Record the exact weights and license, precision or quantization, runtime, context limit, and prompting format. Reducing numerical precision can make weights fit available memory, but it changes the configuration being evaluated. Long documents and several simultaneous jobs also consume memory beyond the stored weights. Ask research computing to assess the intended model and workload when a laptop is insufficient.
-
-A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
-
-[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
-
-### Apple’s built-in on-device model
-
-Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#apple-on-device).
-
-Candidate research tasks include extracting dates and organizations, tagging documents, or classifying short survey responses against a fixed rubric. Apple’s [capability guidance](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models) identifies these language-understanding tasks and cautions against relying on the on-device model for code generation or logical reasoning. Evaluate the particular task on held-out examples, save the original responses, and record the device, operating-system version, and available model information. Local availability is a deployment benefit; the measurement still needs evidence of adequate quality.
-
 ## Preserve the run
 
 Save the exact inputs presented to the LLM, prompts and examples, raw responses, parsing and postprocessing code, dates, model information, and available generation settings. Keep failures, retries, and human corrections traceable to the original case. Apply the same access rules to these records as to the source data.
@@ -1175,7 +1145,7 @@ Use an exact model identifier when the interface exposes one, and record limitat
 
 Keeping an exact copy of open weights can preserve access after a service changes. Repeatability still depends on preprocessing, runtime, numerical precision, and generation settings. Reevaluate a replacement rather than assuming a newer or larger model produces interchangeable measurements.
 
-## Evaluate a labeling task
+## Evaluate a labeling task {#evaluate-llm-labeling}
 
 Suppose you want to label whether a response describes an unmet service need. Write a rubric defining that category, exclusions, and ambiguous cases. Have two people apply it independently to a development sample, discuss disagreements, and record any adjudication. Human labels are a reference with their own uncertainty, not unquestionable truth.
 
@@ -1200,17 +1170,118 @@ Decide acceptable error rates and how uncertain cases will be handled before ins
 :::
 <!-- /prompt:evaluate-labeling -->
 
-If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§17).
+If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§18).
 
 ## Check sensitivity to the measurement procedure
 
-A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. For text coding, changing a boundary definition can reveal that the construct is underspecified.
+A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. [Zheng et al.](https://arxiv.org/abs/2306.05685) documented position and verbosity biases when LLMs judged chatbot responses. Their study motivates checking those effects in a research judging task; it does not establish their size for your protocol. For text coding, changing a boundary definition can reveal that the construct is underspecified.
 
 Keep each alternative's outputs and failures. Report meaningful changes in the substantive conclusion rather than selecting the prompt that yields a preferred answer. Repeated identical inputs can also reveal variation, but consistent outputs are not necessarily valid outputs.
 
-For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§17–18).
+For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§18–19).
 
-# 17. Write and revise from the research record {#research-writing}
+The same measurement checks apply whether inference uses a hosted service or a model you run yourself. Chapter 17 develops the reasons to choose a local model or adapt one; neither choice replaces the evaluation here.
+
+# 17. Run and adapt models for your research {#research-models}
+
+Running a model yourself can give you control over where research material is processed and preserve access to the particular weights used in a study. Adapting a model can also improve how it performs a recurring research task. These benefits require separate decisions about data permissions, hardware, and evidence of useful performance.
+
+Suppose your team is coding interview excerpts for unmet service needs, using the rubric evaluated in §16. The approved environment may exclude an external model service, making local inference useful. Separately, the team may have enough reviewed examples to investigate whether training improves the model's coding. Moving the model onto approved hardware addresses where processing happens; an evaluation addresses whether the coding is adequate.
+
+You can run an unchanged open-weight model locally. Fine-tuning is optional, and it still requires the research checks in §16. This chapter explains those choices; the [toolkit](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers local runtime setup.
+
+## Choose where the model runs {#local-models}
+
+If a hosted LLM reads a transcript or manuscript to analyze it, that material enters the provider's inference system. A commitment not to train on it does not settle retention, subcontracting, deletion, or the other obligations discussed in §3. Synthetic data can help an agent develop analysis code without reading protected records. It cannot replace the actual text when the research task is to classify that text.
+
+An *open-weight model* makes its trained parameters available to download and run under specified terms. *Open-source AI* involves more: the [Open Source Initiative's definition](https://opensource.org/ai/open-source-ai-definition) requires rights to use, study, modify, and share the system, along with its parameters, training and inference code, and sufficient information about the training data. It does not require publishing every raw training record. Downloadable weights alone do not establish that a system meets this definition.
+
+Running a model locally can mean running it on your everyday computer. Install a runtime such as [Ollama](https://docs.ollama.com/macos), download suitable weights, and use the model through a chat interface or a connected script or agent. This runs an already-trained model; you do not train it from scratch. You need disk space for the weights and enough working memory and processing capacity for the workload. A larger model may need a powerful workstation or an institutional GPU server.
+
+The word *server* can also describe software on that same computer that accepts requests from your other programs. For example, [Ollama's local service](https://docs.ollama.com/faq#how-can-i-expose-ollama-on-my-network) is accessible only from that computer by default. You do not need a separate machine or a public internet service. Using downloaded weights and a local runtime keeps model inference there, but an agent's tools may still contact outside services. Using those same weights through somebody else's hosted API sends the inputs to that provider. “Local” in an agent app can also describe where tools run while the model remains hosted.
+
+| Route | Research use | What must be established |
+|:--|:--|:--|
+| Approved hosted model | Strong task performance without maintaining model hardware | Applicable agreement, data permissions, retention, and the actual endpoint |
+| Model on your computer | Smaller approved workloads; control over saved weights and local inference | Sufficient memory, tested task quality, and the agent's remaining network/tool access |
+| Model on controlled institutional infrastructure | Larger models or protected workloads requiring managed resources | Approved compute and storage, access controls, logging, and a reproducible model/runtime record |
+
+Return to the chain of custody in §3 for every route. Prompts, model responses, temporary files, caches, and backups can contain protected material even when inference is local. Local execution gives you more control over those copies; it does not itself authorize their use or deletion schedule. Tool permissions (§4) must match the research protocol too.
+
+### Model families you may encounter
+
+The table gives examples from widely used model families, with release-specific terms checked as of November 2026. These are examples to recognize, not a performance ranking or a list of the newest releases. Follow the model links for capabilities and hardware requirements.
+
+<!-- VERIFY 2026-11-03: release cards and licenses linked below; OSI definition 1.0; Ollama macOS requirements and FAQ. Family names do not imply a common license across releases. -->
+
+| Family | Developer | Example release | License for that release |
+|:--|:--|:--|:--|
+| Qwen | Alibaba | [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) | Apache 2.0 |
+| Gemma | Google DeepMind | [Gemma 4 E4B](https://huggingface.co/google/gemma-4-E4B-it) | Apache 2.0 |
+| Mistral | Mistral AI | [Ministral 3 8B Instruct](https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512) | Apache 2.0 |
+| Llama | Meta | [Llama 3.3 70B Instruct](https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct) | Custom Llama 3.3 license |
+| DeepSeek | DeepSeek | [DeepSeek-V3.2](https://huggingface.co/deepseek-ai/DeepSeek-V3.2) | MIT |
+| Kimi | Moonshot AI | [Kimi K2](https://github.com/MoonshotAI/Kimi-K2) | Modified MIT |
+| GLM | Z.ai | [GLM-4.7](https://huggingface.co/zai-org/GLM-4.7) | MIT |
+| MiniMax | MiniMax | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) | Custom noncommercial terms; commercial use requires authorization |
+
+Licenses can change between releases. MIT and Apache 2.0 are permissive licenses; custom terms need closer attention. For example, [Kimi K2 adds a branding condition for certain large commercial deployments](https://github.com/MoonshotAI/Kimi-K2/blob/main/LICENSE), while [MiniMax-M2.7 restricts commercial use](https://huggingface.co/MiniMaxAI/MiniMax-M2.7/blob/main/LICENSE). The license column alone does not establish whether the training materials meet the open-source definition above.
+
+Model families also include releases with very different capabilities and hardware requirements. The smaller Qwen, Gemma, and Ministral examples offer starting points for evaluating a model on your own computer; a full Kimi K2 deployment needs substantially more resources. [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1) includes the full model and smaller distilled releases. Distillation trains a smaller model using outputs from a larger one; evaluate the particular release rather than assuming it retains the larger model's capabilities.
+
+Record the exact weights and license, precision or quantization, runtime, context limit, and prompting format. Reducing numerical precision can make weights fit available memory, but it changes the configuration being evaluated. Long documents and several simultaneous jobs also consume memory beyond the stored weights. Ask research computing to assess the intended model and workload when a laptop is insufficient.
+
+A model that answers text questions well may still be unreliable at calling tools or following the output format needed by an agent. Test those capabilities separately. If review coding needs only a fixed document and rubric, direct model inference may be sufficient. If the task needs to find files, run code, and inspect intermediate results, use a compatible agent harness and check its tool behavior.
+
+[Ollama](https://docs.ollama.com/integrations/claude-code) provides one route between compatible local models and Claude Code's terminal interface. It also supports cloud models, so the software's name alone does not establish where inference happens. [The toolkit's local-model section](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#local-models) covers setup and a harmless trial. Choose the model based on measured research performance and available infrastructure, then verify the actual inference route before supplying protected inputs.
+
+### Apple’s built-in on-device model
+
+Local inference does not require open weights. Apple’s [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device model on supported devices. Apple also supplies a [Python SDK and, in macOS 27, the `fm` command](https://developer.apple.com/videos/play/wwdc2026/334/), so a research pipeline can use the model without a custom Swift application. These interfaces can also support cloud routes; select and verify the on-device route explicitly. The [toolkit describes the available entry points](https://dss-agentic-toolkit.pages.dev/chapters/terminal-agents.html#apple-on-device).
+
+Candidate research tasks include extracting dates and organizations, tagging documents, or classifying short survey responses against a fixed rubric. Apple’s [capability guidance](https://developer.apple.com/documentation/FoundationModels/generating-content-and-performing-tasks-with-foundation-models) identifies these language-understanding tasks and cautions against relying on the on-device model for code generation or logical reasoning. Evaluate the particular task on held-out examples, save the original responses, and record the device, operating-system version, and available model information. Local availability is a deployment benefit; the measurement still needs evidence of adequate quality.
+
+## Decide whether context is enough {#context-or-training}
+
+Start by giving the existing model a clear task, a rubric, and representative examples. *In-context learning* uses those examples within the request without updating the model's weights. When a task needs facts from papers or project documents, retrieval can select relevant passages to include in that context.
+
+Fine-tuning instead updates learned parameters using a training dataset. For the interview-coding example, a supervised dataset could pair each excerpt with its reviewed code. Training can use many such pairs across separate batches; they do not all need to fit into one prompt. The adapted model still receives the new excerpt and any instructions needed to apply it.
+
+| Research need | Starting approach |
+|:--|:--|
+| Consult current documents or explain an answer from sources | Supply relevant passages directly or through retrieval |
+| Apply a rubric to a limited or changing task | Prompt the existing model with instructions and selected examples |
+| Repeat a stable task where a strong prompt still makes consequential errors | Consider fine-tuning if suitable training examples and an independent evaluation are available |
+
+For a repeated task, adaptation may improve coding accuracy, adherence to an output format, or performance with shorter prompts. It also introduces training and maintenance work. A small dataset with inconsistent codes may teach the model the same inconsistencies; a changed rubric may require another training and evaluation cycle.
+
+The evidence supports testing these possibilities for a particular task. [Liu et al.](https://arxiv.org/abs/2205.05638) found better accuracy and lower prediction-time computation for their parameter-efficient T-Few procedure than the in-context baselines they evaluated. T-Few used a particular pretrained model and an adaptation method called IA³. That result does not establish that LoRA, or any adapted model, will outperform a well-prompted current model on your study.
+
+For factual questions, [Ovadia et al.](https://arxiv.org/abs/2312.05934) found retrieval more effective than unsupervised fine-tuning on the knowledge-intensive tasks they tested. Unsupervised fine-tuning here means further training on text, without labeled task answers. It differs from training on reviewed excerpt/code pairs. The finding supports trying retrieval when the immediate need is access to documents; it is not a comparison of every form of task adaptation.
+
+Fine-tuning and context can be combined. An adapted model may still need the current rubric or retrieved evidence. Keep a strong context-based baseline so you can establish what training adds.
+
+## What LoRA changes {#lora}
+
+*LoRA* stands for *Low-Rank Adaptation*. It is a fine-tuning method implemented by training software. It keeps the original weights fixed and learns a compact mathematical representation of adjustments to selected parts of the model. Those learned adjustments are saved as an *adapter*, which is used with the base model or merged into a new copy. The [LoRA paper](https://arxiv.org/abs/2106.09685) describes the method and its reductions in trainable parameters and training memory.
+
+For example, Qwen is the model family; MLX LM or Hugging Face PEFT supplies software; LoRA is the training method; and your saved adapter contains what was learned from your examples. *Full fine-tuning* updates the original weights themselves and generally needs more training memory.
+
+*QLoRA* combines low-rank adaptation with a quantized base model, reducing the memory needed for training further. The [QLoRA paper](https://arxiv.org/abs/2305.14314) establishes this approach. Its hardware demonstrations are not a guarantee that a particular model and document length will fit your computer.
+
+Apple Silicon users can use [MLX LM's documented LoRA and QLoRA support](https://github.com/ml-explore/mlx-lm/blob/main/mlx_lm/LORA.md); [Hugging Face PEFT](https://huggingface.co/docs/peft/main/en/conceptual_guides/lora) implements LoRA for compatible models. A runtime used to chat with a model and software used to train it have different jobs. The linked documentation identifies supported models and training options.
+
+## Evaluate and preserve an adapted model {#evaluate-adapted-model}
+
+Apply the [evaluation procedure in chapter 16](#evaluate-llm-labeling) to both the unmodified baseline and the adapted model. Separate training examples, development material used to choose settings, and the final evaluation cases. Keep related passages from the same person or document in the same split. Freeze the task and comparison before opening the final results.
+
+Compare the errors that matter to the study, including rare categories and relevant subgroups. Include failed outputs and human referrals. Record training effort and prediction cost if efficiency is part of the reason for adapting the model. Improved agreement with your reference labels does not by itself establish that those labels capture the intended construct.
+
+Preserve the base-model identifier and fingerprint, adapter or updated weights, training-data version, split assignments, training configuration, software environment, and evaluation results. An adapter alone is incomplete without the base model it modifies. Distinguish reproducing the published analysis from saved responses, generating new responses with the saved adapted model, and retraining it (§16; §19).
+
+Local training can keep the training inputs within approved infrastructure, but the trained artifacts also need a place in the chain of custody (§3). [Research on memorization during fine-tuning](https://aclanthology.org/2024.acl-long.216/) shows that models can retain training information. Include adapters, checkpoints, logs, and any external experiment-tracking service when deciding where protected material can go and what may be shared.
+
+# 18. Write and revise from the research record {#research-writing}
 
 Research revisions are incomplete if the analysis changes but the manuscript still describes the earlier result. Give the agent a maintained source for each substantive claim and number, then check the rendered manuscript against that record.
 
@@ -1298,7 +1369,7 @@ An adaptable disclosure template is:
 
 > We used [tool and observed model/version; dates] to [specified tasks]. The authors reviewed [affected text or outputs] and checked the analysis using [checks actually completed]. For LLM-derived measurements, the Methods describe the inputs, prompts, evaluation, and human review. The authors take responsibility for the reported work.
 
-Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§18), even when private working notes are removed.
+Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§19), even when private working notes are removed.
 
 Treat peer-review material separately. This guide's conservative working rule is to keep confidential manuscripts and applications you are reviewing out of agent sessions. Follow the journal's or funder's current reviewer policy; permission to use an agent on your own work does not authorize its use on someone else's confidential submission.
 
@@ -1308,7 +1379,7 @@ Keep every returned manuscript before reconciling edits. A regenerated document 
 
 A gap in the evidence should remain visible. If the agent cannot locate a reported value, verify a reference, or reconcile the written method with the executed code, resolve that gap before polishing the sentence around it.
 
-# 18. Reproduce and hand off the research {#research-handoff}
+# 19. Reproduce and hand off the research {#research-handoff}
 
 A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff exposes dependencies that your familiar working folder can hide. It also gives your future self a usable record when a reviewer asks for a revision.
 
@@ -1751,7 +1822,7 @@ Keep evaluation separate from prompt development.
 
 Find stale values and unsupported claims in the rendered document.
 
-[Explanation and checks in chapter 17](#request-trace-manuscript).
+[Explanation and checks in chapter 18](#request-trace-manuscript).
 
 ::: {.prompt}
 > Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
@@ -1761,7 +1832,7 @@ Find stale values and unsupported claims in the rendered document.
 
 Keep evidence gaps visible while writing.
 
-[Explanation and checks in chapter 17](#request-draft-from-results).
+[Explanation and checks in chapter 18](#request-draft-from-results).
 
 ::: {.prompt}
 > Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
@@ -1771,7 +1842,7 @@ Keep evidence gaps visible while writing.
 
 Preserve the author’s decisions and link replies to revisions.
 
-[Explanation and checks in chapter 17](#request-reviewer-response).
+[Explanation and checks in chapter 18](#request-reviewer-response).
 
 ::: {.prompt}
 > Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
@@ -1781,7 +1852,7 @@ Preserve the author’s decisions and link replies to revisions.
 
 Establish what another researcher can actually rerun.
 
-[Explanation and checks in chapter 18](#request-reproduce-project).
+[Explanation and checks in chapter 19](#request-reproduce-project).
 
 ::: {.prompt}
 > Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
@@ -1791,7 +1862,7 @@ Establish what another researcher can actually rerun.
 
 Check the snapshot before publication.
 
-[Explanation and checks in chapter 18](#request-review-deposit).
+[Explanation and checks in chapter 19](#request-review-deposit).
 
 ::: {.prompt}
 > Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.
@@ -1831,13 +1902,13 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§18). *One-command build* means the same.
+*Build.* The one command that produces every output the paper reports from the scripts and the data (§19). *One-command build* means the same.
 
 *Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§14).
 
 *Chain of custody.* The record of where protected data and their copies travel, who or what can access them, and how retention and deletion can be established (§3).
 
-*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§17).
+*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§18).
 
 *Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
 
@@ -1859,13 +1930,17 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Global file.* An instruction file holding conventions that apply across your projects (§8). Project-specific instructions belong in the project file, defined here under *brief*.
 
+*Fine-tuning.* Additional training that adapts an existing model using a dataset. It changes learned parameters; supplying context alone does not (§17).
+
 *Headless agent.* An agent run from a saved request without an interactive conversation. Headless execution does not itself control all the context or tools available to the run (§16).
 
 *Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§7).
 
 *LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§5, §16).
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§18).
+*LoRA.* Low-Rank Adaptation, a fine-tuning method that learns compact adjustments while keeping the base model's weights fixed. The saved adjustments are an adapter (§17).
+
+*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§19).
 
 *Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§5, §16); and a statistical model fitted to data (§13).
 
@@ -1873,7 +1948,9 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§15).
 
-*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§16).
+*Open-source AI.* Under the Open Source Initiative's definition, a system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this (§17).
+
+*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§17).
 
 *Permission mode.* The setting that decides which actions the agent may take without asking (§5).
 

@@ -58,7 +58,7 @@ This is a development and testing route, not proof that the code will handle eve
 
 ## When this app cannot support the task
 
-If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 16 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
+If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 17 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
 
 ## If material is exposed accidentally
 

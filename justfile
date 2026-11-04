@@ -45,7 +45,8 @@ watch:
     up=../../publishing/agentic-ai-for-researchers
     sync="../dss-training-ops/scripts/split-chapters.py --upstream $up --site . --allow-dirty"
     $sync
-    watchexec --watch "$up/source" --watch "$up/figures" --watch "$up/resources" --exts md,svg,json,zip,txt -- $sync &
+    # The initial sync is complete; another startup sync would race the preview's file copy.
+    watchexec --postpone --watch "$up/source" --watch "$up/figures" --watch "$up/resources" --exts md,svg,json,zip,txt -- $sync &
     watcher=$!
     trap 'kill "$watcher" 2>/dev/null || true' EXIT INT TERM
     python3 scripts/render-site.py --preview
