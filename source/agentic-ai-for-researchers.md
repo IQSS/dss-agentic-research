@@ -10,55 +10,86 @@ version: "1.8 draft"
 
 # 1. How agents can help your research {#research-uses}
 
-Research depends on more than getting an answer quickly. We need to know what was done, whether it matches the question, and whether someone can reproduce it. An agent can help maintain that connection while doing much of the coding, searching, checking, and documentation. Used well, it can make research faster, more robust, reproducible, and auditable.
+An artificial intelligence (AI) agent can work directly with your research files and software, carrying out tasks you describe in ordinary language. You can ask it to find relevant papers, write and run an analysis, or revise a manuscript. These capabilities also make it useful for checking that the agent did what you asked and documenting how the results were produced. This guide explains how to use agents to make research more efficient, strengthen checks on the work, and preserve the information needed to understand and reproduce the findings.
 
-Suppose a collaborator changes an inclusion rule. The agent can identify the affected analysis steps, rerun them, compare the outputs, and update the manuscript's numbers and methods. It should leave the code, checks, and decision record behind. You can then inspect the consequences and repeat the work without reconstructing a conversation.
+Suppose you and a collaborator decide to change an inclusion criterion. An agent can update the analysis code, rerun the affected steps, and regenerate the tables and figures. It can then check that the sample sizes and estimates reported in the manuscript match the revised results. By saving the updated code and recording what changed, it leaves you and your collaborators with an analysis you can inspect and run again.
 
-## Three research uses
+## Three uses for AI in research
 
 ::: {.research-use}
 ![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="An agent examining research ideas."}
 
-*Develop ideas.* Ask an agent to explore explanations, find counterexamples, or challenge a proposed design. Supply the question and the constraints that matter. Treat its suggestions as possibilities to investigate: a plausible account needs support from research evidence.
+*Develop ideas.* A conversation with AI can help you explore a research question and consider explanations you might otherwise overlook. For example, you could describe an observed association and ask for competing explanations, then discuss what evidence would distinguish them. You can develop the promising suggestions further, drawing on the literature and your own expertise to judge which are worth pursuing.
 :::
 
 ::: {.research-use}
 ![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
 
-*Build research workflows.* Delegate data preparation, analysis scripts, figures, document builds, and project maintenance. You choose the research question and method; the agent implements them and supplies evidence about its work. Saved code and commands make that work repeatable.
+*Build and run research workflows.* An agent can turn a research plan into working code and carry out the steps needed to produce results. For example, it could prepare a dataset, fit the models you specify, and generate figures for a manuscript. Saving those steps as reusable scripts makes it easier to revise the analysis or run it on new data. The agent can also help check its implementation and document the work for collaborators.
 :::
 
 ::: {.research-use}
 ![](figures/use-model.svg){.use-icon width="64px" fig-alt="A model processing research material."}
 
-*Use an LLM within the research method.* A model might classify interview passages, extract information from documents, or judge reviews. Its outputs become research material that needs evaluation against the construct you intend to study. A functioning program does not establish the quality of those judgments ([chapter 16](#llm-measurements)).
+*Use AI within the research method.* A large language model (LLM) can classify interview passages, extract information from documents, or evaluate written responses. Here, the model’s outputs become part of the research data. If you use it to identify themes in interviews, for example, the study depends on how well its classifications reflect the concepts you are investigating. You therefore need to evaluate its performance and record how it was instructed and used.
 :::
 
-## How an agent works
+## From language models to agents
 
-An agent combines a language model with tools and a repeated action-and-feedback cycle. It can read files, edit code, run programs, and inspect their outputs, within the access available to it. The diagrams show how that changes the work you can delegate.
+### How does a language model generate a response? {.unnumbered .unlisted}
 
-![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent can use tools to perform those steps in the project."}
+A large language model (LLM) is a neural network[^intro-neural-network] trained on large amounts of text to learn patterns in language. The models used in AI assistants generate text by predicting what could come next, using the conversation so far. They work in *tokens*: pieces of text that may be a word, part of a word, or punctuation.[^intro-tokens]
 
-![](figures/agent-loop.svg){#fig-agent-loop fig-alt="A research request enters a loop: the model chooses an action, a tool performs it, and the result returns to the model. The agent continues or reports the outcome."}
+For each new token, the model assigns probabilities to possible continuations. One is selected and added to the text, then the process repeats. Selection can involve randomness, so the most likely continuation is not always the one chosen.[^intro-generation]
 
-For example, an analysis fails because it expects `birth_weight`, while the input column is `birthweight_g`. The agent reads the error and data dictionary, identifies the intended variable, edits the script, and runs it again. The tool output tells it whether execution succeeded; checks against the specification establish whether the change was appropriate.
+![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Illustrative bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token. The bars are illustrative, not measured probabilities."}
 
-A chat product may also have tools. What matters here is whether the assistant can carry out the delegated work in your project. You can keep your existing [R](https://www.r-project.org/), [Stata](https://www.stata.com/), or [Python](https://www.python.org/) software; adopting an agent does not require changing research languages.
+### How can a model act on a research project? {.unnumbered .unlisted}
 
-## Your role
+An *agent* combines a LLM with tools and the software needed to use them. A tool is a program that performs an action, such as reading a file or running an analysis script. The model can request a *tool call*: an instruction to run one of those programs.
 
-State the result you want, the constraints, and the evidence you will use to accept it. Review consequential choices and inspect the outputs. Save project decisions so they survive a conversation. Keep material outside the agent's reach when the service is not permitted to process it.
+The surrounding software is called the *harness*. It supplies instructions and information to the LLM, handles permission checks, executes permitted tool calls, and returns their results. This lets the agent carry out work directly in your project.[^intro-harness]
 
-You do not have to read every generated line of code to supervise well. Known-answer cases and independent comparisons check the analysis; opened sources check its evidential basis, and reruns check reproducibility. When they expose a discrepancy, inspecting a particular calculation can help explain it. The simulation and independent-implementation chapters develop those checks separately.
+![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent combines an LLM with a harness that runs tools and returns their results, allowing it to perform those steps in the project."}
 
-Some research ends in a dashboard, interactive tool, or service rather than a paper. The same practices apply, with an additional commitment: someone must maintain it, support its users, and manage the information it collects. Establish that responsibility and the relevant institutional requirements before involving users.
+The same AI app may support both ways of working. You can keep your existing [R](https://www.r-project.org/), [Stata](https://www.stata.com/), or [Python](https://www.python.org/) software; adopting an agent does not require changing statistical languages.
 
-## A route through the guide
+::: {.needspace height="8cm"}
+:::
 
-*Orientation* introduces the app, where data goes, what the agent can access, and the settings you will use. *Direct the work* establishes a project, its context, shared conventions, and reusable procedures. *Do the research* follows one example through literature, data, modular analysis, checking, writing, and handoff. Chapters 16–17 extend the discussion to LLM research measurements and running or adapting models. The appendices supply downloadable starter files, a prompt bank, troubleshooting, and a glossary.
+### How does an agent work through a task? {.unnumbered .unlisted}
 
-The main route uses [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You need no terminal or [git](https://git-scm.com/) knowledge to begin; the practices transfer to other agents. Version control is strongly recommended for real projects, and the agent can maintain it. Harvard access details appear beside the relevant topic. [*Extending Your Agent's Toolkit*](https://dss-agentic-toolkit.pages.dev/) explains additional tools when the research gives you a reason to use them.
+The result of a tool call gives the LLM new information to use in choosing its next action. The harness passes that result back, and the LLM may request another tool call or respond to you. Repeating this cycle lets an agent work through a task and adjust when it encounters an error or an unexpected result.[^intro-react]
+
+![](figures/agent-loop.svg){#fig-agent-loop fig-alt="The LLM selects a tool, the harness runs it, and the result returns to the LLM to inform the next action. The cycle repeats as needed."}
+
+For example, an analysis fails because the script expects a column called `birth_weight`, while the dataset uses `birthweight_g`. The agent reads the error and consults the data dictionary to confirm which variable the script needs. It can then correct the code and run it again, using the new output to decide whether further work is needed.
+
+[^intro-neural-network]: A neural network is a mathematical model that learns patterns from examples. It passes information through layers of connected units and adjusts the strength of their connections during training to improve its predictions. See IBM's [“What is a neural network?”](https://www.ibm.com/think/topics/neural-networks) for an illustrated introduction.
+[^intro-tokens]: Hugging Face, [“Tokenizers”](https://huggingface.co/learn/llm-course/en/chapter2/4), explains how text is divided into tokens.
+[^intro-generation]: Hugging Face, [“Text generation”](https://huggingface.co/docs/transformers/llm_tutorial), describes generating successive tokens and the choices involved in selecting them.
+[^intro-harness]: Anthropic, [“How Claude Code works”](https://code.claude.com/docs/en/how-claude-code-works), explains the model, tools, and surrounding harness.
+[^intro-react]: Yao et al. (2023), [“ReAct: Synergizing Reasoning and Acting in Language Models”](https://doi.org/10.48550/arXiv.2210.03629), demonstrates how language models can alternate reasoning with actions and use observations to guide subsequent steps.
+
+## Your role as a supervisor
+
+Think of an agent as a capable research assistant joining your project. It needs context that an established collaborator might already have: what you are trying to establish, which files to use, and which decisions have already been made. Explaining these things helps it carry out work that fits your intentions.
+
+Your role is to give the work direction and assess what the agent produces. You can let it handle implementation details, while remaining involved in decisions that require your research judgment. A script can run without errors while using the wrong variable or excluding observations you intended to keep. Later chapters explain how to detect these mistakes.
+
+Ask it to provide the outputs and the results of its checks, then use those to identify anything that needs explaining or revising. The guide develops ways to supervise this work without having to perform every step yourself or read every line of generated code.
+
+## How to use this guide
+
+If you are new to agents, begin with *Orientation*. If you already use one, you can turn to the chapters relevant to your current work. The guide has three parts:
+
+- **Orientation** introduces the app, explains where your data goes, and shows how to control the agent’s access and choose its settings.
+- **Direct the work** covers organizing your projects, giving the agent useful context, and saving instructions and procedures you want it to reuse.
+- **Do the research** follows a worked research project through literature searches, analysis, checking, writing, and sharing the results. It also covers using LLMs within the research method and running or adapting open-weight models.
+
+The examples use [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [Git](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
+
+The appendices provide downloadable starter files, example requests, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
 
 # 2. Get started with the app {#first-session}
 

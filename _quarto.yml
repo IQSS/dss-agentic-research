@@ -109,7 +109,6 @@ anchor-map:
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "headless-agents": /chapters/llm-measurements.qmd#headless-agents
-  "llm-measurements": /chapters/llm-measurements.qmd
   "project-organization": /chapters/project-organization.qmd
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
