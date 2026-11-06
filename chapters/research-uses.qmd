@@ -73,7 +73,7 @@ Think of an agent as a capable research assistant joining your project. It needs
 
 Your role is to give the work direction and assess what the agent produces. You can let it handle implementation details, while remaining involved in decisions that require your research judgment. A script can run without errors while using the wrong variable or excluding observations you intended to keep. Later chapters explain how to detect these mistakes.
 
-Ask it to provide the outputs and the results of its checks, then use those to identify anything that needs explaining or revising. The guide develops ways to supervise this work without having to perform every step yourself or read every line of generated code.
+Ask the agent to provide the outputs and the results of its checks, then use those to identify anything that needs explaining or revising. The guide develops ways to supervise this work without having to perform every step yourself or read every line of generated code.
 
 ## How to use this guide
 

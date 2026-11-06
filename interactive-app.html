@@ -1,0 +1,45 @@
+<style>
+  .app-illustration { margin:1rem 0; }
+  .app-illustration iframe { display:block; width:100%; border:0; }
+  .app-illustration .app-expand { font:inherit; font-size:.85rem; border:1px solid var(--bs-border-color); border-radius:5px; background:transparent; color:inherit; padding:.25rem .6rem; margin-bottom:.5rem; }
+  .app-illustration.expanded { position:fixed; z-index:10001; inset:16px; margin:0; padding:18px; overflow:auto; background:var(--bs-body-bg); color:var(--bs-body-color); border:1px solid var(--bs-border-color); border-radius:10px; box-shadow:0 0 0 100vmax #0008; }
+  .app-illustration.expanded iframe { width:max(100%,960px); max-width:1190px; margin:0 auto; }
+  @media print { .app-illustration .app-expand { display:none; } }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('img.interactive-app').forEach(image => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'app-illustration';
+    const expand = document.createElement('button');
+    expand.type = 'button'; expand.className = 'app-expand';
+    expand.textContent = 'Enlarge illustration'; expand.setAttribute('aria-expanded', 'false');
+    const frame = document.createElement('iframe');
+    frame.title = 'Explore the controls in Claude Code';
+    frame.src = '/resources/claude-code-app.html'; frame.style.height = '560px';
+    const setTheme = () => frame.contentWindow?.postMessage({
+      type:'claude-app-theme',
+      light:!document.body.classList.contains('quarto-dark')
+    },location.origin);
+    frame.addEventListener('load', setTheme);
+    addEventListener('message', event => {
+      if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
+      if (event.data.type === 'claude-app-close') { setExpanded(false); expand.focus(); return; }
+      if (event.data.type !== 'claude-app-size') return;
+      const height = Number(event.data.height);
+      if (Number.isFinite(height) && height > 100 && height < 10000) frame.style.height = height + 'px';
+    });
+    new MutationObserver(setTheme).observe(document.body, {attributes:true,attributeFilter:['class']});
+    const setExpanded = expanded => {
+      wrapper.classList.toggle('expanded', expanded);
+      expand.textContent = expanded ? 'Close enlarged illustration' : 'Enlarge illustration';
+      expand.setAttribute('aria-expanded', String(expanded));
+    };
+    expand.addEventListener('click', () => setExpanded(!wrapper.classList.contains('expanded')));
+    addEventListener('keydown', event => { if(event.key === 'Escape') setExpanded(false); });
+    wrapper.append(expand, frame);
+    const target = image.parentElement.tagName === 'A' ? image.parentElement : image;
+    target.replaceWith(wrapper);
+  });
+});
+</script>

@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Code view",
+    "text": "Use the </> button to open Code. This is the part of the app used throughout the guide to work with research folders, scripts, and software."
+  },
+  {
+    "title": "Sessions",
+    "text": "Choose New to begin a conversation with the agent. Search helps you find an earlier session so you can return to that work."
+  },
+  {
+    "title": "Start a session",
+    "text": "Choose the project folder and the environment where the agent will run its tools. The same choices appear below the message box."
+  },
+  {
+    "title": "Describe the work",
+    "text": "Tell the agent what you want it to do and what the result should be. For example: \u201cChange the figure\u2019s x-axis label to Maternal age (years), then regenerate it.\u201d"
+  },
+  {
+    "title": "Where tools run",
+    "text": "\u201cThis computer\u201d means the agent runs tools on your machine. The LLM still runs on Anthropic\u2019s servers, and content used in the conversation is sent there. Local tool execution does not keep all data local."
+  },
+  {
+    "title": "Project folder",
+    "text": "Choose the folder containing the project you want to work on. This is where the session starts; it is not, by itself, a restriction on every file the agent can access."
+  },
+  {
+    "title": "Model",
+    "text": "Choose the LLM used for the session. Available models depend on your account and change over time."
+  },
+  {
+    "title": "Reasoning effort",
+    "text": "Where available, this setting controls how much reasoning the model uses. Higher effort can help with difficult tasks, but may take longer and use more of your allowance."
+  },
+  {
+    "title": "Permission mode",
+    "text": "This setting controls how actions are approved. Auto is the mode shown here; the settings chapter explains the available choices."
+  },
+  {
+    "title": "Usage",
+    "text": "In the app, click this circle to see the percentage of your weekly allowance used and when it resets."
+  },
+  {
+    "title": "Research account",
+    "text": "Check that you are signed into the account intended for your research. An institutional account can have different access and data terms from a personal account."
+  },
+  {
+    "title": "Settings",
+    "text": "Open the app\u2019s settings. Later chapters explain which settings affect access to files and tools, and how independently the agent can work."
+  }
+]

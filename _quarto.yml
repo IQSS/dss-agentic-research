@@ -10,7 +10,9 @@ filters:
 format:
   dss-theme-html:
     lightbox: true
-    include-after-body: prompt-controls.html
+    include-after-body:
+      - prompt-controls.html
+      - interactive-app.html
     css:
       - site.css
       - figures-dark.css
@@ -107,9 +109,9 @@ chapter-map:
 anchor-map:
   "agent-access": /chapters/agent-access.qmd
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
+  "directing-work": /chapters/directing-work.qmd
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "headless-agents": /chapters/llm-measurements.qmd#headless-agents
-  "project-organization": /chapters/project-organization.qmd
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations

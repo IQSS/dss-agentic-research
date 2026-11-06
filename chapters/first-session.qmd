@@ -6,43 +6,27 @@ title: "2. Get started with the app"
 
 # 2. Get started with the app
 
-You can use an agent with familiar research files and software without first learning a terminal. This chapter introduces the app and its main controls, so that later instructions about a folder, a session, or a permission mode have a clear meaning.
+Claude’s desktop app lets you work with an agent through a conversation. You describe what you need, and the agent can use your project’s files and software to carry it out.
 
-Imagine opening the folder for a paper you already work on. You need to know which folder the agent will use, where to describe a task, and where to inspect the files it changes. You also need to recognize the account and execution environment before making research material available. We will establish those boundaries next, then start the project in [chapter 6](#project-organization).
+Suppose you need to change the labels on a figure. You can ask the agent to edit the plotting script and regenerate the figure, then open the result to check it. The app gives you a place to describe the change, follow the work, and intervene if the agent misunderstands.
 
 ## Install and sign in
 
-Download the Mac app through the [official desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart), install it, and sign in with the account intended for your research. Open Code in the sidebar. Code is included in the desktop app; a separate terminal installation is unnecessary for this guide.
+1. Download and install the Mac app using the [official Claude Code desktop instructions](https://code.claude.com/docs/en/desktop-quickstart).
+2. Sign in with the account you intend to use for research.
 
-If Code is unavailable or the app asks you to upgrade, check that you have signed into the intended account and that it includes access. A feature advertised publicly may still be unavailable under an institution's settings.
+> **Harvard.** Request a license through [HUIT’s Claude page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Sign in with that account for your Harvard research.
 
-> **Harvard.** Request a license through [HUIT's Claude page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Use the Harvard account for institutionally covered work. Access to a license does not settle whether a particular research dataset may be processed; [chapter 3](#research-limits) covers that decision.
+## Find your way around
 
-## Chat, Cowork, and Code
+The app opens in the Claude tab, which handles general tasks using tools mainly in the cloud. In this guide, we use Code with *This computer* selected so Claude can edit project files and run analyses using the software installed on your computer. The LLM itself still runs on Anthropic’s servers, and any project content included in its context is sent there. [Chapter 3](#research-limits) explains what this means for your research data.
 
-Chat is useful for a conversation; [Cowork](https://claude.com/docs/cowork/overview) offers a convenient continuation into document and other knowledge work, including shared chat memory. That continuity may suit a task that begins in Chat. We use Code because our work centers on a research folder, saved scripts, and repeatable execution. [Cowork's documentation](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork) describes its current behavior; some accounts combine the Chat and Cowork interface.
+Each time you open the app, switch to Code using the `</>` button near the top of the sidebar. The illustration below shows the Code tab. [Hover over a numbered control to read its explanation. On a touchscreen, tap the number; with a keyboard, use the Tab key. You can enlarge the illustration or read all the explanations below it.]{.web-only}
 
-## Recognize the main controls
+![](figures/claude-code-app.svg){.interactive-app .tall fig-alt="The Code tab in Claude’s desktop app, with numbered controls for the project folder, execution environment, task, model, effort, permissions, usage, account, and settings." above="8pt" below="8pt"}
 
-The [desktop reference](https://code.claude.com/docs/en/desktop) explains the current layout. Locate these controls in your installation; their positions and availability can change.
+## Work with the agent
 
-| Control or view | What you need to know |
-|---|---|
-| Environment | Where tools will run. The Local route works with files on your computer; it does not mean the language model runs locally. |
-| Project folder | The folder the session starts from. Select the intended project after establishing the boundaries in chapters 3–4. |
-| Message box | Where you describe the task, add relevant files, and steer the work. |
-| Permission mode | How actions are approved. Chapter 5 explains when to use the available modes. |
-| Model and effort | Which model does the work and, where offered, how much reasoning it uses. |
-| Conversation and tool activity | The request, the agent's explanation, and evidence of actions it has taken. |
-| Changed-files view | The files edited in the session and the changes within them. Open resulting figures and documents in their usual applications too. |
-| Session list | Earlier conversations. Saved project records will help a new session resume without relying on the entire conversation. |
+Describe what you want in the message box. As the agent works, the conversation shows its progress, questions, and requests for permission. You can add information or clarify your instructions there. When it finishes, open the result and decide whether it needs further work. For example, if the revised figure labels are crowded, ask the agent to shorten them and regenerate the figure.
 
-For the main route, choose a Local environment and the project-folder selector when you are ready to begin. Cloud and remote environments are different execution routes; use them only after checking where their files, tools, and model requests go. Selecting a folder is not a guarantee that every available tool is confined to it.
-
-## Steer the work and inspect the result
-
-You can send a correction while the agent is working or use the stop control to interrupt it. Stopping does not undo changes already made. Ask it to identify the completed actions and affected files before deciding what to keep or restore.
-
-For example, if the agent begins changing the analysis when you requested only new figure labels, stop that work and restate the scope. Inspect the changed files and the figure. Later chapters show how to save recoverable versions and specify tasks whose completion you can check.
-
-You are ready for the next chapters when you can identify the intended account, environment and folder controls, mode/model controls, and the places to review activity and changed files. There is no practice-folder assignment here. The first project task will either establish a new research folder or organize an existing one.
+If the agent misunderstands the task, you can stop it and explain what needs to change. Stopping does not undo changes it has already made. The next three chapters explain [where your data goes](#research-limits), [how to control the agent’s access to files and tools](#agent-access), and [which settings to choose](#directing-work) before working with your research files.
