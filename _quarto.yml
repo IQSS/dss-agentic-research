@@ -112,6 +112,7 @@ anchor-map:
   "directing-work": /chapters/directing-work.qmd
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "headless-agents": /chapters/llm-measurements.qmd#headless-agents
+  "llm-measurements": /chapters/llm-measurements.qmd
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations
@@ -135,6 +136,7 @@ anchor-map:
   "request-status-skill": /chapters/reusable-procedures.qmd#request-status-skill
   "request-trace-manuscript": /chapters/research-writing.qmd#request-trace-manuscript
   "research-limits": /chapters/research-limits.qmd
+  "research-models": /chapters/research-models.qmd
   "research-workflows": /chapters/research-workflows.qmd
   "reusable-procedures": /chapters/reusable-procedures.qmd
   "starter-files": /chapters/starter-files.qmd

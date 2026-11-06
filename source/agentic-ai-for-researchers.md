@@ -25,28 +25,28 @@ Suppose you and a collaborator decide to change an inclusion criterion. An agent
 ::: {.research-use}
 ![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
 
-*Build and run research workflows.* An agent can turn a research plan into working code and carry out the steps needed to produce results. For example, it could prepare a dataset, fit the models you specify, and generate figures for a manuscript. Saving those steps as reusable scripts makes it easier to revise the analysis or run it on new data. The agent can also help check its implementation and document the work for collaborators.
+*Build and run research workflows.* An agent can turn a research plan into working code and carry out the steps needed to produce results. For example, it could prepare a dataset, fit the statistical models you specify, and generate figures for a manuscript. Saving those steps as reusable scripts makes it easier to revise the analysis or run it on new data. The agent can also help check its implementation and document the work for collaborators.
 :::
 
 ::: {.research-use}
-![](figures/use-model.svg){.use-icon width="64px" fig-alt="A model processing research material."}
+![](figures/use-model.svg){.use-icon width="64px" fig-alt="An LLM processing research material."}
 
-*Use AI within the research method.* A large language model (LLM) can classify interview passages, extract information from documents, or evaluate written responses. Here, the model’s outputs become part of the research data. If you use it to identify themes in interviews, for example, the study depends on how well its classifications reflect the concepts you are investigating. You therefore need to evaluate its performance and record how it was instructed and used.
+*Use AI within the research method.* A large language model (LLM) can classify interview passages, extract information from documents, or evaluate written responses. Here, the LLM’s outputs become part of the research data. If you use it to identify themes in interviews, for example, the study depends on how well its classifications reflect the concepts you are investigating. You therefore need to evaluate its performance and record how it was instructed and used.
 :::
 
-## From language models to agents
+## From LLMs to agents
 
-### How does a language model generate a response? {.unnumbered .unlisted}
+### How does an LLM generate a response? {.unnumbered .unlisted}
 
-A large language model (LLM) is a neural network[^intro-neural-network] trained on large amounts of text to learn patterns in language. The models used in AI assistants generate text by predicting what could come next, using the conversation so far. They work in *tokens*: pieces of text that may be a word, part of a word, or punctuation.[^intro-tokens]
+A large language model (LLM) is a neural network[^intro-neural-network] trained on large amounts of text to learn patterns in language. LLMs used in AI assistants generate text by predicting what could come next, using the conversation so far. They work in *tokens*: pieces of text that may be a word, part of a word, or punctuation.[^intro-tokens]
 
-For each new token, the model assigns probabilities to possible continuations. One is selected and added to the text, then the process repeats. Selection can involve randomness, so the most likely continuation is not always the one chosen.[^intro-generation]
+For each new token, the LLM assigns probabilities to possible continuations. One is selected and added to the text, then the process repeats. Selection can involve randomness, so the most likely continuation is not always the one chosen.[^intro-generation]
 
 ![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Illustrative bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token. The bars are illustrative, not measured probabilities."}
 
-### How can a model act on a research project? {.unnumbered .unlisted}
+### How can an LLM act on a research project? {.unnumbered .unlisted}
 
-An *agent* combines a LLM with tools and the software needed to use them. A tool is a program that performs an action, such as reading a file or running an analysis script. The model can request a *tool call*: an instruction to run one of those programs.
+An *agent* combines an LLM with tools and the software needed to use them. A tool is a program that performs an action, such as reading a file or running an analysis script. The LLM can request a *tool call*: an instruction to run one of those programs.
 
 The surrounding software is called the *harness*. It supplies instructions and information to the LLM, handles permission checks, executes permitted tool calls, and returns their results. This lets the agent carry out work directly in your project.[^intro-harness]
 
@@ -68,7 +68,7 @@ For example, an analysis fails because the script expects a column called `birth
 [^intro-neural-network]: A neural network is a mathematical model that learns patterns from examples. It passes information through layers of connected units and adjusts the strength of their connections during training to improve its predictions. See IBM's [“What is a neural network?”](https://www.ibm.com/think/topics/neural-networks) for an illustrated introduction.
 [^intro-tokens]: Hugging Face, [“Tokenizers”](https://huggingface.co/learn/llm-course/en/chapter2/4), explains how text is divided into tokens.
 [^intro-generation]: Hugging Face, [“Text generation”](https://huggingface.co/docs/transformers/llm_tutorial), describes generating successive tokens and the choices involved in selecting them.
-[^intro-harness]: Anthropic, [“How Claude Code works”](https://code.claude.com/docs/en/how-claude-code-works), explains the model, tools, and surrounding harness.
+[^intro-harness]: Anthropic, [“How Claude Code works”](https://code.claude.com/docs/en/how-claude-code-works), explains the LLM, tools, and surrounding harness.
 [^intro-react]: Yao et al. (2023), [“ReAct: Synergizing Reasoning and Acting in Language Models”](https://doi.org/10.48550/arXiv.2210.03629), demonstrates how language models can alternate reasoning with actions and use observations to guide subsequent steps.
 
 ## Your role as a supervisor
@@ -85,7 +85,7 @@ If you are new to agents, begin with *Orientation*. If you already use one, you 
 
 - **Orientation** introduces the app, explains where your data goes, and shows how to control the agent’s access and choose its settings.
 - **Direct the work** covers organizing your projects, giving the agent useful context, and saving instructions and procedures you want it to reuse.
-- **Do the research** follows a worked research project through literature searches, analysis, checking, writing, and sharing the results. It also covers using LLMs within the research method and running or adapting open-weight models.
+- **Do the research** follows a worked research project through literature searches, analysis, checking, writing, and sharing the results. It also covers using LLMs within the research method and running or adapting open-weight LLMs.
 
 The examples use [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [Git](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
 
@@ -106,7 +106,7 @@ Suppose you need to change the labels on a figure. You can ask the agent to edit
 
 ## Find your way around
 
-The app opens in the Claude tab, which handles general tasks using tools mainly in the cloud. In this guide, we use Code with *This computer* selected so Claude can edit project files and run analyses using the software installed on your computer. The LLM itself still runs on Anthropic’s servers, and any project content included in its context is sent there. [Chapter 3](#research-limits) explains what this means for your research data.
+The app opens in the Claude tab, which handles general tasks using tools mainly in the cloud. In this guide, we use Code with *This computer* selected so Claude can edit project files and run analyses using the software installed on your computer. The LLM still runs on Anthropic’s servers. When the agent supplies project content to the LLM, it sends that information to Anthropic. [Chapter 3](#research-limits) explains what this means for your research data.
 
 Each time you open the app, switch to Code using the `</>` button near the top of the sidebar. The illustration below shows the Code tab. [Hover over a numbered control to read its explanation. On a touchscreen, tap the number; with a keyboard, use the Tab key. You can enlarge the illustration or read all the explanations below it.]{.web-only}
 
@@ -120,63 +120,61 @@ If the agent misunderstands the task, you can stop it and explain what needs to 
 
 # 3. Know where your data goes {#research-limits}
 
-Protected research material can reach an external service through an agent's normal work. Before using it, establish where the information will go, whether that processing is permitted, and what copies may remain. These decisions affect the research environment you choose and the records you need to keep.
+An agent can send research material to the company running its LLM (the *provider*), even while working with files on your computer. For Claude, that company is Anthropic. Before giving an agent access, you need to understand what information may be sent, what the provider keeps, and whether your project permits that use.
 
-For example, a birth-records agreement might prohibit sending individual records to a hosted model. A no-training commitment would not remove that restriction. You could develop code with invented records and an approved schema, then run it in the restricted environment. If the model must read the real material to perform the analysis, you need an approved processing route for that task.
+Suppose you ask an agent to diagnose an error in a script that analyzes confidential birth records. It prints several records to understand the problem. Those records can be sent to the LLM as part of its context, even though you never uploaded the dataset yourself.
 
-![](figures/research-data-routes.svg){#fig-research-data-routes fig-alt="Approved synthetic records enter a hosted model's context, which may be retained. Saved code runs on real records in a separate restricted environment. A locally hosted model is a different deployment route whose tools and records still need controls."}
+## What reaches the LLM
 
-## Establish the permitted route
+With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with *This computer* selected in [Claude Code](https://code.claude.com/docs/en/desktop).
 
-Check any applicable federal grant or funder requirements, the data classification, the service and account approved for it, and the terms governing this particular project. These may include consent, a data-use agreement, an IRB protocol, contractual confidentiality, or health-data requirements. If the intended AI processing is unclear, ask the responsible institutional office before proceeding. An account setting cannot override those terms.
+![](figures/research-data-flow.svg){#fig-research-data-flow fig-alt="On your computer, the agent's tools read project files. The agent sends tool results to the hosted LLM on the provider's computers. The provider may retain copies."}
 
-Assess every processing route, including connected services and hosted models used by local tools.
+A script reading a dataset does not, by itself, send every record to the LLM. What matters is what the agent sends to the LLM. An error message might contain a participant’s identifier, for example. Consider code, filenames, data dictionaries, and derived outputs as well as data files. Summaries can also contain protected information.
 
-> **Harvard, checked November 3, 2026.** [HUIT's Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3, and [Cowork](https://claude.com/docs/cowork/overview) up to Level 3 provided you actively monitor autonomous sessions. Inputs are not used for training. Connectors require security and privacy approval. HUIT lists Claude Science as available but does not specify its data-level approval in this guidance; confirm that separately before supplying restricted material. Your project's terms may be narrower than the service approval.
+## What the provider keeps
 
-Record the decision in the project file: which inputs the agent may use, which processing is allowed, and which outputs may be shared. Distinguish approved public-data acquisition from ordinary analysis: the former can create a new original file and provenance entry, while the latter should preserve those originals.
+The LLM uses the information sent to it to generate a response. The provider may retain conversations and tool results after the task ends. Using that material to train an LLM is a separate use: a promise not to train on your data does not mean that no copy is kept.
 
-## What can reach the model
+Anthropic documents a standard 30-day retention period for commercial Claude Code use, with other arrangements available to qualifying organizations. Enterprise chat and project retention controls have different coverage.[^data-retention] Even a few weeks may exceed what your project permits. Confirm the terms for your product and account; personal-account privacy settings do not provide an institutional agreement’s contractual coverage.
 
-A local agent can read whole files or substantial portions of them into context, as well as receive excerpts, tool outputs, logs, and errors. Whatever the tool supplies may be sent to the hosted model. Choosing a local folder describes where work runs; it does not make the model local.
+[^data-retention]: See Anthropic’s [Claude Code data-usage documentation](https://code.claude.com/docs/en/data-usage) and [Enterprise retention guidance](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans), checked November 6, 2026. The products have different controls and exclusions. These public documents do not establish Harvard’s retention duration.
 
-Review dictionaries, code, filenames, logs, and derived outputs as well as data files. Aggregation does not automatically remove disclosure risk or sharing restrictions. Preserve approved originals separately from deciding whether the agent may read them.
+## Check what your project permits
 
-## Training and retention are separate
+Check both institutional approval for the service and your project’s terms. An institution may approve a tool while a data-use agreement prohibits sending your records to it. Consent, an IRB protocol, confidentiality agreements, and federal grant or other funder requirements may also limit the use. If the terms are unclear, ask the responsible institutional office before supplying the material.
 
-A promise not to train on submitted data does not mean that no copy is retained. Retention can depend on the product, organization policy, and contractual arrangement. [Claude Code](https://code.claude.com/docs/en/overview)'s [data-usage documentation](https://code.claude.com/docs/en/data-usage) describes retention separately from training; a period measured in weeks can still conflict with a project's terms. Anthropic documents [organization-controlled retention for Enterprise plans](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans); this guide does not establish Harvard's current retention duration. Confirm it through the institutional service guidance when it matters to the project.
+> **Harvard, checked November 6, 2026.** [HUIT’s Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
 
-Deleting a conversation is not a substitute for having permission to submit the material. Nor does an opt-out setting on a personal account give it the coverage of an institutional agreement. Use the approved route established above.
+If you connect the agent to another service, check your institution’s guidance to confirm that the connection is approved for the data you intend to use.
 
-## Establish a chain of custody {#data-chain-of-custody}
+## Work with restricted data
 
-For data entrusted to you, keep a record of where they go and who or what can access them. Include copies and sensitive derivatives in prompts, context, tool responses, logs, exports, and backups. Two practical questions guide this record: can you locate the material after the analysis, and what can you then do with it, including deletion where required?
+An agent writing analysis code can work with synthetic records that have the required columns and types. Give it a shareable data description and have it develop and test the code with those records. Run the saved code on real data in an approved environment, without giving the agent access unless separately authorized. Check the real-data analysis there; return only information that is permitted to leave.
 
-| Record | Example question |
-|---|---|
-| Source and authority | Which dataset version, agreement, consent, or protocol governs the work? |
-| Recipient and route | Which model service, account, connected tool, or local process receives the information? |
-| Copies and retention | Where are conversations, outputs, logs, and backups stored, and for how long? |
-| Control afterward | Who can retrieve or delete each copy, what does deletion cover, and what cannot be confirmed? |
-| Closure | What must be retained for the research record, and what must be removed when access ends? |
+If the LLM must analyze the material, such as coding confidential interviews, it needs the real text. You could use an approved hosted service or an *open-weight LLM*, whose trained parameters are available to download and run on your computer or an institutional server. Running the LLM within approved infrastructure gives you control over where it processes data; the agent’s tools and connections still need restrictions. [Chapter 17](#research-models) explains these choices, and [chapter 16](#llm-measurements) covers evaluating the LLM’s work.
 
-Establish these facts before submitting protected material. A deletion button may remove a visible conversation without immediately removing every retained copy. Record unresolved retention or deletion conditions and get them settled through the responsible service or institutional office.
+![](figures/research-data-routes.svg){#fig-research-data-routes .tall fig-alt="Two ways to work with restricted data. First, an agent using a hosted LLM develops code from synthetic data; saved code is transferred into an approved environment to analyze real data. Second, an open-weight LLM runs alongside the real data inside an approved computer or server."}
 
-Keep the custody record in approved project storage. Describe the allowed route in the agent's project instructions without including confidential details it is not permitted to see. The handoff chapter returns to this record when closing or transferring the work.
+## Keep a chain of custody {#data-chain-of-custody}
 
-## Work with synthetic inputs when access is not permitted
+For protected data, keep a *chain of custody*: a record of where the material goes, who or what can access it, and where copies remain. Include sensitive content in conversations, tool results, outputs, logs, and backups. Before sharing protected data with a service, establish where it will store the data, how long it will keep them, and how deletion can be arranged if your project requires it. Consult your institution’s guidance or ask the service administrator for these details.
 
-The agent can write and test code using an approved schema and invented records with the relevant types and structure. Keep that work in a folder available to the agent. Run the resulting code on real data only in the approved environment, with no agent access unless separately authorized. Share only outputs that have been cleared for that purpose.
+The example below keeps confidential birth records on an institutional server while the agent develops code with synthetic records. Replace these entries with your project’s actual locations, responsible people, and agreed retention dates.
 
-This is a development and testing route, not proof that the code will handle every feature of the real data. Check the actual run, and use the simulation and independent-implementation checks in chapters 14–15 within the permitted environment.
+| What to record | Example entry |
+|:-------------------|:-----------------------------------------------------------|
+| Data and authority | Birth-record extract v2; the data-use agreement permits analysis on the institutional server. |
+| Who receives what | The agent uses synthetic records and a shareable dictionary, which may be sent to the LLM provider. Authorized researchers access real records on the server. |
+| Copies and storage | Real records, logs, and uncleared outputs stay in restricted project storage and managed backups. Synthetic inputs remain in the hosted conversation. |
+| Retention and deletion | The service administrator confirms conversation retention. The server administrator records when and how project files and backup copies will be removed. |
+| Project closure | Retain permitted code and cleared results. The data custodian confirms removal of restricted copies as the agreement requires. |
 
-## When this app cannot support the task
+Confirm what deletion covers, including backups and service records. Keep the custody record in approved storage and update it when the work changes. Give the agent only the instructions and details it is permitted to see.
 
-If the approved route cannot process the required data and synthetic inputs are insufficient, consult research IT about an appropriate environment. Running a model locally may offer more control over data flow, but still requires authorization, suitable security, and evaluation of the model's performance. Chapter 17 explains this choice and links to the toolkit for setup. When the LLM itself must examine sensitive material, synthetic development cannot substitute for the actual measurement. An approved locally hosted open-weight model is one possible route; its tools, logging, and network access still need controls. Performance must be assessed for the research task (§16).
+> **If material is exposed accidentally.** Stop further access and transfer. Record what was sent, to which service and account, and when. Report the incident promptly through your institution’s designated route and follow its instructions. Do not assume deleting the conversation resolves the exposure or erase records needed to assess it.
 
-## If material is exposed accidentally
-
-Stop further agent access and any ongoing transfer. Record what was exposed, to which service and account, when, and through which tool. Use your institution's incident-reporting route promptly and follow its instructions for containment and record handling. Do not assume that deleting the conversation resolves the incident or erase the evidence needed to assess it.
+Once you know which information the agent may use, configure its access to files and tools. [Chapter 4](#agent-access) explains how.
 
 # 4. Control what the agent can do {#agent-access}
 

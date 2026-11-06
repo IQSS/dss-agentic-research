@@ -17,7 +17,7 @@
   },
   {
     "title": "Where tools run",
-    "text": "\u201cThis computer\u201d means the agent runs tools on your machine. The LLM still runs on Anthropic\u2019s servers, and content used in the conversation is sent there. Local tool execution does not keep all data local."
+    "text": "\u201cThis computer\u201d means the agent runs tools on your machine. The LLM runs on Anthropic\u2019s servers, so project content the agent supplies to it is sent to Anthropic."
   },
   {
     "title": "Project folder",
@@ -25,11 +25,11 @@
   },
   {
     "title": "Model",
-    "text": "Choose the LLM used for the session. Available models depend on your account and change over time."
+    "text": "Choose the LLM used for the session. Available LLMs depend on your account and change over time."
   },
   {
     "title": "Reasoning effort",
-    "text": "Where available, this setting controls how much reasoning the model uses. Higher effort can help with difficult tasks, but may take longer and use more of your allowance."
+    "text": "Where available, this setting controls how much reasoning the LLM uses. Higher effort can help with difficult tasks, but may take longer and use more of your allowance."
   },
   {
     "title": "Permission mode",

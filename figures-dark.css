@@ -24,6 +24,7 @@ body.quarto-dark img[src$="manuscript-trace.svg"] { content: url("figures/manusc
 body.quarto-dark img[src$="model-effort.svg"] { content: url("figures/model-effort-dark.svg"); }
 body.quarto-dark img[src$="project-context.svg"] { content: url("figures/project-context-dark.svg"); }
 body.quarto-dark img[src$="reproduction-routes.svg"] { content: url("figures/reproduction-routes-dark.svg"); }
+body.quarto-dark img[src$="research-data-flow.svg"] { content: url("figures/research-data-flow-dark.svg"); }
 body.quarto-dark img[src$="research-data-routes.svg"] { content: url("figures/research-data-routes-dark.svg"); }
 body.quarto-dark img[src$="research-handoff.svg"] { content: url("figures/research-handoff-dark.svg"); }
 body.quarto-dark img[src$="research-uses.svg"] { content: url("figures/research-uses-dark.svg"); }
