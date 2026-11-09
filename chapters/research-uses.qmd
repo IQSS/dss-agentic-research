@@ -32,7 +32,7 @@ Suppose you and a collaborator decide to change an inclusion criterion. An agent
 
 ## From LLMs to agents
 
-### How does an LLM generate a response? {.unnumbered .unlisted}
+### How does an LLM generate a response? {#how-does-an-llm-generate-a-response .unnumbered .unlisted}
 
 A large language model (LLM) is a neural network[^intro-neural-network] trained on large amounts of text to learn patterns in language. LLMs used in AI assistants generate text by predicting what could come next, using the conversation so far. They work in *tokens*: pieces of text that may be a word, part of a word, or punctuation.[^intro-tokens]
 
@@ -40,7 +40,7 @@ For each new token, the LLM assigns probabilities to possible continuations. One
 
 ![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Illustrative bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token. The bars are illustrative, not measured probabilities."}
 
-### How can an LLM act on a research project? {.unnumbered .unlisted}
+### How can an LLM act on a research project? {#how-can-an-llm-act-on-a-research-project .unnumbered .unlisted}
 
 An *agent* combines an LLM with tools and the software needed to use them. A tool is a program that performs an action, such as reading a file or running an analysis script. The LLM can request a *tool call*: an instruction to run one of those programs.
 
@@ -53,7 +53,7 @@ The same AI app may support both ways of working. You can keep your existing [R]
 ::: {.needspace height="8cm"}
 :::
 
-### How does an agent work through a task? {.unnumbered .unlisted}
+### How does an agent work through a task? {#how-does-an-agent-work-through-a-task .unnumbered .unlisted}
 
 The result of a tool call gives the LLM new information to use in choosing its next action. The harness passes that result back, and the LLM may request another tool call or respond to you. Repeating this cycle lets an agent work through a task and adjust when it encounters an error or an unexpected result.[^intro-react]
 

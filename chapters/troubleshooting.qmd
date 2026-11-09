@@ -6,21 +6,36 @@ title: "Appendix C. Troubleshooting"
 
 # Appendix C. Troubleshooting
 
-A failed action is easier to diagnose when you preserve what happened. Keep the current files and useful error output, then choose a check that distinguishes a tool problem from a research problem.
+When something goes wrong, ask the agent to identify the cause before changing the analysis. Preserve the affected files and useful error messages so it can compare what happened with what should have happened.
 
-For example, an [R](https://www.r-project.org/) job that never writes its first message needs a process or launch check before the agent starts changing the statistical model. The specific R-on-macOS issue below has a documented execution workaround; it is not a general explanation for slow analysis.
+For example, a rerun may produce a different sample size because the inputs changed, an exclusion rule changed, or an old intermediate file was reused. Have the agent compare those stages and show where the difference first appears. That evidence determines whether to repair the implementation or reconsider a research decision.
 
-| What happened | Next action | Where the fuller explanation lives |
-|:--|:--|:--|
-| The answer sounds certain but has no evidence | Ask for the source or saved output; keep unsupported claims out of the manuscript | §§11, 15, 17 |
-| The session loses track of decisions | Save the current state and next action, then start a focused session | §7 |
-| Old memory conflicts with current files | Identify and correct the stale record; inspect which instructions loaded | §§7–8 |
-| Routine work asks for approval repeatedly | Inspect the effective mode and permissions; adjust only the required scope | §§4–5; [toolkit chapter 2](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) |
-| The agent changes the question to finish | Restate the specification and acceptance evidence; preserve the failed result | §§5, 15 |
-| A check disappears or its tolerance grows | Require an explanation tied to the specification before changing the check | §15 |
-| A long job seems to have vanished | Inspect the process or queue state, log, and expected output | §13; [toolkit queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) |
-| R spins without output when launched by an agent on macOS | Use the recorded diagnosis and execution wrapper; distinguish this local issue from an analysis failure | [Toolkit troubleshooting](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
-| An app feature is missing | Check account, managed policy, and current documentation; use an available route | §§2–5 |
-| Restricted material may have reached a service | Stop further access and use the institutional incident route | §3 |
+## Problems with the agent's work {#troubleshoot-work}
 
-If the same problem recurs, improve the instruction or check that would have prevented it. Repeatedly restarting the conversation without changing its inputs usually preserves the cause.
+| What you notice | What to ask the agent to do | Explanation |
+|:---------------------------|:-------------------------------------------------|:---------------------|
+| An answer has no supporting evidence | Locate the cited passage or saved result. Mark claims it cannot substantiate. | [Source support](#literature-synthesis) |
+| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project records](#maintain-project-context) |
+| Old instructions conflict with current files | Identify which instructions were used and where they disagree. Propose corrections to the stale record. | [Shared guidance](#maintain-shared-conventions) |
+| The agent changes the question or weakens a check | Show the change against the agreed specification and preserve the failed result. You decide whether a scientific revision is justified. | [Research decisions](#review-project-plan) |
+| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Locate the earliest difference before proposing a fix. | [Reproduction checks](#test-and-name-the-reproduction-route) |
+| Two implementations disagree | Compare each stage against the specification; do not edit one merely to match the other. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
+| The manuscript contains stale numbers | Trace affected values to their saved sources and propose updates from verified results. | [Manuscript checks](#trace-manuscript) |
+
+## Jobs and app controls {#troubleshoot-execution}
+
+| What you notice | What to ask the agent to do | Explanation |
+|:---------------------------|:-------------------------------------------------|:---------------------|
+| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs before restarting it. | [Unattended jobs](#unattended-jobs) |
+| An [R](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check whether it matches the documented launch issue; use the execution wrapper if confirmed. This is a specific R-on-macOS problem, not a general remedy for slow analysis. | [Toolkit diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
+| An app control is missing or has a different label | Compare your account and visible layout with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
+
+## Permissions and data {#troubleshoot-access}
+
+| What you notice | Next action | Explanation |
+|:---------------------------|:-------------------------------------------------|:---------------------|
+| Routine work repeatedly asks for approval | Ask the agent to identify the tool action and the mode or permission rule causing the prompt, then propose a narrowly scoped change for your decision. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
+| The agent cannot reach an input or service | Ask it to report the blocked action and required access. Confirm that the project permits that access before approving a change. | [Project access](#access-scope) |
+| Restricted material may have reached a service | Stop further access and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
+
+Once the cause is confirmed, have the agent record the remedy in the project's troubleshooting notes or relevant instructions. Include the affected software or setting and the check that showed the problem was resolved.

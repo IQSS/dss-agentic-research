@@ -28,7 +28,7 @@ Name the starting point: rebuilding a table from saved estimates, rerunning anal
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
+> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
 :::
 <!-- /prompt:reproduce-project -->
 
@@ -50,7 +50,7 @@ Assemble a separate snapshot for the repository your field uses, such as [Datave
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.
+> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 

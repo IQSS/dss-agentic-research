@@ -75,14 +75,12 @@ The [complete shared example](#starter-global) provides a starting point. Ask th
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
 ## Conventions
-- Read CONVENTIONS.md when organizing a project or naming files.
-- Read CODING.md before writing or changing code.
-- Read MODELING.md before statistical modeling or simulation.
-- Read WRITING.md before drafting prose for people to read.
-- Read TOOLCHAIN.md before adding or changing software.
-- Read WORKSPACE.md when locating projects or shared inputs.
+[Keep short shared conventions here. Add references only to files you maintain,
+with their locations and when to read them. Possible topics include project
+structure, coding, statistical modeling, writing, software, and project locations.]
 
-These files sit beside this file. If a needed file is absent, report the gap.
+Read the referenced guidance relevant to the task. If a listed file is missing,
+report it; do not create a replacement or invent its instructions.
 
 ## Research work
 - Preserve original data. Derive new files with saved code.

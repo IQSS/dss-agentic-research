@@ -102,16 +102,16 @@
       body: "A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff reveals dependencies hidden by a familiar working folder." },
     { n: "A", part: "A", slug: "starter-files", title: "Starter files", ctl: "key",
       r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Use these starter files to establish a small, readable project record. Replace the example details with your own, and keep conventions your lab already uses. The files are instructions and documentation; they do not enforce access controls." },
+      body: "Choose files for project instructions, current work, and scientific decisions. Have the agent adapt them to your project. Personal conventions and Git exclusions are optional additions." },
     { n: "B", part: "A", slug: "prompt-index", title: "Prompt bank", ctl: "key",
       r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
-      body: "These requests are starting points to adapt to your project. Each is also shown beside its explanation in the guide, with a link here to that exact location. Supply the relevant files and decisions before pasting a request; a prompt does not configure permissions or establish scientific validity." },
+      body: "Find a request for your research task, supply the listed files or decisions, and adapt it to the project. Requests are grouped by task and link to their explanations in the guide." },
     { n: "C", part: "A", slug: "troubleshooting", title: "Troubleshooting", ctl: "key",
       r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", gloves: "brown", holds: null, scene: null },
-      body: "A failed action is easier to diagnose when you preserve what happened. Keep the current files and useful error output, then choose a check that distinguishes a tool problem from a research problem." },
+      body: "Find the problem you have encountered and what to ask the agent to investigate. Preserve the affected files and establish the cause before changing the analysis." },
     { n: "D", part: "A", slug: "glossary", title: "Glossary", ctl: "key",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Use these definitions when a term interrupts the research workflow. For example, an *estimand* names the quantity you intend to report; an *estimator* is the procedure used to calculate it. The chapter references return you to the term in use." },
+      body: "Look up an unfamiliar term, then follow its link to the explanation in the guide. Definitions distinguish agents, LLMs, and statistical concepts." },
   ];
   const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null };
 

@@ -16,7 +16,7 @@ Give the agent the specification and available documentation. Ask it to compare 
 
 <!-- prompt:bring-data -->
 ::: {#request-bring-data .prompt}
-> Inspect the approved inputs and their documentation. Record where each came from, the version or acquisition date, permitted use, expected units and identifiers, and a file fingerprint. Preserve the originals and create separate scripted checks for the required columns, record keys, ranges, and missingness rules in specification.md. Report discrepancies before transforming or excluding records; never replace missing research inputs with simulated observations.
+> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in specification.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
 :::
 <!-- /prompt:bring-data -->
 

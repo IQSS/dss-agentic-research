@@ -58,6 +58,8 @@ The example below keeps confidential birth records on an institutional server wh
 
 Confirm what deletion covers, including backups and service records. Keep the custody record in approved storage and update it when the work changes. Give the agent only the instructions and details it is permitted to see.
 
+::: {#accidental-exposure}
 > **If material is exposed accidentally.** Stop further access and transfer. Record what was sent, to which service and account, and when. Report the incident promptly through your institution’s designated route and follow its instructions. Do not assume deleting the conversation resolves the exposure or erase records needed to assess it.
+:::
 
 Once you know which information the agent may use, configure its access to files and tools. [Chapter 4](#agent-access) explains how.

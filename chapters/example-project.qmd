@@ -20,6 +20,12 @@ An agent can help turn a broad interest into a question that the available evide
 
 These are research decisions, not details for the agent to settle while coding. A different outcome or exposure window may answer a different question. You decide which question to pursue; the agent can make the alternatives, assumptions, and unresolved issues easier to examine.
 
+<!-- prompt:compare-research-approaches -->
+::: {#request-compare-research-approaches .prompt}
+> Using the research question, available data, and constraints below, compare plausible approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
+:::
+<!-- /prompt:compare-research-approaches -->
+
 ## Write the scientific specification {#example-specification}
 
 The example records maternal age, smoking status, third-trimester hot days, and birthweight in grams. Its specification separates the quantity to report from the statistical model used to estimate it.
@@ -42,7 +48,7 @@ A real study would also need a target population and defensible assumptions abou
 
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
-> Turn my research decisions into specification.md: state the estimands, population or averaging sample, exposure comparisons, estimator, sample rules, required inputs, uncertainty method, and reported outputs. Identify ambiguities for me rather than choosing silently. Add the agreed verification tolerances and simulation questions. Do not begin fitting until I have reviewed the scientific specification.
+> Write specification.md from my research decisions: estimands, population or averaging sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. Include agreed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 <!-- /prompt:research-specification -->
 

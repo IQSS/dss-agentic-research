@@ -40,6 +40,12 @@ The agent can also help investigate a surprising result. Suppose the age-specifi
 
 If the evidence suggests the linear heat-by-age interaction is too restrictive, you might approve a more flexible interaction as a sensitivity analysis. Preserve the original fit, state the reason for the alternative, and compare the same estimands. Have the agent update the relevant simulation and implementation checks and record the decision in `METHODOLOGY.md`. The purpose is to understand the result's dependence on a defensible choice, not search for a preferred estimate.
 
+<!-- prompt:investigate-result -->
+::: {#request-investigate-result .prompt}
+> Investigate the unexpected result identified below using the current specification, code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, compare the same estimands and record the changes and reasons.
+:::
+<!-- /prompt:investigate-result -->
+
 ## Save commands for useful routes {#saved-commands}
 
 A command file lets you or the agent request individual steps or useful sequences. Preserve adequate existing tooling.

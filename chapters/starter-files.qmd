@@ -6,59 +6,35 @@ title: "Appendix A. Starter files"
 
 # Appendix A. Starter files
 
-Use these starter files to establish a small, readable project record. Replace the example details with your own, and keep conventions your lab already uses. The files are instructions and documentation; they do not enforce access controls.
+These files give an agent the instructions and records it needs to work on a project and resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with project instructions and a short status and task list; add separate scientific records when the work needs them.
 
-For the heat-and-birthweight project, the project file points to the scientific specification and the saved analysis commands. The global file instead points to conventions that should apply across studies. Download either file below, then adapt it before asking the agent to use it.
+For the [synthetic heat-and-birthweight study](#example-specification), `specification.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current analysis plan and the reasoning behind it.
 
-## A.1 Global instructions {#starter-global}
+| File and destination | Use | Template |
+|:------------------------------------|:--------------------------------------------|:-----------------|
+| `CLAUDE.md` in the project | Explain the project and point to its records. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
+| `STATUS.md` in the project | Summarize where the work stands now. | [Download](resources/starter-files/STATUS.md){download="STATUS.md"} |
+| `TASKS.md` in the project | Track remaining work and dated completions. | [Download](resources/starter-files/TASKS.md){download="TASKS.md"} |
+| `specification.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/specification.md){download="specification.md"} |
+| `METHODOLOGY.md` in the project | Record scientific decisions and their reasons. | [Download](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
+| Personal `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| `.gitignore` in the project | Optional exclusions when using [Git](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
 
-Chapter 8 explains the global location and how specialist files are loaded. Save the adapted content as your personal `CLAUDE.md`, or have the agent configure an existing maintained instruction file. The references to specialist files are routing instructions; create only the files you intend to maintain.
+The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: project instructions belong inside the project; personal instructions belong in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [chapter 4](#enforce-those-limits).
 
-[Download global instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
+::: {#starter-layouts}
+For folder layouts, use [chapter 6](#project-shapes). For saved commands and execution tools, use [chapter 13](#saved-commands). The templates below document those choices without prescribing a new project structure or runner.
+:::
 
-<!-- starter:global -->
-```
-# Working conventions
+::: {.keep-together}
+## A.1 Project instructions {#starter-project}
 
-[Describe your research role and the software you normally use.]
-
-## Before a task
-- Read the project's instructions and current state. Preserve accepted work.
-- Identify the requested result, constraints, and evidence needed to accept it.
-- Ask about consequential ambiguity; do not silently substitute another analysis.
-
-## Conventions
-- Read CONVENTIONS.md when organizing a project or naming files.
-- Read CODING.md before writing or changing code.
-- Read MODELING.md before statistical modeling or simulation.
-- Read WRITING.md before drafting prose for people to read.
-- Read TOOLCHAIN.md before adding or changing software.
-- Read WORKSPACE.md when locating projects or shared inputs.
-
-These files sit beside this file. If a needed file is absent, report the gap.
-
-## Research work
-- Preserve original data. Derive new files with saved code.
-- Use independently runnable steps with declared inputs and outputs.
-- Keep scientific decisions and their reasons in the project record.
-- Verify observed outputs before reporting success. Keep failed checks visible.
-
-## Limits
-- Use only inputs and services approved for the project.
-- Ask before publishing, sending messages, expanding access, or adding a service.
-- Do not delete recovery copies or rewrite shared history without approval.
-
-## Finishing
-- Update the task list and current-state record from evidence.
-- Report what changed, how it was checked, and what remains unresolved.
-```
-<!-- /starter:global -->
-
-## A.2 Project instructions {#starter-project}
-
-Save the adapted content in the project's `CLAUDE.md`, or have the agent configure the maintained `AGENTS.md` described in chapter 7. Replace the example paths with commands and files that exist in your project. Keep protected inputs in approved storage beyond the agent's configured reach when the service may not process them (§§3–4).
+Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7](#project-records) explains how to use a maintained `AGENTS.md` instead.
 
 [Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
+
+<details class="guide-example">
+<summary>Read the project-instructions example</summary>
 
 <!-- starter:project -->
 ```
@@ -103,11 +79,19 @@ configured access controls for those boundaries.
 ```
 <!-- /starter:project -->
 
-## A.3 Current state
+</details>
 
-Save this as `STATUS.md` at the project root. Rewrite it as the state changes; keep task history in `TASKS.md` and scientific reasoning in `METHODOLOGY.md`.
+:::
+
+::: {.keep-together}
+## A.2 Current state {#starter-status}
+
+Save this as `STATUS.md`. Have the agent rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
 
 [Download STATUS.md](resources/starter-files/STATUS.md){.download-button download="STATUS.md"}
+
+<details class="guide-example">
+<summary>Read the status template</summary>
 
 <!-- starter:status -->
 ```
@@ -129,11 +113,19 @@ Last updated: [date]
 ```
 <!-- /starter:status -->
 
-## A.4 Tasks
+</details>
 
-Save this as `TASKS.md`. Keep unfinished work visible, and date completed entries. A short list is easier to use than an exhaustive transcript of agent actions.
+:::
+
+::: {.keep-together}
+## A.3 Tasks {#starter-tasks}
+
+Save this as `TASKS.md`. Have the agent move tasks as their status changes and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
 
 [Download TASKS.md](resources/starter-files/TASKS.md){.download-button download="TASKS.md"}
+
+<details class="guide-example">
+<summary>Read the task-list template</summary>
 
 <!-- starter:tasks -->
 ```
@@ -152,11 +144,71 @@ task finishes. An in-progress entry states what remains to be done.
 ```
 <!-- /starter:tasks -->
 
-## A.5 Scientific decisions
+</details>
 
-Save this as `METHODOLOGY.md`. Record a decision when it changes what the study estimates, how it is implemented, or how its evidence should be interpreted. Link to the maintained specification rather than keeping inconsistent copies.
+:::
+
+::: {.keep-together}
+## A.4 Scientific specification {#starter-specification}
+
+Save this as `specification.md`. Have the agent fill it from your research decisions and leave unresolved choices explicit for your review. Adapt or remove fields that do not apply to the study. [Chapter 10](#example-specification) explains the completed heat-and-birthweight example, supplied in the [project download](resources/heat-birthweight.zip).
+
+[Download specification.md](resources/starter-files/specification.md){.download-button download="specification.md"}
+
+<details class="guide-example">
+<summary>Read the specification template</summary>
+
+<!-- starter:specification -->
+```
+# Scientific specification
+
+Project: [name]
+Version and date: [identifier]
+Researcher approval: [pending / approved, with date]
+
+## Research question and estimands
+- Question and intended interpretation:
+- Target population and analysis or averaging sample:
+- Quantities to estimate, comparisons, units, and time periods:
+- Assumptions needed for that interpretation:
+
+## Inputs and sample rules
+- Approved inputs, versions, dictionary, and access location:
+- Inclusion, exclusion, and missing-data rules:
+- Required variables, derivations, units, and supported ranges:
+
+## Estimator and reported outputs
+- Estimation procedure, statistical model, and relevant settings:
+- How fitted results become the requested estimands:
+- Uncertainty calculation and any decision rule:
+- Required tables, figures, and saved full-precision results:
+
+## Checks
+- Input and execution checks:
+- Known-truth scenarios and performance measures, where applicable:
+- Independent comparisons and numerical tolerances, where applicable:
+
+## Unresolved decisions
+[List questions for the researcher. Do not silently supply missing choices.]
+
+Record changes and their reasons in METHODOLOGY.md; keep the agreed current
+specification here and preserve earlier versions.
+```
+<!-- /starter:specification -->
+
+</details>
+
+:::
+
+::: {.keep-together}
+## A.5 Scientific decisions {#starter-methodology}
+
+Save this as `METHODOLOGY.md`. Record a decision when it changes what the study estimates, how the analysis is implemented, or how its evidence should be interpreted. Link to the current specification instead of repeating it. [Chapter 7](#review-project-plan) explains how these records support research decisions.
 
 [Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
+
+<details class="guide-example">
+<summary>Read the scientific-decisions template</summary>
 
 <!-- starter:methodology -->
 ```
@@ -176,15 +228,76 @@ Save this as `METHODOLOGY.md`. Record a decision when it changes what the study 
 ```
 <!-- /starter:methodology -->
 
-## A.6 Git exclusions
+</details>
 
-Save this as `.gitignore` and adapt it to the project's sharing policy. This conservative example excludes inputs by default; permitted synthetic or public inputs and provenance records may belong in a repository. An ignore rule neither blocks agent access nor removes a file already tracked in git.
+:::
 
-[Download the exclusion file](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
+::: {.keep-together}
+## A.6 Personal instructions across projects {#starter-global}
+
+Use this optional template for conventions that apply across your work. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. Add references to separate writing, coding, or other specialist files only when you maintain them; [chapter 8](#specialist-conventions) gives examples.
+
+[Download personal instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
+
+<details class="guide-example">
+<summary>Read the personal-instructions template</summary>
+
+<!-- starter:global -->
+```
+# Working conventions
+
+[Describe your research role and the software you normally use.]
+
+## Before a task
+- Read the project's instructions and current state. Preserve accepted work.
+- Identify the requested result, constraints, and evidence needed to accept it.
+- Ask about consequential ambiguity; do not silently substitute another analysis.
+
+## Conventions
+[Keep short shared conventions here. Add references only to files you maintain,
+with their locations and when to read them. Possible topics include project
+structure, coding, statistical modeling, writing, software, and project locations.]
+
+Read the referenced guidance relevant to the task. If a listed file is missing,
+report it; do not create a replacement or invent its instructions.
+
+## Research work
+- Preserve original data. Derive new files with saved code.
+- Use independently runnable steps with declared inputs and outputs.
+- Keep scientific decisions and their reasons in the project record.
+- Verify observed outputs before reporting success. Keep failed checks visible.
+
+## Limits
+- Use only inputs and services approved for the project.
+- Ask before publishing, sending messages, expanding access, or adding a service.
+- Do not delete recovery copies or rewrite shared history without approval.
+
+## Finishing
+- Update the task list and current-state record from evidence.
+- Report what changed, how it was checked, and what remains unresolved.
+```
+<!-- /starter:global -->
+
+</details>
+
+:::
+
+::: {.keep-together}
+## A.7 Git exclusions {#starter-gitignore}
+
+If the project uses Git, have the agent adapt these exclusions in its `.gitignore`. This example excludes data folders by default; permitted public or synthetic inputs may belong in the repository. Keep shareable input manifests outside excluded folders. An ignore rule neither blocks agent access nor removes files already tracked by Git.
+
+Preserve the files needed for the [reproduction route](#test-and-name-the-reproduction-route), including saved fits, raw LLM responses, or research logs when they are required inputs or evidence. Large or protected files can live in approved storage, with versions and access instructions recorded in the project. Excluding a file from Git is not a decision to discard it.
+
+[Download .gitignore](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
+
+<details class="guide-example">
+<summary>Read the Git-exclusion example</summary>
 
 <!-- starter:gitignore -->
 ```
 # Exclude research inputs by default; share permitted files deliberately.
+# Keep shareable input manifests outside these excluded folders.
 data/raw/
 data/processed/
 
@@ -192,8 +305,8 @@ data/processed/
 .venv/
 renv/library/
 renv/staging/
-outputs/models/
-logs/
+cache/
+.cache/
 .Rproj.user/
 .Rhistory
 .DS_Store
@@ -203,11 +316,13 @@ logs/
 .env
 .env.*
 !.env.example
+
+# Preserve fitted objects, raw LLM responses, and research records required by
+# the reproduction route. Store large or protected files in approved storage
+# and document their versions and locations rather than silently omitting them.
 ```
 <!-- /starter:gitignore -->
 
-## A.7 Adapt the structure to the output {#starter-layouts}
+</details>
 
-Chapter 6 shows a paper project with original and processed data, code, outputs, and a manuscript. A data-curation project needs acquisition scripts, source records, validation reports, and rebuild instructions. A presentation or website project needs editable source, assets, and reviewed deliverables. Keep an established structure when it already makes these roles clear.
-
-For execution, use the project's existing master do-file or runner. The downloadable research example (§10) supplies runnable commands and its environment records; chapter 13 explains how to make meaningful steps independently runnable. A generic script that lists filenames cannot substitute for documenting the dependencies in your actual project.
+:::

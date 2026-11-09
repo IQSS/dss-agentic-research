@@ -6,84 +6,236 @@ title: "Appendix D. Glossary"
 
 # Appendix D. Glossary
 
-Use these definitions when a term interrupts the research workflow. For example, an *estimand* names the quantity you intend to report; an *estimator* is the procedure used to calculate it. The chapter references return you to the term in use.
+Look up a term here, then follow its link to the explanation in the guide. For example, *LLM inference* means generating a response with a trained LLM; it differs from statistical inference about a population or effect.
 
-*Agent.* An LLM working through tools that can read files, run commands, and edit the project. It uses each tool's result to decide what to do next (§1).
+::: {#term-adapter}
+*Adapter.* The learned adjustments saved by a method such as LoRA and used with a particular base LLM. An adapter alone is not the complete LLM. [LoRA](#lora).
+:::
 
-*Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in [R](https://www.r-project.org/), `assert` in [Stata](https://www.stata.com/) and [Python](https://www.python.org/) (§15).
+::: {#term-agent}
+*Agent.* A system combining an LLM, tools, and a software harness. It can use tool results to choose its next action. [Agent components](#how-can-an-llm-act-on-a-research-project).
+:::
 
-*`Auto` mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
+::: {#term-api}
+*API.* Application programming interface: a defined way for software to request data or actions from another program or service. [Acquiring data](#acquisition-ladder).
+:::
 
-*Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
+::: {#term-assertion}
+*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Implementation checks](#investigate-the-earliest-disagreement).
+:::
 
-*Build.* The one command that produces every output the paper reports from the scripts and the data (§19). *One-command build* means the same.
+::: {#term-auto-mode}
+*`Auto` mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated review of actions. It reduces routine approval prompts while retaining checks. [Approval settings](#choose-how-actions-are-approved).
+:::
 
-*Calibration.* Assessing an estimator or decision rule on simulated data with known properties. Conclusions apply to the scenarios and performance measures examined (§14).
+::: {#term-brief}
+*Brief.* A written description of a task or project. For the maintained file describing a project, see [project instructions](#term-project-instructions).
+:::
 
-*Chain of custody.* The record of where protected data and their copies travel, who or what can access them, and how retention and deletion can be established (§3).
+::: {#term-build}
+*Build.* Running commands that produce specified outputs from their inputs, such as a figure from saved estimates or a manuscript from text and tables. A build need not rerun every analysis step. [Saved commands](#saved-commands).
+:::
 
-*Checksum.* A fingerprint calculated from a file’s contents, useful for identifying the version used. It does not establish that the contents are correct (§18).
+::: {#term-calibration}
+*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Simulation goals](#decide-what-the-test-must-establish).
+:::
 
-*Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
+::: {#term-chain-of-custody}
+*Chain of custody.* A record of where protected material and its copies go, who or what can access them, and what retention or deletion options are available. [Data custody](#data-chain-of-custody).
+:::
 
-*Compaction.* Summarizing earlier conversation material to make room in the LLM’s context window. The summary can omit details; maintained project records help preserve decisions and unfinished work (§5, §7).
+::: {#term-checksum}
+*Checksum.* A fingerprint calculated from a file's contents. It helps identify a file version but does not establish that the contents are correct. [Tracing results](#trace-manuscript).
+:::
 
-*Context window.* The limit on how much information the LLM can work with at once, including instructions, conversation, file contents, and tool results (§1, §5).
+::: {#term-commit}
+*Commit.* A recorded version of the files tracked by [Git](https://git-scm.com/), with a message describing the changes. Commits provide versions to compare or restore. [Recovery](#project-recovery).
+:::
 
-*Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§13).
+::: {#term-compaction}
+*Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project records should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
+:::
 
-*Deny rule.* A software-enforced rule blocking matching tool actions. Its coverage depends on the tool and execution route; a file-tool denial alone does not block every arbitrary script (§4).
+::: {#term-container}
+*Container.* A separate software environment for running a task with specified dependencies and configured access to files and networks. Its protections depend on that configuration. [Separate environments](#when-a-separate-environment-helps).
+:::
 
-*Diff.* The line-by-line difference between two versions of the files; what you review after a task (§7).
+::: {#term-context}
+*Context.* The instructions, conversation, file contents, and tool results supplied to an LLM for generating a response. Supplying local files to a hosted LLM transmits their contents to the provider. [Agent loop](#how-does-an-agent-work-through-a-task) and [data movement](#what-reaches-the-llm).
+:::
 
-*Effort.* How much the model reasons before it acts; a setting with levels (§5).
+::: {#term-context-window}
+*Context window.* The limit on how much information an LLM can process in a request, including supplied context and generated tokens. A continuing session may use compaction to stay within that limit. [Usage and context](#usage-and-context).
+:::
 
-*Environment variable.* A named value passed to a process and usually its children. Credentials may be supplied this way; a receiving process can read them (§12).
+::: {#term-decision-rule}
+*Decision rule.* A specified rule for drawing a conclusion from results, such as reporting evidence of an effect when an interval excludes zero. Simulation can assess how often the rule reaches the intended or mistaken conclusion. [Known-truth checks](#calibration-example).
+:::
 
-*Estimand.* The quantity the analysis is trying to estimate, stated before the model is fitted (§10).
+::: {#term-deny-rule}
+*Deny rule.* A permission rule that blocks matching tool actions. Its coverage depends on the tool and execution route; a file-tool rule does not necessarily cover a script reading the same file. [Enforcing access](#enforce-those-limits).
+:::
 
-*Estimator.* A procedure that uses the data to estimate the specified research quantity (§10).
+::: {#term-diff}
+*Diff.* A comparison showing changes between two versions of a file, often line by line. [Version history](#project-recovery).
+:::
 
-*Global file.* An instruction file holding conventions that apply across your projects (§8). Project-specific instructions belong in the project file, defined here under *brief*.
+::: {#term-effort}
+*Effort.* A setting that controls how much reasoning an LLM is allowed to use. More effort can use more time and allowance without guaranteeing a correct result. [LLM and effort settings](#choose-the-llm-and-reasoning-effort).
+:::
 
-*Fine-tuning.* Additional training that adapts an existing model using a dataset. It changes learned parameters; supplying context alone does not (§17).
+::: {#term-environment-variable}
+*Environment variable.* A named value made available to a running program. Services sometimes use these values to receive credentials or configuration; programs with access can read them. [Credentials](#identify-inputs).
+:::
 
-*Headless agent.* An agent run from a saved request without an interactive conversation. Headless execution does not itself control all the context or tools available to the run (§16).
+::: {#term-estimand}
+*Estimand.* The quantity a study aims to estimate, including the population or averaging sample and any comparison. [Scientific specification](#example-specification).
+:::
 
-*Import.* In a `CLAUDE.md`, a line beginning with `@` that pulls another file in at the start of the session (§7).
+::: {#term-estimator}
+*Estimator.* A procedure that uses data to estimate an estimand. [Scientific specification](#example-specification).
+:::
 
-*LLM.* Large language model: the AI that generates the text, and what a chat assistant and an agent both run on (§1). Which LLM, and at which version, is what this guide calls the *model* (§5, §16).
+::: {#term-fine-tuning}
+*Fine-tuning.* Additional training that adapts an existing LLM by changing learned parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
+:::
 
-*LoRA.* Low-Rank Adaptation, a fine-tuning method that learns compact adjustments while keeping the base model's weights fixed. The saved adjustments are an adapter (§17).
+::: {#term-global-instructions}
+*Global instructions.* Another name for [personal instructions](#term-personal-instructions) that apply across projects.
+:::
 
-*Lockfile.* A committed list of every package and its version, from which the environment can be rebuilt: `renv.lock`, `uv.lock` (§19).
+::: {#term-harness}
+*Harness.* The software around the LLM that supplies context, handles permissions, runs permitted tools, and returns their results. [Agent components](#how-can-an-llm-act-on-a-research-project).
+:::
 
-*Model.* Two senses: the LLM the agent uses, whose identifier and available settings should be recorded when it contributes to a result (§5, §16); and a statistical model fitted to data (§13).
+::: {#term-headless-agent}
+*Headless agent.* An agent invoked without an interactive conversation, often from a saved request in a larger workflow. Headless execution does not by itself isolate the agent's inputs or tools. [Controlled runs](#headless-agents).
+:::
 
-*Modular workflow.* Independently runnable research steps with explicit inputs and saved outputs; each step performs a coherent operation and can reuse shared functions (§13).
+::: {#term-import}
+*Import.* In a `CLAUDE.md` instruction file, an `@` reference that includes another file's contents. [Instruction files](#project-records).
+:::
 
-*Monte Carlo error.* The noise in a result that comes from random draws (a bootstrap, a Markov chain), against which two sampling-based results are compared (§15).
+::: {#term-independent-implementation}
+*Independent implementation.* A separate implementation built from the same scientific specification and original inputs without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
+:::
 
-*Open-source AI.* Under the Open Source Initiative's definition, a system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this (§17).
+::: {#term-llm-inference}
+*Inference, LLM.* Running an already-trained LLM to generate a response. This differs from statistical inference about a population or effect. [LLM research outputs](#define-the-output-and-its-research-meaning).
+:::
 
-*Open-weight model.* A model whose trained weights are available under stated terms. Where inference runs is a separate choice (§17).
+::: {#term-llm}
+*LLM.* Large language model: a neural network trained to learn language patterns. LLMs used in assistants generate responses by predicting successive tokens from the supplied context. [How responses are generated](#how-does-an-llm-generate-a-response).
+:::
 
-*Permission mode.* The setting that decides which actions the agent may take without asking (§5).
+::: {#term-lockfile}
+*Lockfile.* A file recording resolved software dependencies and versions, such as `renv.lock` or `uv.lock`. It helps restore the package environment; language versions and system dependencies may need separate records. [Software environments](#assemble-the-files-and-instructions).
+:::
 
-*`Plan` mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§5).
+::: {#term-lora}
+*LoRA.* Low-Rank Adaptation: a fine-tuning method that learns compact adjustments while keeping the base LLM's weights fixed. The adjustments can be saved as an adapter. [How LoRA works](#lora).
+:::
 
-*Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§5, §3); and, in Appendix B, a request you type to the agent.
+::: {#term-model}
+*Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
+:::
 
-*Provenance.* The record of where a data file came from, when, by what request, and under what terms (§12).
+::: {#term-modular-workflow}
+*Modular workflow.* Research steps that can run independently, with explicit inputs and saved outputs. Each performs a coherent operation, such as fitting a statistical model or generating a figure. [Modularity](#modular-steps).
+:::
 
-*RAG.* Retrieval-augmented generation: retrieving relevant material from a larger collection and supplying it to an LLM as context for its response (§7).
+::: {#term-monte-carlo-error}
+*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Simulation results](#interpret-failures-before-changing-the-method).
+:::
 
-*Raw data.* Data as received, never modified; everything derived from it is rebuilt by code (§7, §12).
+::: {#term-open-source-ai}
+*Open-source AI.* Under the Open Source Initiative's definition, an AI system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this. [LLM choices](#choose-for-the-task-and-available-hardware).
+:::
 
-*Sandbox.* Operating-system restrictions on covered execution. Configured limits can constrain reads, writes, and network access; exempt or separately launched tools need separate review (§4).
+::: {#term-open-weight-llm}
+*Open-weight LLM.* An LLM whose trained weights are available under stated license terms. It can run on your computer, institutional infrastructure, or a hosting provider's computers. [Deployment choices](#local-models).
+:::
 
-*Session.* One conversation with the agent, with its own context window (§5).
+::: {#term-permission-mode}
+*Permission mode.* A setting governing which actions require approval during a session. Permission rules and other access controls also affect what can run. [Approval settings](#choose-how-actions-are-approved).
+:::
 
-*Usage window.* The period over which an account's usage allowance is measured. Check the limits for the actual plan (§5).
+::: {#term-personal-instructions}
+*Personal instructions.* Conventions used across your projects, such as writing preferences or software practices. These are often called global instructions. [Shared guidance](#shared-instructions).
+:::
 
-*Version control.* A system such as [git](https://git-scm.com/) that records chosen versions of tracked files, allowing comparison and restoration (§3).
+::: {#term-plan-mode}
+*`Plan` mode.* A mode for inspecting a project and developing a plan before implementation. Writing a planning record does not authorize ordinary changes to the project. [Planning settings](#decide-whether-to-plan-first).
+:::
+
+::: {#term-project-instructions}
+*Project instructions.* A maintained description of a project's purpose, files, working rules, and relevant records, commonly saved as `CLAUDE.md` or `AGENTS.md`. [Project context](#project-records).
+:::
+
+::: {#term-prompt}
+*Prompt.* A request or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Example requests](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
+:::
+
+::: {#term-provenance}
+*Provenance.* A record of where data or results came from and how they were acquired or produced. For a downloaded dataset, this includes its source, version, retrieval method, and applicable terms. [Input provenance](#data-provenance).
+:::
+
+::: {#term-provider}
+*Provider.* The organization operating a hosted LLM service and receiving information submitted to it. The provider need not be the organization that developed the LLM. [Hosted processing](#what-reaches-the-llm).
+:::
+
+::: {#term-qlora}
+*QLoRA.* A method combining LoRA with a quantized base LLM to reduce training memory requirements. [Adaptation methods](#lora).
+:::
+
+::: {#term-quantization}
+*Quantization.* Representing numerical values in an LLM at reduced precision to reduce memory or storage requirements. Evaluate the particular quantized version intended for the research task. [Hardware and LLM choice](#choose-for-the-task-and-available-hardware).
+:::
+
+::: {#term-rag}
+*RAG.* Retrieval-augmented generation: selecting relevant material from a collection and supplying it to an LLM as context. [Context and training](#context-or-training).
+:::
+
+::: {#term-raw-data}
+*Raw data.* Inputs preserved as received from their source. Save transformations separately so they can be traced back to those originals. [Preserving inputs](#data-provenance).
+:::
+
+::: {#term-reproduction}
+*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked; generating new LLM responses is a different route from analyzing saved responses. [Reproduction routes](#test-and-name-the-reproduction-route).
+:::
+
+::: {#term-sandbox}
+*Sandbox.* Operating-system restrictions on covered execution, such as limits on file or network access. Tools outside the sandbox require separate controls. [Access enforcement](#enforce-those-limits).
+:::
+
+::: {#term-session}
+*Session.* A conversation and its associated work with an agent. A session can continue through compaction; its full history need not remain in the LLM's active context. [Context limits](#usage-and-context).
+:::
+
+::: {#term-skill}
+*Skill.* A reusable set of task instructions, sometimes with scripts or other supporting files, that an agent can load when needed. [Recurring tasks](#what-skills-add).
+:::
+
+::: {#term-smoke-test}
+*Smoke test.* A small run through a workflow to detect execution problems before a larger batch. It does not establish the statistical properties of the analysis. [Checking execution](#check-execution-before-scaling-up).
+:::
+
+::: {#term-token}
+*Token.* A unit used by an LLM to process and generate text: a word, part of a word, punctuation, or another encoded piece. [Text generation](#how-does-an-llm-generate-a-response).
+:::
+
+::: {#term-tool-call}
+*Tool / tool call.* A tool is a program that performs an action, such as reading a file or running code. A tool call requests that action; the harness runs it if permitted and returns the result. [Agent components](#how-can-an-llm-act-on-a-research-project).
+:::
+
+::: {#term-usage-window}
+*Usage window.* The period over which an account's usage allowance is measured. It differs from the context window limiting an individual LLM request. [Usage limits](#usage-and-context).
+:::
+
+::: {#term-version-control}
+*Version control.* A system that records selected versions of files so changes can be compared and earlier work recovered. [Project recovery](#project-recovery).
+:::
+
+::: {#term-weights}
+*Weights.* The numerical parameters learned during LLM training. Running an LLM uses those parameters; fine-tuning changes some of them or learns additional adjustments. [Context and training](#context-or-training).
+:::

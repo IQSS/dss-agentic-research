@@ -107,26 +107,62 @@ chapter-map:
   "D": /chapters/glossary.qmd
 
 anchor-map:
+  "access-report": /chapters/agent-access.qmd#access-report
+  "access-scope": /chapters/agent-access.qmd#access-scope
+  "accidental-exposure": /chapters/research-limits.qmd#accidental-exposure
+  "acquisition-ladder": /chapters/data-acquisition.qmd#acquisition-ladder
   "agent-access": /chapters/agent-access.qmd
+  "assemble-the-files-and-instructions": /chapters/research-handoff.qmd#assemble-the-files-and-instructions
+  "build-two-implementations-separately": /chapters/checking-analysis.qmd#build-two-implementations-separately
+  "calibration-example": /chapters/simulation.qmd#calibration-example
+  "check-execution-before-scaling-up": /chapters/research-workflows.qmd#check-execution-before-scaling-up
   "checking-analysis": /chapters/checking-analysis.qmd
+  "choose-for-the-task-and-available-hardware": /chapters/research-models.qmd#choose-for-the-task-and-available-hardware
+  "choose-how-actions-are-approved": /chapters/directing-work.qmd#choose-how-actions-are-approved
+  "choose-the-llm-and-reasoning-effort": /chapters/directing-work.qmd#choose-the-llm-and-reasoning-effort
+  "context-or-training": /chapters/research-models.qmd#context-or-training
   "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
+  "data-provenance": /chapters/data-acquisition.qmd#data-provenance
+  "decide-what-the-test-must-establish": /chapters/simulation.qmd#decide-what-the-test-must-establish
+  "decide-whether-to-plan-first": /chapters/directing-work.qmd#decide-whether-to-plan-first
+  "define-the-output-and-its-research-meaning": /chapters/llm-measurements.qmd#define-the-output-and-its-research-meaning
   "directing-work": /chapters/directing-work.qmd
+  "enforce-those-limits": /chapters/agent-access.qmd#enforce-those-limits
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "example-project": /chapters/example-project.qmd
+  "example-specification": /chapters/example-project.qmd#example-specification
+  "find-your-way-around": /chapters/first-session.qmd#find-your-way-around
+  "headless-agents": /chapters/llm-measurements.qmd#headless-agents
+  "how-can-an-llm-act-on-a-research-project": /chapters/research-uses.qmd#how-can-an-llm-act-on-a-research-project
+  "how-does-an-agent-work-through-a-task": /chapters/research-uses.qmd#how-does-an-agent-work-through-a-task
+  "how-does-an-llm-generate-a-response": /chapters/research-uses.qmd#how-does-an-llm-generate-a-response
   "identify-inputs": /chapters/data-acquisition.qmd#identify-inputs
+  "interpret-failures-before-changing-the-method": /chapters/simulation.qmd#interpret-failures-before-changing-the-method
+  "investigate-the-earliest-disagreement": /chapters/checking-analysis.qmd#investigate-the-earliest-disagreement
   "literature": /chapters/literature.qmd
+  "literature-synthesis": /chapters/literature.qmd#literature-synthesis
   "llm-measurements": /chapters/llm-measurements.qmd
+  "local-models": /chapters/research-models.qmd#local-models
+  "lora": /chapters/research-models.qmd#lora
+  "maintain-project-context": /chapters/project-context.qmd#maintain-project-context
+  "maintain-shared-conventions": /chapters/shared-conventions.qmd#maintain-shared-conventions
+  "modular-steps": /chapters/research-workflows.qmd#modular-steps
   "project-context": /chapters/project-context.qmd
   "project-organization": /chapters/project-organization.qmd
+  "project-records": /chapters/project-context.qmd#project-records
   "project-recovery": /chapters/project-organization.qmd#project-recovery
+  "project-shapes": /chapters/project-organization.qmd#project-shapes
+  "prompt-index": /chapters/prompt-index.qmd
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations
+  "request-compare-research-approaches": /chapters/example-project.qmd#request-compare-research-approaches
   "request-controlled-llm-runs": /chapters/llm-measurements.qmd#request-controlled-llm-runs
   "request-draft-from-results": /chapters/research-writing.qmd#request-draft-from-results
   "request-evaluate-labeling": /chapters/llm-measurements.qmd#request-evaluate-labeling
   "request-independent-implementation": /chapters/checking-analysis.qmd#request-independent-implementation
+  "request-investigate-result": /chapters/research-workflows.qmd#request-investigate-result
   "request-literature-search": /chapters/literature.qmd#request-literature-search
   "request-literature-synthesis": /chapters/literature.qmd#request-literature-synthesis
   "request-modular-workflow": /chapters/research-workflows.qmd#request-modular-workflow
@@ -150,12 +186,22 @@ anchor-map:
   "research-writing": /chapters/research-writing.qmd
   "reusable-procedures": /chapters/reusable-procedures.qmd
   "review-project-plan": /chapters/project-context.qmd#review-project-plan
+  "saved-commands": /chapters/research-workflows.qmd#saved-commands
   "scaffold-project": /chapters/project-organization.qmd#scaffold-project
   "shared-conventions": /chapters/shared-conventions.qmd
+  "shared-instructions": /chapters/shared-conventions.qmd#shared-instructions
   "simulation": /chapters/simulation.qmd
+  "specialist-conventions": /chapters/shared-conventions.qmd#specialist-conventions
   "starter-global": /chapters/starter-files.qmd#starter-global
   "starter-layouts": /chapters/starter-files.qmd#starter-layouts
   "starter-project": /chapters/starter-files.qmd#starter-project
+  "term-personal-instructions": /chapters/glossary.qmd#term-personal-instructions
+  "term-project-instructions": /chapters/glossary.qmd#term-project-instructions
+  "test-and-name-the-reproduction-route": /chapters/research-handoff.qmd#test-and-name-the-reproduction-route
+  "trace-manuscript": /chapters/research-writing.qmd#trace-manuscript
   "unattended-jobs": /chapters/research-workflows.qmd#unattended-jobs
   "usage-and-context": /chapters/directing-work.qmd#usage-and-context
+  "what-reaches-the-llm": /chapters/research-limits.qmd#what-reaches-the-llm
+  "what-skills-add": /chapters/reusable-procedures.qmd#what-skills-add
+  "when-a-separate-environment-helps": /chapters/agent-access.qmd#when-a-separate-environment-helps
 # END chapter-map

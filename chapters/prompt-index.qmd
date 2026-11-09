@@ -6,14 +6,17 @@ title: "Appendix B. Prompt bank"
 
 # Appendix B. Prompt bank
 
-These requests are starting points to adapt to your project. Each is also shown beside its explanation in the guide, with a link here to that exact location. Supply the relevant files and decisions before pasting a request; a prompt does not configure permissions or establish scientific validity.
+Find a request for the task you want to delegate, supply the files or decisions listed with it, and adapt the wording to your project. Each request also appears beside its explanation in the guide. The links below return you to those passages. Permissions are configured separately; research choices remain yours to review.
 
 [Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
-## Start a new research project
+## Set up and maintain a project {#prompts-project}
 
-Establish a project structure that fits the intended output.
+::: {.keep-together}
+### Start a new research project {.unlisted}
+
+Supply: the project purpose, intended output, destination, and any lab conventions.
 
 [Explanation and checks in chapter 6](#request-scaffold-project).
 
@@ -21,9 +24,12 @@ Establish a project structure that fits the intended output.
 > Set up a project for the research described below. Use the existing workspace and lab conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
 :::
 
-## Organize an existing project
+:::
 
-Make a recoverable reorganization without changing the research.
+::: {.keep-together}
+### Organize an existing project {.unlisted}
+
+Supply: the existing project folder and any known current or protected files.
 
 [Explanation and checks in chapter 6](#request-restructure-project).
 
@@ -31,9 +37,12 @@ Make a recoverable reorganization without changing the research.
 > Inspect this project and propose a clearer structure. Identify current and uncertain files before moving anything. After I approve the plan, make a recovery copy, reorganize the files, update affected paths, and save an old-to-new file map. Preserve original inputs and check that the affected outputs still reproduce.
 :::
 
-## Write project instructions
+:::
 
-Make a new session useful without retelling the whole project.
+::: {.keep-together}
+### Write project instructions {.unlisted}
+
+Supply: the project files, existing instructions, and agreed research decisions.
 
 [Explanation and checks in chapter 7](#request-project-context).
 
@@ -41,9 +50,12 @@ Make a new session useful without retelling the whole project.
 > Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 
-## Resume a project
+:::
 
-Use the saved state to choose the next task.
+::: {.keep-together}
+### Resume a project {.unlisted}
+
+Supply: the project folder and its maintained instructions, status, and tasks.
 
 [Explanation and checks in chapter 7](#request-resume-project).
 
@@ -51,9 +63,12 @@ Use the saved state to choose the next task.
 > Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
 :::
 
-## Leave a useful handoff
+:::
 
-Record enough evidence for the next session.
+::: {.keep-together}
+### Leave a useful handoff {.unlisted}
+
+Supply: the current session’s work, checked outputs, and unresolved questions.
 
 [Explanation and checks in chapter 7](#request-close-session).
 
@@ -61,9 +76,12 @@ Record enough evidence for the next session.
 > Update the task list and current status from the work and outputs actually checked. Record scientific decisions and their reasons in METHODOLOGY.md. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 
-## Separate shared and project instructions
+:::
 
-Avoid copying changing rules across every project.
+::: {.keep-together}
+### Separate shared and project instructions {.unlisted}
+
+Supply: existing instructions and examples of conventions used across projects.
 
 [Explanation and checks in chapter 8](#request-shared-conventions).
 
@@ -71,9 +89,12 @@ Avoid copying changing rules across every project.
 > Review these instructions and examples for conventions that apply across projects. Propose a short personal instruction file with references to any useful specialist files. Keep this study's decisions in its project records. Show proposed changes and conflicts, then apply the agreed guidance to the next task.
 :::
 
-## Create a project-scaffolding skill
+:::
 
-Save an agreed project setup for reuse with new studies.
+::: {.keep-together}
+### Create a project-scaffolding skill {.unlisted}
+
+Supply: an agreed project layout, setup instructions, and a destination for the skill.
 
 [Explanation and checks in chapter 9](#request-scaffold-skill).
 
@@ -81,19 +102,40 @@ Save an agreed project setup for reuse with new studies.
 > Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
 :::
 
-## Make the research specification explicit
+:::
 
-Give implementation and verification the same written target.
+## Define the study and gather evidence {#prompts-evidence}
+
+::: {.keep-together}
+### Compare research approaches {.unlisted}
+
+Supply: the research question, available data, constraints, and any verified sources.
+
+[Explanation and checks in chapter 10](#request-compare-research-approaches).
+
+::: {.prompt}
+> Using the research question, available data, and constraints below, compare plausible approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
+:::
+
+:::
+
+::: {.keep-together}
+### Make the research specification explicit {.unlisted}
+
+Supply: your research decisions and the questions that still need resolution.
 
 [Explanation and checks in chapter 10](#request-research-specification).
 
 ::: {.prompt}
-> Turn my research decisions into specification.md: state the estimands, population or averaging sample, exposure comparisons, estimator, sample rules, required inputs, uncertainty method, and reported outputs. Identify ambiguities for me rather than choosing silently. Add the agreed verification tolerances and simulation questions. Do not begin fitting until I have reviewed the scientific specification.
+> Write specification.md from my research decisions: estimands, population or averaging sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. Include agreed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 
-## Search and verify the literature
+:::
 
-Keep source discovery separate from verified evidence.
+::: {.keep-together}
+### Search and verify the literature {.unlisted}
+
+Supply: the research question, eligibility criteria, and any existing search protocol.
 
 [Explanation and checks in chapter 11](#request-literature-search).
 
@@ -101,9 +143,12 @@ Keep source discovery separate from verified evidence.
 > Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
 :::
 
-## Synthesize the papers actually read
+:::
 
-Connect each literature claim to supporting material.
+::: {.keep-together}
+### Synthesize the papers actually read {.unlisted}
+
+Supply: verified papers, records of what was read, and the question to address.
 
 [Explanation and checks in chapter 11](#request-literature-synthesis).
 
@@ -111,19 +156,27 @@ Connect each literature claim to supporting material.
 > Using the verified papers and reading records, summarize the evidence relevant to our research question and proposed method. Link each substantive claim to the source and passage that supports it. Distinguish study design, population, estimand, and limitations; report disagreements and missing evidence. Do not infer full-text findings from an abstract or fill gaps from memory.
 :::
 
-## Bring approved data into the project
+:::
 
-Preserve originals and establish provenance before analysis.
+::: {.keep-together}
+### Bring approved data into the project {.unlisted}
+
+Supply: approved inputs, their documentation, and the current scientific specification.
 
 [Explanation and checks in chapter 12](#request-bring-data).
 
 ::: {.prompt}
-> Inspect the approved inputs and their documentation. Record where each came from, the version or acquisition date, permitted use, expected units and identifiers, and a file fingerprint. Preserve the originals and create separate scripted checks for the required columns, record keys, ranges, and missingness rules in specification.md. Report discrepancies before transforming or excluding records; never replace missing research inputs with simulated observations.
+> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in specification.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
 :::
 
-## Build a modular analysis workflow
+:::
 
-Make meaningful analysis steps independently runnable.
+## Build and check the analysis {#prompts-analysis}
+
+::: {.keep-together}
+### Build a modular analysis workflow {.unlisted}
+
+Supply: the current analysis, its accepted outputs, and existing execution commands.
 
 [Explanation and checks in chapter 13](#request-modular-workflow).
 
@@ -131,19 +184,38 @@ Make meaningful analysis steps independently runnable.
 > Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
 :::
 
-## Plan and run known-truth checks
+:::
 
-Assess implementation and statistical behavior separately.
+::: {.keep-together}
+### Investigate an unexpected result {.unlisted}
+
+Supply: the unexpected result, specification, current code, and saved outputs.
+
+[Explanation and checks in chapter 13](#request-investigate-result).
+
+::: {.prompt}
+> Investigate the unexpected result identified below using the current specification, code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, compare the same estimands and record the changes and reasons.
+:::
+
+:::
+
+::: {.keep-together}
+### Plan and run known-truth checks {.unlisted}
+
+Supply: the specification and scientific scenarios or performance questions to examine.
 
 [Explanation and checks in chapter 14](#request-simulation-plan).
 
 ::: {.prompt}
-> Propose a simulation plan for specification.md. Define plausible generating worlds, separately calculated truth, estimator-recovery measures, interval or decision-rule checks, and Monte Carlo uncertainty. Check outcome support and dispersion before running; count failures as well as successes. After I approve the plan, run the saved analysis unchanged in each world and report where it fails. Keep simulated files separate from study inputs and do not change the method to make a check pass.
+> Propose known-truth checks for specification.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
 :::
 
-## Implement the analysis independently
+:::
 
-Give a fresh agent only the common specification and inputs.
+::: {.keep-together}
+### Implement the analysis independently {.unlisted}
+
+Supply: the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results.
 
 [Explanation and checks in chapter 15](#request-independent-implementation).
 
@@ -151,9 +223,12 @@ Give a fresh agent only the common specification and inputs.
 > Working only from specification.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
 :::
 
-## Compare completed implementations
+:::
 
-Locate the first meaningful disagreement.
+::: {.keep-together}
+### Compare completed implementations {.unlisted}
+
+Supply: both completed implementations, their outputs, and the common specification.
 
 [Explanation and checks in chapter 15](#request-compare-implementations).
 
@@ -161,9 +236,14 @@ Locate the first meaningful disagreement.
 > Compare the completed implementations against specification.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
 :::
 
-## Design controlled LLM research runs
+:::
 
-Specify what each headless run may receive.
+## Use LLMs in the research {#prompts-llm}
+
+::: {.keep-together}
+### Design controlled LLM research runs {.unlisted}
+
+Supply: the review-generation and judging protocol, inputs, and permitted tools and services.
 
 [Explanation and checks in chapter 16](#request-controlled-llm-runs).
 
@@ -171,9 +251,12 @@ Specify what each headless run may receive.
 > For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
 :::
 
-## Evaluate a frozen labeling procedure
+:::
 
-Keep evaluation separate from prompt development.
+::: {.keep-together}
+### Evaluate a frozen labeling procedure {.unlisted}
+
+Supply: the frozen rubric and prompt, evaluation inputs, and acceptance criteria. Keep the human reference labels unavailable during labeling.
 
 [Explanation and checks in chapter 16](#request-evaluate-labeling).
 
@@ -181,9 +264,14 @@ Keep evaluation separate from prompt development.
 > Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
 :::
 
-## Trace numbers into the manuscript
+:::
 
-Find stale values and unsupported claims in the rendered document.
+## Write and revise {#prompts-writing}
+
+::: {.keep-together}
+### Trace numbers into the manuscript {.unlisted}
+
+Supply: the rendered manuscript and saved results, including tables and figure sources.
 
 [Explanation and checks in chapter 18](#request-trace-manuscript).
 
@@ -191,9 +279,12 @@ Find stale values and unsupported claims in the rendered document.
 > Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
 :::
 
-## Draft from the research record
+:::
 
-Keep evidence gaps visible while writing.
+::: {.keep-together}
+### Draft from the research record {.unlisted}
+
+Supply: the section to draft, research decisions, verified sources, results, and writing guidance.
 
 [Explanation and checks in chapter 18](#request-draft-from-results).
 
@@ -201,9 +292,12 @@ Keep evidence gaps visible while writing.
 > Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
 :::
 
-## Draft a response from your decisions
+:::
 
-Preserve the author’s decisions and link replies to revisions.
+::: {.keep-together}
+### Draft a response from your decisions {.unlisted}
+
+Supply: reviewer comments, your decisions, and the revised manuscript and analysis records.
 
 [Explanation and checks in chapter 18](#request-reviewer-response).
 
@@ -211,23 +305,33 @@ Preserve the author’s decisions and link replies to revisions.
 > Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
 :::
 
-## Test a clean-copy handoff
+:::
 
-Establish what another researcher can actually rerun.
+## Reproduce and share {#prompts-handoff}
+
+::: {.keep-together}
+### Test a clean-copy handoff {.unlisted}
+
+Supply: the project, README, input manifest, reference outputs, and comparison tolerances.
 
 [Explanation and checks in chapter 19](#request-reproduce-project).
 
 ::: {.prompt}
-> Prepare a clean-copy reproduction test using the README and input manifest. Identify missing inputs and approved access routes before running. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. If restricted data are unavailable here, run only the synthetic example and state that empirical reproduction remains untested. Save commands, outputs, and discrepancies without changing the analysis or criteria to force a pass.
+> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
 :::
 
-## Review a proposed deposit
+:::
 
-Check the snapshot before publication.
+::: {.keep-together}
+### Review a proposed deposit {.unlisted}
+
+Supply: the proposed deposit snapshot, manuscript, input manifest, and sharing requirements.
 
 [Explanation and checks in chapter 19](#request-review-deposit).
 
 ::: {.prompt}
-> Review the proposed deposit against the manuscript, code, and input manifest. Report confidential material, credentials, personal paths, missing dependencies, incomplete access instructions, and unsupported claims. Preserve relevant AI disclosure and scientific provenance, including prompts and model-evaluation records. Check contributors and licenses. Propose specific corrections; do not upload, delete files, or rewrite history.
+> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
+:::
+
 :::
 <!-- /collection:prompts -->

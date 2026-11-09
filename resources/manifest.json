@@ -4,133 +4,169 @@
       "id": "scaffold-project",
       "chapter": 6,
       "title": "Start a new research project",
-      "purpose": "Establish a project structure that fits the intended output."
+      "group": "project",
+      "inputs": "the project purpose, intended output, destination, and any lab conventions."
     },
     {
       "id": "restructure-project",
       "chapter": 6,
       "title": "Organize an existing project",
-      "purpose": "Make a recoverable reorganization without changing the research."
+      "group": "project",
+      "inputs": "the existing project folder and any known current or protected files."
     },
     {
       "id": "project-context",
       "chapter": 7,
       "title": "Write project instructions",
-      "purpose": "Make a new session useful without retelling the whole project."
+      "group": "project",
+      "inputs": "the project files, existing instructions, and agreed research decisions."
     },
     {
       "id": "resume-project",
       "chapter": 7,
       "title": "Resume a project",
-      "purpose": "Use the saved state to choose the next task."
+      "group": "project",
+      "inputs": "the project folder and its maintained instructions, status, and tasks."
     },
     {
       "id": "close-session",
       "chapter": 7,
       "title": "Leave a useful handoff",
-      "purpose": "Record enough evidence for the next session."
+      "group": "project",
+      "inputs": "the current session’s work, checked outputs, and unresolved questions."
     },
     {
       "id": "shared-conventions",
       "chapter": 8,
       "title": "Separate shared and project instructions",
-      "purpose": "Avoid copying changing rules across every project."
+      "group": "project",
+      "inputs": "existing instructions and examples of conventions used across projects."
     },
     {
       "id": "scaffold-skill",
       "chapter": 9,
       "title": "Create a project-scaffolding skill",
-      "purpose": "Save an agreed project setup for reuse with new studies."
+      "group": "project",
+      "inputs": "an agreed project layout, setup instructions, and a destination for the skill."
+    },
+    {
+      "id": "compare-research-approaches",
+      "chapter": 10,
+      "title": "Compare research approaches",
+      "group": "evidence",
+      "inputs": "the research question, available data, constraints, and any verified sources."
     },
     {
       "id": "research-specification",
       "chapter": 10,
       "title": "Make the research specification explicit",
-      "purpose": "Give implementation and verification the same written target."
+      "group": "evidence",
+      "inputs": "your research decisions and the questions that still need resolution."
     },
     {
       "id": "literature-search",
       "chapter": 11,
       "title": "Search and verify the literature",
-      "purpose": "Keep source discovery separate from verified evidence."
+      "group": "evidence",
+      "inputs": "the research question, eligibility criteria, and any existing search protocol."
     },
     {
       "id": "literature-synthesis",
       "chapter": 11,
       "title": "Synthesize the papers actually read",
-      "purpose": "Connect each literature claim to supporting material."
+      "group": "evidence",
+      "inputs": "verified papers, records of what was read, and the question to address."
     },
     {
       "id": "bring-data",
       "chapter": 12,
       "title": "Bring approved data into the project",
-      "purpose": "Preserve originals and establish provenance before analysis."
+      "group": "evidence",
+      "inputs": "approved inputs, their documentation, and the current scientific specification."
     },
     {
       "id": "modular-workflow",
       "chapter": 13,
       "title": "Build a modular analysis workflow",
-      "purpose": "Make meaningful analysis steps independently runnable."
+      "group": "analysis",
+      "inputs": "the current analysis, its accepted outputs, and existing execution commands."
+    },
+    {
+      "id": "investigate-result",
+      "chapter": 13,
+      "title": "Investigate an unexpected result",
+      "group": "analysis",
+      "inputs": "the unexpected result, specification, current code, and saved outputs."
     },
     {
       "id": "simulation-plan",
       "chapter": 14,
       "title": "Plan and run known-truth checks",
-      "purpose": "Assess implementation and statistical behavior separately."
+      "group": "analysis",
+      "inputs": "the specification and scientific scenarios or performance questions to examine."
     },
     {
       "id": "independent-implementation",
       "chapter": 15,
       "title": "Implement the analysis independently",
-      "purpose": "Give a fresh agent only the common specification and inputs."
+      "group": "analysis",
+      "inputs": "the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results."
     },
     {
       "id": "compare-implementations",
       "chapter": 15,
       "title": "Compare completed implementations",
-      "purpose": "Locate the first meaningful disagreement."
+      "group": "analysis",
+      "inputs": "both completed implementations, their outputs, and the common specification."
     },
     {
       "id": "controlled-llm-runs",
       "chapter": 16,
       "title": "Design controlled LLM research runs",
-      "purpose": "Specify what each headless run may receive."
+      "group": "llm",
+      "inputs": "the review-generation and judging protocol, inputs, and permitted tools and services."
     },
     {
       "id": "evaluate-labeling",
       "chapter": 16,
       "title": "Evaluate a frozen labeling procedure",
-      "purpose": "Keep evaluation separate from prompt development."
+      "group": "llm",
+      "inputs": "the frozen rubric and prompt, evaluation inputs, and acceptance criteria. Keep the human reference labels unavailable during labeling."
     },
     {
       "id": "trace-manuscript",
       "chapter": 18,
       "title": "Trace numbers into the manuscript",
-      "purpose": "Find stale values and unsupported claims in the rendered document."
+      "group": "writing",
+      "inputs": "the rendered manuscript and saved results, including tables and figure sources."
     },
     {
       "id": "draft-from-results",
       "chapter": 18,
       "title": "Draft from the research record",
-      "purpose": "Keep evidence gaps visible while writing."
+      "group": "writing",
+      "inputs": "the section to draft, research decisions, verified sources, results, and writing guidance."
     },
     {
       "id": "reviewer-response",
       "chapter": 18,
       "title": "Draft a response from your decisions",
-      "purpose": "Preserve the author\u2019s decisions and link replies to revisions."
+      "group": "writing",
+      "inputs": "reviewer comments, your decisions, and the revised manuscript and analysis records."
     },
     {
       "id": "reproduce-project",
       "chapter": 19,
       "title": "Test a clean-copy handoff",
-      "purpose": "Establish what another researcher can actually rerun."
+      "group": "handoff",
+      "inputs": "the project, README, input manifest, reference outputs, and comparison tolerances."
     },
     {
       "id": "review-deposit",
       "chapter": 19,
       "title": "Review a proposed deposit",
-      "purpose": "Check the snapshot before publication."
+      "group": "handoff",
+      "inputs": "the proposed deposit snapshot, manuscript, input manifest, and sharing requirements."
     }
   ],
   "starters": [
@@ -151,6 +187,10 @@
       "file": "TASKS.md"
     },
     {
+      "id": "specification",
+      "file": "specification.md"
+    },
+    {
       "id": "methodology",
       "file": "METHODOLOGY.md"
     },
@@ -162,5 +202,13 @@
       "id": "scaffold-skill",
       "path": "skills/research-scaffold/SKILL.md"
     }
-  ]
+  ],
+  "prompt_groups": {
+    "project": "Set up and maintain a project",
+    "evidence": "Define the study and gather evidence",
+    "analysis": "Build and check the analysis",
+    "llm": "Use LLMs in the research",
+    "writing": "Write and revise",
+    "handoff": "Reproduce and share"
+  }
 }
