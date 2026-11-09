@@ -18,7 +18,7 @@ Establish a project structure that fits the intended output.
 [Explanation and checks in chapter 6](#request-scaffold-project).
 
 ::: {.prompt}
-> Create a project for the research described below, using our established workspace and conventions. Propose a small folder structure suited to the deliverable, then create the approved structure and initial project instructions. Preserve any existing files. Record missing scientific decisions instead of inventing them, and show me where inputs, code, results, and the manuscript belong.
+> Set up a project for the research described below. Use the existing workspace and lab conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
 :::
 
 ## Organize an existing project
@@ -28,7 +28,7 @@ Make a recoverable reorganization without changing the research.
 [Explanation and checks in chapter 6](#request-restructure-project).
 
 ::: {.prompt}
-> Inspect this project and propose a clearer structure that preserves original data and accepted work. Identify scripts, outputs, duplicates, and uncertain files; do not decide that uncertain files are disposable. After I approve the plan, make a recovery checkpoint, reorganize the files, update affected paths, and save a before-to-after file map. Check that the existing analysis still runs and report unresolved dependencies.
+> Inspect this project and propose a clearer structure. Identify current and uncertain files before moving anything. After I approve the plan, make a recovery copy, reorganize the files, update affected paths, and save an old-to-new file map. Preserve original inputs and check that the affected outputs still reproduce.
 :::
 
 ## Write project instructions
@@ -38,7 +38,7 @@ Make a new session useful without retelling the whole project.
 [Explanation and checks in chapter 7](#request-project-context).
 
 ::: {.prompt}
-> Read the project files and draft a concise project instruction file describing the purpose, current commands, file locations, scientific specification, and access limits. Separate observed facts from questions for me. Link to detailed records rather than copying them into the instructions. Preserve existing authored instructions and show proposed revisions before replacing them.
+> Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 
 ## Resume a project
@@ -48,7 +48,7 @@ Use the saved state to choose the next task.
 [Explanation and checks in chapter 7](#request-resume-project).
 
 ::: {.prompt}
-> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Tell me the current state, any conflict between the records and the files, and the next useful action. Do not treat an unverified claim of completion as evidence that a check passed.
+> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
 :::
 
 ## Leave a useful handoff
@@ -58,7 +58,7 @@ Record enough evidence for the next session.
 [Explanation and checks in chapter 7](#request-close-session).
 
 ::: {.prompt}
-> Update TASKS.md with completed and remaining work. Rewrite the affected parts of STATUS.md to describe the current state, without adding a running history. Record scientific decisions and their reasons in METHODOLOGY.md. Include the outputs checked, failures or gaps, and the next action; do not mark work complete without evidence.
+> Update the task list and current status from the work and outputs actually checked. Record scientific decisions and their reasons in METHODOLOGY.md. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 
 ## Separate shared and project instructions
@@ -68,17 +68,17 @@ Avoid copying changing rules across every project.
 [Explanation and checks in chapter 8](#request-shared-conventions).
 
 ::: {.prompt}
-> Review these project instructions for conventions I use across projects. Propose a short global instruction file that points to specialist files for coding, modeling, writing, project structure, and installed tools. Keep this study’s scientific decisions and access exceptions in the project. Identify duplicated or conflicting rules and show proposed changes before applying them.
+> Review these instructions and examples for conventions that apply across projects. Propose a short personal instruction file with references to any useful specialist files. Keep this study's decisions in its project records. Show proposed changes and conflicts, then apply the agreed guidance to the next task.
 :::
 
-## Turn a checked procedure into a skill
+## Create a project-scaffolding skill
 
-Reuse a procedure after confirming it works.
+Save an agreed project setup for reuse with new studies.
 
-[Explanation and checks in chapter 9](#request-status-skill).
+[Explanation and checks in chapter 9](#request-scaffold-skill).
 
 ::: {.prompt}
-> Create a project-status skill from the handoff procedure we have checked. It should read the project instructions and state files, verify relevant outputs, update the task list and snapshot, and report unresolved issues. Keep the instructions short, name the evidence required, and stop if the project cannot be identified. Test it on this project and show the resulting changes before treating it as reusable.
+> Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
 :::
 
 ## Make the research specification explicit
@@ -168,7 +168,7 @@ Specify what each headless run may receive.
 [Explanation and checks in chapter 16](#request-controlled-llm-runs).
 
 ::: {.prompt}
-> For this review-generation and judging protocol, list the exact inputs, prompts, instructions, tools, and connected services allowed in each stage. Design fresh runs that do not inherit other cases’ conversations or outputs. Propose harmless marker tests for unintended file, memory, instruction, and tool access, including an allowed-input positive control. Save raw responses, failures, retries, configuration, and model information. Report untested routes; headless execution alone is not evidence of isolation.
+> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
 :::
 
 ## Evaluate a frozen labeling procedure

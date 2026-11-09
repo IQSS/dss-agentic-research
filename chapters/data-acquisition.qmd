@@ -6,15 +6,13 @@ title: "12. Bring data into the project"
 
 # 12. Bring data into the project
 
-The agent needs to work from the intended inputs, with a record of where they came from and how they may be used. That applies whether you receive files from a collaborator, start with data already on disk, or ask the agent to acquire a new extract.
+An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from.
 
-Our example begins with a supplied synthetic birth-record file and its generator. Before fitting anything, the agent should establish that the file contains the promised variables and records, retain the original, and document its origin. Calling the file “births” does not make it observed data; that distinction must survive into the methods and results.
+The [example project](#example-project) starts with a synthetic birth-record file and its generator. Before transforming it, the agent should check its identity, variables, and declared properties. The same process would expose a collaborator's outdated extract or a website download with changed units.
 
-## Start with the required inputs {#identify-inputs}
+## Identify and check the inputs {#identify-inputs}
 
-Use the research specification to identify the observation unit, population, dates, variables, units, and documentation needed. Ask the agent to inspect the actual files and their dictionaries. It should surface conflicts with the specification before transforming them.
-
-For received data, record who supplied the files, when, which release or extract they represent, and what restrictions accompany them. For a file already on disk, establish its identity from the available evidence and mark missing provenance as unknown. Do not invent a retrospective download history.
+Give the agent the specification and available documentation. Ask it to compare the actual files with the required observation unit, dates, variables, units, and identifiers. For received files, record who supplied them and which release they represent. For existing files, use the evidence available and leave unknown provenance explicit.
 
 <!-- prompt:bring-data -->
 ::: {#request-bring-data .prompt}
@@ -22,46 +20,39 @@ For received data, record who supplied the files, when, which release or extract
 :::
 <!-- /prompt:bring-data -->
 
-The synthetic example's raw CSV should have 1,200 unique ids, ages 18–40, hot-day counts between 0 and 20, a binary smoking indicator, and positive birthweight. Those are the declared properties of this teaching input. An agent should fail visibly if the supplied file contradicts them, rather than silently dropping records or replacing values.
+The example declares 1,200 unique identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, a binary smoking indicator, and positive birthweight. Its checks should stop with a useful explanation if those conditions fail. An empirical project needs rules derived from its own documentation, not the example's ranges.
 
-## Choose a suitable acquisition route {#acquisition-ladder}
+A *checksum* is a digital fingerprint computed from a file's contents. Recording one lets the agent detect a later change to that file. It does not establish that the data are correct, and two differently formatted exports can contain the same observations but have different checksums.
 
-When the project needs web-based data, use the first suitable, permitted method in this order:
+## Acquire web data through a repeatable route {#acquisition-ladder}
 
-1. *API or structured source.* Look for a documented API, bulk download, CSV export, or structured response used by the page. It is usually easier to preserve and repeat a request for data than to interpret a rendered page.
-2. *Fetch and parse a static page.* Save the HTML, then extract its data with a script when the required content is already in that response.
-3. *Scripted browser.* Use a browser script for genuinely dynamic content or required interaction. Where permitted, capture the structured responses requested by the page rather than scraping its display.
-4. *Agent-interactive browser.* Use the agent's browser for reconnaissance, a small one-off task, visual judgment, or a step requiring human participation. It may help discover a structured route for the first tier. It is not the default for thousands of repeated page visits.
+For web-based data, choose the first suitable, permitted route in this sequence. Start by looking for a structured source before asking an agent to click through pages.
 
-The first three can leave repeatable acquisition code. Interactive browser actions alone do not. Preserve useful exploration by turning a recurring task into a permitted script with explicit inputs, saved responses, and failure handling.
+![](figures/data-acquisition-ladder.svg){#fig-data-acquisition-ladder fig-alt="Use a documented API or structured download when available, then static-page parsing, then scripted browser interaction. Agent-interactive browsing helps with exploration or small tasks when those routes do not fit."}
 
-Check the source's terms and request limits before collecting. An endpoint visible in a browser is not automatically an authorized route. Sources such as the [Census API](https://www.census.gov/data/developers/guidance/api-user-guide.html), [IPUMS](https://usa.ipums.org/usa/terms.shtml), and [CDC WONDER](https://wonder.cdc.gov/datause.html) have their own access and use conditions. A refusal is not an invitation to bypass the source's restrictions through another interface.
+A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, a script can save and parse that response. Use a scripted browser when content genuinely requires interaction; where permitted, it can capture the structured responses behind the display.
 
-## Preserve originals and document provenance {#data-provenance}
+An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once a repeated acquisition is understood, have the agent preserve it as a script with saved inputs and responses. The toolkit's [browser chapter](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) covers the tools.
 
-Save a response exactly as received before parsing or cleaning it. Write derived files separately, so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one instead of overwriting the input behind a published result.
+Check terms, access requirements, and request limits before collecting. A visible endpoint is not automatically an authorized route. Use approved access, and keep keys out of collection scripts and saved requests; the toolkit explains [credentials](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html). Apply the data-use decisions in [chapter 3](#data-chain-of-custody) to collection as well as analysis.
+
+## Preserve originals and their provenance {#data-provenance}
+
+Save responses and supplied files unchanged. Write cleaned and derived data separately so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one when both support reported work.
 
 | Record | Synthetic example |
 |---|---|
-| Source | Invented records generated for this teaching project; no observed pregnancies. |
-| Original | `data/raw/births.csv`, preserved unchanged after generation. |
-| Reconstruction | Saved generator, seed, and [R](https://www.r-project.org/) version in the provenance record. |
-| File identity | A checksum recorded when the original is created. |
-| Documentation | Variable definitions and the analysis specification. |
-| Derived files | Created by recorded scripts; never relabeled as original observations. |
+| Origin | Synthetic records; no observed pregnancies. |
+| Original | `data/raw/births.csv`, unchanged after generation. |
+| Reconstruction | Generator, seed, and [R](https://www.r-project.org/) version. |
+| Identity | Checksum recorded when the file is created. |
+| Meaning | Variable dictionary and analysis specification. |
+| Derivatives | Scripted transformations saved separately from the original. |
 
-For empirical data, add the actual source address, release/extract identifier, request, retrieval date, and conditions on use and redistribution. Write the provenance entry when the file is saved. A checksum identifies changed bytes; it does not establish whether the source or analysis is correct.
+For empirical data, record the source address or supplier, release or extract identifier, request, acquisition date, and restrictions on use and redistribution. Have the agent write that record when it saves the file. Protecting originals against edits does not prevent their disclosure; retain the [chain of custody](#data-chain-of-custody) for them and their protected derivatives.
 
-Allow specifically authorized acquisitions and provenance updates, then protect the originals during analysis. Read-only access prevents changes but still permits disclosure. Apply the [chain-of-custody decisions](#data-chain-of-custody) to received files, connected services, and any protected derivatives.
+## Repeat collection without repeating unnecessary work
 
-## Make collection repeatable without wasting requests
+Have collection code respect request limits, save raw responses, and record progress. It should reuse completed downloads and resume interrupted work. A failed request belongs in a failure record; it must not become a row of guessed values or disappear as though nothing was expected.
 
-Have acquisition code respect request limits, identify itself as required, save raw responses, and record progress. Reuse cached responses and resume interrupted collections. A missing page or failed request should appear in a failure record, not disappear from the resulting dataset. For long collections, the toolkit's [queue chapter](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) explains unattended execution and completion checks.
-
-Keep credentials out of source code, logs, and conversations. Use the existing approved credential mechanism; the toolkit's [credential chapter](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) covers setup. If a key enters repository history, removing the current line is insufficient: revoke and replace it through the service's process.
-
-## Check what actually arrived
-
-Compare the saved files with the requested population, period, units, variables, and release. Inspect record counts, key uniqueness, and any unexplained missing inputs. For a web extract, compare selected values with the source's own display or documentation. Confirm the original was not recoded during acquisition.
-
-Keep unmatched or ambiguous records visible for a decision. The next chapter shows how to implement approved transformations as modular steps; it should not begin from an undocumented cleaning decision hidden in a download script.
+For a new collection pipeline, ask the agent to process a few representative requests before starting the full batch. This *smoke test* checks that acquisition, parsing, and saving work together. Preserve failures and retry counts during the batch, then compare the received coverage with what was requested. A successful test does not establish complete coverage or permission to redistribute the result.

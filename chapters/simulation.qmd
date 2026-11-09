@@ -10,51 +10,46 @@ aliases:
 
 <!-- aliases: calibration-example -->
 
-Simulation gives an agent's analysis a test with an answer you can establish before fitting the model. It can expose broken processing and reporting, and it can show how the proposed estimator behaves under conditions that matter to your research. Those are separate questions: a workflow may run correctly while its estimates perform poorly.
+Simulation can check whether an agent's workflow executes and whether the proposed estimator recovers quantities whose true values are known. Those are different questions. Code can follow the specification and still produce poor estimates under conditions relevant to the study.
 
-In the heat-and-birthweight example, maternal age has a curved relationship with expected birthweight and modifies the heat association. We can create data with those features, then ask whether the saved workflow recovers the specified exposure contrast. A second world adds curvature to the age-dependent heat association that the fitted model does not include.
+The [birthweight example](#example-project) makes this distinction visible. One simulated world contains the curved age relationship and linear heat-by-age interaction represented in the fitted statistical model. Another contains a more complex interaction. Applying the same estimator to both reveals where its performance deteriorates.
 
-## Start with a small, known answer
+## Decide what the test must establish
 
-Before running hundreds of simulated studies, check that one dataset passes through the saved workflow and produces the expected files. Use a small calculation whose answer follows directly from the specification. In this example, the modeled difference between ten and five hot days at age 28 is five times the heat coefficient. At age 36, it also includes the heat-by-age interaction. Comparing those calculations with the saved prediction contrasts checks the reported quantity separately from fitting the model.
+First, have the agent pass one dataset through the saved workflow and confirm that it produces usable outputs. Add a small calculation with an answer established separately from the code being tested. With age centered at 28 in this example, the modeled 10-minus-5-day difference at age 28 is five times the heat coefficient. Comparing that expression with the prediction-based contrast checks the reported quantity.
 
-Known-answer checks also belong before fitting. A join with a duplicated key should fail where the specification requires one row per person; a missing exposure file should cause a clear failure. It should never trigger the invention of observations to keep the analysis moving. Keep small failing inputs separate from the study data and retain them as regression tests.
+Then repeat the analysis across many generated datasets to assess estimation and uncertainty. A single successful execution cannot establish low bias or reliable interval coverage.
 
-![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="A checked synthetic world supplies data to the saved analysis workflow. The workflow's estimates are compared with separately calculated truth. Repeating the process assesses statistical behavior."}
+![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="First run one dataset through the workflow and check a separately calculated answer. Then repeat across synthetic datasets with known truth and assess estimation bias, interval coverage, and failures."}
 
-The expected answer must come from the research rules or a separately checked calculation. A test that copies the agent's first result into its expected value will preserve that result, including its mistakes.
+## Define plausible worlds and calculate truth {#calibration-example}
 
-## Specify the simulated worlds {#calibration-example}
+Choose worlds that address a scientific concern. The example varies the heat relationship while keeping its analysis method unchanged.
 
-A *calibration harness* generates repeated datasets, applies the same analysis to each, and records how estimates and decisions behave. The agent can build and run it from a written plan. You choose the relevant worlds and the properties that would make the analysis adequate for its intended use.
+| World | Relationship in the generator | Question for the estimator |
+|---|---|---|
+| Null | Heat contributes nothing. | Are estimates near zero and false-positive rates acceptable? |
+| Main | The heat slope changes linearly with age. | Does the estimator recover average and age-specific contrasts? |
+| Curved | The heat slope also changes quadratically with age. | What happens when the fitted interaction is too restrictive? |
 
-The example holds the 1,200 synthetic individuals' ages, smoking indicators, and exposure values fixed while generating a new birthweight for every person in every repetition. Its performance statements therefore concern these covariate values. They do not describe every possible population or sampling design.
+Before assessing recovery, check whether each world can represent the measured quantity. Outcome bounds, dispersion, clustering, exposure support, and constraints between variables matter. The example generates positive, right-skewed birthweights, but it remains a teaching construction rather than a validated description of births. Real studies may also need missingness, measurement error, or dependence.
 
-| World | Relationship built into the data | What the comparison examines |
-|:--|:--|:--|
-| No heat association | Curved maternal-age relationship and a smoking association; heat contributes nothing | Bias near zero, interval coverage, and false-positive rate |
-| Age-dependent heat association | The heat slope changes linearly with centered age | Recovery of the average contrast and the contrasts at ages 22, 28, and 36 |
-| Curved age-dependent heat association | The heat slope also changes quadratically with centered age | Performance when the fitted interaction omits a feature of the generating process |
+Calculate the true contrast from the generating conditional mean before adding noise. Have that calculation checked separately from the estimator. Reusing the fitting code to produce both the estimate and its supposed truth can put the same mistake on both sides.
 
-All three worlds generate positive birthweights with right-skewed noise whose spread grows with the conditional mean. The fitted model includes the curved main association with age and the linear heat-by-age interaction. Its HC3 uncertainty calculation and normal-reference intervals stay the same across worlds. The stress test is useful precisely because the agent does not quietly change the estimator to match it.
+<details class="guide-example">
+<summary>How the example generates outcomes and calculates truth</summary>
 
-The generator describes an invented teaching population. Its coefficients are not empirical estimates of heat effects, and its ranges alone do not establish biological plausibility. For your research, check that the simulated world can represent the measured quantity: outcome bounds, plausible dispersion, clustering, exposure support, and any constraints between variables. Inspect generated values and distributions before interpreting recovery results. Add missingness, measurement error, dependence, or other complications when they are relevant to the planned claim.
+The simulation holds the 1,200 synthetic individuals' ages, smoking indicators, and exposures fixed, and generates new birthweights in each repetition. Its performance results therefore concern those covariate values. The generator uses positive, right-skewed noise with spread increasing with the conditional mean.
 
-## Calculate truth separately
+For each world, the true sample contrast averages the difference between conditional mean birthweight at 10 and 5 hot days over the saved individuals. Age-specific truth uses the stated age and the sample's smoking distribution. The estimator includes quadratic age, a linear heat-by-age interaction, and smoking, with HC3 covariance and normal-reference intervals. It is unchanged across worlds.
 
-The example's estimand is the mean predicted difference between ten and five hot days, averaged over the observed age and smoking distribution (§10). For each simulated world, calculate its true value directly from the generating conditional mean, before adding random noise. Calculate the age-specific contrasts from that same mean at the stated ages.
+The [project download](resources/heat-birthweight.zip) contains generator code, parameters, independent truth calculations, seeds, and the full simulation plan. A different design may require numerical integration or a large reference population to approximate truth; record that approximation and its uncertainty.
 
-Check this truth calculation independently of the fitted-model code. Reusing the fitting function to supply both the estimate and its supposed truth can reproduce the same mistake on both sides. Also distinguish the target from the random outcome difference in one simulated sample: that sample contains noise.
+</details>
 
-For a different research problem, the truth may require integration or a very large reference population. Record that approximation and its numerical uncertainty. A coefficient is the correct target only if a coefficient is what the study intends to report.
+## Have the agent run the comparison
 
-## Assess recovery and decisions
-
-Recovery concerns whether estimates track the target across useful values. Examine bias, root mean squared error, and the distribution of estimates. Decision-rule calibration concerns interval coverage and, if the analysis uses a significance threshold, rejection under null and non-null worlds. Neither assessment substitutes for the other.
-
-The example runs 400 repetitions per world. A coverage estimate near 95 percent then has a Monte Carlo standard error of about 1.1 percentage points. That is simulation uncertainty from a finite run, not the uncertainty interval for the research estimate. Report uncertainty for rates near zero or one too; observing no failures in 400 runs does not establish a failure probability of zero.
-
-Keep failed fits in the record. Report how many were attempted, what failed, and which denominator was used for each performance measure. Quietly calculating coverage only among successful fits can make an unstable procedure look reliable.
+State the evaluation criteria before launching the repetitions. Examine bias and estimation error, then interval coverage and any decision rule the research will use. A procedure can have small average bias and still produce intervals that are too narrow.
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
@@ -62,10 +57,19 @@ Keep failed fits in the record. Report how many were attempted, what failed, and
 :::
 <!-- /prompt:simulation-plan -->
 
-## Read the results before changing the method
+Retain failures and report attempted as well as successful runs. Computing performance only among successful fits can make an unstable estimator look reliable. Finite simulation runs also introduce Monte Carlo uncertainty: with 400 repetitions, coverage near 95 percent has a standard error of about 1.1 percentage points. That describes uncertainty in the estimated coverage rate, not the interval around a birthweight contrast.
+
+## Interpret failures before changing the method
 
 <!-- example:simulation-results -->
-The saved run completed 400 repetitions in each world, with no failed fits. The table shows two of the four reported quantities; the download includes every quantity, replicate, and failure check.
+The saved run completed 400 repetitions in each world, with no failed fits. In the curved world, the age-28 contrast had bias of 28.3 g and interval coverage of 75.8%. The sample-average contrast performed much better. A satisfactory average can conceal an inadequate age-specific result.
+
+![](figures/simulation-performance.svg){#fig-simulation-performance fig-alt="Saved simulation results compare bias and coverage in the null, main, and curved worlds. Age-28 performance deteriorates in the curved world. Bars show Monte Carlo uncertainty, not birthweight confidence intervals."}
+
+<details class="guide-example">
+<summary>Read the numerical results</summary>
+
+The table shows two of the four reported quantities. The project download includes every quantity, replicate, and failure check.
 
 | World | Quantity | Truth (g) | Bias (g) | Coverage | Monte Carlo 95% interval |
 |---|---|---:|---:|---:|---|
@@ -76,13 +80,11 @@ The saved run completed 400 repetitions in each world, with no failed fits. The 
 | Curved | Sample average | -10.8 | 2.4 | 93.5% | 90.6%–95.5% |
 | Curved | Age 28 | -40.0 | 28.3 | 75.8% | 71.3%–79.7% |
 
-The curved world exposes a limitation: the fitted linear modifier misses the contrast at age 28, although the sample-average contrast performs much better. A satisfactory average can conceal an inadequate age-specific result. These are measured simulation outcomes under the stated invented worlds, not empirical health findings.
+</details>
 
-![](resources/example-plots/simulation-bias.png){fig-alt="Measured simulation bias for the sample and age-specific contrasts in three invented worlds. The curved-modifier world produces substantial positive bias at age 28."}
+These are measured simulation results under specified synthetic worlds, not empirical health findings.
 <!-- /example:simulation-results -->
 
-When a result fails the planned check, locate the cause. An incorrect formula, an impossible simulated world, and a method that performs badly under a plausible world call for different responses. Ask the agent to show the relevant data, target calculation, and saved estimates. Preserve the failing run before making a correction.
+When a check fails, ask the agent to show the generator, truth calculation, and saved estimates. An impossible simulated world, a coding mistake, and poor estimator performance require different responses. Preserve the failing run while investigating.
 
-A model can recover a particular estimand under the worlds tested while describing some individual outcomes poorly. Conversely, an implementation can follow the specification exactly and still have poor coverage or miss an age-dependent association. Record the scenarios, performance, and limitations in `METHODOLOGY.md`; any change to the estimator needs a research justification and a new evaluation.
-
-Simulation cannot establish that the estimand answers the substantive question or that an observational design supports a causal claim. Those judgments remain part of the study design. The next chapter addresses a different uncertainty: whether independently built implementations carry out that design in the same way.
+The curved-world result gives a reason to examine a more flexible age interaction. It does not authorize the agent to replace the method silently. Agree any revision, record its reason, and repeat the relevant checks. Simulation supports claims about performance under specified worlds; it does not establish that an observational design supports a causal interpretation. The next chapter asks whether separately built implementations carry out the specification consistently.

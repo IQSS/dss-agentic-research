@@ -12,7 +12,7 @@ Suppose you ask an agent to diagnose an error in a script that analyzes confiden
 
 ## What reaches the LLM
 
-With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with *This computer* selected in [Claude Code](https://code.claude.com/docs/en/desktop).
+With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with `This computer` selected in [Claude Code](https://code.claude.com/docs/en/desktop).
 
 ![](figures/research-data-flow.svg){#fig-research-data-flow fig-alt="On your computer, the agent's tools read project files. The agent sends tool results to the hosted LLM on the provider's computers. The provider may retain copies."}
 

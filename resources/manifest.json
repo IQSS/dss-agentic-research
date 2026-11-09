@@ -37,10 +37,10 @@
       "purpose": "Avoid copying changing rules across every project."
     },
     {
-      "id": "status-skill",
+      "id": "scaffold-skill",
       "chapter": 9,
-      "title": "Turn a checked procedure into a skill",
-      "purpose": "Reuse a procedure after confirming it works."
+      "title": "Create a project-scaffolding skill",
+      "purpose": "Save an agreed project setup for reuse with new studies."
     },
     {
       "id": "research-specification",
@@ -118,7 +118,7 @@
       "id": "reviewer-response",
       "chapter": 18,
       "title": "Draft a response from your decisions",
-      "purpose": "Preserve the author’s decisions and link replies to revisions."
+      "purpose": "Preserve the author\u2019s decisions and link replies to revisions."
     },
     {
       "id": "reproduce-project",
@@ -157,6 +157,10 @@
     {
       "id": "gitignore",
       "file": "gitignore.txt"
+    },
+    {
+      "id": "scaffold-skill",
+      "path": "skills/research-scaffold/SKILL.md"
     }
   ]
 }

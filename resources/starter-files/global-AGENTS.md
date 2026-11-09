@@ -1,4 +1,4 @@
-# How I work
+# Working conventions
 
 [Describe your research role and the software you normally use.]
 
@@ -13,6 +13,7 @@
 - Read MODELING.md before statistical modeling or simulation.
 - Read WRITING.md before drafting prose for people to read.
 - Read TOOLCHAIN.md before adding or changing software.
+- Read WORKSPACE.md when locating projects or shared inputs.
 
 These files sit beside this file. If a needed file is absent, report the gap.
 

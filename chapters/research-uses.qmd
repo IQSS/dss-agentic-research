@@ -57,6 +57,8 @@ The same AI app may support both ways of working. You can keep your existing [R]
 
 The result of a tool call gives the LLM new information to use in choosing its next action. The harness passes that result back, and the LLM may request another tool call or respond to you. Repeating this cycle lets an agent work through a task and adjust when it encounters an error or an unexpected result.[^intro-react]
 
+The instructions, conversation, and tool results supplied to the LLM form its *context*. The *context window* limits how much information it can work with at once.
+
 ![](figures/agent-loop.svg){#fig-agent-loop fig-alt="The LLM selects a tool, the harness runs it, and the result returns to the LLM to inform the next action. The cycle repeats as needed."}
 
 For example, an analysis fails because the script expects a column called `birth_weight`, while the dataset uses `birthweight_g`. The agent reads the error and consults the data dictionary to confirm which variable the script needs. It can then correct the code and run it again, using the new output to decide whether further work is needed.

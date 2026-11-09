@@ -6,15 +6,17 @@ title: "11. Find and assess research literature"
 
 # 11. Find and assess research literature
 
-A literature search is useful when you can explain how the evidence was found and check what it supports. An agent can reduce retrieval, screening, and extraction work, provided it preserves the sources and the decisions behind its synthesis.
+An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support.
 
-For the heat-and-birthweight project, a study of low birthweight is not automatically evidence about a difference in mean birthweight. Exposure windows, temperature definitions, and study populations may differ too. A useful search identifies those distinctions instead of producing a fluent paragraph that treats every heat-related result as interchangeable.
+For the [heat-and-birthweight project](#example-project), a study of low birthweight may not answer a question about mean birthweight. Exposure windows and populations differ too. Ask the agent to make those differences explicit, including evidence that conflicts with the proposed explanation.
 
-## Specify the search before running it {#literature-protocol}
+## Match the search to the question {#literature-protocol}
 
-Give the agent the question, inclusion and exclusion criteria, date range, languages, sources, and stopping rule. Have it draft a protocol, then resolve ambiguous choices before searching. Background reading and a systematic review have different coverage requirements; involve an information specialist when completeness supports a substantive claim.
+For background reading, give the agent the question and ask for a small set of relevant sources and competing explanations. A focused synthesis needs clearer inclusion criteria and a record of coverage. A systematic review needs a protocol and a search designed for completeness; involve an information specialist when that completeness supports the claim. A limited discovery search should not be described as systematic.
 
-Name the sources and record gaps. [Crossref](https://www.crossref.org/) can help verify DOI metadata; [OpenAlex](https://openalex.org/) and field-specific databases support discovery. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example. Access to subscription databases and full texts depends on your institution. A built-in search or review tool still needs the same protocol and verification record.
+An early search can help refine the research question. For example, have the agent compare how studies define heat exposure and which birth outcomes they report. Ask what evidence would favor one approach over another, and where the literature leaves the choice unresolved. Review those findings before updating the specification.
+
+Name the sources searched. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example; [OpenAlex](https://openalex.org/) supports broader discovery, and [Crossref](https://www.crossref.org/) can verify DOI metadata. Institutional access determines which subscription databases and full texts are available.
 
 <!-- prompt:literature-search -->
 ::: {#request-literature-search .prompt}
@@ -22,28 +24,28 @@ Name the sources and record gaps. [Crossref](https://www.crossref.org/) can help
 :::
 <!-- /prompt:literature-search -->
 
-Save the protocol, queries and dates, unmodified search responses, deduplication decisions, screening reasons, unresolved records, and an evidence table. Keep bibliography exports in formats your writing tools can use, such as BibTeX and RIS. Ask for a progress review when a search becomes larger than expected; an arbitrary cap on returned records can make inclusion depend on a database's ranking.
+For a substantial search, preserve queries and dates, unmodified results, duplicate decisions, screening reasons, and unresolved records. Save references in a reusable format such as BibTeX or RIS. Ask the agent to report coverage gaps and unexpected search growth rather than quietly truncating results at an arbitrary cap.
 
-## Verify the citation and then the claim {#verify-citations}
+## Find sources and verify their identity {#verify-citations}
 
-Require a verified DOI for each cited journal article when one exists. Resolve it and compare the title, authors, year, and publication with the retrieved record. A plausible DOI string or a well-formatted citation is insufficient. For legitimate material without a DOI, use a verified alternative such as a PMID, arXiv identifier, or stable publisher/catalog record. Keep unresolved sources explicitly flagged.
+Require a verified DOI for each journal article when one exists. Resolve it and compare title, authors, year, and publication against publisher or registry metadata. For legitimate work without a DOI, verify an alternative such as a PMID, arXiv identifier, or stable publisher record. A failed lookup needs investigation: a real paper registered with [DataCite](https://datacite.org/) can be missed by a verifier that checks only Crossref.
 
-For a concrete example, the DOI [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811) identifies Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes in *The BMJ*. Its [publisher record](https://www.bmj.com/content/371/bmj.m3811) supplies the title, authors, date, and DOI for comparison. It is a real source relevant to the topic, not evidence that our synthetic age relationship or chosen contrast describes real births.
+For example, [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811) identifies Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes. The verified citation establishes which paper was found. Reading it establishes what it supports.
 
-Matching metadata establishes which work the citation identifies. Open the source and inspect the passage, table, or figure supporting the proposed claim. Record whether screening used a title, abstract, or full text. A title-only decision is not a completed reading of the paper, and an empty extraction cell may mean “not yet extracted” rather than “not reported.”
+![](figures/literature-evidence.svg){#fig-literature-evidence fig-alt="Search results pass through identity verification and reading before supporting a research claim. Unresolved records remain visible, and conflicting findings are retained in the synthesis."}
 
-If a DOI lookup fails, investigate before calling the citation fabricated. The registry, service, or supplied metadata may be wrong. In an earlier search, a real paper registered with [DataCite](https://datacite.org/) was incorrectly flagged when the verifier queried only Crossref. Check for corrections, retractions, preprint/published duplicates, and different versions of the same work.
+Keep leads separate from sources ready to cite. Record whether the agent read a title, an abstract, or the full text, and check for corrections, retractions, and duplicate preprint/published versions. Missing extraction information means “not yet established,” not necessarily “not reported.”
 
-## Build a synthesis with traceable support {#literature-synthesis}
+## Assess what the evidence supports {#literature-synthesis}
 
-Have the agent prepare a claim-to-source table before drafting prose. For the running project, useful columns include the population, exposure definition and window, birth outcome, study design, reported quantity, supporting location, and limitations. Preserve disagreements and differences in definitions instead of forcing a consensus.
+Have the agent connect each proposed claim to a passage, table, or figure. A small evidence table makes unsupported inferences easier to spot. These examples come from the Chersich review's abstract and full-text results; they are not a new literature search.[^chersich-evidence]
 
-| Proposed use of evidence | What the agent must distinguish |
-|---|---|
-| Motivate studying heat and birth outcomes | Evidence concerning pregnancy outcomes generally versus mean birthweight specifically. |
-| Choose an exposure window | A reported trimester or weekly window versus the one our example happens to use. |
-| Consider age moderation | An analysis that actually examines effect variation versus an unsupported assumption about a subgroup. |
-| Interpret a numerical contrast | An odds ratio for low birthweight versus a difference in mean birthweight in grams. |
+| Proposed claim | Source location and finding | Use in this project |
+|---|---|---|
+| Higher temperatures have been associated with lower birthweight. | Abstract, Results: 18 of 28 birthweight studies reported a reduction; results varied considerably. | Motivate the question while retaining the variation across studies. |
+| Heat-related birth outcomes can be treated as one interchangeable measure. | Results distinguish preterm birth, birthweight, and stillbirth. | Do not substitute an association for another outcome for a mean birthweight contrast. |
+
+[^chersich-evidence]: Chersich et al. (2020), [“Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7610201/), *The BMJ* 371:m3811. The review supports the general motivation; it does not establish the synthetic example's age relationship or 10-minus-5-day contrast.
 
 <!-- prompt:literature-synthesis -->
 ::: {#request-literature-synthesis .prompt}
@@ -51,18 +53,12 @@ Have the agent prepare a claim-to-source table before drafting prose. For the ru
 :::
 <!-- /prompt:literature-synthesis -->
 
-Check the sources you will cite and the passages supporting the manuscript. Sample exclusions, especially borderline records or those without abstracts. Supply known relevant studies to check retrieval. Reconcile retrieved, duplicate, excluded, unresolved, and included counts. None of these checks turns a limited discovery search into an exhaustive review.
+Use the table to compare findings rather than force agreement. Ask whether different populations, exposure definitions, outcomes, or designs might explain a conflict, and which explanations the papers actually support. Check the sources you will cite and the passages central to the argument. For a screened search, also review borderline exclusions and reconcile retrieved, duplicate, excluded, unresolved, and included counts.
 
-## Reuse the procedure as a skill {#literature-skill}
+## Reuse the task as a skill {#literature-skill}
 
-Search, screen, verify, extract, and preserve the evidence: these requirements recur even when the research question changes. That makes literature work a strong candidate for a skill. The DSS `litsearch` procedure packages this process; give it the project-specific question and criteria, then inspect its protocol, verification report, and evidence outputs.
+Finding sources, verifying citations, and preserving claim support recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [chapter 9](#reusable-procedures) explains how to inspect and adapt a skill.
 
-<!-- RELEASE: replace this note with the verified public DSS litsearch repository link before publication; the current repository is private. -->
+<!-- RELEASE: add the verified public DSS litsearch repository link before publication; the current repository is private. -->
 
-You should understand the procedure before relying on the skill. Read its current instructions and check that it preserves unresolved sources and your intended scope. [Chapter 9](#reusable-procedures) explains how to adopt and adapt a skill; the skill should remain the maintained implementation rather than being copied wholesale into this chapter.
-
-## An earlier recorded search
-
-The previous guide included a real search about peer-review duration. Its counts remain useful as an example of an auditable run: 604 records retrieved across 15 queries, six set aside for missing identifiers, 507 after deduplication, 459 excluded, 11 referred for a decision, and 37 included. Those are historical results, not a heat-and-birthweight search or a new run.
-
-That run's identifier-only rule needs the broader treatment above: an absent identifier should trigger a manual-verification route, not automatic exclusion. Twenty-five included records had retrieved abstracts; twelve had only titles and needed further reading. The limitation field was empty because the abstracts did not supply the information, not because the studies had no limitations. These distinctions are why the saved evidence matters as much as the final prose.
+An [earlier recorded search](resources/literature-search-example.md) illustrates the saved counts and reading limitations for a peer-review-duration project. It is available as a reference, separate from the heat-and-birthweight example.

@@ -166,15 +166,15 @@ summary,.key { color:var(--ink); }
 <script>
 'use strict';
 const notes = {
-  code: ['Code view', 'Use the </> button to open Code. This is the part of the app used throughout the guide to work with research folders, scripts, and software.'],
-  new: ['Sessions', 'Choose New to begin a conversation with the agent. Search helps you find an earlier session so you can return to that work.'],
+  code: ['`Code` view', 'Use the `</>` button to open `Code`. This is the part of the app used throughout the guide to work with research folders, scripts, and software.'],
+  new: ['Sessions', 'Choose `New` to begin a conversation with the agent. `Search` helps you find an earlier session so you can return to that work.'],
   setup: ['Start a session', 'Choose the project folder and the environment where the agent will run its tools. The same choices appear below the message box.'],
   task: ['Describe the work', 'Tell the agent what you want it to do and what the result should be. For example: “Change the figure’s x-axis label to Maternal age (years), then regenerate it.”'],
-  environment: ['Where tools run', '“This computer” means the agent runs tools on your machine. The LLM runs on Anthropic’s servers, so project content the agent supplies to it is sent to Anthropic.'],
+  environment: ['Where tools run', '`This computer` means the agent runs tools on your machine. The LLM runs on Anthropic’s servers, so project content the agent supplies to it is sent to Anthropic.'],
   folder: ['Project folder', 'Choose the folder containing the project you want to work on. This is where the session starts; it is not, by itself, a restriction on every file the agent can access.'],
-  model: ['Model', 'Choose the LLM used for the session. Available LLMs depend on your account and change over time.'],
+  model: ['`Model`', 'Choose the LLM used for the session. Available LLMs depend on your account and change over time.'],
   effort: ['Reasoning effort', 'Where available, this setting controls how much reasoning the LLM uses. Higher effort can help with difficult tasks, but may take longer and use more of your allowance.'],
-  permissions: ['Permission mode', 'This setting controls how actions are approved. Auto is the mode shown here; the settings chapter explains the available choices.'],
+  permissions: ['Permission mode', 'This setting controls how actions are approved. `Auto` is the mode shown here; the settings chapter explains the available choices.'],
   usage: ['Usage', 'In the app, click this circle to see the percentage of your weekly allowance used and when it resets.'],
   account: ['Research account', 'Check that you are signed into the account intended for your research. An institutional account can have different access and data terms from a personal account.'],
   settings: ['Settings', 'Open the app’s settings. Later chapters explain which settings affect access to files and tools, and how independently the agent can work.']
@@ -183,6 +183,18 @@ const app = document.getElementById('app');
 const popup = document.getElementById('popup');
 const hotspots = [...app.querySelectorAll('.hotspot')];
 let current = null, pinned = false, closeTimer;
+function setExplanation(element, text) {
+  element.replaceChildren();
+  text.split(/(`[^`]+`)/g).forEach(part => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      const label = document.createElement('code');
+      label.textContent = part.slice(1, -1);
+      element.append(label);
+    } else {
+      element.append(document.createTextNode(part));
+    }
+  });
+}
 function hide() {
   clearTimeout(closeTimer); popup.hidden = true; pinned = false;
   popup.classList.remove('pinned');
@@ -205,8 +217,8 @@ function show(node, pin = false) {
   if (current && current !== node) { current.classList.remove('active'); current.removeAttribute('aria-describedby'); }
   current = node; pinned = pin;
   const [title, text] = notes[node.dataset.key];
-  document.getElementById('popup-title').textContent = title;
-  document.getElementById('popup-text').textContent = text;
+  setExplanation(document.getElementById('popup-title'), title);
+  setExplanation(document.getElementById('popup-text'), text);
   popup.classList.toggle('pinned', pin); popup.hidden = false;
   node.classList.add('active'); node.setAttribute('aria-describedby', 'popup');
   positionPopup();
@@ -215,9 +227,9 @@ function delayedHide() { if (!pinned) closeTimer = setTimeout(hide, 180); }
 hotspots.forEach((node, index) => {
   const [title, text] = notes[node.dataset.key];
   const nativeTitle = document.createElementNS('http://www.w3.org/2000/svg', 'title');
-  nativeTitle.textContent = title; node.prepend(nativeTitle);
+  nativeTitle.textContent = title.replaceAll('`', ''); node.prepend(nativeTitle);
   const term = document.createElement('dt'), definition = document.createElement('dd');
-  term.textContent = (index + 1) + '. ' + title; definition.textContent = text;
+  setExplanation(term, (index + 1) + '. ' + title); setExplanation(definition, text);
   document.getElementById('key').append(term, definition);
   node.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') show(node); });
   node.addEventListener('pointerleave', delayedHide);
@@ -249,7 +261,7 @@ document.getElementById('download').addEventListener('click', () => {
   const clone = app.cloneNode(true);
   clone.querySelectorAll('.hotspot').forEach(node => {
     node.classList.remove('active'); node.removeAttribute('tabindex'); node.removeAttribute('role'); node.removeAttribute('aria-describedby');
-    node.querySelector('title').textContent = notes[node.dataset.key].join(': ');
+    node.querySelector('title').textContent = notes[node.dataset.key].join(': ').replaceAll('`', '');
   });
   const link = document.createElement('a');
   const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], {type:'image/svg+xml'}));

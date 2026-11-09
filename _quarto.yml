@@ -108,11 +108,18 @@ chapter-map:
 
 anchor-map:
   "agent-access": /chapters/agent-access.qmd
+  "checking-analysis": /chapters/checking-analysis.qmd
+  "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "directing-work": /chapters/directing-work.qmd
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
-  "headless-agents": /chapters/llm-measurements.qmd#headless-agents
+  "example-project": /chapters/example-project.qmd
+  "identify-inputs": /chapters/data-acquisition.qmd#identify-inputs
+  "literature": /chapters/literature.qmd
   "llm-measurements": /chapters/llm-measurements.qmd
+  "project-context": /chapters/project-context.qmd
+  "project-organization": /chapters/project-organization.qmd
+  "project-recovery": /chapters/project-organization.qmd#project-recovery
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations
@@ -131,13 +138,24 @@ anchor-map:
   "request-review-deposit": /chapters/research-handoff.qmd#request-review-deposit
   "request-reviewer-response": /chapters/research-writing.qmd#request-reviewer-response
   "request-scaffold-project": /chapters/project-organization.qmd#request-scaffold-project
+  "request-scaffold-skill": /chapters/reusable-procedures.qmd#request-scaffold-skill
   "request-shared-conventions": /chapters/shared-conventions.qmd#request-shared-conventions
   "request-simulation-plan": /chapters/simulation.qmd#request-simulation-plan
-  "request-status-skill": /chapters/reusable-procedures.qmd#request-status-skill
   "request-trace-manuscript": /chapters/research-writing.qmd#request-trace-manuscript
+  "research-handoff": /chapters/research-handoff.qmd
   "research-limits": /chapters/research-limits.qmd
   "research-models": /chapters/research-models.qmd
+  "research-uses": /chapters/research-uses.qmd
   "research-workflows": /chapters/research-workflows.qmd
+  "research-writing": /chapters/research-writing.qmd
   "reusable-procedures": /chapters/reusable-procedures.qmd
-  "starter-files": /chapters/starter-files.qmd
+  "review-project-plan": /chapters/project-context.qmd#review-project-plan
+  "scaffold-project": /chapters/project-organization.qmd#scaffold-project
+  "shared-conventions": /chapters/shared-conventions.qmd
+  "simulation": /chapters/simulation.qmd
+  "starter-global": /chapters/starter-files.qmd#starter-global
+  "starter-layouts": /chapters/starter-files.qmd#starter-layouts
+  "starter-project": /chapters/starter-files.qmd#starter-project
+  "unattended-jobs": /chapters/research-workflows.qmd#unattended-jobs
+  "usage-and-context": /chapters/directing-work.qmd#usage-and-context
 # END chapter-map

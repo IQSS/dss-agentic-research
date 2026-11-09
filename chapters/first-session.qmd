@@ -19,9 +19,9 @@ Suppose you need to change the labels on a figure. You can ask the agent to edit
 
 ## Find your way around
 
-The app opens in the Claude tab, which handles general tasks using tools mainly in the cloud. In this guide, we use Code with *This computer* selected so Claude can edit project files and run analyses using the software installed on your computer. The LLM still runs on Anthropic’s servers. When the agent supplies project content to the LLM, it sends that information to Anthropic. [Chapter 3](#research-limits) explains what this means for your research data.
+The app opens in the `Claude` tab, which handles general tasks using tools mainly in the cloud. For the work in this guide, use `Code` with `This computer` selected so Claude can edit project files and run analyses using the software installed on your computer. The LLM still runs on Anthropic’s servers. When the agent supplies project content to the LLM, it sends that information to Anthropic. [Chapter 3](#research-limits) explains what this means for your research data.
 
-Each time you open the app, switch to Code using the `</>` button near the top of the sidebar. The illustration below shows the Code tab. [Hover over a numbered control to read its explanation. On a touchscreen, tap the number; with a keyboard, use the Tab key. You can enlarge the illustration or read all the explanations below it.]{.web-only}
+Each time you open the app, switch to `Code` using the `</>` button near the top of the sidebar. The illustration below shows the `Code` tab. [Hover over a numbered control to read its explanation. On a touchscreen, tap the number; with a keyboard, use the Tab key. You can enlarge the illustration or read all the explanations below it.]{.web-only}
 
 ![](figures/claude-code-app.svg){.interactive-app .tall fig-alt="The Code tab in Claude’s desktop app, with numbered controls for the project folder, execution environment, task, model, effort, permissions, usage, account, and settings." above="8pt" below="8pt"}
 

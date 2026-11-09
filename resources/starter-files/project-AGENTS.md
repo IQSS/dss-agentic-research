@@ -1,7 +1,7 @@
 # heat-birthweight
 
 Synthetic teaching study of heat exposure and birthweight. Every individual
-record is invented; results are not evidence about actual pregnancies.
+record is synthetic; results are not evidence about actual pregnancies.
 
 ## Read first
 - specification.md: estimands, estimator, input rules, uncertainty, and checks.
@@ -23,6 +23,13 @@ record is invented; results are not evidence about actual pregnancies.
 - Keep simulation outputs separate from the single-dataset analysis.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
+
+## Maintain the records
+- Read STATUS.md and TASKS.md before starting; check relevant project files.
+- Update the task list as work starts, finishes, or becomes blocked.
+- Keep STATUS.md a short account of the current state, not a running history.
+- Record scientific decisions and their reasons in METHODOLOGY.md.
+- Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
 Only approved synthetic material belongs in this project. No protected birth

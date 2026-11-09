@@ -1,83 +1,35 @@
 ---
-title: "16. When the LLM does the analysis"
+title: "16. Use LLM outputs as research data"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#4f6478;--coat-dk:#3b4c5c;--coat-lt:#6a8098;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><path d="M518 56 Q520 50 528 50 L672 50 Q680 50 682 56 Q640 62 600 62 Q560 62 518 56Z" fill="var(--c-hat-fedora)"/><path d="M546 52 L554 14 Q580 4 600 6 Q620 4 646 14 L654 52Z" fill="var(--c-hat-fedora)"/><path d="M574 10 Q600 20 626 10" fill="none" stroke="var(--c-hat-fedora-2)" stroke-width="3"/><path d="M556 18 L562 48" stroke="var(--c-hat-fedora-2)" stroke-width="2" opacity="0.6"/><rect x="547" y="40" width="106" height="9" fill="var(--c-hat-band)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard-3)"/><rect x="-34" y="-26" width="68" height="56" fill="var(--c-mustard)" opacity="0.5"/><rect x="-34" y="-4" width="68" height="10" fill="var(--c-paper)" opacity="0.85"/><rect x="-6" y="-26" width="12" height="56" fill="var(--c-paper)" opacity="0.85"/><rect x="10" y="8" width="20" height="14" fill="var(--c-paper)"/><text x="12" y="19" class="tiny" style="font-size:8px;fill:#262c2d">v1.0</text></g></g></svg></div>
 
-# 16. When the LLM does the analysis
+# 16. Use LLM outputs as research data
 
-LLMs can make it feasible to code or assess more research material than you could review manually. Once their answers become variables in an analysis, however, errors in those answers affect the evidence. You need to control how the measurements are produced and establish whether they are adequate for the question.
+LLMs can classify documents, extract information, or assess material that would take a research team considerable time to read. When their responses become variables in an analysis, errors in those responses affect the evidence. Define what the LLM should produce and evaluate whether it does that well enough for the study.
 
-In my project comparing AI and human peer reviews, separate headless runs generated AI reviews and judged reviews. The purpose was to give each run its assigned material and protocol without carrying a previous review's conversation into the next. This is a research-design reason for a controlled agent environment, beyond the convenience of unattended execution.
+Suppose a project uses an LLM to label interview excerpts that describe an unmet service need. A high overall agreement rate could conceal frequent misses of that uncommon category. This chapter follows that labeling problem, then uses a peer-review study to show how controlled agent runs can apply a protocol repeatedly.
 
-## Keep three questions separate
+## Define the output and its research meaning
 
-When an LLM codes responses, classifies documents, or extracts a variable from text, ask:
+Write a rubric that defines the category, exclusions, and ambiguous cases. Specify the material the LLM receives and the output it should return. Ask people familiar with the research to apply the rubric to development examples, reconcile disagreements, and record the reasons. Human labels provide a reference with their own limitations.
 
-1. Can a reader recover the published results from the saved measurements?
-2. Can someone rerun the inference procedure that produced them?
-3. Are the measurements adequate for the research task?
+Here, *LLM inference* means running an already-trained LLM to generate a response. It differs from statistical inference about a population or an effect. A scripted LLM call may be sufficient for labeling an excerpt supplied with a fixed rubric. Use an agent when the task also requires tools, such as finding files or extracting passages from several documents.
 
-Saving the responses helps answer the first. Recording the model and procedure helps with the second. Evaluation addresses the third. Success on one does not imply success on the others.
+Develop the prompt on examples reserved for that purpose. Include difficult cases and decide when the procedure should refer a case for human review. A statement of confidence from the LLM is not, by itself, a calibrated probability that the label is correct.
 
-## Use headless agents for controlled research runs {#headless-agents}
+## Evaluate on material kept out of development {#evaluate-llm-labeling}
 
-A *headless agent* runs from a saved request without an interactive app conversation. A script supplies its inputs, starts the run, and collects its result. This is useful when the same protocol must be applied to many cases: generate a review, judge a review pair, or extract specified evidence from a document. It also lets you record the exact procedure and rerun selected cases.
+Freeze the rubric and prompt, then evaluate on a separate sample whose reference labels were not used to choose them. Keep related excerpts from the same person or document together when separating samples. Otherwise, information shared across excerpts can make performance appear better than it will be on new material.
 
-Headless describes how the agent is operated. Context control describes what it can receive. A headless run can still load instructions, reuse a session, read files, or call services. A queue can schedule those runs, but it does not define their information boundaries. [Claude Code](https://code.claude.com/docs/en/overview)'s [programmatic interface](https://code.claude.com/docs/en/headless) supports non-interactive requests and structured output; the configuration and tests belong in [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html).
-
-For the peer-review study, the research requirement is that the next reviewer does not inherit the previous reviewer's conversation, and a judge receives only the material allowed by the judging protocol. Write that requirement before choosing a launcher. Treat review generation, judging, and subsequent statistical analysis as separate stages with separately saved outputs.
-
-### Control what each reviewer or judge receives
-
-Review generation and judging are distinct stages. A reviewer receives the review instructions and the assigned manuscript. A judge receives the judging rubric and the material that its task requires. A pairwise judgment can deliberately include two reviews of one manuscript; excluding other runs' context does not mean every call receives only one document.
-
-![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Separate reviewer runs receive a protocol and an assigned manuscript. Separate judging runs receive a rubric and the assigned review set. Other cases and prior conversations are excluded by the intended protocol, which must be tested."}
-
-The project's recorded wrappers used a new subprocess and a temporary working directory for each call, explicit prompts, and controls intended to avoid persistent sessions and restrict tools. Generation and judging supplied their own assigned inputs. Those are recorded implementation choices, not a claim that a new directory alone excludes every source of context. Current agent tools can also load personal instructions, memory, plugins, and service connections; a read-only process may still read unwanted information.
-
-For a teaching implementation, write down what each run may receive and test the actual configuration. Include loaded instructions, memory or resumed sessions, accessible files, tool permissions, and any connected service. [the toolkit’s headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) supplies the setup and harmless marker tests. Save the evidence for the routes tested and identify anything untested. Do not call a run isolated merely because it is headless or starts a fresh conversation.
-
-| Stage | Deliberately supplied | Kept outside that run |
-|:--|:--|:--|
-| Generate a review | Review protocol; assigned manuscript; approved tools | Other reviews, earlier conversations, judging outcomes |
-| Judge a review set | Rubric; assigned reviews; manuscript if the protocol requires it | Other cases and prior judgments; authorship labels if blinded |
-| Analyze judgments | Saved responses, parsing rules, case identifiers | New model inference unless explicitly requested |
-
-A direct scripted model call may be simpler when the task needs no tools or agent loop. Either route still needs input control, failure handling, and measurement evaluation. Context separation does not establish statistical independence, remove shared model biases, or make a judgment valid.
-
-<!-- prompt:controlled-llm-runs -->
-::: {#request-controlled-llm-runs .prompt}
-> For this review-generation and judging protocol, list the exact inputs, prompts, instructions, tools, and connected services allowed in each stage. Design fresh runs that do not inherit other cases’ conversations or outputs. Propose harmless marker tests for unintended file, memory, instruction, and tool access, including an allowed-input positive control. Save raw responses, failures, retries, configuration, and model information. Report untested routes; headless execution alone is not evidence of isolation.
-:::
-<!-- /prompt:controlled-llm-runs -->
-
-## Preserve the run
-
-Save the exact inputs presented to the LLM, prompts and examples, raw responses, parsing and postprocessing code, dates, model information, and available generation settings. Keep failures, retries, and human corrections traceable to the original case. Apply the same access rules to these records as to the source data.
-
-Use an exact model identifier when the interface exposes one, and record limitations when it does not. A model name in an app menu may be less specific than a version identifier. Do not claim to have pinned information you could not observe. Pinning reduces one source of change; it does not guarantee the same answer on a rerun. Anthropic notes that [outputs can vary even at temperature zero](https://platform.claude.com/docs/en/about-claude/glossary#temperature).
-
-Keeping an exact copy of open weights can preserve access after a service changes. Repeatability still depends on preprocessing, runtime, numerical precision, and generation settings. Reevaluate a replacement rather than assuming a newer or larger model produces interchangeable measurements.
-
-## Evaluate a labeling task {#evaluate-llm-labeling}
-
-Suppose you want to label whether a response describes an unmet service need. Write a rubric defining that category, exclusions, and ambiguous cases. Have two people apply it independently to a development sample, discuss disagreements, and record any adjudication. Human labels are a reference with their own uncertainty, not unquestionable truth.
-
-Use the development sample to revise the rubric and prompt. Then freeze them and evaluate on a separate sample whose labels have not been shown to the LLM or used to choose the prompt. If related responses come from the same person or document, keep them together when separating samples to reduce leakage.
-
-Here is an invented evaluation result for 200 responses:
+Consider this illustrative result for 200 excerpts:
 
 | Human reference | LLM: need present | LLM: need absent |
 |:--|--:|--:|
 | Need present | 10 | 10 |
 | Need absent | 5 | 175 |
 
-Overall agreement is 185/200, or 92.5 percent. Yet the LLM detects only 10 of the 20 positive cases. Of its 15 positive labels, five are false positives. The overall figure would conceal poor performance on the category the study needs.
-
-Ask for category-specific errors and uncertainty, including the uncertainty around estimates based on few cases. Inspect whether errors differ by relevant document type or subgroup. A chance-corrected agreement statistic can supplement these results, but it does not replace them or resolve an ambiguous rubric.
-
-Decide acceptable error rates and how uncertain cases will be handled before inspecting the evaluation result. For example, the rubric may require a human decision when the response lacks context or contains conflicting statements. Save the abstention or referral as a distinct outcome, report its frequency and workload, and include those cases when describing performance. The LLM's self-reported confidence is not an established error probability.
+Overall agreement is 92.5 percent. Yet the LLM finds only half of the 20 positive cases, and five of its 15 positive labels are false positives. Report category-specific errors and their uncertainty, including performance for relevant document types or subgroups. A single agreement statistic would hide the problem that matters here.
 
 <!-- prompt:evaluate-labeling -->
 ::: {#request-evaluate-labeling .prompt}
@@ -85,14 +37,46 @@ Decide acceptable error rates and how uncertain cases will be handled before ins
 :::
 <!-- /prompt:evaluate-labeling -->
 
-If you revise the prompt after seeing those errors, the sample has become development material. Use a new held-out sample for a fresh performance claim, or disclose the reuse and its limitations. Report the evaluation, human review, and saved-output reproduction route in the paper's methods (§18).
+Set acceptance criteria before reading the evaluation results. Count failures and human referrals, and report the workload they create. If the observed errors lead you to revise the prompt, that sample has become development material. Use fresh evaluation material for a new performance claim, or disclose the reuse and its limits.
 
-## Check sensitivity to the measurement procedure
+## Apply the protocol in controlled runs {#headless-agents}
 
-A result can depend on model choice, prompt wording, examples, or presentation order. Decide which alternatives are substantively plausible and compare them on development material before the final evaluation. For review judging, swapping the order of two reviews can expose an order-dependent preference. [Zheng et al.](https://arxiv.org/abs/2306.05685) documented position and verbosity biases when LLMs judged chatbot responses. Their study motivates checking those effects in a research judging task; it does not establish their size for your protocol. For text coding, changing a boundary definition can reveal that the construct is underspecified.
+A *headless agent* runs from a saved request without an interactive conversation. A script supplies inputs and collects the result, allowing the same protocol to be applied to many cases. An agent in the app can launch that script; you do not have to operate a terminal yourself.
 
-Keep each alternative's outputs and failures. Report meaningful changes in the substantive conclusion rather than selecting the prompt that yields a preferred answer. Repeated identical inputs can also reveal variation, but consistent outputs are not necessarily valid outputs.
+In a project comparing AI and human peer reviews, separate headless runs generated reviews and judged review sets. Each run needed its assigned material without inheriting the conversation from the previous case. Review generation, judging, and analysis were separate stages with saved outputs.
 
-For reproduction, first rerun the analysis of the saved responses. Label a new inference run separately: it tests what the model produces again, potentially under changed service conditions. The manuscript should state which route was tested (§§18–19).
+### Control what each reviewer or judge receives {#control-what-each-reviewer-or-judge-receives}
 
-The same measurement checks apply whether inference uses a hosted service or a model you run yourself. Chapter 17 develops the reasons to choose a local model or adapt one; neither choice replaces the evaluation here.
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Fresh reviewer runs each receive a protocol and assigned manuscript. Separate judges receive the rubric and assigned review set. Reviews, judgments, failures, and configuration are saved before statistical analysis."}
+
+A reviewer receives its protocol and manuscript. A judge receives the rubric and assigned reviews, plus the manuscript if the protocol requires it. A pairwise judgment deliberately includes two reviews; controlling context means supplying the intended set, not limiting every run to one document.
+
+Headless execution does not establish isolation. A fresh run can still load personal instructions, memory, files, plugins, or connected services. Have the agent verify the actual access configuration against the protocol and record untested routes. The toolkit's [headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) covers setup and access tests.[^headless-controls]
+
+[^headless-controls]: Anthropic's [programmatic Claude Code documentation](https://code.claude.com/docs/en/headless) describes noninteractive calls and their configuration. These calls can inherit the ordinary Claude Code environment; removing a visible conversation does not remove every possible input.
+
+<!-- prompt:controlled-llm-runs -->
+::: {#request-controlled-llm-runs .prompt}
+> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
+:::
+<!-- /prompt:controlled-llm-runs -->
+
+A queue schedules runs but does not define their information access. Likewise, separating contexts does not establish statistical independence or remove biases shared by the underlying LLM. Use the evaluation above for the actual review or judging task.
+
+## Preserve responses and examine sensitivity
+
+Save the presented inputs, prompts, examples, raw responses, parsing code, failures, retries, and human corrections. Record dates, available LLM identifiers, generation settings, and the configuration of any tools. Apply the source data's access rules to these records.
+
+| Question | Evidence needed |
+|---|---|
+| Can the published analysis be reproduced? | Saved responses and the code that turns them into research results. |
+| Can responses be generated again? | The inference procedure, inputs, and available LLM/runtime records. |
+| Are the measurements adequate? | Evaluation against the rubric and independent reference material. |
+
+A name in an app menu may not identify an exact LLM version. Record what is observable and its limits. Even a pinned configuration does not guarantee identical generated responses; distinguish analyzing saved responses from collecting new ones.
+
+Examine plausible alternatives to the measurement procedure. For judging, reversing the presentation order can reveal an order-dependent preference. Research has documented position and verbosity biases in LLM judgments of chatbot responses; that motivates checking these effects in a research protocol, without assuming the same size of bias.[^judge-bias] For labeling, alternative boundary definitions may reveal an underspecified construct.
+
+[^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685). The evaluated task was comparison of chatbot responses, not peer-review quality.
+
+Preserve alternative results and report meaningful changes in the research conclusion. Do not choose a prompt because it produces the preferred finding. Stable outputs are not necessarily valid measurements. [Chapter 17](#research-models) considers local execution and adaptation; both retain these evaluation requirements.

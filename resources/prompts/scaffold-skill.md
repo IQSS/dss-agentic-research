@@ -1,0 +1,1 @@
+Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.

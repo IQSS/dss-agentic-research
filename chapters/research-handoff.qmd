@@ -6,35 +6,25 @@ title: "19. Reproduce and hand off the research"
 
 # 19. Reproduce and hand off the research
 
-A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff exposes dependencies that your familiar working folder can hide. It also gives your future self a usable record when a reviewer asks for a revision.
+A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff reveals dependencies hidden by a familiar working folder.
 
-For example, the heat-contrast figure may build because yesterday's fitted model is still cached on your laptop. In a separate copy, it fails because neither the model nor the command that creates it is supplied. A clean-copy test turns that hidden dependency into something you can preserve or rebuild.
+For example, a heat-contrast figure may build because yesterday's fitted statistical model is cached on your computer. In a separate copy, it fails because neither the fit nor the command that creates it was supplied. A reproduction test identifies what the recipient needs to preserve or rebuild.
 
-## Preserve a route from inputs to results
+## Assemble the files and instructions
 
-![](figures/research-handoff.svg){#fig-research-handoff fig-alt="A research package contains approved inputs or access instructions, code and commands, a software record, and reference results. These travel together to a separate copy for reproduction."}
+Provide approved inputs or access instructions, the code and commands, software records, and reference results. Include the specification and decisions needed to explain the reported analysis. Have the agent identify missing files or undocumented manual steps; leave unknown history explicit.
 
-The recipient needs the inputs or their permitted acquisition route, the software record, the commands, and the results to compare. An existing project may have gaps: an unexplained exclusion, a missing source file, or an undocumented manual step. Ask the agent to inventory what exists and mark those gaps. Do not invent past decisions or backdate a record.
+![](figures/research-handoff.svg){#fig-research-handoff fig-alt="Inputs or access instructions, code and commands, software records, and reference results form a research package. A separate copy restores the environment, runs the documented steps, and compares the outputs with the references."}
 
-| Preserve | Include |
-|:--|:--|
-| Inputs | Versions or fingerprints, a data dictionary, expected paths, and access instructions |
-| Code and commands | The actual scripts and their execution order, including checks |
-| Software | Language and package versions, system dependencies, and restoration instructions |
-| Reference results | The selected tables, figures, and supporting numerical outputs |
-| Evidence | What was rerun, where, discrepancies, and any untested route |
+The [modular workflow](#research-workflows) supplies runnable steps. Preserve its existing command interface so the recipient does not need an agent to determine execution order. Record the software environment before changing it: language and package versions, relevant system dependencies, and restoration instructions. The toolkit's [environment chapter](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) covers the tools.
 
-The modular workflow (§13) supplies the execution steps. Keep an adequate existing master do-file or runner. For a larger dependency graph, tools such as [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) track affected outputs and avoid unnecessary rebuilding; the [toolkit's workflow chapter](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) covers their operation. The handoff should expose useful commands without requiring the recipient to ask an agent which script comes next.
+For restricted data, provide a permitted acquisition route and a synthetic example that exercises the code. Explain which files an authorized researcher must supply and where. Do not present the synthetic example's results as a reproduction of findings from protected records.
 
-Record the environment before changing a working setup. `renv.lock` and `uv.lock` preserve package versions for [R](https://www.r-project.org/) and [Python](https://www.python.org/) restoration. Record relevant system libraries too. In [Stata](https://www.stata.com/), record the application version and the sources and versions of community commands; a do-file's version statement does not preserve those packages. The toolkit explains [software environments](https://dss-agentic-toolkit.pages.dev/chapters/environments.html).
+## Test and name the reproduction route
 
-## Say what kind of reproduction you tested
+![](figures/reproduction-routes.svg){#fig-reproduction-routes fig-alt="Saved estimates can rebuild reported tables; approved data can rerun the supplied analysis; assigned documents can generate new LLM responses. Each starts from different inputs and supports a different reproduction claim."}
 
-![](figures/reproduction-routes.svg){#fig-reproduction-routes fig-alt="Three reproduction routes start at different points: saved estimates rebuild a table, approved inputs rerun the analysis, and assigned documents rerun model inference. Each route has its own test and evidence."}
-
-Rebuilding a table from saved estimates, rerunning the complete analysis from approved data, and obtaining new responses from an LLM are different operations. Name the starting point. Saved fit objects or model responses become inputs when you choose a route that starts from them.
-
-Keep these tests distinct from independent implementation (§15). A fresh implementation checks the written specification and agreement between separately built analyses. Reproduction runs the supplied code and asks whether another researcher can obtain its results. Neither establishes the scientific validity of the method.
+Name the starting point: rebuilding a table from saved estimates, rerunning analysis from approved data, or generating new LLM responses. Saved fits or responses are legitimate inputs when the stated route begins there. A new inference run may produce different measurements even when the analysis of saved responses is reproducible.
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
@@ -42,15 +32,21 @@ Keep these tests distinct from independent implementation (§15). A fresh implem
 :::
 <!-- /prompt:reproduce-project -->
 
-Inspect the resulting output comparisons as well as the exit status. Identifiers and deterministic counts should match exactly; numerical estimates need suitable tolerances, and stochastic methods may require a comparison that accounts for Monte Carlo variation. Record the actual environment and input versions used. Investigate a discrepancy before updating the reference result to match the new run.
+Use a separate copy and restore the recorded environment. A copied folder that still relies on your existing packages or hidden caches has not tested environment restoration. Ask the agent to record the actual commands, inputs, environment, and output comparisons, with failures and untested steps stated plainly.
 
-For restricted data, provide instructions for authorized access and a synthetic example that exercises the code. Running that example establishes that the example runs. It does not reproduce results from protected records. Have an authorized researcher complete the latter test within the approved environment and record the outcome.
+Compare using the agreed tolerances. Identifiers and deterministic counts should match exactly; numerical and stochastic outputs need the criteria established for the analysis. Investigate discrepancies before changing the reference results.
 
-## Prepare a reviewable research deposit
+This differs from [independent implementation](#checking-analysis), which builds new code from the specification. Reproduction tests the supplied code and instructions. Neither establishes scientific validity. If protected records are unavailable, testing only the synthetic example leaves empirical reproduction untested.
 
-Assemble a separate snapshot for the repository your field uses, such as Dataverse, OSF, or Zenodo. Include the documentation, code, environment records, and permitted inputs and outputs. State what access restrictions prevent a public reader from reproducing. Agree the contributors, affiliations, licenses, and relationship to the manuscript version with your coauthors.
+## Review and deposit the tested version
 
-![](figures/deposit-review.svg){#fig-deposit-review fig-alt="A separate deposit snapshot is reviewed for permitted contents, complete instructions, scientific provenance, and correct metadata before publication."}
+Assemble a separate snapshot for the repository your field uses, such as [Dataverse](https://dataverse.org/), [OSF](https://osf.io/), or [Zenodo](https://zenodo.org/). Agree contributors, licenses, and its relationship to the manuscript version with coauthors. Have the agent review the actual snapshot, then test its instructions.
+
+- Include permitted inputs or complete access instructions, code, software records, and reference outputs.
+- Remove credentials, confidential material, and personal paths from the proposed public copy; inspect included history too.
+- Preserve research decisions, relevant AI disclosure, and prompts or evaluation records needed to understand LLM-derived measurements.
+- State which reproduction routes passed, failed, or remain untested.
+- Link the tested deposit version to the corresponding manuscript.
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
@@ -58,8 +54,4 @@ Assemble a separate snapshot for the repository your field uses, such as Dataver
 :::
 <!-- /prompt:review-deposit -->
 
-Review both the contents and their claims. Remove credentials, confidential correspondence, personal paths, and restricted records from the proposed public copy. If the deposit includes repository history, review that history too. Preserve AI-use disclosure and any prompts, model details, and evaluation records needed to understand the research. Removing irrelevant working notes should not erase a measurement procedure or its limitations.
-
-Test the snapshot's instructions, not just those in the original project. Check filenames, input access, reported units, and the intended model. A successful reproduction from the working folder does not establish that all necessary files reached the deposit.
-
-Publish only after this review. A later repository correction cannot recall copies already downloaded. Keep the deposited version and the tested manuscript version linked so that a subsequent revision begins from a known state.
+Review the agent's findings before publishing. A successful run in the working project does not establish that the deposit contains every necessary file. Keep the tested snapshot available so a later revision begins from an identifiable version.

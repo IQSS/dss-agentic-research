@@ -12,7 +12,7 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Assertion.* A one-line check in a script that stops it when a stated expectation fails: `stopifnot()` in [R](https://www.r-project.org/), `assert` in [Stata](https://www.stata.com/) and [Python](https://www.python.org/) (§15).
 
-*Auto mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
+*`Auto` mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated classification of actions requiring review. It reduces routine prompts but still needs defined access limits (§5).
 
 *Brief.* The project instructions: its purpose, files, execution sequence, and access rules. Keep them in `CLAUDE.md`, or use the optional `AGENTS.md` import described in §7.
 
@@ -26,7 +26,9 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Commit.* A recorded version of the project's tracked files, with a message describing the changes. It provides a point you can compare with or restore later (§3, §7).
 
-*Context window.* The limited amount of material the agent can use at once, including messages, file contents, and tool results (§7, §5).
+*Compaction.* Summarizing earlier conversation material to make room in the LLM’s context window. The summary can omit details; maintained project records help preserve decisions and unfinished work (§5, §7).
+
+*Context window.* The limit on how much information the LLM can work with at once, including instructions, conversation, file contents, and tool results (§1, §5).
 
 *Decision rule.* What the paper will claim and on what basis: an interval excluding zero, a posterior probability above a threshold (§13).
 
@@ -68,7 +70,7 @@ Use these definitions when a term interrupts the research workflow. For example,
 
 *Permission mode.* The setting that decides which actions the agent may take without asking (§5).
 
-*Plan mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§5).
+*`Plan` mode.* A mode for inspecting the project and developing a plan before implementation. It may write planning records, but does not authorize ordinary project changes (§5).
 
 *Prompt.* Two senses. A yes-or-no question the agent puts to you before an action, with the action shown (§5, §3); and, in Appendix B, a request you type to the agent.
 

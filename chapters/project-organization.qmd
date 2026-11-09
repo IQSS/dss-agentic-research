@@ -6,92 +6,65 @@ title: "6. Organize your research projects"
 
 # 6. Organize your research projects
 
-A consistent project structure helps both you and an agent identify the current inputs, code, and outputs. It reduces the chance of editing an obsolete script or reporting a figure from the wrong analysis. These are useful research habits in their own right; agents make the value of recording them more obvious.
+An agent needs to find the right files before it can do useful work. A consistent project structure helps it locate the current analysis, preserve original inputs, and save results where you and your collaborators expect them. The same organization makes it easier to explain how a result was produced or return to an earlier version.
 
-Consider a heat-and-birthweight project with `analysis-final/`, `analysis-new/`, and three figure folders. You may remember which files belong together. An agent sees competing candidates. Establishing one documented arrangement gives it a reliable starting point, whether you are beginning a new paper or bringing it into work already underway.
+Suppose a paper has folders called `analysis-final/` and `analysis-new/`, plus three sets of figures. You may remember which files belong together; an agent needs that relationship made explicit. Establishing a clear structure helps whether you are starting a paper or introducing an agent to work already underway.
 
 ## Give projects a place in a workspace {#workspace-layout}
 
-A *workspace* is a parent folder containing your projects. Grouping projects by their intended output makes them easier to find and lets you reuse a suitable structure. For example:
+A *workspace* is a parent folder containing your projects. You might group papers together, keep shared datasets in a separate area, and give a lab website its own project folder. The arrangement should make sense for your work; the example below is one possible layout.
 
-```
-workspace/
-  papers/
-    heat-birthweight/
-    neighborhood-health/
-  data/
-    weather-extracts/
-  publishing/
-    lab-website/
-    conference-talk/
-```
+![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and project records." above="8pt" below="8pt"}
 
-Use separate folders for independently maintained projects. A short workspace index can list each project's purpose and location, including dependencies such as two papers using the same curated dataset. Open the relevant project in the app. An index helps navigation; it does not grant permission to read every listed project.
+Keep independently maintained projects in separate folders and open the relevant one in the app. A short workspace index can record each project's purpose and location. If two papers use the same curated dataset, the index can show that relationship, while each paper records the data version it used. Chapter 8 explains how to make this index available across projects.
 
-Several papers under a grant can share conventions and input sources while retaining their own methods, status, and record of the data version used. Keep shared data in an agreed location and record that dependency in each paper. A multi-project app feature may help coordinate work, but the ordinary folders and records should remain understandable without it.
+::: {.needspace height="9cm"}
+:::
 
-## Match the structure to the output {#project-shapes}
+## Choose a structure suited to the project {#project-shapes}
 
-The structure should make the work easy to locate. A paper needs manuscript source and analysis outputs; a data project needs acquisition code and provenance; a website needs editable content and a build destination. They can share naming conventions without having identical directories.
+Different outputs need different folders. A paper needs analysis results and manuscript source; a website needs editable pages and somewhere to build the site. Use consistent names for common purposes without forcing every project into the same layout.
 
-For the example paper:
+| Project | What its structure needs to distinguish |
+|---|---|
+| Paper | Original inputs, analysis code, saved results, manuscript source, and research decisions. |
+| Dataset | Acquisition code, source records, processing steps, and documented releases. |
+| Website | Editable content, images and styles, and the generated site. |
 
-```
-heat-birthweight/
-  CLAUDE.md          # starting instructions and pointers
-  README.md          # purpose and execution instructions
-  STATUS.md          # current state
-  TASKS.md           # open and completed work
-  METHODOLOGY.md     # analytical choices and their reasons
-  .here              # project-root marker
-  data/
-    raw/             # inputs preserved as received
-    processed/       # inputs derived by saved code
-  code/              # data preparation, models, and shared functions
-  outputs/
-    figures/
-    tables/
-    models/
-  manuscript/        # editable paper source
-  docs/              # provenance, specifications, and references
-```
+Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. The [starter layouts](#starter-layouts) give examples to adapt. The next chapter explains the instruction and record files shown in the diagram.
 
-Use only the parts the project needs. The next chapter explains the record files; [Starter files](#starter-files) supplies adaptable templates and layouts.
+Paths in scripts should be relative to the *project root*, the folder containing the project. A script that reads `data/raw/births.csv` can work on a collaborator's computer even when their home folder has a different name. Ask the agent to use the project's existing way of locating that root. In [R](https://www.r-project.org/), the [here package](https://here.r-lib.org/) is one option. The later [modular-workflow chapter](#research-workflows) explains how to organize the analysis code itself.
 
-Preserve originals and produce derived files through code. If a derived variable is wrong, correct the script and rebuild the file. Keep manuscript figures and tables associated with the result version that produced them. Decide deliberately which large fits, logs, or inputs belong in version control and which need another preservation route; neither file size nor a directory name settles their scientific value.
+## Keep a recoverable version {#project-recovery}
 
-Use paths relative to a documented project root so scripts work from an IDE, the agent, and a collaborator's computer. A root marker such as `.here` can support this in [R](https://www.r-project.org/); other languages can use the project's established equivalent. Avoid embedding one person's home directory in analysis code. [Chapter 13](#research-workflows) develops the runnable analysis structure.
+Use [Git](https://git-scm.com/) to retain versions of code, documentation, and suitable configuration files as the project develops. The agent can create these checkpoints and recover earlier work; you do not need to learn Git commands or inspect every line of code. Give a specific recovery request, such as restoring yesterday's sample-selection code while keeping today's manuscript edits. The toolkit explains [agent-maintained version control](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html).
 
-## Start a new project with a scaffold {#scaffold-project}
+Before a substantial reorganization, also keep a recoverable copy outside the folder being changed. A dated copy is a workable starting point if you are not yet using version control. Git only preserves files and versions it records, and neither Git nor a synchronized folder replaces a backup. Keep restricted inputs and credentials out of Git history and use the project's approved storage for them.
 
-A *scaffold* creates the initial folders and record files for a particular kind of output. A reusable scaffold skill can apply your or your lab's conventions, so you do not have to describe the same layout for every paper. You can use an existing skill before learning to author one in chapter 9.
+If the project uses Dropbox or another synchronization service, retain that arrangement while asking the agent to check how it handles software libraries, caches, and Git's internal files. The toolkit covers those details; reorganizing a research folder need not become a change to the rest of your computer's setup.
+
+## Start a new project {#scaffold-project}
+
+A *project scaffold* is a starting set of folders and files suited to the intended output. Give the agent the project's purpose, deliverable, and any lab conventions, then ask it to create that structure. A scaffold can include initial project instructions and places to record decisions without pretending that the scientific choices have already been made.
 
 <!-- prompt:scaffold-project -->
 ::: {#request-scaffold-project .prompt}
-> Create a project for the research described below, using our established workspace and conventions. Propose a small folder structure suited to the deliverable, then create the approved structure and initial project instructions. Preserve any existing files. Record missing scientific decisions instead of inventing them, and show me where inputs, code, results, and the manuscript belong.
+> Set up a project for the research described below. Use the existing workspace and lab conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
 :::
 <!-- /prompt:scaffold-project -->
 
-Check the resulting tree and the facts written into the records. A scaffold should leave unknown methods, collaborators, or data permissions marked as unknown. It must not turn a plausible guess into a project instruction. The synthetic example contains invented records; a real project's input permissions require their own decision.
+Review the proposed organization and the facts entered in the records. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [chapter 9](#reusable-procedures) develops that example.
 
-## Bring an agent into an existing project {#restructure-project}
+## Organize an existing project {#restructure-project}
 
-Keep an established lab layout if it already makes the current work clear. For a genuinely confusing folder, ask the agent to help restructure it before using it as the basis for repeated analysis tasks.
-
-Begin with a recoverable copy outside the folder being reorganized. Identify the manuscript and outputs you consider current, then ask for a before-to-after map. Modification dates and filenames are clues, not proof of which analysis is authoritative. The agent should inspect script references and ask about unresolved competing versions.
+Keep a coherent lab layout if it already makes the work easy to find. For a confusing project, identify the manuscript and outputs you consider current, then ask the agent to inspect the files and propose a reorganization. Filenames and modification dates can help, but script references and your knowledge may be needed to distinguish competing versions.
 
 <!-- prompt:restructure-project -->
 ::: {#request-restructure-project .prompt}
-> Inspect this project and propose a clearer structure that preserves original data and accepted work. Identify scripts, outputs, duplicates, and uncertain files; do not decide that uncertain files are disposable. After I approve the plan, make a recovery checkpoint, reorganize the files, update affected paths, and save a before-to-after file map. Check that the existing analysis still runs and report unresolved dependencies.
+> Inspect this project and propose a clearer structure. Identify current and uncertain files before moving anything. After I approve the plan, make a recovery copy, reorganize the files, update affected paths, and save an old-to-new file map. Preserve original inputs and check that the affected outputs still reproduce.
 :::
 <!-- /prompt:restructure-project -->
 
-Retain originals and uncertain duplicates in a documented holding location. After moving files, update paths in scripts, manuscript source, and run instructions. Rerun the work needed to reproduce the current outputs and investigate failures. A successful move must not silently alter the sample or method. Keep the earlier copy until those checks succeed.
+Have the agent retain original inputs and uncertain duplicates, record old and new paths, and update references in scripts and documents. It should rerun the affected work and compare the results with the saved baseline. Keep the recovery copy until those checks succeed and unresolved files have been explained.
 
-A coauthor can continue sending files in their preferred format. Keep an incoming area, preserve what arrived, and record how it maps into the project. The full research procedure includes reviewing ambiguities; a short live demonstration may omit that stop for presentation purposes.
-
-## Keep synchronization separate from recovery
-
-A synced folder is not a substitute for version history or a tested backup. Environment libraries and caches can contain thousands of changing files; two machines should not edit the same Git metadata through a sync service. A plain local working folder is a straightforward starting point, with backups and approved sharing handled separately.
-
-If the project already uses Dropbox or another sync service, preserve that working arrangement while checking how generated directories and repository metadata are handled. The toolkit's [version-control chapter](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) covers the configuration details. Reorganizing research files should not become an unplanned migration of the machine's software environment.
+Coauthors can continue sending files in their preferred format. An incoming folder can preserve what arrived while the agent records how each contribution fits into the organized project. The next step is to give it the knowledge needed to work within that structure.

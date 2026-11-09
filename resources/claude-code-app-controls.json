@@ -1,11 +1,11 @@
 [
   {
-    "title": "Code view",
-    "text": "Use the </> button to open Code. This is the part of the app used throughout the guide to work with research folders, scripts, and software."
+    "title": "`Code` view",
+    "text": "Use the `</>` button to open `Code`. This is the part of the app used throughout the guide to work with research folders, scripts, and software."
   },
   {
     "title": "Sessions",
-    "text": "Choose New to begin a conversation with the agent. Search helps you find an earlier session so you can return to that work."
+    "text": "Choose `New` to begin a conversation with the agent. `Search` helps you find an earlier session so you can return to that work."
   },
   {
     "title": "Start a session",
@@ -17,14 +17,14 @@
   },
   {
     "title": "Where tools run",
-    "text": "\u201cThis computer\u201d means the agent runs tools on your machine. The LLM runs on Anthropic\u2019s servers, so project content the agent supplies to it is sent to Anthropic."
+    "text": "`This computer` means the agent runs tools on your machine. The LLM runs on Anthropic\u2019s servers, so project content the agent supplies to it is sent to Anthropic."
   },
   {
     "title": "Project folder",
     "text": "Choose the folder containing the project you want to work on. This is where the session starts; it is not, by itself, a restriction on every file the agent can access."
   },
   {
-    "title": "Model",
+    "title": "`Model`",
     "text": "Choose the LLM used for the session. Available LLMs depend on your account and change over time."
   },
   {
@@ -33,7 +33,7 @@
   },
   {
     "title": "Permission mode",
-    "text": "This setting controls how actions are approved. Auto is the mode shown here; the settings chapter explains the available choices."
+    "text": "This setting controls how actions are approved. `Auto` is the mode shown here; the settings chapter explains the available choices."
   },
   {
     "title": "Usage",

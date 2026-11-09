@@ -1,45 +1,44 @@
 ---
-title: "10. The research project we’ll follow"
+title: "10. The example research project"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b8963a;--coat-dk:#8f7228;--coat-lt:#d1b05a;--gloves:#7a5535;--gloves-dk:#5c3f27"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="6" fill="#8fd39a"/><circle class="iris" cx="624" cy="86" r="6" fill="#8fd39a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/><g><rect x="562" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(-14 576 68)"/><rect x="610" y="66" width="28" height="4" fill="var(--c-metal-3)" transform="rotate(14 624 68)"/></g></g><g><path d="M536 54 A64 42 0 0 1 664 54 Z" fill="var(--c-mustard-2)"/><rect x="526" y="50" width="148" height="9" rx="3" fill="var(--c-mustard)"/><rect x="596" y="12" width="8" height="42" rx="2" fill="var(--c-mustard-3)"/><path d="M552 40 A48 30 0 0 1 648 40" fill="none" stroke="var(--c-mustard-3)" stroke-width="2" opacity="0.6"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><g transform="rotate(-12)"><rect x="-30" y="-30" width="44" height="44" rx="7" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><g fill="#262c2d"><circle cx="-19" cy="-19" r="3.5"/><circle cx="3" cy="-19" r="3.5"/><circle cx="-8" cy="-8" r="3.5"/><circle cx="-19" cy="3" r="3.5"/><circle cx="3" cy="3" r="3.5"/></g></g><g transform="translate(24,18) rotate(20)"><rect x="-16" y="-16" width="32" height="32" rx="5" fill="var(--c-rose)" stroke="#4f5856" stroke-width="2"/><g fill="var(--c-paper)"><circle cx="-7" cy="-7" r="3"/><circle cx="7" cy="7" r="3"/></g></g></g></g></svg></div>
 
-# 10. The research project we’ll follow
+# 10. The example research project
 
-A shared example makes the consequences of each workflow decision visible. We will carry one project from a scientific specification through sources, data, analysis, checks, and manuscript output. The point is to see what the agent receives, what it produces, and what evidence lets you accept the work.
+How does heat exposure relate to birthweight, and does that relationship vary with maternal age? This question connects the following chapters. An agent can help develop it, examine the evidence, and build an analysis whose results can be checked and reproduced.
 
-The project asks how heat exposure relates to birthweight, and whether that relationship varies with maternal age. Every individual record in the downloadable example is synthetic. Its relationships are deliberately constructed for teaching; its estimates are not evidence about actual pregnancies or the health effects of heat.
+The example uses 1,200 fully synthetic birth records. Their relationships are deliberately constructed to make particular checks possible. The estimates are teaching results, not evidence about actual pregnancies. You can inspect the saved files without installing additional software.
 
 [Download the complete synthetic research project](resources/heat-birthweight.zip){.download-button download="heat-birthweight.zip"}
 
-The package includes the specification, original invented records, both implementations, pinned software records, simulation results, and verification evidence. Its README distinguishes checks already run from environment-restoration work still to test. You can read the saved artifacts before installing any additional tools.
+Chapters 11–15 follow the example through literature, data, modular analysis, simulation, and independent implementation. Continue to [chapter 18](#research-writing) for writing and [chapter 19](#research-handoff) for reproduction and handoff. Chapters [16](#llm-measurements) and [17](#research-models) provide an additional route when LLM outputs become research data or you need to run or adapt an LLM yourself.
 
-## The question and the quantity of interest {#example-specification}
+## Develop the research question
 
-The example contains independent synthetic birth records with maternal age, smoking status, a count of third-trimester hot days, and birthweight in grams. Maternal ages cover 18–40 years; hot-day counts range from 0 to 20. The scientific specification distinguishes the quantity to report from the model used to estimate it.
+An agent can help turn a broad interest into a question that the available evidence and data can address. For this project, ask it to compare studying mean birthweight with studying low birthweight, or a trimester-wide exposure with a shorter heat episode. Have it explain what each choice would require and identify evidence that challenges the proposed approach. The literature search in [chapter 11](#literature) supplies sources for that discussion.
+
+These are research decisions, not details for the agent to settle while coding. A different outcome or exposure window may answer a different question. You decide which question to pursue; the agent can make the alternatives, assumptions, and unresolved issues easier to examine.
+
+## Write the scientific specification {#example-specification}
+
+The example records maternal age, smoking status, third-trimester hot days, and birthweight in grams. Its specification separates the quantity to report from the statistical model used to estimate it.
+
+::: {.needspace height="10cm"}
+:::
 
 | Item | Specification |
 |---|---|
 | Question | What is the mean birthweight difference between 10 and 5 hot days, and how does it vary with maternal age? |
-| Primary estimand | The predicted mean difference, 10 minus 5 hot days, standardized over the observed age and smoking distribution of this synthetic sample. It is a sample-standardized contrast. |
-| Secondary estimands | The same 10-minus-5 contrast at specified maternal ages, using the sample's smoking distribution. |
-| Estimator | Least squares with a quadratic age term, a hot-days-by-age interaction, and smoking as an adjustment variable; counterfactual predictions supply the contrasts. |
-| Uncertainty | 95% confidence intervals using a heteroskedasticity-robust covariance estimate. Simulation checks their behavior under the declared scenarios. |
-| Primary outputs | A contrast table, an age-specific contrast figure, a simulation summary, an independent comparison, and a short manuscript results passage. |
+| Primary estimand | The 10-minus-5-day mean difference, standardized over this synthetic sample's age and smoking distribution. |
+| Secondary estimands | The same contrast at maternal ages 22, 28, and 36, using the sample's smoking distribution. |
+| Estimator | Least squares with quadratic age, a hot-days-by-age interaction, and smoking; counterfactual predictions supply the contrasts. |
+| Uncertainty | 95% confidence intervals from an HC3 heteroskedasticity-robust covariance estimate and a normal reference distribution. |
+| Outputs | A contrast table and figure, simulation results, an independent comparison, and a manuscript passage. |
 
-The estimand is a difference in mean birthweight over a stated distribution. It is not automatically the coefficient of hot days when that coefficient interacts with age. The estimator must calculate the requested contrasts from the fitted model.
+The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.
 
-This is not automatically a population-average causal effect. A real study would need a defined target population and defensible assumptions about confounding, exposure and outcome measurement, selection, and support for the contrast. The synthetic generator specifies those relationships; it cannot establish the corresponding assumptions for real records.
-
-## The known relationships used for testing
-
-The main synthetic scenario has a curvilinear age relationship and a heat contrast that varies with age. Outcomes are positive and their dispersion varies with their mean. The generator, its parameters, and an independent calculation of the true contrasts belong in the example's simulation record.
-
-Chapter 14 examines both a null heat effect and the specified age-dependent relationship, then a stress scenario whose relationship is more flexible than the proposed estimator. That last case should reveal a limitation rather than be silently modified until the analysis passes. Scenario definitions precede the repeated runs; generated results are labeled as simulation output.
-
-## Keep the specification and the work together
-
-The project begins with the folder and context files introduced in chapters 6–7. Its scientific specification is a maintained file, while `METHODOLOGY.md` records decisions and revisions. A literature finding or data limitation may justify a change, but the agent should propose it and record the reason rather than quietly substitute a different question.
+A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison. The synthetic generator cannot establish those assumptions for observed births, and the example's contrast is not automatically a population-average causal effect.
 
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
@@ -47,16 +46,16 @@ The project begins with the folder and context files introduced in chapters 6–
 :::
 <!-- /prompt:research-specification -->
 
-## Follow the artifacts through the chapters
+## Keep the project files together
 
-| Work | Artifact carried forward |
-|---|---|
-| Literature | Search record, verified references, and evidence relevant to the question and assumptions. |
-| Data | Original synthetic inputs, a dictionary, and a record of their source and generation. |
-| Modular analysis | Separately runnable preparation, fitting, contrast, figure, and reporting steps. |
-| Simulation | Known [targets](https://docs.ropensci.org/targets/), saved runs, failures, and comparisons of recovered quantities with truth. |
-| Independent implementation | A separate implementation from the same inputs and specification, with a comparison report. |
-| Writing | A link from the chosen result file and entry to each reported number and figure. |
-| Handoff | Permitted inputs or their reconstruction route, software records, commands, reference outputs, and evidence from a reproduction test. |
+The download follows the organization introduced in [chapter 6](#project-organization). It contains the original synthetic records and dictionary, their generator, independent [R](https://www.r-project.org/) and [Python](https://www.python.org/) implementations, saved results, software records, and verification reports. Its README distinguishes completed checks from restoration work still to test.
 
-The LLM-analysis chapter uses the separate AI peer-review example because generating and judging reviews illustrates a different research use. Its labeling example continues into chapter 17 to explain when local execution or model adaptation may help. There is no reason to make an LLM analyze synthetic birth records merely to force every chapter into the same example.
+Maintain the agreed analysis in `specification.md`. Use `METHODOLOGY.md` to record decisions and their reasons, including revisions to that specification. The example's simulation plan defines separate worlds with known relationships; [chapter 14](#simulation) uses them to assess the estimator. Keeping the plan, code, and results together lets another person distinguish a planned check from an explanation added after seeing the answer.
+
+## Follow the work, including its revisions
+
+Research rarely proceeds once through a fixed sequence. A literature finding may change the exposure definition; a data limitation may narrow the question. Failed checks can reveal a coding error or an inadequate method. Writing can expose a claim the analysis has not addressed.
+
+![](figures/research-process.svg){#fig-research-process .tall fig-alt="A research question leads through literature and data to analysis, checks, writing, and handoff. Labeled return paths show evidence and data changing the specification, failed checks returning to analysis, and manuscript questions prompting further analysis."}
+
+The agent can investigate these problems and propose responses. Before changing the scientific approach, agree what should change and record why. Preserve the earlier specification and results so that the revision can be understood.

@@ -6,27 +6,23 @@ title: "18. Write and revise from the research record"
 
 # 18. Write and revise from the research record
 
-Research revisions are incomplete if the analysis changes but the manuscript still describes the earlier result. Give the agent a maintained source for each substantive claim and number, then check the rendered manuscript against that record.
+An analysis revision is incomplete if the manuscript still reports the earlier result. An agent can trace numbers and claims to their sources, update their uses, and identify passages that need a new interpretation.
 
-For example, correcting a sample rule may change an estimate in a results file while leaving the old number in an abstract, table note, or slide. Ask for those uses to be traced and updated together, with unresolved claims flagged. You remain responsible for the interpretation and final wording.
+In the [birthweight project](#example-project), a corrected sample rule could change a contrast in a results file while leaving the previous value in the abstract or figure caption. Give the agent the saved results and a record of where each is used. You decide how the changed finding affects the argument.
 
-## Do the right numbers make it to the manuscript? {#trace-manuscript}
-
-The analysis can be correct while the manuscript reports an old value, the wrong contrast, or an interval copied from a different run. Ask the agent to preserve a trace from each number to its saved result, including abstract text, captions, supplements, and slides.
-
-![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="A saved result and its file fingerprint connect to a named table entry, the manuscript text, and the final rendered document. A changed source triggers review of every use."}
+## Connect the manuscript to checked results {#trace-manuscript}
 
 <!-- example:manuscript-results -->
 For the synthetic example, `outputs/analysis/contrasts.csv`, row `sample`, supplies this sentence:
 
 > In the synthetic sample, the estimated mean birthweight difference between ten and five hot days was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the observed age and smoking distribution.
 
-The saved source has a SHA-256 fingerprint beginning `48ce37057432`. The example's comparison record retains the full-precision values. The sentence identifies the contrast and averaging sample and labels the result as synthetic; it does not turn this teaching calculation into an empirical claim.
+The example's comparison record retains the full-precision values. The sentence identifies the contrast and averaging sample and labels the result as synthetic; it does not turn this teaching calculation into an empirical claim.
 <!-- /example:manuscript-results -->
 
-A *checksum* is a digital fingerprint calculated from a file's contents. Save it with the source path, run identifier, and exact row and column used. If the contents change, the fingerprint usually changes too. It helps establish which file supplied the number; it does not establish that the file, selected entry, or interpretation is correct. Two exports with different formatting can have different checksums but the same estimates.
+![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="The sample row in contrasts.csv supplies the estimate and interval used in results text, the abstract, and a figure caption. When the source changes, every linked use is checked."}
 
-Have the agent compare both the source manuscript and the final PDF or Word document with the saved outputs. Check signs, units, interval endpoints, sample sizes, rounding, and labels. For a figure, confirm the plotted quantity, axis scale, legend, and caption. An automatic insertion can faithfully transfer the wrong entry, so retain a check on meaning as well as bytes.
+Have the agent record the source file, exact entry, run, and checksum for each main result. The [file fingerprint](#identify-inputs) detects changed contents; it does not establish that the selected row answers the intended question. Check meaning as well as transfer: contrast, averaging sample, units, signs, intervals, and rounding.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
@@ -34,11 +30,11 @@ Have the agent compare both the source manuscript and the final PDF or Word docu
 :::
 <!-- /prompt:trace-manuscript -->
 
-## What to ask for
+After a source changes, have the agent update affected passages, tables, and captions and compare the final PDF or Word document with the saved results. A figure also needs checks of its plotted quantity, scale, and labels. Resolve unsupported claims before polishing their wording.
 
-*Drafts from the files.* Ask for methods text based on `METHODOLOGY.md` and the analysis scripts, describing the estimand, fitted model, and recorded decisions. Put the model equation before the prose that explains it. For the results section, have the agent take numbers from `outputs/tables/` and mark any claim for which the files provide no support. Supply your own list of limitations alongside the results when requesting a discussion draft.
+## Draft and revise one section at a time
 
-Make the source restriction explicit in each request:
+Give the agent the argument you want to make, the relevant research records, and your writing conventions. For methods, use the specification, executed scripts, and recorded decisions. For results, use checked tables and figures. For discussion, supply your interpretation and limitations alongside the evidence.
 
 <!-- prompt:draft-from-results -->
 ::: {#request-draft-from-results .prompt}
@@ -46,21 +42,17 @@ Make the source restriction explicit in each request:
 :::
 <!-- /prompt:draft-from-results -->
 
-*Your writing conventions.* Give the agent the style guidance you maintain (§8, Appendix A). Ask it to state the point directly, name what each claim refers to, and explain the connections between ideas. A short sentence still needs enough context to be understood. Remove repeated explanations and decorative closing lines. Include conventions specific to the manuscript, such as tense, terminology, and the placement of limitations. When you make a recurring correction, record it in the relevant instruction file.
+Work section by section so you can judge the reasoning and support. Ask the agent to identify mismatches between methods text and the code that ran, and between claims and the cited literature. Check consequential interpretations yourself. A technically correct number does not settle what it means.
 
-*Keep the manuscript consistent with the analysis.* Copying results by hand can introduce errors, and later analysis changes can leave old numbers or claims in the text. Ask the agent to transfer values from saved outputs and retain their provenance: the source file and version or run, exact table entry, units, and any rounding or transformation. Link methods statements to the code that ran and the recorded decisions; link research claims to results or literature sources. Keep these links with the manuscript so a changed result can be traced to every affected passage, table, and caption. Flag missing support for review.
+Use the [shared writing instructions](#shared-conventions) for recurring preferences and project files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
 
-Suppose you approve a change to the inclusion criteria. Have the agent identify the affected scripts, rerun the analysis and checks, regenerate tables and figures, then propose manuscript changes using those source links. Ask it to report the locations updated, check the transferred values, and flag interpretations that need your decision. Review the proposed edits and evidence before accepting them; automated transfer can also introduce errors.
+## Preserve coauthor edits and respond to reviewers
 
-I would usually avoid asking an agent for a complete manuscript draft. Its prose can be generic and require substantial revision. If your name is on the paper, retain ownership of its argument, interpretation, wording, and final claims. The agent can help keep methods and results consistent with the research while you develop the paper's argument and voice.
+Keep every returned manuscript before reconciling changes. An agent can compare versions and propose a combined draft, but regeneration can lose a coauthor's wording, comments, or accepted edits. Inspect the reconciled document in the application your collaborators use.
 
-*If you write in Word.* Keep the manuscript in Word. Give the agent an approved section and the supporting results, and ask for proposed wording with a record of what changed and why. You can paste accepted passages into the document yourself, preserving tracked changes and the coauthor workflow. For direct document editing, work on a copy and inspect the returned file in Word, including comments, citations, equations, and layout.
+If the team writes in Word, keep that workflow. Supply an approved section and its evidence, then request proposed wording and an explanation of substantive changes. For direct editing, use a copy and inspect comments, citations, equations, and layout. If your source is markdown or [Quarto](https://quarto.org/), preserve returned Word versions before merging edits back. The toolkit covers [document production](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html).
 
-For a formatted Office deliverable, [Cowork](https://claude.com/docs/cowork/overview) provides a prepared environment for creating editable Word documents, PowerPoint decks, and Excel workbooks. Code can also create these formats directly using [document skills](https://github.com/anthropics/skills) and the tools they require. Cowork may save setup when those tools are absent from your Mac; the toolkit's document-production section covers additional tooling for Code. With either route, supply approved inputs (§3) and inspect the returned file in the application your collaborators will use.
-
-If you already write in markdown or [Quarto](https://quarto.org/), you can keep that as the source and export a Word copy for collaborators. The toolkit's document-production section covers that setup. Save each returned Word file before reconciling edits. Conversion can lose information or change formatting; it is not a substitute for inspecting the document.
-
-*Reviewer responses.* Give the agent your decisions about each comment and the revised manuscript. Ask it to quote each comment, lead the response with the substantive answer, and cite the line numbers of the changes. Record decisions that change the analysis in `METHODOLOGY.md` (§7), so their reasons remain available at the next revision.
+For reviewer responses, supply the comments, your decisions, and the revised manuscript. The agent should answer each comment directly and identify actual changes. A requested analysis that has not been run must remain visibly outstanding.
 
 <!-- prompt:reviewer-response -->
 ::: {#request-reviewer-response .prompt}
@@ -68,36 +60,23 @@ If you already write in markdown or [Quarto](https://quarto.org/), you can keep 
 :::
 <!-- /prompt:reviewer-response -->
 
-*Talks.* Ask for an outline before requesting slides. Give each slide one main claim and identify the supporting figure from `outputs/figures/`. Review the outline for repetition and detail the audience does not need; an initial draft may need substantial cutting. Choose the output format for the venue: PowerPoint, a Quarto web deck, or Beamer, the [LaTeX](https://www.latex-project.org/) slide format. Use the same saved results and figures as the paper so the slides report the same analysis. The toolkit's document-production section covers those formats.
+When a reviewer request changes the analysis, return to the specification and relevant checks before updating the manuscript. Preserve the original result and the reason for the revision. A new analysis should not be described as a wording correction.
 
-## What you check
+<details class="guide-example">
+<summary>Use the same research record for a talk</summary>
 
-Ask for a table tracing each reported number to its source file, row, and column. Check those locations against the manuscript, and investigate any number the agent cannot trace.
+Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the rendered slides after revisions. The toolkit's document-production chapter covers output formats.
 
-Open every cited source and confirm that it supports the associated claim (§11). Do this for references added during drafting as well as those already in the project.
+</details>
 
-Compare the methods section with the scripts, including software defaults (§13). The agent can help by reading each paragraph beside the relevant code and listing discrepancies. Resolve any difference between the intended analysis and what actually ran before finalizing the description.
+## Describe AI use accurately
 
-Read a paragraph aloud to check whether it uses your language and explains the point as you would. Revise phrasing that sounds unlike you or leaves the reader to infer a connection.
+Check the target journal's current instructions at submission. As of November 2026, ICMJE guidance calls for disclosure of AI assistance, human responsibility, and no AI authorship; individual journals determine the applicable details and placement.[^ai-disclosure]
 
-Check the AI-use disclosure and its placement against the journal's instructions, as described below.
+[^ai-disclosure]: [ICMJE, “AI Use by Authors”](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html), checked November 8, 2026. The guidance addresses reporting assistance, reviewing generated material, attribution, and author responsibility.
 
-### Disclosure
+Keep a record of the tools and observable LLM information, dates, tasks, affected work, and checks actually completed. Distinguish language assistance and code generation from [LLM-derived measurements](#llm-measurements). Measurements require a methodological account of inputs, prompts, evaluation, and human review.
 
-Check the target journal's current instructions at submission. Policies differ in the uses they permit, the details required, and where the statement belongs. As of September 2026, [ICMJE's author guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html) calls for disclosure of AI assistance, human responsibility for the submitted work, and no AI authorship. Use the journal's own instructions to determine the applicable wording.
+A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project records rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
 
-Keep a record of the tool and model information available, dates, tasks performed, affected parts of the work, and how the authors checked them. Distinguish language assistance, code generation, and an LLM used to produce measurements (§16). The last requires enough methodological detail to assess the measurement procedure, not just an acknowledgment.
-
-An adaptable disclosure template is:
-
-> We used [tool and observed model/version; dates] to [specified tasks]. The authors reviewed [affected text or outputs] and checked the analysis using [checks actually completed]. For LLM-derived measurements, the Methods describe the inputs, prompts, evaluation, and human review. The authors take responsibility for the reported work.
-
-Fill the brackets from the project's records. Do not claim an independent implementation, a successful rerun, or an exact model version that you cannot document. Preserve this disclosure and relevant provenance in the public research package (§19), even when private working notes are removed.
-
-Treat peer-review material separately. This guide's conservative working rule is to keep confidential manuscripts and applications you are reviewing out of agent sessions. Follow the journal's or funder's current reviewer policy; permission to use an agent on your own work does not authorize its use on someone else's confidential submission.
-
-## Preserve the coauthor record
-
-Keep every returned manuscript before reconciling edits. A regenerated document can overwrite a coauthor's changes, comments, or accepted wording. Compare versions, propose the reconciliation, and inspect the accepted copy in the application your collaborators use. Record any scientific decision that changes the analysis in `METHODOLOGY.md` and rerun the affected checks.
-
-A gap in the evidence should remain visible. If the agent cannot locate a reported value, verify a reference, or reconcile the written method with the executed code, resolve that gap before polishing the sentence around it.
+Confidential material received as a reviewer requires separate authorization under the journal's or funder's policy. Permission to use an agent on your own study does not authorize submitting someone else's manuscript or application.

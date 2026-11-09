@@ -1,76 +1,119 @@
 ---
-title: "9. Reuse research procedures you trust"
+title: "9. Use skills for recurring tasks"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#b08984;--coat-dk:#8b6a66;--coat-lt:#c7a39e;--gloves:#4f6478;--gloves-dk:#3b4c5c"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><ellipse cx="600" cy="53" rx="76" ry="7" fill="var(--c-hat-bowler)"/><path d="M542 53 A58 46 0 0 1 658 53 Z" fill="var(--c-hat-bowler)"/><path d="M552 46 A48 38 0 0 1 648 46" fill="none" stroke="var(--c-hat-bowler-2)" stroke-width="2"/><rect x="546" y="42" width="108" height="8" fill="var(--c-rose)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g><g fill="var(--c-mustard)"><rect x="-6" y="-34" width="12" height="68"/><rect x="-34" y="-6" width="68" height="12"/><rect x="-6" y="-34" width="12" height="68" transform="rotate(45)"/><rect x="-34" y="-6" width="68" height="12" transform="rotate(45)"/></g><circle r="24" fill="var(--c-mustard)"/><circle r="9" fill="var(--c-ground)"/><g transform="translate(30,26)"><g fill="var(--c-rose)"><rect x="-4" y="-20" width="8" height="40" transform="rotate(22)"/><rect x="-20" y="-4" width="40" height="8" transform="rotate(22)"/><rect x="-4" y="-20" width="8" height="40" transform="rotate(67)"/><rect x="-20" y="-4" width="40" height="8" transform="rotate(67)"/></g><circle r="13" fill="var(--c-rose)"/><circle r="5" fill="var(--c-ground)"/></g></g></g></svg></div>
 
-# 9. Reuse research procedures you trust
+# 9. Use skills for recurring tasks
 
-When a useful procedure recurs, saving its instructions reduces the effort of setting it up again and makes omissions easier to spot. A skill packages those instructions for the agent. It is worth creating after you have a procedure whose inputs, output, and checks you trust.
+Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task, including the checks that make its result useful. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
 
-For example, a coauthor asks for a short status update each week. The project already has `STATUS.md` and `TASKS.md` (§7). A status-report skill can turn those records into a draft, identify missing evidence, and leave sending it to you. It needs neither a [git](https://git-scm.com/) history nor a later research chapter.
+Consider the [project scaffold](#scaffold-project) from chapter 6. Once you have a suitable paper layout, a skill can direct the agent to create it for another study, draft the initial records, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
 
-## What a skill is
+## What a skill adds {#what-skills-add}
 
-A skill saves a procedure for the agent to follow again. Think of turning data-cleaning code into an [R](https://www.r-project.org/) or [Python](https://www.python.org/) function that accepts different datasets: separate the recurring procedure from the particular input. A skill applies that idea to instructions the agent interprets and carries out. Unlike a function, it does not specify every operation as executable code, so saving it does not guarantee identical execution or outputs.
+A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
-A skill is stored in a folder containing a file called `SKILL.md`. The file begins with a short header naming the skill and describing when to use it. The rest of the file gives the procedure, much like the requests in §7, §11, §12, §13, §15, §18, §19 and Appendix B. In the app, select the skill from the slash menu, or ask for it by name. The agent may also select it when the request matches its description. Unlike the project instructions, which are loaded every session, a skill's full procedure is loaded only when it is used (§7).
+![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
-```
----
-name: status-report
-description: Draft a coauthor update from STATUS.md and TASKS.md when
-  asked for a project update. Do not send it.
----
+Project files provide facts about this study, shared files provide working conventions, and a skill describes how to carry out a recurring task. Have the skill consult those files rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
-Read STATUS.md and TASKS.md. Check the files they cite for completed work.
-Draft one short paragraph in docs/responses/status-draft.md: what is done,
-what is in progress, what is next, and what needs the coauthor's decision.
-Distinguish verified outputs from a claim in an old note. If the records
-conflict or evidence is missing, flag that rather than inventing progress.
-Show the draft. Send nothing and do not change the project records.
-```
+| Recurring task | What a skill can preserve |
+|---|---|
+| Set up a project | Choose a suitable layout, create initial records, and identify missing decisions. |
+| Search the literature | Record queries, verify DOI metadata, and separate checked sources from leads. |
+| Explore a dataset | Examine variables and missingness, save the report, and flag questions for the researcher. |
+| Check a manuscript's numbers | Trace values to saved results and report inconsistencies in the rendered document. |
 
-With a project record saying “fit complete; figure labels unresolved,” an illustrative draft might be: “The main model fit is saved and its checks pass. Figure 2 still needs unit labels. Next I will redraw it from the saved estimates; please confirm the wording for the caption.” If no check report exists, the draft must not say the checks passed.
+These are examples of tasks to package, not a list of skills already installed. A skill can make the steps more consistent, but its instructions still require interpretation and do not guarantee identical outputs.
 
-<!-- prompt:status-skill -->
-::: {#request-status-skill .prompt}
-> Create a project-status skill from the handoff procedure we have checked. It should read the project instructions and state files, verify relevant outputs, update the task list and snapshot, and report unresolved issues. Keep the instructions short, name the evidence required, and stop if the project cannot be identified. Test it on this project and show the resulting changes before treating it as reusable.
+## Use an existing skill {#use-existing-skill}
+
+Before creating a skill, ask the agent whether an installed skill or a maintained collection already covers the task. Your lab may have one suited to its research. Have the agent inspect its instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
+
+In [Claude Code](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
+
+[^skill-use]: Anthropic's [skills documentation](https://code.claude.com/docs/en/skills) explains invocation, supporting files, and when skill content loads. The description helps the agent select a skill; it is not a guarantee that it will choose or follow it correctly.
+
+## Turn a useful task into a skill {#create-research-skill}
+
+When a task has worked well and is likely to recur, ask the agent to save the instructions that made it work. Include what the task receives, what it should produce, how to check the result, and which decisions remain yours. A scaffold skill should ask for a project's purpose and destination, use the appropriate layout, and leave unresolved methods as questions.
+
+<!-- prompt:scaffold-skill -->
+::: {#request-scaffold-skill .prompt}
+> Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
 :::
-<!-- /prompt:status-skill -->
+<!-- /prompt:scaffold-skill -->
 
+The start of a scaffold skill might look like this:
 
+```
+---
+name: research-scaffold
+description: Set up a new research project using the agreed workspace
+  and layout conventions. Use when asked to create a project.
+---
 
-The description is the part to write carefully. It decides when the agent invokes the skill unasked, so it says when to use it and when not to, in the same spirit as a rule in the brief. The body is the prompt you would otherwise retype, with clear instructions about where the output goes, what to report, and when to ask for a decision.
+Read the workspace index and project-layout conventions if available.
+Confirm the project's purpose, deliverable, and destination.
+Propose the folder structure before creating it. Preserve existing files.
+```
 
-For [Claude Code](https://code.claude.com/docs/en/overview), ask the agent to place the skill in the appropriate location. Each skill is a folder named for it, holding `SKILL.md`:
+The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project records. It is a starting template to adapt, not evidence that a particular project setup has been tested.
 
-| | Where |
-|:--|:--|
-| Every project | `~/.claude/skills/` |
-| This project (committed) | `.claude/skills/` |
-| Run it | `/name`, or automatically |
+[Download the scaffold skill example](resources/skills/research-scaffold/SKILL.md){.download-button download="SKILL.md"}
 
-The [Claude](https://claude.ai/) app lists skills under the same slash menu. A skill that needs more than instructions (a report template, a script it should run) keeps those files in the same folder and refers to them by name.
+::: {.web-only}
+<details class="guide-example">
+<summary>Read the complete scaffold skill example</summary>
 
-## What to package
+<!-- starter:scaffold-skill -->
+```
+---
+name: research-scaffold
+description: Set up a new research project using the agreed workspace
+  and layout conventions. Use when asked to create a project.
+---
 
-Repeating a procedure a few times is a useful signal that it may deserve a skill. First confirm that its inputs, outputs, and checks are stable enough to reuse. The candidates in this guide are already written: the session rituals (§7), a fetch with its provenance entry (§12), the simulation check (§14), the second implementation and its comparison (§15), the number-traceability table (§18), the clean-copy check and the pre-deposit audit (§19). Appendix B contains the full copyable requests, generated from the same maintained prompt files as their chapter examples. Adapt a request only after its procedure works for you.
+Read the workspace index and project-layout conventions if available.
+Confirm the project's purpose, deliverable, and destination.
+Propose the folder structure before creating it. Preserve existing files.
 
-Keep project-specific facts, such as file locations and data restrictions, in the project instructions. A reusable skill should tell the agent to consult those instructions. Similarly, refer to your global conventions rather than copying them into each skill. This lets you reuse the procedure across projects and update a rule in one place.
+After the researcher accepts the structure:
+- Create only the folders needed for the intended output.
+- Draft project instructions that point to the relevant files and conventions.
+- Add status and task records appropriate to the work already agreed.
+- Record unresolved research decisions as questions, not assumed facts.
+- Put detailed decisions and their reasons in a separate methods record.
 
-For example, a research-folder skill could inventory files and propose a structure, pause for your review and approval, then reorganize and verify file preservation (§6). It could include a saved checksum script alongside its instructions. Each new project's proposed changes still need review; the skill preserves the procedure, not approval of those changes.
+Check the result:
+- Confirm that the created paths match the accepted structure.
+- Check that the instructions refer to files that exist, or clearly identify
+  files still to be supplied or created.
+- Confirm that existing files were preserved.
+- Show the folder structure, the initial records, and unresolved decisions.
 
-My own skills illustrate the kinds of procedures you can save. `/scaffold` creates a project in the paper layout described in §6. `/eda` produces a dated report on a dataset's types, missingness, distributions, correlations, and outliers. `/dag` draws a causal diagram from a written graph and computes the adjustment set. `/review-plan` critiques an analysis plan before implementation, while `/review-analysis` audits a completed analysis for issues with identification, convergence, and project conventions. I also use `/targets` and `/pueue` for pipelines and long jobs, whose tools are covered in the companion. Each skill began as a repeated request and includes checks specific to its task.
+Ask before changing an existing project or adding software or services.
+Do not acquire data, fit models, or publish files as part of this setup.
+```
+<!-- /starter:scaffold-skill -->
 
-When a skill produces an unsatisfactory result, revise the instructions or checks that allowed the problem. Keep the main procedure to a screen or two, and put longer templates or checklists in files beside it.
+</details>
+:::
 
-## Adopt an existing skill carefully
+Ask the agent to place the skill in its supported location: personal Claude Code skills use `~/.claude/skills/`, while project-specific skills use `.claude/skills/` inside the project.[^skill-location] Each skill has its own folder containing `SKILL.md`. Supporting templates or scripts belong beside it, with instructions explaining when to use them.
 
-Before writing a new skill, look for one that already covers the task in a maintained collection you trust. Read its instructions and supporting scripts, check its assumptions about inputs and permissions, and try it on disposable material. A good description is not evidence that its procedure fits your research. Keep the source and version so changes are reviewable; remove steps or access you do not need.
+[^skill-location]: See Anthropic's [skill locations](https://code.claude.com/docs/en/skills#choose-where-skills-load). A shared project skill can be versioned with suitable project files; personal skills apply across projects.
 
-## When an automatic check helps
+## Refine and reuse the skill {#refine-skills}
 
-A *hook* runs a configured action at a supported event, such as before a tool call or after an edit. It can help run a quick check or notify you that the agent needs attention. Whether it can block an action depends on the event and configuration; a check after an edit cannot prevent that edit from having occurred. Hooks also need testing and protected configuration. They do not replace the access limits in chapter 4.
+Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the initial records contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
 
-Most readers can begin by asking for the appropriate checks at the end of a task. Add automation when a repeated omission justifies it, and avoid a hook that launches a full expensive analysis after every small edit. The toolkit covers tool-specific configuration; Claude's [hooks documentation](https://code.claude.com/docs/en/hooks) describes the current event behavior.
+Keep the main instructions readable and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
+
+<details class="guide-example">
+<summary>Optional: automate a repeated check with a hook</summary>
+
+A *hook* runs a configured action at a particular event, such as after a file edit. It can automate a quick check that is otherwise often missed. Begin with checks requested through the agent, then add a hook when there is a clear recurring need. Avoid launching a full analysis after every small edit. Whether a hook can prevent an action depends on its timing and configuration; the [official hooks documentation](https://code.claude.com/docs/en/hooks) explains setup and testing.
+
+</details>

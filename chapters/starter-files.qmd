@@ -10,15 +10,15 @@ Use these starter files to establish a small, readable project record. Replace t
 
 For the heat-and-birthweight project, the project file points to the scientific specification and the saved analysis commands. The global file instead points to conventions that should apply across studies. Download either file below, then adapt it before asking the agent to use it.
 
-## A.1 Global instructions
+## A.1 Global instructions {#starter-global}
 
-Chapter 8 explains the global location and how specialist files are loaded. Save the adapted content as your global `CLAUDE.md`, or use `AGENTS.md` with the explicit import described there. The references to specialist files are routing instructions; create only the files you intend to maintain.
+Chapter 8 explains the global location and how specialist files are loaded. Save the adapted content as your personal `CLAUDE.md`, or have the agent configure an existing maintained instruction file. The references to specialist files are routing instructions; create only the files you intend to maintain.
 
-[Download global instructions](resources/starter-files/global-AGENTS.md){.download-button download="AGENTS.md"}
+[Download global instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <!-- starter:global -->
 ```
-# How I work
+# Working conventions
 
 [Describe your research role and the software you normally use.]
 
@@ -33,6 +33,7 @@ Chapter 8 explains the global location and how specialist files are loaded. Save
 - Read MODELING.md before statistical modeling or simulation.
 - Read WRITING.md before drafting prose for people to read.
 - Read TOOLCHAIN.md before adding or changing software.
+- Read WORKSPACE.md when locating projects or shared inputs.
 
 These files sit beside this file. If a needed file is absent, report the gap.
 
@@ -53,18 +54,18 @@ These files sit beside this file. If a needed file is absent, report the gap.
 ```
 <!-- /starter:global -->
 
-## A.2 Project instructions
+## A.2 Project instructions {#starter-project}
 
-Save the adapted content in the project's `CLAUDE.md`, or in `AGENTS.md` with an explicit import (§7). Replace the example paths with commands and files that exist in your project. Keep protected inputs in approved storage beyond the agent's configured reach when the service may not process them (§§3–4).
+Save the adapted content in the project's `CLAUDE.md`, or have the agent configure the maintained `AGENTS.md` described in chapter 7. Replace the example paths with commands and files that exist in your project. Keep protected inputs in approved storage beyond the agent's configured reach when the service may not process them (§§3–4).
 
-[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="AGENTS.md"}
+[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <!-- starter:project -->
 ```
 # heat-birthweight
 
 Synthetic teaching study of heat exposure and birthweight. Every individual
-record is invented; results are not evidence about actual pregnancies.
+record is synthetic; results are not evidence about actual pregnancies.
 
 ## Read first
 - specification.md: estimands, estimator, input rules, uncertainty, and checks.
@@ -86,6 +87,13 @@ record is invented; results are not evidence about actual pregnancies.
 - Keep simulation outputs separate from the single-dataset analysis.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
+
+## Maintain the records
+- Read STATUS.md and TASKS.md before starting; check relevant project files.
+- Update the task list as work starts, finishes, or becomes blocked.
+- Keep STATUS.md a short account of the current state, not a running history.
+- Record scientific decisions and their reasons in METHODOLOGY.md.
+- Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
 Only approved synthetic material belongs in this project. No protected birth
@@ -198,7 +206,7 @@ logs/
 ```
 <!-- /starter:gitignore -->
 
-## A.7 Adapt the structure to the output
+## A.7 Adapt the structure to the output {#starter-layouts}
 
 Chapter 6 shows a paper project with original and processed data, code, outputs, and a manuscript. A data-curation project needs acquisition scripts, source records, validation reports, and rebuild instructions. A presentation or website project needs editable source, assets, and reviewed deliverables. Keep an established structure when it already makes these roles clear.
 
