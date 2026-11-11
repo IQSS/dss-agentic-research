@@ -91,9 +91,9 @@ If that investigation suggests the statistical model represents the age-dependen
 
 ## Run jobs while you're away {#unattended-jobs}
 
-A project may require many independent model fits or simulation runs. Running them all at once can overwhelm your computer; starting each one manually leaves the tasks idle between jobs. Ask the agent to prepare the commands and submit them to a job queue.
+A project may require many independent model fits or simulation runs. A *job* is one such task, run by a command. Running them all at once can overwhelm your computer; starting each one manually leaves the tasks idle between jobs. Ask the agent to prepare the commands and submit them to a job queue.
 
-A *job* is a task run by a command, such as fitting one model or running a simulation. [`pueue`](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
+[`pueue`](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
 
 The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
 
