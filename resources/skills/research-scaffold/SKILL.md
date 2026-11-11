@@ -10,13 +10,14 @@ Propose the folder structure before creating it. Preserve existing files.
 
 After the researcher accepts the structure:
 - Create only the folders needed for the intended output.
-- Draft project instructions that point to the relevant files and conventions.
+- Draft CLAUDE.md (or AGENTS.md) with instructions and paths to the other
+  project context files and relevant conventions.
 - Add status and task records appropriate to the work already agreed.
 - Record unresolved research decisions as questions, not assumed facts.
 - For a paper project, write SPECIFICATION.md from the researcher's current
   decisions and start METHODOLOGY.md with decisions actually made and their reasons.
   Leave unresolved choices explicit; do not invent a history.
-- In the project instructions, tell the agent to follow SPECIFICATION.md when
+- In CLAUDE.md (or AGENTS.md), tell the agent to follow SPECIFICATION.md when
   implementing or checking the analysis and consult METHODOLOGY.md for rationale.
   Approved scientific changes update both: rewrite the specification and add a
   dated decision at the top of the log, preserving earlier entries.
@@ -26,7 +27,7 @@ Check the result:
 - Check that the instructions refer to files that exist, or clearly identify
   files still to be supplied or created.
 - Confirm that existing files were preserved.
-- Show the folder structure, the initial records, and unresolved decisions.
+- Show the folder structure, the project context files, and unresolved decisions.
 
 Ask before changing an existing project or adding software or services.
 Do not acquire data, fit models, or publish files as part of this setup.

@@ -6,46 +6,50 @@ title: "11. Find and assess research literature"
 
 # 11. Find and assess research literature
 
-An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support.
+An agent can help find relevant papers, compare their findings, and identify gaps in the evidence. Ask it to link its summaries and conclusions to the sources it used, so you can check whether its account is accurate.
 
-For the heat-and-birthweight study introduced in [Chapter 10: The example research project](#example-project), a study of low birthweight may not answer a question about mean birthweight. Exposure windows and populations differ too. Ask the agent to make those differences explicit, including evidence that conflicts with the proposed explanation.
-
-## Match the search to the question {#literature-protocol}
-
-For background reading, give the agent the question and ask for a small set of relevant sources and competing explanations. A focused synthesis needs clearer inclusion criteria and a record of coverage. A systematic review needs a protocol and a search designed for completeness; involve an information specialist when that completeness supports the claim. A limited discovery search should not be described as systematic.
-
-An early search can help refine the research question. For example, have the agent compare how studies define heat exposure and which birth outcomes they report. Ask what evidence would favor one approach over another, and where the literature leaves the choice unresolved. If you approve a change based on those findings, have the agent update `SPECIFICATION.md` and explain the decision in `METHODOLOGY.md`, linking the supporting sources. Keep search queries and screening records with the literature search.
-
-Name the sources searched. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example; [OpenAlex](https://openalex.org/) supports broader discovery, and [Crossref](https://www.crossref.org/) can verify DOI metadata. Institutional access determines which subscription databases and full texts are available.
-
-<!-- prompt:literature-search -->
-::: {#request-literature-search .prompt}
-> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
-:::
-<!-- /prompt:literature-search -->
-
-For a substantial search, preserve queries and dates, unmodified results, duplicate decisions, screening reasons, and unresolved records. Save references in a reusable format such as BibTeX or RIS. Ask the agent to report coverage gaps and unexpected search growth rather than quietly truncating results at an arbitrary cap.
-
-## Find sources and verify their identity {#verify-citations}
-
-Require a verified DOI for each journal article when one exists. Resolve it and compare title, authors, year, and publication against publisher or registry metadata. For legitimate work without a DOI, verify an alternative such as a PMID, arXiv identifier, or stable publisher record. A failed lookup needs investigation: a real paper registered with [DataCite](https://datacite.org/) can be missed by a verifier that checks only Crossref.
-
-For example, [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811) identifies Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes. The verified citation establishes which paper was found. Reading it establishes what it supports.
+For the heat-and-birthweight project introduced in [Chapter 10: The example research project](#example-project), a published paper about low birthweight may provide useful background without directly answering the question about mean birthweight. Published studies may also examine different exposure periods or populations. Ask the agent to explain how those differences affect their relevance and to identify findings that challenge the proposed explanation.
 
 ![](figures/literature-evidence.svg){#fig-literature-evidence fig-alt="Search results pass through identity verification and reading before supporting a research claim. Unresolved records remain visible, and conflicting findings are retained in the synthesis."}
 
-Keep leads separate from sources ready to cite. Record whether the agent read a title, an abstract, or the full text, and check for corrections, retractions, and duplicate preprint/published versions. Missing extraction information means “not yet established,” not necessarily “not reported.”
+## Define the scope of the literature search {#literature-protocol}
 
-## Assess what the evidence supports {#literature-synthesis}
+You might need an overview of a topic, evidence to inform a specific research decision, or a systematic review. Tell the agent which purpose the search should serve.
 
-Have the agent connect each proposed claim to a passage, table, or figure. A small evidence table makes unsupported inferences easier to spot. These examples come from the Chersich review's abstract and full-text results; they are not a new literature search.[^chersich-evidence]
+| Purpose | What to ask the agent to do |
+|------------------------|--------------------------------------------------------|
+| Get an overview of a topic | Find key papers, summarize the main findings, and identify competing explanations and unresolved questions. |
+| Inform a research decision | Use your inclusion criteria to find evidence relevant to a particular choice, such as how to measure an exposure. Compare the findings and explain disagreements. |
+| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies. |
+
+For a systematic review, involve a librarian or information specialist in designing a search that covers the eligible literature as fully as possible.
+
+## Search and verify references {#verify-citations}
+
+Ask the agent to record which databases and search services it used. For this example, it can search [PubMed](https://pubmed.ncbi.nlm.nih.gov/) for health research and [OpenAlex](https://openalex.org/) for work across disciplines, then use [Crossref](https://www.crossref.org/) to verify DOI metadata. It should report any databases or full texts it could not access, including material available through your institution that it cannot retrieve directly.
+
+Have the agent resolve each journal article's DOI and compare the title, authors, year, and publication with publisher or registry metadata. A failed lookup needs investigation: a real paper registered with [DataCite](https://datacite.org/) can be missed by a verifier that checks only Crossref. For work without a DOI, the agent should verify an alternative such as a PMID, arXiv identifier, or stable publisher record. It should also check for corrections, retractions, and duplicate preprint/published versions, keeping unverified leads separate from verified references.
+
+Have the agent save search queries, dates, and unmodified results alongside its screening decisions and reasons for exclusions. It should retain unresolved records and export references in a reusable format such as BibTeX or RIS. If the search retrieves more papers than expected, ask it to report the increase before limiting the results. For a screened search, have it reconcile the retrieved, duplicate, excluded, unresolved, and included counts; review borderline exclusions yourself.
+
+<!-- prompt:literature-search -->
+::: {#request-literature-search .prompt}
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
+:::
+<!-- /prompt:literature-search -->
+
+## Read and compare the evidence {#literature-synthesis}
+
+A verified reference establishes which paper was found. To assess what it supports, have the agent connect each proposed claim to a passage, table, or figure. Ask it to record whether it read the title, abstract, or full text. If the agent cannot find how a study measured heat exposure, it should flag that question for further checking. It should not assume the authors failed to report it.
+
+The table illustrates this with Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes ([DOI: 10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811)). The entries draw on the review's abstract and full-text results, rather than a new literature search.[^chersich-evidence]
 
 | Proposed claim | Source location and finding | Use in this project |
 |---|---|---|
 | Higher temperatures have been associated with lower birthweight. | Abstract, Results: 18 of 28 birthweight studies reported a reduction; results varied considerably. | Motivate the question while retaining the variation across studies. |
-| Heat-related birth outcomes can be treated as one interchangeable measure. | Results distinguish preterm birth, birthweight, and stillbirth. | Do not substitute an association for another outcome for a mean birthweight contrast. |
+| Heat-related birth outcomes can be treated as one interchangeable measure. | Results distinguish preterm birth, birthweight, and stillbirth. | A finding that heat exposure is associated with preterm birth does not directly answer the question about mean birthweight. |
 
-[^chersich-evidence]: Chersich et al. (2020), [“Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7610201/), *The BMJ* 371:m3811. The review supports the general motivation; it does not establish the synthetic example's age relationship or 10-minus-5-day contrast.
+[^chersich-evidence]: Chersich et al. (2020), [“Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7610201/), *The BMJ* 371:m3811. The review provides evidence for studying heat exposure and birthweight. The assumed relationship between maternal age and birthweight was specified for the synthetic data, rather than taken from this review. The comparison of 10 versus 5 hot days during the third trimester was also chosen for the example.
 
 <!-- prompt:literature-synthesis -->
 ::: {#request-literature-synthesis .prompt}
@@ -53,12 +57,14 @@ Have the agent connect each proposed claim to a passage, table, or figure. A sma
 :::
 <!-- /prompt:literature-synthesis -->
 
-Use the table to compare findings rather than force agreement. Ask whether different populations, exposure definitions, outcomes, or designs might explain a conflict, and which explanations the papers actually support. Check the sources you will cite and the passages central to the argument. For a screened search, also review borderline exclusions and reconcile retrieved, duplicate, excluded, unresolved, and included counts.
+When papers disagree, ask the agent whether differences in populations, exposure definitions, outcomes, or designs could explain the conflicting findings, and what evidence supports those explanations. Check the sources you will cite and the passages central to your argument.
+
+Literature can help refine the research question. For the heat-and-birthweight project, ask the agent to compare how published studies define heat exposure and which birth outcomes they report. Have it explain what evidence supports each choice and where uncertainty remains. If you decide to revise the research question or analysis approach, have the agent update `SPECIFICATION.md` and record the decision and its reasons in `METHODOLOGY.md`, citing the supporting sources.
 
 ## Reuse the task as a skill {#literature-skill}
 
-Finding sources, verifying citations, and preserving claim support recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
+Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
 <!-- RELEASE: add the verified public DSS litsearch repository link before publication; the current repository is private. -->
 
-An [earlier recorded search](resources/literature-search-example.md) illustrates the saved counts and reading limitations for a peer-review-duration project. It is available as a reference, separate from the heat-and-birthweight example.
+A separate [literature-search example](resources/literature-search-example.md), about how long journal peer review takes, reports how many records were found, screened, and included. It also identifies which included papers were assessed only from titles or abstracts.

@@ -29,7 +29,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-brief}
-*Brief.* A written description of a task or project. For the maintained file describing a project, see [project instructions](#term-project-instructions).
+*Brief.* A written description of a task or project. For information maintained across sessions, see [project context files](#term-project-context-files).
 :::
 
 ::: {#term-build}
@@ -53,7 +53,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-compaction}
-*Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project records should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
+*Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project context files should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
 :::
 
 ::: {#term-container}
@@ -141,7 +141,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-methodological-decision-log}
-*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project records](#project-records).
+*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
 :::
 
 ::: {#term-modular-workflow}
@@ -172,8 +172,9 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *`Plan` mode.* A mode for inspecting a project and developing a plan before implementation. Writing a planning record does not authorize ordinary changes to the project. [Planning settings](#decide-whether-to-plan-first).
 :::
 
-::: {#term-project-instructions}
-*Project instructions.* A maintained description of a project's purpose, files, working rules, and relevant records, commonly saved as `CLAUDE.md` or `AGENTS.md`. [Project context](#project-records).
+::: {#term-project-context-files}
+[]{#term-project-instructions}
+*Project context files.* Maintained files that tell the agent what a project is trying to achieve, how it should work, what has been decided, and what remains to be done. Examples include `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, `TASKS.md`, `SPECIFICATION.md`, and `METHODOLOGY.md`. [Saving project context](#project-records).
 :::
 
 ::: {#term-prompt}
@@ -213,7 +214,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-scientific-specification}
-*Scientific specification.* The current approved research requirements, maintained in `SPECIFICATION.md`. It tells the agent what to implement and check. [Project records](#project-records).
+*Scientific specification.* The current approved research requirements, maintained in `SPECIFICATION.md`. It tells the agent what to implement and check. [Project context files](#project-records).
 :::
 
 ::: {#term-session}

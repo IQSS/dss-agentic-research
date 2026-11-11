@@ -8,7 +8,7 @@ title: "9. Use skills for recurring tasks"
 
 Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task and check its work. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
 
-Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the initial records, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
+Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the project context files, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
 
 ## What a skill adds {#what-skills-add}
 
@@ -16,11 +16,11 @@ A skill is a folder containing a file called `SKILL.md`. It can also contain scr
 
 ![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
-Project records provide facts and decisions about a study. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project records and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
+Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
 | Recurring task | What a skill can preserve |
 |:---------------------------|:-----------------------------------------------------------------------|
-| Set up a project | Choose a suitable layout, create initial records, and identify missing decisions. |
+| Set up a project | Choose a suitable layout, create project context files, and identify missing decisions. |
 | Search the literature | Record queries, verify DOI metadata, and separate checked sources from leads. |
 | Explore a dataset | Examine variables and missingness, save the report, and flag questions for the researcher. |
 | Check a manuscript's numbers | Trace values to saved results and report inconsistencies in the rendered document. |
@@ -61,7 +61,7 @@ Confirm the project's purpose, intended output, and where its folder should be c
 Propose the folder structure before creating it. Preserve existing files.
 ```
 
-The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project records. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
+The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project context files. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
 
 [Download the scaffold skill example](resources/skills/research-scaffold/SKILL.md){.download-button download="SKILL.md"}
 
@@ -83,13 +83,14 @@ Propose the folder structure before creating it. Preserve existing files.
 
 After the researcher accepts the structure:
 - Create only the folders needed for the intended output.
-- Draft project instructions that point to the relevant files and conventions.
+- Draft CLAUDE.md (or AGENTS.md) with instructions and paths to the other
+  project context files and relevant conventions.
 - Add status and task records appropriate to the work already agreed.
 - Record unresolved research decisions as questions, not assumed facts.
 - For a paper project, write SPECIFICATION.md from the researcher's current
   decisions and start METHODOLOGY.md with decisions actually made and their reasons.
   Leave unresolved choices explicit; do not invent a history.
-- In the project instructions, tell the agent to follow SPECIFICATION.md when
+- In CLAUDE.md (or AGENTS.md), tell the agent to follow SPECIFICATION.md when
   implementing or checking the analysis and consult METHODOLOGY.md for rationale.
   Approved scientific changes update both: rewrite the specification and add a
   dated decision at the top of the log, preserving earlier entries.
@@ -99,7 +100,7 @@ Check the result:
 - Check that the instructions refer to files that exist, or clearly identify
   files still to be supplied or created.
 - Confirm that existing files were preserved.
-- Show the folder structure, the initial records, and unresolved decisions.
+- Show the folder structure, the project context files, and unresolved decisions.
 
 Ask before changing an existing project or adding software or services.
 Do not acquire data, fit models, or publish files as part of this setup.
@@ -115,7 +116,7 @@ Ask the agent to place the skill in its supported location: global user skills i
 
 ## Refine and reuse the skill {#refine-skills}
 
-Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the initial records contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
+Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the project context files contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
 
 Have the agent keep `SKILL.md` concise and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
 

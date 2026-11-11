@@ -6,7 +6,7 @@ title: "7. Give the agent context for your project"
 
 # 7. Give the agent context for your project
 
-An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. The records also help you and your collaborators understand changes made along the way.
+An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. These project context files also help you and your collaborators understand changes made along the way.
 
 Suppose you return to a paper after a month and ask an agent to revise Figure 2. Several versions of the results remain in the project folder. The agent needs to know which version uses the agreed sample, why some observations were excluded, and whether the sensitivity analysis is finished.
 
@@ -14,31 +14,33 @@ Suppose you return to a paper after a month and ask an agent to revise Figure 2.
 
 Describe the research question, the relevant data and outputs, and the result you want from this task. Point the agent to the current files and explain which decisions need your involvement. For a new project, identify what remains undecided. For an existing one, supply the information that cannot reliably be inferred from its scripts and filenames.
 
-Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
+Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in project context files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
 
-![](figures/project-context.svg){#fig-project-context .tall fig-alt="Project instructions, status, and tasks form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these records; a later session reads them before continuing." above="8pt" below="8pt"}
+![](figures/project-context.svg){#fig-project-context .tall fig-alt="Five project context files: CLAUDE.md, STATUS.md, and TASKS.md form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these context files; a later session reads them before continuing." above="8pt" below="8pt"}
 
-## Save instructions and project records {#project-records}
+## Save project context files {#project-records}
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for project instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
+Project context files tell the agent what the project is trying to achieve, how it should work, what has been decided, and what remains to be done. Each file has a specific purpose, as shown below.
+
+In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for these instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
 
 ::: {.needspace height="9cm"}
 :::
 
 | File | Purpose and example |
 |:------------|:----------------------------------------------------|
-| `CLAUDE.md` | Project instructions: follow the scientific specification and read the current status before starting. |
+| `CLAUDE.md` | How the agent should work: follow the scientific specification and read the current status before starting. |
 | `STATUS.md` | Current state: the main analysis is complete; the sensitivity analysis is pending. |
 | `TASKS.md` | Work to do and completed work: update Figure 2's labels, with a dated entry after checking the result. |
 | `SPECIFICATION.md` | Current scientific requirements: which records to include, what to estimate, and which checks and outputs to produce. Have the agent rewrite it when approved decisions change. |
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
 
-These record names are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
+The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
@@ -55,11 +57,11 @@ decision and reason at the top of METHODOLOGY.md. Preserve earlier entries.
 
 The [complete project example](#starter-project) is also available as a download. Adapt its research details before using it.
 
-[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
+[Download the project CLAUDE.md template](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 ::: {.web-only}
 <details class="guide-example">
-<summary>Read the complete project instructions</summary>
+<summary>Read the complete CLAUDE.md example</summary>
 
 <!-- starter:project -->
 ```
@@ -122,9 +124,9 @@ For difficult work, ask one or two fresh agent sessions to critique the proposed
 
 Have the agent save its implementation plan separately from the scientific requirements in `SPECIFICATION.md`. When you approve a scientific change, have it rewrite the affected requirements and add a dated entry at the top of `METHODOLOGY.md`, explaining the decision and its reason. Preserve earlier entries. The project record should explain why the work changed, rather than leaving a later reader to infer the reason from altered code. [Chapter 14: Test the analysis against known truth](#simulation) and [Chapter 15: Check the agent with independent implementations](#checking-analysis) explain how to check the resulting analysis.
 
-## Keep the records current {#maintain-project-context}
+## Keep project context files current {#maintain-project-context}
 
-Make record maintenance a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the current records before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
+Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
 
 For example, after correcting a figure's labels, the agent adds a dated completion entry to `TASKS.md` and updates `STATUS.md` to identify the rebuilt figure. If no statistical model was refitted, the record should not imply that the analysis was rerun. An approved scientific change updates `SPECIFICATION.md` and receives a dated explanation in `METHODOLOGY.md`; a completed formatting task does not need either change.
 
@@ -132,7 +134,7 @@ The following requests can establish the routine or recover it when a session ha
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}
-> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
+> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 <!-- /prompt:resume-project -->
 
@@ -144,4 +146,4 @@ The following requests can establish the routine or recover it when a session ha
 
 Keep `STATUS.md` short and current. Record completed and outstanding work in `TASKS.md`. Keep current scientific requirements in `SPECIFICATION.md` and dated decisions with their reasons in `METHODOLOGY.md`. Have the agent consult those records when relevant rather than loading every past result into every task. If you edit a file during a session, tell the agent to read it again before continuing. A fresh conversation can still load saved information; [Chapter 16: Use LLM outputs as research data](#control-what-each-reviewer-or-judge-receives) explains how to control what it receives.[^project-auto-memory]
 
-[^project-auto-memory]: With `Claude Code`’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory), the agent decides which notes to save for future sessions. For project records, you specify what the agent must maintain. Ask it to correct outdated memories, and keep important research decisions in the maintained project files.
+[^project-auto-memory]: With `Claude Code`’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory), the agent decides which notes to save for future sessions. For project context files, you specify what the agent must maintain. Ask it to correct outdated memories, and keep important research decisions in the project context files.

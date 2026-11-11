@@ -12,24 +12,7 @@ The example uses 1,200 synthetic birth records. Each record contains the mother�
 
 [Download the complete synthetic research project](resources/heat-birthweight.zip){.download-button download="heat-birthweight.zip"}
 
-![](figures/research-process.svg){#fig-research-process .tall fig-alt="Chapter 10 defines the research question and specification. Chapters 11 and 12 supply literature and data; Chapter 13 builds the analysis; Chapters 14 and 15 check it; Chapters 18 and 19 cover writing and handoff. Feedback paths return to the question or analysis. An optional branch covers LLM research in Chapters 16 and 17."}
-
-::: {.web-only}
-<details class="guide-example">
-<summary>Open a chapter from the diagram</summary>
-
-- [Chapter 11: Find and assess research literature](#literature)
-- [Chapter 12: Bring data into the project](#data-acquisition)
-- [Chapter 13: Build a modular analysis workflow](#research-workflows)
-- [Chapter 14: Test the analysis against known truth](#simulation)
-- [Chapter 15: Check the agent with independent implementations](#checking-analysis)
-- [Chapter 16: Use LLM outputs as research data](#llm-measurements)
-- [Chapter 17: Run and adapt LLMs for your research](#research-models)
-- [Chapter 18: Write and revise from the research record](#research-writing)
-- [Chapter 19: Reproduce and hand off the research](#research-handoff)
-
-</details>
-:::
+![](figures/research-process.svg){#fig-research-process .tall .chapter-map fig-alt="Chapter 10 defines the research question and specification; Chapters 11 and 12 supply literature and data. The flow branches into saved-code analysis in Chapters 13–15 and research using LLM outputs in Chapters 16–17, with Chapter 17 used when local or adapted LLMs are needed. The routes can be combined and rejoin for writing in Chapter 18 and handoff in Chapter 19. Feedback arrows return to earlier work."}
 
 ## Develop the research question
 

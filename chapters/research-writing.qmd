@@ -44,7 +44,7 @@ Give the agent the argument you want to make, the relevant research records, and
 
 Work section by section so you can judge the reasoning and support. Ask the agent to identify mismatches between methods text and the code that ran, and between claims and the cited literature. Check consequential interpretations yourself. A technically correct number does not settle what it means.
 
-Use shared writing instructions, as described in [Chapter 8: Apply your conventions across projects](#shared-conventions), for recurring preferences and project files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
+Use global user instructions for writing, as described in [Chapter 8: Apply your conventions across projects](#shared-conventions), for recurring preferences and project context files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
 
 ## Preserve coauthor edits and respond to reviewers
 
@@ -77,6 +77,6 @@ Check the target journal's current instructions at submission. As of November 20
 
 Keep a record of the tools and observable LLM information, dates, tasks, affected work, and checks actually completed. Distinguish language assistance and code generation from the LLM-derived measurements described in [Chapter 16: Use LLM outputs as research data](#llm-measurements). Measurements require a methodological account of inputs, prompts, evaluation, and human review.
 
-A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project records rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
+A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project context files and saved evidence rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
 
 Confidential material received as a reviewer requires separate authorization under the journal's or funder's policy. Permission to use an agent on your own study does not authorize submitting someone else's manuscript or application.

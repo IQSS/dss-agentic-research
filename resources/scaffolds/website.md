@@ -19,4 +19,4 @@ website-project/
 
 Write pages in `source/` and keep images and styles in `assets/`. The build produces the viewable site in `output/`; make lasting edits in the sources so they survive the next build. Record the preview and build commands in `README.md`. Keep publishing instructions and the intended destination explicit.
 
-Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and initial records. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
+Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and project context files. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.

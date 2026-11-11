@@ -1,1 +1,1 @@
-Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
+Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.

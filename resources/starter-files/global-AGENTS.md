@@ -3,7 +3,7 @@
 [Describe your research role and the software you normally use.]
 
 ## Before a task
-- Read the project's instructions and current state. Preserve accepted work.
+- Read the relevant project context files. Preserve accepted work.
 - Identify the requested result, constraints, and evidence needed to accept it.
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 

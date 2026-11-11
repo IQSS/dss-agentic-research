@@ -306,7 +306,7 @@ Click the app's usage circle to see usage and reset information. If your account
 
 Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, `Claude Code` automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
 
-Keep consequential decisions and the current state of the work in project files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7: Give the agent context for your project](#project-context) explains which records to maintain.
+Keep consequential decisions and the current state of the work in project context files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7: Give the agent context for your project](#project-context) explains which context files to maintain.
 
 A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [Chapter 13: Build a modular analysis workflow](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
 
@@ -324,7 +324,7 @@ Suppose a paper has folders called `analysis-final/` and `analysis-new/`, plus t
 
 A *workspace* is a parent folder containing your projects. You might group papers together, keep shared datasets in a separate area, and give a research group's website its own project folder. The arrangement should make sense for your work; the example below is one possible layout.
 
-![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five instruction and record files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
+![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five project context files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
 
 Keep independently maintained projects in separate folders and open the relevant one in the app. A short workspace index can record each project's purpose and location. If two papers use the same curated dataset, the index can show that relationship, while each paper records the data version it used. [Chapter 8: Apply your conventions across projects](#shared-conventions) explains how to make this index available across projects.
 
@@ -341,7 +341,7 @@ Different outputs need different folders. A paper needs analysis results and man
 | Dataset | Acquisition code, source records, processing steps, and documented releases. |
 | Website | Editable content, images and styles, and the generated site. |
 
-Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. [Appendix A: Project scaffolds and starter files](#starter-files) provides example folder structures and initial records to adapt. [Chapter 7: Give the agent context for your project](#project-context) explains what to put in the project record files shown in the diagram and how the agent keeps them current.
+Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. [Appendix A: Project scaffolds and starter files](#starter-files) provides example folder structures and project context files to adapt. [Chapter 7: Give the agent context for your project](#project-context) explains what to put in the project context files shown in the diagram and how the agent keeps them current.
 
 Paths in scripts should be relative to the *project root*, the folder containing the project. A script that reads `data/raw/births.csv` can work on a collaborator's computer even when their home folder has a different name. Ask the agent to use the project's existing method for locating its root, if one is already established. For [`R`](https://www.r-project.org/) projects without one, the [`here`](https://here.r-lib.org/) package is a good choice: it builds file paths from the project root. [Chapter 13: Build a modular analysis workflow](#research-workflows) explains how to organize the analysis code itself.
 
@@ -355,15 +355,15 @@ If the project uses a synchronization service (e.g., [`Dropbox`](https://www.dro
 
 ## Start a new project {#scaffold-project}
 
-A *project scaffold* is a starting set of folders and files suited to the intended output. Give the agent the project's purpose, deliverable, and any research group conventions, then ask it to create that structure. A scaffold can include initial project instructions and places to record decisions without pretending that the scientific choices have already been made.
+A *project scaffold* is a starting set of folders and files suited to the intended output. Give the agent the project's purpose, deliverable, and any research group conventions, then ask it to create that structure. A scaffold can include project context files with instructions and space for decisions without pretending that the scientific choices have already been made.
 
 <!-- prompt:scaffold-project -->
 ::: {#request-scaffold-project .prompt}
-> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
+> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and project context files. Preserve existing files and list research decisions still needed from me.
 :::
 <!-- /prompt:scaffold-project -->
 
-Review the proposed organization and the facts entered in the records. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
+Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
 
 ## Organize an existing project {#restructure-project}
 
@@ -381,7 +381,7 @@ Coauthors can continue sending files in their preferred format. An incoming fold
 
 # 7. Give the agent context for your project {#project-context}
 
-An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. The records also help you and your collaborators understand changes made along the way.
+An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. These project context files also help you and your collaborators understand changes made along the way.
 
 Suppose you return to a paper after a month and ask an agent to revise Figure 2. Several versions of the results remain in the project folder. The agent needs to know which version uses the agreed sample, why some observations were excluded, and whether the sensitivity analysis is finished.
 
@@ -389,31 +389,33 @@ Suppose you return to a paper after a month and ask an agent to revise Figure 2.
 
 Describe the research question, the relevant data and outputs, and the result you want from this task. Point the agent to the current files and explain which decisions need your involvement. For a new project, identify what remains undecided. For an existing one, supply the information that cannot reliably be inferred from its scripts and filenames.
 
-Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
+Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in project context files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
 
-![](figures/project-context.svg){#fig-project-context .tall fig-alt="Project instructions, status, and tasks form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these records; a later session reads them before continuing." above="8pt" below="8pt"}
+![](figures/project-context.svg){#fig-project-context .tall fig-alt="Five project context files: CLAUDE.md, STATUS.md, and TASKS.md form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these context files; a later session reads them before continuing." above="8pt" below="8pt"}
 
-## Save instructions and project records {#project-records}
+## Save project context files {#project-records}
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for project instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
+Project context files tell the agent what the project is trying to achieve, how it should work, what has been decided, and what remains to be done. Each file has a specific purpose, as shown below.
+
+In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for these instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
 
 ::: {.needspace height="9cm"}
 :::
 
 | File | Purpose and example |
 |:------------|:----------------------------------------------------|
-| `CLAUDE.md` | Project instructions: follow the scientific specification and read the current status before starting. |
+| `CLAUDE.md` | How the agent should work: follow the scientific specification and read the current status before starting. |
 | `STATUS.md` | Current state: the main analysis is complete; the sensitivity analysis is pending. |
 | `TASKS.md` | Work to do and completed work: update Figure 2's labels, with a dated entry after checking the result. |
 | `SPECIFICATION.md` | Current scientific requirements: which records to include, what to estimate, and which checks and outputs to produce. Have the agent rewrite it when approved decisions change. |
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
 
-These record names are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
+The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
@@ -430,11 +432,11 @@ decision and reason at the top of METHODOLOGY.md. Preserve earlier entries.
 
 The [complete project example](#starter-project) is also available as a download. Adapt its research details before using it.
 
-[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
+[Download the project CLAUDE.md template](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 ::: {.web-only}
 <details class="guide-example">
-<summary>Read the complete project instructions</summary>
+<summary>Read the complete CLAUDE.md example</summary>
 
 <!-- starter:project -->
 ```
@@ -497,9 +499,9 @@ For difficult work, ask one or two fresh agent sessions to critique the proposed
 
 Have the agent save its implementation plan separately from the scientific requirements in `SPECIFICATION.md`. When you approve a scientific change, have it rewrite the affected requirements and add a dated entry at the top of `METHODOLOGY.md`, explaining the decision and its reason. Preserve earlier entries. The project record should explain why the work changed, rather than leaving a later reader to infer the reason from altered code. [Chapter 14: Test the analysis against known truth](#simulation) and [Chapter 15: Check the agent with independent implementations](#checking-analysis) explain how to check the resulting analysis.
 
-## Keep the records current {#maintain-project-context}
+## Keep project context files current {#maintain-project-context}
 
-Make record maintenance a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the current records before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
+Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
 
 For example, after correcting a figure's labels, the agent adds a dated completion entry to `TASKS.md` and updates `STATUS.md` to identify the rebuilt figure. If no statistical model was refitted, the record should not imply that the analysis was rerun. An approved scientific change updates `SPECIFICATION.md` and receives a dated explanation in `METHODOLOGY.md`; a completed formatting task does not need either change.
 
@@ -507,7 +509,7 @@ The following requests can establish the routine or recover it when a session ha
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}
-> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
+> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 <!-- /prompt:resume-project -->
 
@@ -519,7 +521,7 @@ The following requests can establish the routine or recover it when a session ha
 
 Keep `STATUS.md` short and current. Record completed and outstanding work in `TASKS.md`. Keep current scientific requirements in `SPECIFICATION.md` and dated decisions with their reasons in `METHODOLOGY.md`. Have the agent consult those records when relevant rather than loading every past result into every task. If you edit a file during a session, tell the agent to read it again before continuing. A fresh conversation can still load saved information; [Chapter 16: Use LLM outputs as research data](#control-what-each-reviewer-or-judge-receives) explains how to control what it receives.[^project-auto-memory]
 
-[^project-auto-memory]: With `Claude Code`’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory), the agent decides which notes to save for future sessions. For project records, you specify what the agent must maintain. Ask it to correct outdated memories, and keep important research decisions in the maintained project files.
+[^project-auto-memory]: With `Claude Code`’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory), the agent decides which notes to save for future sessions. For project context files, you specify what the agent must maintain. Ask it to correct outdated memories, and keep important research decisions in the project context files.
 
 # 8. Apply your conventions across projects {#shared-conventions}
 
@@ -537,7 +539,7 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A dataset project keeps records appropriate to its work. These are grouped under Project files and decisions." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A website project keeps CLAUDE.md, STATUS.md, TASKS.md, and DESIGN.md. These are grouped under Project context files." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
@@ -563,7 +565,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), global user instru
 
 <!-- prompt:shared-conventions -->
 ::: {#request-shared-conventions .prompt}
-> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
+> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project context files. Show me proposed changes before applying them.
 :::
 <!-- /prompt:shared-conventions -->
 
@@ -573,7 +575,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), global user instru
 Before editing code, read CODING.md beside this file.
 Before statistical modeling or simulation, read MODELING.md.
 Before drafting prose, read WRITING.md.
-Read each project's own instructions for its scientific decisions and files.
+Read each project's context files for its scientific decisions and current state.
 Follow explicit project-specific exceptions to these conventions.
 ```
 
@@ -592,7 +594,7 @@ The [complete shared example](#starter-global) provides a starting point. Ask th
 [Describe your research role and the software you normally use.]
 
 ## Before a task
-- Read the project's instructions and current state. Preserve accepted work.
+- Read the relevant project context files. Preserve accepted work.
 - Identify the requested result, constraints, and evidence needed to accept it.
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
@@ -642,7 +644,7 @@ Record a paper-specific exception in that project's files, with its reason. A ne
 
 Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task and check its work. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
 
-Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the initial records, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
+Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the project context files, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
 
 ## What a skill adds {#what-skills-add}
 
@@ -650,11 +652,11 @@ A skill is a folder containing a file called `SKILL.md`. It can also contain scr
 
 ![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
-Project records provide facts and decisions about a study. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project records and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
+Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
 | Recurring task | What a skill can preserve |
 |:---------------------------|:-----------------------------------------------------------------------|
-| Set up a project | Choose a suitable layout, create initial records, and identify missing decisions. |
+| Set up a project | Choose a suitable layout, create project context files, and identify missing decisions. |
 | Search the literature | Record queries, verify DOI metadata, and separate checked sources from leads. |
 | Explore a dataset | Examine variables and missingness, save the report, and flag questions for the researcher. |
 | Check a manuscript's numbers | Trace values to saved results and report inconsistencies in the rendered document. |
@@ -695,7 +697,7 @@ Confirm the project's purpose, intended output, and where its folder should be c
 Propose the folder structure before creating it. Preserve existing files.
 ```
 
-The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project records. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
+The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project context files. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
 
 [Download the scaffold skill example](resources/skills/research-scaffold/SKILL.md){.download-button download="SKILL.md"}
 
@@ -717,13 +719,14 @@ Propose the folder structure before creating it. Preserve existing files.
 
 After the researcher accepts the structure:
 - Create only the folders needed for the intended output.
-- Draft project instructions that point to the relevant files and conventions.
+- Draft CLAUDE.md (or AGENTS.md) with instructions and paths to the other
+  project context files and relevant conventions.
 - Add status and task records appropriate to the work already agreed.
 - Record unresolved research decisions as questions, not assumed facts.
 - For a paper project, write SPECIFICATION.md from the researcher's current
   decisions and start METHODOLOGY.md with decisions actually made and their reasons.
   Leave unresolved choices explicit; do not invent a history.
-- In the project instructions, tell the agent to follow SPECIFICATION.md when
+- In CLAUDE.md (or AGENTS.md), tell the agent to follow SPECIFICATION.md when
   implementing or checking the analysis and consult METHODOLOGY.md for rationale.
   Approved scientific changes update both: rewrite the specification and add a
   dated decision at the top of the log, preserving earlier entries.
@@ -733,7 +736,7 @@ Check the result:
 - Check that the instructions refer to files that exist, or clearly identify
   files still to be supplied or created.
 - Confirm that existing files were preserved.
-- Show the folder structure, the initial records, and unresolved decisions.
+- Show the folder structure, the project context files, and unresolved decisions.
 
 Ask before changing an existing project or adding software or services.
 Do not acquire data, fit models, or publish files as part of this setup.
@@ -749,7 +752,7 @@ Ask the agent to place the skill in its supported location: global user skills i
 
 ## Refine and reuse the skill {#refine-skills}
 
-Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the initial records contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
+Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the project context files contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
 
 Have the agent keep `SKILL.md` concise and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
 
@@ -768,24 +771,7 @@ The example uses 1,200 synthetic birth records. Each record contains the mother�
 
 [Download the complete synthetic research project](resources/heat-birthweight.zip){.download-button download="heat-birthweight.zip"}
 
-![](figures/research-process.svg){#fig-research-process .tall fig-alt="Chapter 10 defines the research question and specification. Chapters 11 and 12 supply literature and data; Chapter 13 builds the analysis; Chapters 14 and 15 check it; Chapters 18 and 19 cover writing and handoff. Feedback paths return to the question or analysis. An optional branch covers LLM research in Chapters 16 and 17."}
-
-::: {.web-only}
-<details class="guide-example">
-<summary>Open a chapter from the diagram</summary>
-
-- [Chapter 11: Find and assess research literature](#literature)
-- [Chapter 12: Bring data into the project](#data-acquisition)
-- [Chapter 13: Build a modular analysis workflow](#research-workflows)
-- [Chapter 14: Test the analysis against known truth](#simulation)
-- [Chapter 15: Check the agent with independent implementations](#checking-analysis)
-- [Chapter 16: Use LLM outputs as research data](#llm-measurements)
-- [Chapter 17: Run and adapt LLMs for your research](#research-models)
-- [Chapter 18: Write and revise from the research record](#research-writing)
-- [Chapter 19: Reproduce and hand off the research](#research-handoff)
-
-</details>
-:::
+![](figures/research-process.svg){#fig-research-process .tall .chapter-map fig-alt="Chapter 10 defines the research question and specification; Chapters 11 and 12 supply literature and data. The flow branches into saved-code analysis in Chapters 13–15 and research using LLM outputs in Chapters 16–17, with Chapter 17 used when local or adapted LLMs are needed. The routes can be combined and rejoin for writing in Chapter 18 and handoff in Chapter 19. Feedback arrows return to earlier work."}
 
 ## Develop the research question
 
@@ -841,46 +827,50 @@ The agent can investigate these problems and propose responses. Before changing 
 
 # 11. Find and assess research literature {#literature}
 
-An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support.
+An agent can help find relevant papers, compare their findings, and identify gaps in the evidence. Ask it to link its summaries and conclusions to the sources it used, so you can check whether its account is accurate.
 
-For the heat-and-birthweight study introduced in [Chapter 10: The example research project](#example-project), a study of low birthweight may not answer a question about mean birthweight. Exposure windows and populations differ too. Ask the agent to make those differences explicit, including evidence that conflicts with the proposed explanation.
-
-## Match the search to the question {#literature-protocol}
-
-For background reading, give the agent the question and ask for a small set of relevant sources and competing explanations. A focused synthesis needs clearer inclusion criteria and a record of coverage. A systematic review needs a protocol and a search designed for completeness; involve an information specialist when that completeness supports the claim. A limited discovery search should not be described as systematic.
-
-An early search can help refine the research question. For example, have the agent compare how studies define heat exposure and which birth outcomes they report. Ask what evidence would favor one approach over another, and where the literature leaves the choice unresolved. If you approve a change based on those findings, have the agent update `SPECIFICATION.md` and explain the decision in `METHODOLOGY.md`, linking the supporting sources. Keep search queries and screening records with the literature search.
-
-Name the sources searched. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example; [OpenAlex](https://openalex.org/) supports broader discovery, and [Crossref](https://www.crossref.org/) can verify DOI metadata. Institutional access determines which subscription databases and full texts are available.
-
-<!-- prompt:literature-search -->
-::: {#request-literature-search .prompt}
-> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
-:::
-<!-- /prompt:literature-search -->
-
-For a substantial search, preserve queries and dates, unmodified results, duplicate decisions, screening reasons, and unresolved records. Save references in a reusable format such as BibTeX or RIS. Ask the agent to report coverage gaps and unexpected search growth rather than quietly truncating results at an arbitrary cap.
-
-## Find sources and verify their identity {#verify-citations}
-
-Require a verified DOI for each journal article when one exists. Resolve it and compare title, authors, year, and publication against publisher or registry metadata. For legitimate work without a DOI, verify an alternative such as a PMID, arXiv identifier, or stable publisher record. A failed lookup needs investigation: a real paper registered with [DataCite](https://datacite.org/) can be missed by a verifier that checks only Crossref.
-
-For example, [10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811) identifies Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes. The verified citation establishes which paper was found. Reading it establishes what it supports.
+For the heat-and-birthweight project introduced in [Chapter 10: The example research project](#example-project), a published paper about low birthweight may provide useful background without directly answering the question about mean birthweight. Published studies may also examine different exposure periods or populations. Ask the agent to explain how those differences affect their relevance and to identify findings that challenge the proposed explanation.
 
 ![](figures/literature-evidence.svg){#fig-literature-evidence fig-alt="Search results pass through identity verification and reading before supporting a research claim. Unresolved records remain visible, and conflicting findings are retained in the synthesis."}
 
-Keep leads separate from sources ready to cite. Record whether the agent read a title, an abstract, or the full text, and check for corrections, retractions, and duplicate preprint/published versions. Missing extraction information means “not yet established,” not necessarily “not reported.”
+## Define the scope of the literature search {#literature-protocol}
 
-## Assess what the evidence supports {#literature-synthesis}
+You might need an overview of a topic, evidence to inform a specific research decision, or a systematic review. Tell the agent which purpose the search should serve.
 
-Have the agent connect each proposed claim to a passage, table, or figure. A small evidence table makes unsupported inferences easier to spot. These examples come from the Chersich review's abstract and full-text results; they are not a new literature search.[^chersich-evidence]
+| Purpose | What to ask the agent to do |
+|------------------------|--------------------------------------------------------|
+| Get an overview of a topic | Find key papers, summarize the main findings, and identify competing explanations and unresolved questions. |
+| Inform a research decision | Use your inclusion criteria to find evidence relevant to a particular choice, such as how to measure an exposure. Compare the findings and explain disagreements. |
+| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies. |
+
+For a systematic review, involve a librarian or information specialist in designing a search that covers the eligible literature as fully as possible.
+
+## Search and verify references {#verify-citations}
+
+Ask the agent to record which databases and search services it used. For this example, it can search [PubMed](https://pubmed.ncbi.nlm.nih.gov/) for health research and [OpenAlex](https://openalex.org/) for work across disciplines, then use [Crossref](https://www.crossref.org/) to verify DOI metadata. It should report any databases or full texts it could not access, including material available through your institution that it cannot retrieve directly.
+
+Have the agent resolve each journal article's DOI and compare the title, authors, year, and publication with publisher or registry metadata. A failed lookup needs investigation: a real paper registered with [DataCite](https://datacite.org/) can be missed by a verifier that checks only Crossref. For work without a DOI, the agent should verify an alternative such as a PMID, arXiv identifier, or stable publisher record. It should also check for corrections, retractions, and duplicate preprint/published versions, keeping unverified leads separate from verified references.
+
+Have the agent save search queries, dates, and unmodified results alongside its screening decisions and reasons for exclusions. It should retain unresolved records and export references in a reusable format such as BibTeX or RIS. If the search retrieves more papers than expected, ask it to report the increase before limiting the results. For a screened search, have it reconcile the retrieved, duplicate, excluded, unresolved, and included counts; review borderline exclusions yourself.
+
+<!-- prompt:literature-search -->
+::: {#request-literature-search .prompt}
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
+:::
+<!-- /prompt:literature-search -->
+
+## Read and compare the evidence {#literature-synthesis}
+
+A verified reference establishes which paper was found. To assess what it supports, have the agent connect each proposed claim to a passage, table, or figure. Ask it to record whether it read the title, abstract, or full text. If the agent cannot find how a study measured heat exposure, it should flag that question for further checking. It should not assume the authors failed to report it.
+
+The table illustrates this with Chersich and colleagues' 2020 systematic review of high temperatures in pregnancy and birth outcomes ([DOI: 10.1136/bmj.m3811](https://doi.org/10.1136/bmj.m3811)). The entries draw on the review's abstract and full-text results, rather than a new literature search.[^chersich-evidence]
 
 | Proposed claim | Source location and finding | Use in this project |
 |---|---|---|
 | Higher temperatures have been associated with lower birthweight. | Abstract, Results: 18 of 28 birthweight studies reported a reduction; results varied considerably. | Motivate the question while retaining the variation across studies. |
-| Heat-related birth outcomes can be treated as one interchangeable measure. | Results distinguish preterm birth, birthweight, and stillbirth. | Do not substitute an association for another outcome for a mean birthweight contrast. |
+| Heat-related birth outcomes can be treated as one interchangeable measure. | Results distinguish preterm birth, birthweight, and stillbirth. | A finding that heat exposure is associated with preterm birth does not directly answer the question about mean birthweight. |
 
-[^chersich-evidence]: Chersich et al. (2020), [“Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7610201/), *The BMJ* 371:m3811. The review supports the general motivation; it does not establish the synthetic example's age relationship or 10-minus-5-day contrast.
+[^chersich-evidence]: Chersich et al. (2020), [“Associations between high temperatures in pregnancy and risk of preterm birth, low birth weight, and stillbirths”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7610201/), *The BMJ* 371:m3811. The review provides evidence for studying heat exposure and birthweight. The assumed relationship between maternal age and birthweight was specified for the synthetic data, rather than taken from this review. The comparison of 10 versus 5 hot days during the third trimester was also chosen for the example.
 
 <!-- prompt:literature-synthesis -->
 ::: {#request-literature-synthesis .prompt}
@@ -888,15 +878,17 @@ Have the agent connect each proposed claim to a passage, table, or figure. A sma
 :::
 <!-- /prompt:literature-synthesis -->
 
-Use the table to compare findings rather than force agreement. Ask whether different populations, exposure definitions, outcomes, or designs might explain a conflict, and which explanations the papers actually support. Check the sources you will cite and the passages central to the argument. For a screened search, also review borderline exclusions and reconcile retrieved, duplicate, excluded, unresolved, and included counts.
+When papers disagree, ask the agent whether differences in populations, exposure definitions, outcomes, or designs could explain the conflicting findings, and what evidence supports those explanations. Check the sources you will cite and the passages central to your argument.
+
+Literature can help refine the research question. For the heat-and-birthweight project, ask the agent to compare how published studies define heat exposure and which birth outcomes they report. Have it explain what evidence supports each choice and where uncertainty remains. If you decide to revise the research question or analysis approach, have the agent update `SPECIFICATION.md` and record the decision and its reasons in `METHODOLOGY.md`, citing the supporting sources.
 
 ## Reuse the task as a skill {#literature-skill}
 
-Finding sources, verifying citations, and preserving claim support recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
+Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
 <!-- RELEASE: add the verified public DSS litsearch repository link before publication; the current repository is private. -->
 
-An [earlier recorded search](resources/literature-search-example.md) illustrates the saved counts and reading limitations for a peer-review-duration project. It is available as a reference, separate from the heat-and-birthweight example.
+A separate [literature-search example](resources/literature-search-example.md), about how long journal peer review takes, reports how many records were found, screened, and included. It also identifies which included papers were assessed only from titles or abstracts.
 
 # 12. Bring data into the project {#data-acquisition}
 
@@ -1395,7 +1387,7 @@ Give the agent the argument you want to make, the relevant research records, and
 
 Work section by section so you can judge the reasoning and support. Ask the agent to identify mismatches between methods text and the code that ran, and between claims and the cited literature. Check consequential interpretations yourself. A technically correct number does not settle what it means.
 
-Use shared writing instructions, as described in [Chapter 8: Apply your conventions across projects](#shared-conventions), for recurring preferences and project files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
+Use global user instructions for writing, as described in [Chapter 8: Apply your conventions across projects](#shared-conventions), for recurring preferences and project context files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
 
 ## Preserve coauthor edits and respond to reviewers
 
@@ -1428,7 +1420,7 @@ Check the target journal's current instructions at submission. As of November 20
 
 Keep a record of the tools and observable LLM information, dates, tasks, affected work, and checks actually completed. Distinguish language assistance and code generation from the LLM-derived measurements described in [Chapter 16: Use LLM outputs as research data](#llm-measurements). Measurements require a methodological account of inputs, prompts, evaluation, and human review.
 
-A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project records rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
+A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project context files and saved evidence rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
 
 Confidential material received as a reviewer requires separate authorization under the journal's or funder's policy. Permission to use an agent on your own study does not authorize submitting someone else's manuscript or application.
 
@@ -1491,7 +1483,7 @@ Review the agent's findings before publishing. A successful run in the working p
 
 The scaffolds below give an agent a starting structure for a paper, dataset, or website. Each can be downloaded as a Markdown specification to supply with your project brief. They are simplified adaptations of the examples maintained with the scaffold skill; folder names and contents should fit the work, and an existing structure can remain if it serves that purpose.
 
-[Chapter 6: Organize your research projects](#project-organization) explains how to choose a structure. [Chapter 9: Use skills for recurring tasks](#reusable-procedures) shows how to reuse the setup through a skill. The instruction and record templates after the scaffolds supply shared starting files for all three layouts.
+[Chapter 6: Organize your research projects](#project-organization) explains how to choose a structure. [Chapter 9: Use skills for recurring tasks](#reusable-procedures) shows how to reuse the setup through a skill. The project context file templates after the scaffolds provide starting files to adapt for all three layouts.
 
 ## A.1 Project scaffolds {#starter-layouts}
 
@@ -1533,7 +1525,7 @@ paper-project/
 
 Keep original inputs in `data/raw/`; save transformations in `data/processed/`. Reusable setup and functions belong in `code/_startup/`, while independently runnable analysis scripts sit directly in `code/`. The other code folders separate acquisition, exploratory work, and assembly of manuscript figures. Save results under `outputs/` and manuscript drafts under `manuscript/`.
 
-Give this specification to the agent with the research question, intended outputs, analysis language, and destination. Ask it to propose any adaptations before creating the agreed structure. It should describe the project in `README.md`, write navigation instructions in `CLAUDE.md`, and record the current state and tasks. Have the agent populate `SPECIFICATION.md` with approved scientific requirements and start `METHODOLOGY.md` with dated decisions and reasons, newest first; leave unresolved methods as questions. The project instructions should require both records to be updated after an approved scientific change. Preserve existing files and confirm that record-file references point to real locations.
+Give this specification to the agent with the research question, intended outputs, analysis language, and destination. Ask it to propose any adaptations before creating the agreed structure. It should describe the project in `README.md`, write navigation instructions in `CLAUDE.md`, and record the current state and tasks. Have the agent populate `SPECIFICATION.md` with approved scientific requirements and start `METHODOLOGY.md` with dated decisions and reasons, newest first; leave unresolved methods as questions. `CLAUDE.md` should require both files to be updated after an approved scientific change. Preserve existing files and confirm that paths in the project context files point to real locations.
 <!-- /scaffold:paper -->
 
 ### Dataset {#scaffold-dataset-example .unlisted}
@@ -1568,7 +1560,7 @@ Preserve downloads unchanged in `data/sources/`. Acquisition, processing, and ch
 
 Save each release in a named subfolder of `outputs/releases/`, with its data dictionary, source versions, and checks. A paper using that dataset should record which release it used. Access and release arrangements must match the data's permitted uses.
 
-Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and initial records. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
+Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and project context files. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
 <!-- /scaffold:dataset -->
 
 ### Website {#scaffold-website-example .unlisted}
@@ -1595,18 +1587,18 @@ website-project/
 
 Write pages in `source/` and keep images and styles in `assets/`. The build produces the viewable site in `output/`; make lasting edits in the sources so they survive the next build. Record the preview and build commands in `README.md`. Keep publishing instructions and the intended destination explicit.
 
-Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and initial records. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
+Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and project context files. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
 <!-- /scaffold:website -->
 
-## Shared instruction and record files {.unnumbered .unlisted}
+## Context and instruction templates {.unnumbered .unlisted}
 
-The following templates describe the project and help an agent resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with project instructions and a short status and task list; add separate scientific records when the work needs them.
+The project context file templates below describe the work and help an agent resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with `CLAUDE.md`, `STATUS.md`, and `TASKS.md`; add `SPECIFICATION.md` and `METHODOLOGY.md` when the work needs them. The table also includes optional templates for global user instructions and version-control exclusions.
 
 For the [synthetic heat-and-birthweight study](#example-specification), `SPECIFICATION.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current scientific requirements and the reasoning behind them.
 
 | File and destination | Use | Template |
 |:------------------------------------|:--------------------------------------------|:-----------------|
-| `CLAUDE.md` in the project | Explain the project and point to its records. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
+| `CLAUDE.md` in the project | Explain the project and point to its other context files. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
 | `STATUS.md` in the project | Summarize where the work stands now. | [Download](resources/starter-files/STATUS.md){download="STATUS.md"} |
 | `TASKS.md` in the project | Track remaining work and dated completions. | [Download](resources/starter-files/TASKS.md){download="TASKS.md"} |
 | `SPECIFICATION.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
@@ -1614,17 +1606,17 @@ For the [synthetic heat-and-birthweight study](#example-specification), `SPECIFI
 | Global user `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
 | `.gitignore` in the project | Optional exclusions when using [`Git`](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
 
-The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: project instructions belong inside the project; global user instructions belong in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [Chapter 4: Control what the agent can do](#enforce-those-limits).
+The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: the project context file belongs inside the project; the global user instructions file belongs in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [Chapter 4: Control what the agent can do](#enforce-those-limits).
 
 ::: {.keep-together}
-## A.2 Project instructions {#starter-project}
+## A.2 CLAUDE.md for the project {#starter-project}
 
 Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
 
-[Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
+[Download the project CLAUDE.md template](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
-<summary>Read the project-instructions example</summary>
+<summary>Read the CLAUDE.md example</summary>
 
 <!-- starter:project -->
 ```
@@ -1846,7 +1838,7 @@ Use this optional template for conventions that apply across your work. Have the
 [Describe your research role and the software you normally use.]
 
 ## Before a task
-- Read the project's instructions and current state. Preserve accepted work.
+- Read the relevant project context files. Preserve accepted work.
 - Identify the requested result, constraints, and evidence needed to accept it.
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
@@ -1945,7 +1937,7 @@ Supply: the project purpose, intended output, destination, and any research-grou
 Explanation and checks: [Chapter 6: Organize your research projects](#request-scaffold-project).
 
 ::: {.prompt}
-> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
+> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and project context files. Preserve existing files and list research decisions still needed from me.
 :::
 
 :::
@@ -1964,14 +1956,14 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-re
 :::
 
 ::: {.keep-together}
-### Write project instructions {.unlisted}
+### Write CLAUDE.md for a project {.unlisted}
 
 Supply: the project files, existing instructions, and agreed research decisions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
 ::: {.prompt}
-> Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 
 :::
@@ -1979,12 +1971,12 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 ::: {.keep-together}
 ### Resume a project {.unlisted}
 
-Supply: the project folder and its maintained instructions, status, and tasks.
+Supply: the project folder and its project context files.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-resume-project).
 
 ::: {.prompt}
-> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
+> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 
 :::
@@ -2003,14 +1995,14 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Separate shared and project instructions {.unlisted}
+### Set global user instructions {.unlisted}
 
 Supply: existing instructions and examples of conventions used across projects.
 
 Explanation and checks: [Chapter 8: Apply your conventions across projects](#request-shared-conventions).
 
 ::: {.prompt}
-> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
+> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project context files. Show me proposed changes before applying them.
 :::
 
 :::
@@ -2064,7 +2056,7 @@ Supply: the research question, eligibility criteria, and any existing search pro
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-search).
 
 ::: {.prompt}
-> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
 :::
 
 :::
@@ -2271,7 +2263,7 @@ For example, a rerun may produce a different sample size because the inputs chan
 | What you notice | What to ask the agent to do | Explanation |
 |:---------------------------|:-------------------------------------------------|:---------------------|
 | An answer has no supporting evidence | Locate the cited passage or saved result. Mark claims it cannot substantiate. | [Source support](#literature-synthesis) |
-| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project records](#maintain-project-context) |
+| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project context files](#maintain-project-context) |
 | Old instructions conflict with current files | Identify which instructions were used and where they disagree. Propose corrections to the stale record. | [Shared guidance](#maintain-shared-conventions) |
 | The agent changes the question or weakens a check | Show the change against the agreed specification and preserve the failed result. You decide whether a scientific revision is justified. | [Research decisions](#review-project-plan) |
 | A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Locate the earliest difference before proposing a fix. | [Reproduction checks](#test-and-name-the-reproduction-route) |
@@ -2321,7 +2313,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-brief}
-*Brief.* A written description of a task or project. For the maintained file describing a project, see [project instructions](#term-project-instructions).
+*Brief.* A written description of a task or project. For information maintained across sessions, see [project context files](#term-project-context-files).
 :::
 
 ::: {#term-build}
@@ -2345,7 +2337,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-compaction}
-*Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project records should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
+*Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project context files should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
 :::
 
 ::: {#term-container}
@@ -2433,7 +2425,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-methodological-decision-log}
-*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project records](#project-records).
+*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
 :::
 
 ::: {#term-modular-workflow}
@@ -2464,8 +2456,9 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *`Plan` mode.* A mode for inspecting a project and developing a plan before implementation. Writing a planning record does not authorize ordinary changes to the project. [Planning settings](#decide-whether-to-plan-first).
 :::
 
-::: {#term-project-instructions}
-*Project instructions.* A maintained description of a project's purpose, files, working rules, and relevant records, commonly saved as `CLAUDE.md` or `AGENTS.md`. [Project context](#project-records).
+::: {#term-project-context-files}
+[]{#term-project-instructions}
+*Project context files.* Maintained files that tell the agent what a project is trying to achieve, how it should work, what has been decided, and what remains to be done. Examples include `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, `TASKS.md`, `SPECIFICATION.md`, and `METHODOLOGY.md`. [Saving project context](#project-records).
 :::
 
 ::: {#term-prompt}
@@ -2505,7 +2498,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-scientific-specification}
-*Scientific specification.* The current approved research requirements, maintained in `SPECIFICATION.md`. It tells the agent what to implement and check. [Project records](#project-records).
+*Scientific specification.* The current approved research requirements, maintained in `SPECIFICATION.md`. It tells the agent what to implement and check. [Project context files](#project-records).
 :::
 
 ::: {#term-session}

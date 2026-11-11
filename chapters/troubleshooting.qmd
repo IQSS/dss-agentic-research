@@ -15,7 +15,7 @@ For example, a rerun may produce a different sample size because the inputs chan
 | What you notice | What to ask the agent to do | Explanation |
 |:---------------------------|:-------------------------------------------------|:---------------------|
 | An answer has no supporting evidence | Locate the cited passage or saved result. Mark claims it cannot substantiate. | [Source support](#literature-synthesis) |
-| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project records](#maintain-project-context) |
+| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project context files](#maintain-project-context) |
 | Old instructions conflict with current files | Identify which instructions were used and where they disagree. Propose corrections to the stale record. | [Shared guidance](#maintain-shared-conventions) |
 | The agent changes the question or weakens a check | Show the change against the agreed specification and preserve the failed result. You decide whether a scientific revision is justified. | [Research decisions](#review-project-plan) |
 | A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Locate the earliest difference before proposing a fix. | [Reproduction checks](#test-and-name-the-reproduction-route) |

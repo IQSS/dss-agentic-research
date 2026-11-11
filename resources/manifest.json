@@ -17,7 +17,7 @@
     {
       "id": "project-context",
       "chapter": 7,
-      "title": "Write project instructions",
+      "title": "Write CLAUDE.md for a project",
       "group": "project",
       "inputs": "the project files, existing instructions, and agreed research decisions."
     },
@@ -26,7 +26,7 @@
       "chapter": 7,
       "title": "Resume a project",
       "group": "project",
-      "inputs": "the project folder and its maintained instructions, status, and tasks."
+      "inputs": "the project folder and its project context files."
     },
     {
       "id": "close-session",
@@ -38,7 +38,7 @@
     {
       "id": "shared-conventions",
       "chapter": 8,
-      "title": "Separate shared and project instructions",
+      "title": "Set global user instructions",
       "group": "project",
       "inputs": "existing instructions and examples of conventions used across projects."
     },

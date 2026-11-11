@@ -122,7 +122,6 @@ anchor-map:
   "choose-the-llm-and-reasoning-effort": /chapters/directing-work.qmd#choose-the-llm-and-reasoning-effort
   "context-or-training": /chapters/research-models.qmd#context-or-training
   "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
-  "data-acquisition": /chapters/data-acquisition.qmd
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "data-provenance": /chapters/data-acquisition.qmd#data-provenance
   "decide-what-the-test-must-establish": /chapters/simulation.qmd#decide-what-the-test-must-establish
@@ -178,7 +177,6 @@ anchor-map:
   "request-shared-conventions": /chapters/shared-conventions.qmd#request-shared-conventions
   "request-simulation-plan": /chapters/simulation.qmd#request-simulation-plan
   "request-trace-manuscript": /chapters/research-writing.qmd#request-trace-manuscript
-  "research-handoff": /chapters/research-handoff.qmd
   "research-limits": /chapters/research-limits.qmd
   "research-models": /chapters/research-models.qmd
   "research-uses": /chapters/research-uses.qmd
@@ -197,7 +195,7 @@ anchor-map:
   "starter-layouts": /chapters/starter-files.qmd#starter-layouts
   "starter-project": /chapters/starter-files.qmd#starter-project
   "term-global-instructions": /chapters/glossary.qmd#term-global-instructions
-  "term-project-instructions": /chapters/glossary.qmd#term-project-instructions
+  "term-project-context-files": /chapters/glossary.qmd#term-project-context-files
   "test-and-name-the-reproduction-route": /chapters/research-handoff.qmd#test-and-name-the-reproduction-route
   "trace-manuscript": /chapters/research-writing.qmd#trace-manuscript
   "unattended-jobs": /chapters/research-workflows.qmd#unattended-jobs

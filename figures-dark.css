@@ -33,6 +33,7 @@ body.quarto-dark img[src$="research-data-flow.svg"] { content: url("figures/rese
 body.quarto-dark img[src$="research-data-routes.svg"] { content: url("figures/research-data-routes-dark.svg"); }
 body.quarto-dark img[src$="research-handoff.svg"] { content: url("figures/research-handoff-dark.svg"); }
 body.quarto-dark img[src$="research-process.svg"] { content: url("figures/research-process-dark.svg"); }
+body.quarto-dark img[src$="research-process-separate-llm.svg"] { content: url("figures/research-process-separate-llm-dark.svg"); }
 body.quarto-dark img[src$="research-uses.svg"] { content: url("figures/research-uses-dark.svg"); }
 body.quarto-dark img[src$="reusable-skills.svg"] { content: url("figures/reusable-skills-dark.svg"); }
 body.quarto-dark img[src$="selective-workflows.svg"] { content: url("figures/selective-workflows-dark.svg"); }

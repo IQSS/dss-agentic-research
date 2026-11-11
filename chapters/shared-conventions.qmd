@@ -20,7 +20,7 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A dataset project keeps records appropriate to its work. These are grouped under Project files and decisions." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A website project keeps CLAUDE.md, STATUS.md, TASKS.md, and DESIGN.md. These are grouped under Project context files." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
@@ -46,7 +46,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), global user instru
 
 <!-- prompt:shared-conventions -->
 ::: {#request-shared-conventions .prompt}
-> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
+> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project context files. Show me proposed changes before applying them.
 :::
 <!-- /prompt:shared-conventions -->
 
@@ -56,7 +56,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), global user instru
 Before editing code, read CODING.md beside this file.
 Before statistical modeling or simulation, read MODELING.md.
 Before drafting prose, read WRITING.md.
-Read each project's own instructions for its scientific decisions and files.
+Read each project's context files for its scientific decisions and current state.
 Follow explicit project-specific exceptions to these conventions.
 ```
 
@@ -75,7 +75,7 @@ The [complete shared example](#starter-global) provides a starting point. Ask th
 [Describe your research role and the software you normally use.]
 
 ## Before a task
-- Read the project's instructions and current state. Preserve accepted work.
+- Read the relevant project context files. Preserve accepted work.
 - Identify the requested result, constraints, and evidence needed to accept it.
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 

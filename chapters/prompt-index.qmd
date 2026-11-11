@@ -21,7 +21,7 @@ Supply: the project purpose, intended output, destination, and any research-grou
 Explanation and checks: [Chapter 6: Organize your research projects](#request-scaffold-project).
 
 ::: {.prompt}
-> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
+> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and project context files. Preserve existing files and list research decisions still needed from me.
 :::
 
 :::
@@ -40,14 +40,14 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-re
 :::
 
 ::: {.keep-together}
-### Write project instructions {.unlisted}
+### Write CLAUDE.md for a project {.unlisted}
 
 Supply: the project files, existing instructions, and agreed research decisions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
 ::: {.prompt}
-> Read this project and draft concise instructions for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Link to detailed records and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 
 :::
@@ -55,12 +55,12 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 ::: {.keep-together}
 ### Resume a project {.unlisted}
 
-Supply: the project folder and its maintained instructions, status, and tasks.
+Supply: the project folder and its project context files.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-resume-project).
 
 ::: {.prompt}
-> Read the project instructions, STATUS.md, and TASKS.md, then inspect the files relevant to the next task. Summarize the current work, flag any disagreement between the records and the files, and identify the next action.
+> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 
 :::
@@ -79,14 +79,14 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Separate shared and project instructions {.unlisted}
+### Set global user instructions {.unlisted}
 
 Supply: existing instructions and examples of conventions used across projects.
 
 Explanation and checks: [Chapter 8: Apply your conventions across projects](#request-shared-conventions).
 
 ::: {.prompt}
-> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
+> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project context files. Show me proposed changes before applying them.
 :::
 
 :::
@@ -140,7 +140,7 @@ Supply: the research question, eligibility criteria, and any existing search pro
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-search).
 
 ::: {.prompt}
-> Search for research relevant to the question and criteria in our specification. Record the sources searched, exact queries, dates, and screening decisions. Verify each journal article’s DOI against publisher or registry metadata, including title, authors, and year; flag mismatches and works without a DOI rather than inventing one. Save verified references separately from leads, and distinguish abstracts from full texts you actually read.
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
 :::
 
 :::

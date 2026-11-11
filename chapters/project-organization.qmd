@@ -14,7 +14,7 @@ Suppose a paper has folders called `analysis-final/` and `analysis-new/`, plus t
 
 A *workspace* is a parent folder containing your projects. You might group papers together, keep shared datasets in a separate area, and give a research group's website its own project folder. The arrangement should make sense for your work; the example below is one possible layout.
 
-![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five instruction and record files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
+![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five project context files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
 
 Keep independently maintained projects in separate folders and open the relevant one in the app. A short workspace index can record each project's purpose and location. If two papers use the same curated dataset, the index can show that relationship, while each paper records the data version it used. [Chapter 8: Apply your conventions across projects](#shared-conventions) explains how to make this index available across projects.
 
@@ -31,7 +31,7 @@ Different outputs need different folders. A paper needs analysis results and man
 | Dataset | Acquisition code, source records, processing steps, and documented releases. |
 | Website | Editable content, images and styles, and the generated site. |
 
-Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. [Appendix A: Project scaffolds and starter files](#starter-files) provides example folder structures and initial records to adapt. [Chapter 7: Give the agent context for your project](#project-context) explains what to put in the project record files shown in the diagram and how the agent keeps them current.
+Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. [Appendix A: Project scaffolds and starter files](#starter-files) provides example folder structures and project context files to adapt. [Chapter 7: Give the agent context for your project](#project-context) explains what to put in the project context files shown in the diagram and how the agent keeps them current.
 
 Paths in scripts should be relative to the *project root*, the folder containing the project. A script that reads `data/raw/births.csv` can work on a collaborator's computer even when their home folder has a different name. Ask the agent to use the project's existing method for locating its root, if one is already established. For [`R`](https://www.r-project.org/) projects without one, the [`here`](https://here.r-lib.org/) package is a good choice: it builds file paths from the project root. [Chapter 13: Build a modular analysis workflow](#research-workflows) explains how to organize the analysis code itself.
 
@@ -45,15 +45,15 @@ If the project uses a synchronization service (e.g., [`Dropbox`](https://www.dro
 
 ## Start a new project {#scaffold-project}
 
-A *project scaffold* is a starting set of folders and files suited to the intended output. Give the agent the project's purpose, deliverable, and any research group conventions, then ask it to create that structure. A scaffold can include initial project instructions and places to record decisions without pretending that the scientific choices have already been made.
+A *project scaffold* is a starting set of folders and files suited to the intended output. Give the agent the project's purpose, deliverable, and any research group conventions, then ask it to create that structure. A scaffold can include project context files with instructions and space for decisions without pretending that the scientific choices have already been made.
 
 <!-- prompt:scaffold-project -->
 ::: {#request-scaffold-project .prompt}
-> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
+> Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and project context files. Preserve existing files and list research decisions still needed from me.
 :::
 <!-- /prompt:scaffold-project -->
 
-Review the proposed organization and the facts entered in the records. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
+Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
 
 ## Organize an existing project {#restructure-project}
 

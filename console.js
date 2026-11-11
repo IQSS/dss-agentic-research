@@ -102,7 +102,7 @@
       body: "A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff reveals dependencies hidden by a familiar working folder." },
     { n: "A", part: "A", slug: "starter-files", title: "Project scaffolds and starter files", ctl: "key",
       r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Choose a paper, dataset, or website scaffold, then have the agent adapt its folders and starter records to your work. Downloadable specifications accompany the shared instruction and record templates." },
+      body: "Choose a paper, dataset, or website scaffold, then have the agent adapt its folders and project context files to your work. Downloadable specifications accompany templates for project context files and global user instructions." },
     { n: "B", part: "A", slug: "prompt-index", title: "Prompt bank", ctl: "key",
       r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
       body: "Find a request for your research task, supply the listed files or decisions, and adapt it to the project. Requests are grouped by task and link to their explanations in the guide." },
