@@ -6,9 +6,9 @@ Adapt paths and the scientific specification before use.
 
 ### Start a new research project
 
-Supply: the project purpose, intended output, destination, and any lab conventions.
+Supply: the project purpose, intended output, destination, and any research-group conventions.
 
-Set up a project for the research described below. Use the existing workspace and lab conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
+Set up a project for the research described below. Use the existing workspace and research group conventions where available. Propose a structure suited to the deliverable, then create the agreed folders and initial records. Preserve existing files and list research decisions still needed from me.
 
 ### Organize an existing project
 
@@ -32,19 +32,19 @@ Read the project instructions, STATUS.md, and TASKS.md, then inspect the files r
 
 Supply: the current session’s work, checked outputs, and unresolved questions.
 
-Update the task list and current status from the work and outputs actually checked. Record scientific decisions and their reasons in METHODOLOGY.md. Leave unfinished work and failures explicit, with enough information for the next session to continue.
+Update TASKS.md and STATUS.md from the work and outputs actually checked. For scientific changes I approved, update SPECIFICATION.md and add dated entries at the top of METHODOLOGY.md explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 
 ### Separate shared and project instructions
 
 Supply: existing instructions and examples of conventions used across projects.
 
-Review these instructions and examples for conventions that apply across projects. Propose a short personal instruction file with references to any useful specialist files. Keep this study's decisions in its project records. Show proposed changes and conflicts, then apply the agreed guidance to the next task.
+Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
 
 ### Create a project-scaffolding skill
 
-Supply: an agreed project layout, setup instructions, and a destination for the skill.
+Supply: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
 
-Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
+Write a reusable `SKILL.md` for the project setup we have agreed. Have it ask for the new project's purpose and where its folder should be created, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
 
 ## Define the study and gather evidence
 
@@ -52,13 +52,13 @@ Turn the project setup we have agreed into a reusable skill. Have it ask for the
 
 Supply: the research question, available data, constraints, and any verified sources.
 
-Using the research question, available data, and constraints below, compare plausible approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
+Using the research question, available data, and constraints below, compare plausible analysis approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
 
 ### Make the research specification explicit
 
 Supply: your research decisions and the questions that still need resolution.
 
-Write specification.md from my research decisions: estimands, population or averaging sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. Include agreed checks and tolerances. Flag unresolved choices for my review before fitting.
+Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
 
 ### Search and verify the literature
 
@@ -76,7 +76,7 @@ Using the verified papers and reading records, summarize the evidence relevant t
 
 Supply: approved inputs, their documentation, and the current scientific specification.
 
-Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in specification.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
+Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
 
 ## Build and check the analysis
 
@@ -90,25 +90,25 @@ Review the current analysis and propose coherent steps with explicit inputs and 
 
 Supply: the unexpected result, specification, current code, and saved outputs.
 
-Investigate the unexpected result identified below using the current specification, code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, compare the same estimands and record the changes and reasons.
+Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the same estimands.
 
 ### Plan and run known-truth checks
 
 Supply: the specification and scientific scenarios or performance questions to examine.
 
-Propose known-truth checks for specification.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
+Propose known-truth checks for SPECIFICATION.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
 
 ### Implement the analysis independently
 
 Supply: the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results.
 
-Working only from specification.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
 
 ### Compare completed implementations
 
 Supply: both completed implementations, their outputs, and the common specification.
 
-Compare the completed implementations against specification.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
 
 ## Use LLMs in the research
 
@@ -142,7 +142,7 @@ Draft this section using only the supplied research decisions, verified sources,
 
 Supply: reviewer comments, your decisions, and the revised manuscript and analysis records.
 
-Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments and record any approved methodological change in the project record.
+Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments. For an approved methodological change, update SPECIFICATION.md and record the decision and reason in METHODOLOGY.md.
 
 ## Reproduce and share
 

@@ -1,4 +1,4 @@
-# Working conventions
+# Global user instructions
 
 [Describe your research role and the software you normally use.]
 
@@ -8,6 +8,10 @@
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
 ## Conventions
+These conventions are defaults across projects. Follow explicit project-specific
+exceptions and record their reasons. Ask when instructions conflict and no
+exception has been agreed.
+
 [Keep short shared conventions here. Add references only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]

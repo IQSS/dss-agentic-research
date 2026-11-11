@@ -12,11 +12,11 @@ For example, a heat-contrast figure may build because yesterday's fitted statist
 
 ## Assemble the files and instructions
 
-Provide approved inputs or access instructions, the code and commands, software records, and reference results. Include the specification and decisions needed to explain the reported analysis. Have the agent identify missing files or undocumented manual steps; leave unknown history explicit.
+Provide approved inputs or access instructions, the code and commands, software records, and reference results. Include `SPECIFICATION.md`, the specification version used for the reported results, and the relevant decision history from `METHODOLOGY.md`. Identify those versions clearly if current requirements differ from the completed analysis. Have the agent identify missing files or undocumented manual steps; leave unknown history explicit.
 
 ![](figures/research-handoff.svg){#fig-research-handoff fig-alt="Inputs or access instructions, code and commands, software records, and reference results form a research package. A separate copy restores the environment, runs the documented steps, and compares the outputs with the references."}
 
-The [modular workflow](#research-workflows) supplies runnable steps. Preserve its existing command interface so the recipient does not need an agent to determine execution order. Record the software environment before changing it: language and package versions, relevant system dependencies, and restoration instructions. The toolkit's [environment chapter](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) covers the tools.
+A modular workflow supplies independently runnable steps, as explained in [Chapter 13: Build a modular analysis workflow](#research-workflows). Preserve its existing command interface so the recipient does not need an agent to determine execution order. Record the software environment before changing it: language and package versions, relevant system dependencies, and restoration instructions. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
 
 For restricted data, provide a permitted acquisition route and a synthetic example that exercises the code. Explain which files an authorized researcher must supply and where. Do not present the synthetic example's results as a reproduction of findings from protected records.
 
@@ -36,7 +36,7 @@ Use a separate copy and restore the recorded environment. A copied folder that s
 
 Compare using the agreed tolerances. Identifiers and deterministic counts should match exactly; numerical and stochastic outputs need the criteria established for the analysis. Investigate discrepancies before changing the reference results.
 
-This differs from [independent implementation](#checking-analysis), which builds new code from the specification. Reproduction tests the supplied code and instructions. Neither establishes scientific validity. If protected records are unavailable, testing only the synthetic example leaves empirical reproduction untested.
+This differs from the independent implementation described in [Chapter 15: Check the agent with independent implementations](#checking-analysis), which builds new code from the specification. Reproduction tests the supplied code and instructions. Neither establishes scientific validity. If protected records are unavailable, testing only the synthetic example leaves empirical reproduction untested.
 
 ## Review and deposit the tested version
 

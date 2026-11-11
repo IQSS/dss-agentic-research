@@ -8,11 +8,11 @@ title: "15. Check the agent with independent implementations"
 
 Independently built implementations give mistakes a chance to produce observable disagreements. Each agent receives the same specification and inputs, works through the analysis separately, and saves comparable outputs. A rerun of the same code cannot provide this check.
 
-For the [birthweight project](#example-project), one fresh agent implemented the analysis in [R](https://www.r-project.org/) and another in [Python](https://www.python.org/). Neither saw the other's code or results while building. The comparison checked their data processing and calculations, including the specified contrasts and uncertainty method.
+For the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), one fresh agent implemented the analysis in [`R`](https://www.r-project.org/) and another in [`Python`](https://www.python.org/). Neither saw the other's code or results while building. The comparison checked their data processing and calculations, including the specified contrasts and uncertainty method.
 
 ## Give both agents the same specification
 
-Use a fixed copy of `specification.md`, with the estimands, original inputs, sample rules, estimator, reported quantities, and comparison tolerances. Keep decisions and their reasons in `METHODOLOGY.md`. If an implementer finds an ambiguity, resolve it and give both agents the same clarification.
+Give both agents the same fixed version of `SPECIFICATION.md`, with the estimands, original inputs, sample rules, estimator, reported quantities, and comparison tolerances. Preserve that version with the check even if the current specification later changes. If an implementer finds an ambiguity, resolve it and give both agents the same clarification. Record the decision in `METHODOLOGY.md`, but do not supply a log that reveals the other implementation or its results.
 
 “Estimate the heat effect” leaves room for different interpretations. The example specifies a 10-minus-5-day contrast, its averaging sample, age-specific comparisons, and uncertainty calculation. Those details make a disagreement interpretable.
 
@@ -26,18 +26,18 @@ If data processing is part of the work being checked, both implementations shoul
 
 <!-- prompt:independent-implementation -->
 ::: {#request-independent-implementation .prompt}
-> Working only from specification.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+> Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
 :::
 <!-- /prompt:independent-implementation -->
 
 Different languages or statistical packages help expose defaults. Fresh implementations in the same language can still be useful; two are the default, with a third reserved for a further independent attempt when needed. Agreement by majority vote does not decide which implementation is correct.
 
-For restricted inputs, develop code with permitted synthetic data and run each implementation on the real records in the approved environment. Keep the comparison there unless its contents may be shared. [Chapter 3](#research-limits) explains that separation.
+For restricted inputs, develop code with permitted synthetic data and run each implementation on the real records in the approved environment. Keep the comparison there unless its contents may be shared. [Chapter 3: Know where your data goes](#research-limits) explains that separation.
 
 ## What the worked comparison found
 
 <!-- example:independent-results -->
-Two fresh agents received only the same original synthetic CSV and written specification. One built the R analysis; the other built the Python analysis. Neither received the other's implementation or results while building. The completed comparison retained all 1,200 ids and matched every design-matrix value exactly.
+Two fresh agents received only the same original synthetic CSV and written specification. One built the R analysis; the other built the Python analysis. Neither received the other's implementation or results while building. The completed comparison retained all 1,200 ids and matched every design-matrix value exactly. The download preserves the original specification in `docs/notes/independent-implementation-specification.md`; the current root specification links to it.
 
 <details class="guide-example">
 <summary>Compare the saved estimates</summary>
@@ -70,7 +70,7 @@ Compare the completed outputs in a separate session. Work from inputs toward res
 
 <!-- prompt:compare-implementations -->
 ::: {#request-compare-implementations .prompt}
-> Compare the completed implementations against specification.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+> Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
 :::
 <!-- /prompt:compare-implementations -->
 
@@ -78,6 +78,6 @@ Compare full-precision values before rounding. Identifiers and categorical value
 
 Correct against the specification and source data, then rerun affected comparisons. Never change one result merely to match the other. If the specification changes, both implementations must follow the revised version.
 
-Agreement can still miss shared interpretations, faulty routines, and rules never exercised by the supplied data. Supplement it with the [known-answer checks](#simulation) and targeted cases such as duplicates, missing inputs, or boundary values. Retain inexpensive assertions in the [modular workflow](#research-workflows).
+Agreement can still miss shared interpretations, faulty routines, and rules never exercised by the supplied data. Supplement it with the known-truth tests in [Chapter 14: Test the analysis against known truth](#simulation) and targeted cases such as duplicates, missing inputs, or boundary values. Retain inexpensive assertions within the modular workflow described in [Chapter 13: Build a modular analysis workflow](#research-workflows).
 
-For analysis built from saved code, continue to [writing and revision](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.
+For analysis built from saved code, continue to [Chapter 18: Write and revise from the research record](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.

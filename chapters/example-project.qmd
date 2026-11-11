@@ -6,35 +6,52 @@ title: "10. The example research project"
 
 # 10. The example research project
 
-How does heat exposure relate to birthweight, and does that relationship vary with maternal age? This question connects the following chapters. An agent can help develop it, examine the evidence, and build an analysis whose results can be checked and reproduced.
+How does a mother’s exposure to heat during pregnancy relate to her baby’s birthweight, and does that relationship vary with maternal age? This question connects the following chapters. An agent can help develop it, examine the evidence, and build an analysis whose results can be checked and reproduced.
 
-The example uses 1,200 fully synthetic birth records. Their relationships are deliberately constructed to make particular checks possible. The estimates are teaching results, not evidence about actual pregnancies. You can inspect the saved files without installing additional software.
+The example uses 1,200 synthetic birth records. Each record contains the mother’s age and smoking status, the number of hot days she experienced during the third trimester, and the baby’s birthweight in grams. You can inspect the saved files without installing additional software.
 
 [Download the complete synthetic research project](resources/heat-birthweight.zip){.download-button download="heat-birthweight.zip"}
 
-Chapters 11–15 follow the example through literature, data, modular analysis, simulation, and independent implementation. Continue to [chapter 18](#research-writing) for writing and [chapter 19](#research-handoff) for reproduction and handoff. Chapters [16](#llm-measurements) and [17](#research-models) provide an additional route when LLM outputs become research data or you need to run or adapt an LLM yourself.
+![](figures/research-process.svg){#fig-research-process .tall fig-alt="Chapter 10 defines the research question and specification. Chapters 11 and 12 supply literature and data; Chapter 13 builds the analysis; Chapters 14 and 15 check it; Chapters 18 and 19 cover writing and handoff. Feedback paths return to the question or analysis. An optional branch covers LLM research in Chapters 16 and 17."}
+
+::: {.web-only}
+<details class="guide-example">
+<summary>Open a chapter from the diagram</summary>
+
+- [Chapter 11: Find and assess research literature](#literature)
+- [Chapter 12: Bring data into the project](#data-acquisition)
+- [Chapter 13: Build a modular analysis workflow](#research-workflows)
+- [Chapter 14: Test the analysis against known truth](#simulation)
+- [Chapter 15: Check the agent with independent implementations](#checking-analysis)
+- [Chapter 16: Use LLM outputs as research data](#llm-measurements)
+- [Chapter 17: Run and adapt LLMs for your research](#research-models)
+- [Chapter 18: Write and revise from the research record](#research-writing)
+- [Chapter 19: Reproduce and hand off the research](#research-handoff)
+
+</details>
+:::
 
 ## Develop the research question
 
-An agent can help turn a broad interest into a question that the available evidence and data can address. For this project, ask it to compare studying mean birthweight with studying low birthweight, or a trimester-wide exposure with a shorter heat episode. Have it explain what each choice would require and identify evidence that challenges the proposed approach. The literature search in [chapter 11](#literature) supplies sources for that discussion.
+An agent can help you compare ways to frame a research question. For this study, you might examine average birthweight or the probability of low birthweight, and measure heat exposure across the third trimester or during a brief heatwave. Ask the agent to explain what each approach would estimate and what data it would require. [Chapter 11: Find and assess research literature](#literature) explains how to find evidence that supports or challenges these choices.
 
 These are research decisions, not details for the agent to settle while coding. A different outcome or exposure window may answer a different question. You decide which question to pursue; the agent can make the alternatives, assumptions, and unresolved issues easier to examine.
 
 <!-- prompt:compare-research-approaches -->
 ::: {#request-compare-research-approaches .prompt}
-> Using the research question, available data, and constraints below, compare plausible approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
+> Using the research question, available data, and constraints below, compare plausible analysis approaches. Explain what each would estimate, the assumptions it requires, and what evidence supports or challenges it. Separate verified sources from suggestions to investigate. Identify decisions needed from me before turning the chosen approach into an analysis specification.
 :::
 <!-- /prompt:compare-research-approaches -->
 
 ## Write the scientific specification {#example-specification}
 
-The example records maternal age, smoking status, third-trimester hot days, and birthweight in grams. Its specification separates the quantity to report from the statistical model used to estimate it.
+The analysis specification tells the agent what to estimate, how to estimate it, and what results to save. For the synthetic birthweight study, these decisions are recorded in `SPECIFICATION.md` and summarized below.
 
 ::: {.needspace height="10cm"}
 :::
 
 | Item | Specification |
-|---|---|
+|:--------------------|:-------------------------------------------------------------------------------|
 | Question | What is the mean birthweight difference between 10 and 5 hot days, and how does it vary with maternal age? |
 | Primary estimand | The 10-minus-5-day mean difference, standardized over this synthetic sample's age and smoking distribution. |
 | Secondary estimands | The same contrast at maternal ages 22, 28, and 36, using the sample's smoking distribution. |
@@ -44,24 +61,24 @@ The example records maternal age, smoking status, third-trimester hot days, and 
 
 The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.
 
-A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison. The synthetic generator cannot establish those assumptions for observed births, and the example's contrast is not automatically a population-average causal effect.
+A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison.
 
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
-> Write specification.md from my research decisions: estimands, population or averaging sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. Include agreed checks and tolerances. Flag unresolved choices for my review before fitting.
+> Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 <!-- /prompt:research-specification -->
 
 ## Keep the project files together
 
-The download follows the organization introduced in [chapter 6](#project-organization). It contains the original synthetic records and dictionary, their generator, independent [R](https://www.r-project.org/) and [Python](https://www.python.org/) implementations, saved results, software records, and verification reports. Its README distinguishes completed checks from restoration work still to test.
+The download follows the organization introduced in [Chapter 6: Organize your research projects](#project-organization). It contains the original synthetic records and data dictionary, their generator, independent [`R`](https://www.r-project.org/) and [`Python`](https://www.python.org/) implementations, saved results, software records, and verification reports. Its README explains how to run the project and records which checks have been completed.
 
-Maintain the agreed analysis in `specification.md`. Use `METHODOLOGY.md` to record decisions and their reasons, including revisions to that specification. The example's simulation plan defines separate worlds with known relationships; [chapter 14](#simulation) uses them to assess the estimator. Keeping the plan, code, and results together lets another person distinguish a planned check from an explanation added after seeing the answer.
+Record the prescribed analysis in `SPECIFICATION.md`. The completed example states the sample, contrasts, estimator, and required outputs. Its `METHODOLOGY.md` explains the documented choices and the later reorganization; it identifies retrospective entries rather than inventing a decision history. The original specification supplied to the independent implementations is preserved separately, so readers can see exactly what those runs received.
+
+The simulation specification defines distinct simulated scenarios with known relationships among the study variables. [Chapter 14: Test the analysis against known truth](#simulation) uses these scenarios to assess the estimator. Keeping the simulation specification, code, and results together helps distinguish checks specified in advance from explanations developed after seeing the results.
 
 ## Follow the work, including its revisions
 
-Research rarely proceeds once through a fixed sequence. A literature finding may change the exposure definition; a data limitation may narrow the question. Failed checks can reveal a coding error or an inadequate method. Writing can expose a claim the analysis has not addressed.
-
-![](figures/research-process.svg){#fig-research-process .tall fig-alt="A research question leads through literature and data to analysis, checks, writing, and handoff. Labeled return paths show evidence and data changing the specification, failed checks returning to analysis, and manuscript questions prompting further analysis."}
+Research rarely proceeds once through a fixed sequence. A literature finding may change the exposure definition; a data limitation may narrow the research question. Failed checks can reveal a coding error or an inadequate method. Writing can expose a claim the analysis has not addressed.
 
 The agent can investigate these problems and propose responses. Before changing the scientific approach, agree what should change and record why. Preserve the earlier specification and results so that the revision can be understood.

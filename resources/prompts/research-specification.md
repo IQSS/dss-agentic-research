@@ -1,1 +1,1 @@
-Write specification.md from my research decisions: estimands, population or averaging sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. Include agreed checks and tolerances. Flag unresolved choices for my review before fitting.
+Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.

@@ -6,13 +6,13 @@ title: "3. Know where your data goes"
 
 # 3. Know where your data goes
 
-An agent can send research material to the company running its LLM (the *provider*), even while working with files on your computer. For Claude, that company is Anthropic. Before giving an agent access, you need to understand what information may be sent, what the provider keeps, and whether your project permits that use.
+An agent can send research material to the company running its LLM (the *provider*), even while working with files on your computer. For `Claude`, that company is Anthropic. Before giving an agent access, you need to understand what information may be sent, what the provider keeps, and whether your project permits that use.
 
 Suppose you ask an agent to diagnose an error in a script that analyzes confidential birth records. It prints several records to understand the problem. Those records can be sent to the LLM as part of its context, even though you never uploaded the dataset yourself.
 
 ## What reaches the LLM
 
-With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with `This computer` selected in [Claude Code](https://code.claude.com/docs/en/desktop).
+With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with `This computer` selected in [`Claude Code`](https://code.claude.com/docs/en/desktop).
 
 ![](figures/research-data-flow.svg){#fig-research-data-flow fig-alt="On your computer, the agent's tools read project files. The agent sends tool results to the hosted LLM on the provider's computers. The provider may retain copies."}
 
@@ -22,15 +22,15 @@ A script reading a dataset does not, by itself, send every record to the LLM. Wh
 
 The LLM uses the information sent to it to generate a response. The provider may retain conversations and tool results after the task ends. Using that material to train an LLM is a separate use: a promise not to train on your data does not mean that no copy is kept.
 
-Anthropic documents a standard 30-day retention period for commercial Claude Code use, with other arrangements available to qualifying organizations. Enterprise chat and project retention controls have different coverage.[^data-retention] Even a few weeks may exceed what your project permits. Confirm the terms for your product and account; personal-account privacy settings do not provide an institutional agreement’s contractual coverage.
+Anthropic documents a standard 30-day retention period for commercial `Claude Code` use, with other arrangements available to qualifying organizations. Enterprise chat and project retention controls have different coverage.[^data-retention] Even a few weeks may exceed what your project permits. Confirm the terms for your product and account; personal-account privacy settings do not provide an institutional agreement’s contractual coverage.
 
-[^data-retention]: See Anthropic’s [Claude Code data-usage documentation](https://code.claude.com/docs/en/data-usage) and [Enterprise retention guidance](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans), checked November 6, 2026. The products have different controls and exclusions. These public documents do not establish Harvard’s retention duration.
+[^data-retention]: See Anthropic’s [`Claude Code` data-usage documentation](https://code.claude.com/docs/en/data-usage) and [Enterprise retention guidance](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans), checked November 6, 2026. The products have different controls and exclusions. These public documents do not establish Harvard’s retention duration.
 
 ## Check what your project permits
 
 Check both institutional approval for the service and your project’s terms. An institution may approve a tool while a data-use agreement prohibits sending your records to it. Consent, an IRB protocol, confidentiality agreements, and federal grant or other funder requirements may also limit the use. If the terms are unclear, ask the responsible institutional office before supplying the material.
 
-> **Harvard, checked November 6, 2026.** [HUIT’s Claude guidance](https://www.huit.harvard.edu/claude) approves Harvard Claude Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
+> **Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
 
 If you connect the agent to another service, check your institution’s guidance to confirm that the connection is approved for the data you intend to use.
 
@@ -38,7 +38,7 @@ If you connect the agent to another service, check your institution’s guidance
 
 An agent writing analysis code can work with synthetic records that have the required columns and types. Give it a shareable data description and have it develop and test the code with those records. Run the saved code on real data in an approved environment, without giving the agent access unless separately authorized. Check the real-data analysis there; return only information that is permitted to leave.
 
-If the LLM must analyze the material, such as coding confidential interviews, it needs the real text. You could use an approved hosted service or an *open-weight LLM*, whose trained parameters are available to download and run on your computer or an institutional server. Running the LLM within approved infrastructure gives you control over where it processes data; the agent’s tools and connections still need restrictions. [Chapter 17](#research-models) explains these choices, and [chapter 16](#llm-measurements) covers evaluating the LLM’s work.
+If the LLM must analyze the material, such as coding confidential interviews, it needs the real text. You could use an approved hosted service or an *open-weight LLM*, whose trained parameters are available to download and run on your computer or an institutional server. Running the LLM within approved infrastructure gives you control over where it processes data; the agent’s tools and connections still need restrictions. [Chapter 17: Run and adapt LLMs for your research](#research-models) explains these choices, and [Chapter 16: Use LLM outputs as research data](#llm-measurements) covers evaluating the LLM’s work.
 
 ![](figures/research-data-routes.svg){#fig-research-data-routes .tall fig-alt="Two ways to work with restricted data. First, an agent using a hosted LLM develops code from synthetic data; saved code is transferred into an approved environment to analyze real data. Second, an open-weight LLM runs alongside the real data inside an approved computer or server."}
 
@@ -62,4 +62,4 @@ Confirm what deletion covers, including backups and service records. Keep the cu
 > **If material is exposed accidentally.** Stop further access and transfer. Record what was sent, to which service and account, and when. Report the incident promptly through your institution’s designated route and follow its instructions. Do not assume deleting the conversation resolves the exposure or erase records needed to assess it.
 :::
 
-Once you know which information the agent may use, configure its access to files and tools. [Chapter 4](#agent-access) explains how.
+Once you know which information the agent may use, configure its access to files and tools. [Chapter 4: Control what the agent can do](#agent-access) explains how.

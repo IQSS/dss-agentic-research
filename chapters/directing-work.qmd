@@ -8,7 +8,7 @@ title: "5. Choose settings for the task"
 
 The app lets you choose whether the agent should plan before acting, how actions receive approval, and which LLM and reasoning effort to use. These choices help you give difficult work enough attention while letting routine tasks proceed with fewer interruptions.
 
-Changing a figure label usually needs a direct instruction. Investigating why two analyses produce conflicting estimates may need a plan and more reasoning. Both tasks use the access controls from [chapter 4](#agent-access); changing a session setting does not replace those controls.
+Changing a figure label usually needs a direct instruction. Investigating why two analyses produce conflicting estimates may need a plan and more reasoning. Both tasks use the access controls from [Chapter 4: Control what the agent can do](#agent-access); changing a session setting does not replace those controls.
 
 ![](figures/session-settings.svg){#fig-session-settings fig-alt="An enlarged view of the Claude Code controls below the message box. Model selects the LLM, High is the shown reasoning effort, Auto is the shown permission mode, and the usage circle opens allowance and reset information. The four controls have separate purposes." above="6pt" below="6pt"}
 
@@ -17,9 +17,9 @@ Changing a figure label usually needs a direct instruction. Investigating why tw
 
 ## Decide whether to plan first
 
-Use `Plan` mode when the task leaves important choices unresolved. Select it in [Claude Code](https://code.claude.com/docs/en/desktop), describe the intended result and constraints, and ask for the proposed approach before implementation. The plan should identify the files involved, questions that need your judgment, and checks of the completed work.
+Use `Plan` mode when the task leaves important choices unresolved. Select it in [`Claude Code`](https://code.claude.com/docs/en/desktop), describe the intended result and constraints, and ask for the proposed approach before implementation. The plan should identify the files involved, questions that need your judgment, and checks of the completed work.
 
-Read it for analytical assumptions as well as proposed steps. Has the agent chosen the correct input file? Will it preserve the intended sample? Does it propose replacing your statistical model with a simpler one? Resolve these questions before authorizing implementation and switching to an execution mode. For difficult work, another agent can critique the plan; [chapter 7](#review-project-plan) explains how to give that reviewer enough context.
+Read it for analytical assumptions as well as proposed steps. Has the agent chosen the correct input file? Will it preserve the intended sample? Does it propose replacing your statistical model with a simpler one? Resolve these questions before authorizing implementation and switching to an execution mode. For difficult work, another agent can critique the plan; [Chapter 7: Give the agent context for your project](#review-project-plan) explains how to give that reviewer enough context.
 
 When the goal and method are already clear, a direct instruction is usually enough. An agent can change specified labels and regenerate a figure without a separate planning round.
 
@@ -47,14 +47,14 @@ Start consequential research work with a capable LLM and high effort, then reduc
 
 ## Understand usage and context limits {#usage-and-context}
 
-Reading context, reasoning, and generating responses consume LLM tokens, the pieces of text introduced in [chapter 1](#research-uses). Long inputs, extensive outputs, higher effort, and several agents working at once can use more of your allowance. The accounting depends on the LLM and your plan, so message count alone does not tell you how much remains.
+Reading context, reasoning, and generating responses consume LLM tokens, the pieces of text introduced in [Chapter 1: How agents can help your research](#research-uses). Long inputs, extensive outputs, higher effort, and several agents working at once can use more of your allowance. The accounting depends on the LLM and your plan, so message count alone does not tell you how much remains.
 
-Click the app's usage circle to see usage and reset information. If your account has both session and weekly limits, resetting the shorter allowance does not reset the weekly one. Check these before starting substantial work, along with any charges for extra usage. [Claude's usage guidance](https://support.claude.com/en/articles/9797557-usage-limit-best-practices) explains the current arrangements.
+Click the app's usage circle to see usage and reset information. If your account has both session and weekly limits, resetting the shorter allowance does not reset the weekly one. Check these before starting substantial work, along with any charges for extra usage. [`Claude`'s usage guidance](https://support.claude.com/en/articles/9797557-usage-limit-best-practices) explains the current arrangements.
 
-Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, Claude Code automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
+Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, `Claude Code` automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
 
-Keep consequential decisions and the current state of the work in project files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7](#project-context) explains which records to maintain.
+Keep consequential decisions and the current state of the work in project files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7: Give the agent context for your project](#project-context) explains which records to maintain.
 
-A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [chapter 13](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
+A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [Chapter 13: Build a modular analysis workflow](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
 
 [^context-compaction]: Anthropic’s [context-window documentation](https://code.claude.com/docs/en/context-window) explains automatic compaction and the information retained or reloaded afterward.

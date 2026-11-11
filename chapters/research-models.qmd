@@ -8,7 +8,7 @@ title: "17. Run and adapt LLMs for your research"
 
 Running an LLM yourself can give you control over where research material is processed and preserve access to the weights used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices, with different costs and checks.
 
-For the interview-labeling task in [chapter 16](#llm-measurements), data restrictions might require inference on approved local hardware. Separately, persistent coding errors might justify testing whether fine-tuning improves performance. You can run an unchanged open-weight LLM locally; local execution does not require training.
+For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require inference on approved local hardware. Separately, persistent coding errors might justify testing whether fine-tuning improves performance. You can run an unchanged open-weight LLM locally; local execution does not require training.
 
 ## Choose where the LLM runs {#local-models}
 
@@ -16,11 +16,11 @@ An *open-weight LLM* makes its trained parameters available to download and run 
 
 [^open-source-ai]: [Open Source AI Definition 1.0](https://opensource.org/ai/open-source-ai-definition), Open Source Initiative. The definition requires parameters, code, and information sufficient to understand the training data; it does not require publishing every raw training record.
 
-“Hosting locally” can mean running an LLM on your everyday computer. A runtime such as [Ollama](https://docs.ollama.com/) loads suitable downloaded weights and accepts requests from an interface, script, or agent. A *server* can simply be software on that computer serving those requests. A separate machine is needed only when the workload or approved computing arrangement requires one.
+“Hosting locally” can mean running an LLM on your everyday computer. A runtime such as [`Ollama`](https://docs.ollama.com/) loads suitable downloaded weights and accepts requests from an interface, script, or agent. A *server* can simply be software on that computer serving those requests. A separate machine is needed only when the workload or approved computing arrangement requires one.
 
 ![](figures/llm-deployment.svg){#fig-llm-deployment fig-alt="The same research task can use an LLM on your computer, on institutional infrastructure, or at a hosting provider. Inputs travel to the location where inference runs; local tools do not establish a local LLM."}
 
-A hosted LLM receives the material submitted for inference. A promise not to train on it does not settle retention or deletion. Return to [chapter 3](#data-chain-of-custody) when choosing the processing location. Synthetic records can help develop code, but cannot replace the actual interview text when the task is to label that text.
+A hosted LLM receives the material submitted for inference. A promise not to train on it does not settle retention or deletion. Return to [Chapter 3: Know where your data goes](#data-chain-of-custody) when choosing the processing location. Synthetic records can help develop code, but cannot replace the actual interview text when the task is to label that text.
 
 With local inference, check the agent's other routes too: tools, external services, logs, caches, and backups may still transmit or retain protected material. Using open weights through someone else's hosted API sends inputs to that provider. Verify the actual route before supplying the research inputs.
 
@@ -45,11 +45,11 @@ The smaller Qwen, Gemma, and Ministral examples are candidates for evaluation on
 
 Weights occupy disk and working memory. Long contexts and concurrent runs require additional memory. *Quantization* stores numerical values at reduced precision to reduce resource requirements; evaluate the actual quantized version you intend to use. Ask institutional research computing for help when the workload exceeds local resources.
 
-Record the exact release, weights, license, runtime, quantization, context limit, and prompting format. Custom license terms need release-specific attention; the license name alone does not establish that the system meets the open-source definition. The toolkit's [local-model chapter](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) covers installation, hardware checks, and connecting a compatible LLM to an agent.
+Record the exact release, weights, license, runtime, quantization, context limit, and prompting format. Custom license terms need release-specific attention; the license name alone does not establish that the system meets the open-source definition. [Chapter 17: Run and adapt an LLM on your own hardware](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
 
 ### Apple's on-device option
 
-Local inference does not require open weights. Apple's [Foundation Models framework](https://developer.apple.com/foundation-models-framework/) provides access to an on-device LLM on supported devices. It may be useful for a bounded extraction, labeling, or summarization task if evaluation supports that use. The framework also supports hosted routes, so select and verify the on-device route explicitly. It offers a different degree of control from preserving your own downloaded weights.
+Local inference does not require open weights. Apple's [`Foundation Models framework`](https://developer.apple.com/foundation-models-framework/) provides access to an on-device LLM on supported devices. It may be useful for a bounded extraction, labeling, or summarization task if evaluation supports that use. The framework also supports hosted routes, so select and verify the on-device route explicitly. It offers a different degree of control from preserving your own downloaded weights.
 
 ## Decide whether context or training is needed {#context-or-training}
 
@@ -77,9 +77,9 @@ Compare adaptation with a strong prompted baseline.[^adaptation-evidence] When t
 
 *LoRA*, or *Low-Rank Adaptation*, is a fine-tuning method. Training software keeps the base weights fixed and learns compact adjustments to selected parts of the LLM. Those adjustments are saved as an *adapter*, used with the base LLM or merged into a new copy.[^lora-method]
 
-For example, Qwen names an LLM family, [MLX LM](https://github.com/ml-explore/mlx-lm) and [Hugging Face PEFT](https://huggingface.co/docs/peft/) provide training software, and LoRA describes how training changes the system. Your adapter contains the learned adjustments. Full fine-tuning instead updates the original weights and generally requires more training memory.
+For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/mlx-lm) and [`Hugging Face PEFT`](https://huggingface.co/docs/peft/) provide training software, and LoRA describes how training changes the system. Your adapter contains the learned adjustments. Full fine-tuning instead updates the original weights and generally requires more training memory.
 
-*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a particular configuration fits your computer still depends on the release, context length, and training settings. The toolkit links to supported training tools and their setup instructions.
+*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a particular configuration fits your computer still depends on the release, context length, and training settings. The toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 
 [^lora-method]: Hu et al. (2021), [“LoRA: Low-Rank Adaptation of Large Language Models”](https://arxiv.org/abs/2106.09685), explains the method and reductions in trainable parameters and training memory.
 
@@ -87,11 +87,11 @@ For example, Qwen names an LLM family, [MLX LM](https://github.com/ml-explore/ml
 
 ## Evaluate and preserve the adapted LLM {#evaluate-adapted-model}
 
-Apply the [chapter 16 evaluation](#evaluate-llm-labeling) to the baseline and adapted LLM. Separate training examples, development material for choosing settings, and final evaluation cases. Keep related material together across those splits.
+Use the evaluation described in [Chapter 16: Use LLM outputs as research data](#evaluate-llm-labeling) to compare the baseline and adapted LLM. Separate training examples, development material for choosing settings, and final evaluation cases. Keep related material together across those splits.
 
 Compare errors important to the study, including rare categories, failures, and human referrals. If efficiency motivates training, include training effort and inference cost. Better agreement with reference labels does not establish that the labels measure the intended construct.
 
-Preserve the base weights and identifier, adapter or updated weights, training-data version, split assignments, training settings, software environment, and evaluation outputs. An adapter without its base LLM is incomplete. Distinguish analyzing saved responses, generating new responses with the adapted LLM, and retraining it.
+Preserve the base weights and identifier, adapter or updated weights, training-data version, split assignments, training settings, software environment, and evaluation outputs. Link the evaluation criteria and retained run versions from `SPECIFICATION.md`. Record approved changes to the training or evaluation procedure in `METHODOLOGY.md`, preserving the earlier protocols and results. An adapter without its base LLM is incomplete. Distinguish analyzing saved responses, generating new responses with the adapted LLM, and retraining it.
 
 Include trained weights, adapters, checkpoints, and logs in the [chain of custody](#data-chain-of-custody); fine-tuning can retain training information.[^training-memorization]
 

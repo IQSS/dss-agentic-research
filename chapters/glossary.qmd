@@ -25,7 +25,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-auto-mode}
-*`Auto` mode.* A [Claude Code](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated review of actions. It reduces routine approval prompts while retaining checks. [Approval settings](#choose-how-actions-are-approved).
+*`Auto` mode.* A [`Claude Code`](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated review of actions. It reduces routine approval prompts while retaining checks. [Approval settings](#choose-how-actions-are-approved).
 :::
 
 ::: {#term-brief}
@@ -49,7 +49,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-commit}
-*Commit.* A recorded version of the files tracked by [Git](https://git-scm.com/), with a message describing the changes. Commits provide versions to compare or restore. [Recovery](#project-recovery).
+*Commit.* A recorded version of the files tracked by [`Git`](https://git-scm.com/), with a message describing the changes. Commits provide versions to compare or restore. [Recovery](#project-recovery).
 :::
 
 ::: {#term-compaction}
@@ -101,7 +101,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-global-instructions}
-*Global instructions.* Another name for [personal instructions](#term-personal-instructions) that apply across projects.
+*Global user instructions.* Conventions used across your projects, such as writing preferences or software practices. Also called global or personal instructions. [Conventions across projects](#shared-instructions).
 :::
 
 ::: {#term-harness}
@@ -140,6 +140,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
 :::
 
+::: {#term-methodological-decision-log}
+*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project records](#project-records).
+:::
+
 ::: {#term-modular-workflow}
 *Modular workflow.* Research steps that can run independently, with explicit inputs and saved outputs. Each performs a coherent operation, such as fitting a statistical model or generating a figure. [Modularity](#modular-steps).
 :::
@@ -161,7 +165,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-personal-instructions}
-*Personal instructions.* Conventions used across your projects, such as writing preferences or software practices. These are often called global instructions. [Shared guidance](#shared-instructions).
+*Personal instructions.* Another name for [global user instructions](#term-global-instructions).
 :::
 
 ::: {#term-plan-mode}
@@ -173,7 +177,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-prompt}
-*Prompt.* A request or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Example requests](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
+*Prompt.* A request or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Appendix B: Prompt bank](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
 :::
 
 ::: {#term-provenance}
@@ -206,6 +210,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 
 ::: {#term-sandbox}
 *Sandbox.* Operating-system restrictions on covered execution, such as limits on file or network access. Tools outside the sandbox require separate controls. [Access enforcement](#enforce-those-limits).
+:::
+
+::: {#term-scientific-specification}
+*Scientific specification.* The current approved research requirements, maintained in `SPECIFICATION.md`. It tells the agent what to implement and check. [Project records](#project-records).
 :::
 
 ::: {#term-session}

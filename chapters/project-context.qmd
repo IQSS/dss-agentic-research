@@ -8,7 +8,7 @@ title: "7. Give the agent context for your project"
 
 An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. The records also help you and your collaborators understand changes made along the way.
 
-In the [synthetic heat-and-birthweight example](#example-project), suppose the main analysis is complete but a sensitivity analysis remains unfinished. An agent asked to update a caption needs to identify the current results. If it later changes the analysis, it also needs the agreed sample definition and the reasons for earlier modeling choices.
+Suppose you return to a paper after a month and ask an agent to revise Figure 2. Several versions of the results remain in the project folder. The agent needs to know which version uses the agreed sample, why some observations were excluded, and whether the sensitivity analysis is finished.
 
 ## Explain the project and the current task {#project-orientation}
 
@@ -16,24 +16,25 @@ Describe the research question, the relevant data and outputs, and the result yo
 
 Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
 
-![](figures/project-context.svg){#fig-project-context .tall fig-alt="An agent session reads project instructions, status, tasks, and methodological decisions. After doing and checking the work, it updates those records. A later session reads the updated files before continuing." above="8pt" below="8pt"}
+![](figures/project-context.svg){#fig-project-context .tall fig-alt="Project instructions, status, and tasks form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these records; a later session reads them before continuing." above="8pt" below="8pt"}
 
 ## Save instructions and project records {#project-records}
 
-In [Claude Code](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session.[^project-instructions] Keep it short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
+In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for project instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
 
 ::: {.needspace height="9cm"}
 :::
 
 | File | Purpose and example |
-|---|---|
+|:------------|:----------------------------------------------------|
 | `CLAUDE.md` | Project instructions: follow the scientific specification and read the current status before starting. |
 | `STATUS.md` | Current state: the main analysis is complete; the sensitivity analysis is pending. |
 | `TASKS.md` | Work to do and completed work: update Figure 2's labels, with a dated entry after checking the result. |
-| `METHODOLOGY.md` | Research decisions and reasons: which records were excluded and why. |
+| `SPECIFICATION.md` | Current scientific requirements: which records to include, what to estimate, and which checks and outputs to produce. Have the agent rewrite it when approved decisions change. |
+| `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
 
-These record names are conventions, not special commands. Tell the agent which files to read and maintain. Begin with the instructions and the records your project needs; a larger study may also use a separate analysis plan or scientific specification.
+These record names are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
@@ -45,9 +46,11 @@ A useful instruction identifies both the record and its purpose:
 
 ```
 Before starting, read STATUS.md and TASKS.md and inspect the relevant files.
-Follow specification.md for the estimands, estimator, and sample rules.
+Follow SPECIFICATION.md when implementing or checking the analysis;
+consult METHODOLOGY.md for decisions and reasons.
 After working, update the status and tasks from the outputs actually checked.
-Record scientific decisions and their reasons in METHODOLOGY.md.
+After an approved scientific change, update SPECIFICATION.md and add a dated
+decision and reason at the top of METHODOLOGY.md. Preserve earlier entries.
 ```
 
 The [complete project example](#starter-project) is also available as a download. Adapt its research details before using it.
@@ -66,10 +69,12 @@ Synthetic teaching study of heat exposure and birthweight. Every individual
 record is synthetic; results are not evidence about actual pregnancies.
 
 ## Read first
-- specification.md: estimands, estimator, input rules, uncertainty, and checks.
 - STATUS.md: current state and next decision.
 - TASKS.md: work remaining and dated completions.
-- METHODOLOGY.md: scientific decisions and their reasons.
+- SPECIFICATION.md: current scientific requirements; follow it when implementing
+  or checking the analysis.
+- METHODOLOGY.md: dated scientific decisions and their reasons; consult it when
+  the rationale or history matters.
 
 ## Files
 - data/raw/: approved original synthetic data; preserve unchanged.
@@ -90,7 +95,10 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
-- Record scientific decisions and their reasons in METHODOLOGY.md.
+- When the researcher approves a scientific change, rewrite SPECIFICATION.md
+  to reflect the current requirements and add a dated entry at the top of
+  METHODOLOGY.md explaining the decision, reason, and specification change.
+- Preserve older decisions and frozen specifications used for completed runs.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
@@ -104,21 +112,21 @@ configured access controls for those boundaries.
 </details>
 :::
 
-[^project-instructions]: See Anthropic's [instruction-file documentation](https://code.claude.com/docs/en/memory#claudemd-files). If a lab maintains agent-neutral instructions in AGENTS.md, ask the agent to configure that maintained copy for the installed app. The [AGENTS.md documentation](https://code.claude.com/docs/en/memory#agentsmd) explains direct loading and import options. Avoid two independently edited copies of the same instructions.
+[^project-instructions]: When using agent tools from multiple providers, keep one maintained instructions file. Ask the agent to make `CLAUDE.md` a *symbolic link* to `AGENTS.md`, so both filenames refer to the same content, and check that each tool reads it. This avoids independently edited copies. See Anthropic's [instructions for sharing a file](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools) and the [AGENTS.md guidance](https://agents.md/).
 
 ## Record plans and research decisions {#review-project-plan}
 
 When a task needs a plan, distinguish the scientific decisions from the agent's proposed implementation. You may already have settled the estimand, sample, and estimator; the agent still needs to work out which scripts to change and which checks to run. Give it the research question and relevant supporting material, and have it identify unresolved choices before implementation.
 
-For difficult work, ask one or two fresh agent sessions to critique the proposed plan. Give them the research question, constraints, and supporting evidence as well as the plan itself. They can look for questionable assumptions, missing steps, and alternative approaches. Use your judgment and the evidence to resolve their suggestions; agreement between agents does not establish that a method is appropriate.
+For difficult work, ask one or two fresh agent sessions to critique the proposed plan. Responses can differ even when the sessions use the same LLM. A fresh session also reviews the plan without the preceding conversation, which may help it notice assumptions the first session took for granted. Give each session the research question, constraints, evidence, and plan, and ask it to identify questionable assumptions, missing steps, or alternatives. Use your judgment and the evidence to resolve their suggestions; sessions using the same LLM can share mistakes, so agreement does not establish that a method is appropriate.
 
-Have the agent save the accepted plan and record consequential research decisions with their reasons. If a decision changes, preserve the earlier reasoning and add the new decision. The project record should explain why the work changed, rather than leaving a later reader to infer the reason from altered code. The later chapters on [simulation](#simulation) and [independent implementations](#checking-analysis) explain how to check the resulting analysis.
+Have the agent save its implementation plan separately from the scientific requirements in `SPECIFICATION.md`. When you approve a scientific change, have it rewrite the affected requirements and add a dated entry at the top of `METHODOLOGY.md`, explaining the decision and its reason. Preserve earlier entries. The project record should explain why the work changed, rather than leaving a later reader to infer the reason from altered code. [Chapter 14: Test the analysis against known truth](#simulation) and [Chapter 15: Check the agent with independent implementations](#checking-analysis) explain how to check the resulting analysis.
 
 ## Keep the records current {#maintain-project-context}
 
-Make record maintenance a standing instruction. The agent should read the current records before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
+Make record maintenance a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the current records before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
 
-For example, after correcting a figure's labels, the task list gets a dated completion entry and the status file identifies the rebuilt figure. If no model was refitted, the record should not imply that the analysis was rerun. Scientific decisions belong in the methods record; a completed formatting task does not need an entry there.
+For example, after correcting a figure's labels, the agent adds a dated completion entry to `TASKS.md` and updates `STATUS.md` to identify the rebuilt figure. If no statistical model was refitted, the record should not imply that the analysis was rerun. An approved scientific change updates `SPECIFICATION.md` and receives a dated explanation in `METHODOLOGY.md`; a completed formatting task does not need either change.
 
 The following requests can establish the routine or recover it when a session has lost track of the work.
 
@@ -130,10 +138,10 @@ The following requests can establish the routine or recover it when a session ha
 
 <!-- prompt:close-session -->
 ::: {#request-close-session .prompt}
-> Update the task list and current status from the work and outputs actually checked. Record scientific decisions and their reasons in METHODOLOGY.md. Leave unfinished work and failures explicit, with enough information for the next session to continue.
+> Update TASKS.md and STATUS.md from the work and outputs actually checked. For scientific changes I approved, update SPECIFICATION.md and add dated entries at the top of METHODOLOGY.md explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 <!-- /prompt:close-session -->
 
-Keep the status file short and current, with detailed history in the appropriate records. Have the agent consult those records when relevant rather than loading every past result into every task. If you edit a file during a session, tell the agent to read it again before continuing. A fresh conversation can still load saved information; [chapter 16](#control-what-each-reviewer-or-judge-receives) explains how to control what it receives.[^project-auto-memory]
+Keep `STATUS.md` short and current. Record completed and outstanding work in `TASKS.md`. Keep current scientific requirements in `SPECIFICATION.md` and dated decisions with their reasons in `METHODOLOGY.md`. Have the agent consult those records when relevant rather than loading every past result into every task. If you edit a file during a session, tell the agent to read it again before continuing. A fresh conversation can still load saved information; [Chapter 16: Use LLM outputs as research data](#control-what-each-reviewer-or-judge-receives) explains how to control what it receives.[^project-auto-memory]
 
-[^project-auto-memory]: Claude Code’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory) lets the agent retain notes. Ask it to correct outdated notes, and keep important research decisions in the maintained project files.
+[^project-auto-memory]: With `Claude Code`’s [auto memory](https://code.claude.com/docs/en/memory#auto-memory), the agent decides which notes to save for future sessions. For project records, you specify what the agent must maintain. Ask it to correct outdated memories, and keep important research decisions in the maintained project files.

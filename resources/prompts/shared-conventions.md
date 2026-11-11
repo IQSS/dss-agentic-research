@@ -1,1 +1,1 @@
-Review these instructions and examples for conventions that apply across projects. Propose a short personal instruction file with references to any useful specialist files. Keep this study's decisions in its project records. Show proposed changes and conflicts, then apply the agreed guidance to the next task.
+Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.

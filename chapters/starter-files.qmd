@@ -1,35 +1,142 @@
 ---
-title: "Appendix A. Starter files"
+title: "Appendix A. Project scaffolds and starter files"
 ---
 
 <div class="chapter-agent" aria-hidden="true"><svg viewBox="451 -16 346 410" xmlns="http://www.w3.org/2000/svg"><g id="figure" style="--coat:#6f7f76;--coat-dk:#55635b;--coat-lt:#8a9a90;--gloves:#e3d9c1;--gloves-dk:#c9bda0"><ellipse cx="600" cy="362" rx="82" ry="10" fill="var(--c-ink)" opacity="0.12"/><g><rect x="568" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><rect x="608" y="292" width="24" height="34" rx="4" fill="var(--c-metal-2)"/><circle cx="580" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="580" cy="326" r="3" fill="var(--c-metal)"/><circle cx="620" cy="326" r="8" fill="var(--c-metal-3)"/><circle cx="620" cy="326" r="3" fill="var(--c-metal)"/><rect x="570" y="330" width="20" height="24" fill="var(--c-metal)"/><rect x="610" y="330" width="20" height="24" fill="var(--c-metal)"/><path d="M554 356 h40 v-8 h-8 l-6 -6 h-18 a8 8 0 0 0 -8 8z" fill="var(--c-mustard-3)"/><path d="M646 356 h-40 v-8 h8 l6 -6 h18 a8 8 0 0 1 8 8z" fill="var(--c-mustard-3)"/><rect x="554" y="352" width="40" height="5" fill="var(--c-sole)"/><rect x="606" y="352" width="40" height="5" fill="var(--c-sole)"/></g><g><polygon points="550,152 650,152 672,298 528,298" class="coat"/><polygon points="550,152 600,152 600,298 528,298" class="coat-dk" opacity="0.28"/><rect x="528" y="292" width="144" height="7" class="coat-dk"/><polygon points="568,152 600,206 632,152" fill="var(--c-shirt)"/><rect x="594" y="158" width="12" height="46" fill="var(--c-blue)"/><polygon points="592,158 608,158 600,166" fill="var(--c-blue-2)"/><polygon points="594,204 606,204 600,214" fill="var(--c-blue)"/><polygon points="568,152 600,206 586,214 556,164" class="coat-lt"/><polygon points="632,152 600,206 614,214 644,164" class="coat-lt"/><polygon points="568,152 600,206 586,214 556,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><polygon points="632,152 600,206 614,214 644,164" fill="none" stroke="var(--coat-dk)" stroke-width="1.5"/><rect x="550" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="573" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="624" y="150" width="26" height="8" rx="2" class="coat-dk"/><circle cx="627" cy="154" r="2.5" fill="var(--c-mustard)"/><rect x="536" y="228" width="128" height="13" class="coat-dk"/><rect x="590" y="224" width="20" height="21" rx="2" fill="var(--c-mustard)"/><rect x="594" y="228" width="12" height="13" class="coat-dk"/><circle cx="614" cy="258" r="3.2" fill="var(--c-mustard-3)"/><circle cx="614" cy="276" r="3.2" fill="var(--c-mustard-3)"/><rect x="548" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><rect x="626" y="252" width="28" height="9" rx="1.5" class="coat-dk"/><line x1="600" y1="214" x2="600" y2="292" stroke="var(--coat-dk)" stroke-width="1.5"/></g><g id="arms"><g transform="translate(556,160) rotate(8)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-6)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g><g transform="translate(644,160) rotate(-35)"><rect x="-13" y="-4" width="26" height="68" rx="6" class="coat"/><rect x="-13" y="56" width="26" height="9" class="coat-dk"/><circle cx="0" cy="0" r="9" class="coat-dk"/><g transform="translate(0,64) rotate(-85)"><circle cx="0" cy="0" r="8" fill="var(--c-metal-3)"/><rect x="-10" y="0" width="20" height="44" rx="4" fill="var(--c-metal)"/><rect x="-10" y="38" width="20" height="6" fill="var(--c-metal-3)"/><rect x="-12" y="44" width="24" height="22" rx="4" fill="var(--gloves)"/><rect x="-9" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-2" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="5" y="62" width="6" height="12" rx="2" fill="var(--gloves-dk)"/><rect x="-12" y="44" width="24" height="4" fill="var(--gloves-dk)"/></g></g></g><rect x="588" y="124" width="24" height="30" fill="var(--c-metal-2)"/><rect x="586" y="132" width="28" height="3" fill="var(--c-metal-3)"/><rect x="586" y="142" width="28" height="3" fill="var(--c-metal-3)"/><g id="head"><rect x="540" y="50" width="120" height="80" rx="8" fill="var(--c-metal)"/><rect x="540" y="50" width="120" height="80" rx="8" fill="none" stroke="var(--c-metal-3)" stroke-width="2.5"/><rect x="552" y="60" width="96" height="62" rx="5" fill="var(--c-plate)"/><g fill="var(--c-metal-3)"><circle cx="547" cy="57" r="2.4"/><circle cx="653" cy="57" r="2.4"/><circle cx="547" cy="123" r="2.4"/><circle cx="653" cy="123" r="2.4"/></g><rect x="526" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="524" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="524" cy="89" r="3" fill="var(--c-metal)"/><rect x="660" y="84" width="14" height="10" fill="var(--c-metal-2)"/><circle cx="676" cy="89" r="7" fill="var(--c-metal-3)"/><circle cx="676" cy="89" r="3" fill="var(--c-metal)"/><g fill="var(--c-metal-3)"><rect x="582" y="106" width="36" height="2.5"/><rect x="582" y="111" width="36" height="2.5"/><rect x="582" y="116" width="36" height="2.5"/></g><g id="eyes"><circle cx="576" cy="86" r="15" fill="var(--c-metal-3)"/><circle cx="624" cy="86" r="15" fill="var(--c-metal-3)"/><circle class="iris" cx="576" cy="86" r="9" fill="#f0d67a"/><circle class="iris" cx="624" cy="86" r="9" fill="#f0d67a"/><circle cx="572" cy="82" r="3" fill="#fff" opacity="0.8"/><circle cx="620" cy="82" r="3" fill="#fff" opacity="0.8"/></g><g><rect x="597" y="24" width="6" height="28" fill="var(--c-metal-2)"/><circle cx="600" cy="22" r="7" fill="var(--c-mustard)"/><circle cx="600" cy="22" r="3" fill="var(--c-mustard-2)"/></g></g></g><g id="held" transform="translate(746.5,174.4)"><g transform="rotate(-8)"><rect x="-30" y="-38" width="60" height="76" fill="var(--c-paper)" stroke="#4f5856" stroke-width="2"/><text x="-22" y="-20" class="tiny" style="fill:#262c2d">AGENTS.md</text><g fill="#cfc8b9"><rect x="-22" y="-12" width="44" height="3"/><rect x="-22" y="-4" width="36" height="3"/><rect x="-22" y="4" width="42" height="3"/><rect x="-22" y="12" width="28" height="3"/><rect x="-22" y="20" width="40" height="3"/></g></g></g></svg></div>
 
-# Appendix A. Starter files
+# Appendix A. Project scaffolds and starter files
 
-These files give an agent the instructions and records it needs to work on a project and resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with project instructions and a short status and task list; add separate scientific records when the work needs them.
+The scaffolds below give an agent a starting structure for a paper, dataset, or website. Each can be downloaded as a Markdown specification to supply with your project brief. They are simplified adaptations of the examples maintained with the scaffold skill; folder names and contents should fit the work, and an existing structure can remain if it serves that purpose.
 
-For the [synthetic heat-and-birthweight study](#example-specification), `specification.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current analysis plan and the reasoning behind it.
+[Chapter 6: Organize your research projects](#project-organization) explains how to choose a structure. [Chapter 9: Use skills for recurring tasks](#reusable-procedures) shows how to reuse the setup through a skill. The instruction and record templates after the scaffolds supply shared starting files for all three layouts.
+
+## A.1 Project scaffolds {#starter-layouts}
+
+### Research paper {#scaffold-paper-example .unlisted}
+
+[Download the research paper scaffold](resources/scaffolds/paper.md){.download-button download="paper-scaffold.md"}
+
+<!-- scaffold:paper -->
+This layout keeps original inputs, reusable analysis code, exploratory work, and manuscript results distinct. It adapts the paper example supplied with the scaffold skill. Retain only the folders the study needs, and use the project's analysis language.
+
+```
+paper-project/
+  README.md
+  CLAUDE.md
+  STATUS.md
+  TASKS.md
+  SPECIFICATION.md
+  METHODOLOGY.md
+  data/
+    raw/
+    processed/
+  code/
+    _startup/
+    _data-acquisition/
+    _experiments/
+    _final/
+  outputs/
+    figures/
+      working/
+      final/
+    models/
+    results/
+    tables/
+  manuscript/
+  docs/
+    references/
+    notes/
+```
+
+Keep original inputs in `data/raw/`; save transformations in `data/processed/`. Reusable setup and functions belong in `code/_startup/`, while independently runnable analysis scripts sit directly in `code/`. The other code folders separate acquisition, exploratory work, and assembly of manuscript figures. Save results under `outputs/` and manuscript drafts under `manuscript/`.
+
+Give this specification to the agent with the research question, intended outputs, analysis language, and destination. Ask it to propose any adaptations before creating the agreed structure. It should describe the project in `README.md`, write navigation instructions in `CLAUDE.md`, and record the current state and tasks. Have the agent populate `SPECIFICATION.md` with approved scientific requirements and start `METHODOLOGY.md` with dated decisions and reasons, newest first; leave unresolved methods as questions. The project instructions should require both records to be updated after an approved scientific change. Preserve existing files and confirm that record-file references point to real locations.
+<!-- /scaffold:paper -->
+
+### Dataset {#scaffold-dataset-example .unlisted}
+
+[Download the dataset scaffold](resources/scaffolds/dataset.md){.download-button download="dataset-scaffold.md"}
+
+<!-- scaffold:dataset -->
+This layout suits a dataset collected, processed, and released for reuse by several studies. It adapts the data example supplied with the scaffold skill, adding an explicit place for versioned releases.
+
+```
+dataset-project/
+  README.md
+  CLAUDE.md
+  STATUS.md
+  TASKS.md
+  scripts/
+  data/
+    sources/
+    processed/
+    checkpoints/
+    validation/
+  outputs/
+    releases/
+    reports/
+  docs/
+    source-records/
+    data-dictionary.md
+    notes/
+```
+
+Preserve downloads unchanged in `data/sources/`. Acquisition, processing, and checking scripts belong in `scripts/`; save intermediate datasets in `data/processed/`. Collection checkpoints let interrupted acquisition resume. `data/validation/` holds comparison material used to check the data. Document each source and its acquisition in `docs/source-records/`.
+
+Save each release in a named subfolder of `outputs/releases/`, with its data dictionary, source versions, and checks. A paper using that dataset should record which release it used. Access and release arrangements must match the data's permitted uses.
+
+Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and initial records. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
+<!-- /scaffold:dataset -->
+
+### Website {#scaffold-website-example .unlisted}
+
+[Download the website scaffold](resources/scaffolds/website.md){.download-button download="website-scaffold.md"}
+
+<!-- scaffold:website -->
+This layout separates editable material from the generated website. It adapts the scaffold skill's publishing example for a website; the chosen site software may require different folder names.
+
+```
+website-project/
+  README.md
+  CLAUDE.md
+  STATUS.md
+  TASKS.md
+  source/
+  assets/
+    images/
+    styles/
+  output/
+  docs/
+    notes/
+```
+
+Write pages in `source/` and keep images and styles in `assets/`. The build produces the viewable site in `output/`; make lasting edits in the sources so they survive the next build. Record the preview and build commands in `README.md`. Keep publishing instructions and the intended destination explicit.
+
+Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and initial records. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
+<!-- /scaffold:website -->
+
+## Shared instruction and record files {.unnumbered .unlisted}
+
+The following templates describe the project and help an agent resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with project instructions and a short status and task list; add separate scientific records when the work needs them.
+
+For the [synthetic heat-and-birthweight study](#example-specification), `SPECIFICATION.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current scientific requirements and the reasoning behind them.
 
 | File and destination | Use | Template |
 |:------------------------------------|:--------------------------------------------|:-----------------|
 | `CLAUDE.md` in the project | Explain the project and point to its records. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
 | `STATUS.md` in the project | Summarize where the work stands now. | [Download](resources/starter-files/STATUS.md){download="STATUS.md"} |
 | `TASKS.md` in the project | Track remaining work and dated completions. | [Download](resources/starter-files/TASKS.md){download="TASKS.md"} |
-| `specification.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/specification.md){download="specification.md"} |
+| `SPECIFICATION.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
 | `METHODOLOGY.md` in the project | Record scientific decisions and their reasons. | [Download](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
-| Personal `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
-| `.gitignore` in the project | Optional exclusions when using [Git](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
+| Global user `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| `.gitignore` in the project | Optional exclusions when using [`Git`](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
 
-The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: project instructions belong inside the project; personal instructions belong in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [chapter 4](#enforce-those-limits).
-
-::: {#starter-layouts}
-For folder layouts, use [chapter 6](#project-shapes). For saved commands and execution tools, use [chapter 13](#saved-commands). The templates below document those choices without prescribing a new project structure or runner.
-:::
+The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: project instructions belong inside the project; global user instructions belong in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [Chapter 4: Control what the agent can do](#enforce-those-limits).
 
 ::: {.keep-together}
-## A.1 Project instructions {#starter-project}
+## A.2 Project instructions {#starter-project}
 
-Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7](#project-records) explains how to use a maintained `AGENTS.md` instead.
+Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
 
 [Download project instructions](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
@@ -44,10 +151,12 @@ Synthetic teaching study of heat exposure and birthweight. Every individual
 record is synthetic; results are not evidence about actual pregnancies.
 
 ## Read first
-- specification.md: estimands, estimator, input rules, uncertainty, and checks.
 - STATUS.md: current state and next decision.
 - TASKS.md: work remaining and dated completions.
-- METHODOLOGY.md: scientific decisions and their reasons.
+- SPECIFICATION.md: current scientific requirements; follow it when implementing
+  or checking the analysis.
+- METHODOLOGY.md: dated scientific decisions and their reasons; consult it when
+  the rationale or history matters.
 
 ## Files
 - data/raw/: approved original synthetic data; preserve unchanged.
@@ -68,7 +177,10 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
-- Record scientific decisions and their reasons in METHODOLOGY.md.
+- When the researcher approves a scientific change, rewrite SPECIFICATION.md
+  to reflect the current requirements and add a dated entry at the top of
+  METHODOLOGY.md explaining the decision, reason, and specification change.
+- Preserve older decisions and frozen specifications used for completed runs.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
@@ -84,7 +196,7 @@ configured access controls for those boundaries.
 :::
 
 ::: {.keep-together}
-## A.2 Current state {#starter-status}
+## A.3 Current state {#starter-status}
 
 Save this as `STATUS.md`. Have the agent rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
 
@@ -118,7 +230,7 @@ Last updated: [date]
 :::
 
 ::: {.keep-together}
-## A.3 Tasks {#starter-tasks}
+## A.4 Tasks {#starter-tasks}
 
 Save this as `TASKS.md`. Have the agent move tasks as their status changes and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
 
@@ -149,11 +261,11 @@ task finishes. An in-progress entry states what remains to be done.
 :::
 
 ::: {.keep-together}
-## A.4 Scientific specification {#starter-specification}
+## A.5 Scientific specification {#starter-specification}
 
-Save this as `specification.md`. Have the agent fill it from your research decisions and leave unresolved choices explicit for your review. Adapt or remove fields that do not apply to the study. [Chapter 10](#example-specification) explains the completed heat-and-birthweight example, supplied in the [project download](resources/heat-birthweight.zip).
+Save this as `SPECIFICATION.md`. Have the agent fill it from your research decisions and leave unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. Adapt or remove fields that do not apply to the study. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight example, supplied in the [project download](resources/heat-birthweight.zip).
 
-[Download specification.md](resources/starter-files/specification.md){.download-button download="specification.md"}
+[Download SPECIFICATION.md](resources/starter-files/SPECIFICATION.md){.download-button download="SPECIFICATION.md"}
 
 <details class="guide-example">
 <summary>Read the specification template</summary>
@@ -168,7 +280,7 @@ Researcher approval: [pending / approved, with date]
 
 ## Research question and estimands
 - Question and intended interpretation:
-- Target population and analysis or averaging sample:
+- Target population and analysis sample:
 - Quantities to estimate, comparisons, units, and time periods:
 - Assumptions needed for that interpretation:
 
@@ -179,7 +291,7 @@ Researcher approval: [pending / approved, with date]
 
 ## Estimator and reported outputs
 - Estimation procedure, statistical model, and relevant settings:
-- How fitted results become the requested estimands:
+- How fitted results become the requested estimands, including any averaging or standardization:
 - Uncertainty calculation and any decision rule:
 - Required tables, figures, and saved full-precision results:
 
@@ -191,8 +303,10 @@ Researcher approval: [pending / approved, with date]
 ## Unresolved decisions
 [List questions for the researcher. Do not silently supply missing choices.]
 
-Record changes and their reasons in METHODOLOGY.md; keep the agreed current
-specification here and preserve earlier versions.
+Have the agent maintain the current approved specification here, rewriting it
+when decisions change. Record each approved scientific change and its reason
+in METHODOLOGY.md, newest entry first. Preserve earlier specification versions
+in version control and retain frozen protocols used for particular runs.
 ```
 <!-- /starter:specification -->
 
@@ -201,9 +315,9 @@ specification here and preserve earlier versions.
 :::
 
 ::: {.keep-together}
-## A.5 Scientific decisions {#starter-methodology}
+## A.6 Scientific decisions {#starter-methodology}
 
-Save this as `METHODOLOGY.md`. Record a decision when it changes what the study estimates, how the analysis is implemented, or how its evidence should be interpreted. Link to the current specification instead of repeating it. [Chapter 7](#review-project-plan) explains how these records support research decisions.
+Save this as `METHODOLOGY.md`. Have the agent add a dated heading and entry at the top for each approved scientific decision, preserving earlier entries. Record what changed, why, and which requirements in `SPECIFICATION.md` were affected. Keep routine coding and formatting progress in `TASKS.md`. Link to the current specification instead of repeating it. [Chapter 7: Give the agent context for your project](#review-project-plan) explains how these records support research decisions.
 
 [Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
 
@@ -214,15 +328,15 @@ Save this as `METHODOLOGY.md`. Record a decision when it changes what the study 
 ```
 # METHODOLOGY
 
-## Current specification
-[Link to the maintained estimands, estimator, sample, input rules, and checks.]
+Current scientific requirements: [SPECIFICATION.md](SPECIFICATION.md).
+Add dated decisions at the top; preserve earlier entries. Keep routine work
+progress in STATUS.md and TASKS.md. Link detailed evidence rather than copying it.
 
-## Decisions
-
-### [Date]: [Decision]
+## YYYY-MM-DD — Decision title
 - Question or discrepancy:
 - Evidence considered:
 - Decision and reason:
+- Change to SPECIFICATION.md, or why none is needed:
 - Affected code, outputs, and manuscript passages:
 - Verification and remaining limitations:
 ```
@@ -233,18 +347,18 @@ Save this as `METHODOLOGY.md`. Record a decision when it changes what the study 
 :::
 
 ::: {.keep-together}
-## A.6 Personal instructions across projects {#starter-global}
+## A.7 Global user instructions {#starter-global}
 
-Use this optional template for conventions that apply across your work. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. Add references to separate writing, coding, or other specialist files only when you maintain them; [chapter 8](#specialist-conventions) gives examples.
+Use this optional template for conventions that apply across your work. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. Add references to separate writing, coding, or other specialist files only when you maintain them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
 
-[Download personal instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
+[Download global user instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
 <summary>Read the personal-instructions template</summary>
 
 <!-- starter:global -->
 ```
-# Working conventions
+# Global user instructions
 
 [Describe your research role and the software you normally use.]
 
@@ -254,6 +368,10 @@ Use this optional template for conventions that apply across your work. Have the
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
 ## Conventions
+These conventions are defaults across projects. Follow explicit project-specific
+exceptions and record their reasons. Ask when instructions conflict and no
+exception has been agreed.
+
 [Keep short shared conventions here. Add references only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
@@ -283,11 +401,11 @@ report it; do not create a replacement or invent its instructions.
 :::
 
 ::: {.keep-together}
-## A.7 Git exclusions {#starter-gitignore}
+## A.8 Git exclusions {#starter-gitignore}
 
-If the project uses Git, have the agent adapt these exclusions in its `.gitignore`. This example excludes data folders by default; permitted public or synthetic inputs may belong in the repository. Keep shareable input manifests outside excluded folders. An ignore rule neither blocks agent access nor removes files already tracked by Git.
+If the project uses `Git`, have the agent adapt these exclusions in its `.gitignore`. This example excludes data folders by default; permitted public or synthetic inputs may belong in the repository. Keep shareable input manifests outside excluded folders. An ignore rule neither blocks agent access nor removes files already tracked by Git.
 
-Preserve the files needed for the [reproduction route](#test-and-name-the-reproduction-route), including saved fits, raw LLM responses, or research logs when they are required inputs or evidence. Large or protected files can live in approved storage, with versions and access instructions recorded in the project. Excluding a file from Git is not a decision to discard it.
+Preserve the files needed for the [reproduction route](#test-and-name-the-reproduction-route), including saved fits, raw LLM responses, or research logs when they are required inputs or evidence. Large or protected files can live in approved storage, with versions and access instructions recorded in the project. Excluding a file from `Git` is not a decision to discard it.
 
 [Download .gitignore](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 

@@ -5,7 +5,7 @@
       "chapter": 6,
       "title": "Start a new research project",
       "group": "project",
-      "inputs": "the project purpose, intended output, destination, and any lab conventions."
+      "inputs": "the project purpose, intended output, destination, and any research-group conventions."
     },
     {
       "id": "restructure-project",
@@ -33,7 +33,7 @@
       "chapter": 7,
       "title": "Leave a useful handoff",
       "group": "project",
-      "inputs": "the current session’s work, checked outputs, and unresolved questions."
+      "inputs": "the current session\u2019s work, checked outputs, and unresolved questions."
     },
     {
       "id": "shared-conventions",
@@ -47,7 +47,7 @@
       "chapter": 9,
       "title": "Create a project-scaffolding skill",
       "group": "project",
-      "inputs": "an agreed project layout, setup instructions, and a destination for the skill."
+      "inputs": "an agreed project layout, setup instructions, and the folder where the agent should save the skill."
     },
     {
       "id": "compare-research-approaches",
@@ -188,7 +188,7 @@
     },
     {
       "id": "specification",
-      "file": "specification.md"
+      "file": "SPECIFICATION.md"
     },
     {
       "id": "methodology",
@@ -210,5 +210,19 @@
     "llm": "Use LLMs in the research",
     "writing": "Write and revise",
     "handoff": "Reproduce and share"
-  }
+  },
+  "scaffolds": [
+    {
+      "id": "paper",
+      "path": "scaffolds/paper.md"
+    },
+    {
+      "id": "dataset",
+      "path": "scaffolds/dataset.md"
+    },
+    {
+      "id": "website",
+      "path": "scaffolds/website.md"
+    }
+  ]
 }

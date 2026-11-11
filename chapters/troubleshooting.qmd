@@ -27,7 +27,7 @@ For example, a rerun may produce a different sample size because the inputs chan
 | What you notice | What to ask the agent to do | Explanation |
 |:---------------------------|:-------------------------------------------------|:---------------------|
 | A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs before restarting it. | [Unattended jobs](#unattended-jobs) |
-| An [R](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check whether it matches the documented launch issue; use the execution wrapper if confirmed. This is a specific R-on-macOS problem, not a general remedy for slow analysis. | [Toolkit diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
+| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check whether it matches the documented launch issue; use the execution wrapper if confirmed. This is a specific R-on-macOS problem, not a general remedy for slow analysis. | [Toolkit diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app control is missing or has a different label | Compare your account and visible layout with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
 
 ## Permissions and data {#troubleshoot-access}

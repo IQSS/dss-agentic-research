@@ -12,7 +12,7 @@ Suppose a project uses an LLM to label interview excerpts that describe an unmet
 
 ## Define the output and its research meaning
 
-Write a rubric that defines the category, exclusions, and ambiguous cases. Specify the material the LLM receives and the output it should return. Ask people familiar with the research to apply the rubric to development examples, reconcile disagreements, and record the reasons. Human labels provide a reference with their own limitations.
+Write a rubric that defines the category, exclusions, and ambiguous cases. Specify the material the LLM receives and the output it should return. Ask people familiar with the research to apply the rubric to development examples, reconcile disagreements, and record the reasons. Human labels provide a reference with their own limitations. In `SPECIFICATION.md`, state the research output and link the labeling protocol and evaluation criteria. Record approved changes and their reasons in `METHODOLOGY.md`; retain the frozen rubric and prompt used for each completed run.
 
 Here, *LLM inference* means running an already-trained LLM to generate a response. It differs from statistical inference about a population or an effect. A scripted LLM call may be sufficient for labeling an excerpt supplied with a fixed rubric. Use an agent when the task also requires tools, such as finding files or extracting passages from several documents.
 
@@ -51,9 +51,9 @@ In a project comparing AI and human peer reviews, separate headless runs generat
 
 A reviewer receives its protocol and manuscript. A judge receives the rubric and assigned reviews, plus the manuscript if the protocol requires it. A pairwise judgment deliberately includes two reviews; controlling context means supplying the intended set, not limiting every run to one document.
 
-Headless execution does not establish isolation. A fresh run can still load personal instructions, memory, files, plugins, or connected services. Have the agent verify the actual access configuration against the protocol and record untested routes. The toolkit's [headless-agent chapter](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) covers setup and access tests.[^headless-controls]
+Headless execution does not establish isolation. A fresh run can still load global user instructions, memory, files, plugins, or connected services. Have the agent verify the actual access configuration against the protocol and record untested routes. [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) in the companion guide *Extending Your Agent's Toolkit* covers setup and access tests.[^headless-controls]
 
-[^headless-controls]: Anthropic's [programmatic Claude Code documentation](https://code.claude.com/docs/en/headless) describes noninteractive calls and their configuration. These calls can inherit the ordinary Claude Code environment; removing a visible conversation does not remove every possible input.
+[^headless-controls]: Anthropic's [programmatic `Claude Code` documentation](https://code.claude.com/docs/en/headless) describes noninteractive calls and their configuration. These calls can inherit the ordinary `Claude Code` environment; removing a visible conversation does not remove every possible input.
 
 <!-- prompt:controlled-llm-runs -->
 ::: {#request-controlled-llm-runs .prompt}
@@ -79,4 +79,4 @@ Examine plausible alternatives to the measurement procedure. For judging, revers
 
 [^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685). The evaluated task was comparison of chatbot responses, not peer-review quality.
 
-Preserve alternative results and report meaningful changes in the research conclusion. Do not choose a prompt because it produces the preferred finding. Stable outputs are not necessarily valid measurements. [Chapter 17](#research-models) considers local execution and adaptation; both retain these evaluation requirements.
+Preserve alternative results and report meaningful changes in the research conclusion. Do not choose a prompt because it produces the preferred finding. Stable outputs are not necessarily valid measurements. [Chapter 17: Run and adapt LLMs for your research](#research-models) considers local execution and adaptation; both retain these evaluation requirements.

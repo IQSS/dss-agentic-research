@@ -8,13 +8,13 @@ title: "11. Find and assess research literature"
 
 An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support.
 
-For the [heat-and-birthweight project](#example-project), a study of low birthweight may not answer a question about mean birthweight. Exposure windows and populations differ too. Ask the agent to make those differences explicit, including evidence that conflicts with the proposed explanation.
+For the heat-and-birthweight study introduced in [Chapter 10: The example research project](#example-project), a study of low birthweight may not answer a question about mean birthweight. Exposure windows and populations differ too. Ask the agent to make those differences explicit, including evidence that conflicts with the proposed explanation.
 
 ## Match the search to the question {#literature-protocol}
 
 For background reading, give the agent the question and ask for a small set of relevant sources and competing explanations. A focused synthesis needs clearer inclusion criteria and a record of coverage. A systematic review needs a protocol and a search designed for completeness; involve an information specialist when that completeness supports the claim. A limited discovery search should not be described as systematic.
 
-An early search can help refine the research question. For example, have the agent compare how studies define heat exposure and which birth outcomes they report. Ask what evidence would favor one approach over another, and where the literature leaves the choice unresolved. Review those findings before updating the specification.
+An early search can help refine the research question. For example, have the agent compare how studies define heat exposure and which birth outcomes they report. Ask what evidence would favor one approach over another, and where the literature leaves the choice unresolved. If you approve a change based on those findings, have the agent update `SPECIFICATION.md` and explain the decision in `METHODOLOGY.md`, linking the supporting sources. Keep search queries and screening records with the literature search.
 
 Name the sources searched. [PubMed](https://pubmed.ncbi.nlm.nih.gov/) is relevant to this example; [OpenAlex](https://openalex.org/) supports broader discovery, and [Crossref](https://www.crossref.org/) can verify DOI metadata. Institutional access determines which subscription databases and full texts are available.
 
@@ -57,7 +57,7 @@ Use the table to compare findings rather than force agreement. Ask whether diffe
 
 ## Reuse the task as a skill {#literature-skill}
 
-Finding sources, verifying citations, and preserving claim support recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [chapter 9](#reusable-procedures) explains how to inspect and adapt a skill.
+Finding sources, verifying citations, and preserving claim support recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
 <!-- RELEASE: add the verified public DSS litsearch repository link before publication; the current repository is private. -->
 

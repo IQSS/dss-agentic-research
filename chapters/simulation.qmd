@@ -12,7 +12,7 @@ aliases:
 
 Simulation can check whether an agent's workflow executes and whether the proposed estimator recovers quantities whose true values are known. Those are different questions. Code can follow the specification and still produce poor estimates under conditions relevant to the study.
 
-The [birthweight example](#example-project) makes this distinction visible. One simulated world contains the curved age relationship and linear heat-by-age interaction represented in the fitted statistical model. Another contains a more complex interaction. Applying the same estimator to both reveals where its performance deteriorates.
+The heat-and-birthweight study in [Chapter 10: The example research project](#example-project) makes this distinction visible. One simulated world contains the curved age relationship and linear heat-by-age interaction represented in the fitted statistical model. Another contains a more complex interaction. Applying the same estimator to both reveals where its performance deteriorates.
 
 ## Decide what the test must establish
 
@@ -24,7 +24,7 @@ Then repeat the analysis across many generated datasets to assess estimation and
 
 ## Define plausible worlds and calculate truth {#calibration-example}
 
-Choose worlds that address a scientific concern. The example varies the heat relationship while keeping its analysis method unchanged.
+Use `SPECIFICATION.md` as the analysis target and link a detailed simulation specification from it. Define the scenarios, known quantities, repetitions, and performance summaries there. The example varies the heat relationship while keeping its analysis method unchanged.
 
 | World | Relationship in the generator | Question for the estimator |
 |---|---|---|
@@ -53,7 +53,7 @@ State the evaluation criteria before launching the repetitions. Examine bias and
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Propose known-truth checks for specification.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
+> Propose known-truth checks for SPECIFICATION.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 
@@ -87,4 +87,4 @@ These are measured simulation results under specified synthetic worlds, not empi
 
 When a check fails, ask the agent to show the generator, truth calculation, and saved estimates. An impossible simulated world, a coding mistake, and poor estimator performance require different responses. Preserve the failing run while investigating.
 
-The curved-world result gives a reason to examine a more flexible age interaction. It does not authorize the agent to replace the method silently. Agree any revision, record its reason, and repeat the relevant checks. Simulation supports claims about performance under specified worlds; it does not establish that an observational design supports a causal interpretation. The next chapter asks whether separately built implementations carry out the specification consistently.
+The curved-world result gives a reason to examine a more flexible age interaction. It does not authorize the agent to replace the method silently. Approve any revision before the agent updates `SPECIFICATION.md`, records the reason in `METHODOLOGY.md`, and repeats the relevant checks. Simulation supports claims about performance under specified worlds; it does not establish that an observational design supports a causal interpretation. The next chapter asks whether separately built implementations carry out the specification consistently.

@@ -8,7 +8,7 @@ title: "13. Build a modular analysis workflow"
 
 Research analyses change repeatedly. Separating the work into independently runnable steps lets an agent revise one part without rerunning everything. Saved inputs and outputs also make errors easier to locate.
 
-In the [birthweight project](#example-project), changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the statistical model, and updating contrasts, figures, and manuscript checks. A modular workflow makes that difference explicit.
+In the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the statistical model, and updating contrasts, figures, and manuscript checks. A modular workflow makes that difference explicit.
 
 ![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Fifteen small analysis files and one small recipes file support two routes: redraw a figure from saved contrasts, or rerun all affected steps after an approved sample change."}
 
@@ -38,11 +38,11 @@ For a new project, have the agent implement the specification in this structure.
 
 The agent can also help investigate a surprising result. Suppose the age-specific heat contrasts change sharply near the edge of the sample. Ask it to examine exposure support, influential observations, prediction calculations, and the fitted age relationship, then explain which findings warrant further work. This is a proposed investigation, not a finding from the example's saved run.
 
-If the evidence suggests the linear heat-by-age interaction is too restrictive, you might approve a more flexible interaction as a sensitivity analysis. Preserve the original fit, state the reason for the alternative, and compare the same estimands. Have the agent update the relevant simulation and implementation checks and record the decision in `METHODOLOGY.md`. The purpose is to understand the result's dependence on a defensible choice, not search for a preferred estimate.
+If the evidence suggests the linear heat-by-age interaction is too restrictive, you might approve a more flexible interaction as a sensitivity analysis. Preserve the original fit, state the reason for the alternative, and compare the same estimands. Have the agent add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and update the relevant simulation and implementation checks. Repairing code to follow the existing specification is different: record the repair and its checks without rewriting the scientific requirements to match the error. The purpose is to understand the result's dependence on a defensible choice, not search for a preferred estimate.
 
 <!-- prompt:investigate-result -->
 ::: {#request-investigate-result .prompt}
-> Investigate the unexpected result identified below using the current specification, code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, compare the same estimands and record the changes and reasons.
+> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the same estimands.
 :::
 <!-- /prompt:investigate-result -->
 
@@ -54,15 +54,15 @@ A command file lets you or the agent request individual steps or useful sequence
 |---|---|
 | Modular analysis code | Allows a figure to be redrawn without refitting. |
 | Named commands, for example [`just`](https://just.systems/) recipes | Provides a consistent command for a figure, analysis, or useful sequence. |
-| Dependencies, tracked by [`targets`](https://docs.ropensci.org/targets/) or [Snakemake](https://snakemake.readthedocs.io/) | Determines which outputs must be rebuilt after an input or code change. |
+| Dependencies, tracked by [`targets`](https://docs.ropensci.org/targets/) or [`Snakemake`](https://snakemake.readthedocs.io/) | Determines which outputs must be rebuilt after an input or code change. |
 
-A `justfile` can call a dependency-aware runner; the tools serve different purposes. It does not make a monolithic script selective by itself. The toolkit covers [project commands](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) and [dependency-aware workflows](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html).
+A `justfile` can call a dependency-aware runner; the tools serve different purposes. It does not make a monolithic script selective by itself. For tool setup, see [Chapter 5: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) and [Chapter 9: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 For a label change, regenerate and inspect the figure. For a sample change, rebuild the sample and affected outputs. Have the agent identify that route before running it.
 
 ## Check execution before scaling up
 
-Have the agent run a small end-to-end smoke test of a new workflow before a large batch. It should confirm that files reach the next step, calculations finish, and outputs can be read. [Chapter 14](#simulation) adds a different test: whether estimates recover known quantities.
+Have the agent run a small end-to-end smoke test of a new workflow before a large batch. It should confirm that files reach the next step, calculations finish, and outputs can be read. [Chapter 14: Test the analysis against known truth](#simulation) adds a different test: whether estimates recover known quantities.
 
 Retain inexpensive *assertions*: checks that stop a script when a documented expectation fails. Check required columns, identifiers, merge relationships, sample exclusions, and fitting diagnostics. Their expected values must come from the specification or source documentation. Copying the agent's latest result into a test only preserves that result.
 
@@ -72,6 +72,6 @@ Missing research inputs should cause a clear failure. An empirical analysis must
 
 A queue such as [`pueue`](https://github.com/Nukesor/pueue) starts waiting jobs automatically when execution slots become available. Simulation runs and alternative specifications can proceed without waiting for you. Have the agent save commands and logs, manage submission, and establish completion from the queue state and expected outputs.
 
-Choose parallelism to fit memory and CPU needs; a slot is not necessarily one core. A local queue cannot calculate while the computer sleeps. For larger workloads, use approved institutional services such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/). The toolkit covers [queues and completion checks](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html).
+Choose parallelism to fit memory and CPU needs; a slot is not necessarily one core. A local queue cannot calculate while the computer sleeps. For larger workloads, use approved institutional services such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/). For queue setup and completion checks, see the toolkit’s [Chapter 6: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html).
 
 After an interruption, reuse completed steps. Resuming a partly completed fit requires support from the fitting software.

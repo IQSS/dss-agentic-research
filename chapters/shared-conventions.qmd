@@ -6,27 +6,31 @@ title: "8. Apply your conventions across projects"
 
 # 8. Apply your conventions across projects
 
-You should not have to explain the same coding, modeling, or writing preferences whenever you begin a project. Shared instructions let the agent reuse those conventions while keeping each study's question, data, and decisions in its own records. Corrections made during one project can then improve work on the next.
+You should not have to explain the same coding, modeling, or writing preferences whenever you begin a project. Global user instructions let the agent reuse those conventions while keeping each study's question, data, and decisions in its own records. Corrections made during one project can then improve work on the next.
 
-For example, you might require uncertainty alongside estimates and full-precision results saved before rounding. Those rules can apply to many papers. The particular heat-exposure contrast and analysis sample in the [birthweight example](#example-project) belong in that project's specification.
+For example, you might ask the agent to save results at full precision and report uncertainty alongside estimates. Those conventions can apply to many papers. A decision to restrict one survey analysis to respondents aged 18 and over belongs in that paper's `SPECIFICATION.md`, with the reason recorded in `METHODOLOGY.md`.
 
 ## Decide which conventions apply across projects {#shared-instructions}
 
+Global user instructions establish default behaviors across your projects. When a project needs an exception, record it in that project's `CLAUDE.md`[^project-convention-file] and tell the agent to follow it for that project. For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
+
+[^project-convention-file]: If you use an agent from another provider, record the exception in `AGENTS.md` if that is the project instructions file the agent reads.
+
 Save instructions that describe a recurring way of working. “Preserve the existing software environment and explain any required package change” is more useful than “be reproducible.” A good shared instruction tells the agent what to do in a recognizable situation. It should leave study-specific choices to the project.
 
-Shared instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
+Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="One maintained set of personal instructions directs the agent to writing, coding, modeling, and other shared guidance. Several projects use it while keeping their own data, specifications, status, and decisions." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A dataset project keeps records appropriate to its work. These are grouped under Project files and decisions." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
 
 ## Organize detailed guidance by subject {#specialist-conventions}
 
-A short main instruction file can point to more detailed files. Give each one a clear purpose and say when the agent should read it. The following examples cover common research needs; add the files that are useful to your work.
+The global `CLAUDE.md` acts as a hub: it holds shared defaults and gives the agent paths to specialist files, with instructions on when to read them. Give each specialist file a clear purpose. The following examples cover common research needs; add the files that are useful to your work.
 
 | File | When to consult it | Example content |
-|---|---|---|
+|:---------------------|:-------------------------|:---------------------------------------------------|
 | `CONVENTIONS.md` | Creating or organizing a project. | Folder layouts for papers, datasets, and websites; names for inputs and outputs. |
 | `CODING.md` | Writing or changing code. | Use project-relative paths, reusable functions, and the existing package environment. |
 | `MODELING.md` | Planning, fitting, or checking statistical models. | Specify the estimand; use the required simulation checks and uncertainty summaries. |
@@ -34,38 +38,39 @@ A short main instruction file can point to more detailed files. Give each one a 
 | `TOOLCHAIN.md` | Adding or troubleshooting software. | Available tools, their configurations, and how they are maintained. |
 | `WORKSPACE.md` | Finding a project or shared input. | Project purposes, folder locations, and dependencies between projects. |
 
-Start with the conventions you repeatedly explain. Separate a topic when its detail makes the main file hard to read. For instance, a manuscript edit needs the writing guidance but may not need several pages of statistical conventions. These filenames do not cause the agent to load their contents automatically; the main instructions must point to them.
+Start with the conventions you repeatedly explain. Separate a topic when its detail makes the global instruction file hard to read. For instance, a manuscript edit needs the writing guidance but may not need several pages of statistical conventions. These filenames do not cause the agent to load their contents automatically; the main instructions (see below) must point to them.
 
-## Have the agent create and use shared instructions {#configure-shared-instructions}
+## Have the agent create and use global user instructions {#configure-shared-instructions}
 
-In [Claude Code](https://code.claude.com/docs/en/overview), personal instructions can live in `~/.claude/CLAUDE.md`, outside individual project folders. Here, `~` means your home folder. Ask the agent to create or update the file from the app, using the practices you describe or examples of work you have accepted.[^shared-instruction-location]
+In [`Claude Code`](https://code.claude.com/docs/en/overview), global user instructions live in `~/.claude/CLAUDE.md`, outside individual project folders.[^shared-instruction-location] Here, `~` means your home folder. Ask the agent to create or update this file from the app, using the practices you describe or examples of work you have accepted.
 
 <!-- prompt:shared-conventions -->
 ::: {#request-shared-conventions .prompt}
-> Review these instructions and examples for conventions that apply across projects. Propose a short personal instruction file with references to any useful specialist files. Keep this study's decisions in its project records. Show proposed changes and conflicts, then apply the agreed guidance to the next task.
+> Use these conventions and examples to create or update `~/.claude/CLAUDE.md`. Keep it concise and link to specialist files, stating when each should be read. Keep study-specific decisions in the project's records. Show me proposed changes before applying them.
 :::
 <!-- /prompt:shared-conventions -->
 
-The main file should connect each task to the relevant guidance. For example:
+`~/.claude/CLAUDE.md` should tell the agent which specialist file to read for each kind of task. For example:
 
 ```
 Before editing code, read CODING.md beside this file.
 Before statistical modeling or simulation, read MODELING.md.
 Before drafting prose, read WRITING.md.
 Read each project's own instructions for its scientific decisions and files.
+Follow explicit project-specific exceptions to these conventions.
 ```
 
 The [complete shared example](#starter-global) provides a starting point. Ask the agent to adapt it to your work and then apply the relevant guidance during the next real task. You can assess whether a paragraph follows your writing conventions or whether an analysis used the existing software environment. A file's presence alone does not show that the agent used it.
 
-[Download shared instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
+[Download global user instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
 ::: {.web-only}
 <details class="guide-example">
-<summary>Read the complete shared instructions</summary>
+<summary>Read the complete global user instructions</summary>
 
 <!-- starter:global -->
 ```
-# Working conventions
+# Global user instructions
 
 [Describe your research role and the software you normally use.]
 
@@ -75,6 +80,10 @@ The [complete shared example](#starter-global) provides a starting point. Ask th
 - Ask about consequential ambiguity; do not silently substitute another analysis.
 
 ## Conventions
+These conventions are defaults across projects. Follow explicit project-specific
+exceptions and record their reasons. Ask when instructions conflict and no
+exception has been agreed.
+
 [Keep short shared conventions here. Add references only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
@@ -102,12 +111,12 @@ report it; do not create a replacement or invent its instructions.
 </details>
 :::
 
-[^shared-instruction-location]: Anthropic's [instruction locations](https://code.claude.com/docs/en/memory#choose-where-to-put-claudemd-files) distinguish personal and project files.
+[^shared-instruction-location]: Anthropic calls these [user instructions](https://code.claude.com/docs/en/memory#choose-where-to-put-claudemd-files). Other agent tools may use `AGENTS.md` in a different location: [`Codex`](https://learn.chatgpt.com/docs/agent-configuration/agents-md#create-global-guidance), for example, uses `~/.codex/AGENTS.md` by default. Ask the agent to confirm the location for the tool you use.
 
 ## Maintain and share the conventions {#maintain-shared-conventions}
 
 When the same correction recurs, ask the agent to update the relevant shared guidance. For example, repeated rounding of saved model estimates can become an instruction to save full precision and round only for display. Review the proposed rule to make sure it applies beyond the current paper.
 
-A lab can maintain shared files in a repository and make a local copy available to each member's agent. Have the agent configure the references and report conflicting instructions. A shared folder is useful only if sessions know when to read its contents.
+A research group can maintain shared files in a repository and make a local copy available to each member's agent. Ask the agent to add the locations of the shared specialist files to `~/.claude/CLAUDE.md` and specify when to read each one. Have it flag any conflicting instructions. A shared folder is useful only if sessions know when to read its contents.
 
-Record a paper-specific exception in that project's files, with its reason. A new lab default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use the toolkit's [settings-management chapter](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) if you need to keep those files consistent across computers.
+Record a paper-specific exception in that project's files, with its reason. A new research group default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use [Appendix B: Keep records of shared settings: chezmoi](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) in the companion guide *Extending Your Agent's Toolkit* if you need to keep those files consistent across computers.

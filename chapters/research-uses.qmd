@@ -48,7 +48,7 @@ The surrounding software is called the *harness*. It supplies instructions and i
 
 ![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent combines an LLM with a harness that runs tools and returns their results, allowing it to perform those steps in the project."}
 
-The same AI app may support both ways of working. You can keep your existing [R](https://www.r-project.org/), [Stata](https://www.stata.com/), or [Python](https://www.python.org/) software; adopting an agent does not require changing statistical languages.
+The same AI app may support both ways of working. You can keep your existing [`R`](https://www.r-project.org/), [`Stata`](https://www.stata.com/), or [`Python`](https://www.python.org/) software; adopting an agent does not require changing statistical languages.
 
 ::: {.needspace height="8cm"}
 :::
@@ -85,6 +85,6 @@ If you are new to agents, begin with *Orientation*. If you already use one, you 
 - **Direct the work** covers organizing your projects, giving the agent useful context, and saving instructions and procedures you want it to reuse.
 - **Do the research** follows a worked research project through literature searches, analysis, checking, writing, and sharing the results. It also covers using LLMs within the research method and running or adapting open-weight LLMs.
 
-The examples use [Claude Code](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [Git](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
+The examples use [`Claude Code`](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [`Git`](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
 
-The appendices provide downloadable starter files, example requests, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
+The appendices provide downloadable project scaffolds and starter files, example requests, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.

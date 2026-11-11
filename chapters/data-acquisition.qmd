@@ -8,15 +8,15 @@ title: "12. Bring data into the project"
 
 An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from.
 
-The [example project](#example-project) starts with a synthetic birth-record file and its generator. Before transforming it, the agent should check its identity, variables, and declared properties. The same process would expose a collaborator's outdated extract or a website download with changed units.
+The study in [Chapter 10: The example research project](#example-project) starts with a synthetic birth-record file and its generator. Before transforming it, the agent should check its identity, variables, and declared properties. The same process would expose a collaborator's outdated extract or a website download with changed units.
 
 ## Identify and check the inputs {#identify-inputs}
 
-Give the agent the specification and available documentation. Ask it to compare the actual files with the required observation unit, dates, variables, units, and identifiers. For received files, record who supplied them and which release they represent. For existing files, use the evidence available and leave unknown provenance explicit.
+Give the agent `SPECIFICATION.md` and available documentation. Ask it to compare the actual files with the required observation unit, dates, variables, units, and identifiers. For received files, record who supplied them and which release they represent. For existing files, use the evidence available and leave unknown provenance explicit. If a data limitation requires a change to the sample or question, approve it before the agent updates `SPECIFICATION.md` and records the reason in `METHODOLOGY.md`. Keep acquisition details in the source log.
 
 <!-- prompt:bring-data -->
 ::: {#request-bring-data .prompt}
-> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in specification.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
+> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
 :::
 <!-- /prompt:bring-data -->
 
@@ -32,9 +32,9 @@ For web-based data, choose the first suitable, permitted route in this sequence.
 
 A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, a script can save and parse that response. Use a scripted browser when content genuinely requires interaction; where permitted, it can capture the structured responses behind the display.
 
-An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once a repeated acquisition is understood, have the agent preserve it as a script with saved inputs and responses. The toolkit's [browser chapter](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) covers the tools.
+An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once a repeated acquisition is understood, have the agent preserve it as a script with saved inputs and responses. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
 
-Check terms, access requirements, and request limits before collecting. A visible endpoint is not automatically an authorized route. Use approved access, and keep keys out of collection scripts and saved requests; the toolkit explains [credentials](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html). Apply the data-use decisions in [chapter 3](#data-chain-of-custody) to collection as well as analysis.
+Check terms, access requirements, and request limits before collecting. A visible endpoint is not automatically an authorized route. Use approved access, and keep keys out of collection scripts and saved requests; see the toolkit’s [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html). Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
 
 ## Preserve originals and their provenance {#data-provenance}
 
@@ -44,7 +44,7 @@ Save responses and supplied files unchanged. Write cleaned and derived data sepa
 |---|---|
 | Origin | Synthetic records; no observed pregnancies. |
 | Original | `data/raw/births.csv`, unchanged after generation. |
-| Reconstruction | Generator, seed, and [R](https://www.r-project.org/) version. |
+| Reconstruction | Generator, seed, and [`R`](https://www.r-project.org/) version. |
 | Identity | Checksum recorded when the file is created. |
 | Meaning | Variable dictionary and analysis specification. |
 | Derivatives | Scripted transformations saved separately from the original. |

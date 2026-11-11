@@ -6,46 +6,48 @@ title: "9. Use skills for recurring tasks"
 
 # 9. Use skills for recurring tasks
 
-Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task, including the checks that make its result useful. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
+Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task and check its work. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
 
-Consider the [project scaffold](#scaffold-project) from chapter 6. Once you have a suitable paper layout, a skill can direct the agent to create it for another study, draft the initial records, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
+Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the initial records, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
 
 ## What a skill adds {#what-skills-add}
 
-A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
+A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions in `SKILL.md` and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
 ![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
-Project files provide facts about this study, shared files provide working conventions, and a skill describes how to carry out a recurring task. Have the skill consult those files rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
+Project records provide facts and decisions about a study. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project records and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
 | Recurring task | What a skill can preserve |
-|---|---|
+|:---------------------------|:-----------------------------------------------------------------------|
 | Set up a project | Choose a suitable layout, create initial records, and identify missing decisions. |
 | Search the literature | Record queries, verify DOI metadata, and separate checked sources from leads. |
 | Explore a dataset | Examine variables and missingness, save the report, and flag questions for the researcher. |
 | Check a manuscript's numbers | Trace values to saved results and report inconsistencies in the rendered document. |
 
-These are examples of tasks to package, not a list of skills already installed. A skill can make the steps more consistent, but its instructions still require interpretation and do not guarantee identical outputs.
+These are examples of tasks that might be useful to package into skills. A skill can make the steps more consistent, but its instructions still require interpretation and do not guarantee identical outputs.
 
 ## Use an existing skill {#use-existing-skill}
 
-Before creating a skill, ask the agent whether an installed skill or a maintained collection already covers the task. Your lab may have one suited to its research. Have the agent inspect its instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
+Before creating a skill, ask the agent whether an installed skill or a maintained online collection[^skill-collections] already covers the task. Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
 
-In [Claude Code](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
+[^skill-collections]: Examples include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
+
+In [`Claude Code`](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
 
 [^skill-use]: Anthropic's [skills documentation](https://code.claude.com/docs/en/skills) explains invocation, supporting files, and when skill content loads. The description helps the agent select a skill; it is not a guarantee that it will choose or follow it correctly.
 
 ## Turn a useful task into a skill {#create-research-skill}
 
-When a task has worked well and is likely to recur, ask the agent to save the instructions that made it work. Include what the task receives, what it should produce, how to check the result, and which decisions remain yours. A scaffold skill should ask for a project's purpose and destination, use the appropriate layout, and leave unresolved methods as questions.
+When a task has worked well and is likely to recur, ask the agent to write a `SKILL.md` file with the instructions that made it work. Have it specify what the task receives, what it should produce, how to check the result, and which decisions remain yours. A scaffold skill should ask for the project's purpose and where its folder should be created, use the appropriate layout, and leave unresolved methods as questions.
 
 <!-- prompt:scaffold-skill -->
 ::: {#request-scaffold-skill .prompt}
-> Turn the project setup we have agreed into a reusable skill. Have it ask for the new project's purpose and destination, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
+> Write a reusable `SKILL.md` for the project setup we have agreed. Have it ask for the new project's purpose and where its folder should be created, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
 :::
 <!-- /prompt:scaffold-skill -->
 
-The start of a scaffold skill might look like this:
+The agent might write the start of `SKILL.md` like this:
 
 ```
 ---
@@ -55,11 +57,11 @@ description: Set up a new research project using the agreed workspace
 ---
 
 Read the workspace index and project-layout conventions if available.
-Confirm the project's purpose, deliverable, and destination.
+Confirm the project's purpose, intended output, and where its folder should be created.
 Propose the folder structure before creating it. Preserve existing files.
 ```
 
-The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project records. It is a starting template to adapt, not evidence that a particular project setup has been tested.
+The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project records. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
 
 [Download the scaffold skill example](resources/skills/research-scaffold/SKILL.md){.download-button download="SKILL.md"}
 
@@ -76,7 +78,7 @@ description: Set up a new research project using the agreed workspace
 ---
 
 Read the workspace index and project-layout conventions if available.
-Confirm the project's purpose, deliverable, and destination.
+Confirm the project's purpose, intended output, and where its folder should be created.
 Propose the folder structure before creating it. Preserve existing files.
 
 After the researcher accepts the structure:
@@ -84,7 +86,13 @@ After the researcher accepts the structure:
 - Draft project instructions that point to the relevant files and conventions.
 - Add status and task records appropriate to the work already agreed.
 - Record unresolved research decisions as questions, not assumed facts.
-- Put detailed decisions and their reasons in a separate methods record.
+- For a paper project, write SPECIFICATION.md from the researcher's current
+  decisions and start METHODOLOGY.md with decisions actually made and their reasons.
+  Leave unresolved choices explicit; do not invent a history.
+- In the project instructions, tell the agent to follow SPECIFICATION.md when
+  implementing or checking the analysis and consult METHODOLOGY.md for rationale.
+  Approved scientific changes update both: rewrite the specification and add a
+  dated decision at the top of the log, preserving earlier entries.
 
 Check the result:
 - Confirm that the created paths match the accepted structure.
@@ -101,19 +109,16 @@ Do not acquire data, fit models, or publish files as part of this setup.
 </details>
 :::
 
-Ask the agent to place the skill in its supported location: personal Claude Code skills use `~/.claude/skills/`, while project-specific skills use `.claude/skills/` inside the project.[^skill-location] Each skill has its own folder containing `SKILL.md`. Supporting templates or scripts belong beside it, with instructions explaining when to use them.
+Ask the agent to place the skill in its supported location: global user skills in `Claude Code` use `~/.claude/skills/`, while project-specific skills use `.claude/skills/` inside the project.[^skill-location] Each skill has its own folder containing `SKILL.md`. Supporting templates or scripts belong beside it, with instructions explaining when to use them. The project scaffolds in [Appendix A: Project scaffolds and starter files](#starter-layouts) can supply the folder layouts for this skill.
 
-[^skill-location]: See Anthropic's [skill locations](https://code.claude.com/docs/en/skills#choose-where-skills-load). A shared project skill can be versioned with suitable project files; personal skills apply across projects.
+[^skill-location]: See Anthropic's [skill locations](https://code.claude.com/docs/en/skills#choose-where-skills-load), which calls global user skills “personal” skills. These apply across projects; project-specific skills can be shared with suitable project files.
 
 ## Refine and reuse the skill {#refine-skills}
 
 Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the initial records contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
 
-Keep the main instructions readable and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
+Have the agent keep `SKILL.md` concise and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
 
-<details class="guide-example">
-<summary>Optional: automate a repeated check with a hook</summary>
+## Automate a repeated check with a hook {#skill-hooks}
 
 A *hook* runs a configured action at a particular event, such as after a file edit. It can automate a quick check that is otherwise often missed. Begin with checks requested through the agent, then add a hook when there is a clear recurring need. Avoid launching a full analysis after every small edit. Whether a hook can prevent an action depends on its timing and configuration; the [official hooks documentation](https://code.claude.com/docs/en/hooks) explains setup and testing.
-
-</details>

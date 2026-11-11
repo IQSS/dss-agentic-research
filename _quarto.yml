@@ -122,6 +122,7 @@ anchor-map:
   "choose-the-llm-and-reasoning-effort": /chapters/directing-work.qmd#choose-the-llm-and-reasoning-effort
   "context-or-training": /chapters/research-models.qmd#context-or-training
   "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
+  "data-acquisition": /chapters/data-acquisition.qmd
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "data-provenance": /chapters/data-acquisition.qmd#data-provenance
   "decide-what-the-test-must-establish": /chapters/simulation.qmd#decide-what-the-test-must-establish
@@ -152,7 +153,6 @@ anchor-map:
   "project-organization": /chapters/project-organization.qmd
   "project-records": /chapters/project-context.qmd#project-records
   "project-recovery": /chapters/project-organization.qmd#project-recovery
-  "project-shapes": /chapters/project-organization.qmd#project-shapes
   "prompt-index": /chapters/prompt-index.qmd
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
@@ -187,15 +187,16 @@ anchor-map:
   "reusable-procedures": /chapters/reusable-procedures.qmd
   "review-project-plan": /chapters/project-context.qmd#review-project-plan
   "saved-commands": /chapters/research-workflows.qmd#saved-commands
-  "scaffold-project": /chapters/project-organization.qmd#scaffold-project
+  "scaffold-paper-example": /chapters/starter-files.qmd#scaffold-paper-example
   "shared-conventions": /chapters/shared-conventions.qmd
   "shared-instructions": /chapters/shared-conventions.qmd#shared-instructions
   "simulation": /chapters/simulation.qmd
   "specialist-conventions": /chapters/shared-conventions.qmd#specialist-conventions
+  "starter-files": /chapters/starter-files.qmd
   "starter-global": /chapters/starter-files.qmd#starter-global
   "starter-layouts": /chapters/starter-files.qmd#starter-layouts
   "starter-project": /chapters/starter-files.qmd#starter-project
-  "term-personal-instructions": /chapters/glossary.qmd#term-personal-instructions
+  "term-global-instructions": /chapters/glossary.qmd#term-global-instructions
   "term-project-instructions": /chapters/glossary.qmd#term-project-instructions
   "test-and-name-the-reproduction-route": /chapters/research-handoff.qmd#test-and-name-the-reproduction-route
   "trace-manuscript": /chapters/research-writing.qmd#trace-manuscript

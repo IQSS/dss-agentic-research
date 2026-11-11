@@ -4,10 +4,12 @@ Synthetic teaching study of heat exposure and birthweight. Every individual
 record is synthetic; results are not evidence about actual pregnancies.
 
 ## Read first
-- specification.md: estimands, estimator, input rules, uncertainty, and checks.
 - STATUS.md: current state and next decision.
 - TASKS.md: work remaining and dated completions.
-- METHODOLOGY.md: scientific decisions and their reasons.
+- SPECIFICATION.md: current scientific requirements; follow it when implementing
+  or checking the analysis.
+- METHODOLOGY.md: dated scientific decisions and their reasons; consult it when
+  the rationale or history matters.
 
 ## Files
 - data/raw/: approved original synthetic data; preserve unchanged.
@@ -28,7 +30,10 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
-- Record scientific decisions and their reasons in METHODOLOGY.md.
+- When the researcher approves a scientific change, rewrite SPECIFICATION.md
+  to reflect the current requirements and add a dated entry at the top of
+  METHODOLOGY.md explaining the decision, reason, and specification change.
+- Preserve older decisions and frozen specifications used for completed runs.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
