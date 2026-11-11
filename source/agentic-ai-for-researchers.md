@@ -892,56 +892,60 @@ A separate [literature-search example](resources/literature-search-example.md), 
 
 # 12. Bring data into the project {#data-acquisition}
 
-An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from.
+An agent needs access to your research data and enough documentation to use them correctly. Whether the files come from a collaborator, are already on your computer, or need to be collected, ask the agent to check what they contain and record where they came from.
 
-The study in [Chapter 10: The example research project](#example-project) starts with a synthetic birth-record file and its generator. Before transforming it, the agent should check its identity, variables, and declared properties. The same process would expose a collaborator's outdated extract or a website download with changed units.
+For the heat-and-birthweight study introduced in [Chapter 10: The example research project](#example-project), ask the agent to compare the birth records with their data dictionary. It should report discrepancies, such as duplicate birth identifiers or birthweight recorded in kilograms when the documentation specifies grams, before using the data in an analysis.
 
 ## Identify and check the inputs {#identify-inputs}
 
-Give the agent `SPECIFICATION.md` and available documentation. Ask it to compare the actual files with the required observation unit, dates, variables, units, and identifiers. For received files, record who supplied them and which release they represent. For existing files, use the evidence available and leave unknown provenance explicit. If a data limitation requires a change to the sample or question, approve it before the agent updates `SPECIFICATION.md` and records the reason in `METHODOLOGY.md`. Keep acquisition details in the source log.
+Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.
 
-<!-- prompt:bring-data -->
-::: {#request-bring-data .prompt}
-> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
-:::
-<!-- /prompt:bring-data -->
+In the heat-and-birthweight example, the agent should check for 1,200 unique birth identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, smoking status coded as 0 or 1, and positive birthweight values. If any check fails, the analysis should stop and report which values or records caused the problem.
 
-The example declares 1,200 unique identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, a binary smoking indicator, and positive birthweight. Its checks should stop with a useful explanation if those conditions fail. An empirical project needs rules derived from its own documentation, not the example's ranges.
-
-A *checksum* is a digital fingerprint computed from a file's contents. Recording one lets the agent detect a later change to that file. It does not establish that the data are correct, and two differently formatted exports can contain the same observations but have different checksums.
+If the data cannot support the specified sample or research question, ask the agent to explain the limitation and propose options. Once you approve a change, have it update `SPECIFICATION.md` and record the decision and its reason in `METHODOLOGY.md`.
 
 ## Acquire web data through a repeatable route {#acquisition-ladder}
 
-For web-based data, choose the first suitable, permitted route in this sequence. Start by looking for a structured source before asking an agent to click through pages.
+Ask the agent to work down the ladder below and use the first suitable, permitted route. It should look for an API or structured download before extracting data from web pages. Because this approach applies across projects, the ladder is a useful addition to `CODING.md` as part of your global user instructions.
 
 ![](figures/data-acquisition-ladder.svg){#fig-data-acquisition-ladder fig-alt="Use a documented API or structured download when available, then static-page parsing, then scripted browser interaction. Agent-interactive browsing helps with exploration or small tasks when those routes do not fit."}
 
-A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, a script can save and parse that response. Use a scripted browser when content genuinely requires interaction; where permitted, it can capture the structured responses behind the display.
+A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, the agent can write a script to save the page and extract them. When collection requires interaction, such as logging in or clicking through results, ask it to automate those steps with a scripted browser. Where permitted, the script can save the data sent to the browser to populate the page.
 
-An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once a repeated acquisition is understood, have the agent preserve it as a script with saved inputs and responses. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
+An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once the agent has worked out how to collect the data, ask it to write a script for any collection that needs to be repeated. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
 
-Check terms, access requirements, and request limits before collecting. A visible endpoint is not automatically an authorized route. Use approved access, and keep keys out of collection scripts and saved requests; see the toolkit’s [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html). Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
+Ask the agent to check whether a website or service permits automated data collection before using it, including its access requirements and request limits. If access requires an API key (a credential that lets software access the service through your account), have the agent store it separately from collection scripts and keep it out of saved request records. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains how. Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
 
 ## Preserve originals and their provenance {#data-provenance}
 
-Save responses and supplied files unchanged. Write cleaned and derived data separately so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one when both support reported work.
+Have the agent save downloaded and supplied files unchanged, with cleaned and derived data in separate files. This lets it correct an error in processing without collecting the data again. If a new release becomes available, keep the earlier release too when it supports reported results.
 
-| Record | Synthetic example |
+Ask the agent to maintain a source log as it saves each file. For supplied or downloaded data, the log should identify the supplier or source address, the version or release, and the acquisition date. Have it also save any collection request and restrictions on use or redistribution. If information about a file's origins is unavailable, the agent should identify what is unknown.
+
+Have the agent also record a *checksum* for each original data file. This digital fingerprint lets it check whether a file has changed before rerunning the analysis. The heat-and-birthweight example keeps the following information with its data:
+
+| Record | Heat-and-birthweight example |
 |---|---|
 | Origin | Synthetic records; no observed pregnancies. |
 | Original | `data/raw/births.csv`, unchanged after generation. |
 | Reconstruction | Generator, seed, and [`R`](https://www.r-project.org/) version. |
 | Identity | Checksum recorded when the file is created. |
-| Meaning | Variable dictionary and analysis specification. |
-| Derivatives | Scripted transformations saved separately from the original. |
+| Documentation | Data dictionary and `SPECIFICATION.md`. |
+| Derived data | Scripted transformations saved separately from the original. |
 
-For empirical data, record the source address or supplier, release or extract identifier, request, acquisition date, and restrictions on use and redistribution. Have the agent write that record when it saves the file. Protecting originals against edits does not prevent their disclosure; retain the [chain of custody](#data-chain-of-custody) for them and their protected derivatives.
+<!-- prompt:bring-data -->
+::: {#request-bring-data .prompt}
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
+:::
+<!-- /prompt:bring-data -->
 
 ## Repeat collection without repeating unnecessary work
 
-Have collection code respect request limits, save raw responses, and record progress. It should reuse completed downloads and resume interrupted work. A failed request belongs in a failure record; it must not become a row of guessed values or disappear as though nothing was expected.
+Before collecting a large dataset, ask the agent to run a few representative requests through the collection code. This *smoke test* checks that it can retrieve the data, interpret the response, and save the expected files. The agent should investigate any problems before starting the full batch.
 
-For a new collection pipeline, ask the agent to process a few representative requests before starting the full batch. This *smoke test* checks that acquisition, parsing, and saving work together. Preserve failures and retry counts during the batch, then compare the received coverage with what was requested. A successful test does not establish complete coverage or permission to redistribute the result.
+During the full collection, the code should respect the service's request limits and save its progress. If collection is interrupted, it should resume from where it stopped, reusing completed downloads. Have the agent keep a log of failed requests and retry attempts so gaps remain visible.
+
+After collection, ask the agent to compare what was received with what was requested and report anything missing or incomplete. A failed download should be recorded as missing data to investigate, never filled with guessed values or silently omitted.
 
 # 13. Build a modular analysis workflow {#research-workflows}
 
@@ -949,11 +953,11 @@ Research analyses change repeatedly. Separating the work into independently runn
 
 In the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the statistical model, and updating contrasts, figures, and manuscript checks. A modular workflow makes that difference explicit.
 
-![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Fifteen small analysis files and one small recipes file support two routes: redraw a figure from saved contrasts, or rerun all affected steps after an approved sample change."}
+![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Fifteen analysis scripts and a larger justfile listing just all, just figures, just contrasts, and just power connect to a shared downward arrow. Two example routes redraw a figure from saved contrasts or rerun affected steps after an approved sample change."}
 
 ## Make research steps independently runnable {#modular-steps}
 
-Separate coherent operations with explicit inputs and saved outputs. Reuse common functions. Each step should run from recorded inputs rather than objects left in an interactive session.
+Ask the agent to give each step explicit input files and saved outputs. Each step should run using those inputs, without depending on objects left in an interactive session.
 
 | Step | Reads | Saves |
 |---|---|---|
@@ -963,57 +967,84 @@ Separate coherent operations with explicit inputs and saved outputs. Reuse commo
 | Draw the figure | Saved contrasts and figure instructions | Plotting data and rendered figure. |
 | Check the manuscript | Selected results and manuscript source | Comparison report and discrepancies. |
 
-Modularity does not require a particular number of files or abandoning an IDE. Two related operations may share a script; a function may serve several analyses. What matters is that the needed step can run on its own with its dependencies supplied.
+Related operations can share a script, and several analyses can reuse the same function. Have the agent organize the code so that each step can run separately, with the inputs it needs.
 
 ## Build or revise the workflow {#build-modular-workflow}
 
-For a new project, have the agent implement the specification in this structure. For an existing analysis, preserve a baseline, separate the operations, and compare samples and results before making scientific changes. Moving code should not quietly change a missing-value rule or statistical option.
+For a new analysis, ask the agent to read `SPECIFICATION.md` and propose how to divide the work into independently runnable steps. Its proposal should identify the files each step will read and save. Have it implement that structure, using shared functions for calculations needed in several places.
+
+For an existing analysis, ask the agent to identify those steps within the current code. Before reorganizing it, have the agent run the existing analysis and save its code and results for comparison. It should then separate the steps and rerun them using the same inputs. Comparing the sample, estimates, and uncertainty intervals will help detect unintended changes introduced while reorganizing the code.
 
 <!-- prompt:modular-workflow -->
 ::: {#request-modular-workflow .prompt}
-> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
 :::
 <!-- /prompt:modular-workflow -->
 
-The agent can also help investigate a surprising result. Suppose the age-specific heat contrasts change sharply near the edge of the sample. Ask it to examine exposure support, influential observations, prediction calculations, and the fitted age relationship, then explain which findings warrant further work. This is a proposed investigation, not a finding from the example's saved run.
+## Run the workflow with saved commands {#saved-commands}
 
-If the evidence suggests the linear heat-by-age interaction is too restrictive, you might approve a more flexible interaction as a sensitivity analysis. Preserve the original fit, state the reason for the alternative, and compare the same estimands. Have the agent add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and update the relevant simulation and implementation checks. Repairing code to follow the existing specification is different: record the repair and its checks without rewriting the scientific requirements to match the error. The purpose is to understand the result's dependence on a defensible choice, not search for a preferred estimate.
+Once the analysis has independently runnable steps, ask the agent to save commands for the tasks you expect to repeat. You should be able to request a figure, rerun an analysis, or rebuild the project without reconstructing the sequence of scripts each time.
 
-<!-- prompt:investigate-result -->
-::: {#request-investigate-result .prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the same estimands.
-:::
-<!-- /prompt:investigate-result -->
+[`just`](https://just.systems/) is a *command runner*: it lets you give names to commands used in a project. The agent writes these definitions, called *recipes*, in a plain-text file named `justfile`. A recipe can run one script or several commands in sequence. For example, the agent could create these recipes:
 
-## Save commands for useful routes {#saved-commands}
+| Command | What the agent configures it to do |
+|:------------------|:------------------------------------------------------|
+| `just figures` | Regenerate figures from saved results. |
+| `just contrasts` | Calculate the specified comparisons from saved statistical models. |
+| `just power` | Run the project's power analysis. |
+| `just all` | Run the complete analysis workflow. |
 
-A command file lets you or the agent request individual steps or useful sequences. Preserve adequate existing tooling.
+As a workflow grows, keeping track of which steps need rerunning becomes harder. A figure depends on estimated contrasts, which depend on a fitted statistical model, which depends on the analysis data. These relationships are called *dependencies*. Changing the data can affect every subsequent step; changing a figure label usually affects only the figure.
 
-| Capability | What it adds |
-|---|---|
-| Modular analysis code | Allows a figure to be redrawn without refitting. |
-| Named commands, for example [`just`](https://just.systems/) recipes | Provides a consistent command for a figure, analysis, or useful sequence. |
-| Dependencies, tracked by [`targets`](https://docs.ropensci.org/targets/) or [`Snakemake`](https://snakemake.readthedocs.io/) | Determines which outputs must be rebuilt after an input or code change. |
+A *dependency-aware pipeline runner*, such as [`targets`](https://docs.ropensci.org/targets/) for [`R`](https://www.r-project.org/), records these relationships and tracks changes to code and inputs. When asked to run the workflow, it determines which results need updating and reuses results that are still current. Have the agent configure those relationships as it builds the analysis.
 
-A `justfile` can call a dependency-aware runner; the tools serve different purposes. It does not make a monolithic script selective by itself. For tool setup, see [Chapter 5: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html) and [Chapter 9: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) in the companion guide *Extending Your Agent's Toolkit*.
+You can use both tools together. The agent can define `just all` to start a `targets` pipeline. You or the agent then use the same convenient command, while `targets` determines which calculations actually need to run. If the project already has working commands or a pipeline, ask the agent to extend them.
 
-For a label change, regenerate and inspect the figure. For a sample change, rebuild the sample and affected outputs. Have the agent identify that route before running it.
+The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 5: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html). [Chapter 9: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
 
 ## Check execution before scaling up
 
-Have the agent run a small end-to-end smoke test of a new workflow before a large batch. It should confirm that files reach the next step, calculations finish, and outputs can be read. [Chapter 14: Test the analysis against known truth](#simulation) adds a different test: whether estimates recover known quantities.
+Individual scripts can run successfully while the complete workflow fails. For example, a model-fitting script might save its results in a format the figure script cannot read. Discovering that after many lengthy model fits wastes time.
 
-Retain inexpensive *assertions*: checks that stop a script when a documented expectation fails. Check required columns, identifiers, merge relationships, sample exclusions, and fitting diagnostics. Their expected values must come from the specification or source documentation. Copying the agent's latest result into a test only preserves that result.
+Before starting a large run, ask the agent to perform a *smoke test*: a small but complete run through the workflow using the same code intended for the full analysis. In the heat-and-birthweight example, this means reading the birth records, fitting a statistical model, calculating the specified contrasts, and producing a figure. The agent should check that each step receives the inputs it expects and produces usable outputs. Have it fix implementation errors and repeat the test before running the full *batch*, meaning all the jobs planned for that run.
 
-Missing research inputs should cause a clear failure. An empirical analysis must never substitute synthetic observations to finish. In this teaching project, generating synthetic inputs is an explicit, documented step. Keep its outputs distinguishable from any observed study data.
+Ask the agent to include automatic checks in the scripts themselves. These checks, often called *assertions*, should stop execution and explain the problem when a requirement is violated. For example, they can detect missing input files, duplicate birth identifiers, or unexpected changes in the number of records after joining datasets. The agent should derive these checks from `SPECIFICATION.md` and the data documentation.
 
-## Keep long jobs moving {#unattended-jobs}
+<!-- prompt:smoke-test-workflow -->
+::: {#request-smoke-test-workflow .prompt}
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
+:::
+<!-- /prompt:smoke-test-workflow -->
 
-A queue such as [`pueue`](https://github.com/Nukesor/pueue) starts waiting jobs automatically when execution slots become available. Simulation runs and alternative specifications can proceed without waiting for you. Have the agent save commands and logs, manage submission, and establish completion from the queue state and expected outputs.
+[Chapter 14: Test the analysis against known truth](#simulation) explains how simulated data with known answers can test the calculations and statistical performance.
 
-Choose parallelism to fit memory and CPU needs; a slot is not necessarily one core. A local queue cannot calculate while the computer sleeps. For larger workloads, use approved institutional services such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/). For queue setup and completion checks, see the toolkit’s [Chapter 6: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html).
+## Investigate results and revise the analysis {#investigate-workflow-results}
 
-After an interruption, reuse completed steps. Resuming a partly completed fit requires support from the fitting software.
+A modular workflow also helps when a result needs investigating. The agent can inspect saved estimates and predictions before deciding whether a statistical model needs refitting. If a revised analysis is warranted, it can rerun the affected steps while preserving the original results.
+
+As a hypothetical example, suppose the estimated heat-related birthweight differences are much larger for the youngest mothers than for other ages. Ask the agent to check whether there are enough births at those ages across the exposure range, whether a few records have a large influence, and whether the code calculates the specified comparisons correctly. It should explain what it finds and which explanations need further investigation.
+
+If that investigation suggests the statistical model represents the age-dependent heat relationship too simply, you might approve a more flexible relationship as a sensitivity analysis. Have the agent preserve the original fit and compare the estimated difference between 10 and 5 hot days at the same maternal ages. It should add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and rerun the affected analysis and checks. If it instead finds code that fails to follow the existing specification, have it correct the code and record how it verified the repair.
+
+<!-- prompt:investigate-result -->
+::: {#request-investigate-result .prompt}
+> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
+:::
+<!-- /prompt:investigate-result -->
+
+## Run jobs while you're away {#unattended-jobs}
+
+A project may require many independent model fits or simulation runs. Running them all at once can overwhelm your computer; starting each one manually leaves the tasks idle between jobs. Ask the agent to prepare the commands and submit them to a job queue.
+
+[`pueue`](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
+
+The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
+
+![](figures/work-while-you-sleep.svg){#fig-work-while-you-sleep .tall fig-alt="An illustrative overnight batch of 100 jobs: a pueue queue feeds up to eight running jobs on your computer, starting the next automatically whenever one finishes. A 5 PM, overnight, and 9 AM timeline leads to reviewing results, logs, and job status, including failures or unfinished work. The computer remains awake."}
+
+The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
+
+For setup and recovery instructions, see [Chapter 6: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 
 # 14. Test the analysis against known truth {#simulation}
 
@@ -2082,7 +2113,7 @@ Supply: approved inputs, their documentation, and the current scientific specifi
 Explanation and checks: [Chapter 12: Bring data into the project](#request-bring-data).
 
 ::: {.prompt}
-> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
 :::
 
 :::
@@ -2092,12 +2123,25 @@ Explanation and checks: [Chapter 12: Bring data into the project](#request-bring
 ::: {.keep-together}
 ### Build a modular analysis workflow {.unlisted}
 
-Supply: the current analysis, its accepted outputs, and existing execution commands.
+Supply: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-modular-workflow).
 
 ::: {.prompt}
-> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
+:::
+
+:::
+
+::: {.keep-together}
+### Test the workflow before running the full batch {.unlisted}
+
+Supply: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
+
+Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-smoke-test-workflow).
+
+::: {.prompt}
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
 :::
 
 :::
@@ -2110,7 +2154,7 @@ Supply: the unexpected result, specification, current code, and saved outputs.
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-investigate-result).
 
 ::: {.prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the same estimands.
+> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
 :::
 
 :::

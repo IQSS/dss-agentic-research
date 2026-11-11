@@ -6,53 +6,57 @@ title: "12. Bring data into the project"
 
 # 12. Bring data into the project
 
-An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from.
+An agent needs access to your research data and enough documentation to use them correctly. Whether the files come from a collaborator, are already on your computer, or need to be collected, ask the agent to check what they contain and record where they came from.
 
-The study in [Chapter 10: The example research project](#example-project) starts with a synthetic birth-record file and its generator. Before transforming it, the agent should check its identity, variables, and declared properties. The same process would expose a collaborator's outdated extract or a website download with changed units.
+For the heat-and-birthweight study introduced in [Chapter 10: The example research project](#example-project), ask the agent to compare the birth records with their data dictionary. It should report discrepancies, such as duplicate birth identifiers or birthweight recorded in kilograms when the documentation specifies grams, before using the data in an analysis.
 
 ## Identify and check the inputs {#identify-inputs}
 
-Give the agent `SPECIFICATION.md` and available documentation. Ask it to compare the actual files with the required observation unit, dates, variables, units, and identifiers. For received files, record who supplied them and which release they represent. For existing files, use the evidence available and leave unknown provenance explicit. If a data limitation requires a change to the sample or question, approve it before the agent updates `SPECIFICATION.md` and records the reason in `METHODOLOGY.md`. Keep acquisition details in the source log.
+Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.
 
-<!-- prompt:bring-data -->
-::: {#request-bring-data .prompt}
-> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
-:::
-<!-- /prompt:bring-data -->
+In the heat-and-birthweight example, the agent should check for 1,200 unique birth identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, smoking status coded as 0 or 1, and positive birthweight values. If any check fails, the analysis should stop and report which values or records caused the problem.
 
-The example declares 1,200 unique identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, a binary smoking indicator, and positive birthweight. Its checks should stop with a useful explanation if those conditions fail. An empirical project needs rules derived from its own documentation, not the example's ranges.
-
-A *checksum* is a digital fingerprint computed from a file's contents. Recording one lets the agent detect a later change to that file. It does not establish that the data are correct, and two differently formatted exports can contain the same observations but have different checksums.
+If the data cannot support the specified sample or research question, ask the agent to explain the limitation and propose options. Once you approve a change, have it update `SPECIFICATION.md` and record the decision and its reason in `METHODOLOGY.md`.
 
 ## Acquire web data through a repeatable route {#acquisition-ladder}
 
-For web-based data, choose the first suitable, permitted route in this sequence. Start by looking for a structured source before asking an agent to click through pages.
+Ask the agent to work down the ladder below and use the first suitable, permitted route. It should look for an API or structured download before extracting data from web pages. Because this approach applies across projects, the ladder is a useful addition to `CODING.md` as part of your global user instructions.
 
 ![](figures/data-acquisition-ladder.svg){#fig-data-acquisition-ladder fig-alt="Use a documented API or structured download when available, then static-page parsing, then scripted browser interaction. Agent-interactive browsing helps with exploration or small tasks when those routes do not fit."}
 
-A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, a script can save and parse that response. Use a scripted browser when content genuinely requires interaction; where permitted, it can capture the structured responses behind the display.
+A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, the agent can write a script to save the page and extract them. When collection requires interaction, such as logging in or clicking through results, ask it to automate those steps with a scripted browser. Where permitted, the script can save the data sent to the browser to populate the page.
 
-An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once a repeated acquisition is understood, have the agent preserve it as a script with saved inputs and responses. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
+An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once the agent has worked out how to collect the data, ask it to write a script for any collection that needs to be repeated. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
 
-Check terms, access requirements, and request limits before collecting. A visible endpoint is not automatically an authorized route. Use approved access, and keep keys out of collection scripts and saved requests; see the toolkit’s [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html). Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
+Ask the agent to check whether a website or service permits automated data collection before using it, including its access requirements and request limits. If access requires an API key (a credential that lets software access the service through your account), have the agent store it separately from collection scripts and keep it out of saved request records. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains how. Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
 
 ## Preserve originals and their provenance {#data-provenance}
 
-Save responses and supplied files unchanged. Write cleaned and derived data separately so a parsing error can be corrected without repeating collection. Preserve a new release alongside the earlier one when both support reported work.
+Have the agent save downloaded and supplied files unchanged, with cleaned and derived data in separate files. This lets it correct an error in processing without collecting the data again. If a new release becomes available, keep the earlier release too when it supports reported results.
 
-| Record | Synthetic example |
+Ask the agent to maintain a source log as it saves each file. For supplied or downloaded data, the log should identify the supplier or source address, the version or release, and the acquisition date. Have it also save any collection request and restrictions on use or redistribution. If information about a file's origins is unavailable, the agent should identify what is unknown.
+
+Have the agent also record a *checksum* for each original data file. This digital fingerprint lets it check whether a file has changed before rerunning the analysis. The heat-and-birthweight example keeps the following information with its data:
+
+| Record | Heat-and-birthweight example |
 |---|---|
 | Origin | Synthetic records; no observed pregnancies. |
 | Original | `data/raw/births.csv`, unchanged after generation. |
 | Reconstruction | Generator, seed, and [`R`](https://www.r-project.org/) version. |
 | Identity | Checksum recorded when the file is created. |
-| Meaning | Variable dictionary and analysis specification. |
-| Derivatives | Scripted transformations saved separately from the original. |
+| Documentation | Data dictionary and `SPECIFICATION.md`. |
+| Derived data | Scripted transformations saved separately from the original. |
 
-For empirical data, record the source address or supplier, release or extract identifier, request, acquisition date, and restrictions on use and redistribution. Have the agent write that record when it saves the file. Protecting originals against edits does not prevent their disclosure; retain the [chain of custody](#data-chain-of-custody) for them and their protected derivatives.
+<!-- prompt:bring-data -->
+::: {#request-bring-data .prompt}
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
+:::
+<!-- /prompt:bring-data -->
 
 ## Repeat collection without repeating unnecessary work
 
-Have collection code respect request limits, save raw responses, and record progress. It should reuse completed downloads and resume interrupted work. A failed request belongs in a failure record; it must not become a row of guessed values or disappear as though nothing was expected.
+Before collecting a large dataset, ask the agent to run a few representative requests through the collection code. This *smoke test* checks that it can retrieve the data, interpret the response, and save the expected files. The agent should investigate any problems before starting the full batch.
 
-For a new collection pipeline, ask the agent to process a few representative requests before starting the full batch. This *smoke test* checks that acquisition, parsing, and saving work together. Preserve failures and retry counts during the batch, then compare the received coverage with what was requested. A successful test does not establish complete coverage or permission to redistribute the result.
+During the full collection, the code should respect the service's request limits and save its progress. If collection is interrupted, it should resume from where it stopped, reusing completed downloads. Have the agent keep a log of failed requests and retry attempts so gaps remain visible.
+
+After collection, ask the agent to compare what was received with what was requested and report anything missing or incomplete. A failed download should be recorded as missing data to investigate, never filled with guessed values or silently omitted.

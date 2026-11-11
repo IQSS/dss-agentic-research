@@ -89,7 +89,14 @@
       "chapter": 13,
       "title": "Build a modular analysis workflow",
       "group": "analysis",
-      "inputs": "the current analysis, its accepted outputs, and existing execution commands."
+      "inputs": "SPECIFICATION.md, the research data and documentation, and any existing analysis code and results."
+    },
+    {
+      "id": "smoke-test-workflow",
+      "chapter": 13,
+      "title": "Test the workflow before running the full batch",
+      "group": "analysis",
+      "inputs": "the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch."
     },
     {
       "id": "investigate-result",

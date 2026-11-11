@@ -46,3 +46,4 @@ body.quarto-dark img[src$="two-pipelines.svg"] { content: url("figures/two-pipel
 body.quarto-dark img[src$="use-ideas.svg"] { content: url("figures/use-ideas-dark.svg"); }
 body.quarto-dark img[src$="use-model.svg"] { content: url("figures/use-model-dark.svg"); }
 body.quarto-dark img[src$="use-workflows.svg"] { content: url("figures/use-workflows-dark.svg"); }
+body.quarto-dark img[src$="work-while-you-sleep.svg"] { content: url("figures/work-while-you-sleep-dark.svg"); }

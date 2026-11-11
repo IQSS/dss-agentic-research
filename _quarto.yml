@@ -176,6 +176,7 @@ anchor-map:
   "request-scaffold-skill": /chapters/reusable-procedures.qmd#request-scaffold-skill
   "request-shared-conventions": /chapters/shared-conventions.qmd#request-shared-conventions
   "request-simulation-plan": /chapters/simulation.qmd#request-simulation-plan
+  "request-smoke-test-workflow": /chapters/research-workflows.qmd#request-smoke-test-workflow
   "request-trace-manuscript": /chapters/research-writing.qmd#request-trace-manuscript
   "research-limits": /chapters/research-limits.qmd
   "research-models": /chapters/research-models.qmd

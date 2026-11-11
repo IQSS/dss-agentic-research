@@ -166,7 +166,7 @@ Supply: approved inputs, their documentation, and the current scientific specifi
 Explanation and checks: [Chapter 12: Bring data into the project](#request-bring-data).
 
 ::: {.prompt}
-> Inspect the approved inputs and documentation. Record each source, version or acquisition date, permitted use, and file fingerprint. Preserve the originals. Write checks for the columns, keys, units, ranges, and missingness rules in SPECIFICATION.md; report discrepancies before transforming or excluding records. Do not substitute synthetic observations for missing research inputs.
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
 :::
 
 :::
@@ -176,12 +176,25 @@ Explanation and checks: [Chapter 12: Bring data into the project](#request-bring
 ::: {.keep-together}
 ### Build a modular analysis workflow {.unlisted}
 
-Supply: the current analysis, its accepted outputs, and existing execution commands.
+Supply: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-modular-workflow).
 
 ::: {.prompt}
-> Review the current analysis and propose coherent steps with explicit inputs and saved outputs. Preserve its scientific behavior while separating expensive fits from contrasts, figures, and reporting. Reuse shared functions, and keep adequate existing runners. Provide commands for individual steps and useful combinations, then compare the refactored outputs with the accepted baseline. Report any scientific difference instead of silently treating it as a refactor.
+> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
+:::
+
+:::
+
+::: {.keep-together}
+### Test the workflow before running the full batch {.unlisted}
+
+Supply: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
+
+Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-smoke-test-workflow).
+
+::: {.prompt}
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
 :::
 
 :::
@@ -194,7 +207,7 @@ Supply: the unexpected result, specification, current code, and saved outputs.
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-investigate-result).
 
 ::: {.prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible input, implementation, and statistical explanations, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision; after approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the same estimands.
+> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
 :::
 
 :::
