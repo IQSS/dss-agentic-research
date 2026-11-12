@@ -220,7 +220,7 @@ Supply: the specification and scientific scenarios or performance questions to e
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
 ::: {.prompt}
-> Propose known-truth checks for SPECIFICATION.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
+> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 
 :::
@@ -228,12 +228,12 @@ Explanation and checks: [Chapter 14: Test the analysis against known truth](#req
 ::: {.keep-together}
 ### Implement the analysis independently {.unlisted}
 
-Supply: the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results.
+Supply: the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
 ::: {.prompt}
-> Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 
 :::
@@ -246,7 +246,7 @@ Supply: both completed implementations, their outputs, and the common specificat
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
 ::: {.prompt}
-> Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
 :::
 
 :::

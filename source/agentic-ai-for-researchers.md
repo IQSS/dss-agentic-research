@@ -1050,160 +1050,195 @@ For setup and recovery instructions, see [Chapter 6: Keep unattended jobs moving
 
 <!-- aliases: calibration-example -->
 
-Simulation can check whether an agent's workflow executes and whether the proposed estimator recovers quantities whose true values are known. Those are different questions. Code can follow the specification and still produce poor estimates under conditions relevant to the study.
+Simulation can check whether the code an agent has written runs successfully and whether a candidate estimator has desirable statistical properties under conditions relevant to the study. Those are different questions. Code can follow the specification and run without error while producing biased estimates or unreliable uncertainty intervals.
 
-The heat-and-birthweight study in [Chapter 10: The example research project](#example-project) makes this distinction visible. One simulated world contains the curved age relationship and linear heat-by-age interaction represented in the fitted statistical model. Another contains a more complex interaction. Applying the same estimator to both reveals where its performance deteriorates.
+In the heat-and-birthweight example ([Chapter 10: The example research project](#example-project)), the agent generates synthetic datasets with known relationships between maternal age, heat exposure, and birthweight. By varying those relationships and repeating the prescribed analysis, it can assess when the method produces reliable estimates and uncertainty intervals.
 
-## Decide what the test must establish
+## Check that the code runs from inputs to outputs {#simulation-execution}
 
-First, have the agent pass one dataset through the saved workflow and confirm that it produces usable outputs. Add a small calculation with an answer established separately from the code being tested. With age centered at 28 in this example, the modeled 10-minus-5-day difference at age 28 is five times the heat coefficient. Comparing that expression with the prediction-based contrast checks the reported quantity.
+Build on the smoke test in [Chapter 13: Build a modular analysis workflow](#research-workflows). Ask the agent to generate a small synthetic dataset with the variables and formats the code expects, then run it through the complete workflow. For the birthweight example, that means preparing the analysis data, fitting the statistical model, calculating contrasts, and producing the required tables and figures. Have the agent fix errors, missing outputs, and failures between steps before repeating the run.
 
-Then repeat the analysis across many generated datasets to assess estimation and uncertainty. A single successful execution cannot establish low bias or reliable interval coverage.
+Synthetic data also let the agent exercise conditions the code needs to handle. For example, it can insert missing birthweights to check that the code applies the prescribed exclusion rule. These functional checks establish whether the code completes the required steps for the supplied inputs. Assessing the estimator's statistical properties requires repeated datasets with known truth.
 
-![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="First run one dataset through the workflow and check a separately calculated answer. Then repeat across synthetic datasets with known truth and assess estimation bias, interval coverage, and failures."}
+![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="Two uses of simulation: pass one synthetic dataset through the saved code to check execution and required outputs; then repeatedly generate datasets under specified scenarios, run the prescribed analysis, and compare estimates and intervals with known truth."}
 
-## Define plausible worlds and calculate truth {#calibration-example}
+## Choose the scenarios for evaluating the estimator {#calibration-example}
 
-Use `SPECIFICATION.md` as the analysis target and link a detailed simulation specification from it. Define the scenarios, known quantities, repetitions, and performance summaries there. The example varies the heat relationship while keeping its analysis method unchanged.
+The methodological question is how well the proposed analysis performs under conditions that could matter for the study. You identify those conditions; the agent can help turn them into simulation scenarios and explain what each would reveal. In other projects, the simulation scenarios might vary in sample size, the amount of missing data, measurement error, or dependence among observations.
 
-| World | Relationship in the generator | Question for the estimator |
-|---|---|---|
-| Null | Heat contributes nothing. | Are estimates near zero and false-positive rates acceptable? |
-| Main | The heat slope changes linearly with age. | Does the estimator recover average and age-specific contrasts? |
-| Curved | The heat slope also changes quadratically with age. | What happens when the fitted interaction is too restrictive? |
+The birthweight example examines three scenarios. All retain a curved relationship between maternal age and birthweight. They differ in how heat exposure affects birthweight, while the prescribed analysis allows the heat effect to change linearly with age.
 
-Before assessing recovery, check whether each world can represent the measured quantity. Outcome bounds, dispersion, clustering, exposure support, and constraints between variables matter. The example generates positive, right-skewed birthweights, but it remains a teaching construction rather than a validated description of births. Real studies may also need missingness, measurement error, or dependence.
+| Scenario | How the data are generated | What the comparison examines |
+|:----------------------|:------------------------------------------|:----------------------------------|
+| No heat effect | Heat exposure does not affect birthweight. | Estimates near zero and the frequency of false positives. |
+| Linear change with age | The heat effect changes linearly with maternal age, as the analysis assumes. | Performance when the fitted statistical model represents the simulated relationships. |
+| Nonlinear change with age | The heat effect also changes quadratically with maternal age. | Performance when the fitted interaction cannot fully represent the simulated relationship. |
 
-Calculate the true contrast from the generating conditional mean before adding noise. Have that calculation checked separately from the estimator. Reusing the fitting code to produce both the estimate and its supposed truth can put the same mistake on both sides.
+Before evaluating the estimator, have the agent check that the data generator can produce plausible values for the study variables. For birthweight, this includes positive values and a defensible distribution and spread. Check relevant constraints between variables too. The example uses positive, right-skewed birthweights; a real study needs scenarios justified by its scientific knowledge and data.
+
+Have the agent calculate the true quantities being estimated directly from the data-generating rules and check those calculations separately from the fitting code. For this example, it calculates mean birthweight at 10 and 5 hot days before adding random variation, then averages the differences over the specified individuals. If the agent uses the same faulty calculation for both the estimate and the value used to check it, the two can agree even though both are wrong.
+
+Have the agent record the approved scenarios, true quantities, number of repetitions, and evaluation criteria in a simulation specification linked from `SPECIFICATION.md`. It should keep simulated inputs and results separate from the primary analysis files.
 
 <details class="guide-example">
 <summary>How the example generates outcomes and calculates truth</summary>
 
-The simulation holds the 1,200 synthetic individuals' ages, smoking indicators, and exposures fixed, and generates new birthweights in each repetition. Its performance results therefore concern those covariate values. The generator uses positive, right-skewed noise with spread increasing with the conditional mean.
+The simulation holds the 1,200 synthetic individuals' ages, smoking indicators, and exposures fixed, and generates new birthweights in each repetition. Its performance results therefore concern those covariate values. The generator uses positive, right-skewed noise with spread increasing with the conditional mean. The download labels the three scenarios `null`, `main`, and `curved`.
 
-For each world, the true sample contrast averages the difference between conditional mean birthweight at 10 and 5 hot days over the saved individuals. Age-specific truth uses the stated age and the sample's smoking distribution. The estimator includes quadratic age, a linear heat-by-age interaction, and smoking, with HC3 covariance and normal-reference intervals. It is unchanged across worlds.
+For each scenario, the true sample contrast averages the difference between conditional mean birthweight at 10 and 5 hot days over the saved individuals. Age-specific truth uses the stated age and the sample's smoking distribution. The estimator includes quadratic age, a linear heat-by-age interaction, and smoking, with HC3 covariance and normal-reference intervals. It is unchanged across scenarios.
 
-The [project download](resources/heat-birthweight.zip) contains generator code, parameters, independent truth calculations, seeds, and the full simulation plan. A different design may require numerical integration or a large reference population to approximate truth; record that approximation and its uncertainty.
+A separate calculation can check the implementation of a reported contrast. With age centered at 28, the fitted model's 10-minus-5-day difference at age 28 is five times its heat coefficient. Ask the agent to compare that expression with the contrast obtained from predictions. This checks the contrast calculation; the repeated simulation assesses its statistical performance.
+
+The [project download](resources/heat-birthweight.zip) contains generator code, parameters, independent truth calculations, random seeds, and the simulation specification. A different design may require numerical integration or a large reference population to approximate truth; have the agent record that approximation and its uncertainty.
 
 </details>
 
-## Have the agent run the comparison
+## Have the agent evaluate repeated datasets {#simulation-repetitions}
 
-State the evaluation criteria before launching the repetitions. Examine bias and estimation error, then interval coverage and any decision rule the research will use. A procedure can have small average bias and still produce intervals that are too narrow.
+Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
+
+Agree on the performance measures before launching the repetitions. Ask the agent to propose measures suited to the quantities being estimated and any decision rules the study will use. The table below summarizes common choices.
+
+| Measure | What it tells you |
+|:----------------------------|:---------------------------------------------------------------------|
+| Bias | Whether estimates are systematically too high or too low. |
+| Overall estimation error | How far estimates fall from the truth, accounting for both bias and variation. |
+| Interval coverage | How often the uncertainty intervals contain the true value. |
+| Interval width | How precise the reported estimates are; high coverage can come from very wide intervals. |
+| Power and false-positive rate | How often a specified decision rule detects an effect when one exists, or declares one when none exists. |
+| Failure rate | How often the analysis fails to produce an estimate or interval. |
+
+The number of repetitions determines how precisely the simulation estimates statistical performance. With 400 repetitions, an estimated coverage rate near 95 percent has a standard error of about 1.1 percentage points. This is *Monte Carlo uncertainty*: uncertainty in the estimated performance, rather than in an individual birthweight contrast. More repetitions reduce it. Have the agent choose enough repetitions to distinguish differences that matter for the methodological decision and report the remaining uncertainty.
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Propose known-truth checks for SPECIFICATION.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
+> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 
-Retain failures and report attempted as well as successful runs. Computing performance only among successful fits can make an unstable estimator look reliable. Finite simulation runs also introduce Monte Carlo uncertainty: with 400 repetitions, coverage near 95 percent has a standard error of about 1.1 percentage points. That describes uncertainty in the estimated coverage rate, not the interval around a birthweight contrast.
+Have the agent retain failed runs and report their number alongside the successful ones. If performance summaries exclude failures, it should state that explicitly: results from successful fits alone can make an unstable estimator look reliable.
 
-## Interpret failures before changing the method
+## Use the results to assess and revise the method {#simulation-decisions}
 
 <!-- example:simulation-results -->
-The saved run completed 400 repetitions in each world, with no failed fits. In the curved world, the age-28 contrast had bias of 28.3 g and interval coverage of 75.8%. The sample-average contrast performed much better. A satisfactory average can conceal an inadequate age-specific result.
+All 1,200 fits in the saved simulation completed without failure: 400 repetitions in each of the three scenarios. Yet when the heat effect changed nonlinearly with age, the age-28 contrast had bias of 28.3 g, and its nominal 95% intervals contained the true value in only 75.8% of repetitions. The code ran successfully, but the prescribed method's statistical performance was poor for this quantity in this scenario. The sample-average contrast performed much better, so examining only that average would have concealed the problem at age 28.
 
-![](figures/simulation-performance.svg){#fig-simulation-performance fig-alt="Saved simulation results compare bias and coverage in the null, main, and curved worlds. Age-28 performance deteriorates in the curved world. Bars show Monte Carlo uncertainty, not birthweight confidence intervals."}
+![](figures/simulation-performance.svg){#fig-simulation-performance fig-alt="Saved simulation results compare bias and interval coverage across three scenarios. The age-28 contrast performs poorly when the heat effect changes nonlinearly with age, while the sample-average contrast performs better. Bars show Monte Carlo uncertainty, not birthweight confidence intervals."}
+
+::: {.needspace height="12cm"}
+:::
 
 <details class="guide-example">
 <summary>Read the numerical results</summary>
 
-The table shows two of the four reported quantities. The project download includes every quantity, replicate, and failure check.
+The table shows two of the four reported quantities. Coverage is the proportion of 95% confidence intervals containing the true contrast; the last column reports Monte Carlo uncertainty in that proportion. The project download includes every quantity, repetition, and failure check.
 
-| World | Quantity | Truth (g) | Bias (g) | Coverage | Monte Carlo 95% interval |
-|---|---|---:|---:|---:|---|
-| Null | Sample average | 0.0 | -0.2 | 94.5% | 91.8%–96.3% |
-| Null | Age 28 | 0.0 | 0.1 | 94.0% | 91.2%–95.9% |
-| Main | Sample average | -37.8 | 1.0 | 94.2% | 91.5%–96.1% |
-| Main | Age 28 | -40.0 | 1.0 | 94.8% | 92.1%–96.5% |
-| Curved | Sample average | -10.8 | 2.4 | 93.5% | 90.6%–95.5% |
-| Curved | Age 28 | -40.0 | 28.3 | 75.8% | 71.3%–79.7% |
+| Scenario | Quantity | Truth (g) | Bias (g) | Coverage | Monte Carlo 95% interval |
+|:-----------------------|:--------------|----------:|---------:|------------:|:--------------------------|
+| No heat effect | Sample average | 0.0 | -0.2 | 94.5% | 91.8%–96.3% |
+| No heat effect | Age 28 | 0.0 | 0.1 | 94.0% | 91.2%–95.9% |
+| Linear change with age | Sample average | -37.8 | 1.0 | 94.2% | 91.5%–96.1% |
+| Linear change with age | Age 28 | -40.0 | 1.0 | 94.8% | 92.1%–96.5% |
+| Nonlinear change with age | Sample average | -10.8 | 2.4 | 93.5% | 90.6%–95.5% |
+| Nonlinear change with age | Age 28 | -40.0 | 28.3 | 75.8% | 71.3%–79.7% |
 
 </details>
 
-These are measured simulation results under specified synthetic worlds, not empirical health findings.
 <!-- /example:simulation-results -->
 
-When a check fails, ask the agent to show the generator, truth calculation, and saved estimates. An impossible simulated world, a coding mistake, and poor estimator performance require different responses. Preserve the failing run while investigating.
+When performance is poor, ask the agent to investigate the data generator, truth calculation, and implementation before attributing the problem to the estimator. Preserve the failing runs. A generator that produces impossible values needs correction; an implementation error needs repair; a correctly implemented method that performs poorly may need a scientific revision.
 
-The curved-world result gives a reason to examine a more flexible age interaction. It does not authorize the agent to replace the method silently. Approve any revision before the agent updates `SPECIFICATION.md`, records the reason in `METHODOLOGY.md`, and repeats the relevant checks. Simulation supports claims about performance under specified worlds; it does not establish that an observational design supports a causal interpretation. The next chapter asks whether separately built implementations carry out the specification consistently.
+The nonlinear scenario gives a reason to evaluate a more flexible age interaction. If you approve that evaluation, have the agent compare the candidate methods across the relevant scenarios, preserving the original results. An approved change to the prescribed analysis belongs in `SPECIFICATION.md`, with its reason in `METHODOLOGY.md`; the agent then reruns the affected analysis and checks.
+
+Simulation supports conclusions about performance under the conditions examined. [Chapter 15: Check the agent with independent implementations](#checking-analysis) provides a complementary check: whether separately written implementations carry out the same scientific specification consistently.
 
 # 15. Check the agent with independent implementations {#checking-analysis}
 
-Independently built implementations give mistakes a chance to produce observable disagreements. Each agent receives the same specification and inputs, works through the analysis separately, and saves comparable outputs. A rerun of the same code cannot provide this check.
+The code an agent builds can run without error yet use the wrong sample, report a coefficient instead of the requested contrast, or calculate uncertainty incorrectly. An independent implementation is a separately written set of code for the same prescribed analysis. Comparing its outputs with those of the first implementation can reveal mistakes that rerunning the original code would repeat.
 
-For the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), one fresh agent implemented the analysis in [`R`](https://www.r-project.org/) and another in [`Python`](https://www.python.org/). Neither saw the other's code or results while building. The comparison checked their data processing and calculations, including the specified contrasts and uncertainty method.
+For the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), one fresh agent implemented the analysis in [`R`](https://www.r-project.org/) and another in [`Python`](https://www.python.org/). Neither saw the other's code or results while building. Whereas the simulations in [Chapter 14: Test the analysis against known truth](#simulation) assessed the estimator's performance under specified scenarios, this comparison checked whether separately written code produced the same data processing and calculations.
 
-## Give both agents the same specification
+## Define the analysis to be checked {#give-both-agents-the-same-specification}
 
-Give both agents the same fixed version of `SPECIFICATION.md`, with the estimands, original inputs, sample rules, estimator, reported quantities, and comparison tolerances. Preserve that version with the check even if the current specification later changes. If an implementer finds an ambiguity, resolve it and give both agents the same clarification. Record the decision in `METHODOLOGY.md`, but do not supply a log that reveals the other implementation or its results.
+Both implementations need to follow the same scientific requirements. Ask the agent to prepare a fixed copy of `SPECIFICATION.md` with the quantities to estimate, input files, sample rules, estimator, and uncertainty calculation. For the heat-and-birthweight example, “estimate the heat effect” is too vague: the specification identifies the birthweight contrast between 10 and 5 hot days, the sample over which to average it, and the age-specific comparisons.
 
-“Estimate the heat effect” leaves room for different interpretations. The example specifies a 10-minus-5-day contrast, its averaging sample, age-specific comparisons, and uncertainty calculation. Those details make a disagreement interpretable.
+Also have the agent propose comparison tolerances: how close numerical results must be to count as agreement. Tiny differences can arise from numerical calculations, while estimates based on simulation draws require allowance for Monte Carlo variation. Agree on these tolerances before comparing outputs. Record identifiers and categorical values should match exactly.
 
-## Build two implementations separately
+Keep the specification version used for the check even if the project later changes. If either agent finds an ambiguity, resolve it and give both the same clarification. Have the agent record your decision and its reason in `METHODOLOGY.md`, without passing the other implementation's code or results to either builder.
 
-![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and specification go to two fresh agents in separate folders. Each produces its own processing, analysis, and outputs before a comparison session sees both results."}
+## Have the agents build separately {#build-two-implementations-separately}
 
-Use fresh sessions and separate folders containing the specification, dictionary, and approved original inputs. Exclude the other implementation's code, processed data, and results. The sessions can run sequentially or simultaneously. Translating the first implementation carries its choices into the second and provides a different, weaker check.
+Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-If data processing is part of the work being checked, both implementations should start from original inputs. Sharing one agent's processed dataset leaves that processing unchecked. For a narrower check of fitting on an already verified dataset, the processed file is an appropriate common starting point.
+[^independent-headless]: For setup, saved requests, and controlling each run's inputs, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+
+You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
+
+![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same inputs and analysis specification go to two fresh agents in separate folders, illustrated by an R implementation and a Python implementation. Each writes its own code and saves outputs. Another headless agent session compares both implementations to find where they disagree. Different analysis software is preferred when practical, but not required."}
+
+If the project already has the analysis code developed in [Chapter 13: Build a modular analysis workflow](#research-workflows), keep it and have the coordinating agent launch just the independent second build. It should work from the specification and inputs only. Translating or revising the first implementation can carry its mistakes into the second.
+
+The inputs depend on what you want to check. To check data processing as well as analysis, have both implementations start from the original data. Sharing one agent's processed dataset would leave that processing unchecked. To check only the analysis of an already verified dataset, use that dataset as the common starting point.
 
 <!-- prompt:independent-implementation -->
 ::: {#request-independent-implementation .prompt}
-> Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 <!-- /prompt:independent-implementation -->
 
-Different languages or statistical packages help expose defaults. Fresh implementations in the same language can still be useful; two are the default, with a third reserved for a further independent attempt when needed. Agreement by majority vote does not decide which implementation is correct.
+The agents do not need to use different agent providers or programming languages. Where practical, use different analysis software, such as `R`, `Python`, or [`Stata`](https://www.stata.com/). This can reveal differences in defaults and data handling, while checking calculations performed by different statistical libraries. The essential requirement is to construct the implementations independently from the same specification.
 
 For restricted inputs, develop code with permitted synthetic data and run each implementation on the real records in the approved environment. Keep the comparison there unless its contents may be shared. [Chapter 3: Know where your data goes](#research-limits) explains that separation.
 
-## What the worked comparison found
+## Have an agent compare and investigate the outputs {#investigate-the-earliest-disagreement}
+
+Once both implementations are complete, have the coordinating agent launch another separate headless session to compare them. This session can read both sets of code and results. It should work from the input files through to the reported estimates, because a difference early in the analysis can explain several later ones. If the samples differ, for example, resolve that before investigating why the estimates differ.
+
+| What to compare, in order | What a disagreement may reveal |
+|:-------------------------------|:----------------------------------------------------|
+| Input files and their checksums | A different data release, the wrong file, or a variable taken from the wrong source. |
+| Included records and exclusions | Different exclusion rules, duplicate records, or rules applied in a different order. Equal sample sizes can conceal different people. |
+| Derived variables and model terms | Different units, transformations, or joins; different variables supplied to the statistical model. |
+| Fitted results | Differences in estimation settings, convergence, or software defaults. Compare coefficients and fitted values before the summaries calculated from them. |
+| Reported quantities and uncertainty | A different exposure contrast, averaging sample, prediction scale, or uncertainty calculation. |
+
+<!-- prompt:compare-implementations -->
+::: {#request-compare-implementations .prompt}
+> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
+:::
+<!-- /prompt:compare-implementations -->
+
+Compare full-precision values before rounding, using the agreed tolerances. Have the agent trace each discrepancy back to the specification and source data, explain the cause, and correct the implementation that departs from the requirements. Neither implementation is the answer key, and agreement by majority vote would not resolve the issue. If the investigation leads you to change the scientific specification, have the agent update `SPECIFICATION.md`, record the reason in `METHODOLOGY.md`, and bring both implementations into line before rerunning the comparison.
+
+## What the heat-and-birthweight comparison found {#what-the-worked-comparison-found}
 
 <!-- example:independent-results -->
-Two fresh agents received only the same original synthetic CSV and written specification. One built the R analysis; the other built the Python analysis. Neither received the other's implementation or results while building. The completed comparison retained all 1,200 ids and matched every design-matrix value exactly. The download preserves the original specification in `docs/notes/independent-implementation-specification.md`; the current root specification links to it.
+The completed `R` and `Python` implementations included the same 1,200 birth records. Every value supplied to the statistical model matched exactly, including the transformed variables and interaction terms. The reported birthweight contrasts, standard errors, and confidence intervals agreed within the specified tolerances.
 
 <details class="guide-example">
 <summary>Compare the saved estimates</summary>
 
-| Quantity | R estimate (g) | Python estimate (g) | 95% interval (g), rounded |
-|---|---:|---:|---|
-| sample | -31.639627 | -31.639627 | -74.3 to 11.0 |
-| age_22 | -34.325612 | -34.325612 | -93.8 to 25.1 |
-| age_28 | -31.978065 | -31.978065 | -74.9 to 10.9 |
-| age_36 | -28.848003 | -28.848003 | -90.7 to 33.0 |
+Estimates and intervals are in grams. The intervals below are rounded to one decimal place.
+
+| Quantity | `R` estimate | `Python` estimate | 95% interval |
+|:-----------------------|---------------------:|---------------------:|:-------------------------------|
+| Sample average | -31.639627 | -31.639627 | -74.3 to 11.0 |
+| Age 22 | -34.325612 | -34.325612 | -93.8 to 25.1 |
+| Age 28 | -31.978065 | -31.978065 | -74.9 to 10.9 |
+| Age 36 | -28.848003 | -28.848003 | -90.7 to 33.0 |
+
+Across the contrasts, standard errors, and interval endpoints, the largest absolute difference was 3e-12, below the prespecified tolerance of 0.000001. The comparison also checks coefficients, their covariance matrix, and fitted values at full precision. The project download preserves the original specification in `docs/notes/independent-implementation-specification.md`; the current root specification links to it.
 
 </details>
 
-Across the contrasts, standard errors, and interval endpoints, the largest absolute difference was 3e-12, below the prespecified tolerance of 0.000001. The package also compares coefficients, covariance, and fitted values at full precision.
-
-Implementation checks and a separate input-rule audit identified different issues. Python's postestimation package supplied t-based intervals by default; its implementation calculated the required normal intervals explicitly. Review of the R input checks found an age-range check that was too broad and an unrequested integer restriction on exposure. Correcting those checks left the numerical results unchanged. Agreement on this dataset would not have detected those boundary mistakes by itself.
+Other checks revealed problems that the final numerical agreement does not show. During implementation checking, the `Python` package used to calculate contrasts returned *t*-based confidence intervals by default. Because the specification required intervals based on the normal distribution, the agent calculated those intervals separately from the estimates and standard errors. A separate audit of the `R` input checks found that they accepted ages outside the specified range and unnecessarily required whole numbers of hot days. Correcting those rules left the numerical results unchanged because none of the supplied records triggered the mistakes. Comparing this dataset's results alone would not have exposed them.
 <!-- /example:independent-results -->
 
-## Investigate the earliest disagreement
+## Keep the comparison with the project
 
-Compare the completed outputs in a separate session. Work from inputs toward results; the earliest difference often explains several later ones.
+Ask the agent to save both implementations, the comparison code, and a report identifying the exact input files and specification version. Keep unresolved differences in that report, and have the agent rerun the affected comparisons when the data, code, or specification changes. Both implementations can share a mistaken interpretation or faulty software routine, so retain the simulations in [Chapter 14: Test the analysis against known truth](#simulation) and the targeted checks in [Chapter 13: Build a modular analysis workflow](#check-execution-before-scaling-up), including cases such as duplicates or boundary values.
 
-| First difference | What to investigate |
-|---|---|
-| Input fingerprint or variable source | A different release, an unsupported field, or the wrong data file. |
-| Record identifiers or exclusions | Different samples, duplicates, or rule ordering. Equal sample sizes are insufficient. |
-| Derived values or model terms | Units, transformations, merges, or a different specification. |
-| Standard errors or interval endpoints | Covariance method, reference distribution, or software defaults. |
-| Contrasts despite matching fitted models | Exposure values, averaging population, prediction scale, or postestimation code. |
-
-<!-- prompt:compare-implementations -->
-::: {#request-compare-implementations .prompt}
-> Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
-:::
-<!-- /prompt:compare-implementations -->
-
-Compare full-precision values before rounding. Identifiers and categorical values should agree exactly. Numerical tolerances should reflect the calculation and fitting algorithm; estimates based on simulation draws also need allowance for Monte Carlo error. Record those choices before comparing.
-
-Correct against the specification and source data, then rerun affected comparisons. Never change one result merely to match the other. If the specification changes, both implementations must follow the revised version.
-
-Agreement can still miss shared interpretations, faulty routines, and rules never exercised by the supplied data. Supplement it with the known-truth tests in [Chapter 14: Test the analysis against known truth](#simulation) and targeted cases such as duplicates, missing inputs, or boundary values. Retain inexpensive assertions within the modular workflow described in [Chapter 13: Build a modular analysis workflow](#research-workflows).
+Even error-free code and excellent agreement provide no evidence that the specification is methodologically appropriate for the research question. Both agents could faithfully implement an analysis that estimates the wrong quantity or relies on implausible assumptions. The researcher remains responsible for justifying the approach; agreement between implementations cannot supply that justification.
 
 For analysis built from saved code, continue to [Chapter 18: Write and revise from the research record](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.
 
@@ -2167,7 +2202,7 @@ Supply: the specification and scientific scenarios or performance questions to e
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
 ::: {.prompt}
-> Propose known-truth checks for SPECIFICATION.md, with plausible generating scenarios, independently calculated truth, performance measures, and Monte Carlo uncertainty. Verify outcome ranges and dispersion. After approval, run the saved analysis unchanged in each scenario and report failures alongside successes. Keep simulation files separate and propose any methodological changes for my decision.
+> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 
 :::
@@ -2175,12 +2210,12 @@ Explanation and checks: [Chapter 14: Test the analysis against known truth](#req
 ::: {.keep-together}
 ### Implement the analysis independently {.unlisted}
 
-Supply: the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results.
+Supply: the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
 ::: {.prompt}
-> Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 
 :::
@@ -2193,7 +2228,7 @@ Supply: both completed implementations, their outputs, and the common specificat
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
 ::: {.prompt}
-> Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
+> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
 :::
 
 :::
@@ -2349,7 +2384,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-assertion}
-*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Implementation checks](#investigate-the-earliest-disagreement).
+*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Automatic checks](#check-execution-before-scaling-up).
 :::
 
 ::: {#term-auto-mode}
@@ -2365,7 +2400,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-calibration}
-*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Simulation goals](#decide-what-the-test-must-establish).
+*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Choosing simulation scenarios](#calibration-example).
 :::
 
 ::: {#term-chain-of-custody}
@@ -2445,7 +2480,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-independent-implementation}
-*Independent implementation.* A separate implementation built from the same scientific specification and original inputs without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
+*Independent implementation.* Separately written code for the same scientific specification and approved inputs, built without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
 :::
 
 ::: {#term-llm-inference}
@@ -2477,7 +2512,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-monte-carlo-error}
-*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Simulation results](#interpret-failures-before-changing-the-method).
+*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Repeated simulation and its uncertainty](#simulation-repetitions).
 :::
 
 ::: {#term-open-source-ai}

@@ -124,7 +124,6 @@ anchor-map:
   "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "data-provenance": /chapters/data-acquisition.qmd#data-provenance
-  "decide-what-the-test-must-establish": /chapters/simulation.qmd#decide-what-the-test-must-establish
   "decide-whether-to-plan-first": /chapters/directing-work.qmd#decide-whether-to-plan-first
   "define-the-output-and-its-research-meaning": /chapters/llm-measurements.qmd#define-the-output-and-its-research-meaning
   "directing-work": /chapters/directing-work.qmd
@@ -138,7 +137,6 @@ anchor-map:
   "how-does-an-agent-work-through-a-task": /chapters/research-uses.qmd#how-does-an-agent-work-through-a-task
   "how-does-an-llm-generate-a-response": /chapters/research-uses.qmd#how-does-an-llm-generate-a-response
   "identify-inputs": /chapters/data-acquisition.qmd#identify-inputs
-  "interpret-failures-before-changing-the-method": /chapters/simulation.qmd#interpret-failures-before-changing-the-method
   "investigate-the-earliest-disagreement": /chapters/checking-analysis.qmd#investigate-the-earliest-disagreement
   "literature": /chapters/literature.qmd
   "literature-synthesis": /chapters/literature.qmd#literature-synthesis
@@ -190,6 +188,7 @@ anchor-map:
   "shared-conventions": /chapters/shared-conventions.qmd
   "shared-instructions": /chapters/shared-conventions.qmd#shared-instructions
   "simulation": /chapters/simulation.qmd
+  "simulation-repetitions": /chapters/simulation.qmd#simulation-repetitions
   "specialist-conventions": /chapters/shared-conventions.qmd#specialist-conventions
   "starter-files": /chapters/starter-files.qmd
   "starter-global": /chapters/starter-files.qmd#starter-global

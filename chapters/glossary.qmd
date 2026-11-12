@@ -21,7 +21,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-assertion}
-*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Implementation checks](#investigate-the-earliest-disagreement).
+*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Automatic checks](#check-execution-before-scaling-up).
 :::
 
 ::: {#term-auto-mode}
@@ -37,7 +37,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-calibration}
-*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Simulation goals](#decide-what-the-test-must-establish).
+*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Choosing simulation scenarios](#calibration-example).
 :::
 
 ::: {#term-chain-of-custody}
@@ -117,7 +117,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-independent-implementation}
-*Independent implementation.* A separate implementation built from the same scientific specification and original inputs without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
+*Independent implementation.* Separately written code for the same scientific specification and approved inputs, built without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
 :::
 
 ::: {#term-llm-inference}
@@ -149,7 +149,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-monte-carlo-error}
-*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Simulation results](#interpret-failures-before-changing-the-method).
+*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Repeated simulation and its uncertainty](#simulation-repetitions).
 :::
 
 ::: {#term-open-source-ai}

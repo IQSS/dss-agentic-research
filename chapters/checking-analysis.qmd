@@ -6,78 +6,90 @@ title: "15. Check the agent with independent implementations"
 
 # 15. Check the agent with independent implementations
 
-Independently built implementations give mistakes a chance to produce observable disagreements. Each agent receives the same specification and inputs, works through the analysis separately, and saves comparable outputs. A rerun of the same code cannot provide this check.
+The code an agent builds can run without error yet use the wrong sample, report a coefficient instead of the requested contrast, or calculate uncertainty incorrectly. An independent implementation is a separately written set of code for the same prescribed analysis. Comparing its outputs with those of the first implementation can reveal mistakes that rerunning the original code would repeat.
 
-For the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), one fresh agent implemented the analysis in [`R`](https://www.r-project.org/) and another in [`Python`](https://www.python.org/). Neither saw the other's code or results while building. The comparison checked their data processing and calculations, including the specified contrasts and uncertainty method.
+For the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), one fresh agent implemented the analysis in [`R`](https://www.r-project.org/) and another in [`Python`](https://www.python.org/). Neither saw the other's code or results while building. Whereas the simulations in [Chapter 14: Test the analysis against known truth](#simulation) assessed the estimator's performance under specified scenarios, this comparison checked whether separately written code produced the same data processing and calculations.
 
-## Give both agents the same specification
+## Define the analysis to be checked {#give-both-agents-the-same-specification}
 
-Give both agents the same fixed version of `SPECIFICATION.md`, with the estimands, original inputs, sample rules, estimator, reported quantities, and comparison tolerances. Preserve that version with the check even if the current specification later changes. If an implementer finds an ambiguity, resolve it and give both agents the same clarification. Record the decision in `METHODOLOGY.md`, but do not supply a log that reveals the other implementation or its results.
+Both implementations need to follow the same scientific requirements. Ask the agent to prepare a fixed copy of `SPECIFICATION.md` with the quantities to estimate, input files, sample rules, estimator, and uncertainty calculation. For the heat-and-birthweight example, “estimate the heat effect” is too vague: the specification identifies the birthweight contrast between 10 and 5 hot days, the sample over which to average it, and the age-specific comparisons.
 
-“Estimate the heat effect” leaves room for different interpretations. The example specifies a 10-minus-5-day contrast, its averaging sample, age-specific comparisons, and uncertainty calculation. Those details make a disagreement interpretable.
+Also have the agent propose comparison tolerances: how close numerical results must be to count as agreement. Tiny differences can arise from numerical calculations, while estimates based on simulation draws require allowance for Monte Carlo variation. Agree on these tolerances before comparing outputs. Record identifiers and categorical values should match exactly.
 
-## Build two implementations separately
+Keep the specification version used for the check even if the project later changes. If either agent finds an ambiguity, resolve it and give both the same clarification. Have the agent record your decision and its reason in `METHODOLOGY.md`, without passing the other implementation's code or results to either builder.
 
-![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same original data and specification go to two fresh agents in separate folders. Each produces its own processing, analysis, and outputs before a comparison session sees both results."}
+## Have the agents build separately {#build-two-implementations-separately}
 
-Use fresh sessions and separate folders containing the specification, dictionary, and approved original inputs. Exclude the other implementation's code, processed data, and results. The sessions can run sequentially or simultaneously. Translating the first implementation carries its choices into the second and provides a different, weaker check.
+Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-If data processing is part of the work being checked, both implementations should start from original inputs. Sharing one agent's processed dataset leaves that processing unchecked. For a narrower check of fitting on an already verified dataset, the processed file is an appropriate common starting point.
+[^independent-headless]: For setup, saved requests, and controlling each run's inputs, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+
+You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
+
+![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same inputs and analysis specification go to two fresh agents in separate folders, illustrated by an R implementation and a Python implementation. Each writes its own code and saves outputs. Another headless agent session compares both implementations to find where they disagree. Different analysis software is preferred when practical, but not required."}
+
+If the project already has the analysis code developed in [Chapter 13: Build a modular analysis workflow](#research-workflows), keep it and have the coordinating agent launch just the independent second build. It should work from the specification and inputs only. Translating or revising the first implementation can carry its mistakes into the second.
+
+The inputs depend on what you want to check. To check data processing as well as analysis, have both implementations start from the original data. Sharing one agent's processed dataset would leave that processing unchecked. To check only the analysis of an already verified dataset, use that dataset as the common starting point.
 
 <!-- prompt:independent-implementation -->
 ::: {#request-independent-implementation .prompt}
-> Working only from SPECIFICATION.md, the data dictionary, and the approved original inputs, independently implement the analysis in the assigned language. Do not consult another implementation, processed dataset, or result. Stop for missing inputs or ambiguity; do not invent values or substitute simulated data. Save the code, input fingerprints, sample identifiers, derived values, model terms, and labeled full-precision results with their uncertainty calculations.
+> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 <!-- /prompt:independent-implementation -->
 
-Different languages or statistical packages help expose defaults. Fresh implementations in the same language can still be useful; two are the default, with a third reserved for a further independent attempt when needed. Agreement by majority vote does not decide which implementation is correct.
+The agents do not need to use different agent providers or programming languages. Where practical, use different analysis software, such as `R`, `Python`, or [`Stata`](https://www.stata.com/). This can reveal differences in defaults and data handling, while checking calculations performed by different statistical libraries. The essential requirement is to construct the implementations independently from the same specification.
 
 For restricted inputs, develop code with permitted synthetic data and run each implementation on the real records in the approved environment. Keep the comparison there unless its contents may be shared. [Chapter 3: Know where your data goes](#research-limits) explains that separation.
 
-## What the worked comparison found
+## Have an agent compare and investigate the outputs {#investigate-the-earliest-disagreement}
+
+Once both implementations are complete, have the coordinating agent launch another separate headless session to compare them. This session can read both sets of code and results. It should work from the input files through to the reported estimates, because a difference early in the analysis can explain several later ones. If the samples differ, for example, resolve that before investigating why the estimates differ.
+
+| What to compare, in order | What a disagreement may reveal |
+|:-------------------------------|:----------------------------------------------------|
+| Input files and their checksums | A different data release, the wrong file, or a variable taken from the wrong source. |
+| Included records and exclusions | Different exclusion rules, duplicate records, or rules applied in a different order. Equal sample sizes can conceal different people. |
+| Derived variables and model terms | Different units, transformations, or joins; different variables supplied to the statistical model. |
+| Fitted results | Differences in estimation settings, convergence, or software defaults. Compare coefficients and fitted values before the summaries calculated from them. |
+| Reported quantities and uncertainty | A different exposure contrast, averaging sample, prediction scale, or uncertainty calculation. |
+
+<!-- prompt:compare-implementations -->
+::: {#request-compare-implementations .prompt}
+> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
+:::
+<!-- /prompt:compare-implementations -->
+
+Compare full-precision values before rounding, using the agreed tolerances. Have the agent trace each discrepancy back to the specification and source data, explain the cause, and correct the implementation that departs from the requirements. Neither implementation is the answer key, and agreement by majority vote would not resolve the issue. If the investigation leads you to change the scientific specification, have the agent update `SPECIFICATION.md`, record the reason in `METHODOLOGY.md`, and bring both implementations into line before rerunning the comparison.
+
+## What the heat-and-birthweight comparison found {#what-the-worked-comparison-found}
 
 <!-- example:independent-results -->
-Two fresh agents received only the same original synthetic CSV and written specification. One built the R analysis; the other built the Python analysis. Neither received the other's implementation or results while building. The completed comparison retained all 1,200 ids and matched every design-matrix value exactly. The download preserves the original specification in `docs/notes/independent-implementation-specification.md`; the current root specification links to it.
+The completed `R` and `Python` implementations included the same 1,200 birth records. Every value supplied to the statistical model matched exactly, including the transformed variables and interaction terms. The reported birthweight contrasts, standard errors, and confidence intervals agreed within the specified tolerances.
 
 <details class="guide-example">
 <summary>Compare the saved estimates</summary>
 
-| Quantity | R estimate (g) | Python estimate (g) | 95% interval (g), rounded |
-|---|---:|---:|---|
-| sample | -31.639627 | -31.639627 | -74.3 to 11.0 |
-| age_22 | -34.325612 | -34.325612 | -93.8 to 25.1 |
-| age_28 | -31.978065 | -31.978065 | -74.9 to 10.9 |
-| age_36 | -28.848003 | -28.848003 | -90.7 to 33.0 |
+Estimates and intervals are in grams. The intervals below are rounded to one decimal place.
+
+| Quantity | `R` estimate | `Python` estimate | 95% interval |
+|:-----------------------|---------------------:|---------------------:|:-------------------------------|
+| Sample average | -31.639627 | -31.639627 | -74.3 to 11.0 |
+| Age 22 | -34.325612 | -34.325612 | -93.8 to 25.1 |
+| Age 28 | -31.978065 | -31.978065 | -74.9 to 10.9 |
+| Age 36 | -28.848003 | -28.848003 | -90.7 to 33.0 |
+
+Across the contrasts, standard errors, and interval endpoints, the largest absolute difference was 3e-12, below the prespecified tolerance of 0.000001. The comparison also checks coefficients, their covariance matrix, and fitted values at full precision. The project download preserves the original specification in `docs/notes/independent-implementation-specification.md`; the current root specification links to it.
 
 </details>
 
-Across the contrasts, standard errors, and interval endpoints, the largest absolute difference was 3e-12, below the prespecified tolerance of 0.000001. The package also compares coefficients, covariance, and fitted values at full precision.
-
-Implementation checks and a separate input-rule audit identified different issues. Python's postestimation package supplied t-based intervals by default; its implementation calculated the required normal intervals explicitly. Review of the R input checks found an age-range check that was too broad and an unrequested integer restriction on exposure. Correcting those checks left the numerical results unchanged. Agreement on this dataset would not have detected those boundary mistakes by itself.
+Other checks revealed problems that the final numerical agreement does not show. During implementation checking, the `Python` package used to calculate contrasts returned *t*-based confidence intervals by default. Because the specification required intervals based on the normal distribution, the agent calculated those intervals separately from the estimates and standard errors. A separate audit of the `R` input checks found that they accepted ages outside the specified range and unnecessarily required whole numbers of hot days. Correcting those rules left the numerical results unchanged because none of the supplied records triggered the mistakes. Comparing this dataset's results alone would not have exposed them.
 <!-- /example:independent-results -->
 
-## Investigate the earliest disagreement
+## Keep the comparison with the project
 
-Compare the completed outputs in a separate session. Work from inputs toward results; the earliest difference often explains several later ones.
+Ask the agent to save both implementations, the comparison code, and a report identifying the exact input files and specification version. Keep unresolved differences in that report, and have the agent rerun the affected comparisons when the data, code, or specification changes. Both implementations can share a mistaken interpretation or faulty software routine, so retain the simulations in [Chapter 14: Test the analysis against known truth](#simulation) and the targeted checks in [Chapter 13: Build a modular analysis workflow](#check-execution-before-scaling-up), including cases such as duplicates or boundary values.
 
-| First difference | What to investigate |
-|---|---|
-| Input fingerprint or variable source | A different release, an unsupported field, or the wrong data file. |
-| Record identifiers or exclusions | Different samples, duplicates, or rule ordering. Equal sample sizes are insufficient. |
-| Derived values or model terms | Units, transformations, merges, or a different specification. |
-| Standard errors or interval endpoints | Covariance method, reference distribution, or software defaults. |
-| Contrasts despite matching fitted models | Exposure values, averaging population, prediction scale, or postestimation code. |
-
-<!-- prompt:compare-implementations -->
-::: {#request-compare-implementations .prompt}
-> Compare the completed implementations against SPECIFICATION.md and its tolerances. Check input versions, sample membership, exclusions, derived variables, model terms, and reported quantities, using full-precision values. Produce an agreement-and-discrepancy table and identify the earliest stage at which each discrepancy appears. Do not change either implementation or its outputs to force agreement.
-:::
-<!-- /prompt:compare-implementations -->
-
-Compare full-precision values before rounding. Identifiers and categorical values should agree exactly. Numerical tolerances should reflect the calculation and fitting algorithm; estimates based on simulation draws also need allowance for Monte Carlo error. Record those choices before comparing.
-
-Correct against the specification and source data, then rerun affected comparisons. Never change one result merely to match the other. If the specification changes, both implementations must follow the revised version.
-
-Agreement can still miss shared interpretations, faulty routines, and rules never exercised by the supplied data. Supplement it with the known-truth tests in [Chapter 14: Test the analysis against known truth](#simulation) and targeted cases such as duplicates, missing inputs, or boundary values. Retain inexpensive assertions within the modular workflow described in [Chapter 13: Build a modular analysis workflow](#research-workflows).
+Even error-free code and excellent agreement provide no evidence that the specification is methodologically appropriate for the research question. Both agents could faithfully implement an analysis that estimates the wrong quantity or relies on implausible assumptions. The researcher remains responsible for justifying the approach; agreement between implementations cannot supply that justification.
 
 For analysis built from saved code, continue to [Chapter 18: Write and revise from the research record](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.

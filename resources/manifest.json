@@ -117,7 +117,7 @@
       "chapter": 15,
       "title": "Implement the analysis independently",
       "group": "analysis",
-      "inputs": "the specification, data dictionary, original inputs, and assigned language. Use a fresh agent without access to the other implementation or results."
+      "inputs": "the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results."
     },
     {
       "id": "compare-implementations",
