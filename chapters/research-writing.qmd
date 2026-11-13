@@ -10,9 +10,9 @@ A manuscript can retain an outdated estimate after the analysis has changed. An 
 
 Suppose a revised sample definition changes the estimated birthweight difference in the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)). The agent should locate every use of the earlier result, including the abstract and captions, and propose the necessary updates. The researcher decides whether the revised finding changes the argument.
 
-## Connect the manuscript to saved results {#trace-manuscript}
+## Build a chain of evidence {#trace-manuscript}
 
-Ask the agent to connect each main result in the manuscript to the saved output that supplies it. It should record the source file and exact entry, identify the analysis run that produced it, and note where the result appears in the manuscript. This gives the agent a way to find affected passages when an analysis changes.
+Ask the agent to create a *chain of evidence* linking each reported result to the saved output that produced it. The links should identify the results file, the analysis run, the exact entry, and every place that result appears in the manuscript. The agent can use these links to find affected passages when an analysis changes.
 
 <!-- example:manuscript-results -->
 For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
@@ -22,17 +22,17 @@ For the synthetic heat-and-birthweight study, the `sample` row in `outputs/resul
 The saved results retain full precision; the manuscript rounds them for presentation. The agent should check that the sentence describes the comparison and sample represented by the selected row.
 <!-- /example:manuscript-results -->
 
-![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="The agent connects the sample row in contrasts.csv to its uses in results text, the abstract, and a figure caption. It checks the final document against the saved estimate and interval, and revisits each use when the source changes."}
+The agent can record a *checksum*, a digital fingerprint of a file's contents, and compare it with a newly calculated fingerprint to detect whether the results file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. It should also check that the manuscript uses the correct entry and reports its values accurately, including the exposure contrast, sample, units, sign, interval, and rounding.
 
-The agent can also record a *checksum*, a digital fingerprint of a file's contents, to detect whether a source file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. A changed file prompts a new comparison; the comparison must still check the meaning of the result, including the exposure contrast, sample, units, sign, interval, and rounding.
+![](figures/manuscript-trace.svg){#fig-manuscript-trace .tall fig-alt="A chain connects the saved contrasts.csv file to the manuscript. The agent compares recorded and calculated file fingerprints, identifies the sample row for the ten-versus-five-hot-day contrast, and checks rounding from -31.639627 to -31.6 grams. The manuscript shows the matching table value and an illustrative correction of an outdated value in the text. The abstract, figures, and captions also need checking."}
 
-Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. Both approaches need a check of the final document, including figure scales, labels, and captions.
+Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] For a [`LaTeX`](https://www.latex-project.org/) manuscript, the agent can extract values from saved results into a file that the document reads when it is compiled. This keeps reported numbers connected to their sources without copying them by hand. If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. All three approaches need a check of the final document, including figure scales, labels, and captions.
 
 [^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
-> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
+> Create a chain of evidence linking each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 <!-- /prompt:trace-manuscript -->
 
@@ -58,15 +58,19 @@ Read the draft for clear connections between ideas, sufficient context, and repe
 
 ## Incorporate coauthor edits {#preserve-coauthor-edits-and-respond-to-reviewers}
 
-Coauthors may return different versions of the same manuscript. Ask the agent to preserve each original, compare it with the version sent for review, and propose a combined draft. It should retain accepted wording and comments, identify incompatible edits, and explain substantive changes for your decision.
+Coauthors may return different versions of the same manuscript. Ask the agent to preserve each coauthor's returned version, compare it with the draft you sent to that coauthor, and propose a combined draft. It should retain accepted wording and comments, identify incompatible edits, and explain substantive changes for your decision.
 
 Keep the document workflow your collaborators use. For direct `Word` editing, have the agent work on a copy and check that comments, citations, equations, and formatting survive. Review the combined draft in `Word`, paying particular attention to unresolved disagreements. If the maintained source is markdown or `Quarto`, have the agent incorporate the approved edits there before rebuilding; otherwise a later build can overwrite the coauthors' changes.
+
+If coauthors draft together in [`Google Docs`](https://docs.google.com/), keep the shared document as the maintained manuscript. You can download the current draft as markdown and ask the agent to check its prose, citations, and reported numbers against the project's sources.[^google-docs-review] Incorporate the accepted changes into the shared document, preserving comments and any edits coauthors have made since the download.
+
+[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://dss-agentic-toolkit.pages.dev/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 ## Respond to reviewers {#respond-to-reviewers}
 
 Give the agent the reviewer comments and your proposed responses. It can identify which requests require clarification, a wording change, or further analysis, and help you assess the options. Once you decide, it should connect each response to the actual manuscript change or explain why no change was made.
 
-For an approved analysis change, have the agent preserve the original results, update `SPECIFICATION.md`, and add the decision and reason to `METHODOLOGY.md`. It should then rerun the affected analysis and checks before revising the manuscript, following [Chapter 13: Build a modular analysis workflow](#investigate-workflow-results). A requested analysis that is still pending must remain visibly outstanding in the response draft.
+For an approved analysis change, have the agent preserve the original results, update `SPECIFICATION.md`, and add the decision and reason to `METHODOLOGY.md`. It should then rerun the affected analysis and checks before revising the manuscript, following [Chapter 13: Build a modular analysis workflow](#investigate-workflow-results).
 
 <!-- prompt:reviewer-response -->
 ::: {#request-reviewer-response .prompt}
@@ -74,12 +78,9 @@ For an approved analysis change, have the agent preserve the original results, u
 :::
 <!-- /prompt:reviewer-response -->
 
-<details class="guide-example">
-<summary>Use the same results for a talk</summary>
+## Use the same results for a talk {#use-results-for-a-talk}
 
 Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
-
-</details>
 
 ## Report how AI was used {#describe-ai-use-accurately}
 

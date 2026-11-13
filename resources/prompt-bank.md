@@ -152,7 +152,7 @@ Prepare one fresh headless session per case, using the supplied research protoco
 
 Point the agent to: the rendered manuscript and saved results, including tables and figure sources.
 
-Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
+Create a chain of evidence linking each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 
 ### Draft and assess a manuscript section
 
@@ -170,12 +170,12 @@ Draft the reviewer response from the supplied comments, my decisions, the revise
 
 ### Test the proposed handoff files
 
-Point the agent to: the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances.
+Point the agent to: the proposed archive/ folder or zipped copy, its README and input list, the saved results to reproduce, and comparison tolerances.
 
-In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 
 ### Review a proposed deposit
 
 Point the agent to: the exact files proposed for sharing, the manuscript, reproduction report, and sharing requirements.
 
-Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.

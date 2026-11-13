@@ -182,7 +182,7 @@
       "chapter": 19,
       "title": "Test the proposed handoff files",
       "group": "handoff",
-      "inputs": "the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances."
+      "inputs": "the proposed archive/ folder or zipped copy, its README and input list, the saved results to reproduce, and comparison tolerances."
     },
     {
       "id": "review-deposit",

@@ -1506,9 +1506,9 @@ A manuscript can retain an outdated estimate after the analysis has changed. An 
 
 Suppose a revised sample definition changes the estimated birthweight difference in the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)). The agent should locate every use of the earlier result, including the abstract and captions, and propose the necessary updates. The researcher decides whether the revised finding changes the argument.
 
-## Connect the manuscript to saved results {#trace-manuscript}
+## Build a chain of evidence {#trace-manuscript}
 
-Ask the agent to connect each main result in the manuscript to the saved output that supplies it. It should record the source file and exact entry, identify the analysis run that produced it, and note where the result appears in the manuscript. This gives the agent a way to find affected passages when an analysis changes.
+Ask the agent to create a *chain of evidence* linking each reported result to the saved output that produced it. The links should identify the results file, the analysis run, the exact entry, and every place that result appears in the manuscript. The agent can use these links to find affected passages when an analysis changes.
 
 <!-- example:manuscript-results -->
 For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
@@ -1518,17 +1518,17 @@ For the synthetic heat-and-birthweight study, the `sample` row in `outputs/resul
 The saved results retain full precision; the manuscript rounds them for presentation. The agent should check that the sentence describes the comparison and sample represented by the selected row.
 <!-- /example:manuscript-results -->
 
-![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="The agent connects the sample row in contrasts.csv to its uses in results text, the abstract, and a figure caption. It checks the final document against the saved estimate and interval, and revisits each use when the source changes."}
+The agent can record a *checksum*, a digital fingerprint of a file's contents, and compare it with a newly calculated fingerprint to detect whether the results file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. It should also check that the manuscript uses the correct entry and reports its values accurately, including the exposure contrast, sample, units, sign, interval, and rounding.
 
-The agent can also record a *checksum*, a digital fingerprint of a file's contents, to detect whether a source file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. A changed file prompts a new comparison; the comparison must still check the meaning of the result, including the exposure contrast, sample, units, sign, interval, and rounding.
+![](figures/manuscript-trace.svg){#fig-manuscript-trace .tall fig-alt="A chain connects the saved contrasts.csv file to the manuscript. The agent compares recorded and calculated file fingerprints, identifies the sample row for the ten-versus-five-hot-day contrast, and checks rounding from -31.639627 to -31.6 grams. The manuscript shows the matching table value and an illustrative correction of an outdated value in the text. The abstract, figures, and captions also need checking."}
 
-Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. Both approaches need a check of the final document, including figure scales, labels, and captions.
+Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] For a [`LaTeX`](https://www.latex-project.org/) manuscript, the agent can extract values from saved results into a file that the document reads when it is compiled. This keeps reported numbers connected to their sources without copying them by hand. If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. All three approaches need a check of the final document, including figure scales, labels, and captions.
 
 [^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
-> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
+> Create a chain of evidence linking each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 <!-- /prompt:trace-manuscript -->
 
@@ -1554,15 +1554,19 @@ Read the draft for clear connections between ideas, sufficient context, and repe
 
 ## Incorporate coauthor edits {#preserve-coauthor-edits-and-respond-to-reviewers}
 
-Coauthors may return different versions of the same manuscript. Ask the agent to preserve each original, compare it with the version sent for review, and propose a combined draft. It should retain accepted wording and comments, identify incompatible edits, and explain substantive changes for your decision.
+Coauthors may return different versions of the same manuscript. Ask the agent to preserve each coauthor's returned version, compare it with the draft you sent to that coauthor, and propose a combined draft. It should retain accepted wording and comments, identify incompatible edits, and explain substantive changes for your decision.
 
 Keep the document workflow your collaborators use. For direct `Word` editing, have the agent work on a copy and check that comments, citations, equations, and formatting survive. Review the combined draft in `Word`, paying particular attention to unresolved disagreements. If the maintained source is markdown or `Quarto`, have the agent incorporate the approved edits there before rebuilding; otherwise a later build can overwrite the coauthors' changes.
+
+If coauthors draft together in [`Google Docs`](https://docs.google.com/), keep the shared document as the maintained manuscript. You can download the current draft as markdown and ask the agent to check its prose, citations, and reported numbers against the project's sources.[^google-docs-review] Incorporate the accepted changes into the shared document, preserving comments and any edits coauthors have made since the download.
+
+[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://dss-agentic-toolkit.pages.dev/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 ## Respond to reviewers {#respond-to-reviewers}
 
 Give the agent the reviewer comments and your proposed responses. It can identify which requests require clarification, a wording change, or further analysis, and help you assess the options. Once you decide, it should connect each response to the actual manuscript change or explain why no change was made.
 
-For an approved analysis change, have the agent preserve the original results, update `SPECIFICATION.md`, and add the decision and reason to `METHODOLOGY.md`. It should then rerun the affected analysis and checks before revising the manuscript, following [Chapter 13: Build a modular analysis workflow](#investigate-workflow-results). A requested analysis that is still pending must remain visibly outstanding in the response draft.
+For an approved analysis change, have the agent preserve the original results, update `SPECIFICATION.md`, and add the decision and reason to `METHODOLOGY.md`. It should then rerun the affected analysis and checks before revising the manuscript, following [Chapter 13: Build a modular analysis workflow](#investigate-workflow-results).
 
 <!-- prompt:reviewer-response -->
 ::: {#request-reviewer-response .prompt}
@@ -1570,12 +1574,9 @@ For an approved analysis change, have the agent preserve the original results, u
 :::
 <!-- /prompt:reviewer-response -->
 
-<details class="guide-example">
-<summary>Use the same results for a talk</summary>
+## Use the same results for a talk {#use-results-for-a-talk}
 
 Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
-
-</details>
 
 ## Report how AI was used {#describe-ai-use-accurately}
 
@@ -1606,43 +1607,47 @@ Saved LLM responses are research inputs. Generating new responses is a new colle
 
 ## Prepare the files and instructions {#assemble-the-files-and-instructions}
 
-Ask the agent to assemble a separate folder containing the materials needed for the chosen starting point. It should include the permitted inputs, analysis and reporting code, and the saved results against which a rerun will be compared. Retain the specification used for those results and the relevant decisions in `METHODOLOGY.md`; label the completed version clearly if the current `SPECIFICATION.md` contains later requirements.
+Ask the agent to prepare an `archive/` folder containing the files another researcher will need to reproduce the reported results. The name is your choice; this chapter uses `archive/`. To rebuild tables and figures, include the saved estimates and reporting code. To rerun the analysis, include the permitted study data and analysis code as well. Keep the saved results against which the rerun will be compared.
 
-Have the agent write a `README.md` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
+Have the agent place a copy of the `SPECIFICATION.md` used for the reported analysis in `archive/`, together with the relevant decision history from `METHODOLOGY.md`. If the working project has newer requirements, the copy in `archive/` should retain the earlier specification that matches the supplied code and results. The working project's current `SPECIFICATION.md` stays in place.
+
+Have the agent write a `README.md` for `archive/` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
 
 The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
 
-For restricted data, the shared folder should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
+For restricted data, the instructions in `archive/` should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
 
-![](figures/research-handoff.svg){#fig-research-handoff .tall fig-alt="The agent assembles inputs or access instructions, code and a README, software versions, and reported results. In a separate copy it restores the software, runs the commands, and compares outputs. Missing files or instructions lead to repairs and another test. The tested version is then shared."}
+![](figures/research-handoff.svg){#fig-research-handoff .tall fig-alt="An archive folder contains inputs or access instructions, code, README and SPECIFICATION files, software versions, and results. The agent tests a separate copy by restoring the software environment, running saved commands, and comparing outputs. A report distinguishes passed, failed, and untested checks. A repair loop returns to the archive folder. The tested version can be sent as a zipped copy to a collaborator or deposited in Dataverse, Zenodo, or Dryad."}
 
 ## Test the project outside the working folder {#test-and-name-the-reproduction-route}
 
-Have the agent test the actual files intended for handoff, using a separate copy and restoring the recorded software versions. If the deliverable is an archive, it should unpack and test that archive. A copied folder that still uses packages or unlisted files from the working project has not established that someone else can restore it. A container can help provide a separate environment; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains when that is useful.
+Ask the agent to copy `archive/` into a temporary directory outside the working project. If you will share a zipped copy, have it extract and test that exact file there. It should start a fresh headless agent session[^handoff-headless] with access to the test directory but no access to the working project or earlier conversation. Have that agent restore the recorded software versions in a separate environment and follow the supplied `README.md`. Missing files, dependencies, or instructions should be reported rather than recovered from the working project.
 
-A fresh agent session can follow the `README.md` without relying on the earlier conversation. Ask it to report missing instructions rather than silently reconstruct them. A fresh conversation alone does not isolate the software or files: those must be configured separately. Once omissions are corrected in the handoff folder, have the agent repeat the affected steps from that corrected version.
+[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+
+A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+> Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 <!-- /prompt:reproduce-project -->
 
 Ask the agent to compare both the reported results and the data selections that produced them. Identifiers and deterministic counts should match exactly. Numerical estimates should meet the tolerances specified for the analysis; procedures involving randomness need the agreed settings and comparison criteria. A rebuilt PDF can have different file metadata while displaying identical results, so document checks should compare the content rather than require identical file fingerprints.
 
-The agent should save a short report stating what it ran, the inputs and software used, which comparisons passed, and anything that failed or remains untested. In the heat-and-birthweight example, the main analysis and figures were rebuilt in a separate copy using the existing development environment. Its README identifies clean-machine software restoration as untested.
+The agent should save a short report stating what it ran, the inputs and software used, which comparisons passed, and anything that failed or remains untested. In the heat-and-birthweight example, the agent copied the project to a different directory and rebuilt the main analysis and figures there, using the existing software installation. Recreating the software environment on a new computer has not yet been tested.
 
-This checks the supplied code and instructions. [Chapter 15: Check the agent with independent implementations](#checking-analysis) instead checks separately written implementations of the same specification. Successful reproduction establishes that the documented calculation can be repeated; the researcher must still justify its suitability for the question.
+Reproduction checks whether the supplied files and instructions allow someone to repeat the analysis. [Chapter 15: Check the agent with independent implementations](#checking-analysis) asks whether the agent implemented the analysis the researcher requested. Different agents independently build analysis pipelines from the same specification and inputs; agreement between their results provides evidence that the requested calculation was implemented correctly. Neither check establishes whether the specified analysis is appropriate for the research question.
 
 ## Share the tested version {#review-and-deposit-the-tested-version}
 
-The tested folder can be handed to a collaborator or prepared for a research repository, such as [`Dataverse`](https://dataverse.org/), [`OSF`](https://osf.io/), or [`Zenodo`](https://zenodo.org/). Agree with coauthors who should be credited, which licenses apply, and which manuscript version the files support. Have the agent include the relevant AI-use disclosure and, for LLM-derived measurements, the prompts and evaluation records needed to understand them.
+The tested `archive/` folder can be shared as a zipped copy or deposited in a research repository such as [`Dataverse`](https://dataverse.org/), [`Zenodo`](https://zenodo.org/), or [`Dryad`](https://datadryad.org/). Agree with coauthors who should be credited, which licenses apply, and which manuscript version the files support. Have the agent include the relevant AI-use disclosure and, for LLM-derived measurements, the prompts and evaluation records needed to understand them.
 
 Before sharing, have the agent review the proposed files for confidential material, credentials, and paths that work only on your computer. If version history is included, it needs the same review. The agent should identify proposed exclusions and check whether they would prevent reproduction; you decide what may be shared. Retest affected steps after any corrections.
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+> Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 
@@ -2438,7 +2443,7 @@ Point the agent to: the rendered manuscript and saved results, including tables 
 Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-trace-manuscript).
 
 ::: {.prompt}
-> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
+> Create a chain of evidence linking each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 
 :::
@@ -2474,12 +2479,12 @@ Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-r
 ::: {.keep-together}
 ### Test the proposed handoff files {#bank-reproduce-project .unlisted}
 
-Point the agent to: the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances.
+Point the agent to: the proposed archive/ folder or zipped copy, its README and input list, the saved results to reproduce, and comparison tolerances.
 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-reproduce-project).
 
 ::: {.prompt}
-> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+> Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 
 :::
@@ -2492,7 +2497,7 @@ Point the agent to: the exact files proposed for sharing, the manuscript, reprod
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-review-deposit).
 
 ::: {.prompt}
-> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+> Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 
 :::
