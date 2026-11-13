@@ -440,10 +440,11 @@ The [complete project example](#starter-project) is also available as a download
 
 <!-- starter:project -->
 ```
-# heat-birthweight
+# [Project name]
 
-Synthetic teaching study of heat exposure and birthweight. Every individual
-record is synthetic; results are not evidence about actual pregnancies.
+[Describe the research question, purpose, and intended outputs.]
+[Adapt the paths and file list below to the project. Keep unresolved choices
+explicit; do not invent research decisions to complete this template.]
 
 ## Read first
 - STATUS.md: current state and next decision.
@@ -454,9 +455,9 @@ record is synthetic; results are not evidence about actual pregnancies.
   the rationale or history matters.
 
 ## Files
-- data/raw/: approved original synthetic data; preserve unchanged.
+- data/raw/: approved original inputs; preserve unchanged.
 - code/: saved analysis and validation steps.
-- outputs/: fits, contrasts, figures, and verification records.
+- outputs/: saved results, figures, and checks.
 - manuscript/: text linked to the saved outputs.
 - README.md: actual commands and environment restoration instructions.
 
@@ -464,11 +465,11 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Follow the written specification. Report missing inputs or ambiguities.
 - Do not invent observations, alter the estimand, or weaken a failed check.
 - Save full-precision results; apply rounding only for presentation.
-- Keep simulation outputs separate from the single-dataset analysis.
+- Keep exploratory work, simulations, and manuscript results distinguishable.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
 
-## Maintain the records
+## Maintain project context files
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
@@ -479,10 +480,9 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
-Only approved synthetic material belongs in this project. No protected birth
-records are available here. Ask before adding external services or publishing.
-These instructions do not enforce file or network permissions; use the
-configured access controls for those boundaries.
+[Identify approved inputs, storage, and services, and any restrictions on use.]
+Ask before adding external services or publishing. These instructions do not
+enforce file or network permissions; configure access controls separately.
 ```
 <!-- /starter:project -->
 
@@ -603,7 +603,7 @@ These conventions are defaults across projects. Follow explicit project-specific
 exceptions and record their reasons. Ask when instructions conflict and no
 exception has been agreed.
 
-[Keep short shared conventions here. Add references only to files you maintain,
+[Keep short defaults here. Add paths or links only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
 
@@ -613,7 +613,8 @@ report it; do not create a replacement or invent its instructions.
 ## Research work
 - Preserve original data. Derive new files with saved code.
 - Use independently runnable steps with declared inputs and outputs.
-- Keep scientific decisions and their reasons in the project record.
+- For paper projects, keep current requirements in SPECIFICATION.md and dated
+  scientific decisions and reasons in METHODOLOGY.md.
 - Verify observed outputs before reporting success. Keep failed checks visible.
 
 ## Limits
@@ -622,7 +623,7 @@ report it; do not create a replacement or invent its instructions.
 - Do not delete recovery copies or rewrite shared history without approval.
 
 ## Finishing
-- Update the task list and current-state record from evidence.
+- Update TASKS.md and STATUS.md from the work and checks actually completed.
 - Report what changed, how it was checked, and what remains unresolved.
 ```
 <!-- /starter:global -->
@@ -1078,7 +1079,9 @@ Before evaluating the estimator, have the agent check that the data generator ca
 
 Have the agent calculate the true quantities being estimated directly from the data-generating rules and check those calculations separately from the fitting code. For this example, it calculates mean birthweight at 10 and 5 hot days before adding random variation, then averages the differences over the specified individuals. If the agent uses the same faulty calculation for both the estimate and the value used to check it, the two can agree even though both are wrong.
 
-Have the agent record the approved scenarios, true quantities, number of repetitions, and evaluation criteria in a simulation specification linked from `SPECIFICATION.md`. It should keep simulated inputs and results separate from the primary analysis files.
+Have the agent record the approved scenarios, true quantities, number of repetitions, and evaluation criteria in a simulation specification linked from `SPECIFICATION.md`.[^simulation-design] It should keep simulated inputs and results separate from the primary analysis files.
+
+[^simulation-design]: Morris, White, and Crowther (2019), [“Using simulation studies to evaluate statistical methods”](https://doi.org/10.1002/sim.8086), *Statistics in Medicine*, provide guidance on specifying a simulation study's aims, data-generating mechanisms, estimands, methods, and performance measures, and on reporting Monte Carlo uncertainty.
 
 <details class="guide-example">
 <summary>How the example generates outcomes and calculates truth</summary>
@@ -1170,7 +1173,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: For setup, saved requests, and controlling each run's inputs, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^independent-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -1240,114 +1243,188 @@ Ask the agent to save both implementations, the comparison code, and a report id
 
 Even error-free code and excellent agreement provide no evidence that the specification is methodologically appropriate for the research question. Both agents could faithfully implement an analysis that estimates the wrong quantity or relies on implausible assumptions. The researcher remains responsible for justifying the approach; agreement between implementations cannot supply that justification.
 
-For analysis built from saved code, continue to [Chapter 18: Write and revise from the research record](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.
+For analysis built from saved code, continue to [Chapter 18: Write and revise the manuscript](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.
 
 
 # 16. Use LLM outputs as research data {#llm-measurements}
 
-LLMs can classify documents, extract information, or assess material that would take a research team considerable time to read. When their responses become variables in an analysis, errors in those responses affect the evidence. Define what the LLM should produce and evaluate whether it does that well enough for the study.
+Large language models (LLMs) can help researchers turn large collections of documents, recordings, or images into data for analysis. They can assign categories to interview passages, extract reported events, or assess written reviews. An agent can build the code that prepares the material, requests these outputs, and saves them as research variables. The preceding chapters explained how to check that code; this chapter examines whether the outputs measure what the study requires.
 
-Suppose a project uses an LLM to label interview excerpts that describe an unmet service need. A high overall agreement rate could conceal frequent misses of that uncommon category. This chapter follows that labeling problem, then uses a peer-review study to show how controlled agent runs can apply a protocol repeatedly.
+This chapter uses a running example: a research team wants to estimate the proportion of interview excerpts that describe an unmet service need. An LLM could label each excerpt, allowing the team to examine more material than it could read manually.[^llm-annotation] The team needs to establish what counts as an unmet need, evaluate the labels against human judgments, and account for labeling errors when estimating that proportion. The following sections explain how an agent can help with each step.
 
-## Define the output and its research meaning
+[^llm-annotation]: Gilardi, Alizadeh, and Kubli (2023), [“ChatGPT outperforms crowd workers for text-annotation tasks”](https://doi.org/10.1073/pnas.2305016120), found useful performance on specific annotation tasks involving tweets. Those results motivate evaluating LLM annotation on a research task; they do not establish its accuracy on other material.
 
-Write a rubric that defines the category, exclusions, and ambiguous cases. Specify the material the LLM receives and the output it should return. Ask people familiar with the research to apply the rubric to development examples, reconcile disagreements, and record the reasons. Human labels provide a reference with their own limitations. In `SPECIFICATION.md`, state the research output and link the labeling protocol and evaluation criteria. Record approved changes and their reasons in `METHODOLOGY.md`; retain the frozen rubric and prompt used for each completed run.
+## Define what the LLM should produce {#define-the-output-and-its-research-meaning}
 
-Here, *LLM inference* means running an already-trained LLM to generate a response. It differs from statistical inference about a population or an effect. A scripted LLM call may be sufficient for labeling an excerpt supplied with a fixed rubric. Use an agent when the task also requires tools, such as finding files or extracting passages from several documents.
+Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Researchers familiar with the subject should review it and label a set of examples, resolving disagreements and recording their reasons. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
 
-Develop the prompt on examples reserved for that purpose. Include difficult cases and decide when the procedure should refer a case for human review. A statement of confidence from the LLM is not, by itself, a calibrated probability that the label is correct.
+Work with the agent to develop the rubric and prompt on examples reserved for that purpose. Include difficult cases and specify when the LLM should leave a case for human review. Ask the agent to record what the labels represent in `SPECIFICATION.md`, with links to the rubric and evaluation criteria. It should retain the exact rubric and prompt used for each completed run and record approved revisions and their reasons in `METHODOLOGY.md`.
 
-## Evaluate on material kept out of development {#evaluate-llm-labeling}
+For recorded interviews, the agent might first use speech-recognition software to transcribe the audio, then ask an LLM to label passages. Have it select a sample for human review against the recordings so the evaluation captures transcription errors as well as labeling errors. Some LLMs can process images, audio, or video alongside text. These are called *multimodal LLMs*. Ask the agent to check whether the chosen LLM supports the material you want to analyze. [Chapter 12: Bring data into the project](#data-acquisition) covers collecting and documenting those inputs.
 
-Freeze the rubric and prompt, then evaluate on a separate sample whose reference labels were not used to choose them. Keep related excerpts from the same person or document together when separating samples. Otherwise, information shared across excerpts can make performance appear better than it will be on new material.
+Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that submits each excerpt with the rubric and saves the returned label. If the task also requires tools, such as retrieving passages from several files, the script can launch a separate agent session to do that work.
 
-Consider this illustrative result for 200 excerpts:
+[^llm-inference-tokens]: A token is a unit of text processed by an LLM. It may be a whole word, part of a word, or a punctuation mark.
+
+## Evaluate the labels against human judgments {#evaluate-llm-labeling}
+
+Evaluating LLM-generated labels follows a familiar principle from predictive modeling: assess performance on examples that were not used to develop or select the method.[^predictive-evaluation] Even without training an LLM, researchers make choices about the rubric, prompt, and which LLM to use. Repeatedly adjusting those choices to improve results on the same examples can give an overly optimistic picture of performance on new material.
+
+For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Keep the test set separate from all those decisions. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
+
+![](figures/llm-evaluation-split.svg){#fig-llm-evaluation-split .tall fig-alt="Partition human-labeled examples by participant or document. Development examples support refining the rubric and prompt and comparing LLMs and settings. An optional branch adds training data when fine-tuning. After choosing and fixing the labeling method, evaluate it on the held-out test set, comparing predicted labels with human labels withheld from the LLM."}
+
+If the team also fine-tunes an LLM, a *training set* supplies examples used to update its learned parameters. The development set helps compare candidate LLMs, prompts, and settings. Both contribute to preparing the labeling method; the test set remains separate for final evaluation. [Chapter 17: Run and adapt LLMs for your research](#research-models) explains fine-tuning. The interview example here uses an already-trained LLM without further training.
+
+<!-- prompt:develop-labeling -->
+::: {#request-develop-labeling .prompt}
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
+:::
+<!-- /prompt:develop-labeling -->
+
+Set criteria for acceptable performance before the final test, including which errors matter for the study. Once the rubric, prompt, LLM version where available, and generation settings are fixed, ask the agent to apply them to the test excerpts. The LLM should receive those excerpts without their human labels. The agent can then compare its predictions with the withheld human judgments and report whether they meet the criteria.
+
+[^predictive-evaluation]: The [`scikit-learn` documentation on model evaluation](https://scikit-learn.org/stable/modules/cross_validation.html) explains why test data must remain separate from fitting and selecting a predictive model. The same separation applies when selecting prompts and LLMs rather than fitting a new predictive model.
+
+A *confusion matrix* summarizes agreement and errors by category. In this illustrative matrix for 200 test excerpts, rows show the human reference labels and columns show the LLM's predictions. Each cell counts the excerpts with that combination of labels:
 
 | Human reference | LLM: need present | LLM: need absent |
-|:--|--:|--:|
+|:--------------------|---------------:|---------------:|
 | Need present | 10 | 10 |
 | Need absent | 5 | 175 |
 
-Overall agreement is 92.5 percent. Yet the LLM finds only half of the 20 positive cases, and five of its 15 positive labels are false positives. Report category-specific errors and their uncertainty, including performance for relevant document types or subgroups. A single agreement statistic would hide the problem that matters here.
+Overall agreement is 92.5 percent: the LLM and human reference agree on 185 of 200 excerpts (10 positive and 175 negative). Yet the LLM finds only half of the 20 positive cases, and five of its 15 positive labels are false positives.[^labeling-metrics] Ask the agent to report these category-specific errors and their uncertainty, including performance for relevant document types or groups of participants. Also count failed requests and cases sent for human review, because excluding them can conceal errors and understate the work remaining.
+
+[^labeling-metrics]: Overall agreement is *accuracy*. *Sensitivity* (recall) is the proportion of human-positive cases detected: here, 10 / 20 = 50 percent. *Precision* (positive predictive value) is the proportion of positive predictions that are correct: here, 10 / 15 = 66.7 percent. Other summaries include F1, which combines precision and recall, and balanced accuracy. Choose measures that reflect the errors important to the research question; the [`scikit-learn` overview of classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics) explains these alternatives.
 
 <!-- prompt:evaluate-labeling -->
 ::: {#request-evaluate-labeling .prompt}
-> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 <!-- /prompt:evaluate-labeling -->
 
-Set acceptance criteria before reading the evaluation results. Count failures and human referrals, and report the workload they create. If the observed errors lead you to revise the prompt, that sample has become development material. Use fresh evaluation material for a new performance claim, or disclose the reuse and its limits.
+::: {#llm-confidence}
+An LLM's stated confidence also needs evaluation. If it assigns 80 percent confidence to a set of labels, roughly 80 percent would need to be correct for that confidence to be well calibrated on those cases. Do not use its confidence statements as a substitute for comparison with the human reference.
+:::
 
-## Apply the protocol in controlled runs {#headless-agents}
+## Account for labeling errors in the analysis {#labeling-error-analysis}
 
-A *headless agent* runs from a saved request without an interactive conversation. A script supplies inputs and collects the result, allowing the same protocol to be applied to many cases. An agent in the app can launch that script; you do not have to operate a terminal yourself.
+In the table above, the human reference identifies unmet need in 20 of 200 excerpts, or 10 percent. The LLM identifies 15, or 7.5 percent. Despite high overall agreement, the LLM labels give a different estimate of prevalence. Errors can also distort comparisons and regression estimates, especially when the likelihood of an error differs between groups or depends on other variables in the analysis.
 
-In a project comparing AI and human peer reviews, separate headless runs generated reviews and judged review sets. Each run needed its assigned material without inheriting the conversation from the previous case. Review generation, judging, and analysis were separate stages with saved outputs.
+![](figures/llm-measurement.svg){#fig-llm-measurement fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
 
-### Control what each reviewer or judge receives {#control-what-each-reviewer-or-judge-receives}
+Ask the agent to examine the errors that matter for the planned analysis and propose how to account for them. Methods such as *design-based supervised learning* combine a sample of human-reviewed observations with the larger set of LLM-labeled observations to estimate research quantities and their uncertainty. Their validity depends on the sampling and estimation procedure; a single accuracy score is not enough to make the correction.[^label-error-inference]
 
-![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Fresh reviewer runs each receive a protocol and assigned manuscript. Separate judges receive the rubric and assigned review set. Reviews, judgments, failures, and configuration are saved before statistical analysis."}
+Agree on the approach before the full labeling run, including how observations will be selected for human review. Have the agent preserve those selections, the human and LLM labels, and the code for the proposed adjustment or sensitivity analysis. It should show how accounting for errors changes the estimates and intervals. When the evaluation material does not support a credible correction, additional human review or a narrower research claim may be needed.
 
-A reviewer receives its protocol and manuscript. A judge receives the rubric and assigned reviews, plus the manuscript if the protocol requires it. A pairwise judgment deliberately includes two reviews; controlling context means supplying the intended set, not limiting every run to one document.
+[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://arxiv.org/abs/2306.04746), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
 
-Headless execution does not establish isolation. A fresh run can still load global user instructions, memory, files, plugins, or connected services. Have the agent verify the actual access configuration against the protocol and record untested routes. [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) in the companion guide *Extending Your Agent's Toolkit* covers setup and access tests.[^headless-controls]
+## Check sensitivity to prompts and LLMs {#llm-sensitivity}
 
-[^headless-controls]: Anthropic's [programmatic `Claude Code` documentation](https://code.claude.com/docs/en/headless) describes noninteractive calls and their configuration. These calls can inherit the ordinary `Claude Code` environment; removing a visible conversation does not remove every possible input.
+Research conclusions should not depend on an arbitrary wording choice. Ask the agent to vary reasonable features of the labeling method while keeping the research question and rubric fixed: equivalent prompt wording, the order of examples or material, the LLM or version, and generation settings. Specify these comparisons before examining their results. Changing what a category includes changes the measurement itself; resolve that definition separately.
+
+Have the agent repeat requests with unchanged settings as well, so ordinary run-to-run variation can be distinguished from differences between configurations. For the interview example, compare which excerpts change labels and whether those changes alter the estimated proportion with unmet need or differences between participant groups. Where human reference labels are available, also compare error rates. A change that affects few labels could still matter if those labels concern a small group central to the research question.
+
+The relevant variations depend on the task. When an LLM compares two written responses, reversing their order can reveal a preference for whichever appears first. Research on judging chatbot responses has documented position and verbosity biases, motivating checks of ordering and response length when they could affect the research task.[^judge-bias]
+
+Use development material when these comparisons will guide selection of a prompt or LLM. Prespecified sensitivity analyses can also show how final research estimates vary across configurations; do not select whichever gives the preferred substantive finding. If test results lead to changes in the labeling method, evaluate the revised method on new held-out material. When no defensible human reference exists, sensitivity analysis can still reveal unstable results, but stable outputs alone do not establish accurate or valid measurements.
+
+<!-- prompt:llm-sensitivity -->
+::: {#request-llm-sensitivity .prompt}
+> Using the agreed comparisons, keep the research question and category definitions fixed while varying prompt wording, example order, LLM choice, or generation settings. Repeat requests with unchanged settings to assess ordinary run-to-run variation. Report which labels change and how those changes affect the research estimates, including relevant group comparisons. Compare errors where human reference labels are available. Use development material when the comparisons will guide method selection; keep prespecified analyses of final estimates separate. Save every configuration and response. Do not select a method because it produces a preferred research finding, and do not interpret stable labels as evidence of accuracy.
+:::
+<!-- /prompt:llm-sensitivity -->
+
+[^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685), evaluate comparisons of chatbot responses. Their findings motivate task-specific checks; they do not establish the size of a bias in another research task.
+
+## Evaluate simulated respondents and teams {#simulated-respondents}
+
+LLMs can also generate responses as simulated participants, allowing researchers to explore proposed questions or interactions before organizing a human study. For example, an agent could arrange several LLM sessions to represent members of a small team, supply each with a role and task, and record their exchanges and decisions. These responses are generated behavior, rather than measurements collected from people. Unlike the simulations in [Chapter 14: Test the analysis against known truth](#simulation), their behavior does not follow a generating mechanism whose relevant relationships the researcher has explicitly set.
+
+Define what the simulation needs to reproduce, then ask the agent to compare its outputs with relevant empirical results. For a team study, these might include differences in performance under particular working conditions, with estimates from comparable studies or a meta-analysis. Compare effect sizes and variation, as well as the direction of a difference. Keep some empirical comparisons out of prompt development, and do not supply the target results in the simulated participants' instructions.
+
+Agreement with one finding does not establish that simulated participants represent the target population or will respond realistically to a new intervention. A study found that LLM-generated survey responses could have averages similar to those from human respondents, while showing less variation and different associations between variables.[^synthetic-respondents] Use the comparison to state which aspects of the simulation have empirical support and which remain exploratory. More generated responses can make a simulated estimate more precise without making it a better estimate of human behavior.
+
+[^synthetic-respondents]: Bisbee et al. (2024), [“Synthetic Replacements for Human Survey Data? The Perils of Large Language Models”](https://doi.org/10.1017/pan.2024.5), compare generated survey responses with American National Election Studies data. Their findings concern the tested surveys and LLM configurations, rather than every possible use of simulated participants.
+
+## Run the procedure across many cases {#headless-agents}
+
+Once the labeling procedure is ready, ask the agent to apply it to the full collection using the saved code. It should first run a few cases through every stage to check that requests, returned labels, and failures are recorded correctly. This *smoke test* checks execution; the held-out evaluation establishes measurement performance. Separate the collection of LLM responses from their analysis so a revised figure does not require labeling the interviews again.
+
+A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
+
+[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+
+### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
+
+Processing every case in one long conversation lets earlier cases influence later responses. Ask the agent to start a fresh headless session for each case, supply the same fixed instructions and its assigned input, and save its response separately. For interview labeling, each session receives the rubric and its assigned excerpt. The agent can repeat these calls unattended without carrying conversation history from one case to the next.
+
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Three fresh headless sessions receive the same fixed instructions and their own assigned inputs. Each saves a separate response. Conversation history is not passed between sessions; file and tool access must be configured separately."}
+
+A fresh headless run can still load global user instructions, memory, files, plugins, or connected services. Ask the agent to check which of these each run can access and configure it to match the research protocol. It should identify any files or services whose access it could not verify. Fresh conversations alone establish neither access isolation nor statistical independence between the resulting outputs.[^headless-controls]
 
 <!-- prompt:controlled-llm-runs -->
 ::: {#request-controlled-llm-runs .prompt}
-> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 <!-- /prompt:controlled-llm-runs -->
 
-A queue schedules runs but does not define their information access. Likewise, separating contexts does not establish statistical independence or remove biases shared by the underlying LLM. Use the evaluation above for the actual review or judging task.
+A job queue can schedule these runs. It controls when they start; the session configuration determines what information and tools they can access.
 
-## Preserve responses and examine sensitivity
+[^headless-controls]: Anthropic's [programmatic `Claude Code` documentation](https://code.claude.com/docs/en/headless) explains noninteractive calls and their configuration, including which ordinary instructions and tools they can inherit.
 
-Save the presented inputs, prompts, examples, raw responses, parsing code, failures, retries, and human corrections. Record dates, available LLM identifiers, generation settings, and the configuration of any tools. Apply the source data's access rules to these records.
+## Save the outputs and reproduce the analysis {#preserve-responses-and-examine-sensitivity}
 
-| Question | Evidence needed |
-|---|---|
-| Can the published analysis be reproduced? | Saved responses and the code that turns them into research results. |
-| Can responses be generated again? | The inference procedure, inputs, and available LLM/runtime records. |
-| Are the measurements adequate? | Evaluation against the rubric and independent reference material. |
+Have the agent save the presented inputs, prompts, raw responses, and code that extracts research variables from them. Retain failed requests, retries, and human corrections alongside successful responses, with the available LLM version identifiers and generation settings. Saved prompts, responses, and logs may contain sensitive information from the original data. Ask the agent to keep these files in approved storage and exclude them from any materials prepared for sharing with people who are not authorized to see the data.
 
-A name in an app menu may not identify an exact LLM version. Record what is observable and its limits. Even a pinned configuration does not guarantee identical generated responses; distinguish analyzing saved responses from collecting new ones.
+| Task | What the agent uses |
+|:-----------------|:---------------------------------|
+| Reproduce the reported analysis | Saved responses and the code that turns them into research variables and results. |
+| Generate another set of responses | The saved inputs, prompt, LLM configuration, and software that submits requests. |
+| Assess whether the measurements remain suitable | Human reference material, the evaluation procedure, and checks of changes in the research estimates. |
 
-Examine plausible alternatives to the measurement procedure. For judging, reversing the presentation order can reveal an order-dependent preference. Research has documented position and verbosity biases in LLM judgments of chatbot responses; that motivates checking these effects in a research protocol, without assuming the same size of bias.[^judge-bias] For labeling, alternative boundary definitions may reveal an underspecified construct.
-
-[^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685). The evaluated task was comparison of chatbot responses, not peer-review quality.
-
-Preserve alternative results and report meaningful changes in the research conclusion. Do not choose a prompt because it produces the preferred finding. Stable outputs are not necessarily valid measurements. [Chapter 17: Run and adapt LLMs for your research](#research-models) considers local execution and adaptation; both retain these evaluation requirements.
+Rerunning the analysis from saved responses can reproduce the reported results without calling an LLM. Generating responses again involves a new collection run: even a fixed configuration may produce different responses across multiple runs, and an app's LLM name may not identify an exact LLM version. Ask the agent to preserve each collection separately and report changes that affect the conclusions. [Chapter 17: Run and adapt LLMs for your research](#research-models) explains how running an LLM yourself or training it further changes these choices.
 
 # 17. Run and adapt LLMs for your research {#research-models}
 
-Running an LLM yourself can give you control over where research material is processed and preserve access to the weights used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices, with different costs and checks.
+Running an LLM yourself can give you control over where research material is processed and preserve access to the version used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices: the first concerns where computation happens, while the second changes what the LLM has learned.
 
-For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require inference on approved local hardware. Separately, persistent coding errors might justify testing whether fine-tuning improves performance. You can run an unchanged open-weight LLM locally; local execution does not require training.
+For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require processing on approved local hardware. Persistent labeling errors might also justify testing whether further training improves performance. An unchanged LLM can run locally, and a locally run LLM can still receive instructions and examples with each request.
 
 ## Choose where the LLM runs {#local-models}
 
-An *open-weight LLM* makes its trained parameters available to download and run under specified terms. *Open-source AI* requires more than downloadable weights: the Open Source Initiative's definition also covers rights to use, study, modify, and share, along with code and sufficient training-data information.[^open-source-ai]
+An LLM's *weights* are numerical values learned during training. An *open-weight LLM* makes those values available to download and use under specified terms. *Open-source AI* requires more than downloadable weights: the Open Source Initiative's definition also covers rights to use, study, modify, and share, along with code and sufficient training-data information.[^open-source-ai]
 
 [^open-source-ai]: [Open Source AI Definition 1.0](https://opensource.org/ai/open-source-ai-definition), Open Source Initiative. The definition requires parameters, code, and information sufficient to understand the training data; it does not require publishing every raw training record.
 
-“Hosting locally” can mean running an LLM on your everyday computer. A runtime such as [`Ollama`](https://docs.ollama.com/) loads suitable downloaded weights and accepts requests from an interface, script, or agent. A *server* can simply be software on that computer serving those requests. A separate machine is needed only when the workload or approved computing arrangement requires one.
+“Hosting locally” can mean running an LLM on your everyday computer. A *runtime* is software that loads the LLM and executes requests; [`Ollama`](https://docs.ollama.com/) is one example. Ask the agent to connect a suitable runtime to the script or agent that will submit the research inputs. Larger LLMs or workloads may require a more powerful computer. Data restrictions may also require the work to run on approved institutional hardware.
 
-![](figures/llm-deployment.svg){#fig-llm-deployment fig-alt="The same research task can use an LLM on your computer, on institutional infrastructure, or at a hosting provider. Inputs travel to the location where inference runs; local tools do not establish a local LLM."}
+![](figures/llm-deployment.svg){#fig-llm-deployment fig-alt="Research inputs can be sent to an LLM on your computer, on institutional infrastructure, or at a hosting provider. Inputs travel to the location where inference runs; each arrangement produces responses that need evaluation."}
 
-A hosted LLM receives the material submitted for inference. A promise not to train on it does not settle retention or deletion. Return to [Chapter 3: Know where your data goes](#data-chain-of-custody) when choosing the processing location. Synthetic records can help develop code, but cannot replace the actual interview text when the task is to label that text.
+Using a hosted LLM sends the interview text to the provider's computers. A promise not to train on it does not settle retention or deletion policies; [Chapter 3: Know where your data goes](#data-chain-of-custody) explains how to assess those arrangements. Synthetic records can help develop the labeling code, but the actual interview text must reach the LLM that labels it. Open weights used through someone else's hosted service still send inputs to that provider.
 
-With local inference, check the agent's other routes too: tools, external services, logs, caches, and backups may still transmit or retain protected material. Using open weights through someone else's hosted API sends inputs to that provider. Verify the actual route before supplying the research inputs.
+With local processing, have the agent also check whether tools, connected services, or backups send research material elsewhere, and where logs and caches retain copies. Choosing local hardware controls the LLM's location; the rest of the workflow still needs to match the study's data requirements.
 
-## Choose for the task and available hardware
+## Choose an LLM for the task and hardware {#choose-for-the-task-and-available-hardware}
 
-Start with the research workload: document length, number of cases, required output, and whether tools are needed. Then identify releases that fit the available memory and can be evaluated against the rubric. A capable text generator may still fail at tool use or structured output.
+Ask the agent to compare candidate models, taking into account the research workload and available computing resources. Include the types of inputs: a text-only LLM cannot directly interpret an audio recording or image. For labeling, the main question is how well each candidate applies the rubric. If an agent will use the LLM to operate tools, its support for tool requests also matters.
 
-The table lists recognizable families and example releases, with release-specific licenses checked in November 2026. It is an orientation, not a ranking or a list of the newest releases.
+| Requirement | What the agent should establish |
+|:------------|:--------------------------------------|
+| Research performance | Errors on development examples, including consequential mistakes and cases needing human review. Confirm the selected configuration on held-out cases. |
+| Inputs and outputs | Support for the material and its length, and reliable *structured output*: responses with specified fields, such as an excerpt identifier and label. |
+| Available hardware | Enough working memory for the LLM, the supplied context, and the intended number of simultaneous requests. |
+| Time and cost | Processing time on a representative sample, expected total workload, and any computing charges. |
+| Tool use | Compatibility with the intended agent and its tools, if the research task requires them. |
+
+Weights occupy disk and working memory. Longer contexts and simultaneous requests need additional memory. *Quantization*[^quantization] reduces memory requirements by storing numerical values at lower precision. Ask the agent to evaluate the actual quantized version it would use, since changing precision can change outputs. Institutional research computing, such as [FAS Research Computing's cluster](https://www.rc.fas.harvard.edu/cluster/), can help when the workload exceeds local resources.
+
+[^quantization]: Quantization represents an LLM's numerical weights using fewer bits—for example, 8 rather than 32 per value—reducing the memory needed to store and run it. See [Hugging Face's explanation](https://huggingface.co/docs/optimum/concept_guides/quantization).
+
+The following table identifies recognizable families and example releases, with release-specific licenses checked in November 2026. It provides names to investigate rather than a ranking. A `B` in a parameter count means billions of parameters; the download size and working memory also depend on how those values are stored and used.
 
 | Family | Developer | Example release | License for that release |
-|:--|:--|:--|:--|
+|:-------|:----------|:----------------|:-----------------|
 | Qwen | Alibaba | [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) | Apache 2.0 |
 | Gemma | Google DeepMind | [Gemma 4 E4B](https://huggingface.co/google/gemma-4-E4B-it) | Apache 2.0 |
 | Mistral | Mistral AI | [Ministral 3 8B Instruct](https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512) | Apache 2.0 |
@@ -1357,199 +1434,246 @@ The table lists recognizable families and example releases, with release-specifi
 | GLM | Z.ai | [GLM-4.7](https://huggingface.co/zai-org/GLM-4.7) | MIT |
 | MiniMax | MiniMax | [MiniMax-M2.7](https://huggingface.co/MiniMaxAI/MiniMax-M2.7) | Custom noncommercial terms; commercial use requires authorization |
 
-The smaller Qwen, Gemma, and Ministral examples are candidates for evaluation on a personal computer, subject to its memory and the workload. Large releases such as full Kimi K2 or DeepSeek-V3.2 need substantially greater resources. Family names alone do not tell you which release will fit or perform adequately.
+The smaller Qwen, Gemma, and Ministral examples are candidates for a personal computer, subject to its memory and the workload. Full releases such as Kimi K2 and DeepSeek-V3.2 require substantially greater resources. Have the agent report the exact release, license, runtime, and quantization used in its comparison. A license name alone does not establish that the system meets the open-source definition.
 
-Weights occupy disk and working memory. Long contexts and concurrent runs require additional memory. *Quantization* stores numerical values at reduced precision to reduce resource requirements; evaluate the actual quantized version you intend to use. Ask institutional research computing for help when the workload exceeds local resources.
+[Chapter 17: Run and adapt an LLM on your own hardware](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
 
-Record the exact release, weights, license, runtime, quantization, context limit, and prompting format. Custom license terms need release-specific attention; the license name alone does not establish that the system meets the open-source definition. [Chapter 17: Run and adapt an LLM on your own hardware](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
+::: {.callout-note appearance="simple" icon="false"}
+### Apple's on-device option {.unlisted}
 
-### Apple's on-device option
+Local processing does not require open weights. Apple's [`Foundation Models framework`](https://developer.apple.com/foundation-models-framework/) lets software access an on-device LLM on supported devices. An agent could build a program that uses it for extraction or labeling, then evaluate it on the study's examples. This requires software that uses the framework; it is not a setting in the Claude app. The framework also supports hosted LLMs, so specify the on-device option when local processing is required. Preserving downloaded weights offers more control over the exact LLM version.
+:::
 
-Local inference does not require open weights. Apple's [`Foundation Models framework`](https://developer.apple.com/foundation-models-framework/) provides access to an on-device LLM on supported devices. It may be useful for a bounded extraction, labeling, or summarization task if evaluation supports that use. The framework also supports hosted routes, so select and verify the on-device route explicitly. It offers a different degree of control from preserving your own downloaded weights.
+## Decide whether to supply context or fine-tune {#context-or-training}
 
-## Decide whether context or training is needed {#context-or-training}
+Start by giving an existing LLM a clear rubric and representative examples. *In-context learning* uses examples supplied with the request without updating weights. For tasks requiring information from documents, *retrieval* selects relevant passages to include in that context.[^retrieval-evidence] The agent can arrange either approach without training the LLM.
 
-First give an existing LLM a clear rubric, representative examples, and relevant documents. *In-context learning* uses examples supplied with the request without updating weights. Retrieval selects relevant passages to include in that context.
+*Fine-tuning* trains an existing LLM on additional data. For interview labeling, *supervised training* pairs excerpts with reviewed labels so training can adjust the LLM toward the required responses. It can use many examples in successive groups, called training batches, without putting them all in one prompt. The resulting LLM still receives each new excerpt and the instructions needed to process it.
 
-*Fine-tuning* trains an existing LLM on additional data. For interview coding, supervised training pairs excerpts with reviewed labels. It can use many examples across batches, so they need not all fit into one prompt. The resulting LLM still receives each new excerpt and the instructions needed to process it.
-
-![](figures/context-and-adaptation.svg){#fig-context-and-adaptation fig-alt="Context supplies a rubric, examples, and evidence with a new case while weights stay unchanged. Fine-tuning uses reviewed training cases to learn an adapter; the base LLM plus adapter then processes new cases. Both routes require separate evaluation."}
-
-| Need | Starting approach |
-|---|---|
+| Research need | Starting approach |
+|:---------------------|:-----------------------------|
 | Answer from current documents with source support | Supply passages directly or through retrieval. |
 | Apply a limited or changing rubric | Prompt an existing LLM with selected examples. |
-| Repeat a stable task despite consequential errors with a strong prompt | Test fine-tuning if suitable training data and independent evaluation are available. |
+| Improve a recurring task whose errors remain consequential | Test fine-tuning after developing a strong prompt, if suitable training and evaluation data are available. |
 
-Fine-tuning may improve accuracy, output format, or performance with shorter prompts. It adds training and maintenance work, especially when the rubric changes. Inconsistent labels can teach inconsistent behavior.
-
-Compare adaptation with a strong prompted baseline.[^adaptation-evidence] When the task needs document knowledge, try retrieval first; it can also be combined with fine-tuning.[^retrieval-evidence]
+Fine-tuning may improve labeling accuracy, adherence to the output format, or performance with shorter prompts.[^adaptation-evidence] It adds training and maintenance work, especially when the rubric changes. A fine-tuned LLM can still receive retrieved passages when it needs information from documents.
 
 [^adaptation-evidence]: Liu et al. (2022), [“Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning”](https://arxiv.org/abs/2205.05638), found accuracy and prediction-time computation benefits for T-Few with IA³ under their comparisons. This was not a general demonstration that LoRA outperforms a well-prompted current LLM on any research task.
 
 [^retrieval-evidence]: Ovadia et al. (2024), [“Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs”](https://arxiv.org/abs/2312.05934), found retrieval more effective than unsupervised fine-tuning for the knowledge-intensive tasks tested. Training on unlabeled text differs from supervised training on reviewed excerpt/label pairs.
 
-## Understand what LoRA changes {#lora}
+## Understand LoRA and adapters {#lora}
 
-*LoRA*, or *Low-Rank Adaptation*, is a fine-tuning method. Training software keeps the base weights fixed and learns compact adjustments to selected parts of the LLM. Those adjustments are saved as an *adapter*, used with the base LLM or merged into a new copy.[^lora-method]
+*LoRA*, or *Low-Rank Adaptation*, is a fine-tuning method. Training software keeps the original, or *base*, weights fixed and learns compact adjustments to selected parts of the LLM. Those adjustments are saved as an *adapter*, used with the matching base LLM or merged into a new copy.[^lora-method]
 
-For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/mlx-lm) and [`Hugging Face PEFT`](https://huggingface.co/docs/peft/) provide training software, and LoRA describes how training changes the system. Your adapter contains the learned adjustments. Full fine-tuning instead updates the original weights and generally requires more training memory.
+For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/mlx-lm) and [`Hugging Face PEFT`](https://huggingface.co/docs/peft/) provide training software, and LoRA describes the method used to learn the adjustments. Unlike LoRA, full fine-tuning updates all of the LLM's original weights and generally requires more training memory.
 
-*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a particular configuration fits your computer still depends on the release, context length, and training settings. The toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
+![](figures/context-and-adaptation.svg){#fig-context-and-adaptation fig-alt="Supplying context leaves the LLM's weights unchanged. LoRA fine-tuning learns an adapter from reviewed training examples, then combines it with the base LLM to process new cases. Compare the two approaches on the same held-out evaluation cases."}
+
+*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 
 [^lora-method]: Hu et al. (2021), [“LoRA: Low-Rank Adaptation of Large Language Models”](https://arxiv.org/abs/2106.09685), explains the method and reductions in trainable parameters and training memory.
 
 [^qlora-method]: Dettmers et al. (2023), [“QLoRA: Efficient Finetuning of Quantized LLMs”](https://arxiv.org/abs/2305.14314). Its hardware demonstrations concern specified training configurations, not every release and workload.
 
-## Evaluate and preserve the adapted LLM {#evaluate-adapted-model}
+## Check whether fine-tuning helps {#evaluate-adapted-model}
 
-Use the evaluation described in [Chapter 16: Use LLM outputs as research data](#evaluate-llm-labeling) to compare the baseline and adapted LLM. Separate training examples, development material for choosing settings, and final evaluation cases. Keep related material together across those splits.
+For the interview study, the question is whether fine-tuning improves labeling enough to justify preparing training data and maintaining an adapted LLM. Ask the agent to compare it with a *baseline*: the original LLM using the best prompt developed for the task.
 
-Compare errors important to the study, including rare categories, failures, and human referrals. If efficiency motivates training, include training effort and inference cost. Better agreement with reference labels does not establish that the labels measure the intended construct.
+Training examples supply the material used to learn the adjustments; development examples support choosing candidate versions and settings. Once those choices are fixed, the agent should compare the original and adapted LLMs on the same untouched test cases, without supplying their human labels to either LLM. [Chapter 16: Use LLM outputs as research data](#evaluate-llm-labeling) explains how to separate the material and evaluate the labels.
 
-Preserve the base weights and identifier, adapter or updated weights, training-data version, split assignments, training settings, software environment, and evaluation outputs. Link the evaluation criteria and retained run versions from `SPECIFICATION.md`. Record approved changes to the training or evaluation procedure in `METHODOLOGY.md`, preserving the earlier protocols and results. An adapter without its base LLM is incomplete. Distinguish analyzing saved responses, generating new responses with the adapted LLM, and retraining it.
+The comparison should show whether fine-tuning reduces errors important to the study and how those changes affect the research estimates. Remaining human review and the costs of preparing examples, training, and generating responses also matter when deciding whether to adopt the adapted LLM. Better agreement with human labels does not resolve a poorly defined research category.
 
-Include trained weights, adapters, checkpoints, and logs in the [chain of custody](#data-chain-of-custody); fine-tuning can retain training information.[^training-memorization]
+## Save what is needed to use the LLM again {#preserve-adapted-model}
 
-[^training-memorization]: Zeng et al. (2024), [“Exploring Memorization in Fine-tuned Language Models”](https://aclanthology.org/2024.acl-long.216/). The study found that memorization differed across fine-tuning tasks.
+The files needed to run an adapted LLM differ from those needed to repeat its training. Ask the agent to preserve both sets and keep earlier configurations and evaluation results available for comparison.
 
-# 18. Write and revise from the research record {#research-writing}
+| To do this later | What needs preserving |
+|:--------------------|:--------------------------------------------|
+| Run the adapted LLM | The matching base LLM and adapter—or fully updated weights—plus the software and settings used to run them. |
+| Repeat the training | The original base LLM, reviewed data and assignments to training/development/test sets, plus training code and settings. |
 
-An analysis revision is incomplete if the manuscript still reports the earlier result. An agent can trace numbers and claims to their sources, update their uses, and identify passages that need a new interpretation.
+Training can leave sensitive information in learned weights, adapters, or logs.[^training-memorization] These files need approved storage and appropriate access restrictions, just as the original records do. The agent should link the selected configuration, evaluation criteria, and results from `SPECIFICATION.md`, and record approved changes and their reasons in `METHODOLOGY.md`.
 
-In the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), a corrected sample rule could change a contrast in a results file while leaving the previous value in the abstract or figure caption. Give the agent the saved results and a record of where each is used. You decide how the changed finding affects the argument.
+Preserving an LLM does not replace saving the responses actually used in the study. [Chapter 16: Use LLM outputs as research data](#preserve-responses-and-examine-sensitivity) explains how those responses support reproducing the analysis without generating them again.
 
-## Connect the manuscript to checked results {#trace-manuscript}
+[^training-memorization]: Zeng et al. (2024), [“Exploring Memorization in Fine-tuned Language Models”](https://aclanthology.org/2024.acl-long.216/), found that memorization differed across fine-tuning tasks. Keeping training local does not remove the need to protect the resulting weights and related artifacts.
+
+
+# 18. Write and revise the manuscript {#research-writing}
+
+A manuscript can retain an outdated estimate after the analysis has changed. An agent can help keep the text, tables, and figures consistent with the saved results, and identify interpretations that need reconsidering.
+
+Suppose a revised sample definition changes the estimated birthweight difference in the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)). The agent should locate every use of the earlier result, including the abstract and captions, and propose the necessary updates. The researcher decides whether the revised finding changes the argument.
+
+## Connect the manuscript to saved results {#trace-manuscript}
+
+Ask the agent to connect each main result in the manuscript to the saved output that supplies it. It should record the source file and exact entry, identify the analysis run that produced it, and note where the result appears in the manuscript. This gives the agent a way to find affected passages when an analysis changes.
 
 <!-- example:manuscript-results -->
-For the synthetic example, `outputs/results/analysis/contrasts.csv`, row `sample`, supplies this sentence:
+For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
 
-> In the synthetic sample, the estimated mean birthweight difference between ten and five hot days was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the observed age and smoking distribution.
+> In the synthetic sample, the estimated mean birthweight difference between ten and five hot days of maternal exposure during the third trimester was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the sample's maternal age and smoking distribution.
 
-The example's comparison record retains the full-precision values. The sentence identifies the contrast and averaging sample and labels the result as synthetic; it does not turn this teaching calculation into an empirical claim.
+The saved results retain full precision; the manuscript rounds them for presentation. The agent should check that the sentence describes the comparison and sample represented by the selected row.
 <!-- /example:manuscript-results -->
 
-![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="The sample row in contrasts.csv supplies the estimate and interval used in results text, the abstract, and a figure caption. When the source changes, every linked use is checked."}
+![](figures/manuscript-trace.svg){#fig-manuscript-trace fig-alt="The agent connects the sample row in contrasts.csv to its uses in results text, the abstract, and a figure caption. It checks the final document against the saved estimate and interval, and revisits each use when the source changes."}
 
-Have the agent record the source file, exact entry, run, and checksum for each main result. The [file fingerprint](#identify-inputs) detects changed contents; it does not establish that the selected row answers the intended question. Check meaning as well as transfer: contrast, averaging sample, units, signs, intervals, and rounding.
+The agent can also record a *checksum*, a digital fingerprint of a file's contents, to detect whether a source file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. A changed file prompts a new comparison; the comparison must still check the meaning of the result, including the exposure contrast, sample, units, sign, interval, and rounding.
+
+Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. Both approaches need a check of the final document, including figure scales, labels, and captions.
+
+[^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
-> Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
+> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 <!-- /prompt:trace-manuscript -->
 
-After a source changes, have the agent update affected passages, tables, and captions and compare the final PDF or `Word` document with the saved results. A figure also needs checks of its plotted quantity, scale, and labels. Resolve unsupported claims before polishing their wording.
+## Draft and revise from the evidence {#draft-and-revise-one-section-at-a-time}
 
-## Draft and revise one section at a time
+Give the agent the argument you want to develop, the supporting files, and your writing conventions. Different sections need different evidence. Work section by section so you can assess the reasoning as well as the prose.
 
-Give the agent the argument you want to make, the relevant research records, and your writing conventions. For methods, use `SPECIFICATION.md`, the executed scripts, and the decisions in `METHODOLOGY.md`. Describe what was actually run, making any gap from the current specification explicit; changing that file does not establish that the analysis was rerun. For results, use checked tables and figures. For discussion, supply your interpretation and limitations alongside the evidence.
+| Section | What to supply | What the agent should check |
+|:----------------|:-----------------------------------|:---------------------------------------------|
+| Methods | The specification used for the reported analysis, executed scripts, and relevant decisions in `METHODOLOGY.md`. | The text describes what actually ran, including any departures from the specification. |
+| Results | Saved estimates, checked tables and figures, and their source links. | Numbers and descriptions match the relevant comparison, sample, and uncertainty. |
+| Discussion | The findings, relevant literature, and your interpretation and limitations. | Claims have support; conflicting evidence and alternative explanations are considered. |
+
+The current `SPECIFICATION.md` may include approved changes that have not yet been implemented. Ask the agent to flag these differences rather than describe planned work as completed. It can also identify a missing step in the argument, explain where a conclusion exceeds the evidence, or propose another interpretation for you to consider. You decide which scientific claims the paper should make.
 
 <!-- prompt:draft-from-results -->
 ::: {#request-draft-from-results .prompt}
-> Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
+> Draft this section from the supplied research decisions, verified sources, and saved results. Follow my writing conventions. Mark unsupported claims, numbers, and references as gaps. Identify weaknesses in the argument and propose alternatives separately for my consideration. Describe the analysis that actually ran; do not present planned work as completed or change the scientific interpretation without agreement.
 :::
 <!-- /prompt:draft-from-results -->
 
-Work section by section so you can judge the reasoning and support. Ask the agent to identify mismatches between methods text and the code that ran, and between claims and the cited literature. Check consequential interpretations yourself. A technically correct number does not settle what it means.
+Read the draft for clear connections between ideas, sufficient context, and repetition. Have the agent save recurring style corrections in the global user instructions for writing, as explained in [Chapter 8: Apply your conventions across projects](#specialist-conventions). Manuscript-specific terminology belongs in the project context files. Use the literature checks in [Chapter 11: Find and assess research literature](#literature-synthesis) when assessing whether cited papers support a claim.
 
-Use global user instructions for writing, as described in [Chapter 8: Apply your conventions across projects](#shared-conventions), for recurring preferences and project context files for manuscript-specific terminology. Read for clear connections between ideas, sufficient context, and repetition. Record recurring corrections where the agent can use them in the next revision.
+## Incorporate coauthor edits {#preserve-coauthor-edits-and-respond-to-reviewers}
 
-## Preserve coauthor edits and respond to reviewers
+Coauthors may return different versions of the same manuscript. Ask the agent to preserve each original, compare it with the version sent for review, and propose a combined draft. It should retain accepted wording and comments, identify incompatible edits, and explain substantive changes for your decision.
 
-Keep every returned manuscript before reconciling changes. An agent can compare versions and propose a combined draft, but regeneration can lose a coauthor's wording, comments, or accepted edits. Inspect the reconciled document in the application your collaborators use.
+Keep the document workflow your collaborators use. For direct `Word` editing, have the agent work on a copy and check that comments, citations, equations, and formatting survive. Review the combined draft in `Word`, paying particular attention to unresolved disagreements. If the maintained source is markdown or `Quarto`, have the agent incorporate the approved edits there before rebuilding; otherwise a later build can overwrite the coauthors' changes.
 
-If the team writes in `Word`, keep that workflow. Supply an approved section and its evidence, then request proposed wording and an explanation of substantive changes. For direct editing, use a copy and inspect comments, citations, equations, and layout. If your source is markdown or [`Quarto`](https://quarto.org/), preserve returned `Word` versions before merging edits back. For document-production tools, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
+## Respond to reviewers {#respond-to-reviewers}
 
-For reviewer responses, supply the comments, your decisions, and the revised manuscript. The agent should answer each comment directly and identify actual changes. A requested analysis that has not been run must remain visibly outstanding.
+Give the agent the reviewer comments and your proposed responses. It can identify which requests require clarification, a wording change, or further analysis, and help you assess the options. Once you decide, it should connect each response to the actual manuscript change or explain why no change was made.
+
+For an approved analysis change, have the agent preserve the original results, update `SPECIFICATION.md`, and add the decision and reason to `METHODOLOGY.md`. It should then rerun the affected analysis and checks before revising the manuscript, following [Chapter 13: Build a modular analysis workflow](#investigate-workflow-results). A requested analysis that is still pending must remain visibly outstanding in the response draft.
 
 <!-- prompt:reviewer-response -->
 ::: {#request-reviewer-response .prompt}
-> Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments. For an approved methodological change, update SPECIFICATION.md and record the decision and reason in METHODOLOGY.md.
+> Draft the reviewer response from the supplied comments, my decisions, the revised manuscript, and completed analysis outputs. Quote each comment, lead with the substantive answer, and cite the actual locations of changes. Distinguish analyses from wording edits. Do not add concessions I did not make or claim unfinished work is complete. Flag unresolved comments and decisions.
 :::
 <!-- /prompt:reviewer-response -->
 
-When you approve a reviewer request that changes the analysis, have the agent update `SPECIFICATION.md`, add the decision and reason to `METHODOLOGY.md`, and rerun the affected analysis and checks before updating the manuscript. Preserve the original result and the reason for the revision. A new analysis should not be described as a wording correction.
-
 <details class="guide-example">
-<summary>Use the same research record for a talk</summary>
+<summary>Use the same results for a talk</summary>
 
-Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the rendered slides after revisions. The toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
+Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
 
 </details>
 
-## Describe AI use accurately
+## Report how AI was used {#describe-ai-use-accurately}
 
-Check the target journal's current instructions at submission. As of November 2026, ICMJE guidance calls for disclosure of AI assistance, human responsibility, and no AI authorship; individual journals determine the applicable details and placement.[^ai-disclosure]
+Ask the agent to check the target journal's current AI-use instructions when preparing the submission. For example, ICMJE guidance calls for disclosure of AI assistance and holds human authors responsible for the submitted work; AI tools cannot be listed as authors. Individual journals determine the applicable details and placement.[^ai-disclosure]
 
-[^ai-disclosure]: [ICMJE, “AI Use by Authors”](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html), checked November 8, 2026. The guidance addresses reporting assistance, reviewing generated material, attribution, and author responsibility.
+[^ai-disclosure]: [ICMJE, “AI Use by Authors”](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html), checked November 12, 2026. Acting as a reviewer raises a separate confidentiality question: using AI on your own paper does not authorize sending someone else's manuscript or grant application to a provider. Follow the journal's or funder's policy; see [ICMJE's reviewer guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-reviewers.html).
 
-Keep a record of the tools and observable LLM information, dates, tasks, affected work, and checks actually completed. Distinguish language assistance and code generation from the LLM-derived measurements described in [Chapter 16: Use LLM outputs as research data](#llm-measurements). Measurements require a methodological account of inputs, prompts, evaluation, and human review.
+Have the agent maintain a brief account of the tools used, dates, tasks, affected work, and checks completed. Include the LLM name and version when available, without inferring an exact version from an app label. From those records, it can draft a disclosure explaining the assistance and how the authors checked the work. Review the statement against what was actually done before submitting it.
 
-A disclosure should identify the assistance, explain how the affected work was checked, and state the authors' responsibility. Derive it from project context files and saved evidence rather than a generic claim that “all outputs were verified.” Do not report an exact LLM version, independent implementation, or successful rerun that the records cannot support. Preserve relevant disclosure and provenance in the research deposit.
-
-Confidential material received as a reviewer requires separate authorization under the journal's or funder's policy. Permission to use an agent on your own study does not authorize submitting someone else's manuscript or application.
+LLM-derived measurements need more than an assistance disclosure: the methods must explain their generation and evaluation, as described in [Chapter 16: Use LLM outputs as research data](#llm-measurements). Have the agent preserve that documentation and the disclosure with the files prepared for handoff in the next chapter.
 
 # 19. Reproduce and hand off the research {#research-handoff}
 
-A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff reveals dependencies hidden by a familiar working folder.
+Another researcher should be able to reproduce the reported results using the supplied files and instructions. An agent can prepare and test those materials, finding dependencies that are easy to miss in a familiar working project. The same preparation helps when you return to the study months later.
 
-For example, a heat-contrast figure may build because yesterday's fitted statistical model is cached on your computer. In a separate copy, it fails because neither the fit nor the command that creates it was supplied. A reproduction test identifies what the recipient needs to preserve or rebuild.
+Suppose a figure from the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)) builds because a fitted statistical model was saved elsewhere on your computer. A collaborator receives the project folder, but neither that saved fit nor instructions for recreating it. Testing the files intended for handoff exposes the omission before the collaborator has to investigate it.
 
-## Assemble the files and instructions
+## Decide what should be reproducible {#reproduction-starting-points}
 
-Provide approved inputs or access instructions, the code and commands, software records, and reference results. Include `SPECIFICATION.md`, the specification version used for the reported results, and the relevant decision history from `METHODOLOGY.md`. Identify those versions clearly if current requirements differ from the completed analysis. Have the agent identify missing files or undocumented manual steps; leave unknown history explicit.
+State what the recipient should be able to produce and where the calculation should begin. Rebuilding a figure from saved estimates and rerunning the analysis from study data require different inputs. A project can support both.
 
-![](figures/research-handoff.svg){#fig-research-handoff fig-alt="Inputs or access instructions, code and commands, software records, and reference results form a research package. A separate copy restores the environment, runs the documented steps, and compares the outputs with the references."}
+| Starting inputs | What to reproduce |
+|:----------------------------------|:--------------------------------------------------------|
+| Saved estimates or fitted statistical models | The reported tables, figures, or numerical values in the manuscript. |
+| Study data, including saved LLM responses when used | The analysis and its reported results, using the supplied code. |
 
-A modular workflow supplies independently runnable steps, as explained in [Chapter 13: Build a modular analysis workflow](#research-workflows). Preserve its existing command interface so the recipient does not need an agent to determine execution order. Record the software environment before changing it: language and package versions, relevant system dependencies, and restoration instructions. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
+Saved LLM responses are research inputs. Generating new responses is a new collection run and can change the measurements, even when the analysis code is unchanged. [Chapter 16: Use LLM outputs as research data](#preserve-responses-and-examine-sensitivity) explains reproduction from saved responses. If future work also needs an adapted LLM, [Chapter 17: Run and adapt LLMs for your research](#preserve-adapted-model) explains what to retain.
 
-For restricted data, provide a permitted acquisition route and a synthetic example that exercises the code. Explain which files an authorized researcher must supply and where. Do not present the synthetic example's results as a reproduction of findings from protected records.
+## Prepare the files and instructions {#assemble-the-files-and-instructions}
 
-## Test and name the reproduction route
+Ask the agent to assemble a separate folder containing the materials needed for the chosen starting point. It should include the permitted inputs, analysis and reporting code, and the saved results against which a rerun will be compared. Retain the specification used for those results and the relevant decisions in `METHODOLOGY.md`; label the completed version clearly if the current `SPECIFICATION.md` contains later requirements.
 
-![](figures/reproduction-routes.svg){#fig-reproduction-routes fig-alt="Saved estimates can rebuild reported tables; approved data can rerun the supplied analysis; assigned documents can generate new LLM responses. Each starts from different inputs and supports a different reproduction claim."}
+Have the agent write a `README.md` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
 
-Name the starting point: rebuilding a table from saved estimates, rerunning analysis from approved data, or generating new LLM responses. Saved fits or responses are legitimate inputs when the stated route begins there. A new inference run may produce different measurements even when the analysis of saved responses is reproducible.
+The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
+
+For restricted data, the shared folder should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
+
+![](figures/research-handoff.svg){#fig-research-handoff .tall fig-alt="The agent assembles inputs or access instructions, code and a README, software versions, and reported results. In a separate copy it restores the software, runs the commands, and compares outputs. Missing files or instructions lead to repairs and another test. The tested version is then shared."}
+
+## Test the project outside the working folder {#test-and-name-the-reproduction-route}
+
+Have the agent test the actual files intended for handoff, using a separate copy and restoring the recorded software versions. If the deliverable is an archive, it should unpack and test that archive. A copied folder that still uses packages or unlisted files from the working project has not established that someone else can restore it. A container can help provide a separate environment; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains when that is useful.
+
+A fresh agent session can follow the `README.md` without relying on the earlier conversation. Ask it to report missing instructions rather than silently reconstruct them. A fresh conversation alone does not isolate the software or files: those must be configured separately. Once omissions are corrected in the handoff folder, have the agent repeat the affected steps from that corrected version.
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
+> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 <!-- /prompt:reproduce-project -->
 
-Use a separate copy and restore the recorded environment. A copied folder that still relies on your existing packages or hidden caches has not tested environment restoration. Ask the agent to record the actual commands, inputs, environment, and output comparisons, with failures and untested steps stated plainly.
+Ask the agent to compare both the reported results and the data selections that produced them. Identifiers and deterministic counts should match exactly. Numerical estimates should meet the tolerances specified for the analysis; procedures involving randomness need the agreed settings and comparison criteria. A rebuilt PDF can have different file metadata while displaying identical results, so document checks should compare the content rather than require identical file fingerprints.
 
-Compare using the agreed tolerances. Identifiers and deterministic counts should match exactly; numerical and stochastic outputs need the criteria established for the analysis. Investigate discrepancies before changing the reference results.
+The agent should save a short report stating what it ran, the inputs and software used, which comparisons passed, and anything that failed or remains untested. In the heat-and-birthweight example, the main analysis and figures were rebuilt in a separate copy using the existing development environment. Its README identifies clean-machine software restoration as untested.
 
-This differs from the independent implementation described in [Chapter 15: Check the agent with independent implementations](#checking-analysis), which builds new code from the specification. Reproduction tests the supplied code and instructions. Neither establishes scientific validity. If protected records are unavailable, testing only the synthetic example leaves empirical reproduction untested.
+This checks the supplied code and instructions. [Chapter 15: Check the agent with independent implementations](#checking-analysis) instead checks separately written implementations of the same specification. Successful reproduction establishes that the documented calculation can be repeated; the researcher must still justify its suitability for the question.
 
-## Review and deposit the tested version
+## Share the tested version {#review-and-deposit-the-tested-version}
 
-Assemble a separate snapshot for the repository your field uses, such as [Dataverse](https://dataverse.org/), [OSF](https://osf.io/), or [Zenodo](https://zenodo.org/). Agree contributors, licenses, and its relationship to the manuscript version with coauthors. Have the agent review the actual snapshot, then test its instructions.
+The tested folder can be handed to a collaborator or prepared for a research repository, such as [`Dataverse`](https://dataverse.org/), [`OSF`](https://osf.io/), or [`Zenodo`](https://zenodo.org/). Agree with coauthors who should be credited, which licenses apply, and which manuscript version the files support. Have the agent include the relevant AI-use disclosure and, for LLM-derived measurements, the prompts and evaluation records needed to understand them.
 
-- Include permitted inputs or complete access instructions, code, software records, and reference outputs.
-- Remove credentials, confidential material, and personal paths from the proposed public copy; inspect included history too.
-- Preserve research decisions, relevant AI disclosure, and prompts or evaluation records needed to understand LLM-derived measurements.
-- State which reproduction routes passed, failed, or remain untested.
-- Link the tested deposit version to the corresponding manuscript.
+Before sharing, have the agent review the proposed files for confidential material, credentials, and paths that work only on your computer. If version history is included, it needs the same review. The agent should identify proposed exclusions and check whether they would prevent reproduction; you decide what may be shared. Retest affected steps after any corrections.
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
+> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 
-Review the agent's findings before publishing. A successful run in the working project does not establish that the deposit contains every necessary file. Keep the tested snapshot available so a later revision begins from an identifiable version.
+After approval, share the tested version and link its version identifier to the corresponding manuscript. Preserve those files and the reproduction report so a later revision can be compared with what readers received.
 
 
 <!-- ===================== REFERENCE ===================== -->
 
 # Appendix A. Project scaffolds and starter files {#starter-files}
 
-The scaffolds below give an agent a starting structure for a paper, dataset, or website. Each can be downloaded as a Markdown specification to supply with your project brief. They are simplified adaptations of the examples maintained with the scaffold skill; folder names and contents should fit the work, and an existing structure can remain if it serves that purpose.
+Give the agent a scaffold or template from this appendix, explain the project and where its folder should live, and ask it to create or adapt the files. A scaffold describes the folder layout; the templates supply starting text for project context files and global user instructions. Have the agent preserve useful existing organization and fill placeholders from your decisions, leaving unresolved questions explicit.
 
-[Chapter 6: Organize your research projects](#project-organization) explains how to choose a structure. [Chapter 9: Use skills for recurring tasks](#reusable-procedures) shows how to reuse the setup through a skill. The project context file templates after the scaffolds provide starting files to adapt for all three layouts.
+Paper projects normally use all five project context files below. Other projects can use the files their work needs. The templates are generic; [Chapter 10: The example research project](#example-project) provides a [completed paper project](resources/heat-birthweight.zip) with populated files. [Chapter 6: Organize your research projects](#project-organization) explains the layouts, and [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains reusable setup.
+
+| Resource | Purpose or location | Download |
+|:-------------------------------|:-------------------------------------------|:----------------|
+| Project scaffolds | | |
+| [Research paper](#scaffold-paper-example) | Data, analysis, results, and manuscript. | [Get file](resources/scaffolds/paper.md){download="paper-scaffold.md"} |
+| [Dataset](#scaffold-dataset-example) | Collection, processing, checks, and releases. | [Get file](resources/scaffolds/dataset.md){download="dataset-scaffold.md"} |
+| [Website](#scaffold-website-example) | Editable pages, assets, and generated site. | [Get file](resources/scaffolds/website.md){download="website-scaffold.md"} |
+| Project context files | | |
+| [CLAUDE.md](#starter-project) | Instructions and file locations, inside the project. | [Template](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
+| [STATUS.md](#starter-status) | Current state, inside the project. | [Template](resources/starter-files/STATUS.md){download="STATUS.md"} |
+| [TASKS.md](#starter-tasks) | Work remaining and completed, inside the project. | [Template](resources/starter-files/TASKS.md){download="TASKS.md"} |
+| [SPECIFICATION.md](#starter-specification) | Current scientific requirements, inside the project. | [Template](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
+| [METHODOLOGY.md](#starter-methodology) | Dated scientific decisions and reasons, inside the project. | [Template](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
+| Optional settings | | |
+| [Global user instructions](#starter-global) | Defaults across projects, in `~/.claude/CLAUDE.md`. | [Template](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| [Git exclusions](#starter-gitignore) | Files excluded from version control, in the project's `.gitignore`. | [Template](resources/starter-files/gitignore.txt){download=".gitignore"} |
+
+The tilde (`~`) means your home folder. The two `CLAUDE.md` templates belong in different places: one inside the project, the other in your home folder's `.claude` directory. Ask the agent to merge useful instructions into existing files. Access controls are configured separately, as explained in [Chapter 4: Control what the agent can do](#enforce-those-limits).
 
 ## A.1 Project scaffolds {#starter-layouts}
 
@@ -1557,8 +1681,11 @@ The scaffolds below give an agent a starting structure for a paper, dataset, or 
 
 [Download the research paper scaffold](resources/scaffolds/paper.md){.download-button download="paper-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the paper layout and setup instructions</summary>
+
 <!-- scaffold:paper -->
-This layout keeps original inputs, reusable analysis code, exploratory work, and manuscript results distinct. It adapts the paper example supplied with the scaffold skill. Retain only the folders the study needs, and use the project's analysis language.
+This layout keeps original inputs, reusable analysis code, exploratory work, and manuscript results distinct. Have the agent retain only the folders the study needs and use the project's analysis language.
 
 ```
 paper-project/
@@ -1591,15 +1718,20 @@ paper-project/
 
 Keep original inputs in `data/raw/`; save transformations in `data/processed/`. Reusable setup and functions belong in `code/_startup/`, while independently runnable analysis scripts sit directly in `code/`. The other code folders separate acquisition, exploratory work, and assembly of manuscript figures. Save results under `outputs/` and manuscript drafts under `manuscript/`.
 
-Give this specification to the agent with the research question, intended outputs, analysis language, and destination. Ask it to propose any adaptations before creating the agreed structure. It should describe the project in `README.md`, write navigation instructions in `CLAUDE.md`, and record the current state and tasks. Have the agent populate `SPECIFICATION.md` with approved scientific requirements and start `METHODOLOGY.md` with dated decisions and reasons, newest first; leave unresolved methods as questions. `CLAUDE.md` should require both files to be updated after an approved scientific change. Preserve existing files and confirm that paths in the project context files point to real locations.
+Give this layout to the agent with the research question, intended outputs, analysis language, and the folder where the project should be created. Ask it to adapt the layout, describe the project in `README.md`, and write navigation and maintenance instructions in `CLAUDE.md`. It should populate `STATUS.md` and `TASKS.md` from the current work, `SPECIFICATION.md` from your approved scientific requirements, and `METHODOLOGY.md` with dated decisions and reasons, newest first. Unresolved methods should remain questions. After an approved scientific change, the agent should update both scientific files. Have it preserve existing work and check that the paths it records point to the right locations.
 <!-- /scaffold:paper -->
+
+</details>
 
 ### Dataset {#scaffold-dataset-example .unlisted}
 
 [Download the dataset scaffold](resources/scaffolds/dataset.md){.download-button download="dataset-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the dataset layout and setup instructions</summary>
+
 <!-- scaffold:dataset -->
-This layout suits a dataset collected, processed, and released for reuse by several studies. It adapts the data example supplied with the scaffold skill, adding an explicit place for versioned releases.
+This layout suits a dataset collected, processed, and released for reuse by several studies, with a separate location for each release.
 
 ```
 dataset-project/
@@ -1626,15 +1758,21 @@ Preserve downloads unchanged in `data/sources/`. Acquisition, processing, and ch
 
 Save each release in a named subfolder of `outputs/releases/`, with its data dictionary, source versions, and checks. A paper using that dataset should record which release it used. Access and release arrangements must match the data's permitted uses.
 
-Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and project context files. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
+Give this layout to the agent with the data sources, intended users, access restrictions, and the folder where the project should be created. Ask it to adapt the structure to the collection and release process and create the folders and project context files. It should preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
 <!-- /scaffold:dataset -->
 
+</details>
+
+::: {.keep-together}
 ### Website {#scaffold-website-example .unlisted}
 
 [Download the website scaffold](resources/scaffolds/website.md){.download-button download="website-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the website layout and setup instructions</summary>
+
 <!-- scaffold:website -->
-This layout separates editable material from the generated website. It adapts the scaffold skill's publishing example for a website; the chosen site software may require different folder names.
+This layout separates editable material from the generated website. Have the agent adapt the folder names to the chosen website software.
 
 ```
 website-project/
@@ -1642,6 +1780,7 @@ website-project/
   CLAUDE.md
   STATUS.md
   TASKS.md
+  DESIGN.md
   source/
   assets/
     images/
@@ -1651,45 +1790,32 @@ website-project/
     notes/
 ```
 
-Write pages in `source/` and keep images and styles in `assets/`. The build produces the viewable site in `output/`; make lasting edits in the sources so they survive the next build. Record the preview and build commands in `README.md`. Keep publishing instructions and the intended destination explicit.
+The agent writes pages in `source/` and keeps images and styles in `assets/`. The build produces the viewable site in `output/`; lasting edits belong in the sources so they survive the next build. Have the agent record preview and build commands in `README.md`, along with where the site will be published.
 
-Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and project context files. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
+Give this layout to the agent with the site's purpose, audience, software if already chosen, and the folder where the project should be created. Ask it to create the structure and project context files and check that the preview uses the intended pages and assets. Publishing the site is a separate task.
 <!-- /scaffold:website -->
 
-## Context and instruction templates {.unnumbered .unlisted}
+</details>
 
-The project context file templates below describe the work and help an agent resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with `CLAUDE.md`, `STATUS.md`, and `TASKS.md`; add `SPECIFICATION.md` and `METHODOLOGY.md` when the work needs them. The table also includes optional templates for global user instructions and version-control exclusions.
-
-For the [synthetic heat-and-birthweight study](#example-specification), `SPECIFICATION.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current scientific requirements and the reasoning behind them.
-
-| File and destination | Use | Template |
-|:------------------------------------|:--------------------------------------------|:-----------------|
-| `CLAUDE.md` in the project | Explain the project and point to its other context files. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
-| `STATUS.md` in the project | Summarize where the work stands now. | [Download](resources/starter-files/STATUS.md){download="STATUS.md"} |
-| `TASKS.md` in the project | Track remaining work and dated completions. | [Download](resources/starter-files/TASKS.md){download="TASKS.md"} |
-| `SPECIFICATION.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
-| `METHODOLOGY.md` in the project | Record scientific decisions and their reasons. | [Download](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
-| Global user `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
-| `.gitignore` in the project | Optional exclusions when using [`Git`](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
-
-The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: the project context file belongs inside the project; the global user instructions file belongs in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [Chapter 4: Control what the agent can do](#enforce-those-limits).
+:::
 
 ::: {.keep-together}
-## A.2 CLAUDE.md for the project {#starter-project}
+## A.2 CLAUDE.md: Project instructions {#starter-project}
 
-Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
+Ask the agent to adapt this template and save it as `CLAUDE.md` in the project's main folder. It should describe the actual work, identify the important paths, and include only files the project uses. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
 
 [Download the project CLAUDE.md template](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
-<summary>Read the CLAUDE.md example</summary>
+<summary>Read the CLAUDE.md template</summary>
 
 <!-- starter:project -->
 ```
-# heat-birthweight
+# [Project name]
 
-Synthetic teaching study of heat exposure and birthweight. Every individual
-record is synthetic; results are not evidence about actual pregnancies.
+[Describe the research question, purpose, and intended outputs.]
+[Adapt the paths and file list below to the project. Keep unresolved choices
+explicit; do not invent research decisions to complete this template.]
 
 ## Read first
 - STATUS.md: current state and next decision.
@@ -1700,9 +1826,9 @@ record is synthetic; results are not evidence about actual pregnancies.
   the rationale or history matters.
 
 ## Files
-- data/raw/: approved original synthetic data; preserve unchanged.
+- data/raw/: approved original inputs; preserve unchanged.
 - code/: saved analysis and validation steps.
-- outputs/: fits, contrasts, figures, and verification records.
+- outputs/: saved results, figures, and checks.
 - manuscript/: text linked to the saved outputs.
 - README.md: actual commands and environment restoration instructions.
 
@@ -1710,11 +1836,11 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Follow the written specification. Report missing inputs or ambiguities.
 - Do not invent observations, alter the estimand, or weaken a failed check.
 - Save full-precision results; apply rounding only for presentation.
-- Keep simulation outputs separate from the single-dataset analysis.
+- Keep exploratory work, simulations, and manuscript results distinguishable.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
 
-## Maintain the records
+## Maintain project context files
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
@@ -1725,10 +1851,9 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
-Only approved synthetic material belongs in this project. No protected birth
-records are available here. Ask before adding external services or publishing.
-These instructions do not enforce file or network permissions; use the
-configured access controls for those boundaries.
+[Identify approved inputs, storage, and services, and any restrictions on use.]
+Ask before adding external services or publishing. These instructions do not
+enforce file or network permissions; configure access controls separately.
 ```
 <!-- /starter:project -->
 
@@ -1737,9 +1862,9 @@ configured access controls for those boundaries.
 :::
 
 ::: {.keep-together}
-## A.3 Current state {#starter-status}
+## A.3 STATUS.md: Current state {#starter-status}
 
-Save this as `STATUS.md`. Have the agent rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
+Have the agent create `STATUS.md` and rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
 
 [Download STATUS.md](resources/starter-files/STATUS.md){.download-button download="STATUS.md"}
 
@@ -1771,9 +1896,9 @@ Last updated: [date]
 :::
 
 ::: {.keep-together}
-## A.4 Tasks {#starter-tasks}
+## A.4 TASKS.md: Work to do and completed {#starter-tasks}
 
-Save this as `TASKS.md`. Have the agent move tasks as their status changes and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
+Have the agent create `TASKS.md`, move tasks as their status changes, and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
 
 [Download TASKS.md](resources/starter-files/TASKS.md){.download-button download="TASKS.md"}
 
@@ -1788,8 +1913,7 @@ Move tasks between these sections as their status changes. Add a date when a
 task finishes. An in-progress entry states what remains to be done.
 
 ## To Do
-- Confirm the scientific specification and the approved inputs.
-- Implement the analysis and its verification plan.
+- [Describe an agreed task and the result needed to complete it.]
 
 ## In Progress
 
@@ -1802,9 +1926,9 @@ task finishes. An in-progress entry states what remains to be done.
 :::
 
 ::: {.keep-together}
-## A.5 Scientific specification {#starter-specification}
+## A.5 SPECIFICATION.md: Current requirements {#starter-specification}
 
-Save this as `SPECIFICATION.md`. Have the agent fill it from your research decisions and leave unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. Adapt or remove fields that do not apply to the study. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight example, supplied in the [project download](resources/heat-birthweight.zip).
+Have the agent create `SPECIFICATION.md` from your research decisions, adapting the fields to the study and leaving unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight specification.
 
 [Download SPECIFICATION.md](resources/starter-files/SPECIFICATION.md){.download-button download="SPECIFICATION.md"}
 
@@ -1856,9 +1980,9 @@ in version control and retain frozen protocols used for particular runs.
 :::
 
 ::: {.keep-together}
-## A.6 Scientific decisions {#starter-methodology}
+## A.6 METHODOLOGY.md: Scientific decisions {#starter-methodology}
 
-Save this as `METHODOLOGY.md`. Have the agent add a dated heading and entry at the top for each approved scientific decision, preserving earlier entries. Record what changed, why, and which requirements in `SPECIFICATION.md` were affected. Keep routine coding and formatting progress in `TASKS.md`. Link to the current specification instead of repeating it. [Chapter 7: Give the agent context for your project](#review-project-plan) explains how these records support research decisions.
+Have the agent create `METHODOLOGY.md` and add a dated entry at the top for each approved scientific decision, preserving earlier entries. Each entry should explain what changed, why, and which requirements in `SPECIFICATION.md` were affected. Routine coding and formatting progress belongs in `TASKS.md`. Link to the current specification rather than repeating it. [Chapter 7: Give the agent context for your project](#review-project-plan) explains how the two files support research decisions.
 
 [Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
 
@@ -1890,12 +2014,12 @@ progress in STATUS.md and TASKS.md. Link detailed evidence rather than copying i
 ::: {.keep-together}
 ## A.7 Global user instructions {#starter-global}
 
-Use this optional template for conventions that apply across your work. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. Add references to separate writing, coding, or other specialist files only when you maintain them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
+Use this optional template for defaults that apply across your projects. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. For longer guidance, have the agent add paths to maintained specialist files and instructions on when to read them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
 
 [Download global user instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
-<summary>Read the personal-instructions template</summary>
+<summary>Read the global user instructions template</summary>
 
 <!-- starter:global -->
 ```
@@ -1913,7 +2037,7 @@ These conventions are defaults across projects. Follow explicit project-specific
 exceptions and record their reasons. Ask when instructions conflict and no
 exception has been agreed.
 
-[Keep short shared conventions here. Add references only to files you maintain,
+[Keep short defaults here. Add paths or links only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
 
@@ -1923,7 +2047,8 @@ report it; do not create a replacement or invent its instructions.
 ## Research work
 - Preserve original data. Derive new files with saved code.
 - Use independently runnable steps with declared inputs and outputs.
-- Keep scientific decisions and their reasons in the project record.
+- For paper projects, keep current requirements in SPECIFICATION.md and dated
+  scientific decisions and reasons in METHODOLOGY.md.
 - Verify observed outputs before reporting success. Keep failed checks visible.
 
 ## Limits
@@ -1932,7 +2057,7 @@ report it; do not create a replacement or invent its instructions.
 - Do not delete recovery copies or rewrite shared history without approval.
 
 ## Finishing
-- Update the task list and current-state record from evidence.
+- Update TASKS.md and STATUS.md from the work and checks actually completed.
 - Report what changed, how it was checked, and what remains unresolved.
 ```
 <!-- /starter:global -->
@@ -1944,9 +2069,9 @@ report it; do not create a replacement or invent its instructions.
 ::: {.keep-together}
 ## A.8 Git exclusions {#starter-gitignore}
 
-If the project uses `Git`, have the agent adapt these exclusions in its `.gitignore`. This example excludes data folders by default; permitted public or synthetic inputs may belong in the repository. Keep shareable input manifests outside excluded folders. An ignore rule neither blocks agent access nor removes files already tracked by Git.
+If the project uses [`Git`](https://git-scm.com/), have the agent adapt these exclusions in its `.gitignore`. The template excludes data folders by default; permitted public or synthetic inputs may belong in the repository. An ignore rule affects which files Git tracks. It does not restrict agent access or remove files already tracked.
 
-Preserve the files needed for the [reproduction route](#test-and-name-the-reproduction-route), including saved fits, raw LLM responses, or research logs when they are required inputs or evidence. Large or protected files can live in approved storage, with versions and access instructions recorded in the project. Excluding a file from `Git` is not a decision to discard it.
+Have the agent preserve the inputs needed for reproduction, including saved fits or LLM responses. Large or protected files can remain in approved storage, with their versions and locations documented in the project. For setup, see [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 [Download .gitignore](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 
@@ -1988,17 +2113,29 @@ cache/
 
 # Appendix B. Prompt bank {#prompt-index}
 
-Find a request for the task you want to delegate, supply the files or decisions listed with it, and adapt the wording to your project. Each request also appears beside its explanation in the guide. The links below return you to those passages. Permissions are configured separately; research choices remain yours to review.
+Choose the task you want to delegate, point the agent to the listed files and decisions, and adapt the request to your project. You can refer to files already in the project rather than paste their contents. Each request also appears beside its explanation in the guide; the links return to those passages. The agent does the work, while you decide research questions and permitted access.
 
 [Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
+**Set up and maintain a project:** [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a project-scaffolding skill](#bank-scaffold-skill)
+
+**Define the study and gather evidence:** [Compare research approaches](#bank-compare-research-approaches) · [Make the research specification explicit](#bank-research-specification) · [Search and verify the literature](#bank-literature-search) · [Synthesize the papers actually read](#bank-literature-synthesis) · [Bring approved data into the project](#bank-bring-data)
+
+**Build and check the analysis:** [Build a modular analysis workflow](#bank-modular-workflow) · [Test the workflow before running the full batch](#bank-smoke-test-workflow) · [Investigate an unexpected result](#bank-investigate-result) · [Plan and run known-truth checks](#bank-simulation-plan) · [Implement the analysis independently](#bank-independent-implementation) · [Compare completed implementations](#bank-compare-implementations)
+
+**Use LLMs in the research:** [Develop an LLM labeling method](#bank-develop-labeling) · [Evaluate LLM labels on a held-out test set](#bank-evaluate-labeling) · [Assess sensitivity to prompts and LLMs](#bank-llm-sensitivity) · [Run research tasks in fresh headless sessions](#bank-controlled-llm-runs)
+
+**Write and revise:** [Trace numbers into the manuscript](#bank-trace-manuscript) · [Draft and assess a manuscript section](#bank-draft-from-results) · [Draft a response from your decisions](#bank-reviewer-response)
+
+**Reproduce and share:** [Test the proposed handoff files](#bank-reproduce-project) · [Review a proposed deposit](#bank-review-deposit)
+
 ## Set up and maintain a project {#prompts-project}
 
 ::: {.keep-together}
-### Start a new research project {.unlisted}
+### Start a new research project {#bank-scaffold-project .unlisted}
 
-Supply: the project purpose, intended output, destination, and any research-group conventions.
+Point the agent to: the project purpose, intended output, folder where the project should be created, and any research-group conventions.
 
 Explanation and checks: [Chapter 6: Organize your research projects](#request-scaffold-project).
 
@@ -2009,9 +2146,9 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-sc
 :::
 
 ::: {.keep-together}
-### Organize an existing project {.unlisted}
+### Organize an existing project {#bank-restructure-project .unlisted}
 
-Supply: the existing project folder and any known current or protected files.
+Point the agent to: the existing project folder and any known current or protected files.
 
 Explanation and checks: [Chapter 6: Organize your research projects](#request-restructure-project).
 
@@ -2022,9 +2159,9 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-re
 :::
 
 ::: {.keep-together}
-### Write CLAUDE.md for a project {.unlisted}
+### Write CLAUDE.md for a project {#bank-project-context .unlisted}
 
-Supply: the project files, existing instructions, and agreed research decisions.
+Point the agent to: the project files, existing instructions, and agreed research decisions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
@@ -2035,9 +2172,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Resume a project {.unlisted}
+### Resume a project {#bank-resume-project .unlisted}
 
-Supply: the project folder and its project context files.
+Point the agent to: the project folder and its project context files.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-resume-project).
 
@@ -2048,9 +2185,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Leave a useful handoff {.unlisted}
+### Finish a session and update project context {#bank-close-session .unlisted}
 
-Supply: the current session’s work, checked outputs, and unresolved questions.
+Point the agent to: the current session’s work, checked outputs, and unresolved questions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-close-session).
 
@@ -2061,9 +2198,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Set global user instructions {.unlisted}
+### Set global user instructions {#bank-shared-conventions .unlisted}
 
-Supply: existing instructions and examples of conventions used across projects.
+Point the agent to: existing instructions and examples of conventions used across projects.
 
 Explanation and checks: [Chapter 8: Apply your conventions across projects](#request-shared-conventions).
 
@@ -2074,9 +2211,9 @@ Explanation and checks: [Chapter 8: Apply your conventions across projects](#req
 :::
 
 ::: {.keep-together}
-### Create a project-scaffolding skill {.unlisted}
+### Create a project-scaffolding skill {#bank-scaffold-skill .unlisted}
 
-Supply: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
+Point the agent to: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
 
 Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-scaffold-skill).
 
@@ -2089,9 +2226,9 @@ Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-sca
 ## Define the study and gather evidence {#prompts-evidence}
 
 ::: {.keep-together}
-### Compare research approaches {.unlisted}
+### Compare research approaches {#bank-compare-research-approaches .unlisted}
 
-Supply: the research question, available data, constraints, and any verified sources.
+Point the agent to: the research question, available data, constraints, and any verified sources.
 
 Explanation and checks: [Chapter 10: The example research project](#request-compare-research-approaches).
 
@@ -2102,9 +2239,9 @@ Explanation and checks: [Chapter 10: The example research project](#request-comp
 :::
 
 ::: {.keep-together}
-### Make the research specification explicit {.unlisted}
+### Make the research specification explicit {#bank-research-specification .unlisted}
 
-Supply: your research decisions and the questions that still need resolution.
+Point the agent to: your research decisions and the questions that still need resolution.
 
 Explanation and checks: [Chapter 10: The example research project](#request-research-specification).
 
@@ -2115,9 +2252,9 @@ Explanation and checks: [Chapter 10: The example research project](#request-rese
 :::
 
 ::: {.keep-together}
-### Search and verify the literature {.unlisted}
+### Search and verify the literature {#bank-literature-search .unlisted}
 
-Supply: the research question, eligibility criteria, and any existing search protocol.
+Point the agent to: the research question, eligibility criteria, and any existing search protocol.
 
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-search).
 
@@ -2128,9 +2265,9 @@ Explanation and checks: [Chapter 11: Find and assess research literature](#reque
 :::
 
 ::: {.keep-together}
-### Synthesize the papers actually read {.unlisted}
+### Synthesize the papers actually read {#bank-literature-synthesis .unlisted}
 
-Supply: verified papers, records of what was read, and the question to address.
+Point the agent to: verified papers, records of what was read, and the question to address.
 
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-synthesis).
 
@@ -2141,9 +2278,9 @@ Explanation and checks: [Chapter 11: Find and assess research literature](#reque
 :::
 
 ::: {.keep-together}
-### Bring approved data into the project {.unlisted}
+### Bring approved data into the project {#bank-bring-data .unlisted}
 
-Supply: approved inputs, their documentation, and the current scientific specification.
+Point the agent to: approved inputs, their documentation, and the current scientific specification.
 
 Explanation and checks: [Chapter 12: Bring data into the project](#request-bring-data).
 
@@ -2156,9 +2293,9 @@ Explanation and checks: [Chapter 12: Bring data into the project](#request-bring
 ## Build and check the analysis {#prompts-analysis}
 
 ::: {.keep-together}
-### Build a modular analysis workflow {.unlisted}
+### Build a modular analysis workflow {#bank-modular-workflow .unlisted}
 
-Supply: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
+Point the agent to: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-modular-workflow).
 
@@ -2169,9 +2306,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Test the workflow before running the full batch {.unlisted}
+### Test the workflow before running the full batch {#bank-smoke-test-workflow .unlisted}
 
-Supply: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
+Point the agent to: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-smoke-test-workflow).
 
@@ -2182,9 +2319,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Investigate an unexpected result {.unlisted}
+### Investigate an unexpected result {#bank-investigate-result .unlisted}
 
-Supply: the unexpected result, specification, current code, and saved outputs.
+Point the agent to: the unexpected result, specification, current code, and saved outputs.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-investigate-result).
 
@@ -2195,9 +2332,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Plan and run known-truth checks {.unlisted}
+### Plan and run known-truth checks {#bank-simulation-plan .unlisted}
 
-Supply: the specification and scientific scenarios or performance questions to examine.
+Point the agent to: the specification and scientific scenarios or performance questions to examine.
 
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
@@ -2208,9 +2345,11 @@ Explanation and checks: [Chapter 14: Test the analysis against known truth](#req
 :::
 
 ::: {.keep-together}
-### Implement the analysis independently {.unlisted}
+### Implement the analysis independently {#bank-independent-implementation .unlisted}
 
-Supply: the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results.
+Point the agent to: the fixed specification, data dictionary, approved input files, and assigned language.
+
+Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
@@ -2221,9 +2360,11 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 :::
 
 ::: {.keep-together}
-### Compare completed implementations {.unlisted}
+### Compare completed implementations {#bank-compare-implementations .unlisted}
 
-Supply: both completed implementations, their outputs, and the common specification.
+Point the agent to: both completed implementations, their outputs, and the common specification.
+
+Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
@@ -2236,27 +2377,53 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 ## Use LLMs in the research {#prompts-llm}
 
 ::: {.keep-together}
-### Design controlled LLM research runs {.unlisted}
+### Develop an LLM labeling method {#bank-develop-labeling .unlisted}
 
-Supply: the review-generation and judging protocol, inputs, and permitted tools and services.
+Point the agent to: the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together.
 
-Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-develop-labeling).
 
 ::: {.prompt}
-> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
 :::
 
 :::
 
 ::: {.keep-together}
-### Evaluate a frozen labeling procedure {.unlisted}
+### Evaluate LLM labels on a held-out test set {#bank-evaluate-labeling .unlisted}
 
-Supply: the frozen rubric and prompt, evaluation inputs, and acceptance criteria. Keep the human reference labels unavailable during labeling.
+Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-evaluate-labeling).
 
 ::: {.prompt}
-> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+:::
+
+:::
+
+::: {.keep-together}
+### Assess sensitivity to prompts and LLMs {#bank-llm-sensitivity .unlisted}
+
+Point the agent to: the fixed research question and rubric, agreed variations to compare, designated development or final-analysis material, and the code producing research estimates.
+
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-llm-sensitivity).
+
+::: {.prompt}
+> Using the agreed comparisons, keep the research question and category definitions fixed while varying prompt wording, example order, LLM choice, or generation settings. Repeat requests with unchanged settings to assess ordinary run-to-run variation. Report which labels change and how those changes affect the research estimates, including relevant group comparisons. Compare errors where human reference labels are available. Use development material when the comparisons will guide method selection; keep prespecified analyses of final estimates separate. Save every configuration and response. Do not select a method because it produces a preferred research finding, and do not interpret stable labels as evidence of accuracy.
+:::
+
+:::
+
+::: {.keep-together}
+### Run research tasks in fresh headless sessions {#bank-controlled-llm-runs .unlisted}
+
+Point the agent to: the research protocol, fixed instructions, assigned input for each case, and permitted files, tools, and services.
+
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
+
+::: {.prompt}
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 
 :::
@@ -2264,40 +2431,40 @@ Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-
 ## Write and revise {#prompts-writing}
 
 ::: {.keep-together}
-### Trace numbers into the manuscript {.unlisted}
+### Trace numbers into the manuscript {#bank-trace-manuscript .unlisted}
 
-Supply: the rendered manuscript and saved results, including tables and figure sources.
+Point the agent to: the rendered manuscript and saved results, including tables and figure sources.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-trace-manuscript).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-trace-manuscript).
 
 ::: {.prompt}
-> Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
+> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 
 :::
 
 ::: {.keep-together}
-### Draft from the research record {.unlisted}
+### Draft and assess a manuscript section {#bank-draft-from-results .unlisted}
 
-Supply: the section to draft, research decisions, verified sources, results, and writing guidance.
+Point the agent to: the section to draft, research decisions, verified sources, results, and writing guidance.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-draft-from-results).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-draft-from-results).
 
 ::: {.prompt}
-> Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
+> Draft this section from the supplied research decisions, verified sources, and saved results. Follow my writing conventions. Mark unsupported claims, numbers, and references as gaps. Identify weaknesses in the argument and propose alternatives separately for my consideration. Describe the analysis that actually ran; do not present planned work as completed or change the scientific interpretation without agreement.
 :::
 
 :::
 
 ::: {.keep-together}
-### Draft a response from your decisions {.unlisted}
+### Draft a response from your decisions {#bank-reviewer-response .unlisted}
 
-Supply: reviewer comments, your decisions, and the revised manuscript and analysis records.
+Point the agent to: reviewer comments, your decisions, and the revised manuscript and analysis records.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-reviewer-response).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-reviewer-response).
 
 ::: {.prompt}
-> Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments. For an approved methodological change, update SPECIFICATION.md and record the decision and reason in METHODOLOGY.md.
+> Draft the reviewer response from the supplied comments, my decisions, the revised manuscript, and completed analysis outputs. Quote each comment, lead with the substantive answer, and cite the actual locations of changes. Distinguish analyses from wording edits. Do not add concessions I did not make or claim unfinished work is complete. Flag unresolved comments and decisions.
 :::
 
 :::
@@ -2305,27 +2472,27 @@ Explanation and checks: [Chapter 18: Write and revise from the research record](
 ## Reproduce and share {#prompts-handoff}
 
 ::: {.keep-together}
-### Test a clean-copy handoff {.unlisted}
+### Test the proposed handoff files {#bank-reproduce-project .unlisted}
 
-Supply: the project, README, input manifest, reference outputs, and comparison tolerances.
+Point the agent to: the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances.
 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-reproduce-project).
 
 ::: {.prompt}
-> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
+> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 
 :::
 
 ::: {.keep-together}
-### Review a proposed deposit {.unlisted}
+### Review a proposed deposit {#bank-review-deposit .unlisted}
 
-Supply: the proposed deposit snapshot, manuscript, input manifest, and sharing requirements.
+Point the agent to: the exact files proposed for sharing, the manuscript, reproduction report, and sharing requirements.
 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-review-deposit).
 
 ::: {.prompt}
-> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
+> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 
 :::
@@ -2333,43 +2500,50 @@ Explanation and checks: [Chapter 19: Reproduce and hand off the research](#reque
 
 # Appendix C. Troubleshooting {#troubleshooting}
 
-When something goes wrong, ask the agent to identify the cause before changing the analysis. Preserve the affected files and useful error messages so it can compare what happened with what should have happened.
-
-For example, a rerun may produce a different sample size because the inputs changed, an exclusion rule changed, or an old intermediate file was reused. Have the agent compare those stages and show where the difference first appears. That evidence determines whether to repair the implementation or reconsider a research decision.
+Point the agent to the affected files or outputs, describe what you expected, and include any error message it cannot already read. Ask it to locate the cause, preserve the evidence, and explain what needs to change. It can repair an implementation error and rerun the relevant checks; changes to scientific requirements or permitted access need your decision.
 
 ## Problems with the agent's work {#troubleshoot-work}
 
 | What you notice | What to ask the agent to do | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| An answer has no supporting evidence | Locate the cited passage or saved result. Mark claims it cannot substantiate. | [Source support](#literature-synthesis) |
-| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project context files](#maintain-project-context) |
-| Old instructions conflict with current files | Identify which instructions were used and where they disagree. Propose corrections to the stale record. | [Shared guidance](#maintain-shared-conventions) |
-| The agent changes the question or weakens a check | Show the change against the agreed specification and preserve the failed result. You decide whether a scientific revision is justified. | [Research decisions](#review-project-plan) |
-| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Locate the earliest difference before proposing a fix. | [Reproduction checks](#test-and-name-the-reproduction-route) |
-| Two implementations disagree | Compare each stage against the specification; do not edit one merely to match the other. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
-| The manuscript contains stale numbers | Trace affected values to their saved sources and propose updates from verified results. | [Manuscript checks](#trace-manuscript) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| An answer has no supporting evidence | Find the cited passage or saved result, correct unsupported claims, and identify anything still unresolved. | [Source support](#literature-synthesis) |
+| The agent forgets earlier decisions | Save current work and unresolved questions in the project context files. Use them to prepare a fresh session and confirm its next task. | [Maintaining context](#maintain-project-context) |
+| Old instructions conflict with current files | Identify the conflicting instructions and propose corrections to the relevant `CLAUDE.md` or specialist file. Apply the agreed correction and check the affected work. | [Maintaining global user instructions](#maintain-shared-conventions) |
+| The agent changes the question or weakens a check | Compare the change with `SPECIFICATION.md` and preserve the failed result. Restore the prescribed analysis unless you approve a scientific change, then rerun the checks. | [Research decisions](#review-project-plan) |
+| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Find the earliest difference, repair confirmed errors, and report the comparison after rerunning. | [Reproduction checks](#test-and-name-the-reproduction-route) |
+| Two implementations disagree | Find the earliest disagreement and check each implementation against the specification. Correct errors and repeat the comparison; agreement alone is not a reason to change either method. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
+| The manuscript contains stale numbers | Trace the values to saved results, update them from the verified analysis, and check the rendered manuscript again. | [Manuscript checks](#trace-manuscript) |
+| Coauthor edits are lost after rebuilding | Compare the returned manuscript with the last shared version. Incorporate accepted edits into the maintained source, rebuild, and check that they survived. | [Coauthor revisions](#preserve-coauthor-edits-and-respond-to-reviewers) |
+| LLM labels vary between runs | Repeat a sample with unchanged settings and compare the agreed prompt and LLM variations. Report which labels and research estimates change; do not choose a run because its finding is preferred. | [Sensitivity analysis](#llm-sensitivity) |
 
 ## Jobs and app controls {#troubleshoot-execution}
 
 | What you notice | What to ask the agent to do | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs before restarting it. | [Unattended jobs](#unattended-jobs) |
-| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check whether it matches the documented launch issue; use the execution wrapper if confirmed. This is a specific R-on-macOS problem, not a general remedy for slow analysis. | [Toolkit diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
-| An app control is missing or has a different label | Compare your account and visible layout with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs. Fix a confirmed failure or resume from saved progress, then verify that work has restarted. | [Unattended jobs](#unattended-jobs) |
+| Reproduction works only in the original folder | Test the handoff copy using its README. Identify missing inputs, software, paths, or instructions; repair the handoff and repeat that test. | [Testing the handoff](#test-and-name-the-reproduction-route) |
+| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check for the documented launch issue. If confirmed, use the toolkit's method of starting `R` through a pseudo-terminal[^troubleshoot-pty] and check that it produces output. This remedy is specific to that launch problem. | [R-on-macOS diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
+| An app control is missing or has a different label | Compare the visible layout and account with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
+
+[^troubleshoot-pty]: A pseudo-terminal gives the launched program a terminal-like input/output connection. The agent can configure it without requiring you to work in a terminal. The linked diagnosis in the companion guide *Extending Your Agent's Toolkit* explains this specific problem and remedy.
 
 ## Permissions and data {#troubleshoot-access}
 
 | What you notice | Next action | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| Routine work repeatedly asks for approval | Ask the agent to identify the tool action and the mode or permission rule causing the prompt, then propose a narrowly scoped change for your decision. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
-| The agent cannot reach an input or service | Ask it to report the blocked action and required access. Confirm that the project permits that access before approving a change. | [Project access](#access-scope) |
-| Restricted material may have reached a service | Stop further access and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| Routine work repeatedly asks for approval | Ask the agent to identify the tool action and mode or permission rule causing the prompt. Review a narrowly scoped change, then have it check the action again. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
+| The agent cannot reach an input or service | Ask it to identify the blocked action and required access. Confirm that the project permits that access before approving a change and retrying. | [Project access](#access-scope) |
+| Restricted material may have reached a service | Stop further transfers and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
 
-Once the cause is confirmed, have the agent record the remedy in the project's troubleshooting notes or relevant instructions. Include the affected software or setting and the check that showed the problem was resolved.
+After a repair, have the agent record the cause, change, and check in `TASKS.md` and update `STATUS.md` if unfinished work or the next step has changed. An approved scientific revision also belongs in `SPECIFICATION.md` and `METHODOLOGY.md`. Detailed technical logs can stay with the affected code or outputs.
 
 # Appendix D. Glossary {#glossary}
 
-Look up a term here, then follow its link to the explanation in the guide. For example, *LLM inference* means generating a response with a trained LLM; it differs from statistical inference about a population or effect.
+Look up a term below and follow its link for an explanation or example.
+
+[A](#glossary-a) · [B](#glossary-b) · [C](#glossary-c) · [D](#glossary-d) · [E](#glossary-e) · [F](#glossary-f) · [G](#glossary-g) · [H](#glossary-h) · [I](#glossary-i) · [J](#glossary-j) · [L](#glossary-l) · [M](#glossary-m) · [O](#glossary-o) · [P](#glossary-p) · [Q](#glossary-q) · [R](#glossary-r) · [S](#glossary-s) · [T](#glossary-t) · [U](#glossary-u) · [V](#glossary-v) · [W](#glossary-w)
+
+## A {#glossary-a .unnumbered .unlisted}
 
 ::: {#term-adapter}
 *Adapter.* The learned adjustments saved by a method such as LoRA and used with a particular base LLM. An adapter alone is not the complete LLM. [LoRA](#lora).
@@ -2391,6 +2565,12 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *`Auto` mode.* A [`Claude Code`](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated review of actions. It reduces routine approval prompts while retaining checks. [Approval settings](#choose-how-actions-are-approved).
 :::
 
+## B {#glossary-b .unnumbered .unlisted}
+
+::: {#term-batch}
+*Batch.* A group of jobs prepared to run together or in sequence, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
+:::
+
 ::: {#term-brief}
 *Brief.* A written description of a task or project. For information maintained across sessions, see [project context files](#term-project-context-files).
 :::
@@ -2399,8 +2579,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Build.* Running commands that produce specified outputs from their inputs, such as a figure from saved estimates or a manuscript from text and tables. A build need not rerun every analysis step. [Saved commands](#saved-commands).
 :::
 
+## C {#glossary-c .unnumbered .unlisted}
+
 ::: {#term-calibration}
-*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Choosing simulation scenarios](#calibration-example).
+*Calibration.* For predicted probabilities, agreement between the stated probabilities and observed frequencies: labels assigned 80 percent confidence should be correct about 80 percent of the time. Simulation can also check whether interval coverage or error rates match their specified levels. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
 :::
 
 ::: {#term-chain-of-custody}
@@ -2408,7 +2590,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-checksum}
-*Checksum.* A fingerprint calculated from a file's contents. It helps identify a file version but does not establish that the contents are correct. [Tracing results](#trace-manuscript).
+*Checksum.* A digital fingerprint calculated from a file's contents. The agent can compare checksums to detect whether a file changed. [Recording input versions](#data-provenance).
 :::
 
 ::: {#term-commit}
@@ -2417,6 +2599,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 
 ::: {#term-compaction}
 *Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project context files should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
+:::
+
+::: {#term-confusion-matrix}
+*Confusion matrix.* A table counting predicted labels against reference labels, showing correct classifications and errors for each category. [The interview-labeling example](#evaluate-llm-labeling).
 :::
 
 ::: {#term-container}
@@ -2431,6 +2617,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Context window.* The limit on how much information an LLM can process in a request, including supplied context and generated tokens. A continuing session may use compaction to stay within that limit. [Usage and context](#usage-and-context).
 :::
 
+## D {#glossary-d .unnumbered .unlisted}
+
 ::: {#term-decision-rule}
 *Decision rule.* A specified rule for drawing a conclusion from results, such as reporting evidence of an effect when an interval excludes zero. Simulation can assess how often the rule reaches the intended or mistaken conclusion. [Known-truth checks](#calibration-example).
 :::
@@ -2439,56 +2627,82 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Deny rule.* A permission rule that blocks matching tool actions. Its coverage depends on the tool and execution route; a file-tool rule does not necessarily cover a script reading the same file. [Enforcing access](#enforce-those-limits).
 :::
 
+::: {#term-development-set}
+*Development set.* Material used to refine a rubric or prompt and compare candidate LLMs or settings. It contributes to choosing the method and is kept separate from the final test set. [Developing and testing labels](#evaluate-llm-labeling).
+:::
+
 ::: {#term-diff}
 *Diff.* A comparison showing changes between two versions of a file, often line by line. [Version history](#project-recovery).
 :::
+
+## E {#glossary-e .unnumbered .unlisted}
 
 ::: {#term-effort}
 *Effort.* A setting that controls how much reasoning an LLM is allowed to use. More effort can use more time and allowance without guaranteeing a correct result. [LLM and effort settings](#choose-the-llm-and-reasoning-effort).
 :::
 
 ::: {#term-environment-variable}
-*Environment variable.* A named value made available to a running program. Services sometimes use these values to receive credentials or configuration; programs with access can read them. [Credentials](#identify-inputs).
+*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
 :::
 
 ::: {#term-estimand}
-*Estimand.* The quantity a study aims to estimate, including the population or averaging sample and any comparison. [Scientific specification](#example-specification).
+*Estimand.* The quantity the study aims to estimate, defined for a target population or specified analysis sample and with any comparison made explicit. For example, a difference in mean birthweight between two specified maternal heat exposures. [Scientific specification](#example-specification).
 :::
 
 ::: {#term-estimator}
 *Estimator.* A procedure that uses data to estimate an estimand. [Scientific specification](#example-specification).
 :::
 
+## F {#glossary-f .unnumbered .unlisted}
+
 ::: {#term-fine-tuning}
 *Fine-tuning.* Additional training that adapts an existing LLM by changing learned parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
 :::
 
+## G {#glossary-g .unnumbered .unlisted}
+
 ::: {#term-global-instructions}
-*Global user instructions.* Conventions used across your projects, such as writing preferences or software practices. Also called global or personal instructions. [Conventions across projects](#shared-instructions).
+*Global user instructions.* Defaults used across projects, such as writing preferences or coding conventions. Explicit project-specific instructions can establish exceptions. [Conventions across projects](#shared-instructions).
 :::
+
+## H {#glossary-h .unnumbered .unlisted}
 
 ::: {#term-harness}
 *Harness.* The software around the LLM that supplies context, handles permissions, runs permitted tools, and returns their results. [Agent components](#how-can-an-llm-act-on-a-research-project).
 :::
 
 ::: {#term-headless-agent}
-*Headless agent.* An agent invoked without an interactive conversation, often from a saved request in a larger workflow. Headless execution does not by itself isolate the agent's inputs or tools. [Controlled runs](#headless-agents).
+*Headless agent.* An agent run with supplied instructions and inputs, without an interactive conversation. It can process cases unattended. Separate sessions do not by themselves restrict which files or tools are available. [Fresh headless sessions](#headless-agents).
 :::
 
+::: {#term-held-out-data}
+*Held-out data.* Material excluded from a specified stage of fitting or choosing a method. In this guide, the test set is held out from all development and training decisions until final evaluation. [Separating development and testing](#evaluate-llm-labeling).
+:::
+
+## I {#glossary-i .unnumbered .unlisted}
+
 ::: {#term-import}
-*Import.* In a `CLAUDE.md` instruction file, an `@` reference that includes another file's contents. [Instruction files](#project-records).
+*Import.* In a `CLAUDE.md` instruction file, an `@` reference that loads another file's contents alongside those instructions. [Claude Code's import documentation](https://code.claude.com/docs/en/memory#import-additional-files).
 :::
 
 ::: {#term-independent-implementation}
 *Independent implementation.* Separately written code for the same scientific specification and approved inputs, built without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
 :::
 
-::: {#term-llm-inference}
-*Inference, LLM.* Running an already-trained LLM to generate a response. This differs from statistical inference about a population or effect. [LLM research outputs](#define-the-output-and-its-research-meaning).
+## J {#glossary-j .unnumbered .unlisted}
+
+::: {#term-job}
+*Job.* One execution of a command or script, such as fitting a statistical model or running a simulation. [Unattended jobs](#unattended-jobs).
 :::
+
+## L {#glossary-l .unnumbered .unlisted}
 
 ::: {#term-llm}
 *LLM.* Large language model: a neural network trained to learn language patterns. LLMs used in assistants generate responses by predicting successive tokens from the supplied context. [How responses are generated](#how-does-an-llm-generate-a-response).
+:::
+
+::: {#term-llm-inference}
+*LLM inference.* Running an already-trained LLM to generate a response. It uses learned patterns and supplied context to predict successive tokens: a form of statistical prediction, rather than statistical inference about a population or effect. [LLM research outputs](#define-the-output-and-its-research-meaning).
 :::
 
 ::: {#term-lockfile}
@@ -2499,12 +2713,14 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *LoRA.* Low-Rank Adaptation: a fine-tuning method that learns compact adjustments while keeping the base LLM's weights fixed. The adjustments can be saved as an adapter. [How LoRA works](#lora).
 :::
 
-::: {#term-model}
-*Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
-:::
+## M {#glossary-m .unnumbered .unlisted}
 
 ::: {#term-methodological-decision-log}
 *Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
+:::
+
+::: {#term-model}
+*Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
 :::
 
 ::: {#term-modular-workflow}
@@ -2515,13 +2731,21 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Repeated simulation and its uncertainty](#simulation-repetitions).
 :::
 
+::: {#term-multimodal-llm}
+*Multimodal LLM.* An LLM that can process more than one kind of input, such as text and images. The supported kinds depend on the particular LLM. [Research inputs](#define-the-output-and-its-research-meaning).
+:::
+
+## O {#glossary-o .unnumbered .unlisted}
+
 ::: {#term-open-source-ai}
-*Open-source AI.* Under the Open Source Initiative's definition, an AI system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this. [LLM choices](#choose-for-the-task-and-available-hardware).
+*Open-source AI.* Under the Open Source Initiative's definition, an AI system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this. [Open-weight and open-source distinctions](#local-models).
 :::
 
 ::: {#term-open-weight-llm}
 *Open-weight LLM.* An LLM whose trained weights are available under stated license terms. It can run on your computer, institutional infrastructure, or a hosting provider's computers. [Deployment choices](#local-models).
 :::
+
+## P {#glossary-p .unnumbered .unlisted}
 
 ::: {#term-permission-mode}
 *Permission mode.* A setting governing which actions require approval during a session. Permission rules and other access controls also affect what can run. [Approval settings](#choose-how-actions-are-approved).
@@ -2552,6 +2776,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Provider.* The organization operating a hosted LLM service and receiving information submitted to it. The provider need not be the organization that developed the LLM. [Hosted processing](#what-reaches-the-llm).
 :::
 
+## Q {#glossary-q .unnumbered .unlisted}
+
 ::: {#term-qlora}
 *QLoRA.* A method combining LoRA with a quantized base LLM to reduce training memory requirements. [Adaptation methods](#lora).
 :::
@@ -2559,6 +2785,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 ::: {#term-quantization}
 *Quantization.* Representing numerical values in an LLM at reduced precision to reduce memory or storage requirements. Evaluate the particular quantized version intended for the research task. [Hardware and LLM choice](#choose-for-the-task-and-available-hardware).
 :::
+
+## R {#glossary-r .unnumbered .unlisted}
 
 ::: {#term-rag}
 *RAG.* Retrieval-augmented generation: selecting relevant material from a collection and supplying it to an LLM as context. [Context and training](#context-or-training).
@@ -2569,11 +2797,13 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-reproduction}
-*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked; generating new LLM responses is a different route from analyzing saved responses. [Reproduction routes](#test-and-name-the-reproduction-route).
+*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
 :::
 
+## S {#glossary-s .unnumbered .unlisted}
+
 ::: {#term-sandbox}
-*Sandbox.* Operating-system restrictions on covered execution, such as limits on file or network access. Tools outside the sandbox require separate controls. [Access enforcement](#enforce-those-limits).
+*Sandbox.* An environment in which the operating system restricts what a program can access, such as particular files or network destinations. Agent tools running outside that environment need separate controls. [Access enforcement](#enforce-those-limits).
 :::
 
 ::: {#term-scientific-specification}
@@ -2588,8 +2818,22 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Skill.* A reusable set of task instructions, sometimes with scripts or other supporting files, that an agent can load when needed. [Recurring tasks](#what-skills-add).
 :::
 
+::: {#term-slot}
+*Slot.* Capacity for one running job in a queue. With four slots, the queue can run four jobs at once and start another automatically when one finishes. A slot is not necessarily one processor core. [Queue capacity](#unattended-jobs).
+:::
+
 ::: {#term-smoke-test}
 *Smoke test.* A small run through a workflow to detect execution problems before a larger batch. It does not establish the statistical properties of the analysis. [Checking execution](#check-execution-before-scaling-up).
+:::
+
+::: {#term-software-environment}
+*Software environment.* The language versions, packages, system software, and settings used to run a project. Recording these helps another person recreate the conditions needed to run the saved code. [Preparing reproduction files](#assemble-the-files-and-instructions).
+:::
+
+## T {#glossary-t .unnumbered .unlisted}
+
+::: {#term-test-set}
+*Test set.* Material reserved for evaluating the chosen method after its design and settings are fixed. It does not contribute to training or choosing that method. [Final evaluation](#evaluate-llm-labeling).
 :::
 
 ::: {#term-token}
@@ -2600,13 +2844,23 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Tool / tool call.* A tool is a program that performs an action, such as reading a file or running code. A tool call requests that action; the harness runs it if permitted and returns the result. [Agent components](#how-can-an-llm-act-on-a-research-project).
 :::
 
+::: {#term-training-set}
+*Training set.* Examples used to update an LLM's learned parameters during training or fine-tuning. The guide distinguishes this from development material used to compare candidates and a test set used for final evaluation. [Fine-tuning evaluation](#evaluate-adapted-model).
+:::
+
+## U {#glossary-u .unnumbered .unlisted}
+
 ::: {#term-usage-window}
 *Usage window.* The period over which an account's usage allowance is measured. It differs from the context window limiting an individual LLM request. [Usage limits](#usage-and-context).
 :::
 
+## V {#glossary-v .unnumbered .unlisted}
+
 ::: {#term-version-control}
 *Version control.* A system that records selected versions of files so changes can be compared and earlier work recovered. [Project recovery](#project-recovery).
 :::
+
+## W {#glossary-w .unnumbered .unlisted}
 
 ::: {#term-weights}
 *Weights.* The numerical parameters learned during LLM training. Running an LLM uses those parameters; fine-tuning changes some of them or learns additional adjustments. [Context and training](#context-or-training).

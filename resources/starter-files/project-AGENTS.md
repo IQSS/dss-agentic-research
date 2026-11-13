@@ -1,7 +1,8 @@
-# heat-birthweight
+# [Project name]
 
-Synthetic teaching study of heat exposure and birthweight. Every individual
-record is synthetic; results are not evidence about actual pregnancies.
+[Describe the research question, purpose, and intended outputs.]
+[Adapt the paths and file list below to the project. Keep unresolved choices
+explicit; do not invent research decisions to complete this template.]
 
 ## Read first
 - STATUS.md: current state and next decision.
@@ -12,9 +13,9 @@ record is synthetic; results are not evidence about actual pregnancies.
   the rationale or history matters.
 
 ## Files
-- data/raw/: approved original synthetic data; preserve unchanged.
+- data/raw/: approved original inputs; preserve unchanged.
 - code/: saved analysis and validation steps.
-- outputs/: fits, contrasts, figures, and verification records.
+- outputs/: saved results, figures, and checks.
 - manuscript/: text linked to the saved outputs.
 - README.md: actual commands and environment restoration instructions.
 
@@ -22,11 +23,11 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Follow the written specification. Report missing inputs or ambiguities.
 - Do not invent observations, alter the estimand, or weaken a failed check.
 - Save full-precision results; apply rounding only for presentation.
-- Keep simulation outputs separate from the single-dataset analysis.
+- Keep exploratory work, simulations, and manuscript results distinguishable.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
 
-## Maintain the records
+## Maintain project context files
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
@@ -37,7 +38,6 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
-Only approved synthetic material belongs in this project. No protected birth
-records are available here. Ask before adding external services or publishing.
-These instructions do not enforce file or network permissions; use the
-configured access controls for those boundaries.
+[Identify approved inputs, storage, and services, and any restrictions on use.]
+Ask before adding external services or publishing. These instructions do not
+enforce file or network permissions; configure access controls separately.

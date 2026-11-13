@@ -6,7 +6,11 @@ title: "Appendix D. Glossary"
 
 # Appendix D. Glossary
 
-Look up a term here, then follow its link to the explanation in the guide. For example, *LLM inference* means generating a response with a trained LLM; it differs from statistical inference about a population or effect.
+Look up a term below and follow its link for an explanation or example.
+
+[A](#glossary-a) · [B](#glossary-b) · [C](#glossary-c) · [D](#glossary-d) · [E](#glossary-e) · [F](#glossary-f) · [G](#glossary-g) · [H](#glossary-h) · [I](#glossary-i) · [J](#glossary-j) · [L](#glossary-l) · [M](#glossary-m) · [O](#glossary-o) · [P](#glossary-p) · [Q](#glossary-q) · [R](#glossary-r) · [S](#glossary-s) · [T](#glossary-t) · [U](#glossary-u) · [V](#glossary-v) · [W](#glossary-w)
+
+## A {#glossary-a .unnumbered .unlisted}
 
 ::: {#term-adapter}
 *Adapter.* The learned adjustments saved by a method such as LoRA and used with a particular base LLM. An adapter alone is not the complete LLM. [LoRA](#lora).
@@ -28,6 +32,12 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *`Auto` mode.* A [`Claude Code`](https://code.claude.com/docs/en/overview) permission mode that combines permission rules with automated review of actions. It reduces routine approval prompts while retaining checks. [Approval settings](#choose-how-actions-are-approved).
 :::
 
+## B {#glossary-b .unnumbered .unlisted}
+
+::: {#term-batch}
+*Batch.* A group of jobs prepared to run together or in sequence, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
+:::
+
 ::: {#term-brief}
 *Brief.* A written description of a task or project. For information maintained across sessions, see [project context files](#term-project-context-files).
 :::
@@ -36,8 +46,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Build.* Running commands that produce specified outputs from their inputs, such as a figure from saved estimates or a manuscript from text and tables. A build need not rerun every analysis step. [Saved commands](#saved-commands).
 :::
 
+## C {#glossary-c .unnumbered .unlisted}
+
 ::: {#term-calibration}
-*Calibration.* In this guide, assessing an estimator or decision rule using simulated data with known properties. The conclusions depend on the scenarios and performance measures examined. [Choosing simulation scenarios](#calibration-example).
+*Calibration.* For predicted probabilities, agreement between the stated probabilities and observed frequencies: labels assigned 80 percent confidence should be correct about 80 percent of the time. Simulation can also check whether interval coverage or error rates match their specified levels. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
 :::
 
 ::: {#term-chain-of-custody}
@@ -45,7 +57,7 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-checksum}
-*Checksum.* A fingerprint calculated from a file's contents. It helps identify a file version but does not establish that the contents are correct. [Tracing results](#trace-manuscript).
+*Checksum.* A digital fingerprint calculated from a file's contents. The agent can compare checksums to detect whether a file changed. [Recording input versions](#data-provenance).
 :::
 
 ::: {#term-commit}
@@ -54,6 +66,10 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 
 ::: {#term-compaction}
 *Compaction.* Summarizing earlier conversation material to make room in the LLM's context window. Details can be lost, so project context files should preserve important decisions and unfinished work. [Context limits](#usage-and-context).
+:::
+
+::: {#term-confusion-matrix}
+*Confusion matrix.* A table counting predicted labels against reference labels, showing correct classifications and errors for each category. [The interview-labeling example](#evaluate-llm-labeling).
 :::
 
 ::: {#term-container}
@@ -68,6 +84,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Context window.* The limit on how much information an LLM can process in a request, including supplied context and generated tokens. A continuing session may use compaction to stay within that limit. [Usage and context](#usage-and-context).
 :::
 
+## D {#glossary-d .unnumbered .unlisted}
+
 ::: {#term-decision-rule}
 *Decision rule.* A specified rule for drawing a conclusion from results, such as reporting evidence of an effect when an interval excludes zero. Simulation can assess how often the rule reaches the intended or mistaken conclusion. [Known-truth checks](#calibration-example).
 :::
@@ -76,56 +94,82 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Deny rule.* A permission rule that blocks matching tool actions. Its coverage depends on the tool and execution route; a file-tool rule does not necessarily cover a script reading the same file. [Enforcing access](#enforce-those-limits).
 :::
 
+::: {#term-development-set}
+*Development set.* Material used to refine a rubric or prompt and compare candidate LLMs or settings. It contributes to choosing the method and is kept separate from the final test set. [Developing and testing labels](#evaluate-llm-labeling).
+:::
+
 ::: {#term-diff}
 *Diff.* A comparison showing changes between two versions of a file, often line by line. [Version history](#project-recovery).
 :::
+
+## E {#glossary-e .unnumbered .unlisted}
 
 ::: {#term-effort}
 *Effort.* A setting that controls how much reasoning an LLM is allowed to use. More effort can use more time and allowance without guaranteeing a correct result. [LLM and effort settings](#choose-the-llm-and-reasoning-effort).
 :::
 
 ::: {#term-environment-variable}
-*Environment variable.* A named value made available to a running program. Services sometimes use these values to receive credentials or configuration; programs with access can read them. [Credentials](#identify-inputs).
+*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
 :::
 
 ::: {#term-estimand}
-*Estimand.* The quantity a study aims to estimate, including the population or averaging sample and any comparison. [Scientific specification](#example-specification).
+*Estimand.* The quantity the study aims to estimate, defined for a target population or specified analysis sample and with any comparison made explicit. For example, a difference in mean birthweight between two specified maternal heat exposures. [Scientific specification](#example-specification).
 :::
 
 ::: {#term-estimator}
 *Estimator.* A procedure that uses data to estimate an estimand. [Scientific specification](#example-specification).
 :::
 
+## F {#glossary-f .unnumbered .unlisted}
+
 ::: {#term-fine-tuning}
 *Fine-tuning.* Additional training that adapts an existing LLM by changing learned parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
 :::
 
+## G {#glossary-g .unnumbered .unlisted}
+
 ::: {#term-global-instructions}
-*Global user instructions.* Conventions used across your projects, such as writing preferences or software practices. Also called global or personal instructions. [Conventions across projects](#shared-instructions).
+*Global user instructions.* Defaults used across projects, such as writing preferences or coding conventions. Explicit project-specific instructions can establish exceptions. [Conventions across projects](#shared-instructions).
 :::
+
+## H {#glossary-h .unnumbered .unlisted}
 
 ::: {#term-harness}
 *Harness.* The software around the LLM that supplies context, handles permissions, runs permitted tools, and returns their results. [Agent components](#how-can-an-llm-act-on-a-research-project).
 :::
 
 ::: {#term-headless-agent}
-*Headless agent.* An agent invoked without an interactive conversation, often from a saved request in a larger workflow. Headless execution does not by itself isolate the agent's inputs or tools. [Controlled runs](#headless-agents).
+*Headless agent.* An agent run with supplied instructions and inputs, without an interactive conversation. It can process cases unattended. Separate sessions do not by themselves restrict which files or tools are available. [Fresh headless sessions](#headless-agents).
 :::
 
+::: {#term-held-out-data}
+*Held-out data.* Material excluded from a specified stage of fitting or choosing a method. In this guide, the test set is held out from all development and training decisions until final evaluation. [Separating development and testing](#evaluate-llm-labeling).
+:::
+
+## I {#glossary-i .unnumbered .unlisted}
+
 ::: {#term-import}
-*Import.* In a `CLAUDE.md` instruction file, an `@` reference that includes another file's contents. [Instruction files](#project-records).
+*Import.* In a `CLAUDE.md` instruction file, an `@` reference that loads another file's contents alongside those instructions. [Claude Code's import documentation](https://code.claude.com/docs/en/memory#import-additional-files).
 :::
 
 ::: {#term-independent-implementation}
 *Independent implementation.* Separately written code for the same scientific specification and approved inputs, built without consulting the first implementation or its results. [Independent checks](#build-two-implementations-separately).
 :::
 
-::: {#term-llm-inference}
-*Inference, LLM.* Running an already-trained LLM to generate a response. This differs from statistical inference about a population or effect. [LLM research outputs](#define-the-output-and-its-research-meaning).
+## J {#glossary-j .unnumbered .unlisted}
+
+::: {#term-job}
+*Job.* One execution of a command or script, such as fitting a statistical model or running a simulation. [Unattended jobs](#unattended-jobs).
 :::
+
+## L {#glossary-l .unnumbered .unlisted}
 
 ::: {#term-llm}
 *LLM.* Large language model: a neural network trained to learn language patterns. LLMs used in assistants generate responses by predicting successive tokens from the supplied context. [How responses are generated](#how-does-an-llm-generate-a-response).
+:::
+
+::: {#term-llm-inference}
+*LLM inference.* Running an already-trained LLM to generate a response. It uses learned patterns and supplied context to predict successive tokens: a form of statistical prediction, rather than statistical inference about a population or effect. [LLM research outputs](#define-the-output-and-its-research-meaning).
 :::
 
 ::: {#term-lockfile}
@@ -136,12 +180,14 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *LoRA.* Low-Rank Adaptation: a fine-tuning method that learns compact adjustments while keeping the base LLM's weights fixed. The adjustments can be saved as an adapter. [How LoRA works](#lora).
 :::
 
-::: {#term-model}
-*Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
-:::
+## M {#glossary-m .unnumbered .unlisted}
 
 ::: {#term-methodological-decision-log}
 *Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
+:::
+
+::: {#term-model}
+*Model.* This guide uses *LLM* for the language component of an agent and *statistical model* for a model fitted as part of the research analysis. The app's `Model` control selects an LLM. [LLM settings](#choose-the-llm-and-reasoning-effort).
 :::
 
 ::: {#term-modular-workflow}
@@ -152,13 +198,21 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Repeated simulation and its uncertainty](#simulation-repetitions).
 :::
 
+::: {#term-multimodal-llm}
+*Multimodal LLM.* An LLM that can process more than one kind of input, such as text and images. The supported kinds depend on the particular LLM. [Research inputs](#define-the-output-and-its-research-meaning).
+:::
+
+## O {#glossary-o .unnumbered .unlisted}
+
 ::: {#term-open-source-ai}
-*Open-source AI.* Under the Open Source Initiative's definition, an AI system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this. [LLM choices](#choose-for-the-task-and-available-hardware).
+*Open-source AI.* Under the Open Source Initiative's definition, an AI system supplied with the rights and materials needed to use, study, modify, and share it. Downloadable weights alone do not establish this. [Open-weight and open-source distinctions](#local-models).
 :::
 
 ::: {#term-open-weight-llm}
 *Open-weight LLM.* An LLM whose trained weights are available under stated license terms. It can run on your computer, institutional infrastructure, or a hosting provider's computers. [Deployment choices](#local-models).
 :::
+
+## P {#glossary-p .unnumbered .unlisted}
 
 ::: {#term-permission-mode}
 *Permission mode.* A setting governing which actions require approval during a session. Permission rules and other access controls also affect what can run. [Approval settings](#choose-how-actions-are-approved).
@@ -189,6 +243,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Provider.* The organization operating a hosted LLM service and receiving information submitted to it. The provider need not be the organization that developed the LLM. [Hosted processing](#what-reaches-the-llm).
 :::
 
+## Q {#glossary-q .unnumbered .unlisted}
+
 ::: {#term-qlora}
 *QLoRA.* A method combining LoRA with a quantized base LLM to reduce training memory requirements. [Adaptation methods](#lora).
 :::
@@ -196,6 +252,8 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 ::: {#term-quantization}
 *Quantization.* Representing numerical values in an LLM at reduced precision to reduce memory or storage requirements. Evaluate the particular quantized version intended for the research task. [Hardware and LLM choice](#choose-for-the-task-and-available-hardware).
 :::
+
+## R {#glossary-r .unnumbered .unlisted}
 
 ::: {#term-rag}
 *RAG.* Retrieval-augmented generation: selecting relevant material from a collection and supplying it to an LLM as context. [Context and training](#context-or-training).
@@ -206,11 +264,13 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 :::
 
 ::: {#term-reproduction}
-*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked; generating new LLM responses is a different route from analyzing saved responses. [Reproduction routes](#test-and-name-the-reproduction-route).
+*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
 :::
 
+## S {#glossary-s .unnumbered .unlisted}
+
 ::: {#term-sandbox}
-*Sandbox.* Operating-system restrictions on covered execution, such as limits on file or network access. Tools outside the sandbox require separate controls. [Access enforcement](#enforce-those-limits).
+*Sandbox.* An environment in which the operating system restricts what a program can access, such as particular files or network destinations. Agent tools running outside that environment need separate controls. [Access enforcement](#enforce-those-limits).
 :::
 
 ::: {#term-scientific-specification}
@@ -225,8 +285,22 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Skill.* A reusable set of task instructions, sometimes with scripts or other supporting files, that an agent can load when needed. [Recurring tasks](#what-skills-add).
 :::
 
+::: {#term-slot}
+*Slot.* Capacity for one running job in a queue. With four slots, the queue can run four jobs at once and start another automatically when one finishes. A slot is not necessarily one processor core. [Queue capacity](#unattended-jobs).
+:::
+
 ::: {#term-smoke-test}
 *Smoke test.* A small run through a workflow to detect execution problems before a larger batch. It does not establish the statistical properties of the analysis. [Checking execution](#check-execution-before-scaling-up).
+:::
+
+::: {#term-software-environment}
+*Software environment.* The language versions, packages, system software, and settings used to run a project. Recording these helps another person recreate the conditions needed to run the saved code. [Preparing reproduction files](#assemble-the-files-and-instructions).
+:::
+
+## T {#glossary-t .unnumbered .unlisted}
+
+::: {#term-test-set}
+*Test set.* Material reserved for evaluating the chosen method after its design and settings are fixed. It does not contribute to training or choosing that method. [Final evaluation](#evaluate-llm-labeling).
 :::
 
 ::: {#term-token}
@@ -237,13 +311,23 @@ Look up a term here, then follow its link to the explanation in the guide. For e
 *Tool / tool call.* A tool is a program that performs an action, such as reading a file or running code. A tool call requests that action; the harness runs it if permitted and returns the result. [Agent components](#how-can-an-llm-act-on-a-research-project).
 :::
 
+::: {#term-training-set}
+*Training set.* Examples used to update an LLM's learned parameters during training or fine-tuning. The guide distinguishes this from development material used to compare candidates and a test set used for final evaluation. [Fine-tuning evaluation](#evaluate-adapted-model).
+:::
+
+## U {#glossary-u .unnumbered .unlisted}
+
 ::: {#term-usage-window}
 *Usage window.* The period over which an account's usage allowance is measured. It differs from the context window limiting an individual LLM request. [Usage limits](#usage-and-context).
 :::
 
+## V {#glossary-v .unnumbered .unlisted}
+
 ::: {#term-version-control}
 *Version control.* A system that records selected versions of files so changes can be compared and earlier work recovered. [Project recovery](#project-recovery).
 :::
+
+## W {#glossary-w .unnumbered .unlisted}
 
 ::: {#term-weights}
 *Weights.* The numerical parameters learned during LLM training. Running an LLM uses those parameters; fine-tuning changes some of them or learns additional adjustments. [Context and training](#context-or-training).

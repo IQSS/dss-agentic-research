@@ -6,9 +6,27 @@ title: "Appendix A. Project scaffolds and starter files"
 
 # Appendix A. Project scaffolds and starter files
 
-The scaffolds below give an agent a starting structure for a paper, dataset, or website. Each can be downloaded as a Markdown specification to supply with your project brief. They are simplified adaptations of the examples maintained with the scaffold skill; folder names and contents should fit the work, and an existing structure can remain if it serves that purpose.
+Give the agent a scaffold or template from this appendix, explain the project and where its folder should live, and ask it to create or adapt the files. A scaffold describes the folder layout; the templates supply starting text for project context files and global user instructions. Have the agent preserve useful existing organization and fill placeholders from your decisions, leaving unresolved questions explicit.
 
-[Chapter 6: Organize your research projects](#project-organization) explains how to choose a structure. [Chapter 9: Use skills for recurring tasks](#reusable-procedures) shows how to reuse the setup through a skill. The project context file templates after the scaffolds provide starting files to adapt for all three layouts.
+Paper projects normally use all five project context files below. Other projects can use the files their work needs. The templates are generic; [Chapter 10: The example research project](#example-project) provides a [completed paper project](resources/heat-birthweight.zip) with populated files. [Chapter 6: Organize your research projects](#project-organization) explains the layouts, and [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains reusable setup.
+
+| Resource | Purpose or location | Download |
+|:-------------------------------|:-------------------------------------------|:----------------|
+| Project scaffolds | | |
+| [Research paper](#scaffold-paper-example) | Data, analysis, results, and manuscript. | [Get file](resources/scaffolds/paper.md){download="paper-scaffold.md"} |
+| [Dataset](#scaffold-dataset-example) | Collection, processing, checks, and releases. | [Get file](resources/scaffolds/dataset.md){download="dataset-scaffold.md"} |
+| [Website](#scaffold-website-example) | Editable pages, assets, and generated site. | [Get file](resources/scaffolds/website.md){download="website-scaffold.md"} |
+| Project context files | | |
+| [CLAUDE.md](#starter-project) | Instructions and file locations, inside the project. | [Template](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
+| [STATUS.md](#starter-status) | Current state, inside the project. | [Template](resources/starter-files/STATUS.md){download="STATUS.md"} |
+| [TASKS.md](#starter-tasks) | Work remaining and completed, inside the project. | [Template](resources/starter-files/TASKS.md){download="TASKS.md"} |
+| [SPECIFICATION.md](#starter-specification) | Current scientific requirements, inside the project. | [Template](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
+| [METHODOLOGY.md](#starter-methodology) | Dated scientific decisions and reasons, inside the project. | [Template](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
+| Optional settings | | |
+| [Global user instructions](#starter-global) | Defaults across projects, in `~/.claude/CLAUDE.md`. | [Template](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| [Git exclusions](#starter-gitignore) | Files excluded from version control, in the project's `.gitignore`. | [Template](resources/starter-files/gitignore.txt){download=".gitignore"} |
+
+The tilde (`~`) means your home folder. The two `CLAUDE.md` templates belong in different places: one inside the project, the other in your home folder's `.claude` directory. Ask the agent to merge useful instructions into existing files. Access controls are configured separately, as explained in [Chapter 4: Control what the agent can do](#enforce-those-limits).
 
 ## A.1 Project scaffolds {#starter-layouts}
 
@@ -16,8 +34,11 @@ The scaffolds below give an agent a starting structure for a paper, dataset, or 
 
 [Download the research paper scaffold](resources/scaffolds/paper.md){.download-button download="paper-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the paper layout and setup instructions</summary>
+
 <!-- scaffold:paper -->
-This layout keeps original inputs, reusable analysis code, exploratory work, and manuscript results distinct. It adapts the paper example supplied with the scaffold skill. Retain only the folders the study needs, and use the project's analysis language.
+This layout keeps original inputs, reusable analysis code, exploratory work, and manuscript results distinct. Have the agent retain only the folders the study needs and use the project's analysis language.
 
 ```
 paper-project/
@@ -50,15 +71,20 @@ paper-project/
 
 Keep original inputs in `data/raw/`; save transformations in `data/processed/`. Reusable setup and functions belong in `code/_startup/`, while independently runnable analysis scripts sit directly in `code/`. The other code folders separate acquisition, exploratory work, and assembly of manuscript figures. Save results under `outputs/` and manuscript drafts under `manuscript/`.
 
-Give this specification to the agent with the research question, intended outputs, analysis language, and destination. Ask it to propose any adaptations before creating the agreed structure. It should describe the project in `README.md`, write navigation instructions in `CLAUDE.md`, and record the current state and tasks. Have the agent populate `SPECIFICATION.md` with approved scientific requirements and start `METHODOLOGY.md` with dated decisions and reasons, newest first; leave unresolved methods as questions. `CLAUDE.md` should require both files to be updated after an approved scientific change. Preserve existing files and confirm that paths in the project context files point to real locations.
+Give this layout to the agent with the research question, intended outputs, analysis language, and the folder where the project should be created. Ask it to adapt the layout, describe the project in `README.md`, and write navigation and maintenance instructions in `CLAUDE.md`. It should populate `STATUS.md` and `TASKS.md` from the current work, `SPECIFICATION.md` from your approved scientific requirements, and `METHODOLOGY.md` with dated decisions and reasons, newest first. Unresolved methods should remain questions. After an approved scientific change, the agent should update both scientific files. Have it preserve existing work and check that the paths it records point to the right locations.
 <!-- /scaffold:paper -->
+
+</details>
 
 ### Dataset {#scaffold-dataset-example .unlisted}
 
 [Download the dataset scaffold](resources/scaffolds/dataset.md){.download-button download="dataset-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the dataset layout and setup instructions</summary>
+
 <!-- scaffold:dataset -->
-This layout suits a dataset collected, processed, and released for reuse by several studies. It adapts the data example supplied with the scaffold skill, adding an explicit place for versioned releases.
+This layout suits a dataset collected, processed, and released for reuse by several studies, with a separate location for each release.
 
 ```
 dataset-project/
@@ -85,15 +111,21 @@ Preserve downloads unchanged in `data/sources/`. Acquisition, processing, and ch
 
 Save each release in a named subfolder of `outputs/releases/`, with its data dictionary, source versions, and checks. A paper using that dataset should record which release it used. Access and release arrangements must match the data's permitted uses.
 
-Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and project context files. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
+Give this layout to the agent with the data sources, intended users, access restrictions, and the folder where the project should be created. Ask it to adapt the structure to the collection and release process and create the folders and project context files. It should preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
 <!-- /scaffold:dataset -->
 
+</details>
+
+::: {.keep-together}
 ### Website {#scaffold-website-example .unlisted}
 
 [Download the website scaffold](resources/scaffolds/website.md){.download-button download="website-scaffold.md"}
 
+<details class="guide-example">
+<summary>Read the website layout and setup instructions</summary>
+
 <!-- scaffold:website -->
-This layout separates editable material from the generated website. It adapts the scaffold skill's publishing example for a website; the chosen site software may require different folder names.
+This layout separates editable material from the generated website. Have the agent adapt the folder names to the chosen website software.
 
 ```
 website-project/
@@ -101,6 +133,7 @@ website-project/
   CLAUDE.md
   STATUS.md
   TASKS.md
+  DESIGN.md
   source/
   assets/
     images/
@@ -110,45 +143,32 @@ website-project/
     notes/
 ```
 
-Write pages in `source/` and keep images and styles in `assets/`. The build produces the viewable site in `output/`; make lasting edits in the sources so they survive the next build. Record the preview and build commands in `README.md`. Keep publishing instructions and the intended destination explicit.
+The agent writes pages in `source/` and keeps images and styles in `assets/`. The build produces the viewable site in `output/`; lasting edits belong in the sources so they survive the next build. Have the agent record preview and build commands in `README.md`, along with where the site will be published.
 
-Give this specification to the agent with the site's purpose, audience, software if already chosen, and destination. Ask it to adapt the layout to that software and create the agreed structure and project context files. It should check that the preview uses the intended pages and assets. Creating the scaffold does not include publishing the site.
+Give this layout to the agent with the site's purpose, audience, software if already chosen, and the folder where the project should be created. Ask it to create the structure and project context files and check that the preview uses the intended pages and assets. Publishing the site is a separate task.
 <!-- /scaffold:website -->
 
-## Context and instruction templates {.unnumbered .unlisted}
+</details>
 
-The project context file templates below describe the work and help an agent resume it later. Have the agent adapt the useful ones to your existing files and conventions. A small project can begin with `CLAUDE.md`, `STATUS.md`, and `TASKS.md`; add `SPECIFICATION.md` and `METHODOLOGY.md` when the work needs them. The table also includes optional templates for global user instructions and version-control exclusions.
-
-For the [synthetic heat-and-birthweight study](#example-specification), `SPECIFICATION.md` states the quantities to estimate and how to estimate them. `METHODOLOGY.md` records why those choices were made or changed. Keeping those roles separate lets a new session find both the current scientific requirements and the reasoning behind them.
-
-| File and destination | Use | Template |
-|:------------------------------------|:--------------------------------------------|:-----------------|
-| `CLAUDE.md` in the project | Explain the project and point to its other context files. | [Download](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
-| `STATUS.md` in the project | Summarize where the work stands now. | [Download](resources/starter-files/STATUS.md){download="STATUS.md"} |
-| `TASKS.md` in the project | Track remaining work and dated completions. | [Download](resources/starter-files/TASKS.md){download="TASKS.md"} |
-| `SPECIFICATION.md` in the project | State the agreed analysis and checks. | [Download](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
-| `METHODOLOGY.md` in the project | Record scientific decisions and their reasons. | [Download](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
-| Global user `CLAUDE.md` in `~/.claude/` | Optional conventions used across projects. | [Download](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
-| `.gitignore` in the project | Optional exclusions when using [`Git`](https://git-scm.com/). | [Download](resources/starter-files/gitignore.txt){download=".gitignore"} |
-
-The tilde (`~`) means your home folder. The two `CLAUDE.md` templates have different destinations: the project context file belongs inside the project; the global user instructions file belongs in your `.claude` folder. Have the agent merge useful content into existing instructions rather than overwrite them. Instruction files do not enforce access controls; those are configured separately in [Chapter 4: Control what the agent can do](#enforce-those-limits).
+:::
 
 ::: {.keep-together}
-## A.2 CLAUDE.md for the project {#starter-project}
+## A.2 CLAUDE.md: Project instructions {#starter-project}
 
-Adapt the example to the project, then save it as `CLAUDE.md` in the project's main folder. Replace the study description and paths; remove references to records the project does not need. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
+Ask the agent to adapt this template and save it as `CLAUDE.md` in the project's main folder. It should describe the actual work, identify the important paths, and include only files the project uses. [Chapter 7: Give the agent context for your project](#project-records) explains how to use a maintained `AGENTS.md` instead.
 
 [Download the project CLAUDE.md template](resources/starter-files/project-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
-<summary>Read the CLAUDE.md example</summary>
+<summary>Read the CLAUDE.md template</summary>
 
 <!-- starter:project -->
 ```
-# heat-birthweight
+# [Project name]
 
-Synthetic teaching study of heat exposure and birthweight. Every individual
-record is synthetic; results are not evidence about actual pregnancies.
+[Describe the research question, purpose, and intended outputs.]
+[Adapt the paths and file list below to the project. Keep unresolved choices
+explicit; do not invent research decisions to complete this template.]
 
 ## Read first
 - STATUS.md: current state and next decision.
@@ -159,9 +179,9 @@ record is synthetic; results are not evidence about actual pregnancies.
   the rationale or history matters.
 
 ## Files
-- data/raw/: approved original synthetic data; preserve unchanged.
+- data/raw/: approved original inputs; preserve unchanged.
 - code/: saved analysis and validation steps.
-- outputs/: fits, contrasts, figures, and verification records.
+- outputs/: saved results, figures, and checks.
 - manuscript/: text linked to the saved outputs.
 - README.md: actual commands and environment restoration instructions.
 
@@ -169,11 +189,11 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Follow the written specification. Report missing inputs or ambiguities.
 - Do not invent observations, alter the estimand, or weaken a failed check.
 - Save full-precision results; apply rounding only for presentation.
-- Keep simulation outputs separate from the single-dataset analysis.
+- Keep exploratory work, simulations, and manuscript results distinguishable.
 - Record the exact input and software versions used.
 - Inspect changed outputs and record verification before reporting completion.
 
-## Maintain the records
+## Maintain project context files
 - Read STATUS.md and TASKS.md before starting; check relevant project files.
 - Update the task list as work starts, finishes, or becomes blocked.
 - Keep STATUS.md a short account of the current state, not a running history.
@@ -184,10 +204,9 @@ record is synthetic; results are not evidence about actual pregnancies.
 - Keep unfinished work, failed checks, and unresolved questions explicit.
 
 ## Access
-Only approved synthetic material belongs in this project. No protected birth
-records are available here. Ask before adding external services or publishing.
-These instructions do not enforce file or network permissions; use the
-configured access controls for those boundaries.
+[Identify approved inputs, storage, and services, and any restrictions on use.]
+Ask before adding external services or publishing. These instructions do not
+enforce file or network permissions; configure access controls separately.
 ```
 <!-- /starter:project -->
 
@@ -196,9 +215,9 @@ configured access controls for those boundaries.
 :::
 
 ::: {.keep-together}
-## A.3 Current state {#starter-status}
+## A.3 STATUS.md: Current state {#starter-status}
 
-Save this as `STATUS.md`. Have the agent rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
+Have the agent create `STATUS.md` and rewrite it as the work changes, keeping a short snapshot of what exists, what has been checked, and what comes next. Task history belongs in `TASKS.md`; scientific reasoning belongs in `METHODOLOGY.md`.
 
 [Download STATUS.md](resources/starter-files/STATUS.md){.download-button download="STATUS.md"}
 
@@ -230,9 +249,9 @@ Last updated: [date]
 :::
 
 ::: {.keep-together}
-## A.4 Tasks {#starter-tasks}
+## A.4 TASKS.md: Work to do and completed {#starter-tasks}
 
-Save this as `TASKS.md`. Have the agent move tasks as their status changes and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
+Have the agent create `TASKS.md`, move tasks as their status changes, and date completed entries. Keep enough detail to resume unfinished work without turning the file into a transcript of every action.
 
 [Download TASKS.md](resources/starter-files/TASKS.md){.download-button download="TASKS.md"}
 
@@ -247,8 +266,7 @@ Move tasks between these sections as their status changes. Add a date when a
 task finishes. An in-progress entry states what remains to be done.
 
 ## To Do
-- Confirm the scientific specification and the approved inputs.
-- Implement the analysis and its verification plan.
+- [Describe an agreed task and the result needed to complete it.]
 
 ## In Progress
 
@@ -261,9 +279,9 @@ task finishes. An in-progress entry states what remains to be done.
 :::
 
 ::: {.keep-together}
-## A.5 Scientific specification {#starter-specification}
+## A.5 SPECIFICATION.md: Current requirements {#starter-specification}
 
-Save this as `SPECIFICATION.md`. Have the agent fill it from your research decisions and leave unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. Adapt or remove fields that do not apply to the study. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight example, supplied in the [project download](resources/heat-birthweight.zip).
+Have the agent create `SPECIFICATION.md` from your research decisions, adapting the fields to the study and leaving unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight specification.
 
 [Download SPECIFICATION.md](resources/starter-files/SPECIFICATION.md){.download-button download="SPECIFICATION.md"}
 
@@ -315,9 +333,9 @@ in version control and retain frozen protocols used for particular runs.
 :::
 
 ::: {.keep-together}
-## A.6 Scientific decisions {#starter-methodology}
+## A.6 METHODOLOGY.md: Scientific decisions {#starter-methodology}
 
-Save this as `METHODOLOGY.md`. Have the agent add a dated heading and entry at the top for each approved scientific decision, preserving earlier entries. Record what changed, why, and which requirements in `SPECIFICATION.md` were affected. Keep routine coding and formatting progress in `TASKS.md`. Link to the current specification instead of repeating it. [Chapter 7: Give the agent context for your project](#review-project-plan) explains how these records support research decisions.
+Have the agent create `METHODOLOGY.md` and add a dated entry at the top for each approved scientific decision, preserving earlier entries. Each entry should explain what changed, why, and which requirements in `SPECIFICATION.md` were affected. Routine coding and formatting progress belongs in `TASKS.md`. Link to the current specification rather than repeating it. [Chapter 7: Give the agent context for your project](#review-project-plan) explains how the two files support research decisions.
 
 [Download METHODOLOGY.md](resources/starter-files/METHODOLOGY.md){.download-button download="METHODOLOGY.md"}
 
@@ -349,12 +367,12 @@ progress in STATUS.md and TASKS.md. Link detailed evidence rather than copying i
 ::: {.keep-together}
 ## A.7 Global user instructions {#starter-global}
 
-Use this optional template for conventions that apply across your work. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. Add references to separate writing, coding, or other specialist files only when you maintain them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
+Use this optional template for defaults that apply across your projects. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. For longer guidance, have the agent add paths to maintained specialist files and instructions on when to read them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
 
 [Download global user instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
 <details class="guide-example">
-<summary>Read the personal-instructions template</summary>
+<summary>Read the global user instructions template</summary>
 
 <!-- starter:global -->
 ```
@@ -372,7 +390,7 @@ These conventions are defaults across projects. Follow explicit project-specific
 exceptions and record their reasons. Ask when instructions conflict and no
 exception has been agreed.
 
-[Keep short shared conventions here. Add references only to files you maintain,
+[Keep short defaults here. Add paths or links only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
 
@@ -382,7 +400,8 @@ report it; do not create a replacement or invent its instructions.
 ## Research work
 - Preserve original data. Derive new files with saved code.
 - Use independently runnable steps with declared inputs and outputs.
-- Keep scientific decisions and their reasons in the project record.
+- For paper projects, keep current requirements in SPECIFICATION.md and dated
+  scientific decisions and reasons in METHODOLOGY.md.
 - Verify observed outputs before reporting success. Keep failed checks visible.
 
 ## Limits
@@ -391,7 +410,7 @@ report it; do not create a replacement or invent its instructions.
 - Do not delete recovery copies or rewrite shared history without approval.
 
 ## Finishing
-- Update the task list and current-state record from evidence.
+- Update TASKS.md and STATUS.md from the work and checks actually completed.
 - Report what changed, how it was checked, and what remains unresolved.
 ```
 <!-- /starter:global -->
@@ -403,9 +422,9 @@ report it; do not create a replacement or invent its instructions.
 ::: {.keep-together}
 ## A.8 Git exclusions {#starter-gitignore}
 
-If the project uses `Git`, have the agent adapt these exclusions in its `.gitignore`. This example excludes data folders by default; permitted public or synthetic inputs may belong in the repository. Keep shareable input manifests outside excluded folders. An ignore rule neither blocks agent access nor removes files already tracked by Git.
+If the project uses [`Git`](https://git-scm.com/), have the agent adapt these exclusions in its `.gitignore`. The template excludes data folders by default; permitted public or synthetic inputs may belong in the repository. An ignore rule affects which files Git tracks. It does not restrict agent access or remove files already tracked.
 
-Preserve the files needed for the [reproduction route](#test-and-name-the-reproduction-route), including saved fits, raw LLM responses, or research logs when they are required inputs or evidence. Large or protected files can live in approved storage, with versions and access instructions recorded in the project. Excluding a file from `Git` is not a decision to discard it.
+Have the agent preserve the inputs needed for reproduction, including saved fits or LLM responses. Large or protected files can remain in approved storage, with their versions and locations documented in the project. For setup, see [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 [Download .gitignore](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 

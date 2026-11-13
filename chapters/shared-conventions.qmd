@@ -84,7 +84,7 @@ These conventions are defaults across projects. Follow explicit project-specific
 exceptions and record their reasons. Ask when instructions conflict and no
 exception has been agreed.
 
-[Keep short shared conventions here. Add references only to files you maintain,
+[Keep short defaults here. Add paths or links only to files you maintain,
 with their locations and when to read them. Possible topics include project
 structure, coding, statistical modeling, writing, software, and project locations.]
 
@@ -94,7 +94,8 @@ report it; do not create a replacement or invent its instructions.
 ## Research work
 - Preserve original data. Derive new files with saved code.
 - Use independently runnable steps with declared inputs and outputs.
-- Keep scientific decisions and their reasons in the project record.
+- For paper projects, keep current requirements in SPECIFICATION.md and dated
+  scientific decisions and reasons in METHODOLOGY.md.
 - Verify observed outputs before reporting success. Keep failed checks visible.
 
 ## Limits
@@ -103,7 +104,7 @@ report it; do not create a replacement or invent its instructions.
 - Do not delete recovery copies or rewrite shared history without approval.
 
 ## Finishing
-- Update the task list and current-state record from evidence.
+- Update TASKS.md and STATUS.md from the work and checks actually completed.
 - Report what changed, how it was checked, and what remains unresolved.
 ```
 <!-- /starter:global -->

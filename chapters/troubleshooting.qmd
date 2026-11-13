@@ -6,36 +6,39 @@ title: "Appendix C. Troubleshooting"
 
 # Appendix C. Troubleshooting
 
-When something goes wrong, ask the agent to identify the cause before changing the analysis. Preserve the affected files and useful error messages so it can compare what happened with what should have happened.
-
-For example, a rerun may produce a different sample size because the inputs changed, an exclusion rule changed, or an old intermediate file was reused. Have the agent compare those stages and show where the difference first appears. That evidence determines whether to repair the implementation or reconsider a research decision.
+Point the agent to the affected files or outputs, describe what you expected, and include any error message it cannot already read. Ask it to locate the cause, preserve the evidence, and explain what needs to change. It can repair an implementation error and rerun the relevant checks; changes to scientific requirements or permitted access need your decision.
 
 ## Problems with the agent's work {#troubleshoot-work}
 
 | What you notice | What to ask the agent to do | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| An answer has no supporting evidence | Locate the cited passage or saved result. Mark claims it cannot substantiate. | [Source support](#literature-synthesis) |
-| The session loses track of decisions | Save the current work and unresolved issues, then use those records to start a focused session. | [Project context files](#maintain-project-context) |
-| Old instructions conflict with current files | Identify which instructions were used and where they disagree. Propose corrections to the stale record. | [Shared guidance](#maintain-shared-conventions) |
-| The agent changes the question or weakens a check | Show the change against the agreed specification and preserve the failed result. You decide whether a scientific revision is justified. | [Research decisions](#review-project-plan) |
-| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Locate the earliest difference before proposing a fix. | [Reproduction checks](#test-and-name-the-reproduction-route) |
-| Two implementations disagree | Compare each stage against the specification; do not edit one merely to match the other. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
-| The manuscript contains stale numbers | Trace affected values to their saved sources and propose updates from verified results. | [Manuscript checks](#trace-manuscript) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| An answer has no supporting evidence | Find the cited passage or saved result, correct unsupported claims, and identify anything still unresolved. | [Source support](#literature-synthesis) |
+| The agent forgets earlier decisions | Save current work and unresolved questions in the project context files. Use them to prepare a fresh session and confirm its next task. | [Maintaining context](#maintain-project-context) |
+| Old instructions conflict with current files | Identify the conflicting instructions and propose corrections to the relevant `CLAUDE.md` or specialist file. Apply the agreed correction and check the affected work. | [Maintaining global user instructions](#maintain-shared-conventions) |
+| The agent changes the question or weakens a check | Compare the change with `SPECIFICATION.md` and preserve the failed result. Restore the prescribed analysis unless you approve a scientific change, then rerun the checks. | [Research decisions](#review-project-plan) |
+| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Find the earliest difference, repair confirmed errors, and report the comparison after rerunning. | [Reproduction checks](#test-and-name-the-reproduction-route) |
+| Two implementations disagree | Find the earliest disagreement and check each implementation against the specification. Correct errors and repeat the comparison; agreement alone is not a reason to change either method. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
+| The manuscript contains stale numbers | Trace the values to saved results, update them from the verified analysis, and check the rendered manuscript again. | [Manuscript checks](#trace-manuscript) |
+| Coauthor edits are lost after rebuilding | Compare the returned manuscript with the last shared version. Incorporate accepted edits into the maintained source, rebuild, and check that they survived. | [Coauthor revisions](#preserve-coauthor-edits-and-respond-to-reviewers) |
+| LLM labels vary between runs | Repeat a sample with unchanged settings and compare the agreed prompt and LLM variations. Report which labels and research estimates change; do not choose a run because its finding is preferred. | [Sensitivity analysis](#llm-sensitivity) |
 
 ## Jobs and app controls {#troubleshoot-execution}
 
 | What you notice | What to ask the agent to do | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs before restarting it. | [Unattended jobs](#unattended-jobs) |
-| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check whether it matches the documented launch issue; use the execution wrapper if confirmed. This is a specific R-on-macOS problem, not a general remedy for slow analysis. | [Toolkit diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
-| An app control is missing or has a different label | Compare your account and visible layout with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs. Fix a confirmed failure or resume from saved progress, then verify that work has restarted. | [Unattended jobs](#unattended-jobs) |
+| Reproduction works only in the original folder | Test the handoff copy using its README. Identify missing inputs, software, paths, or instructions; repair the handoff and repeat that test. | [Testing the handoff](#test-and-name-the-reproduction-route) |
+| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check for the documented launch issue. If confirmed, use the toolkit's method of starting `R` through a pseudo-terminal[^troubleshoot-pty] and check that it produces output. This remedy is specific to that launch problem. | [R-on-macOS diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
+| An app control is missing or has a different label | Compare the visible layout and account with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
+
+[^troubleshoot-pty]: A pseudo-terminal gives the launched program a terminal-like input/output connection. The agent can configure it without requiring you to work in a terminal. The linked diagnosis in the companion guide *Extending Your Agent's Toolkit* explains this specific problem and remedy.
 
 ## Permissions and data {#troubleshoot-access}
 
 | What you notice | Next action | Explanation |
-|:---------------------------|:-------------------------------------------------|:---------------------|
-| Routine work repeatedly asks for approval | Ask the agent to identify the tool action and the mode or permission rule causing the prompt, then propose a narrowly scoped change for your decision. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
-| The agent cannot reach an input or service | Ask it to report the blocked action and required access. Confirm that the project permits that access before approving a change. | [Project access](#access-scope) |
-| Restricted material may have reached a service | Stop further access and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
+|:-------------------------|:----------------------------------------------------------|:-------------------|
+| Routine work repeatedly asks for approval | Ask the agent to identify the tool action and mode or permission rule causing the prompt. Review a narrowly scoped change, then have it check the action again. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
+| The agent cannot reach an input or service | Ask it to identify the blocked action and required access. Confirm that the project permits that access before approving a change and retrying. | [Project access](#access-scope) |
+| Restricted material may have reached a service | Stop further transfers and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
 
-Once the cause is confirmed, have the agent record the remedy in the project's troubleshooting notes or relevant instructions. Include the affected software or setting and the check that showed the problem was resolved.
+After a repair, have the agent record the cause, change, and check in `TASKS.md` and update `STATUS.md` if unfinished work or the next step has changed. An approved scientific revision also belongs in `SPECIFICATION.md` and `METHODOLOGY.md`. Detailed technical logs can stay with the affected code or outputs.

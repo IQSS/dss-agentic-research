@@ -5,7 +5,7 @@
       "chapter": 6,
       "title": "Start a new research project",
       "group": "project",
-      "inputs": "the project purpose, intended output, destination, and any research-group conventions."
+      "inputs": "the project purpose, intended output, folder where the project should be created, and any research-group conventions."
     },
     {
       "id": "restructure-project",
@@ -31,7 +31,7 @@
     {
       "id": "close-session",
       "chapter": 7,
-      "title": "Leave a useful handoff",
+      "title": "Finish a session and update project context",
       "group": "project",
       "inputs": "the current session\u2019s work, checked outputs, and unresolved questions."
     },
@@ -117,28 +117,44 @@
       "chapter": 15,
       "title": "Implement the analysis independently",
       "group": "analysis",
-      "inputs": "the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results."
+      "inputs": "the fixed specification, data dictionary, approved input files, and assigned language.",
+      "delivery": "Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check."
     },
     {
       "id": "compare-implementations",
       "chapter": 15,
       "title": "Compare completed implementations",
       "group": "analysis",
-      "inputs": "both completed implementations, their outputs, and the common specification."
+      "inputs": "both completed implementations, their outputs, and the common specification.",
+      "delivery": "Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below."
     },
     {
-      "id": "controlled-llm-runs",
+      "id": "develop-labeling",
       "chapter": 16,
-      "title": "Design controlled LLM research runs",
+      "title": "Develop an LLM labeling method",
       "group": "llm",
-      "inputs": "the review-generation and judging protocol, inputs, and permitted tools and services."
+      "inputs": "the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together."
     },
     {
       "id": "evaluate-labeling",
       "chapter": 16,
-      "title": "Evaluate a frozen labeling procedure",
+      "title": "Evaluate LLM labels on a held-out test set",
       "group": "llm",
-      "inputs": "the frozen rubric and prompt, evaluation inputs, and acceptance criteria. Keep the human reference labels unavailable during labeling."
+      "inputs": "the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling."
+    },
+    {
+      "id": "llm-sensitivity",
+      "chapter": 16,
+      "title": "Assess sensitivity to prompts and LLMs",
+      "group": "llm",
+      "inputs": "the fixed research question and rubric, agreed variations to compare, designated development or final-analysis material, and the code producing research estimates."
+    },
+    {
+      "id": "controlled-llm-runs",
+      "chapter": 16,
+      "title": "Run research tasks in fresh headless sessions",
+      "group": "llm",
+      "inputs": "the research protocol, fixed instructions, assigned input for each case, and permitted files, tools, and services."
     },
     {
       "id": "trace-manuscript",
@@ -150,7 +166,7 @@
     {
       "id": "draft-from-results",
       "chapter": 18,
-      "title": "Draft from the research record",
+      "title": "Draft and assess a manuscript section",
       "group": "writing",
       "inputs": "the section to draft, research decisions, verified sources, results, and writing guidance."
     },
@@ -164,16 +180,16 @@
     {
       "id": "reproduce-project",
       "chapter": 19,
-      "title": "Test a clean-copy handoff",
+      "title": "Test the proposed handoff files",
       "group": "handoff",
-      "inputs": "the project, README, input manifest, reference outputs, and comparison tolerances."
+      "inputs": "the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances."
     },
     {
       "id": "review-deposit",
       "chapter": 19,
       "title": "Review a proposed deposit",
       "group": "handoff",
-      "inputs": "the proposed deposit snapshot, manuscript, input manifest, and sharing requirements."
+      "inputs": "the exact files proposed for sharing, the manuscript, reproduction report, and sharing requirements."
     }
   ],
   "starters": [

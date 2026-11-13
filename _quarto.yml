@@ -113,6 +113,33 @@ anchor-map:
   "acquisition-ladder": /chapters/data-acquisition.qmd#acquisition-ladder
   "agent-access": /chapters/agent-access.qmd
   "assemble-the-files-and-instructions": /chapters/research-handoff.qmd#assemble-the-files-and-instructions
+  "bank-bring-data": /chapters/prompt-index.qmd#bank-bring-data
+  "bank-close-session": /chapters/prompt-index.qmd#bank-close-session
+  "bank-compare-implementations": /chapters/prompt-index.qmd#bank-compare-implementations
+  "bank-compare-research-approaches": /chapters/prompt-index.qmd#bank-compare-research-approaches
+  "bank-controlled-llm-runs": /chapters/prompt-index.qmd#bank-controlled-llm-runs
+  "bank-develop-labeling": /chapters/prompt-index.qmd#bank-develop-labeling
+  "bank-draft-from-results": /chapters/prompt-index.qmd#bank-draft-from-results
+  "bank-evaluate-labeling": /chapters/prompt-index.qmd#bank-evaluate-labeling
+  "bank-independent-implementation": /chapters/prompt-index.qmd#bank-independent-implementation
+  "bank-investigate-result": /chapters/prompt-index.qmd#bank-investigate-result
+  "bank-literature-search": /chapters/prompt-index.qmd#bank-literature-search
+  "bank-literature-synthesis": /chapters/prompt-index.qmd#bank-literature-synthesis
+  "bank-llm-sensitivity": /chapters/prompt-index.qmd#bank-llm-sensitivity
+  "bank-modular-workflow": /chapters/prompt-index.qmd#bank-modular-workflow
+  "bank-project-context": /chapters/prompt-index.qmd#bank-project-context
+  "bank-reproduce-project": /chapters/prompt-index.qmd#bank-reproduce-project
+  "bank-research-specification": /chapters/prompt-index.qmd#bank-research-specification
+  "bank-restructure-project": /chapters/prompt-index.qmd#bank-restructure-project
+  "bank-resume-project": /chapters/prompt-index.qmd#bank-resume-project
+  "bank-review-deposit": /chapters/prompt-index.qmd#bank-review-deposit
+  "bank-reviewer-response": /chapters/prompt-index.qmd#bank-reviewer-response
+  "bank-scaffold-project": /chapters/prompt-index.qmd#bank-scaffold-project
+  "bank-scaffold-skill": /chapters/prompt-index.qmd#bank-scaffold-skill
+  "bank-shared-conventions": /chapters/prompt-index.qmd#bank-shared-conventions
+  "bank-simulation-plan": /chapters/prompt-index.qmd#bank-simulation-plan
+  "bank-smoke-test-workflow": /chapters/prompt-index.qmd#bank-smoke-test-workflow
+  "bank-trace-manuscript": /chapters/prompt-index.qmd#bank-trace-manuscript
   "build-two-implementations-separately": /chapters/checking-analysis.qmd#build-two-implementations-separately
   "calibration-example": /chapters/simulation.qmd#calibration-example
   "check-execution-before-scaling-up": /chapters/research-workflows.qmd#check-execution-before-scaling-up
@@ -122,46 +149,77 @@ anchor-map:
   "choose-the-llm-and-reasoning-effort": /chapters/directing-work.qmd#choose-the-llm-and-reasoning-effort
   "context-or-training": /chapters/research-models.qmd#context-or-training
   "control-what-each-reviewer-or-judge-receives": /chapters/llm-measurements.qmd#control-what-each-reviewer-or-judge-receives
+  "data-acquisition": /chapters/data-acquisition.qmd
   "data-chain-of-custody": /chapters/research-limits.qmd#data-chain-of-custody
   "data-provenance": /chapters/data-acquisition.qmd#data-provenance
   "decide-whether-to-plan-first": /chapters/directing-work.qmd#decide-whether-to-plan-first
   "define-the-output-and-its-research-meaning": /chapters/llm-measurements.qmd#define-the-output-and-its-research-meaning
   "directing-work": /chapters/directing-work.qmd
   "enforce-those-limits": /chapters/agent-access.qmd#enforce-those-limits
+  "evaluate-adapted-model": /chapters/research-models.qmd#evaluate-adapted-model
   "evaluate-llm-labeling": /chapters/llm-measurements.qmd#evaluate-llm-labeling
   "example-project": /chapters/example-project.qmd
   "example-specification": /chapters/example-project.qmd#example-specification
   "find-your-way-around": /chapters/first-session.qmd#find-your-way-around
+  "glossary-a": /chapters/glossary.qmd#glossary-a
+  "glossary-b": /chapters/glossary.qmd#glossary-b
+  "glossary-c": /chapters/glossary.qmd#glossary-c
+  "glossary-d": /chapters/glossary.qmd#glossary-d
+  "glossary-e": /chapters/glossary.qmd#glossary-e
+  "glossary-f": /chapters/glossary.qmd#glossary-f
+  "glossary-g": /chapters/glossary.qmd#glossary-g
+  "glossary-h": /chapters/glossary.qmd#glossary-h
+  "glossary-i": /chapters/glossary.qmd#glossary-i
+  "glossary-j": /chapters/glossary.qmd#glossary-j
+  "glossary-l": /chapters/glossary.qmd#glossary-l
+  "glossary-m": /chapters/glossary.qmd#glossary-m
+  "glossary-o": /chapters/glossary.qmd#glossary-o
+  "glossary-p": /chapters/glossary.qmd#glossary-p
+  "glossary-q": /chapters/glossary.qmd#glossary-q
+  "glossary-r": /chapters/glossary.qmd#glossary-r
+  "glossary-s": /chapters/glossary.qmd#glossary-s
+  "glossary-t": /chapters/glossary.qmd#glossary-t
+  "glossary-u": /chapters/glossary.qmd#glossary-u
+  "glossary-v": /chapters/glossary.qmd#glossary-v
+  "glossary-w": /chapters/glossary.qmd#glossary-w
   "headless-agents": /chapters/llm-measurements.qmd#headless-agents
   "how-can-an-llm-act-on-a-research-project": /chapters/research-uses.qmd#how-can-an-llm-act-on-a-research-project
   "how-does-an-agent-work-through-a-task": /chapters/research-uses.qmd#how-does-an-agent-work-through-a-task
   "how-does-an-llm-generate-a-response": /chapters/research-uses.qmd#how-does-an-llm-generate-a-response
-  "identify-inputs": /chapters/data-acquisition.qmd#identify-inputs
   "investigate-the-earliest-disagreement": /chapters/checking-analysis.qmd#investigate-the-earliest-disagreement
+  "investigate-workflow-results": /chapters/research-workflows.qmd#investigate-workflow-results
   "literature": /chapters/literature.qmd
   "literature-synthesis": /chapters/literature.qmd#literature-synthesis
+  "llm-confidence": /chapters/llm-measurements.qmd#llm-confidence
   "llm-measurements": /chapters/llm-measurements.qmd
+  "llm-sensitivity": /chapters/llm-measurements.qmd#llm-sensitivity
   "local-models": /chapters/research-models.qmd#local-models
   "lora": /chapters/research-models.qmd#lora
   "maintain-project-context": /chapters/project-context.qmd#maintain-project-context
   "maintain-shared-conventions": /chapters/shared-conventions.qmd#maintain-shared-conventions
   "modular-steps": /chapters/research-workflows.qmd#modular-steps
+  "preserve-adapted-model": /chapters/research-models.qmd#preserve-adapted-model
+  "preserve-coauthor-edits-and-respond-to-reviewers": /chapters/research-writing.qmd#preserve-coauthor-edits-and-respond-to-reviewers
+  "preserve-responses-and-examine-sensitivity": /chapters/llm-measurements.qmd#preserve-responses-and-examine-sensitivity
   "project-context": /chapters/project-context.qmd
   "project-organization": /chapters/project-organization.qmd
   "project-records": /chapters/project-context.qmd#project-records
   "project-recovery": /chapters/project-organization.qmd#project-recovery
   "prompt-index": /chapters/prompt-index.qmd
+  "reproduction-starting-points": /chapters/research-handoff.qmd#reproduction-starting-points
   "request-bring-data": /chapters/data-acquisition.qmd#request-bring-data
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations
   "request-compare-research-approaches": /chapters/example-project.qmd#request-compare-research-approaches
   "request-controlled-llm-runs": /chapters/llm-measurements.qmd#request-controlled-llm-runs
+  "request-develop-labeling": /chapters/llm-measurements.qmd#request-develop-labeling
   "request-draft-from-results": /chapters/research-writing.qmd#request-draft-from-results
   "request-evaluate-labeling": /chapters/llm-measurements.qmd#request-evaluate-labeling
   "request-independent-implementation": /chapters/checking-analysis.qmd#request-independent-implementation
   "request-investigate-result": /chapters/research-workflows.qmd#request-investigate-result
   "request-literature-search": /chapters/literature.qmd#request-literature-search
   "request-literature-synthesis": /chapters/literature.qmd#request-literature-synthesis
+  "request-llm-sensitivity": /chapters/llm-measurements.qmd#request-llm-sensitivity
   "request-modular-workflow": /chapters/research-workflows.qmd#request-modular-workflow
   "request-project-context": /chapters/project-context.qmd#request-project-context
   "request-reproduce-project": /chapters/research-handoff.qmd#request-reproduce-project
@@ -184,16 +242,23 @@ anchor-map:
   "reusable-procedures": /chapters/reusable-procedures.qmd
   "review-project-plan": /chapters/project-context.qmd#review-project-plan
   "saved-commands": /chapters/research-workflows.qmd#saved-commands
+  "scaffold-dataset-example": /chapters/starter-files.qmd#scaffold-dataset-example
   "scaffold-paper-example": /chapters/starter-files.qmd#scaffold-paper-example
+  "scaffold-website-example": /chapters/starter-files.qmd#scaffold-website-example
   "shared-conventions": /chapters/shared-conventions.qmd
   "shared-instructions": /chapters/shared-conventions.qmd#shared-instructions
   "simulation": /chapters/simulation.qmd
   "simulation-repetitions": /chapters/simulation.qmd#simulation-repetitions
   "specialist-conventions": /chapters/shared-conventions.qmd#specialist-conventions
   "starter-files": /chapters/starter-files.qmd
+  "starter-gitignore": /chapters/starter-files.qmd#starter-gitignore
   "starter-global": /chapters/starter-files.qmd#starter-global
   "starter-layouts": /chapters/starter-files.qmd#starter-layouts
+  "starter-methodology": /chapters/starter-files.qmd#starter-methodology
   "starter-project": /chapters/starter-files.qmd#starter-project
+  "starter-specification": /chapters/starter-files.qmd#starter-specification
+  "starter-status": /chapters/starter-files.qmd#starter-status
+  "starter-tasks": /chapters/starter-files.qmd#starter-tasks
   "term-global-instructions": /chapters/glossary.qmd#term-global-instructions
   "term-project-context-files": /chapters/glossary.qmd#term-project-context-files
   "test-and-name-the-reproduction-route": /chapters/research-handoff.qmd#test-and-name-the-reproduction-route

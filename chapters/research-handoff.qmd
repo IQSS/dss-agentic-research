@@ -6,52 +6,61 @@ title: "19. Reproduce and hand off the research"
 
 # 19. Reproduce and hand off the research
 
-A collaborator should be able to repeat the analysis from its files and instructions without asking an agent to reconstruct what happened. Preparing and testing that handoff reveals dependencies hidden by a familiar working folder.
+Another researcher should be able to reproduce the reported results using the supplied files and instructions. An agent can prepare and test those materials, finding dependencies that are easy to miss in a familiar working project. The same preparation helps when you return to the study months later.
 
-For example, a heat-contrast figure may build because yesterday's fitted statistical model is cached on your computer. In a separate copy, it fails because neither the fit nor the command that creates it was supplied. A reproduction test identifies what the recipient needs to preserve or rebuild.
+Suppose a figure from the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)) builds because a fitted statistical model was saved elsewhere on your computer. A collaborator receives the project folder, but neither that saved fit nor instructions for recreating it. Testing the files intended for handoff exposes the omission before the collaborator has to investigate it.
 
-## Assemble the files and instructions
+## Decide what should be reproducible {#reproduction-starting-points}
 
-Provide approved inputs or access instructions, the code and commands, software records, and reference results. Include `SPECIFICATION.md`, the specification version used for the reported results, and the relevant decision history from `METHODOLOGY.md`. Identify those versions clearly if current requirements differ from the completed analysis. Have the agent identify missing files or undocumented manual steps; leave unknown history explicit.
+State what the recipient should be able to produce and where the calculation should begin. Rebuilding a figure from saved estimates and rerunning the analysis from study data require different inputs. A project can support both.
 
-![](figures/research-handoff.svg){#fig-research-handoff fig-alt="Inputs or access instructions, code and commands, software records, and reference results form a research package. A separate copy restores the environment, runs the documented steps, and compares the outputs with the references."}
+| Starting inputs | What to reproduce |
+|:----------------------------------|:--------------------------------------------------------|
+| Saved estimates or fitted statistical models | The reported tables, figures, or numerical values in the manuscript. |
+| Study data, including saved LLM responses when used | The analysis and its reported results, using the supplied code. |
 
-A modular workflow supplies independently runnable steps, as explained in [Chapter 13: Build a modular analysis workflow](#research-workflows). Preserve its existing command interface so the recipient does not need an agent to determine execution order. Record the software environment before changing it: language and package versions, relevant system dependencies, and restoration instructions. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
+Saved LLM responses are research inputs. Generating new responses is a new collection run and can change the measurements, even when the analysis code is unchanged. [Chapter 16: Use LLM outputs as research data](#preserve-responses-and-examine-sensitivity) explains reproduction from saved responses. If future work also needs an adapted LLM, [Chapter 17: Run and adapt LLMs for your research](#preserve-adapted-model) explains what to retain.
 
-For restricted data, provide a permitted acquisition route and a synthetic example that exercises the code. Explain which files an authorized researcher must supply and where. Do not present the synthetic example's results as a reproduction of findings from protected records.
+## Prepare the files and instructions {#assemble-the-files-and-instructions}
 
-## Test and name the reproduction route
+Ask the agent to assemble a separate folder containing the materials needed for the chosen starting point. It should include the permitted inputs, analysis and reporting code, and the saved results against which a rerun will be compared. Retain the specification used for those results and the relevant decisions in `METHODOLOGY.md`; label the completed version clearly if the current `SPECIFICATION.md` contains later requirements.
 
-![](figures/reproduction-routes.svg){#fig-reproduction-routes fig-alt="Saved estimates can rebuild reported tables; approved data can rerun the supplied analysis; assigned documents can generate new LLM responses. Each starts from different inputs and supports a different reproduction claim."}
+Have the agent write a `README.md` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
 
-Name the starting point: rebuilding a table from saved estimates, rerunning analysis from approved data, or generating new LLM responses. Saved fits or responses are legitimate inputs when the stated route begins there. A new inference run may produce different measurements even when the analysis of saved responses is reproducible.
+The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
+
+For restricted data, the shared folder should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
+
+![](figures/research-handoff.svg){#fig-research-handoff .tall fig-alt="The agent assembles inputs or access instructions, code and a README, software versions, and reported results. In a separate copy it restores the software, runs the commands, and compares outputs. Missing files or instructions lead to repairs and another test. The tested version is then shared."}
+
+## Test the project outside the working folder {#test-and-name-the-reproduction-route}
+
+Have the agent test the actual files intended for handoff, using a separate copy and restoring the recorded software versions. If the deliverable is an archive, it should unpack and test that archive. A copied folder that still uses packages or unlisted files from the working project has not established that someone else can restore it. A container can help provide a separate environment; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains when that is useful.
+
+A fresh agent session can follow the `README.md` without relying on the earlier conversation. Ask it to report missing instructions rather than silently reconstruct them. A fresh conversation alone does not isolate the software or files: those must be configured separately. Once omissions are corrected in the handoff folder, have the agent repeat the affected steps from that corrected version.
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
+> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 <!-- /prompt:reproduce-project -->
 
-Use a separate copy and restore the recorded environment. A copied folder that still relies on your existing packages or hidden caches has not tested environment restoration. Ask the agent to record the actual commands, inputs, environment, and output comparisons, with failures and untested steps stated plainly.
+Ask the agent to compare both the reported results and the data selections that produced them. Identifiers and deterministic counts should match exactly. Numerical estimates should meet the tolerances specified for the analysis; procedures involving randomness need the agreed settings and comparison criteria. A rebuilt PDF can have different file metadata while displaying identical results, so document checks should compare the content rather than require identical file fingerprints.
 
-Compare using the agreed tolerances. Identifiers and deterministic counts should match exactly; numerical and stochastic outputs need the criteria established for the analysis. Investigate discrepancies before changing the reference results.
+The agent should save a short report stating what it ran, the inputs and software used, which comparisons passed, and anything that failed or remains untested. In the heat-and-birthweight example, the main analysis and figures were rebuilt in a separate copy using the existing development environment. Its README identifies clean-machine software restoration as untested.
 
-This differs from the independent implementation described in [Chapter 15: Check the agent with independent implementations](#checking-analysis), which builds new code from the specification. Reproduction tests the supplied code and instructions. Neither establishes scientific validity. If protected records are unavailable, testing only the synthetic example leaves empirical reproduction untested.
+This checks the supplied code and instructions. [Chapter 15: Check the agent with independent implementations](#checking-analysis) instead checks separately written implementations of the same specification. Successful reproduction establishes that the documented calculation can be repeated; the researcher must still justify its suitability for the question.
 
-## Review and deposit the tested version
+## Share the tested version {#review-and-deposit-the-tested-version}
 
-Assemble a separate snapshot for the repository your field uses, such as [Dataverse](https://dataverse.org/), [OSF](https://osf.io/), or [Zenodo](https://zenodo.org/). Agree contributors, licenses, and its relationship to the manuscript version with coauthors. Have the agent review the actual snapshot, then test its instructions.
+The tested folder can be handed to a collaborator or prepared for a research repository, such as [`Dataverse`](https://dataverse.org/), [`OSF`](https://osf.io/), or [`Zenodo`](https://zenodo.org/). Agree with coauthors who should be credited, which licenses apply, and which manuscript version the files support. Have the agent include the relevant AI-use disclosure and, for LLM-derived measurements, the prompts and evaluation records needed to understand them.
 
-- Include permitted inputs or complete access instructions, code, software records, and reference outputs.
-- Remove credentials, confidential material, and personal paths from the proposed public copy; inspect included history too.
-- Preserve research decisions, relevant AI disclosure, and prompts or evaluation records needed to understand LLM-derived measurements.
-- State which reproduction routes passed, failed, or remain untested.
-- Link the tested deposit version to the corresponding manuscript.
+Before sharing, have the agent review the proposed files for confidential material, credentials, and paths that work only on your computer. If version history is included, it needs the same review. The agent should identify proposed exclusions and check whether they would prevent reproduction; you decide what may be shared. Retest affected steps after any corrections.
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
+> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 
-Review the agent's findings before publishing. A successful run in the working project does not establish that the deposit contains every necessary file. Keep the tested snapshot available so a later revision begins from an identifiable version.
+After approval, share the tested version and link its version identifier to the corresponding manuscript. Preserve those files and the reproduction report so a later revision can be compared with what readers received.

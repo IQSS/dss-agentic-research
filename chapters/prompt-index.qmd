@@ -6,17 +6,29 @@ title: "Appendix B. Prompt bank"
 
 # Appendix B. Prompt bank
 
-Find a request for the task you want to delegate, supply the files or decisions listed with it, and adapt the wording to your project. Each request also appears beside its explanation in the guide. The links below return you to those passages. Permissions are configured separately; research choices remain yours to review.
+Choose the task you want to delegate, point the agent to the listed files and decisions, and adapt the request to your project. You can refer to files already in the project rather than paste their contents. Each request also appears beside its explanation in the guide; the links return to those passages. The agent does the work, while you decide research questions and permitted access.
 
 [Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
+**Set up and maintain a project:** [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a project-scaffolding skill](#bank-scaffold-skill)
+
+**Define the study and gather evidence:** [Compare research approaches](#bank-compare-research-approaches) · [Make the research specification explicit](#bank-research-specification) · [Search and verify the literature](#bank-literature-search) · [Synthesize the papers actually read](#bank-literature-synthesis) · [Bring approved data into the project](#bank-bring-data)
+
+**Build and check the analysis:** [Build a modular analysis workflow](#bank-modular-workflow) · [Test the workflow before running the full batch](#bank-smoke-test-workflow) · [Investigate an unexpected result](#bank-investigate-result) · [Plan and run known-truth checks](#bank-simulation-plan) · [Implement the analysis independently](#bank-independent-implementation) · [Compare completed implementations](#bank-compare-implementations)
+
+**Use LLMs in the research:** [Develop an LLM labeling method](#bank-develop-labeling) · [Evaluate LLM labels on a held-out test set](#bank-evaluate-labeling) · [Assess sensitivity to prompts and LLMs](#bank-llm-sensitivity) · [Run research tasks in fresh headless sessions](#bank-controlled-llm-runs)
+
+**Write and revise:** [Trace numbers into the manuscript](#bank-trace-manuscript) · [Draft and assess a manuscript section](#bank-draft-from-results) · [Draft a response from your decisions](#bank-reviewer-response)
+
+**Reproduce and share:** [Test the proposed handoff files](#bank-reproduce-project) · [Review a proposed deposit](#bank-review-deposit)
+
 ## Set up and maintain a project {#prompts-project}
 
 ::: {.keep-together}
-### Start a new research project {.unlisted}
+### Start a new research project {#bank-scaffold-project .unlisted}
 
-Supply: the project purpose, intended output, destination, and any research-group conventions.
+Point the agent to: the project purpose, intended output, folder where the project should be created, and any research-group conventions.
 
 Explanation and checks: [Chapter 6: Organize your research projects](#request-scaffold-project).
 
@@ -27,9 +39,9 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-sc
 :::
 
 ::: {.keep-together}
-### Organize an existing project {.unlisted}
+### Organize an existing project {#bank-restructure-project .unlisted}
 
-Supply: the existing project folder and any known current or protected files.
+Point the agent to: the existing project folder and any known current or protected files.
 
 Explanation and checks: [Chapter 6: Organize your research projects](#request-restructure-project).
 
@@ -40,9 +52,9 @@ Explanation and checks: [Chapter 6: Organize your research projects](#request-re
 :::
 
 ::: {.keep-together}
-### Write CLAUDE.md for a project {.unlisted}
+### Write CLAUDE.md for a project {#bank-project-context .unlisted}
 
-Supply: the project files, existing instructions, and agreed research decisions.
+Point the agent to: the project files, existing instructions, and agreed research decisions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
@@ -53,9 +65,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Resume a project {.unlisted}
+### Resume a project {#bank-resume-project .unlisted}
 
-Supply: the project folder and its project context files.
+Point the agent to: the project folder and its project context files.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-resume-project).
 
@@ -66,9 +78,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Leave a useful handoff {.unlisted}
+### Finish a session and update project context {#bank-close-session .unlisted}
 
-Supply: the current session’s work, checked outputs, and unresolved questions.
+Point the agent to: the current session’s work, checked outputs, and unresolved questions.
 
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-close-session).
 
@@ -79,9 +91,9 @@ Explanation and checks: [Chapter 7: Give the agent context for your project](#re
 :::
 
 ::: {.keep-together}
-### Set global user instructions {.unlisted}
+### Set global user instructions {#bank-shared-conventions .unlisted}
 
-Supply: existing instructions and examples of conventions used across projects.
+Point the agent to: existing instructions and examples of conventions used across projects.
 
 Explanation and checks: [Chapter 8: Apply your conventions across projects](#request-shared-conventions).
 
@@ -92,9 +104,9 @@ Explanation and checks: [Chapter 8: Apply your conventions across projects](#req
 :::
 
 ::: {.keep-together}
-### Create a project-scaffolding skill {.unlisted}
+### Create a project-scaffolding skill {#bank-scaffold-skill .unlisted}
 
-Supply: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
+Point the agent to: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
 
 Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-scaffold-skill).
 
@@ -107,9 +119,9 @@ Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-sca
 ## Define the study and gather evidence {#prompts-evidence}
 
 ::: {.keep-together}
-### Compare research approaches {.unlisted}
+### Compare research approaches {#bank-compare-research-approaches .unlisted}
 
-Supply: the research question, available data, constraints, and any verified sources.
+Point the agent to: the research question, available data, constraints, and any verified sources.
 
 Explanation and checks: [Chapter 10: The example research project](#request-compare-research-approaches).
 
@@ -120,9 +132,9 @@ Explanation and checks: [Chapter 10: The example research project](#request-comp
 :::
 
 ::: {.keep-together}
-### Make the research specification explicit {.unlisted}
+### Make the research specification explicit {#bank-research-specification .unlisted}
 
-Supply: your research decisions and the questions that still need resolution.
+Point the agent to: your research decisions and the questions that still need resolution.
 
 Explanation and checks: [Chapter 10: The example research project](#request-research-specification).
 
@@ -133,9 +145,9 @@ Explanation and checks: [Chapter 10: The example research project](#request-rese
 :::
 
 ::: {.keep-together}
-### Search and verify the literature {.unlisted}
+### Search and verify the literature {#bank-literature-search .unlisted}
 
-Supply: the research question, eligibility criteria, and any existing search protocol.
+Point the agent to: the research question, eligibility criteria, and any existing search protocol.
 
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-search).
 
@@ -146,9 +158,9 @@ Explanation and checks: [Chapter 11: Find and assess research literature](#reque
 :::
 
 ::: {.keep-together}
-### Synthesize the papers actually read {.unlisted}
+### Synthesize the papers actually read {#bank-literature-synthesis .unlisted}
 
-Supply: verified papers, records of what was read, and the question to address.
+Point the agent to: verified papers, records of what was read, and the question to address.
 
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-synthesis).
 
@@ -159,9 +171,9 @@ Explanation and checks: [Chapter 11: Find and assess research literature](#reque
 :::
 
 ::: {.keep-together}
-### Bring approved data into the project {.unlisted}
+### Bring approved data into the project {#bank-bring-data .unlisted}
 
-Supply: approved inputs, their documentation, and the current scientific specification.
+Point the agent to: approved inputs, their documentation, and the current scientific specification.
 
 Explanation and checks: [Chapter 12: Bring data into the project](#request-bring-data).
 
@@ -174,9 +186,9 @@ Explanation and checks: [Chapter 12: Bring data into the project](#request-bring
 ## Build and check the analysis {#prompts-analysis}
 
 ::: {.keep-together}
-### Build a modular analysis workflow {.unlisted}
+### Build a modular analysis workflow {#bank-modular-workflow .unlisted}
 
-Supply: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
+Point the agent to: SPECIFICATION.md, the research data and documentation, and any existing analysis code and results.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-modular-workflow).
 
@@ -187,9 +199,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Test the workflow before running the full batch {.unlisted}
+### Test the workflow before running the full batch {#bank-smoke-test-workflow .unlisted}
 
-Supply: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
+Point the agent to: the workflow code, input data and documentation, SPECIFICATION.md, and the intended full batch.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-smoke-test-workflow).
 
@@ -200,9 +212,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Investigate an unexpected result {.unlisted}
+### Investigate an unexpected result {#bank-investigate-result .unlisted}
 
-Supply: the unexpected result, specification, current code, and saved outputs.
+Point the agent to: the unexpected result, specification, current code, and saved outputs.
 
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-investigate-result).
 
@@ -213,9 +225,9 @@ Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request
 :::
 
 ::: {.keep-together}
-### Plan and run known-truth checks {.unlisted}
+### Plan and run known-truth checks {#bank-simulation-plan .unlisted}
 
-Supply: the specification and scientific scenarios or performance questions to examine.
+Point the agent to: the specification and scientific scenarios or performance questions to examine.
 
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
@@ -226,9 +238,11 @@ Explanation and checks: [Chapter 14: Test the analysis against known truth](#req
 :::
 
 ::: {.keep-together}
-### Implement the analysis independently {.unlisted}
+### Implement the analysis independently {#bank-independent-implementation .unlisted}
 
-Supply: the specification, data dictionary, approved input files, and assigned language. Use original data when checking processing; an already verified dataset can be shared for a narrower analysis check. Use a fresh agent without access to the other implementation or results.
+Point the agent to: the fixed specification, data dictionary, approved input files, and assigned language.
+
+Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
@@ -239,9 +253,11 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 :::
 
 ::: {.keep-together}
-### Compare completed implementations {.unlisted}
+### Compare completed implementations {#bank-compare-implementations .unlisted}
 
-Supply: both completed implementations, their outputs, and the common specification.
+Point the agent to: both completed implementations, their outputs, and the common specification.
+
+Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
@@ -254,27 +270,53 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 ## Use LLMs in the research {#prompts-llm}
 
 ::: {.keep-together}
-### Design controlled LLM research runs {.unlisted}
+### Develop an LLM labeling method {#bank-develop-labeling .unlisted}
 
-Supply: the review-generation and judging protocol, inputs, and permitted tools and services.
+Point the agent to: the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together.
 
-Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-develop-labeling).
 
 ::: {.prompt}
-> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
 :::
 
 :::
 
 ::: {.keep-together}
-### Evaluate a frozen labeling procedure {.unlisted}
+### Evaluate LLM labels on a held-out test set {#bank-evaluate-labeling .unlisted}
 
-Supply: the frozen rubric and prompt, evaluation inputs, and acceptance criteria. Keep the human reference labels unavailable during labeling.
+Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-evaluate-labeling).
 
 ::: {.prompt}
-> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+:::
+
+:::
+
+::: {.keep-together}
+### Assess sensitivity to prompts and LLMs {#bank-llm-sensitivity .unlisted}
+
+Point the agent to: the fixed research question and rubric, agreed variations to compare, designated development or final-analysis material, and the code producing research estimates.
+
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-llm-sensitivity).
+
+::: {.prompt}
+> Using the agreed comparisons, keep the research question and category definitions fixed while varying prompt wording, example order, LLM choice, or generation settings. Repeat requests with unchanged settings to assess ordinary run-to-run variation. Report which labels change and how those changes affect the research estimates, including relevant group comparisons. Compare errors where human reference labels are available. Use development material when the comparisons will guide method selection; keep prespecified analyses of final estimates separate. Save every configuration and response. Do not select a method because it produces a preferred research finding, and do not interpret stable labels as evidence of accuracy.
+:::
+
+:::
+
+::: {.keep-together}
+### Run research tasks in fresh headless sessions {#bank-controlled-llm-runs .unlisted}
+
+Point the agent to: the research protocol, fixed instructions, assigned input for each case, and permitted files, tools, and services.
+
+Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
+
+::: {.prompt}
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 
 :::
@@ -282,40 +324,40 @@ Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-
 ## Write and revise {#prompts-writing}
 
 ::: {.keep-together}
-### Trace numbers into the manuscript {.unlisted}
+### Trace numbers into the manuscript {#bank-trace-manuscript .unlisted}
 
-Supply: the rendered manuscript and saved results, including tables and figure sources.
+Point the agent to: the rendered manuscript and saved results, including tables and figure sources.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-trace-manuscript).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-trace-manuscript).
 
 ::: {.prompt}
-> Trace each main manuscript result, including the abstract and captions, to its saved source file and exact entry. Record source fingerprints and check values, signs, units, samples, intervals, and rounding in the final rendered document. Identify every affected use when a source result changes. Propose updates only from verified outputs and list unsupported claims for my decision.
+> Trace each main manuscript result to its saved source file, exact entry, and analysis run. Record where it appears, including the abstract, tables, and captions, and save source checksums to detect changes. Compare the final document with those results, checking contrasts, samples, values, units, signs, intervals, and rounding. Propose updates to affected passages and identify unsupported claims for my decision.
 :::
 
 :::
 
 ::: {.keep-together}
-### Draft from the research record {.unlisted}
+### Draft and assess a manuscript section {#bank-draft-from-results .unlisted}
 
-Supply: the section to draft, research decisions, verified sources, results, and writing guidance.
+Point the agent to: the section to draft, research decisions, verified sources, results, and writing guidance.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-draft-from-results).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-draft-from-results).
 
 ::: {.prompt}
-> Draft this section using only the supplied research decisions, verified sources, saved result tables, and figure captions. Where a claim, number, or reference has no support in those files, leave a bracketed gap and list it at the end. Follow my writing conventions. Do not invent evidence or change the scientific interpretation to complete the prose.
+> Draft this section from the supplied research decisions, verified sources, and saved results. Follow my writing conventions. Mark unsupported claims, numbers, and references as gaps. Identify weaknesses in the argument and propose alternatives separately for my consideration. Describe the analysis that actually ran; do not present planned work as completed or change the scientific interpretation without agreement.
 :::
 
 :::
 
 ::: {.keep-together}
-### Draft a response from your decisions {.unlisted}
+### Draft a response from your decisions {#bank-reviewer-response .unlisted}
 
-Supply: reviewer comments, your decisions, and the revised manuscript and analysis records.
+Point the agent to: reviewer comments, your decisions, and the revised manuscript and analysis records.
 
-Explanation and checks: [Chapter 18: Write and revise from the research record](#request-reviewer-response).
+Explanation and checks: [Chapter 18: Write and revise the manuscript](#request-reviewer-response).
 
 ::: {.prompt}
-> Draft the reviewer response from the supplied comments and my decision notes. Quote each comment, lead with the substantive answer, and cite the actual locations of manuscript changes. Do not add concessions I did not make or claim an analysis was run without its saved output. Flag unresolved comments. For an approved methodological change, update SPECIFICATION.md and record the decision and reason in METHODOLOGY.md.
+> Draft the reviewer response from the supplied comments, my decisions, the revised manuscript, and completed analysis outputs. Quote each comment, lead with the substantive answer, and cite the actual locations of changes. Distinguish analyses from wording edits. Do not add concessions I did not make or claim unfinished work is complete. Flag unresolved comments and decisions.
 :::
 
 :::
@@ -323,27 +365,27 @@ Explanation and checks: [Chapter 18: Write and revise from the research record](
 ## Reproduce and share {#prompts-handoff}
 
 ::: {.keep-together}
-### Test a clean-copy handoff {.unlisted}
+### Test the proposed handoff files {#bank-reproduce-project .unlisted}
 
-Supply: the project, README, input manifest, reference outputs, and comparison tolerances.
+Point the agent to: the proposed handoff folder or archive, its README and input list, the saved results to reproduce, and comparison tolerances.
 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-reproduce-project).
 
 ::: {.prompt}
-> Test a separate copy using the README and input manifest. Restore the recorded environment without upgrading it, run the documented commands, and compare outputs using the agreed tolerances. Record failures and missing inputs without altering the analysis or criteria to force agreement. If only synthetic inputs are available, state that reproduction with the study data remains untested.
+> In a fresh session, test a separate copy of the proposed handoff files using only their README, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 
 :::
 
 ::: {.keep-together}
-### Review a proposed deposit {.unlisted}
+### Review a proposed deposit {#bank-review-deposit .unlisted}
 
-Supply: the proposed deposit snapshot, manuscript, input manifest, and sharing requirements.
+Point the agent to: the exact files proposed for sharing, the manuscript, reproduction report, and sharing requirements.
 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-review-deposit).
 
 ::: {.prompt}
-> Review the proposed deposit against the manuscript, code, input manifest, and sharing requirements. Identify confidential material, credentials, personal paths, missing dependencies, and incomplete access instructions. Check contributors, licenses, AI disclosure, and records needed to understand the results. Propose corrections without uploading or deleting files or rewriting history.
+> Review the exact files proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 
 :::

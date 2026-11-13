@@ -22,7 +22,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: For setup, saved requests, and controlling each run's inputs, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^independent-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -92,4 +92,4 @@ Ask the agent to save both implementations, the comparison code, and a report id
 
 Even error-free code and excellent agreement provide no evidence that the specification is methodologically appropriate for the research question. Both agents could faithfully implement an analysis that estimates the wrong quantity or relies on implausible assumptions. The researcher remains responsible for justifying the approach; agreement between implementations cannot supply that justification.
 
-For analysis built from saved code, continue to [Chapter 18: Write and revise from the research record](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.
+For analysis built from saved code, continue to [Chapter 18: Write and revise the manuscript](#research-writing). The next two chapters address studies that use LLM-generated measurements and decisions about running or adapting LLMs.

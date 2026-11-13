@@ -38,7 +38,9 @@ Before evaluating the estimator, have the agent check that the data generator ca
 
 Have the agent calculate the true quantities being estimated directly from the data-generating rules and check those calculations separately from the fitting code. For this example, it calculates mean birthweight at 10 and 5 hot days before adding random variation, then averages the differences over the specified individuals. If the agent uses the same faulty calculation for both the estimate and the value used to check it, the two can agree even though both are wrong.
 
-Have the agent record the approved scenarios, true quantities, number of repetitions, and evaluation criteria in a simulation specification linked from `SPECIFICATION.md`. It should keep simulated inputs and results separate from the primary analysis files.
+Have the agent record the approved scenarios, true quantities, number of repetitions, and evaluation criteria in a simulation specification linked from `SPECIFICATION.md`.[^simulation-design] It should keep simulated inputs and results separate from the primary analysis files.
+
+[^simulation-design]: Morris, White, and Crowther (2019), [“Using simulation studies to evaluate statistical methods”](https://doi.org/10.1002/sim.8086), *Statistics in Medicine*, provide guidance on specifying a simulation study's aims, data-generating mechanisms, estimands, methods, and performance measures, and on reporting Monte Carlo uncertainty.
 
 <details class="guide-example">
 <summary>How the example generates outcomes and calculates truth</summary>

@@ -6,77 +6,139 @@ title: "16. Use LLM outputs as research data"
 
 # 16. Use LLM outputs as research data
 
-LLMs can classify documents, extract information, or assess material that would take a research team considerable time to read. When their responses become variables in an analysis, errors in those responses affect the evidence. Define what the LLM should produce and evaluate whether it does that well enough for the study.
+Large language models (LLMs) can help researchers turn large collections of documents, recordings, or images into data for analysis. They can assign categories to interview passages, extract reported events, or assess written reviews. An agent can build the code that prepares the material, requests these outputs, and saves them as research variables. The preceding chapters explained how to check that code; this chapter examines whether the outputs measure what the study requires.
 
-Suppose a project uses an LLM to label interview excerpts that describe an unmet service need. A high overall agreement rate could conceal frequent misses of that uncommon category. This chapter follows that labeling problem, then uses a peer-review study to show how controlled agent runs can apply a protocol repeatedly.
+This chapter uses a running example: a research team wants to estimate the proportion of interview excerpts that describe an unmet service need. An LLM could label each excerpt, allowing the team to examine more material than it could read manually.[^llm-annotation] The team needs to establish what counts as an unmet need, evaluate the labels against human judgments, and account for labeling errors when estimating that proportion. The following sections explain how an agent can help with each step.
 
-## Define the output and its research meaning
+[^llm-annotation]: Gilardi, Alizadeh, and Kubli (2023), [“ChatGPT outperforms crowd workers for text-annotation tasks”](https://doi.org/10.1073/pnas.2305016120), found useful performance on specific annotation tasks involving tweets. Those results motivate evaluating LLM annotation on a research task; they do not establish its accuracy on other material.
 
-Write a rubric that defines the category, exclusions, and ambiguous cases. Specify the material the LLM receives and the output it should return. Ask people familiar with the research to apply the rubric to development examples, reconcile disagreements, and record the reasons. Human labels provide a reference with their own limitations. In `SPECIFICATION.md`, state the research output and link the labeling protocol and evaluation criteria. Record approved changes and their reasons in `METHODOLOGY.md`; retain the frozen rubric and prompt used for each completed run.
+## Define what the LLM should produce {#define-the-output-and-its-research-meaning}
 
-Here, *LLM inference* means running an already-trained LLM to generate a response. It differs from statistical inference about a population or an effect. A scripted LLM call may be sufficient for labeling an excerpt supplied with a fixed rubric. Use an agent when the task also requires tools, such as finding files or extracting passages from several documents.
+Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Researchers familiar with the subject should review it and label a set of examples, resolving disagreements and recording their reasons. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
 
-Develop the prompt on examples reserved for that purpose. Include difficult cases and decide when the procedure should refer a case for human review. A statement of confidence from the LLM is not, by itself, a calibrated probability that the label is correct.
+Work with the agent to develop the rubric and prompt on examples reserved for that purpose. Include difficult cases and specify when the LLM should leave a case for human review. Ask the agent to record what the labels represent in `SPECIFICATION.md`, with links to the rubric and evaluation criteria. It should retain the exact rubric and prompt used for each completed run and record approved revisions and their reasons in `METHODOLOGY.md`.
 
-## Evaluate on material kept out of development {#evaluate-llm-labeling}
+For recorded interviews, the agent might first use speech-recognition software to transcribe the audio, then ask an LLM to label passages. Have it select a sample for human review against the recordings so the evaluation captures transcription errors as well as labeling errors. Some LLMs can process images, audio, or video alongside text. These are called *multimodal LLMs*. Ask the agent to check whether the chosen LLM supports the material you want to analyze. [Chapter 12: Bring data into the project](#data-acquisition) covers collecting and documenting those inputs.
 
-Freeze the rubric and prompt, then evaluate on a separate sample whose reference labels were not used to choose them. Keep related excerpts from the same person or document together when separating samples. Otherwise, information shared across excerpts can make performance appear better than it will be on new material.
+Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that submits each excerpt with the rubric and saves the returned label. If the task also requires tools, such as retrieving passages from several files, the script can launch a separate agent session to do that work.
 
-Consider this illustrative result for 200 excerpts:
+[^llm-inference-tokens]: A token is a unit of text processed by an LLM. It may be a whole word, part of a word, or a punctuation mark.
+
+## Evaluate the labels against human judgments {#evaluate-llm-labeling}
+
+Evaluating LLM-generated labels follows a familiar principle from predictive modeling: assess performance on examples that were not used to develop or select the method.[^predictive-evaluation] Even without training an LLM, researchers make choices about the rubric, prompt, and which LLM to use. Repeatedly adjusting those choices to improve results on the same examples can give an overly optimistic picture of performance on new material.
+
+For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Keep the test set separate from all those decisions. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
+
+![](figures/llm-evaluation-split.svg){#fig-llm-evaluation-split .tall fig-alt="Partition human-labeled examples by participant or document. Development examples support refining the rubric and prompt and comparing LLMs and settings. An optional branch adds training data when fine-tuning. After choosing and fixing the labeling method, evaluate it on the held-out test set, comparing predicted labels with human labels withheld from the LLM."}
+
+If the team also fine-tunes an LLM, a *training set* supplies examples used to update its learned parameters. The development set helps compare candidate LLMs, prompts, and settings. Both contribute to preparing the labeling method; the test set remains separate for final evaluation. [Chapter 17: Run and adapt LLMs for your research](#research-models) explains fine-tuning. The interview example here uses an already-trained LLM without further training.
+
+<!-- prompt:develop-labeling -->
+::: {#request-develop-labeling .prompt}
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
+:::
+<!-- /prompt:develop-labeling -->
+
+Set criteria for acceptable performance before the final test, including which errors matter for the study. Once the rubric, prompt, LLM version where available, and generation settings are fixed, ask the agent to apply them to the test excerpts. The LLM should receive those excerpts without their human labels. The agent can then compare its predictions with the withheld human judgments and report whether they meet the criteria.
+
+[^predictive-evaluation]: The [`scikit-learn` documentation on model evaluation](https://scikit-learn.org/stable/modules/cross_validation.html) explains why test data must remain separate from fitting and selecting a predictive model. The same separation applies when selecting prompts and LLMs rather than fitting a new predictive model.
+
+A *confusion matrix* summarizes agreement and errors by category. In this illustrative matrix for 200 test excerpts, rows show the human reference labels and columns show the LLM's predictions. Each cell counts the excerpts with that combination of labels:
 
 | Human reference | LLM: need present | LLM: need absent |
-|:--|--:|--:|
+|:--------------------|---------------:|---------------:|
 | Need present | 10 | 10 |
 | Need absent | 5 | 175 |
 
-Overall agreement is 92.5 percent. Yet the LLM finds only half of the 20 positive cases, and five of its 15 positive labels are false positives. Report category-specific errors and their uncertainty, including performance for relevant document types or subgroups. A single agreement statistic would hide the problem that matters here.
+Overall agreement is 92.5 percent: the LLM and human reference agree on 185 of 200 excerpts (10 positive and 175 negative). Yet the LLM finds only half of the 20 positive cases, and five of its 15 positive labels are false positives.[^labeling-metrics] Ask the agent to report these category-specific errors and their uncertainty, including performance for relevant document types or groups of participants. Also count failed requests and cases sent for human review, because excluding them can conceal errors and understate the work remaining.
+
+[^labeling-metrics]: Overall agreement is *accuracy*. *Sensitivity* (recall) is the proportion of human-positive cases detected: here, 10 / 20 = 50 percent. *Precision* (positive predictive value) is the proportion of positive predictions that are correct: here, 10 / 15 = 66.7 percent. Other summaries include F1, which combines precision and recall, and balanced accuracy. Choose measures that reflect the errors important to the research question; the [`scikit-learn` overview of classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics) explains these alternatives.
 
 <!-- prompt:evaluate-labeling -->
 ::: {#request-evaluate-labeling .prompt}
-> Apply the frozen rubric and prompt to the held-out evaluation inputs without reading their human labels. Save every raw response, parsed label, failure, and referral. After labeling finishes, compare with the independently adjudicated reference. Report the confusion table, category-specific errors, uncertainty, referral workload, and prespecified acceptance criteria. Do not tune on this sample or drop difficult cases; list disagreements for human review.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 <!-- /prompt:evaluate-labeling -->
 
-Set acceptance criteria before reading the evaluation results. Count failures and human referrals, and report the workload they create. If the observed errors lead you to revise the prompt, that sample has become development material. Use fresh evaluation material for a new performance claim, or disclose the reuse and its limits.
+::: {#llm-confidence}
+An LLM's stated confidence also needs evaluation. If it assigns 80 percent confidence to a set of labels, roughly 80 percent would need to be correct for that confidence to be well calibrated on those cases. Do not use its confidence statements as a substitute for comparison with the human reference.
+:::
 
-## Apply the protocol in controlled runs {#headless-agents}
+## Account for labeling errors in the analysis {#labeling-error-analysis}
 
-A *headless agent* runs from a saved request without an interactive conversation. A script supplies inputs and collects the result, allowing the same protocol to be applied to many cases. An agent in the app can launch that script; you do not have to operate a terminal yourself.
+In the table above, the human reference identifies unmet need in 20 of 200 excerpts, or 10 percent. The LLM identifies 15, or 7.5 percent. Despite high overall agreement, the LLM labels give a different estimate of prevalence. Errors can also distort comparisons and regression estimates, especially when the likelihood of an error differs between groups or depends on other variables in the analysis.
 
-In a project comparing AI and human peer reviews, separate headless runs generated reviews and judged review sets. Each run needed its assigned material without inheriting the conversation from the previous case. Review generation, judging, and analysis were separate stages with saved outputs.
+![](figures/llm-measurement.svg){#fig-llm-measurement fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
 
-### Control what each reviewer or judge receives {#control-what-each-reviewer-or-judge-receives}
+Ask the agent to examine the errors that matter for the planned analysis and propose how to account for them. Methods such as *design-based supervised learning* combine a sample of human-reviewed observations with the larger set of LLM-labeled observations to estimate research quantities and their uncertainty. Their validity depends on the sampling and estimation procedure; a single accuracy score is not enough to make the correction.[^label-error-inference]
 
-![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Fresh reviewer runs each receive a protocol and assigned manuscript. Separate judges receive the rubric and assigned review set. Reviews, judgments, failures, and configuration are saved before statistical analysis."}
+Agree on the approach before the full labeling run, including how observations will be selected for human review. Have the agent preserve those selections, the human and LLM labels, and the code for the proposed adjustment or sensitivity analysis. It should show how accounting for errors changes the estimates and intervals. When the evaluation material does not support a credible correction, additional human review or a narrower research claim may be needed.
 
-A reviewer receives its protocol and manuscript. A judge receives the rubric and assigned reviews, plus the manuscript if the protocol requires it. A pairwise judgment deliberately includes two reviews; controlling context means supplying the intended set, not limiting every run to one document.
+[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://arxiv.org/abs/2306.04746), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
 
-Headless execution does not establish isolation. A fresh run can still load global user instructions, memory, files, plugins, or connected services. Have the agent verify the actual access configuration against the protocol and record untested routes. [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html) in the companion guide *Extending Your Agent's Toolkit* covers setup and access tests.[^headless-controls]
+## Check sensitivity to prompts and LLMs {#llm-sensitivity}
 
-[^headless-controls]: Anthropic's [programmatic `Claude Code` documentation](https://code.claude.com/docs/en/headless) describes noninteractive calls and their configuration. These calls can inherit the ordinary `Claude Code` environment; removing a visible conversation does not remove every possible input.
+Research conclusions should not depend on an arbitrary wording choice. Ask the agent to vary reasonable features of the labeling method while keeping the research question and rubric fixed: equivalent prompt wording, the order of examples or material, the LLM or version, and generation settings. Specify these comparisons before examining their results. Changing what a category includes changes the measurement itself; resolve that definition separately.
+
+Have the agent repeat requests with unchanged settings as well, so ordinary run-to-run variation can be distinguished from differences between configurations. For the interview example, compare which excerpts change labels and whether those changes alter the estimated proportion with unmet need or differences between participant groups. Where human reference labels are available, also compare error rates. A change that affects few labels could still matter if those labels concern a small group central to the research question.
+
+The relevant variations depend on the task. When an LLM compares two written responses, reversing their order can reveal a preference for whichever appears first. Research on judging chatbot responses has documented position and verbosity biases, motivating checks of ordering and response length when they could affect the research task.[^judge-bias]
+
+Use development material when these comparisons will guide selection of a prompt or LLM. Prespecified sensitivity analyses can also show how final research estimates vary across configurations; do not select whichever gives the preferred substantive finding. If test results lead to changes in the labeling method, evaluate the revised method on new held-out material. When no defensible human reference exists, sensitivity analysis can still reveal unstable results, but stable outputs alone do not establish accurate or valid measurements.
+
+<!-- prompt:llm-sensitivity -->
+::: {#request-llm-sensitivity .prompt}
+> Using the agreed comparisons, keep the research question and category definitions fixed while varying prompt wording, example order, LLM choice, or generation settings. Repeat requests with unchanged settings to assess ordinary run-to-run variation. Report which labels change and how those changes affect the research estimates, including relevant group comparisons. Compare errors where human reference labels are available. Use development material when the comparisons will guide method selection; keep prespecified analyses of final estimates separate. Save every configuration and response. Do not select a method because it produces a preferred research finding, and do not interpret stable labels as evidence of accuracy.
+:::
+<!-- /prompt:llm-sensitivity -->
+
+[^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685), evaluate comparisons of chatbot responses. Their findings motivate task-specific checks; they do not establish the size of a bias in another research task.
+
+## Evaluate simulated respondents and teams {#simulated-respondents}
+
+LLMs can also generate responses as simulated participants, allowing researchers to explore proposed questions or interactions before organizing a human study. For example, an agent could arrange several LLM sessions to represent members of a small team, supply each with a role and task, and record their exchanges and decisions. These responses are generated behavior, rather than measurements collected from people. Unlike the simulations in [Chapter 14: Test the analysis against known truth](#simulation), their behavior does not follow a generating mechanism whose relevant relationships the researcher has explicitly set.
+
+Define what the simulation needs to reproduce, then ask the agent to compare its outputs with relevant empirical results. For a team study, these might include differences in performance under particular working conditions, with estimates from comparable studies or a meta-analysis. Compare effect sizes and variation, as well as the direction of a difference. Keep some empirical comparisons out of prompt development, and do not supply the target results in the simulated participants' instructions.
+
+Agreement with one finding does not establish that simulated participants represent the target population or will respond realistically to a new intervention. A study found that LLM-generated survey responses could have averages similar to those from human respondents, while showing less variation and different associations between variables.[^synthetic-respondents] Use the comparison to state which aspects of the simulation have empirical support and which remain exploratory. More generated responses can make a simulated estimate more precise without making it a better estimate of human behavior.
+
+[^synthetic-respondents]: Bisbee et al. (2024), [“Synthetic Replacements for Human Survey Data? The Perils of Large Language Models”](https://doi.org/10.1017/pan.2024.5), compare generated survey responses with American National Election Studies data. Their findings concern the tested surveys and LLM configurations, rather than every possible use of simulated participants.
+
+## Run the procedure across many cases {#headless-agents}
+
+Once the labeling procedure is ready, ask the agent to apply it to the full collection using the saved code. It should first run a few cases through every stage to check that requests, returned labels, and failures are recorded correctly. This *smoke test* checks execution; the held-out evaluation establishes measurement performance. Separate the collection of LLM responses from their analysis so a revised figure does not require labeling the interviews again.
+
+A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
+
+[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+
+### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
+
+Processing every case in one long conversation lets earlier cases influence later responses. Ask the agent to start a fresh headless session for each case, supply the same fixed instructions and its assigned input, and save its response separately. For interview labeling, each session receives the rubric and its assigned excerpt. The agent can repeat these calls unattended without carrying conversation history from one case to the next.
+
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Three fresh headless sessions receive the same fixed instructions and their own assigned inputs. Each saves a separate response. Conversation history is not passed between sessions; file and tool access must be configured separately."}
+
+A fresh headless run can still load global user instructions, memory, files, plugins, or connected services. Ask the agent to check which of these each run can access and configure it to match the research protocol. It should identify any files or services whose access it could not verify. Fresh conversations alone establish neither access isolation nor statistical independence between the resulting outputs.[^headless-controls]
 
 <!-- prompt:controlled-llm-runs -->
 ::: {#request-controlled-llm-runs .prompt}
-> For this review-generation and judging protocol, specify the inputs, instructions, tools, and services allowed in each stage. Set up fresh runs and verify their actual access against that protocol before the batch. Save raw responses, failures, retries, configuration, and LLM information. Report untested access routes; headless execution alone does not establish isolation.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 <!-- /prompt:controlled-llm-runs -->
 
-A queue schedules runs but does not define their information access. Likewise, separating contexts does not establish statistical independence or remove biases shared by the underlying LLM. Use the evaluation above for the actual review or judging task.
+A job queue can schedule these runs. It controls when they start; the session configuration determines what information and tools they can access.
 
-## Preserve responses and examine sensitivity
+[^headless-controls]: Anthropic's [programmatic `Claude Code` documentation](https://code.claude.com/docs/en/headless) explains noninteractive calls and their configuration, including which ordinary instructions and tools they can inherit.
 
-Save the presented inputs, prompts, examples, raw responses, parsing code, failures, retries, and human corrections. Record dates, available LLM identifiers, generation settings, and the configuration of any tools. Apply the source data's access rules to these records.
+## Save the outputs and reproduce the analysis {#preserve-responses-and-examine-sensitivity}
 
-| Question | Evidence needed |
-|---|---|
-| Can the published analysis be reproduced? | Saved responses and the code that turns them into research results. |
-| Can responses be generated again? | The inference procedure, inputs, and available LLM/runtime records. |
-| Are the measurements adequate? | Evaluation against the rubric and independent reference material. |
+Have the agent save the presented inputs, prompts, raw responses, and code that extracts research variables from them. Retain failed requests, retries, and human corrections alongside successful responses, with the available LLM version identifiers and generation settings. Saved prompts, responses, and logs may contain sensitive information from the original data. Ask the agent to keep these files in approved storage and exclude them from any materials prepared for sharing with people who are not authorized to see the data.
 
-A name in an app menu may not identify an exact LLM version. Record what is observable and its limits. Even a pinned configuration does not guarantee identical generated responses; distinguish analyzing saved responses from collecting new ones.
+| Task | What the agent uses |
+|:-----------------|:---------------------------------|
+| Reproduce the reported analysis | Saved responses and the code that turns them into research variables and results. |
+| Generate another set of responses | The saved inputs, prompt, LLM configuration, and software that submits requests. |
+| Assess whether the measurements remain suitable | Human reference material, the evaluation procedure, and checks of changes in the research estimates. |
 
-Examine plausible alternatives to the measurement procedure. For judging, reversing the presentation order can reveal an order-dependent preference. Research has documented position and verbosity biases in LLM judgments of chatbot responses; that motivates checking these effects in a research protocol, without assuming the same size of bias.[^judge-bias] For labeling, alternative boundary definitions may reveal an underspecified construct.
-
-[^judge-bias]: Zheng et al. (2023), [“Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena”](https://arxiv.org/abs/2306.05685). The evaluated task was comparison of chatbot responses, not peer-review quality.
-
-Preserve alternative results and report meaningful changes in the research conclusion. Do not choose a prompt because it produces the preferred finding. Stable outputs are not necessarily valid measurements. [Chapter 17: Run and adapt LLMs for your research](#research-models) considers local execution and adaptation; both retain these evaluation requirements.
+Rerunning the analysis from saved responses can reproduce the reported results without calling an LLM. Generating responses again involves a new collection run: even a fixed configuration may produce different responses across multiple runs, and an app's LLM name may not identify an exact LLM version. Ask the agent to preserve each collection separately and report changes that affect the conclusions. [Chapter 17: Run and adapt LLMs for your research](#research-models) explains how running an LLM yourself or training it further changes these choices.

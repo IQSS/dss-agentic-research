@@ -1,6 +1,6 @@
 # Dataset scaffold
 
-This layout suits a dataset collected, processed, and released for reuse by several studies. It adapts the data example supplied with the scaffold skill, adding an explicit place for versioned releases.
+This layout suits a dataset collected, processed, and released for reuse by several studies, with a separate location for each release.
 
 ```
 dataset-project/
@@ -27,4 +27,4 @@ Preserve downloads unchanged in `data/sources/`. Acquisition, processing, and ch
 
 Save each release in a named subfolder of `outputs/releases/`, with its data dictionary, source versions, and checks. A paper using that dataset should record which release it used. Access and release arrangements must match the data's permitted uses.
 
-Give this specification to the agent with the data sources, intended users, access restrictions, and destination. Ask it to adapt the structure to the actual collection and release process, then create the agreed folders and project context files. Preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
+Give this layout to the agent with the data sources, intended users, access restrictions, and the folder where the project should be created. Ask it to adapt the structure to the collection and release process and create the folders and project context files. It should preserve existing files, record unresolved decisions, and check that the instructions identify the right inputs, scripts, and release locations.
