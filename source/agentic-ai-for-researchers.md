@@ -1658,12 +1658,12 @@ After approval, share the tested version and link its version identifier to the 
 
 # Appendix A. Project scaffolds and starter files {#starter-files}
 
-Give the agent a scaffold or template from this appendix, explain the project and where its folder should live, and ask it to create or adapt the files. A scaffold describes the folder layout; the templates supply starting text for project context files and global user instructions. Have the agent preserve useful existing organization and fill placeholders from your decisions, leaving unresolved questions explicit.
+This appendix provides scaffolds that describe project folder layouts and templates with starting text for project context files and global user instructions. Give the agent a suitable scaffold or template and describe your project. Ask it to create or adapt the files to your needs, preserving any existing organization that works well. If you are unsure where the folders or files belong, ask the agent to suggest suitable locations.
 
-Paper projects normally use all five project context files below. Other projects can use the files their work needs. The templates are generic; [Chapter 10: The example research project](#example-project) provides a [completed paper project](resources/heat-birthweight.zip) with populated files. [Chapter 6: Organize your research projects](#project-organization) explains the layouts, and [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains reusable setup.
+Research paper projects can benefit from all five project context files below. Other projects may need a different set. Ask the agent to adapt these files or create additional ones to suit your workflow. The templates are generic; [Chapter 10: The example research project](#example-project) provides a [completed paper project](resources/heat-birthweight.zip) with populated files. [Chapter 6: Organize your research projects](#project-organization) explains the layouts, and [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains reusable setup.
 
 | Resource | Purpose or location | Download |
-|:-------------------------------|:-------------------------------------------|:----------------|
+|:------------------------------------|:--------------------------------------|:----------------|
 | Project scaffolds | | |
 | [Research paper](#scaffold-paper-example) | Data, analysis, results, and manuscript. | [Get file](resources/scaffolds/paper.md){download="paper-scaffold.md"} |
 | [Dataset](#scaffold-dataset-example) | Collection, processing, checks, and releases. | [Get file](resources/scaffolds/dataset.md){download="dataset-scaffold.md"} |
@@ -1672,13 +1672,16 @@ Paper projects normally use all five project context files below. Other projects
 | [CLAUDE.md](#starter-project) | Instructions and file locations, inside the project. | [Template](resources/starter-files/project-AGENTS.md){download="CLAUDE.md"} |
 | [STATUS.md](#starter-status) | Current state, inside the project. | [Template](resources/starter-files/STATUS.md){download="STATUS.md"} |
 | [TASKS.md](#starter-tasks) | Work remaining and completed, inside the project. | [Template](resources/starter-files/TASKS.md){download="TASKS.md"} |
-| [SPECIFICATION.md](#starter-specification) | Current scientific requirements, inside the project. | [Template](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
-| [METHODOLOGY.md](#starter-methodology) | Dated scientific decisions and reasons, inside the project. | [Template](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
-| Optional settings | | |
-| [Global user instructions](#starter-global) | Defaults across projects, in `~/.claude/CLAUDE.md`. | [Template](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| [SPECIFICATION.md](#starter-specification){style="white-space: nowrap;"} | Current scientific requirements, inside the project. | [Template](resources/starter-files/SPECIFICATION.md){download="SPECIFICATION.md"} |
+| [METHODOLOGY.md](#starter-methodology){style="white-space: nowrap;"} | Dated scientific decisions and reasons, inside the project. | [Template](resources/starter-files/METHODOLOGY.md){download="METHODOLOGY.md"} |
+| Global user instructions | | |
+| [CLAUDE.md](#starter-global) | Defaults across projects, in `~/.claude/CLAUDE.md`. | [Template](resources/starter-files/global-AGENTS.md){download="CLAUDE.md"} |
+| Version control | | |
 | [Git exclusions](#starter-gitignore) | Files excluded from version control, in the project's `.gitignore`. | [Template](resources/starter-files/gitignore.txt){download=".gitignore"} |
 
-The tilde (`~`) means your home folder. The two `CLAUDE.md` templates belong in different places: one inside the project, the other in your home folder's `.claude` directory. Ask the agent to merge useful instructions into existing files. Access controls are configured separately, as explained in [Chapter 4: Control what the agent can do](#enforce-those-limits).
+The tilde (`~`) means your home folder. The project `CLAUDE.md` belongs in the project's main folder; global user instructions belong in `~/.claude/CLAUDE.md`. Ask the agent to check whether these files already exist. If they do, have it use them as the starting point and adapt the templates to your needs, preserving your existing instructions. Access controls are configured separately, as explained in [Chapter 4: Control what the agent can do](#enforce-those-limits).
+
+These instruction templates also work with other agents. [`Codex`](https://developers.openai.com/codex/), for example, uses `AGENTS.md` instead of `CLAUDE.md`. Ask your agent to adapt the template and save it with the filename and location it expects. The filename depends on the agent software, including when it uses a locally running LLM.
 
 ## A.1 Project scaffolds {#starter-layouts}
 
@@ -2019,7 +2022,7 @@ progress in STATUS.md and TASKS.md. Link detailed evidence rather than copying i
 ::: {.keep-together}
 ## A.7 Global user instructions {#starter-global}
 
-Use this optional template for defaults that apply across your projects. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. For longer guidance, have the agent add paths to maintained specialist files and instructions on when to read them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
+Use this template for defaults that apply across your projects. Have the agent adapt it at `~/.claude/CLAUDE.md`, preserving existing guidance. Short conventions can stay in that file. For longer guidance, have the agent add paths to maintained specialist files and instructions on when to read them; [Chapter 8: Apply your conventions across projects](#specialist-conventions) gives examples.
 
 [Download global user instructions](resources/starter-files/global-AGENTS.md){.download-button download="CLAUDE.md"}
 
@@ -2118,7 +2121,7 @@ cache/
 
 # Appendix B. Prompt bank {#prompt-index}
 
-Choose the task you want to delegate, point the agent to the listed files and decisions, and adapt the request to your project. You can refer to files already in the project rather than paste their contents. Each request also appears beside its explanation in the guide; the links return to those passages. The agent does the work, while you decide research questions and permitted access.
+This prompt bank brings together the same example prompts used throughout the guide, organized by task for easy reference. Each prompt links back to the section that explains when and how to use it. Choose a prompt and adapt it to your project, naming the relevant files and adding any research decisions the agent needs to follow. You can refer to files already in the project without pasting their contents.
 
 [Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 

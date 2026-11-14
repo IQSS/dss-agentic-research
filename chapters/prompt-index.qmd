@@ -6,7 +6,7 @@ title: "Appendix B. Prompt bank"
 
 # Appendix B. Prompt bank
 
-Choose the task you want to delegate, point the agent to the listed files and decisions, and adapt the request to your project. You can refer to files already in the project rather than paste their contents. Each request also appears beside its explanation in the guide; the links return to those passages. The agent does the work, while you decide research questions and permitted access.
+This prompt bank brings together the same example prompts used throughout the guide, organized by task for easy reference. Each prompt links back to the section that explains when and how to use it. Choose a prompt and adapt it to your project, naming the relevant files and adding any research decisions the agent needs to follow. You can refer to files already in the project without pasting their contents.
 
 [Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
