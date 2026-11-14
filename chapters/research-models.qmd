@@ -8,7 +8,7 @@ title: "17. Run and adapt LLMs for your research"
 
 Running an LLM yourself can give you control over where research material is processed and preserve access to the version used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices: the first concerns where computation happens, while the second changes what the LLM has learned.
 
-For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require processing on approved local hardware. Persistent labeling errors might also justify testing whether further training improves performance. An unchanged LLM can run locally, and a locally run LLM can still receive instructions and examples with each request.
+For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require processing on approved local hardware. Persistent labeling errors might also justify testing whether further training improves performance. An unchanged LLM can run locally, and a locally run LLM can still receive instructions and examples with each prompt.
 
 ## Choose where the LLM runs {#local-models}
 
@@ -65,7 +65,7 @@ Local processing does not require open weights. Apple's [`Foundation Models fram
 
 ## Decide whether to supply context or fine-tune {#context-or-training}
 
-Start by giving an existing LLM a clear rubric and representative examples. *In-context learning* uses examples supplied with the request without updating weights. For tasks requiring information from documents, *retrieval* selects relevant passages to include in that context.[^retrieval-evidence] The agent can arrange either approach without training the LLM.
+Start by giving an existing LLM a clear rubric and representative examples. *In-context learning* uses examples supplied with the prompt without updating weights. For tasks requiring information from documents, *retrieval* selects relevant passages to include in that context.[^retrieval-evidence] The agent can arrange either approach without training the LLM.
 
 *Fine-tuning* trains an existing LLM on additional data. For interview labeling, *supervised training* pairs excerpts with reviewed labels so training can adjust the LLM toward the required responses. It can use many examples in successive groups, called training batches, without putting them all in one prompt. The resulting LLM still receives each new excerpt and the instructions needed to process it.
 

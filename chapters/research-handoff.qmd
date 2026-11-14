@@ -39,7 +39,7 @@ For restricted data, the instructions in `archive/` should explain how an author
 
 Ask the agent to copy `archive/` into a temporary directory outside the working project. If you will share a zipped copy, have it extract and test that exact file there. It should start a fresh headless agent session[^handoff-headless] with access to the test directory but no access to the working project or earlier conversation. Have that agent restore the recorded software versions in a separate environment and follow the supplied `README.md`. Missing files, dependencies, or instructions should be reported rather than recovered from the working project.
 
-[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
 

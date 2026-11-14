@@ -91,7 +91,7 @@ If you are new to agents, begin with *Orientation*. If you already use one, you 
 
 The examples use [`Claude Code`](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [`Git`](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
 
-The appendices provide downloadable project scaffolds and starter files, example requests, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
+The appendices provide downloadable project scaffolds and starter files, example prompts, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
 
 # 2. Get started with the app {#first-session}
 
@@ -347,7 +347,7 @@ Paths in scripts should be relative to the *project root*, the folder containing
 
 ## Keep a recoverable version {#project-recovery}
 
-Use [`Git`](https://git-scm.com/) to retain versions of code, documentation, and suitable configuration files as the project develops. The agent can create these checkpoints and recover earlier work; you do not need to learn `Git` commands or inspect every line of code. Give a specific recovery request, such as restoring yesterday's sample-selection code while keeping today's manuscript edits. [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit* explains how to have the agent save versions of your work and restore earlier ones.
+Use [`Git`](https://git-scm.com/) to retain versions of code, documentation, and suitable configuration files as the project develops. The agent can create these checkpoints and recover earlier work; you do not need to learn `Git` commands or inspect every line of code. Give a specific recovery prompt, such as restoring yesterday's sample-selection code while keeping today's manuscript edits. [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit* explains how to have the agent save versions of your work and restore earlier ones.
 
 Before a substantial reorganization, also keep a recoverable copy outside the folder being changed. A dated copy is a workable starting point if you are not yet using version control. `Git` only preserves files and versions it records, and neither `Git` nor a synchronized folder replaces a backup. Keep restricted inputs and credentials out of `Git` history and use the project's approved storage for them.
 
@@ -501,11 +501,11 @@ Have the agent save its implementation plan separately from the scientific requi
 
 ## Keep project context files current {#maintain-project-context}
 
-Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
+Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping prompt every session.
 
 For example, after correcting a figure's labels, the agent adds a dated completion entry to `TASKS.md` and updates `STATUS.md` to identify the rebuilt figure. If no statistical model was refitted, the record should not imply that the analysis was rerun. An approved scientific change updates `SPECIFICATION.md` and receives a dated explanation in `METHODOLOGY.md`; a completed formatting task does not need either change.
 
-The following requests can establish the routine or recover it when a session has lost track of the work.
+The following prompts can establish the routine or recover it when a session has lost track of the work.
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}
@@ -651,7 +651,7 @@ Consider the [paper project scaffold](#scaffold-paper-example), which follows th
 
 A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions in `SKILL.md` and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
-![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
+![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project prompt and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
 Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
@@ -1173,7 +1173,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^independent-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -1353,7 +1353,7 @@ Once the labeling procedure is ready, ask the agent to apply it to the full coll
 
 A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
 
-[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 ### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
 
@@ -1389,7 +1389,7 @@ Rerunning the analysis from saved responses can reproduce the reported results w
 
 Running an LLM yourself can give you control over where research material is processed and preserve access to the version used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices: the first concerns where computation happens, while the second changes what the LLM has learned.
 
-For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require processing on approved local hardware. Persistent labeling errors might also justify testing whether further training improves performance. An unchanged LLM can run locally, and a locally run LLM can still receive instructions and examples with each request.
+For the interview-labeling task in [Chapter 16: Use LLM outputs as research data](#llm-measurements), data restrictions might require processing on approved local hardware. Persistent labeling errors might also justify testing whether further training improves performance. An unchanged LLM can run locally, and a locally run LLM can still receive instructions and examples with each prompt.
 
 ## Choose where the LLM runs {#local-models}
 
@@ -1446,7 +1446,7 @@ Local processing does not require open weights. Apple's [`Foundation Models fram
 
 ## Decide whether to supply context or fine-tune {#context-or-training}
 
-Start by giving an existing LLM a clear rubric and representative examples. *In-context learning* uses examples supplied with the request without updating weights. For tasks requiring information from documents, *retrieval* selects relevant passages to include in that context.[^retrieval-evidence] The agent can arrange either approach without training the LLM.
+Start by giving an existing LLM a clear rubric and representative examples. *In-context learning* uses examples supplied with the prompt without updating weights. For tasks requiring information from documents, *retrieval* selects relevant passages to include in that context.[^retrieval-evidence] The agent can arrange either approach without training the LLM.
 
 *Fine-tuning* trains an existing LLM on additional data. For interview labeling, *supervised training* pairs excerpts with reviewed labels so training can adjust the LLM toward the required responses. It can use many examples in successive groups, called training batches, without putting them all in one prompt. The resulting LLM still receives each new excerpt and the instructions needed to process it.
 
@@ -1623,7 +1623,7 @@ For restricted data, the instructions in `archive/` should explain how an author
 
 Ask the agent to copy `archive/` into a temporary directory outside the working project. If you will share a zipped copy, have it extract and test that exact file there. It should start a fresh headless agent session[^handoff-headless] with access to the test directory but no access to the working project or earlier conversation. Have that agent restore the recorded software versions in a separate environment and follow the supplied `README.md`. Missing files, dependencies, or instructions should be reported rather than recovered from the working project.
 
-[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved requests](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
 
@@ -2123,7 +2123,7 @@ cache/
 
 This prompt bank brings together the same example prompts used throughout the guide, organized by task for easy reference. Each prompt links back to the section that explains when and how to use it. Choose a prompt and adapt it to your project, naming the relevant files and adding any research decisions the agent needs to follow. You can refer to files already in the project without pasting their contents.
 
-[Download all requests as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
+[Download all prompts as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
 **Set up and maintain a project:** [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a project-scaffolding skill](#bank-scaffold-skill)
@@ -2357,7 +2357,7 @@ Explanation and checks: [Chapter 14: Test the analysis against known truth](#req
 
 Point the agent to: the fixed specification, data dictionary, approved input files, and assigned language.
 
-Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
+Ask the current agent to prepare two fresh headless sessions, each receiving the prompt below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
@@ -2372,7 +2372,7 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 
 Point the agent to: both completed implementations, their outputs, and the common specification.
 
-Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below.
+Ask the current agent to launch a separate fresh headless session for this comparison and give it the prompt below.
 
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
@@ -2508,28 +2508,29 @@ Explanation and checks: [Chapter 19: Reproduce and hand off the research](#reque
 
 # Appendix C. Troubleshooting {#troubleshooting}
 
-Point the agent to the affected files or outputs, describe what you expected, and include any error message it cannot already read. Ask it to locate the cause, preserve the evidence, and explain what needs to change. It can repair an implementation error and rerun the relevant checks; changes to scientific requirements or permitted access need your decision.
+This appendix helps you resolve problems that arise when working with an agent, such as forgotten instructions, inconsistent results, stalled jobs, or blocked access. The tables pair each problem with suggested actions and links to fuller explanations in the guide. Find the entry closest to your problem, then ask the agent to investigate, explaining what happened and what you expected. Point it to the affected files and include any error messages it cannot already read.
 
 ## Problems with the agent's work {#troubleshoot-work}
 
 | What you notice | What to ask the agent to do | Explanation |
 |:-------------------------|:----------------------------------------------------------|:-------------------|
 | An answer has no supporting evidence | Find the cited passage or saved result, correct unsupported claims, and identify anything still unresolved. | [Source support](#literature-synthesis) |
-| The agent forgets earlier decisions | Save current work and unresolved questions in the project context files. Use them to prepare a fresh session and confirm its next task. | [Maintaining context](#maintain-project-context) |
-| Old instructions conflict with current files | Identify the conflicting instructions and propose corrections to the relevant `CLAUDE.md` or specialist file. Apply the agreed correction and check the affected work. | [Maintaining global user instructions](#maintain-shared-conventions) |
-| The agent changes the question or weakens a check | Compare the change with `SPECIFICATION.md` and preserve the failed result. Restore the prescribed analysis unless you approve a scientific change, then rerun the checks. | [Research decisions](#review-project-plan) |
-| A rerun gives different results | Compare inputs, sample rules, software, settings, and intermediate outputs. Find the earliest difference, repair confirmed errors, and report the comparison after rerunning. | [Reproduction checks](#test-and-name-the-reproduction-route) |
-| Two implementations disagree | Find the earliest disagreement and check each implementation against the specification. Correct errors and repeat the comparison; agreement alone is not a reason to change either method. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
+| The agent forgets earlier decisions | Reread the project context files and identify missing or outdated information. Update them from documented decisions, then use them to prepare a fresh session if needed. | [Maintaining context](#maintain-project-context) |
+| Instructions conflict with the project's current requirements | Identify the conflict and establish which instruction should apply before proposing corrections to the relevant `CLAUDE.md` or specialist file. Ask you to resolve any uncertainty, then apply the agreed correction and check the affected work. | [Maintaining global user instructions](#maintain-shared-conventions) |
+| The agent changes the question or weakens a check | Compare the change with `SPECIFICATION.md` and preserve the changed code and any failed checks. Reverse unapproved changes and rerun the checks. Any proposed scientific revision needs your decision. | [Research decisions](#review-project-plan) |
+| The agent keeps trying the same unsuccessful fix | Summarize the attempted fixes and what each result showed, then investigate the cause before making another change. If a fresh session is needed, prepare a summary of the problem, attempted fixes, and relevant files. | [Investigating problems](#investigate-workflow-results) |
+| A rerun gives different results | Compare inputs, sample rules, software, random-number settings, and intermediate outputs. Establish whether the differences reflect expected random variation or a changed calculation. Repair confirmed errors and report the comparison after rerunning. | [Reproduction checks](#test-and-name-the-reproduction-route) |
+| Two implementations disagree | Find the earliest disagreement and check each implementation against the specification. Correct errors and repeat the comparison. Do not change the specified analysis simply to force agreement. | [Investigating disagreement](#investigate-the-earliest-disagreement) |
 | The manuscript contains stale numbers | Trace the values to saved results, update them from the verified analysis, and check the rendered manuscript again. | [Manuscript checks](#trace-manuscript) |
 | Coauthor edits are lost after rebuilding | Compare the returned manuscript with the last shared version. Incorporate accepted edits into the maintained source, rebuild, and check that they survived. | [Coauthor revisions](#preserve-coauthor-edits-and-respond-to-reviewers) |
-| LLM labels vary between runs | Repeat a sample with unchanged settings and compare the agreed prompt and LLM variations. Report which labels and research estimates change; do not choose a run because its finding is preferred. | [Sensitivity analysis](#llm-sensitivity) |
+| LLM labels vary between runs | Repeat labeling of the same cases with unchanged settings, then separately assess the agreed prompt and LLM variations. Report which labels and research estimates change, and compare with human reference labels where available. Do not choose a run because its finding is preferred. | [Sensitivity analysis](#llm-sensitivity) |
 
 ## Jobs and app controls {#troubleshoot-execution}
 
 | What you notice | What to ask the agent to do | Explanation |
 |:-------------------------|:----------------------------------------------------------|:-------------------|
-| A long job seems to have stopped | Check the process or queue, recent log entries, and expected outputs. Fix a confirmed failure or resume from saved progress, then verify that work has restarted. | [Unattended jobs](#unattended-jobs) |
-| Reproduction works only in the original folder | Test the handoff copy using its README. Identify missing inputs, software, paths, or instructions; repair the handoff and repeat that test. | [Testing the handoff](#test-and-name-the-reproduction-route) |
+| A long job seems to have stopped | Check whether the job is still running before starting another copy. Examine recent log entries and expected outputs. Fix a confirmed failure or resume from saved progress, then use logs and outputs to verify that work is progressing. | [Unattended jobs](#unattended-jobs) |
+| Reproduction works only in the original folder | Test the contents of `archive/` in a temporary folder, following its README and restoring the documented software environment without relying on files from the working project. Identify and repair missing inputs, software, paths, or instructions, then repeat the test. | [Testing the handoff](#test-and-name-the-reproduction-route) |
 | An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check for the documented launch issue. If confirmed, use the toolkit's method of starting `R` through a pseudo-terminal[^troubleshoot-pty] and check that it produces output. This remedy is specific to that launch problem. | [R-on-macOS diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
 | An app control is missing or has a different label | Compare the visible layout and account with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
 
@@ -2540,14 +2541,14 @@ Point the agent to the affected files or outputs, describe what you expected, an
 | What you notice | Next action | Explanation |
 |:-------------------------|:----------------------------------------------------------|:-------------------|
 | Routine work repeatedly asks for approval | Ask the agent to identify the tool action and mode or permission rule causing the prompt. Review a narrowly scoped change, then have it check the action again. | [Approval settings](#choose-how-actions-are-approved) and [access configuration](#access-report) |
-| The agent cannot reach an input or service | Ask it to identify the blocked action and required access. Confirm that the project permits that access before approving a change and retrying. | [Project access](#access-scope) |
+| The agent cannot reach an input or service | Ask it to check the file location or service address, account and sign-in, and access restrictions before proposing a permissions change. Confirm that the project permits any additional access before approving a change and retrying. | [Project access](#access-scope) |
 | Restricted material may have reached a service | Stop further transfers and follow your institution's incident procedure. Record the material and service involved; seek guidance before deleting evidence. | [Accidental exposure](#accidental-exposure) |
 
-After a repair, have the agent record the cause, change, and check in `TASKS.md` and update `STATUS.md` if unfinished work or the next step has changed. An approved scientific revision also belongs in `SPECIFICATION.md` and `METHODOLOGY.md`. Detailed technical logs can stay with the affected code or outputs.
+After a repair, have the agent record what went wrong, what it changed, and how it checked the fix in `TASKS.md`. It should update `STATUS.md` if the remaining work or next step has changed. For a scientific change you approve, have it update the current requirements in `SPECIFICATION.md` and add a dated explanation to `METHODOLOGY.md`. Detailed logs can remain with the affected code or outputs.
 
 # Appendix D. Glossary {#glossary}
 
-Look up a term below and follow its link for an explanation or example.
+This glossary explains the technical terms used throughout the guide, including agent software, research workflows, and LLM training and evaluation. Each entry gives a short definition and links to the section where the term is explained or illustrated. Use the alphabetical links below to find a term.
 
 [A](#glossary-a) · [B](#glossary-b) · [C](#glossary-c) · [D](#glossary-d) · [E](#glossary-e) · [F](#glossary-f) · [G](#glossary-g) · [H](#glossary-h) · [I](#glossary-i) · [J](#glossary-j) · [L](#glossary-l) · [M](#glossary-m) · [O](#glossary-o) · [P](#glossary-p) · [Q](#glossary-q) · [R](#glossary-r) · [S](#glossary-s) · [T](#glossary-t) · [U](#glossary-u) · [V](#glossary-v) · [W](#glossary-w)
 
@@ -2566,7 +2567,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-assertion}
-*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Automatic checks](#check-execution-before-scaling-up).
+*Assertion.* A check in code that signals an error when a required condition is not met, such as when the sample size differs from the expected value. [Automatic checks](#check-execution-before-scaling-up).
 :::
 
 ::: {#term-auto-mode}
@@ -2576,7 +2577,7 @@ Look up a term below and follow its link for an explanation or example.
 ## B {#glossary-b .unnumbered .unlisted}
 
 ::: {#term-batch}
-*Batch.* A group of jobs prepared to run together or in sequence, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
+*Batch.* A collection of jobs prepared or managed as a group, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
 :::
 
 ::: {#term-brief}
@@ -2590,15 +2591,23 @@ Look up a term below and follow its link for an explanation or example.
 ## C {#glossary-c .unnumbered .unlisted}
 
 ::: {#term-calibration}
-*Calibration.* For predicted probabilities, agreement between the stated probabilities and observed frequencies: labels assigned 80 percent confidence should be correct about 80 percent of the time. Simulation can also check whether interval coverage or error rates match their specified levels. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
+*Calibration.* For predictions, agreement between predicted probabilities and observed frequencies: among cases assigned an 80 percent probability of an event, that event should occur about 80 percent of the time. In simulation studies, calibration can also mean checking whether intervals and decision rules achieve their stated coverage or error rates. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
 :::
 
 ::: {#term-chain-of-custody}
 *Chain of custody.* A record of where protected material and its copies go, who or what can access them, and what retention or deletion options are available. [Data custody](#data-chain-of-custody).
 :::
 
+::: {#term-chain-of-evidence}
+*Chain of evidence.* Links connecting a reported result to its saved source output, the analysis run that produced it, and its appearances in the manuscript. [Tracing manuscript results](#trace-manuscript).
+:::
+
 ::: {#term-checksum}
 *Checksum.* A digital fingerprint calculated from a file's contents. The agent can compare checksums to detect whether a file changed. [Recording input versions](#data-provenance).
+:::
+
+::: {#term-command-runner}
+*Command runner.* A tool such as [`just`](https://just.systems/) that runs saved commands by name. Each named command can perform one step or a sequence of steps. [Saved commands](#saved-commands).
 :::
 
 ::: {#term-commit}
@@ -2618,11 +2627,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-context}
-*Context.* The instructions, conversation, file contents, and tool results supplied to an LLM for generating a response. Supplying local files to a hosted LLM transmits their contents to the provider. [Agent loop](#how-does-an-agent-work-through-a-task) and [data movement](#what-reaches-the-llm).
+*Context.* The instructions, conversation, file contents, and tool results supplied to an LLM for generating a response. When the LLM is hosted, any file content included in its context is sent to the provider. [Agent loop](#how-does-an-agent-work-through-a-task) and [data movement](#what-reaches-the-llm).
 :::
 
 ::: {#term-context-window}
-*Context window.* The limit on how much information an LLM can process in a request, including supplied context and generated tokens. A continuing session may use compaction to stay within that limit. [Usage and context](#usage-and-context).
+*Context window.* The maximum amount of information an LLM can work with at once, measured in tokens and including supplied context and generated output. A continuing session may use compaction to stay within that limit. This capacity is separate from an account's usage allowance. [Usage and context](#usage-and-context).
 :::
 
 ## D {#glossary-d .unnumbered .unlisted}
@@ -2633,6 +2642,10 @@ Look up a term below and follow its link for an explanation or example.
 
 ::: {#term-deny-rule}
 *Deny rule.* A permission rule that blocks matching tool actions. Its coverage depends on the tool and execution route; a file-tool rule does not necessarily cover a script reading the same file. [Enforcing access](#enforce-those-limits).
+:::
+
+::: {#term-dependency-aware-pipeline-runner}
+*Dependency-aware pipeline runner.* A tool that tracks relationships among workflow steps and determines which outputs need rebuilding when code or inputs change. Examples include [`targets`](https://docs.ropensci.org/targets/) and [`Snakemake`](https://snakemake.readthedocs.io/). [Dependencies and saved commands](#saved-commands).
 :::
 
 ::: {#term-development-set}
@@ -2664,7 +2677,7 @@ Look up a term below and follow its link for an explanation or example.
 ## F {#glossary-f .unnumbered .unlisted}
 
 ::: {#term-fine-tuning}
-*Fine-tuning.* Additional training that adapts an existing LLM by changing learned parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
+*Fine-tuning.* Additional training that adapts an existing LLM by updating existing weights or learning additional parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
 :::
 
 ## G {#glossary-g .unnumbered .unlisted}
@@ -2687,6 +2700,10 @@ Look up a term below and follow its link for an explanation or example.
 *Held-out data.* Material excluded from a specified stage of fitting or choosing a method. In this guide, the test set is held out from all development and training decisions until final evaluation. [Separating development and testing](#evaluate-llm-labeling).
 :::
 
+::: {#term-hosted-llm}
+*Hosted LLM.* An LLM running on a provider's computers, even when the agent's tools run on your computer. [Where information is sent](#what-reaches-the-llm).
+:::
+
 ## I {#glossary-i .unnumbered .unlisted}
 
 ::: {#term-import}
@@ -2701,6 +2718,14 @@ Look up a term below and follow its link for an explanation or example.
 
 ::: {#term-job}
 *Job.* One execution of a command or script, such as fitting a statistical model or running a simulation. [Unattended jobs](#unattended-jobs).
+:::
+
+::: {#term-job-queue}
+*Job queue.* A system that holds submitted jobs and starts them as running capacity becomes available. [Unattended jobs](#unattended-jobs).
+:::
+
+::: {#term-justfile}
+*`justfile`.* The plain-text file containing the named commands, or recipes, used by `just`. [Saved commands](#saved-commands).
 :::
 
 ## L {#glossary-l .unnumbered .unlisted}
@@ -2724,7 +2749,7 @@ Look up a term below and follow its link for an explanation or example.
 ## M {#glossary-m .unnumbered .unlisted}
 
 ::: {#term-methodological-decision-log}
-*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
+*Methodological decision log.* Dated methodological choices and their reasons, maintained newest first in `METHODOLOGY.md`. It records the original choices as well as subsequent revisions to the scientific specification. [Project context files](#project-records).
 :::
 
 ::: {#term-model}
@@ -2732,7 +2757,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-modular-workflow}
-*Modular workflow.* Research steps that can run independently, with explicit inputs and saved outputs. Each performs a coherent operation, such as fitting a statistical model or generating a figure. [Modularity](#modular-steps).
+*Modular workflow.* Research steps that can be run separately once their required inputs are available. Each performs a coherent operation, such as fitting a statistical model or generating a figure, with explicit inputs and saved outputs. [Modularity](#modular-steps).
 :::
 
 ::: {#term-monte-carlo-error}
@@ -2764,7 +2789,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-plan-mode}
-*`Plan` mode.* A mode for inspecting a project and developing a plan before implementation. Writing a planning record does not authorize ordinary changes to the project. [Planning settings](#decide-whether-to-plan-first).
+*`Plan` mode.* A mode in which the agent examines the project and proposes changes before implementation. [Planning settings](#decide-whether-to-plan-first).
+:::
+
+::: {#term-processor-core}
+*Processor core.* A computing unit that can execute instructions independently of other cores. One job may use several cores. [Choosing queue capacity](#unattended-jobs).
 :::
 
 ::: {#term-project-context-files}
@@ -2773,7 +2802,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-prompt}
-*Prompt.* A request or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Appendix B: Prompt bank](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
+*Prompt.* Instructions or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Appendix B: Prompt bank](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
 :::
 
 ::: {#term-provenance}
@@ -2805,7 +2834,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-reproduction}
-*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
+*Reproduction.* Recreating reported results from supplied inputs, code, and instructions, with a comparison to check whether the outputs match. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
+:::
+
+::: {#term-runtime}
+*Runtime.* In this guide, software that loads an LLM and runs it to generate responses. [Running an LLM](#local-models).
 :::
 
 ## S {#glossary-s .unnumbered .unlisted}

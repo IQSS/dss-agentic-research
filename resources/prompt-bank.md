@@ -1,6 +1,6 @@
-# Research requests
+# Research prompts
 
-Point the agent to the listed project files and decisions, then adapt the request to your task.
+Point the agent to the listed project files and decisions, then adapt the prompt to your task.
 
 ## Set up and maintain a project
 
@@ -108,7 +108,7 @@ Using SPECIFICATION.md, propose simulation scenarios relevant to this study and 
 
 Point the agent to: the fixed specification, data dictionary, approved input files, and assigned language.
 
-Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
+Ask the current agent to prepare two fresh headless sessions, each receiving the prompt below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check.
 
 Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 
@@ -116,7 +116,7 @@ Working only from the supplied SPECIFICATION.md, data dictionary, and approved i
 
 Point the agent to: both completed implementations, their outputs, and the common specification.
 
-Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below.
+Ask the current agent to launch a separate fresh headless session for this comparison and give it the prompt below.
 
 Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
 

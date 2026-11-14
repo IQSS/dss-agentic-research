@@ -126,11 +126,11 @@ Have the agent save its implementation plan separately from the scientific requi
 
 ## Keep project context files current {#maintain-project-context}
 
-Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping request every session.
+Make maintaining project context files a standing instruction in the project's `CLAUDE.md` or maintained `AGENTS.md`. The agent should read the relevant project context files before starting, track the assigned work, and update the affected files after checking its outputs. You can then direct the research and review the results without issuing the same bookkeeping prompt every session.
 
 For example, after correcting a figure's labels, the agent adds a dated completion entry to `TASKS.md` and updates `STATUS.md` to identify the rebuilt figure. If no statistical model was refitted, the record should not imply that the analysis was rerun. An approved scientific change updates `SPECIFICATION.md` and receives a dated explanation in `METHODOLOGY.md`; a completed formatting task does not need either change.
 
-The following requests can establish the routine or recover it when a session has lost track of the work.
+The following prompts can establish the routine or recover it when a session has lost track of the work.
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}

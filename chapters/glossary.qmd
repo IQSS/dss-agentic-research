@@ -6,7 +6,7 @@ title: "Appendix D. Glossary"
 
 # Appendix D. Glossary
 
-Look up a term below and follow its link for an explanation or example.
+This glossary explains the technical terms used throughout the guide, including agent software, research workflows, and LLM training and evaluation. Each entry gives a short definition and links to the section where the term is explained or illustrated. Use the alphabetical links below to find a term.
 
 [A](#glossary-a) · [B](#glossary-b) · [C](#glossary-c) · [D](#glossary-d) · [E](#glossary-e) · [F](#glossary-f) · [G](#glossary-g) · [H](#glossary-h) · [I](#glossary-i) · [J](#glossary-j) · [L](#glossary-l) · [M](#glossary-m) · [O](#glossary-o) · [P](#glossary-p) · [Q](#glossary-q) · [R](#glossary-r) · [S](#glossary-s) · [T](#glossary-t) · [U](#glossary-u) · [V](#glossary-v) · [W](#glossary-w)
 
@@ -25,7 +25,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-assertion}
-*Assertion.* A check in code that reports or stops execution when an expected condition fails, such as an unexpected sample size. [Automatic checks](#check-execution-before-scaling-up).
+*Assertion.* A check in code that signals an error when a required condition is not met, such as when the sample size differs from the expected value. [Automatic checks](#check-execution-before-scaling-up).
 :::
 
 ::: {#term-auto-mode}
@@ -35,7 +35,7 @@ Look up a term below and follow its link for an explanation or example.
 ## B {#glossary-b .unnumbered .unlisted}
 
 ::: {#term-batch}
-*Batch.* A group of jobs prepared to run together or in sequence, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
+*Batch.* A collection of jobs prepared or managed as a group, such as all fits for a simulation study. [Queuing jobs](#unattended-jobs).
 :::
 
 ::: {#term-brief}
@@ -49,15 +49,23 @@ Look up a term below and follow its link for an explanation or example.
 ## C {#glossary-c .unnumbered .unlisted}
 
 ::: {#term-calibration}
-*Calibration.* For predicted probabilities, agreement between the stated probabilities and observed frequencies: labels assigned 80 percent confidence should be correct about 80 percent of the time. Simulation can also check whether interval coverage or error rates match their specified levels. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
+*Calibration.* For predictions, agreement between predicted probabilities and observed frequencies: among cases assigned an 80 percent probability of an event, that event should occur about 80 percent of the time. In simulation studies, calibration can also mean checking whether intervals and decision rules achieve their stated coverage or error rates. [LLM confidence](#llm-confidence) and [simulation performance](#simulation-repetitions).
 :::
 
 ::: {#term-chain-of-custody}
 *Chain of custody.* A record of where protected material and its copies go, who or what can access them, and what retention or deletion options are available. [Data custody](#data-chain-of-custody).
 :::
 
+::: {#term-chain-of-evidence}
+*Chain of evidence.* Links connecting a reported result to its saved source output, the analysis run that produced it, and its appearances in the manuscript. [Tracing manuscript results](#trace-manuscript).
+:::
+
 ::: {#term-checksum}
 *Checksum.* A digital fingerprint calculated from a file's contents. The agent can compare checksums to detect whether a file changed. [Recording input versions](#data-provenance).
+:::
+
+::: {#term-command-runner}
+*Command runner.* A tool such as [`just`](https://just.systems/) that runs saved commands by name. Each named command can perform one step or a sequence of steps. [Saved commands](#saved-commands).
 :::
 
 ::: {#term-commit}
@@ -77,11 +85,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-context}
-*Context.* The instructions, conversation, file contents, and tool results supplied to an LLM for generating a response. Supplying local files to a hosted LLM transmits their contents to the provider. [Agent loop](#how-does-an-agent-work-through-a-task) and [data movement](#what-reaches-the-llm).
+*Context.* The instructions, conversation, file contents, and tool results supplied to an LLM for generating a response. When the LLM is hosted, any file content included in its context is sent to the provider. [Agent loop](#how-does-an-agent-work-through-a-task) and [data movement](#what-reaches-the-llm).
 :::
 
 ::: {#term-context-window}
-*Context window.* The limit on how much information an LLM can process in a request, including supplied context and generated tokens. A continuing session may use compaction to stay within that limit. [Usage and context](#usage-and-context).
+*Context window.* The maximum amount of information an LLM can work with at once, measured in tokens and including supplied context and generated output. A continuing session may use compaction to stay within that limit. This capacity is separate from an account's usage allowance. [Usage and context](#usage-and-context).
 :::
 
 ## D {#glossary-d .unnumbered .unlisted}
@@ -92,6 +100,10 @@ Look up a term below and follow its link for an explanation or example.
 
 ::: {#term-deny-rule}
 *Deny rule.* A permission rule that blocks matching tool actions. Its coverage depends on the tool and execution route; a file-tool rule does not necessarily cover a script reading the same file. [Enforcing access](#enforce-those-limits).
+:::
+
+::: {#term-dependency-aware-pipeline-runner}
+*Dependency-aware pipeline runner.* A tool that tracks relationships among workflow steps and determines which outputs need rebuilding when code or inputs change. Examples include [`targets`](https://docs.ropensci.org/targets/) and [`Snakemake`](https://snakemake.readthedocs.io/). [Dependencies and saved commands](#saved-commands).
 :::
 
 ::: {#term-development-set}
@@ -123,7 +135,7 @@ Look up a term below and follow its link for an explanation or example.
 ## F {#glossary-f .unnumbered .unlisted}
 
 ::: {#term-fine-tuning}
-*Fine-tuning.* Additional training that adapts an existing LLM by changing learned parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
+*Fine-tuning.* Additional training that adapts an existing LLM by updating existing weights or learning additional parameters. Supplying context alone does not change those parameters. [Context and training](#context-or-training).
 :::
 
 ## G {#glossary-g .unnumbered .unlisted}
@@ -146,6 +158,10 @@ Look up a term below and follow its link for an explanation or example.
 *Held-out data.* Material excluded from a specified stage of fitting or choosing a method. In this guide, the test set is held out from all development and training decisions until final evaluation. [Separating development and testing](#evaluate-llm-labeling).
 :::
 
+::: {#term-hosted-llm}
+*Hosted LLM.* An LLM running on a provider's computers, even when the agent's tools run on your computer. [Where information is sent](#what-reaches-the-llm).
+:::
+
 ## I {#glossary-i .unnumbered .unlisted}
 
 ::: {#term-import}
@@ -160,6 +176,14 @@ Look up a term below and follow its link for an explanation or example.
 
 ::: {#term-job}
 *Job.* One execution of a command or script, such as fitting a statistical model or running a simulation. [Unattended jobs](#unattended-jobs).
+:::
+
+::: {#term-job-queue}
+*Job queue.* A system that holds submitted jobs and starts them as running capacity becomes available. [Unattended jobs](#unattended-jobs).
+:::
+
+::: {#term-justfile}
+*`justfile`.* The plain-text file containing the named commands, or recipes, used by `just`. [Saved commands](#saved-commands).
 :::
 
 ## L {#glossary-l .unnumbered .unlisted}
@@ -183,7 +207,7 @@ Look up a term below and follow its link for an explanation or example.
 ## M {#glossary-m .unnumbered .unlisted}
 
 ::: {#term-methodological-decision-log}
-*Methodological decision log.* Dated scientific decisions and their reasons, maintained newest first in `METHODOLOGY.md`. It explains how and why the specification changed. [Project context files](#project-records).
+*Methodological decision log.* Dated methodological choices and their reasons, maintained newest first in `METHODOLOGY.md`. It records the original choices as well as subsequent revisions to the scientific specification. [Project context files](#project-records).
 :::
 
 ::: {#term-model}
@@ -191,7 +215,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-modular-workflow}
-*Modular workflow.* Research steps that can run independently, with explicit inputs and saved outputs. Each performs a coherent operation, such as fitting a statistical model or generating a figure. [Modularity](#modular-steps).
+*Modular workflow.* Research steps that can be run separately once their required inputs are available. Each performs a coherent operation, such as fitting a statistical model or generating a figure, with explicit inputs and saved outputs. [Modularity](#modular-steps).
 :::
 
 ::: {#term-monte-carlo-error}
@@ -223,7 +247,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-plan-mode}
-*`Plan` mode.* A mode for inspecting a project and developing a plan before implementation. Writing a planning record does not authorize ordinary changes to the project. [Planning settings](#decide-whether-to-plan-first).
+*`Plan` mode.* A mode in which the agent examines the project and proposes changes before implementation. [Planning settings](#decide-whether-to-plan-first).
+:::
+
+::: {#term-processor-core}
+*Processor core.* A computing unit that can execute instructions independently of other cores. One job may use several cores. [Choosing queue capacity](#unattended-jobs).
 :::
 
 ::: {#term-project-context-files}
@@ -232,7 +260,7 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-prompt}
-*Prompt.* A request or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Appendix B: Prompt bank](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
+*Prompt.* Instructions or other input supplied to an LLM or agent. An *approval prompt* instead asks you whether an action may proceed. [Appendix B: Prompt bank](#prompt-index) and [approval settings](#choose-how-actions-are-approved).
 :::
 
 ::: {#term-provenance}
@@ -264,7 +292,11 @@ Look up a term below and follow its link for an explanation or example.
 :::
 
 ::: {#term-reproduction}
-*Reproduction.* Repeating a stated analysis or document-building procedure from specified files and instructions. Name the starting inputs and what was checked. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
+*Reproduction.* Recreating reported results from supplied inputs, code, and instructions, with a comparison to check whether the outputs match. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
+:::
+
+::: {#term-runtime}
+*Runtime.* In this guide, software that loads an LLM and runs it to generate responses. [Running an LLM](#local-models).
 :::
 
 ## S {#glossary-s .unnumbered .unlisted}

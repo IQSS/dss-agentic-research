@@ -14,7 +14,7 @@ Consider the [paper project scaffold](#scaffold-paper-example), which follows th
 
 A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions in `SKILL.md` and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
-![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project request and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
+![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project prompt and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
 
 Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 

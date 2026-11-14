@@ -118,7 +118,7 @@
       "title": "Implement the analysis independently",
       "group": "analysis",
       "inputs": "the fixed specification, data dictionary, approved input files, and assigned language.",
-      "delivery": "Ask the current agent to prepare two fresh headless sessions, each receiving the request below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check."
+      "delivery": "Ask the current agent to prepare two fresh headless sessions, each receiving the prompt below without access to the other implementation or its results. Share original data when checking processing; an already verified dataset can be shared for a narrower analysis check."
     },
     {
       "id": "compare-implementations",
@@ -126,7 +126,7 @@
       "title": "Compare completed implementations",
       "group": "analysis",
       "inputs": "both completed implementations, their outputs, and the common specification.",
-      "delivery": "Ask the current agent to launch a separate fresh headless session for this comparison and give it the request below."
+      "delivery": "Ask the current agent to launch a separate fresh headless session for this comparison and give it the prompt below."
     },
     {
       "id": "develop-labeling",
