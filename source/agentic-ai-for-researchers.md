@@ -1001,7 +1001,7 @@ A *dependency-aware pipeline runner*, such as [`targets`](https://docs.ropensci.
 
 You can use both tools together. The agent can define `just all` to start a `targets` pipeline. You or the agent then use the same convenient command, while `targets` determines which calculations actually need to run. If the project already has working commands or a pipeline, ask the agent to extend them.
 
-The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 5: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html). [Chapter 9: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
+The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 7: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html). [Chapter 8: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
 
 ## Check execution before scaling up
 
@@ -1045,7 +1045,7 @@ The queue's *slots* determine how many jobs may run simultaneously. Eight slots 
 
 The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
 
-For setup and recovery instructions, see [Chapter 6: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
+For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 
 # 14. Test the analysis against known truth {#simulation}
 
@@ -1613,7 +1613,7 @@ Have the agent place a copy of the `SPECIFICATION.md` used for the reported anal
 
 Have the agent write a `README.md` for `archive/` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
 
-The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 8: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
+The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 6: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
 
 For restricted data, the instructions in `archive/` should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
 
