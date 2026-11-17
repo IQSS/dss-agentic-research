@@ -59,7 +59,9 @@ For many settings, your personal project file overrides the shared project file,
 
 [^settings-precedence]: Anthropic's [settings precedence](https://code.claude.com/docs/en/settings#settings-precedence) explains file priority; its [permission documentation](https://code.claude.com/docs/en/permissions#settings-precedence) explains why a deny rule from one file takes precedence over an allow from another.
 
-> **Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains the setup.
+::: {.guide-note}
+**Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains the setup.
+:::
 
 [^saved-permission-secrets]: Apiiro's [November 2026 investigation](https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again) documents secrets in saved approvals. `Claude Code` normally adds the local settings file to your global `Git` ignore list when it writes the file inside a repository, but this does not protect a file `Git` already tracks. Exclude `.claude/settings.local.json` in the project's own `.gitignore` too; the shared `.claude/settings.json` can remain under version control. See Anthropic's [settings documentation](https://code.claude.com/docs/en/settings#keep-personal-settings-out-of-a-repository).
 
@@ -75,7 +77,9 @@ Containers can also preserve the software needed to reproduce an analysis. The t
 
 You can direct this setup from the app. Give the agent your permitted files and services, then ask:
 
+::: {.prompt}
 > Inspect the current settings and propose controls for the access I've described. Identify which settings files apply and where you propose to save each change. After I approve the changes, configure them and test permitted and blocked operations with harmless files. Check file tools, commands, and any connections this task uses. Report what worked, what failed, and anything you could not verify.
+:::
 
 For example, the agent can check that an approved test file is readable, a protected test file cannot be changed, and an excluded test file cannot be read through either a file tool or a script. It should report the actual outcomes and leave failed restrictions in place for diagnosis, rather than bypassing them to complete the test. These checks can reveal mistakes; they do not establish protection for every possible action. If a required control is unavailable, ask your institution's support team for an appropriate environment.
 

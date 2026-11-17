@@ -15,7 +15,9 @@ Suppose you need to change the labels on a figure. You can ask the agent to edit
 1. Download and install the Mac app using the [official `Claude Code` desktop instructions](https://code.claude.com/docs/en/desktop-quickstart).
 2. Sign in with the account you intend to use for research.
 
-> **Harvard.** Request a license through [HUIT’s `Claude` page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Sign in with that account for your Harvard research.
+::: {.guide-note}
+**Harvard.** Request a license through [HUIT’s `Claude` page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Sign in with that account for your Harvard research.
+:::
 
 ## Find your way around
 

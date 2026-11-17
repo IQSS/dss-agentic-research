@@ -12,7 +12,7 @@ version: "1.8 draft"
 
 An artificial intelligence (AI) agent can work directly with your research files and software, carrying out tasks you describe in ordinary language. You can ask it to find relevant papers, write and run an analysis, or revise a manuscript. These capabilities also make it useful for checking that the agent did what you asked and documenting how the results were produced. This guide explains how to use agents to make research more efficient, strengthen checks on the work, and preserve the information needed to understand and reproduce the findings.
 
-Suppose you and a collaborator decide to change an inclusion criterion. An agent can update the analysis code, rerun the affected steps, and regenerate the tables and figures. It can then check that the sample sizes and estimates reported in the manuscript match the revised results. By saving the updated code and recording what changed, it leaves you and your collaborators with an analysis you can inspect and run again.
+Suppose you and a collaborator decide to change an inclusion criterion. An agent can update the analysis code, rerun the affected steps, and regenerate the tables and figures. It can then check that the sample sizes and estimates reported in the manuscript match the revised results. By saving the updated code and recording what changed, it leaves you and your collaborators with an analysis you can inspect and run again. Much of this guide concerns organizing the whole research workflow so agents can help carry it out, check it, and document it.
 
 ## Three uses for AI in research
 
@@ -104,7 +104,9 @@ Suppose you need to change the labels on a figure. You can ask the agent to edit
 1. Download and install the Mac app using the [official `Claude Code` desktop instructions](https://code.claude.com/docs/en/desktop-quickstart).
 2. Sign in with the account you intend to use for research.
 
-> **Harvard.** Request a license through [HUIT’s `Claude` page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Sign in with that account for your Harvard research.
+::: {.guide-note}
+**Harvard.** Request a license through [HUIT’s `Claude` page](https://www.huit.harvard.edu/claude), using the form for your school or unit. Sign in with that account for your Harvard research.
+:::
 
 ## Find your way around
 
@@ -146,7 +148,9 @@ Anthropic documents a standard 30-day retention period for commercial `Claude Co
 
 Check both institutional approval for the service and your project’s terms. An institution may approve a tool while a data-use agreement prohibits sending your records to it. Consent, an IRB protocol, confidentiality agreements, and federal grant or other funder requirements may also limit the use. If the terms are unclear, ask the responsible institutional office before supplying the material.
 
-> **Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
+::: {.guide-note}
+**Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
+:::
 
 If you connect the agent to another service, check your institution’s guidance to confirm that the connection is approved for the data you intend to use.
 
@@ -174,8 +178,8 @@ The example below keeps confidential birth records on an institutional server wh
 
 Confirm what deletion covers, including backups and service records. Keep the custody record in approved storage and update it when the work changes. Give the agent only the instructions and details it is permitted to see.
 
-::: {#accidental-exposure}
-> **If material is exposed accidentally.** Stop further access and transfer. Record what was sent, to which service and account, and when. Report the incident promptly through your institution’s designated route and follow its instructions. Do not assume deleting the conversation resolves the exposure or erase records needed to assess it.
+::: {#accidental-exposure .guide-note}
+**If material is exposed accidentally.** Stop further access and transfer. Record what was sent, to which service and account, and when. Report the incident promptly through your institution’s designated route and follow its instructions. Do not assume deleting the conversation resolves the exposure or erase records needed to assess it.
 :::
 
 Once you know which information the agent may use, configure its access to files and tools. [Chapter 4: Control what the agent can do](#agent-access) explains how.
@@ -235,7 +239,9 @@ For many settings, your personal project file overrides the shared project file,
 
 [^settings-precedence]: Anthropic's [settings precedence](https://code.claude.com/docs/en/settings#settings-precedence) explains file priority; its [permission documentation](https://code.claude.com/docs/en/permissions#settings-precedence) explains why a deny rule from one file takes precedence over an allow from another.
 
-> **Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains the setup.
+::: {.guide-note}
+**Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains the setup.
+:::
 
 [^saved-permission-secrets]: Apiiro's [November 2026 investigation](https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again) documents secrets in saved approvals. `Claude Code` normally adds the local settings file to your global `Git` ignore list when it writes the file inside a repository, but this does not protect a file `Git` already tracks. Exclude `.claude/settings.local.json` in the project's own `.gitignore` too; the shared `.claude/settings.json` can remain under version control. See Anthropic's [settings documentation](https://code.claude.com/docs/en/settings#keep-personal-settings-out-of-a-repository).
 
@@ -251,7 +257,9 @@ Containers can also preserve the software needed to reproduce an analysis. The t
 
 You can direct this setup from the app. Give the agent your permitted files and services, then ask:
 
+::: {.prompt}
 > Inspect the current settings and propose controls for the access I've described. Identify which settings files apply and where you propose to save each change. After I approve the changes, configure them and test permitted and blocked operations with harmless files. Check file tools, commands, and any connections this task uses. Report what worked, what failed, and anything you could not verify.
+:::
 
 For example, the agent can check that an approved test file is readable, a protected test file cannot be changed, and an excluded test file cannot be read through either a file tool or a script. It should report the actual outcomes and leave failed restrictions in place for diagnosis, rather than bypassing them to complete the test. These checks can reveal mistakes; they do not establish protection for every possible action. If a required control is unavailable, ask your institution's support team for an appropriate environment.
 
@@ -340,6 +348,10 @@ Different outputs need different folders. A paper needs analysis results and man
 | Paper | Original inputs, analysis code, saved results, manuscript source, and research decisions. |
 | Dataset | Acquisition code, source records, processing steps, and documented releases. |
 | Website | Editable content, images and styles, and the generated site. |
+
+Consistent file and folder names help you and the agent recognize what belongs where. Lowercase words joined by hyphens (*kebab-case*) are one option: `heat-birthweight/` and `analysis-results.csv`.[^project-naming-styles] Consistency across the workspace matters more than the particular convention. Ask the agent to apply the chosen scheme while respecting programming-language conventions and keeping established project context filenames such as `CLAUDE.md` and `SPECIFICATION.md`.
+
+[^project-naming-styles]: Compare `analysis-results` (kebab case), `analysis_results` (snake case), and `analysisResults` (camel case). MDN explains [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case), [snake case](https://developer.mozilla.org/en-US/docs/Glossary/Snake_case), and [camel case](https://developer.mozilla.org/en-US/docs/Glossary/Camel_case).
 
 Preserve original inputs and create derived files through saved code. Keep current figures and tables separate from exploratory outputs, with enough information to identify the analysis that produced them. [Appendix A: Project scaffolds and starter files](#starter-files) provides example folder structures and project context files to adapt. [Chapter 7: Give the agent context for your project](#project-context) explains what to put in the project context files shown in the diagram and how the agent keeps them current.
 
@@ -1513,7 +1525,9 @@ Ask the agent to create a *chain of evidence* linking each reported result to th
 <!-- example:manuscript-results -->
 For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
 
-> In the synthetic sample, the estimated mean birthweight difference between ten and five hot days of maternal exposure during the third trimester was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the sample's maternal age and smoking distribution.
+::: {.example-output}
+In the synthetic sample, the estimated mean birthweight difference between ten and five hot days of maternal exposure during the third trimester was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the sample's maternal age and smoking distribution.
+:::
 
 The saved results retain full precision; the manuscript rounds them for presentation. The agent should check that the sentence describes the comparison and sample represented by the selected row.
 <!-- /example:manuscript-results -->
