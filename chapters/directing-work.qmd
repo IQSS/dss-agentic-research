@@ -10,7 +10,7 @@ The app lets you choose whether the agent should plan before acting, how actions
 
 Changing a figure label usually needs a direct instruction. Investigating why two analyses produce conflicting estimates may need a plan and more reasoning. Both tasks use the access controls from [Chapter 4: Control what the agent can do](#agent-access); changing a session setting does not replace those controls.
 
-![](figures/session-settings.svg){#fig-session-settings fig-alt="An enlarged view of the Claude Code controls below the message box. Model selects the LLM, High is the shown reasoning effort, Auto is the shown permission mode, and the usage circle opens allowance and reset information. The four controls have separate purposes." above="6pt" below="6pt"}
+![](figures/session-settings.svg){#fig-session-settings .tall fig-alt="The app controls connect to four distinct illustrations: an LLM selector, a reasoning-effort dial, an approval dialog, and a usage allowance with a reset time. LLM choice, effort, permissions, and usage have separate purposes." above="6pt" below="6pt"}
 
 ::: {.pagebreak}
 :::

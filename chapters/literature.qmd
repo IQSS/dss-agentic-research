@@ -10,7 +10,7 @@ An agent can help find relevant papers, compare their findings, and identify gap
 
 For the heat-and-birthweight project introduced in [Chapter 10: The example research project](#example-project), a published paper about low birthweight may provide useful background without directly answering the question about mean birthweight. Published studies may also examine different exposure periods or populations. Ask the agent to explain how those differences affect their relevance and to identify findings that challenge the proposed explanation.
 
-![](figures/literature-evidence.svg){#fig-literature-evidence fig-alt="Search results pass through identity verification and reading before supporting a research claim. Unresolved records remain visible, and conflicting findings are retained in the synthesis."}
+![](figures/literature-evidence.svg){#fig-literature-evidence .tall fig-alt="Search results and a saved log lead to verified citations, reading, and links between source passages and research claims. Unresolved citations remain separate and visible. The agent records whether it read the abstract or full text and retains conflicting findings."}
 
 ## Define the scope of the literature search {#literature-protocol}
 

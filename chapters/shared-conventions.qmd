@@ -20,7 +20,7 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A website project keeps CLAUDE.md, STATUS.md, TASKS.md, and DESIGN.md. These are grouped under Project context files." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The ~/.claude/ folder holds global user instructions. CLAUDE.md lists paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. Separate paper and website folders have their own project context files; the website uses DESIGN.md." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::

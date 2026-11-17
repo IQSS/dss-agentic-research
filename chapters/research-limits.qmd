@@ -14,7 +14,7 @@ Suppose you ask an agent to diagnose an error in a script that analyzes confiden
 
 With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with `This computer` selected in [`Claude Code`](https://code.claude.com/docs/en/desktop).
 
-![](figures/research-data-flow.svg){#fig-research-data-flow fig-alt="On your computer, the agent's tools read project files. The agent sends tool results to the hosted LLM on the provider's computers. The provider may retain copies."}
+![](figures/research-data-flow.svg){#fig-research-data-flow .tall fig-alt="A desktop computer holds project files and the agent's tools. An arrow carries tool results to a hosted LLM in the provider's server below. Storage bays show that the provider may retain copies."}
 
 A script reading a dataset does not, by itself, send every record to the LLM. What matters is what the agent sends to the LLM. An error message might contain a participant’s identifier, for example. Consider code, filenames, data dictionaries, and derived outputs as well as data files. Summaries can also contain protected information.
 
@@ -47,6 +47,8 @@ If the LLM must analyze the material, such as coding confidential interviews, it
 ## Keep a chain of custody {#data-chain-of-custody}
 
 For protected data, keep a *chain of custody*: a record of where the material goes, who or what can access it, and where copies remain. Include sensitive content in conversations, tool results, outputs, logs, and backups. Before sharing protected data with a service, establish where it will store the data, how long it will keep them, and how deletion can be arranged if your project requires it. Consult your institution’s guidance or ask the service administrator for these details.
+
+![](figures/chain-of-custody.svg){#fig-chain-of-custody .tall fig-alt="A chain links original data and permitted use, approved processing, copies that remain, and retention or deletion. Record each location, responsible person or service, and permitted access. Copies include conversations, outputs and logs, and backups; each needs a retention and removal record."}
 
 The example below keeps confidential birth records on an institutional server while the agent develops code with synthetic records. Replace these entries with your project’s actual locations, responsible people, and agreed retention dates.
 

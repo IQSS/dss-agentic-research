@@ -14,7 +14,7 @@ Suppose a paper has folders called `analysis-final/` and `analysis-new/`, plus t
 
 A *workspace* is a parent folder containing your projects. You might group papers together, keep shared datasets in a separate area, and give a research group's website its own project folder. The arrangement should make sense for your work; the example below is one possible layout.
 
-![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five project context files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
+![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace groups paper, dataset, and website projects in separate folders. The expanded paper directory contains data, code, outputs, manuscript source, and five project context files. Raw and processed data occupy separate subfolders." above="8pt" below="8pt"}
 
 Keep independently maintained projects in separate folders and open the relevant one in the app. A short workspace index can record each project's purpose and location. If two papers use the same curated dataset, the index can show that relationship, while each paper records the data version it used. [Chapter 8: Apply your conventions across projects](#shared-conventions) explains how to make this index available across projects.
 

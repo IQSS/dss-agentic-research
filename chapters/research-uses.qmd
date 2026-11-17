@@ -13,13 +13,13 @@ Suppose you and a collaborator decide to change an inclusion criterion. An agent
 ## Three uses for AI in research
 
 ::: {.research-use}
-![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="An agent examining research ideas."}
+![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="A lightbulb inside a chat bubble represents developing research ideas through conversation."}
 
 *Develop ideas.* A conversation with AI can help you explore a research question and consider explanations you might otherwise overlook. For example, you could describe an observed association and ask for competing explanations, then discuss what evidence would distinguish them. You can develop the promising suggestions further, drawing on the literature and your own expertise to judge which are worth pursuing.
 :::
 
 ::: {.research-use}
-![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
+![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="A code window connects data, a script, and a plotted result."}
 
 *Build and run research workflows.* An agent can turn a research plan into working code and carry out the steps needed to produce results. For example, it could prepare a dataset, fit the statistical models you specify, and generate figures for a manuscript. Saving those steps as reusable scripts makes it easier to revise the analysis or run it on new data. The agent can also help check its implementation and document the work for collaborators.
 :::
@@ -38,7 +38,7 @@ A large language model (LLM) is a neural network[^intro-neural-network] trained 
 
 For each new token, the LLM assigns probabilities to possible continuations. One is selected and added to the text, then the process repeats. Selection can involve randomness, so the most likely continuation is not always the one chosen.[^intro-generation]
 
-![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Illustrative bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token. The bars are illustrative, not measured probabilities."}
+![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token."}
 
 ### How can an LLM act on a research project? {#how-can-an-llm-act-on-a-research-project .unnumbered .unlisted}
 
@@ -46,7 +46,7 @@ An *agent* combines an LLM with tools and the software needed to use them. A too
 
 The surrounding software is called the *harness*. It supplies instructions and information to the LLM, handles permission checks, executes permitted tool calls, and returns their results. This lets the agent carry out work directly in your project.[^intro-harness]
 
-![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent combines an LLM with a harness that runs tools and returns their results, allowing it to perform those steps in the project."}
+![](figures/chat-to-agent.svg){#fig-chat-to-agent .tall fig-alt="Chat leaves the researcher to carry out project steps. Inside the Agent boundary, a software-harness console connects the LLM to tools: it runs tools and returns their results. The tools read, run, and edit the project under the researcher's direction."}
 
 The same AI app may support both ways of working. You can keep your existing [`R`](https://www.r-project.org/), [`Stata`](https://www.stata.com/), or [`Python`](https://www.python.org/) software; adopting an agent does not require changing statistical languages.
 

@@ -26,7 +26,7 @@ Ask the agent in your current session to prepare separate folders and launch two
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
-![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same inputs and analysis specification go to two fresh agents in separate folders, illustrated by an R implementation and a Python implementation. Each writes its own code and saves outputs. Another headless agent session compares both implementations to find where they disagree. Different analysis software is preferred when practical, but not required."}
+![](figures/independent-implementations.svg){#fig-independent-implementations .tall fig-alt="The same data, dictionary, and specification feed separate headless sessions A and B, illustrated with R and Python. Each builds independently from those inputs. Session C compares the saved outputs and reports agreement; if results disagree, its agent determines the cause."}
 
 If the project already has the analysis code developed in [Chapter 13: Build a modular analysis workflow](#research-workflows), keep it and have the coordinating agent launch just the independent second build. It should work from the specification and inputs only. Translating or revising the first implementation can carry its mistakes into the second.
 

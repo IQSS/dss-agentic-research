@@ -10,7 +10,7 @@ Research analyses change repeatedly. Separating the work into independently runn
 
 In the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the statistical model, and updating contrasts, figures, and manuscript checks. A modular workflow makes that difference explicit.
 
-![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Fifteen analysis scripts and a larger justfile listing just all, just figures, just contrasts, and just power connect to a shared downward arrow. Two example routes redraw a figure from saved contrasts or rerun affected steps after an approved sample change."}
+![](figures/selective-workflows.svg){#fig-selective-workflows .tall fig-alt="An agent prepares analysis scripts and defines recipes in a justfile. Four selectable commands connect inputs, scripts, and outputs: just all runs the workflow, just figures reuses saved contrasts, just contrasts reuses a saved fit, and just power runs a simulation. Recipes share scripts where appropriate."}
 
 ## Make research steps independently runnable {#modular-steps}
 
@@ -97,7 +97,7 @@ A project may require many independent model fits or simulation runs. A *job* is
 
 The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
 
-![](figures/work-while-you-sleep.svg){#fig-work-while-you-sleep .tall fig-alt="An illustrative overnight batch of 100 jobs: a pueue queue feeds up to eight running jobs on your computer, starting the next automatically whenever one finishes. A 5 PM, overnight, and 9 AM timeline leads to reviewing results, logs, and job status, including failures or unfinished work. The computer remains awake."}
+![](figures/work-while-you-sleep.svg){#fig-work-while-you-sleep .tall fig-alt="An agent submits 100 jobs at 5 PM. A pueue window shows 92 waiting and eight running slots. One job has finished, and the next waiting job automatically fills its slot. The computer stays awake. At 9 AM, the agent reviews outputs, logs, and completed, failed, or still-running jobs."}
 
 The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
 

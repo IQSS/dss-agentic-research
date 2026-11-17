@@ -10,6 +10,7 @@ body.quarto-dark main img[src*="figures/"] {
 
 body.quarto-dark img[src$="agent-access.svg"] { content: url("figures/agent-access-dark.svg"); }
 body.quarto-dark img[src$="agent-loop.svg"] { content: url("figures/agent-loop-dark.svg"); }
+body.quarto-dark img[src$="chain-of-custody.svg"] { content: url("figures/chain-of-custody-dark.svg"); }
 body.quarto-dark img[src$="chat-to-agent.svg"] { content: url("figures/chat-to-agent-dark.svg"); }
 body.quarto-dark img[src$="claude-code-app.svg"] { content: url("figures/claude-code-app-dark.svg"); }
 body.quarto-dark img[src$="context-and-adaptation.svg"] { content: url("figures/context-and-adaptation-dark.svg"); }

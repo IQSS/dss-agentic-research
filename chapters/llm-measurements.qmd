@@ -69,7 +69,7 @@ An LLM's stated confidence also needs evaluation. If it assigns 80 percent confi
 
 In the table above, the human reference identifies unmet need in 20 of 200 excerpts, or 10 percent. The LLM identifies 15, or 7.5 percent. Despite high overall agreement, the LLM labels give a different estimate of prevalence. Errors can also distort comparisons and regression estimates, especially when the likelihood of an error differs between groups or depends on other variables in the analysis.
 
-![](figures/llm-measurement.svg){#fig-llm-measurement fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
+![](figures/llm-measurement.svg){#fig-llm-measurement .tall fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
 
 Ask the agent to examine the errors that matter for the planned analysis and propose how to account for them. Methods such as *design-based supervised learning* combine a sample of human-reviewed observations with the larger set of LLM-labeled observations to estimate research quantities and their uncertainty. Their validity depends on the sampling and estimation procedure; a single accuracy score is not enough to make the correction.[^label-error-inference]
 
@@ -117,7 +117,7 @@ A *headless agent*[^measurement-headless] follows supplied instructions without 
 
 Processing every case in one long conversation lets earlier cases influence later responses. Ask the agent to start a fresh headless session for each case, supply the same fixed instructions and its assigned input, and save its response separately. For interview labeling, each session receives the rubric and its assigned excerpt. The agent can repeat these calls unattended without carrying conversation history from one case to the next.
 
-![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Three fresh headless sessions receive the same fixed instructions and their own assigned inputs. Each saves a separate response. Conversation history is not passed between sessions; file and tool access must be configured separately."}
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs .tall fig-alt="The same prompt and rubric feed three separate headless sessions, each with its own input file, agent, and saved response. No conversation history passes between sessions. File and tool access must be configured separately."}
 
 A fresh headless run can still load global user instructions, memory, files, plugins, or connected services. Ask the agent to check which of these each run can access and configure it to match the research protocol. It should identify any files or services whose access it could not verify. Fresh conversations alone establish neither access isolation nor statistical independence between the resulting outputs.[^headless-controls]
 

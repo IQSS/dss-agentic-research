@@ -20,8 +20,6 @@ Build on the smoke test in [Chapter 13: Build a modular analysis workflow](#rese
 
 Synthetic data also let the agent exercise conditions the code needs to handle. For example, it can insert missing birthweights to check that the code applies the prescribed exclusion rule. These functional checks establish whether the code completes the required steps for the supplied inputs. Assessing the estimator's statistical properties requires repeated datasets with known truth.
 
-![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="Two uses of simulation: pass one synthetic dataset through the saved code to check execution and required outputs; then repeatedly generate datasets under specified scenarios, run the prescribed analysis, and compare estimates and intervals with known truth."}
-
 ## Choose the scenarios for evaluating the estimator {#calibration-example}
 
 The methodological question is how well the proposed analysis performs under conditions that could matter for the study. You identify those conditions; the agent can help turn them into simulation scenarios and explain what each would reveal. In other projects, the simulation scenarios might vary in sample size, the amount of missing data, measurement error, or dependence among observations.
@@ -58,6 +56,8 @@ The [project download](resources/heat-birthweight.zip) contains generator code, 
 ## Have the agent evaluate repeated datasets {#simulation-repetitions}
 
 Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
+
+![](figures/known-answer-check.svg){#fig-known-answer-check .tall fig-alt="A simulation specification sets scenarios and acceptance criteria. Within each scenario, repeatedly generate data, run the prescribed analysis, and save results. Independently calculated true quantities feed the evaluation. Confidence intervals and summaries of bias, coverage, power, and false positives reveal performance across scenarios; crosses mark values outside the displayed criteria."}
 
 Agree on the performance measures before launching the repetitions. Ask the agent to propose measures suited to the quantities being estimated and any decision rules the study will use. The table below summarizes common choices.
 

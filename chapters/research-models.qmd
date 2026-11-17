@@ -18,7 +18,7 @@ An LLM's *weights* are numerical values learned during training. An *open-weight
 
 “Hosting locally” can mean running an LLM on your everyday computer. A *runtime* is software that loads the LLM and executes requests; [`Ollama`](https://docs.ollama.com/) is one example. Ask the agent to connect a suitable runtime to the script or agent that will submit the research inputs. Larger LLMs or workloads may require a more powerful computer. Data restrictions may also require the work to run on approved institutional hardware.
 
-![](figures/llm-deployment.svg){#fig-llm-deployment fig-alt="Research inputs can be sent to an LLM on your computer, on institutional infrastructure, or at a hosting provider. Inputs travel to the location where inference runs; each arrangement produces responses that need evaluation."}
+![](figures/llm-deployment.svg){#fig-llm-deployment .tall fig-alt="Research inputs can go to an LLM on a personal computer, an institutional research server, or a hosting provider. Each produces responses that require evaluation on the research task."}
 
 Using a hosted LLM sends the interview text to the provider's computers. A promise not to train on it does not settle retention or deletion policies; [Chapter 3: Know where your data goes](#data-chain-of-custody) explains how to assess those arrangements. Synthetic records can help develop the labeling code, but the actual interview text must reach the LLM that labels it. Open weights used through someone else's hosted service still send inputs to that provider.
 
@@ -87,7 +87,7 @@ Fine-tuning may improve labeling accuracy, adherence to the output format, or pe
 
 For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/mlx-lm) and [`Hugging Face PEFT`](https://huggingface.co/docs/peft/) provide training software, and LoRA describes the method used to learn the adjustments. Unlike LoRA, full fine-tuning updates all of the LLM's original weights and generally requires more training memory.
 
-![](figures/context-and-adaptation.svg){#fig-context-and-adaptation fig-alt="Supplying context leaves the LLM's weights unchanged. LoRA fine-tuning learns an adapter from reviewed training examples, then combines it with the base LLM to process new cases. Compare the two approaches on the same held-out evaluation cases."}
+![](figures/context-and-adaptation.svg){#fig-context-and-adaptation .tall fig-alt="A rubric, examples, and evidence accompany a new case in a prompt to an unchanged LLM. Alternatively, reviewed training examples produce a LoRA adapter while the base LLM's weights remain fixed. The adapter and matching base LLM process new cases. Compare both approaches on the same held-out test cases."}
 
 *QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 

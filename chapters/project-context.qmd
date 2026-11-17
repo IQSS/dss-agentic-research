@@ -16,7 +16,7 @@ Describe the research question, the relevant data and outputs, and the result yo
 
 Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in project context files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
 
-![](figures/project-context.svg){#fig-project-context .tall fig-alt="Five project context files: CLAUDE.md, STATUS.md, and TASKS.md form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these context files; a later session reads them before continuing." above="8pt" below="8pt"}
+![](figures/project-context.svg){#fig-project-context .tall fig-alt="A current agent session reads and updates five project context files in papers/research-project/. It records that tables are checked and captions remain. A fresh session reads the updated files and continues with the captions; the project folder persists between sessions." above="8pt" below="8pt"}
 
 ## Save project context files {#project-records}
 

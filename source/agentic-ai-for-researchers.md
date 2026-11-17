@@ -17,13 +17,13 @@ Suppose you and a collaborator decide to change an inclusion criterion. An agent
 ## Three uses for AI in research
 
 ::: {.research-use}
-![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="An agent examining research ideas."}
+![](figures/use-ideas.svg){.use-icon width="64px" fig-alt="A lightbulb inside a chat bubble represents developing research ideas through conversation."}
 
 *Develop ideas.* A conversation with AI can help you explore a research question and consider explanations you might otherwise overlook. For example, you could describe an observed association and ask for competing explanations, then discuss what evidence would distinguish them. You can develop the promising suggestions further, drawing on the literature and your own expertise to judge which are worth pursuing.
 :::
 
 ::: {.research-use}
-![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="Saved analysis code and results."}
+![](figures/use-workflows.svg){.use-icon width="64px" fig-alt="A code window connects data, a script, and a plotted result."}
 
 *Build and run research workflows.* An agent can turn a research plan into working code and carry out the steps needed to produce results. For example, it could prepare a dataset, fit the statistical models you specify, and generate figures for a manuscript. Saving those steps as reusable scripts makes it easier to revise the analysis or run it on new data. The agent can also help check its implementation and document the work for collaborators.
 :::
@@ -42,7 +42,7 @@ A large language model (LLM) is a neural network[^intro-neural-network] trained 
 
 For each new token, the LLM assigns probabilities to possible continuations. One is selected and added to the text, then the process repeats. Selection can involve randomness, so the most likely continuation is not always the one chosen.[^intro-generation]
 
-![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Illustrative bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token. The bars are illustrative, not measured probabilities."}
+![](figures/how-models-build-answers.svg){#fig-how-models-build-answers fig-alt="The unfinished sentence 'She poured herself a cup of' enters an LLM. Bars show possible next tokens: tea, coffee, and water. Coffee is selected, added to the sentence, and used to predict the next token."}
 
 ### How can an LLM act on a research project? {#how-can-an-llm-act-on-a-research-project .unnumbered .unlisted}
 
@@ -50,7 +50,7 @@ An *agent* combines an LLM with tools and the software needed to use them. A too
 
 The surrounding software is called the *harness*. It supplies instructions and information to the LLM, handles permission checks, executes permitted tool calls, and returns their results. This lets the agent carry out work directly in your project.[^intro-harness]
 
-![](figures/chat-to-agent.svg){#fig-chat-to-agent fig-alt="In a chat workflow the researcher carries instructions and results between the conversation and research software. An agent combines an LLM with a harness that runs tools and returns their results, allowing it to perform those steps in the project."}
+![](figures/chat-to-agent.svg){#fig-chat-to-agent .tall fig-alt="Chat leaves the researcher to carry out project steps. Inside the Agent boundary, a software-harness console connects the LLM to tools: it runs tools and returns their results. The tools read, run, and edit the project under the researcher's direction."}
 
 The same AI app may support both ways of working. You can keep your existing [`R`](https://www.r-project.org/), [`Stata`](https://www.stata.com/), or [`Python`](https://www.python.org/) software; adopting an agent does not require changing statistical languages.
 
@@ -132,7 +132,7 @@ Suppose you ask an agent to diagnose an error in a script that analyzes confiden
 
 With a *hosted LLM*, the LLM runs on the provider’s computers. The agent’s tools can run on your computer and return whole files, selected records, figures, or messages printed by a program. When the agent supplies those results to the LLM, it sends that information to the provider, even with `This computer` selected in [`Claude Code`](https://code.claude.com/docs/en/desktop).
 
-![](figures/research-data-flow.svg){#fig-research-data-flow fig-alt="On your computer, the agent's tools read project files. The agent sends tool results to the hosted LLM on the provider's computers. The provider may retain copies."}
+![](figures/research-data-flow.svg){#fig-research-data-flow .tall fig-alt="A desktop computer holds project files and the agent's tools. An arrow carries tool results to a hosted LLM in the provider's server below. Storage bays show that the provider may retain copies."}
 
 A script reading a dataset does not, by itself, send every record to the LLM. What matters is what the agent sends to the LLM. An error message might contain a participant’s identifier, for example. Consider code, filenames, data dictionaries, and derived outputs as well as data files. Summaries can also contain protected information.
 
@@ -165,6 +165,8 @@ If the LLM must analyze the material, such as coding confidential interviews, it
 ## Keep a chain of custody {#data-chain-of-custody}
 
 For protected data, keep a *chain of custody*: a record of where the material goes, who or what can access it, and where copies remain. Include sensitive content in conversations, tool results, outputs, logs, and backups. Before sharing protected data with a service, establish where it will store the data, how long it will keep them, and how deletion can be arranged if your project requires it. Consult your institution’s guidance or ask the service administrator for these details.
+
+![](figures/chain-of-custody.svg){#fig-chain-of-custody .tall fig-alt="A chain links original data and permitted use, approved processing, copies that remain, and retention or deletion. Record each location, responsible person or service, and permitted access. Copies include conversations, outputs and logs, and backups; each needs a retention and removal record."}
 
 The example below keeps confidential birth records on an institutional server while the agent develops code with synthetic records. Replace these entries with your project’s actual locations, responsible people, and agreed retention dates.
 
@@ -271,7 +273,7 @@ The app lets you choose whether the agent should plan before acting, how actions
 
 Changing a figure label usually needs a direct instruction. Investigating why two analyses produce conflicting estimates may need a plan and more reasoning. Both tasks use the access controls from [Chapter 4: Control what the agent can do](#agent-access); changing a session setting does not replace those controls.
 
-![](figures/session-settings.svg){#fig-session-settings fig-alt="An enlarged view of the Claude Code controls below the message box. Model selects the LLM, High is the shown reasoning effort, Auto is the shown permission mode, and the usage circle opens allowance and reset information. The four controls have separate purposes." above="6pt" below="6pt"}
+![](figures/session-settings.svg){#fig-session-settings .tall fig-alt="The app controls connect to four distinct illustrations: an LLM selector, a reasoning-effort dial, an approval dialog, and a usage allowance with a reset time. LLM choice, effort, permissions, and usage have separate purposes." above="6pt" below="6pt"}
 
 ::: {.pagebreak}
 :::
@@ -332,7 +334,7 @@ Suppose a paper has folders called `analysis-final/` and `analysis-new/`, plus t
 
 A *workspace* is a parent folder containing your projects. You might group papers together, keep shared datasets in a separate area, and give a research group's website its own project folder. The arrangement should make sense for your work; the example below is one possible layout.
 
-![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace contains separate paper, data, and website projects. One paper folder is expanded to show original and processed inputs, analysis code, saved results, manuscript source, and five project context files: CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md." above="8pt" below="8pt"}
+![](figures/project-organization.svg){#fig-project-organization .tall fig-alt="A workspace groups paper, dataset, and website projects in separate folders. The expanded paper directory contains data, code, outputs, manuscript source, and five project context files. Raw and processed data occupy separate subfolders." above="8pt" below="8pt"}
 
 Keep independently maintained projects in separate folders and open the relevant one in the app. A short workspace index can record each project's purpose and location. If two papers use the same curated dataset, the index can show that relationship, while each paper records the data version it used. [Chapter 8: Apply your conventions across projects](#shared-conventions) explains how to make this index available across projects.
 
@@ -403,7 +405,7 @@ Describe the research question, the relevant data and outputs, and the result yo
 
 Conversation details can be lost during [compaction](#usage-and-context) or be unavailable in a new session. Have the agent save agreed decisions and the current state of the work in project context files it can read again. It should also record unresolved questions, so an assumption does not become an apparent fact when the next session begins.
 
-![](figures/project-context.svg){#fig-project-context .tall fig-alt="Five project context files: CLAUDE.md, STATUS.md, and TASKS.md form the top row. SPECIFICATION.md and METHODOLOGY.md sit centered below: current scientific requirements and dated decisions with their reasons. An agent session reads and updates these context files; a later session reads them before continuing." above="8pt" below="8pt"}
+![](figures/project-context.svg){#fig-project-context .tall fig-alt="A current agent session reads and updates five project context files in papers/research-project/. It records that tables are checked and captions remain. A fresh session reads the updated files and continues with the captions; the project folder persists between sessions." above="8pt" below="8pt"}
 
 ## Save project context files {#project-records}
 
@@ -551,7 +553,7 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="A global CLAUDE.md lists example paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. The specialist files form a two-by-two grid. Two paper projects each keep CLAUDE.md, STATUS.md, TASKS.md, SPECIFICATION.md, and METHODOLOGY.md. A website project keeps CLAUDE.md, STATUS.md, TASKS.md, and DESIGN.md. These are grouped under Project context files." above="8pt" below="8pt"}
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The ~/.claude/ folder holds global user instructions. CLAUDE.md lists paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. Separate paper and website folders have their own project context files; the website uses DESIGN.md." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
@@ -663,7 +665,7 @@ Consider the [paper project scaffold](#scaffold-paper-example), which follows th
 
 A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions in `SKILL.md` and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
-![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A new-project prompt and the project's context join a reusable skill containing instructions and an optional template or script. The agent uses these to create the project, check its files, and report unresolved decisions." above="8pt" below="8pt"}
+![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A reusable skill in ~/.claude/skills/project-scaffold/ contains SKILL.md and paper and website templates. Two agents invoke /project-scaffold with different purposes and destinations, creating and checking papers/attendance/ and websites/group-site/. Each folder contains its own layout and project context files." above="8pt" below="8pt"}
 
 Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
@@ -844,7 +846,7 @@ An agent can help find relevant papers, compare their findings, and identify gap
 
 For the heat-and-birthweight project introduced in [Chapter 10: The example research project](#example-project), a published paper about low birthweight may provide useful background without directly answering the question about mean birthweight. Published studies may also examine different exposure periods or populations. Ask the agent to explain how those differences affect their relevance and to identify findings that challenge the proposed explanation.
 
-![](figures/literature-evidence.svg){#fig-literature-evidence fig-alt="Search results pass through identity verification and reading before supporting a research claim. Unresolved records remain visible, and conflicting findings are retained in the synthesis."}
+![](figures/literature-evidence.svg){#fig-literature-evidence .tall fig-alt="Search results and a saved log lead to verified citations, reading, and links between source passages and research claims. Unresolved citations remain separate and visible. The agent records whether it read the abstract or full text and retains conflicting findings."}
 
 ## Define the scope of the literature search {#literature-protocol}
 
@@ -966,7 +968,7 @@ Research analyses change repeatedly. Separating the work into independently runn
 
 In the heat-and-birthweight study ([Chapter 10: The example research project](#example-project)), changing a figure label should redraw from saved contrasts. Changing an approved sample rule requires rebuilding the sample, refitting the statistical model, and updating contrasts, figures, and manuscript checks. A modular workflow makes that difference explicit.
 
-![](figures/selective-workflows.svg){#fig-selective-workflows fig-alt="Fifteen analysis scripts and a larger justfile listing just all, just figures, just contrasts, and just power connect to a shared downward arrow. Two example routes redraw a figure from saved contrasts or rerun affected steps after an approved sample change."}
+![](figures/selective-workflows.svg){#fig-selective-workflows .tall fig-alt="An agent prepares analysis scripts and defines recipes in a justfile. Four selectable commands connect inputs, scripts, and outputs: just all runs the workflow, just figures reuses saved contrasts, just contrasts reuses a saved fit, and just power runs a simulation. Recipes share scripts where appropriate."}
 
 ## Make research steps independently runnable {#modular-steps}
 
@@ -1053,7 +1055,7 @@ A project may require many independent model fits or simulation runs. A *job* is
 
 The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
 
-![](figures/work-while-you-sleep.svg){#fig-work-while-you-sleep .tall fig-alt="An illustrative overnight batch of 100 jobs: a pueue queue feeds up to eight running jobs on your computer, starting the next automatically whenever one finishes. A 5 PM, overnight, and 9 AM timeline leads to reviewing results, logs, and job status, including failures or unfinished work. The computer remains awake."}
+![](figures/work-while-you-sleep.svg){#fig-work-while-you-sleep .tall fig-alt="An agent submits 100 jobs at 5 PM. A pueue window shows 92 waiting and eight running slots. One job has finished, and the next waiting job automatically fills its slot. The computer stays awake. At 9 AM, the agent reviews outputs, logs, and completed, failed, or still-running jobs."}
 
 The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
 
@@ -1072,8 +1074,6 @@ In the heat-and-birthweight example ([Chapter 10: The example research project](
 Build on the smoke test in [Chapter 13: Build a modular analysis workflow](#research-workflows). Ask the agent to generate a small synthetic dataset with the variables and formats the code expects, then run it through the complete workflow. For the birthweight example, that means preparing the analysis data, fitting the statistical model, calculating contrasts, and producing the required tables and figures. Have the agent fix errors, missing outputs, and failures between steps before repeating the run.
 
 Synthetic data also let the agent exercise conditions the code needs to handle. For example, it can insert missing birthweights to check that the code applies the prescribed exclusion rule. These functional checks establish whether the code completes the required steps for the supplied inputs. Assessing the estimator's statistical properties requires repeated datasets with known truth.
-
-![](figures/known-answer-check.svg){#fig-known-answer-check fig-alt="Two uses of simulation: pass one synthetic dataset through the saved code to check execution and required outputs; then repeatedly generate datasets under specified scenarios, run the prescribed analysis, and compare estimates and intervals with known truth."}
 
 ## Choose the scenarios for evaluating the estimator {#calibration-example}
 
@@ -1111,6 +1111,8 @@ The [project download](resources/heat-birthweight.zip) contains generator code, 
 ## Have the agent evaluate repeated datasets {#simulation-repetitions}
 
 Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
+
+![](figures/known-answer-check.svg){#fig-known-answer-check .tall fig-alt="A simulation specification sets scenarios and acceptance criteria. Within each scenario, repeatedly generate data, run the prescribed analysis, and save results. Independently calculated true quantities feed the evaluation. Confidence intervals and summaries of bias, coverage, power, and false positives reveal performance across scenarios; crosses mark values outside the displayed criteria."}
 
 Agree on the performance measures before launching the repetitions. Ask the agent to propose measures suited to the quantities being estimated and any decision rules the study will use. The table below summarizes common choices.
 
@@ -1189,7 +1191,7 @@ Ask the agent in your current session to prepare separate folders and launch two
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
-![](figures/independent-implementations.svg){#fig-independent-implementations fig-alt="The same inputs and analysis specification go to two fresh agents in separate folders, illustrated by an R implementation and a Python implementation. Each writes its own code and saves outputs. Another headless agent session compares both implementations to find where they disagree. Different analysis software is preferred when practical, but not required."}
+![](figures/independent-implementations.svg){#fig-independent-implementations .tall fig-alt="The same data, dictionary, and specification feed separate headless sessions A and B, illustrated with R and Python. Each builds independently from those inputs. Session C compares the saved outputs and reports agreement; if results disagree, its agent determines the cause."}
 
 If the project already has the analysis code developed in [Chapter 13: Build a modular analysis workflow](#research-workflows), keep it and have the coordinating agent launch just the independent second build. It should work from the specification and inputs only. Translating or revising the first implementation can carry its mistakes into the second.
 
@@ -1323,7 +1325,7 @@ An LLM's stated confidence also needs evaluation. If it assigns 80 percent confi
 
 In the table above, the human reference identifies unmet need in 20 of 200 excerpts, or 10 percent. The LLM identifies 15, or 7.5 percent. Despite high overall agreement, the LLM labels give a different estimate of prevalence. Errors can also distort comparisons and regression estimates, especially when the likelihood of an error differs between groups or depends on other variables in the analysis.
 
-![](figures/llm-measurement.svg){#fig-llm-measurement fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
+![](figures/llm-measurement.svg){#fig-llm-measurement .tall fig-alt="Interview excerpts supply both LLM labeling and human review of an evaluation sample. Their labels are compared to estimate errors. Saved LLM labels enter the research analysis, which uses the error assessment to examine or adjust estimates and uncertainty."}
 
 Ask the agent to examine the errors that matter for the planned analysis and propose how to account for them. Methods such as *design-based supervised learning* combine a sample of human-reviewed observations with the larger set of LLM-labeled observations to estimate research quantities and their uncertainty. Their validity depends on the sampling and estimation procedure; a single accuracy score is not enough to make the correction.[^label-error-inference]
 
@@ -1371,7 +1373,7 @@ A *headless agent*[^measurement-headless] follows supplied instructions without 
 
 Processing every case in one long conversation lets earlier cases influence later responses. Ask the agent to start a fresh headless session for each case, supply the same fixed instructions and its assigned input, and save its response separately. For interview labeling, each session receives the rubric and its assigned excerpt. The agent can repeat these calls unattended without carrying conversation history from one case to the next.
 
-![](figures/controlled-review-runs.svg){#fig-controlled-review-runs fig-alt="Three fresh headless sessions receive the same fixed instructions and their own assigned inputs. Each saves a separate response. Conversation history is not passed between sessions; file and tool access must be configured separately."}
+![](figures/controlled-review-runs.svg){#fig-controlled-review-runs .tall fig-alt="The same prompt and rubric feed three separate headless sessions, each with its own input file, agent, and saved response. No conversation history passes between sessions. File and tool access must be configured separately."}
 
 A fresh headless run can still load global user instructions, memory, files, plugins, or connected services. Ask the agent to check which of these each run can access and configure it to match the research protocol. It should identify any files or services whose access it could not verify. Fresh conversations alone establish neither access isolation nor statistical independence between the resulting outputs.[^headless-controls]
 
@@ -1411,7 +1413,7 @@ An LLM's *weights* are numerical values learned during training. An *open-weight
 
 “Hosting locally” can mean running an LLM on your everyday computer. A *runtime* is software that loads the LLM and executes requests; [`Ollama`](https://docs.ollama.com/) is one example. Ask the agent to connect a suitable runtime to the script or agent that will submit the research inputs. Larger LLMs or workloads may require a more powerful computer. Data restrictions may also require the work to run on approved institutional hardware.
 
-![](figures/llm-deployment.svg){#fig-llm-deployment fig-alt="Research inputs can be sent to an LLM on your computer, on institutional infrastructure, or at a hosting provider. Inputs travel to the location where inference runs; each arrangement produces responses that need evaluation."}
+![](figures/llm-deployment.svg){#fig-llm-deployment .tall fig-alt="Research inputs can go to an LLM on a personal computer, an institutional research server, or a hosting provider. Each produces responses that require evaluation on the research task."}
 
 Using a hosted LLM sends the interview text to the provider's computers. A promise not to train on it does not settle retention or deletion policies; [Chapter 3: Know where your data goes](#data-chain-of-custody) explains how to assess those arrangements. Synthetic records can help develop the labeling code, but the actual interview text must reach the LLM that labels it. Open weights used through someone else's hosted service still send inputs to that provider.
 
@@ -1480,7 +1482,7 @@ Fine-tuning may improve labeling accuracy, adherence to the output format, or pe
 
 For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/mlx-lm) and [`Hugging Face PEFT`](https://huggingface.co/docs/peft/) provide training software, and LoRA describes the method used to learn the adjustments. Unlike LoRA, full fine-tuning updates all of the LLM's original weights and generally requires more training memory.
 
-![](figures/context-and-adaptation.svg){#fig-context-and-adaptation fig-alt="Supplying context leaves the LLM's weights unchanged. LoRA fine-tuning learns an adapter from reviewed training examples, then combines it with the base LLM to process new cases. Compare the two approaches on the same held-out evaluation cases."}
+![](figures/context-and-adaptation.svg){#fig-context-and-adaptation .tall fig-alt="A rubric, examples, and evidence accompany a new case in a prompt to an unchanged LLM. Alternatively, reviewed training examples produce a LoRA adapter while the base LLM's weights remain fixed. The adapter and matching base LLM process new cases. Compare both approaches on the same held-out test cases."}
 
 *QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 
@@ -1534,7 +1536,7 @@ The saved results retain full precision; the manuscript rounds them for presenta
 
 The agent can record a *checksum*, a digital fingerprint of a file's contents, and compare it with a newly calculated fingerprint to detect whether the results file has changed. [Chapter 12: Bring data into the project](#data-provenance) explains these fingerprints. It should also check that the manuscript uses the correct entry and reports its values accurately, including the exposure contrast, sample, units, sign, interval, and rounding.
 
-![](figures/manuscript-trace.svg){#fig-manuscript-trace .tall fig-alt="A chain connects the saved contrasts.csv file to the manuscript. The agent compares recorded and calculated file fingerprints, identifies the sample row for the ten-versus-five-hot-day contrast, and checks rounding from -31.639627 to -31.6 grams. The manuscript shows the matching table value and an illustrative correction of an outdated value in the text. The abstract, figures, and captions also need checking."}
+![](figures/manuscript-trace.svg){#fig-manuscript-trace .tall fig-alt="A chain links the saved contrasts.csv spreadsheet to the manuscript. The agent compares recorded and calculated checksums, selects the mean birthweight contrast for 10 versus 5 hot days, and checks rounding from -31.639627 to -31.6 grams. The manuscript shows a corrected value; the abstract, figures, and captions also need checking."}
 
 Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] For a [`LaTeX`](https://www.latex-project.org/) manuscript, the agent can extract values from saved results into a file that the document reads when it is compiled. This keeps reported numbers connected to their sources without copying them by hand. If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. All three approaches need a check of the final document, including figure scales, labels, and captions.
 
