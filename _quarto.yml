@@ -25,6 +25,7 @@ project:
   output-dir: _site
   resources:
     - "resources/**"
+    - "!mockups/**"
   render:
     - index.qmd
     # Cloudflare Pages serves /404.html for any address it does not recognise. Without it Pages treats

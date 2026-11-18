@@ -13,7 +13,7 @@ resources:
 ```{=html}
 <link rel="stylesheet" href="console.css">
 <div class="console-scene">
-<svg id="scene" viewBox="0 0 1200 712" role="img" aria-label="The agent at its console" aria-describedby="scene-desc">
+<svg id="scene" viewBox="0 0 1200 728" role="img" aria-label="The agent at its console" aria-describedby="scene-desc">
       <desc id="scene-desc">A robot in a hat and trench coat stands behind a three-part control desk of gauges, screens, switches and lamps, with a speech bubble beside its head. Each control is a chapter of the guide; selecting one changes the robot's hat, eyes, arms, coat, what it holds and what surrounds it, and what it says in the bubble.</desc>
       <defs>
         <linearGradient id="panelFace" x1="0" y1="0" x2="0" y2="1">
@@ -37,7 +37,7 @@ resources:
       <g>
         <polygon points="760,20 1090,70 1040,330 860,290" fill="var(--c-rose)" opacity="0.28"/>
         <circle cx="1010" cy="130" r="52" fill="var(--c-mustard)" opacity="0.42"/>
-        <rect x="0" y="0" width="1200" height="712" fill="url(#grid)"/>
+        <rect x="0" y="0" width="1200" height="728" fill="url(#grid)"/>
       </g>
 
       <!-- ===== surroundings ===== -->
@@ -300,9 +300,9 @@ resources:
         </defs>
         <g id="shell"></g>
         <g id="wingL"></g>
-        <g id="wingR"></g>
         <g id="statusStrip"></g>
         <g id="centre"></g>
+        <g id="wingR"></g>
       </g>
     </svg>
 </div>

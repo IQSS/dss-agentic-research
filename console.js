@@ -4,13 +4,14 @@
 // per chapter, and are real links to the chapter pages; the desk under them is modeled in 3D and drawn
 // in perspective. Pointer: hover previews, a press opens the chapter. Touch: the first tap shows the
 // chapter in the agent's speech bubble, with a link, and the second opens.
-(function () {
+// Draw SVG links after Quarto has normalized the page's HTML links.
+document.addEventListener("DOMContentLoaded", function () {
   const SITE = "chapters/";
   const PARTS = {
     I: { name: "Part I · Orientation", dot: "var(--c-blue-2)" },
     II: { name: "Part II · Direct the work", dot: "var(--c-mustard)" },
-    III: { name: "Part III · Do the research", dot: "var(--c-rose)" },
-    A: { name: "Reference", dot: "var(--c-muted)" },
+    III: { name: "Part III · Do the research", dot: "var(--c-part-research)" },
+    A: { name: "Reference", dot: "var(--c-part-reference)" },
   };
   const COATS = {
     sage:    { c: "#6f7f76", dk: "#55635b", lt: "#8a9a90" },
@@ -46,58 +47,58 @@
     { n: "1", part: "I", slug: "research-uses", title: "How agents can help your research", ctl: "dome",
       r: { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null },
       body: "Research depends on more than getting an answer quickly. We need to know what was done, whether it matches the question, and whether someone can reproduce it. An agent can help maintain that connection while doing much of the coding, searching, checking, and documentation. Used well, it can make research faster, more robust, reproducible, and auditable." },
-    { n: "2", part: "I", slug: "first-session", title: "Get started with the app", ctl: "lampgrid",
+    { n: "2", part: "I", slug: "first-session", title: "Get started with the app", ctl: "app",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "slate", gloves: "cream", holds: "terminal", scene: null },
       body: "You can use an agent with familiar research files and software without first learning a terminal. This chapter introduces the app and its main controls, so that later instructions about a folder, a session, or a permission mode have a clear meaning." },
-    { n: "3", part: "I", slug: "research-limits", title: "Know where your data goes", ctl: "toggles",
+    { n: "3", part: "I", slug: "research-limits", title: "Know where your data goes", ctl: "transfer",
       r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "slate", gloves: "mustard", holds: null, scene: "glassbox" },
       body: "Protected research material can reach an external service through an agent's normal work. Before using it, establish where the information will go, whether that processing is permitted, and what copies may remain. These decisions affect the research environment you choose and the records you need to keep." },
-    { n: "4", part: "I", slug: "agent-access", title: "Control what the agent can do", ctl: "dome",
+    { n: "4", part: "I", slug: "agent-access", title: "Control what the agent can do", ctl: "stop",
       r: { hat: "fedora", eyes: "alert", arms: "rest", coat: "slate", gloves: "mustard", holds: null, scene: "glassbox" },
       body: "You decide which files the agent may read or change and which services it may use. The agent can configure and check those controls, so routine work can proceed while other files remain protected. This chapter explains permission rules, sandbox restrictions, and when a separate environment helps." },
     { n: "5", part: "I", slug: "directing-work", title: "Choose settings for the task", ctl: "rotary",
       r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", gloves: "brown", holds: "dial", scene: null },
       body: "Choose whether the agent should plan before acting, how actions receive approval, and which LLM and reasoning effort to use. A figure-label change can proceed directly; conflicting estimates may need investigation. The app also shows your usage allowance and reset information." },
-    { n: "6", part: "II", slug: "project-organization", title: "Organize your research projects", ctl: "cardslot",
+    { n: "6", part: "II", slug: "project-organization", title: "Organize your research projects", ctl: "folder",
       r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
       body: "An agent needs to find the right files before it can do useful work. A consistent project structure helps it locate the current analysis, preserve original inputs, and save results where you and your collaborators expect them. The same organization makes it easier to explain how a result was produced or return to an earlier version." },
-    { n: "7", part: "II", slug: "project-context", title: "Give the agent context for your project", ctl: "cardslot",
+    { n: "7", part: "II", slug: "project-context", title: "Give the agent context for your project", ctl: "context",
       r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
       body: "An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. The records also help you and your collaborators understand changes made along the way." },
-    { n: "8", part: "II", slug: "shared-conventions", title: "Apply your conventions across projects", ctl: "dpad",
+    { n: "8", part: "II", slug: "shared-conventions", title: "Apply your conventions across projects", ctl: "defaults",
       r: { hat: "hardhat", eyes: "calm", arms: "rest", coat: "mustard", gloves: "slate", holds: null, scene: "tree" },
       body: "You should not have to explain the same coding, modeling, or writing preferences whenever you begin a project. Shared instructions let the agent reuse those conventions while keeping each study's question, data, and decisions in its own records. Corrections made during one project can then improve work on the next." },
     { n: "9", part: "II", slug: "reusable-procedures", title: "Use skills for recurring tasks", ctl: "keys",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "rose", gloves: "slate", holds: "gear", scene: null },
       body: "Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task, including the checks that make its result useful. It can preserve lessons from earlier work and reduce the need to explain the same steps again." },
-    { n: "10", part: "III", slug: "example-project", title: "The example research project", ctl: "scope",
+    { n: "10", part: "III", slug: "example-project", title: "The example research project", ctl: "study",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
       body: "How does heat exposure relate to birthweight, and does that relationship vary with maternal age? This question connects the following chapters. An agent can help develop it, examine the evidence, and build an analysis whose results can be checked and reproduced." },
-    { n: "11", part: "III", slug: "literature", title: "Find and assess research literature", ctl: "ledbar",
+    { n: "11", part: "III", slug: "literature", title: "Find and assess research literature", ctl: "references",
       r: { hat: "beret", eyes: "alert", arms: "hold", coat: "slate", gloves: "cream", holds: "books", scene: null },
       body: "An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support." },
-    { n: "12", part: "III", slug: "data-acquisition", title: "Bring data into the project", ctl: "jacks",
+    { n: "12", part: "III", slug: "data-acquisition", title: "Bring data into the project", ctl: "datainputs",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "mustard", holds: "key", scene: "database" },
       body: "An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from." },
-    { n: "13", part: "III", slug: "research-workflows", title: "Build a modular analysis workflow", ctl: "scope",
+    { n: "13", part: "III", slug: "research-workflows", title: "Build a modular analysis workflow", ctl: "sequencer",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
       body: "Research analyses change repeatedly. Separating the work into independently runnable steps lets an agent revise one part without rerunning everything. Saved inputs and outputs also make errors easier to locate." },
-    { n: "14", part: "III", slug: "simulation", title: "Test the analysis against known truth", ctl: "key",
+    { n: "14", part: "III", slug: "simulation", title: "Test the analysis against known truth", ctl: "scope",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
-      body: "<!-- aliases: calibration-example -->" },
+      body: "Simulation can check whether the code an agent builds runs successfully and whether a statistical method produces reliable estimates and uncertainty intervals. Repeating the analysis on synthetic datasets with known truth lets you assess its performance under different conditions." },
     { n: "15", part: "III", slug: "checking-analysis", title: "Check the agent with independent implementations", ctl: "twinmeters",
       r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "sage", gloves: "mustard", holds: "magnifier", scene: null },
       body: "Independently built implementations give mistakes a chance to produce observable disagreements. Each agent receives the same specification and inputs, works through the analysis separately, and saves comparable outputs. A rerun of the same code cannot provide this check." },
-    { n: "16", part: "III", slug: "llm-measurements", title: "Use LLM outputs as research data", ctl: "lever",
+    { n: "16", part: "III", slug: "llm-measurements", title: "Use LLM outputs as research data", ctl: "measurement",
       r: { hat: "fedora", eyes: "calm", arms: "hold", coat: "slate", gloves: "brown", holds: "package", scene: null },
       body: "LLMs can classify documents, extract information, or assess material that would take a research team considerable time to read. When their responses become variables in an analysis, errors in those responses affect the evidence. Define what the LLM should produce and evaluate whether it does that well enough for the study." },
-    { n: "17", part: "III", slug: "research-models", title: "Run and adapt LLMs for your research", ctl: "rotary",
+    { n: "17", part: "III", slug: "research-models", title: "Run and adapt LLMs for your research", ctl: "adaptlever",
       r: { hat: "hardhat", eyes: "focus", arms: "hold", coat: "slate", gloves: "brown", holds: "gear", scene: null },
       body: "Running an LLM yourself can give you control over where research material is processed and preserve access to the weights used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices, with different costs and checks." },
-    { n: "18", part: "III", slug: "research-writing", title: "Write and revise the manuscript", ctl: "printer",
+    { n: "18", part: "III", slug: "research-writing", title: "Write and revise the manuscript", ctl: "paperprinter",
       r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
       body: "A manuscript can retain an outdated estimate after the analysis has changed. An agent can help keep the text, tables, and figures consistent with the saved results, and identify interpretations that need reconsidering." },
-    { n: "19", part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "counter",
+    { n: "19", part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "rerun",
       r: { hat: "none", eyes: "focus", arms: "hold", coat: "sage", gloves: "brown", holds: "clipboard", scene: null },
       body: "Another researcher should be able to reproduce the reported results using the supplied files and instructions. An agent can prepare and test those materials, finding dependencies that are easy to miss in a familiar working project." },
     { n: "A", part: "A", slug: "starter-files", title: "Project scaffolds and starter files", ctl: "key",
@@ -317,7 +318,7 @@
       return 32;
     },
     twinmeters(a, x, y, dot) {
-      [["R", -22], ["STATA", 22]].forEach(([s, dx]) => {
+      [["R", -22], ["Python", 22]].forEach(([s, dx]) => {
         const mx = x + dx;
         el("rect", { x: mx - 19, y: y - 22, width: 38, height: 40, rx: 3, fill: EDGE }, a);
         el("rect", { x: mx - 16, y: y - 19, width: 32, height: 26, rx: 2, fill: PAPER }, a);
@@ -394,60 +395,375 @@
     },
   };
 
-  function control(g, ch, x, y) {
+  // Chapter-specific instruments. Draw at the origin; placement sets size and
+  // position on the taller control face. The console's width is unchanged.
+  const instrument = {
+    rect(a, x, y, w, h, fill, rx = 2, extra = {}) {
+      return el("rect", { x, y, width: w, height: h, rx, fill, ...extra }, a);
+    },
+    circle(a, x, y, r, fill, extra = {}) {
+      return el("circle", { cx: x, cy: y, r, fill, ...extra }, a);
+    },
+    path(a, d, stroke, width = 1.5, fill = "none", extra = {}) {
+      return el("path", { d, fill, stroke, "stroke-width": width, "stroke-linecap": "round", "stroke-linejoin": "round", ...extra }, a);
+    },
+    text(a, x, y, s, color = PAPER, size = 6, anchor = "middle") {
+      return txt(a, x, y, s, "tag", { "text-anchor": anchor, style: `fill:${color};font-size:${size}px;opacity:1;letter-spacing:0` });
+    },
+    frame(a, x, y, w, h, rx = 5) {
+      this.rect(a, x, y, w, h, "none", rx, { class: "ring" });
+    },
+    screw(a, x, y) {
+      this.circle(a, x, y, 1.3, "var(--c-metal)");
+      this.path(a, `M${x - .6} ${y + .6} l1.2 -1.2`, EDGE, .65);
+    }
+  };
+  const I = instrument;
+  const BLUE = "var(--c-instrument-blue)", SAGE = "var(--c-instrument-sage)";
+  const CREAM = "var(--c-instrument-cream)", ROSE = "var(--c-instrument-rose)";
+  Object.assign(CTL, {
+    app(a) {
+      I.rect(a, -40, -29, 80, 58, EDGE, 6);
+      I.rect(a, -34, -23, 68, 45, CREAM, 3);
+      I.rect(a, -34, -23, 68, 10, BLUE, 3);
+      I.rect(a, -34, -18, 68, 5, BLUE, 0);
+      I.text(a, -17, -16, "Claude", INK, 5.5);
+      I.rect(a, -2, -21, 31, 7, PAPER, 2);
+      I.text(a, 13, -16, "Code", INK, 5.5);
+      I.rect(a, -34, -13, 15, 35, "var(--c-plate)", 0);
+      [-6, 1, 8].forEach(y => I.rect(a, -30, y, 7, 2, "var(--c-metal-3)", .5));
+      I.rect(a, -14, -8, 42, 8, BLUE, 2);
+      I.path(a, "M-10 -4 h24", INK, 1);
+      [-1, 4, 9].forEach((y, i) => I.path(a, `M-11 ${y + 5} h${31 - i * 6}`, "var(--c-metal-2)", 1.5));
+      I.rect(a, -14, 15, 42, 4, PAPER, 1);
+      I.circle(a, 32, 25.5, 1.7, SAGE, { class: "lamp" });
+      I.frame(a, -44, -33, 88, 66, 8);
+    },
+    transfer(a) {
+      I.rect(a, -38, -25, 76, 50, EDGE, 4);
+      I.text(a, -20, -15, "LOCAL", CREAM, 5.2);
+      I.text(a, 19, -15, "PROVIDER", CREAM, 5.2);
+      [-21, 21].forEach(x => {
+        I.circle(a, x, -1, 8, "var(--c-metal)");
+        I.circle(a, x, -1, 5, DEEP);
+        I.circle(a, x, -1, 2, CREAM);
+      });
+      I.path(a, "M-21 2 C-21 24 21 24 21 2", ROSE, 3.5);
+      [-21, 21].forEach(x => I.rect(a, x - 3, -4, 6, 13, BLUE, 1.5));
+      I.path(a, "M-6 2 h12 m-3 -3 l3 3 -3 3", CREAM, 1.3);
+      I.screw(a, -33, 20); I.screw(a, 33, 20);
+      I.frame(a, -42, -29, 84, 58, 6);
+    },
+    folder(a) {
+      I.rect(a, -38, 12, 76, 16, EDGE, 4);
+      I.rect(a, -31, 16, 62, 5, DEEP, 2);
+      I.path(a, "M-29 15 V-23 Q-29 -27 -25 -27 H-9 L-3 -20 H27 Q31 -20 31 -16 V15 Z", EDGE, 1.4, SAGE);
+      I.path(a, "M-27 13 L-23 -12 H34 L29 15 Z", EDGE, 1.4, CREAM);
+      I.rect(a, -17, -5, 37, 11, PAPER, 1);
+      I.text(a, 1, 2.5, "project/", INK, 7);
+      I.circle(a, 31, 22, 2.2, "var(--c-mustard)", { class: "lamp" });
+      I.frame(a, -42, -31, 84, 63, 6);
+    },
+    context(a) {
+      I.path(a, "M-24 -22 L30 -27 L34 11 L-20 15 Z", EDGE, 1.2, SAGE);
+      I.path(a, "M-31 -27 L22 -31 L25 11 L-28 15 Z", EDGE, 1.2, CREAM);
+      const sheet = el("g", { transform: "rotate(-5)" }, a);
+      I.rect(sheet, -28, -27, 53, 44, PAPER, 1, { stroke: EDGE, "stroke-width": 1.2 });
+      I.rect(sheet, -28, -27, 53, 5, "var(--c-mustard)", 0);
+      I.text(sheet, -2, -11, "CLAUDE.md", INK, 7.3);
+      I.path(sheet, "M-21 -3 h33 M-21 3 h25 M-21 9 h30", "var(--c-metal)", 2.2);
+      I.rect(a, -38, 13, 76, 15, EDGE, 3);
+      I.rect(a, -31, 17, 62, 4, DEEP, 2);
+      I.circle(a, 31, 23, 2.2, BLUE, { class: "lamp" });
+      I.frame(a, -42, -35, 84, 67, 6);
+    },
+    defaults(a) {
+      I.path(a, "M0 8 v12 M-27 27 v-7 h54 v7", EDGE, 2);
+      I.circle(a, 0, -6, 23, EDGE);
+      I.circle(a, 0, -6, 18, "var(--c-metal)");
+      I.circle(a, 0, -6, 14, "var(--c-mustard)", { class: "lamp" });
+      I.path(a, "M0 -6 l8 -9", INK, 3);
+      [-27, 0, 27].forEach((x, i) => {
+        I.rect(a, x - 9, 24, 18, 12, EDGE, 2);
+        I.circle(a, x, 30, 3.4, [BLUE, SAGE, ROSE][i]);
+      });
+      I.frame(a, -40, -33, 80, 73, 6);
+    },
+    study(a) {
+      I.rect(a, -41, -28, 82, 56, EDGE, 5);
+      I.rect(a, -35, -22, 70, 42, CREAM, 3);
+      I.text(a, 0, -13, "HEAT & BIRTHWEIGHT", INK, 5.8);
+      I.path(a, "M-25 -4 v15", EDGE, 8);
+      I.path(a, "M-25 -4 v15", PAPER, 5);
+      I.path(a, "M-25 0 v11", ROSE, 2.6);
+      I.circle(a, -25, 12, 5, EDGE); I.circle(a, -25, 12, 3.2, ROSE);
+      I.path(a, "M-9 -5 v20 h36", "var(--c-metal-3)", 1);
+      [[-4, 0], [2, 4], [6, 1], [11, 7], [16, 5], [22, 10], [27, 9]].forEach(([x,y]) => I.circle(a, x, y, 1.8, "var(--c-blue)"));
+      I.circle(a, 33, 24, 2.2, SAGE, { class: "lamp" });
+      I.frame(a, -45, -32, 90, 64, 7);
+    },
+    references(a) {
+      I.rect(a, -37, -27, 74, 54, EDGE, 4);
+      I.rect(a, -30, -21, 51, 36, BLUE, 2);
+      I.rect(a, -25, -17, 39, 30, CREAM, 1, { transform: "rotate(-5)" });
+      I.rect(a, -21, -18, 38, 30, PAPER, 1, { stroke: "var(--c-metal)", "stroke-width": .8 });
+      I.text(a, -3, -10, "SOURCES", INK, 5.2);
+      I.path(a, "M-15 -4 h22 M-15 1 h17 M-15 6 h20", "var(--c-metal-2)", 1.5);
+      I.circle(a, 17, 3, 9, "var(--c-instrument-lens)", { stroke: EDGE, "stroke-width": 2.7 });
+      I.path(a, "M23 10 l8 8", "var(--c-metal)", 5);
+      I.path(a, "M23 10 l8 8", EDGE, 2.4);
+      I.circle(a, -26, 21, 2.8, SAGE, { class: "lamp" });
+      I.text(a, 0, 23, "VERIFY", CREAM, 5.2);
+      I.frame(a, -41, -31, 82, 62, 6);
+    },
+    sequencer(a) {
+      I.rect(a, -43, -27, 86, 54, EDGE, 4);
+      I.text(a, 0, -17, "WORKFLOW", CREAM, 6);
+      I.path(a, "M-29 -3 h58 M-29 14 h58 M0 -3 v17", "var(--c-metal)", 1.5);
+      [-29, 0, 29].forEach((x, i) => {
+        I.rect(a, x - 9, -10, 18, 15, DEEP, 2);
+        I.rect(a, x - 8, -12, 16, 14, [BLUE, SAGE, ROSE][i], 2, { class: "lamp" });
+        I.text(a, x, -3, String(i + 1), INK, 7);
+      });
+      [-29, 0, 29].forEach((x, i) => {
+        I.rect(a, x - 9, 9, 18, 13, DEEP, 2);
+        I.circle(a, x, 15, 3, i === 1 ? "var(--c-mustard)" : "var(--c-metal-2)", i === 1 ? { class: "lamp" } : {});
+      });
+      I.frame(a, -47, -31, 94, 62, 6);
+    },
+    labeler(a) {
+      I.rect(a, -42, -23, 84, 46, EDGE, 4);
+      I.rect(a, -35, -14, 28, 27, PAPER, 1);
+      I.path(a, "M-30 -8 h18 M-30 -3 h15 M-30 2 h19 M-30 7 h12", "var(--c-metal-2)", 1.5);
+      I.path(a, "M-4 0 h11 m-3 -3 l3 3 -3 3", CREAM, 1.5);
+      [BLUE, SAGE, ROSE].forEach((color, i) => {
+        I.circle(a, 20, -12 + i * 12, 3.4, color, i === 1 ? { class: "lamp" } : {});
+        I.text(a, 31, -10 + i * 12, ["A", "B", "?"][i], CREAM, 5.5);
+      });
+      I.text(a, -20, 20, "LABEL", CREAM, 5.5);
+      I.frame(a, -46, -27, 92, 54, 6);
+    },
+    adapter(a) {
+      I.rect(a, -36, -24, 58, 49, EDGE, 5);
+      I.rect(a, -29, -18, 44, 29, BLUE, 3);
+      I.rect(a, -18, -11, 21, 14, CREAM, 2);
+      [-14, -8, -2].forEach(x => { I.path(a, `M${x} -14 v3 M${x} 3 v3`, CREAM, 1.2); });
+      I.text(a, -7, -1, "LLM", INK, 6.5);
+      I.text(a, -8, 20, "LOCAL", CREAM, 5.6);
+      I.rect(a, 11, -6, 29, 24, EDGE, 3);
+      I.rect(a, 15, -10, 26, 24, ROSE, 2, { stroke: EDGE, "stroke-width": 1 });
+      I.text(a, 28, 0, "+", INK, 12);
+      I.text(a, 28, 9, "LoRA", INK, 5.4);
+      [18, 24, 30, 36].forEach(x => I.rect(a, x, 14, 2.5, 4, "var(--c-mustard)", .5));
+      I.circle(a, -27, 20, 2, SAGE, { class: "lamp" });
+      I.frame(a, -40, -28, 85, 57, 6);
+    },
+    handoff(a) {
+      I.rect(a, -41, -25, 24, 50, EDGE, 4);
+      I.text(a, -29, -16, "RUN", CREAM, 5.5);
+      I.rect(a, -32, -10, 6, 29, DEEP, 3);
+      I.rect(a, -31, -3, 4, 18, "var(--c-metal)", 2);
+      I.circle(a, -29, -4, 7, ROSE, { class: "lamp" });
+      I.circle(a, -31, -6, 2, CREAM, { opacity: .65 });
+      I.rect(a, -10, 12, 51, 13, EDGE, 3);
+      I.path(a, "M-5 15 V-17 h13 l5 5 h23 v27 Z", EDGE, 1.4, SAGE);
+      I.rect(a, -1, -5, 32, 9, CREAM, 1);
+      I.text(a, 15, 1.5, "archive/", INK, 5.9);
+      I.circle(a, 23, 15, 6, CREAM);
+      I.path(a, "M20 15 l2 2 4 -5", "var(--c-instrument-check)", 1.7);
+      I.frame(a, -45, -29, 90, 58, 6);
+    },
+    measurement(a) {
+      I.rect(a, -52, -32, 104, 64, EDGE, 6);
+      I.rect(a, -46, -27, 92, 53, CREAM, 4);
+      const arc = (from, to, color) => {
+        const point = t => [Math.cos(t) * 32, 15 + Math.sin(t) * 32];
+        const [x0, y0] = point(from), [x1, y1] = point(to);
+        I.path(a, `M${x0} ${y0} A32 32 0 0 1 ${x1} ${y1}`, color, 6);
+      };
+      arc(Math.PI, Math.PI * 1.42, SAGE);
+      arc(Math.PI * 1.42, Math.PI * 1.76, "var(--c-mustard)");
+      arc(Math.PI * 1.76, Math.PI * 2, ROSE);
+      for (let i = 0; i <= 10; i++) {
+        const t = Math.PI + i * Math.PI / 10;
+        const inner = i % 5 ? 24 : 22;
+        I.path(a, `M${Math.cos(t) * inner} ${15 + Math.sin(t) * inner} L${Math.cos(t) * 28} ${15 + Math.sin(t) * 28}`, INK, i % 5 ? .8 : 1.3);
+      }
+      I.text(a, 0, -20, "MEASURE", INK, 6.8);
+      I.path(a, "M0 15 L-7 -14", INK, 2.3);
+      I.circle(a, 0, 15, 4.2, INK);
+      I.circle(a, -1, 14, 1.2, "var(--c-metal)");
+      I.circle(a, 39, -20, 2.7, SAGE, { class: "lamp" });
+      I.screw(a, -48, 28); I.screw(a, 48, 28);
+      I.frame(a, -56, -36, 112, 72, 8);
+    },
+    adaptlever(a) {
+      I.rect(a, -24, -36, 39, 72, EDGE, 5);
+      I.rect(a, -19, -32, 29, 64, BLUE, 3);
+      I.text(a, -4, -25, "ADAPT", INK, 6);
+      I.rect(a, -7, -19, 6, 43, DEEP, 3);
+      [-17, -7, 3, 13, 23].forEach((y, i) => I.path(a, `M-16 ${y} h${i % 2 ? 3 : 5}`, INK, 1.1));
+      I.rect(a, -5.5, -3, 3, 24, "var(--c-metal)", 1.5);
+      I.rect(a, -17, -8, 26, 14, EDGE, 5);
+      I.rect(a, -16, -10, 24, 13, ROSE, 5, { class: "glow" });
+      I.path(a, "M-11 -6 h14", CREAM, 1.3, "none", { opacity: .65 });
+      I.text(a, -4, 30, "BASE", INK, 5.2);
+      // A smaller plug-in module gives the lever its LLM meaning without
+      // enclosing the instrument in another large rectangular housing.
+      I.path(a, "M15 19 h6", "var(--c-metal)", 4);
+      I.rect(a, 18, 5, 27, 30, EDGE, 3);
+      I.rect(a, 20, 3, 23, 27, CREAM, 2, { stroke: EDGE, "stroke-width": 1 });
+      I.rect(a, 25, 10, 13, 11, SAGE, 1, { stroke: "var(--c-metal-3)", "stroke-width": .8 });
+      I.text(a, 31.5, 17.5, "LLM", INK, 4.7);
+      [24, 29, 34, 39].forEach(x => I.rect(a, x, 30, 2, 4, "var(--c-mustard)", .5));
+      I.frame(a, -28, -40, 77, 80, 7);
+    },
+    datainputs(a) {
+      I.rect(a, -39, -26, 78, 49, EDGE, 5);
+      I.rect(a, -36, -23, 72, 43, "var(--c-metal-2)", 3);
+      I.text(a, 0, -15, "DATA IN", CREAM, 6.6);
+      [-24, 0, 24].forEach((x, i) => {
+        I.circle(a, x, 0, 8.5, [BLUE, CREAM, SAGE][i]);
+        I.circle(a, x, 0, 5.5, EDGE);
+        I.text(a, x, 15, ["API", "FILE", "WEB"][i], CREAM, 6);
+      });
+      I.rect(a, -4, -2, 8, 4, "var(--c-metal)", .8);
+      I.circle(a, 24, 0, 2.8, "var(--c-metal)");
+      I.path(a, "M-24 7 C-36 7 -44 7 -44 19 V28", EDGE, 5);
+      I.path(a, "M-24 7 C-36 7 -44 7 -44 19 V28", ROSE, 3);
+      I.rect(a, -28, -3, 8, 12, "var(--c-metal-3)", 2);
+      I.path(a, "M-27 1 h6 M-27 4 h6", "var(--c-plate)", 1);
+      I.circle(a, 29, -17.5, 2, SAGE, { class: "lamp" });
+      I.screw(a, -35, -21); I.screw(a, 35, 18);
+      I.frame(a, -48, -30, 91, 63, 7);
+    },
+    paperprinter(a) {
+      // The sheet feeds through an exposed roller above the projecting tray.
+      I.path(a, "M-30 -1 L24 -5 L35 4 L-21 9 Z", EDGE, 1.2, BLUE);
+      I.path(a, "M24 4 L35 4 V22 L24 26 Z", EDGE, 1.2, "var(--c-metal-2)");
+      I.path(a, "M-19 -31 H14 L21 -24 V5 H-19 Z", EDGE, 1, PAPER);
+      I.path(a, "M14 -31 V-24 H21", EDGE, .8, CREAM);
+      I.text(a, -1, -20, "DRAFT", INK, 6);
+      I.path(a, "M-13 -13 H13 M-13 -8 H8 M-13 -3 H12", "var(--c-metal)", 1.8);
+      I.rect(a, -31, 4, 56, 20, "var(--c-printer-case)", 4, { stroke: EDGE, "stroke-width": 1.3 });
+      I.rect(a, -25, -2, 50, 9, "var(--c-metal-3)", 4);
+      [-23, 23].forEach(x => I.circle(a, x, 2.5, 3.3, "var(--c-metal)"));
+      I.path(a, "M-18 0 H18", "var(--c-plate)", 1.4);
+      I.path(a, "M-21 15 H20 L29 28 H-29 Z", EDGE, 1.1, BLUE);
+      I.path(a, "M-25 25 H25", "var(--c-metal-2)", 1);
+      I.circle(a, -25, 12, 2, SAGE, { class: "lamp" });
+      I.rect(a, 16, 9, 6, 3, CREAM, 1);
+      I.frame(a, -35, -35, 74, 67, 6);
+    },
+    rerun(a) {
+      I.circle(a, -10, 1, 30, EDGE);
+      I.circle(a, -10, 1, 26, "var(--c-metal)");
+      I.circle(a, -10, 1, 22, "var(--c-rerun-dark)");
+      I.circle(a, -10, -2, 21, "var(--c-rerun)", { class: "glow" });
+      el("ellipse", { cx: -16, cy: -11, rx: 7, ry: 3.5, fill: CREAM, opacity: .4 }, a);
+      I.text(a, -10, 2, "RE-RUN", PAPER, 7.1);
+      I.path(a, "M-17 10 C-11 15 -4 13 -3 7 M-6 8 l3 -1 1 3", CREAM, 1.2);
+      I.path(a, "M20 1 h4", "var(--c-metal)", 2);
+      I.rect(a, 23, -6, 33, 13, EDGE, 2);
+      I.rect(a, 25, -4, 29, 9, CREAM, 1);
+      I.text(a, 39.5, 2.4, "archive/", INK, 5.3);
+      I.frame(a, -44, -33, 104, 68, 8);
+    },
+    appendix(a, x, y, dot, ch) {
+      I.rect(a, -12, -10, 24, 22, EDGE, 3);
+      I.rect(a, -11, -12, 22, 20, "var(--c-plate)", 3, { class: "lamp" });
+      I.text(a, 0, 3, ch.n, INK, 10);
+      I.frame(a, -15, -15, 30, 29, 5);
+    }
+  });
+
+  function control(g, ch, x, y, options = {}) {
     // A chapter opens in a new tab: this page is the way into the guide and stays put, the same rule the
     // training index and every other link to materials follows. Without it readers get a same-tab jump --
     // browser extensions that rewrite links can mask this locally, so it has to be set here to be real.
     const a = el("a", { href: SITE + ch.slug + ".html", class: "hot", "data-n": ch.n, tabindex: "0", role: "link", target: "_blank", rel: "noopener" }, g);
     el("title", {}, a).textContent = ch.n + ". " + ch.title;
-    // Keep the existing controls within their temporary three-row slots. The
-    // landing-page redesign follows the author's review of the chapter order.
-    if (ch.part === "III") {
-      const drawing = el("g", {}, a);
-      CTL[ch.ctl](drawing, 0, 0, PARTS[ch.part].dot, ch);
-      const box = drawing.getBBox();
-      const scale = Math.min(1, 76 / box.width, 34 / box.height);
-      drawing.setAttribute("transform", `translate(${x},${y}) scale(${scale}) translate(${-box.x - box.width / 2},${-box.y - box.height / 2})`);
-      txt(a, x, y + 28, ch.n, "lbl", { "text-anchor": "middle" });
-      return;
+    const drawing = el("g", { class: "control-art", transform: `translate(${x},${y}) scale(${options.scale || 1})` }, a);
+    const appendix = ch.part === "A";
+    CTL[appendix ? "appendix" : ch.ctl](drawing, 0, 0, PARTS[ch.part].dot, ch);
+    if (!appendix) {
+      const labelX = options.labelX ?? x;
+      const labelY = options.labelY ?? y + 42;
+      const badgeX = options.badgeX ?? labelX;
+      const badgeWidth = options.badgeWidth ?? 60;
+      txt(a, labelX, labelY, ch.n, "lbl chapter-number", { "text-anchor": "middle" });
+      const badge = el("g", { class: "sequence-badge", transform: `translate(${badgeX},${labelY - 4})`, "aria-hidden": "true" }, a);
+      I.rect(badge, -badgeWidth / 2, -8, badgeWidth, 16, "var(--c-sequence-label)", 4);
+      txt(badge, 0, 3, "", "sequence-label", { "text-anchor": "middle" });
     }
-    const h = CTL[ch.ctl](a, x, y, PARTS[ch.part].dot, ch);
-    if (ch.ctl !== "key") txt(a, x, y + h + 12, ch.n, "lbl", { "text-anchor": "middle" });
   }
-  const heading = (g, s, x, y) => txt(g, x, y, s, "eng", { "text-anchor": "middle" });
+  const heading = (g, s, x, y, part, extra = {}) => {
+    const group = el("g", { class: "panel-heading", "data-part": part }, g);
+    const label = txt(group, x, y, s, "eng", { "text-anchor": "middle", ...extra });
+    const bounds = label.getBBox();
+    el("circle", {
+      cx: bounds.x - 8, cy: bounds.y + bounds.height / 2, r: 3.5,
+      fill: PARTS[part].dot, stroke: "var(--c-label)", "stroke-width": .6,
+      "aria-hidden": "true"
+    }, group);
+  };
   const byN = n => CH.find(c => c.n === n);
-  const place = (g, list) => list.forEach(([n, x, y]) => control(g, byN(n), x, y));
+  const place = (g, list) => list.forEach(([n, x, y, options]) => control(g, byN(n), x, y, options));
 
-  // Left wing: Part I. Local coordinates, x in [-260, 0], y in [0, 196].
+  // Left wing: Part I. The taller face provides more space between the rows.
   const wl = document.getElementById("wingL");
-  heading(wl, "ORIENTATION", -101, 26);
+  heading(wl, "ORIENTATION", -101, 23, "I");
   // Spacing set against a mock-up, 2026-09-13. Every row is distributed with an even gap and centred
   // in the panel rather than pushed to one end. The panel face is longer than the join line suggests --
   // the mitre extends it, to lx +43 at the top row's depth and +17 at the bottom row's -- so the inner
   // end had ~59 units of dead panel on the top row and ~44 on the bottom. Top row: 14 between controls.
   // Bottom row: the slack split three ways. Control 3 stops short of the mitre on purpose; at a wider
   // gap its lower inner corner crosses the panel edge, which slants with depth.
-  place(wl, [["1", -190, 70], ["2", -65, 70], ["3", -205, 150], ["4", -120, 150], ["5", -35, 150]]);
+  place(wl, [
+    ["1", -212, 69, { labelY: 112 }],
+    ["2", -122, 69, { labelY: 112, scale: .94 }],
+    ["3", -24, 69, { labelY: 112 }],
+    ["4", -167, 165, { labelY: 212, scale: 1.05 }],
+    ["5", -63, 165, { labelY: 212 }]
+  ]);
 
   // Centre: Part II left of the divider, Part III right of it.
   const ce = document.getElementById("centre");
-  // The heading keeps its height; only the controls drop (8), so the label does not crowd them.
-  // x pulled left from 366: "THEM" is two characters longer than "IT" and ran 7 units past the
-  // Part II | Part III divider at 540.
-  heading(ce, "DIRECT THE WORK", 417, 408);
-  place(ce, [["6", 380, 450], ["7", 485, 450], ["8", 380, 520], ["9", 485, 520]]);
-  heading(ce, "DO THE RESEARCH", 662, 408);   // a third along Part III, not its midpoint
-  place(ce, [["10", 590, 438], ["11", 690, 438], ["12", 790, 438], ["13", 590, 484], ["14", 690, 484], ["15", 790, 484], ["16", 580, 530], ["17", 655, 530], ["18", 730, 530], ["19", 805, 530]]);
+  // Taller file controls sit lower beneath the heading. Number positions follow
+  // each instrument's height so short controls do not leave an oversized gap.
+  heading(ce, "DIRECT THE WORK", 430, 405, "II");
+  place(ce, [
+    ["6", 382, 451, { labelY: 496 }],
+    ["7", 485, 451, { labelY: 496 }],
+    ["8", 390, 535, { labelY: 580, scale: .82 }],
+    ["9", 485, 539, { labelY: 573, scale: 1.05 }]
+  ]);
+  heading(ce, "DO THE RESEARCH", 690, 405, "III");
+  place(ce, [
+    ["10", 598, 445, { labelY: 490 }],
+    ["11", 704, 445, { labelY: 490 }],
+    ["12", 815, 447, { labelY: 493 }],
+    ["13", 598, 535, { labelY: 580 }],
+    ["14", 698, 532, { labelY: 580 }],
+    ["15", 798, 535, { labelY: 570 }]
+  ]);
 
-  // Right wing: Part IV above, the appendices as a keypad below.
+  // Right wing: the research sequence finishes above a separate reference keypad.
   const wr = document.getElementById("wingR");
-  heading(wr, "REFERENCE", 119, 26);
-  place(wr, [["A", 80, 80], ["B", 160, 80], ["C", 80, 145], ["D", 160, 145]]);
+  heading(wr, "DO THE RESEARCH", 110, 18, "III");
+  place(wr, [
+    ["16", 43, 66, { labelY: 118 }],
+    ["17", 168, 66, { labelY: 118 }],
+    ["18", 43, 157, { labelY: 201 }],
+    ["19", 160, 156, { labelX: 199.5, labelY: 182, badgeX: 205, badgeWidth: 50 }]
+  ]);
+  heading(wr, "APPENDICES", 61, 218, "A", { style: "font-size:9.5px;letter-spacing:.06em" });
+  place(wr, [["A", 115, 211], ["B", 151, 211], ["C", 187, 211], ["D", 223, 211]]);
 
-  // decorative status strip on the centre panel
+  // Status lamps occupy the narrow band between the back edge and inset line.
   const ss = document.getElementById("statusStrip");
-  for (let i = 0; i < 8; i++) el("rect", { x: 744 + i * 12, y: 388, width: 8, height: 5, rx: 1, fill: i < 6 ? "var(--c-olive)" : "var(--c-mustard)", opacity: 0.9 }, ss);
-  txt(ss, 736, 393, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
+  for (let i = 0; i < 8; i++) el("rect", { x: 756 + i * 12, y: 377, width: 8, height: 5, rx: 1, fill: i < 6 ? "var(--c-olive)" : "var(--c-mustard)", opacity: 0.9 }, ss);
+  txt(ss, 748, 382, "SYS", "tag", { "text-anchor": "end", style: "font-size:6px" });
 
   // ---- the console in perspective ----
   // The console is modeled in 3D and projected: x right, y up, z toward the viewer, one unit a pixel at z = 0.
@@ -457,8 +773,10 @@
   // drawn flat, in each panel's own coordinates, and each is then fitted to its face by the affine map tangent
   // to the projection at the control's centre.
   {
-    const CX = 600, HORIZON = 90, CAM_Z = 1600, CAM_Y = 470;
-    const HALF = 250, DEPTH = 200, RISE = 138, APRON = 60, KICK = 9, WING = 250, TURN = rad(36);
+    // Extra height creates a clear header band without stretching the controls.
+    // Lower the console to preserve clearance beneath the unchanged agent.
+    const CX = 600, HORIZON = 126, CAM_Z = 1600, CAM_Y = 470;
+    const HALF = 250, DEPTH = 200, RISE = 187, APRON = 60, KICK = 9, WING = 250, TURN = rad(36);
     const S = Math.sin(TURN), C = Math.cos(TURN), T2 = Math.tan(TURN / 2);
     const norm = v => { const l = Math.hypot(...v); return v.map(c => c / l); };
     const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -501,7 +819,7 @@
            "url(#panelFront)", g.d, true);
     for (const g of ALL) {                                                // inset panel lines and screws
       const inset = (s, m) => [slope(g, g.lo(-DEPTH * s) + m, s), slope(g, g.hi(-DEPTH * s) - m, s)];
-      const [a, b] = inset(0.06, 12), [c, d] = inset(0.94, 12);
+      const [a, b] = inset(0.03, 12), [c, d] = inset(0.94, 12);
       poly([a, b, d, c], { fill: "none", stroke: "#000", "stroke-opacity": 0.2, "stroke-width": 1 });
       for (const p of [...inset(0.025, 7), ...inset(0.975, 7)]) {
         const [x, y] = proj(p);
@@ -521,11 +839,11 @@
     };
     vent(SEG.centre, 12); vent(SEG.centre, 466); vent(SEG.left, WING - 40); vent(SEG.right, WING - 40);
     const [tx, ty] = proj([0, -APRON * 0.58, 0]);
-    txt(shell, tx, (ty + 4).toFixed(1), "AGENT CONTROL CONSOLE MK III", "eng", { "text-anchor": "middle", style: "fill:var(--c-ground);opacity:.8" });
+    txt(shell, tx, (ty + 4).toFixed(1), "AGENT CONTROL CONSOLE MK III", "eng", { "text-anchor": "middle", style: "fill:var(--c-console-inscription);opacity:.8" });
 
     // fit each control, heading and lamp to its face
-    const onWing = (g, sign) => (lx, ly) => proj(slope(g, sign * lx * WING / 260, 1 - ly / 196));
-    const onCentre = (lx, ly) => proj(slope(SEG.centre, lx - 350, 1 - (ly - 385) / 180));
+    const onWing = (g, sign) => (lx, ly) => proj(slope(g, sign * lx * WING / 260, 1 - (ly + 14) / 250));
+    const onCentre = (lx, ly) => proj(slope(SEG.centre, lx - 350, 1 - (ly - 385 + 12) / 226));
     const fit = (node, map) => {
       const bb = node.getBBox(), cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2, h = 8;
       const P = map(cx, cy), X1 = map(cx + h, cy), X0 = map(cx - h, cy), Y1 = map(cx, cy + h), Y0 = map(cx, cy - h);
@@ -545,8 +863,34 @@
   const roIntro = document.getElementById("ro-intro"), roChapter = document.getElementById("ro-chapter"), roHow = document.getElementById("ro-how");
   const roPart = document.getElementById("ro-part"), roTitle = document.getElementById("ro-title"),
         roBody = document.getElementById("ro-body"), roLink = document.getElementById("ro-link"), roHint = document.getElementById("ro-hint");
-  let pinned = null;
+  const controls = [...document.querySelectorAll(".hot")];
+  const nextLink = document.createElement("a");
+  nextLink.className = "sequence-next-link";
+  nextLink.target = "_blank"; nextLink.rel = "noopener";
+  const actions = document.createElement("div");
+  actions.className = "sequence-actions";
+  actions.append(roLink, nextLink);
+  roChapter.insertBefore(actions, roHint);
+  const chapterName = n => /^[A-Z]$/.test(n) ? "Appendix " + n : "Chapter " + n;
+  function cueSequence(ch) {
+    controls.forEach(a => a.classList.remove("sequence-next", "sequence-start"));
+    const next = ch ? CH[CH.indexOf(ch) + 1] : CH[0];
+    if (next) {
+      const target = controls.find(a => a.dataset.n === next.n);
+      target.classList.add(ch ? "sequence-next" : "sequence-start");
+      const label = target.querySelector(".sequence-label");
+      if (label) label.textContent = (ch ? "Next" : "Start") + " · " + next.n;
+    }
+    nextLink.hidden = !ch || !next;
+    if (ch && next) {
+      nextLink.textContent = "Next: " + chapterName(next.n) + " →";
+      nextLink.href = SITE + next.slug + ".html";
+      nextLink.setAttribute("aria-label", "Next: " + chapterName(next.n) + ": " + next.title);
+    }
+  }
+  let pinned = null, explored = null;
   function show(ch, preview) {
+    explored = ch;
     applyRecipe(ch.r);
     roIntro.hidden = true; roChapter.hidden = false;
     ro.style.setProperty("--dot", PARTS[ch.part].dot);
@@ -557,18 +901,18 @@
     roLink.href = SITE + ch.slug + ".html"; roLink.textContent = "Open chapter " + ch.n + " →"; roLink.hidden = preview;
     roHint.textContent = preview ? "Press the control to open the chapter." : "Tap the control again to open the chapter, or use the link.";
     document.querySelectorAll(".hot.on").forEach(a => a.classList.remove("on"));
-    const keep = pinned || (!preview ? ch : null);
-    if (keep) { const k = document.querySelector('.hot[data-n="' + keep.n + '"]'); if (k) k.classList.add("on"); }
+    controls.find(a => a.dataset.n === ch.n).classList.add("on");
+    cueSequence(ch);
   }
   function restore() {
-    if (pinned) { show(pinned, false); return; }
+    if (explored) { show(explored, !pinned || pinned.n !== explored.n); return; }
     applyRecipe(DEFAULT);
     ro.dataset.preview = "0"; ro.style.setProperty("--dot", "var(--c-mustard)");
     roChapter.hidden = true; roIntro.hidden = false;
   }
   const find = a => CH.find(c => c.n === a.dataset.n);
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  if (!fine) roHow.textContent = "Tap one to see what it covers, and tap it again to open that chapter.";
+  if (!fine) roHow.textContent = "Tap to explore; tap again to open. The blue glow marks the next chapter.";
   document.querySelectorAll(".hot").forEach(a => {
     a.addEventListener("click", e => {
       if (fine) return;                          // pointer: hover previews, a press opens the chapter
@@ -599,5 +943,6 @@
     shape.setAttribute("d", `M36 22 H462 a16 16 0 0 1 16 16 V84 L502 106 L478 124 V${bottom - 16} a16 16 0 0 1 -16 16 H36 a16 16 0 0 1 -16 -16 V38 a16 16 0 0 1 16 -16 Z`);
   };
   new ResizeObserver(fitBubble).observe(home); fitBubble();
+  cueSequence(null);
   applyRecipe(DEFAULT);
-})();
+});

@@ -17,6 +17,8 @@
   --c-mustard-2: #e4c25a;
   --c-mustard-3: #8f7228;
   --c-rose: #c49a95;
+  --c-part-research: #8b719b;
+  --c-part-reference: #718795;
   --c-red: #c4463f;
   --c-blue: #34568b;
   --c-blue-2: #5a7cb0;
@@ -38,6 +40,7 @@
   --c-glow: rgba(200, 162, 60, 0.55);
   --c-paper: #f7f4ec;
   --c-ground: #f7f4ec;
+  --c-console-inscription: #f7f4ec;
   --c-focus: #c8a23c;
   --c-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 }
@@ -45,6 +48,8 @@ body.quarto-dark {
   --c-ink: #e6e9ed;
   --c-ink-2: #c4cbd3;
   --c-muted: #9aa5b5;
+  --c-part-research: #c76d7f;
+  --c-part-reference: #9aaebb;
   --c-rule: #2b333c;
   --c-card: #1d232b;
   --c-panel: #6f7d74;
@@ -65,6 +70,7 @@ body.quarto-dark {
   --c-paper: #e9e4d8;
   --c-glass: rgba(143, 176, 224, 0.16);
   --c-ground: #14181e;
+  --c-console-inscription: #bbc4c1;
   --c-shirt: #efe9d8;   /* dark keeps the cream, which reads well on the dark ground */
 }
 
@@ -159,3 +165,52 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
    404.qmd is hand-maintained like index.qmd and is not part of the sync. Centred, not floated. */
 .lost-agent { max-width: 260px; margin: 0 auto 4px; }
 .lost-agent svg { display: block; width: 100%; height: auto; }
+
+/* Physical instrument materials retain contrast on both console faces. */
+:root {
+  --c-instrument-blue: #91aabc;
+  --c-instrument-sage: #a4b59a;
+  --c-instrument-cream: #e3dac5;
+  --c-instrument-rose: #bd8d83;
+  --c-instrument-check: #4d7060;
+  --c-instrument-lens: rgba(145, 170, 188, .25);
+  --c-printer-case: #899da5;
+  --c-rerun: #59806a;
+  --c-rerun-dark: #3f5e4c;
+  --c-sequence: #286b8c;
+  --c-sequence-halo: #b3e0ed;
+  --c-sequence-label: #d7edf2;
+}
+body.quarto-dark {
+  --c-instrument-blue: #a1b9c9;
+  --c-instrument-sage: #b6c3aa;
+  --c-instrument-cream: #ded4bd;
+  --c-instrument-rose: #c89b93;
+  --c-printer-case: #9dafb7;
+  --c-rerun: #6b967b;
+  --c-rerun-dark: #486851;
+  --c-sequence: #8dd3eb;
+  --c-sequence-halo: #64abc5;
+  --c-sequence-label: #d0e9ed;
+}
+.sequence-badge { display: none; pointer-events: none; }
+.hot:is(.sequence-next, .sequence-start) .sequence-badge { display: block; }
+.hot:is(.sequence-next, .sequence-start) .chapter-number { visibility: hidden; }
+.sequence-badge rect { stroke: var(--c-sequence); stroke-width: 1.1; }
+.sequence-label { font-family: var(--c-mono); font-size: 8.5px; fill: #214453; font-weight: 600; }
+.hot.sequence-next .control-art {
+  filter: drop-shadow(0 0 1px var(--c-sequence-label)) drop-shadow(0 0 4px var(--c-sequence));
+}
+.hot.sequence-next .ring { opacity: 1; stroke: var(--c-sequence); stroke-width: 1.5; }
+.hot.sequence-start .control-art { animation: console-start-glow 3s ease-in-out infinite; }
+@keyframes console-start-glow {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--c-sequence-halo)); }
+  50% { filter: drop-shadow(0 0 3px var(--c-sequence-label)) drop-shadow(0 0 8px var(--c-sequence)); }
+}
+.sequence-actions { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px; }
+.sequence-next-link { color: var(--c-sequence); font-weight: 600; font-size: .9rem; }
+#bubble .sequence-next-link { font-size: 14px; }
+.sequence-next-link[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hot.sequence-start .control-art { animation: none; filter: drop-shadow(0 0 4px var(--c-sequence)); }
+}
