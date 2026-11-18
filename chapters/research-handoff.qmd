@@ -45,7 +45,7 @@ A headless session alone does not isolate files or software: the agent must conf
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+> Copy `archive/` into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied `README` using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 <!-- /prompt:reproduce-project -->
 
@@ -63,7 +63,7 @@ Before sharing, have the agent review the proposed files for confidential materi
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+> Review the exact contents of `archive/` proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 

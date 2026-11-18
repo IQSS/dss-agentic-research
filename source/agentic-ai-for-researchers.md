@@ -429,7 +429,7 @@ The status, task, specification, and decision-log filenames are conventions, not
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
@@ -523,13 +523,13 @@ The following prompts can establish the routine or recover it when a session has
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}
-> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
+> Read `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, and `TASKS.md`, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 <!-- /prompt:resume-project -->
 
 <!-- prompt:close-session -->
 ::: {#request-close-session .prompt}
-> Update TASKS.md and STATUS.md from the work and outputs actually checked. For scientific changes I approved, update SPECIFICATION.md and add dated entries at the top of METHODOLOGY.md explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
+> Update `TASKS.md` and `STATUS.md` from the work and outputs actually checked. For scientific changes I approved, update `SPECIFICATION.md` and add dated entries at the top of `METHODOLOGY.md` explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 <!-- /prompt:close-session -->
 
@@ -822,7 +822,7 @@ A real study would also need a target population and defensible assumptions abou
 
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
-> Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
+> Write `SPECIFICATION.md` from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 <!-- /prompt:research-specification -->
 
@@ -870,7 +870,7 @@ Have the agent save search queries, dates, and unmodified results alongside its 
 
 <!-- prompt:literature-search -->
 ::: {#request-literature-search .prompt}
-> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in `SPECIFICATION.md`. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
 :::
 <!-- /prompt:literature-search -->
 
@@ -950,7 +950,7 @@ Have the agent also record a *checksum* for each original data file. This digita
 
 <!-- prompt:bring-data -->
 ::: {#request-bring-data .prompt}
-> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in `SPECIFICATION.md`. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
 :::
 <!-- /prompt:bring-data -->
 
@@ -992,7 +992,7 @@ For an existing analysis, ask the agent to identify those steps within the curre
 
 <!-- prompt:modular-workflow -->
 ::: {#request-modular-workflow .prompt}
-> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
+> Read `SPECIFICATION.md` and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
 :::
 <!-- /prompt:modular-workflow -->
 
@@ -1027,7 +1027,7 @@ Ask the agent to include automatic checks in the scripts themselves. These check
 
 <!-- prompt:smoke-test-workflow -->
 ::: {#request-smoke-test-workflow .prompt}
-> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on `SPECIFICATION.md` and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
 :::
 <!-- /prompt:smoke-test-workflow -->
 
@@ -1043,7 +1043,7 @@ If that investigation suggests the statistical model represents the age-dependen
 
 <!-- prompt:investigate-result -->
 ::: {#request-investigate-result .prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
+> Investigate the unexpected result identified below using `SPECIFICATION.md`, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update `SPECIFICATION.md`, record the decision and reason in `METHODOLOGY.md`, and compare the original and revised results for the specified quantities.
 :::
 <!-- /prompt:investigate-result -->
 
@@ -1079,7 +1079,7 @@ Synthetic data also let the agent exercise conditions the code needs to handle. 
 
 The methodological question is how well the proposed analysis performs under conditions that could matter for the study. You identify those conditions; the agent can help turn them into simulation scenarios and explain what each would reveal. In other projects, the simulation scenarios might vary in sample size, the amount of missing data, measurement error, or dependence among observations.
 
-The birthweight example examines three scenarios. All retain a curved relationship between maternal age and birthweight. They differ in how heat exposure affects birthweight, while the prescribed analysis allows the heat effect to change linearly with age.
+The birthweight example examines three scenarios. In each repetition, the agent generates new birthweights while keeping the 1,200 individuals' maternal ages, smoking indicators, and heat exposures fixed. All three scenarios retain a curved relationship between maternal age and birthweight. They differ in how heat exposure affects birthweight, while the prescribed analysis allows the heat effect to change linearly with age.
 
 | Scenario | How the data are generated | What the comparison examines |
 |:----------------------|:------------------------------------------|:----------------------------------|
@@ -1098,7 +1098,7 @@ Have the agent record the approved scenarios, true quantities, number of repetit
 <details class="guide-example">
 <summary>How the example generates outcomes and calculates truth</summary>
 
-The simulation holds the 1,200 synthetic individuals' ages, smoking indicators, and exposures fixed, and generates new birthweights in each repetition. Its performance results therefore concern those covariate values. The generator uses positive, right-skewed noise with spread increasing with the conditional mean. The download labels the three scenarios `null`, `main`, and `curved`.
+The simulation's performance results concern the fixed covariate values of the 1,200 synthetic individuals. The generator uses positive, right-skewed noise with spread increasing with the conditional mean. The download labels the three scenarios `null`, `main`, and `curved`.
 
 For each scenario, the true sample contrast averages the difference between conditional mean birthweight at 10 and 5 hot days over the saved individuals. Age-specific truth uses the stated age and the sample's smoking distribution. The estimator includes quadratic age, a linear heat-by-age interaction, and smoking, with HC3 covariance and normal-reference intervals. It is unchanged across scenarios.
 
@@ -1129,7 +1129,7 @@ The number of repetitions determines how precisely the simulation estimates stat
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 
@@ -1138,7 +1138,7 @@ Have the agent retain failed runs and report their number alongside the successf
 ## Use the results to assess and revise the method {#simulation-decisions}
 
 <!-- example:simulation-results -->
-All 1,200 fits in the saved simulation completed without failure: 400 repetitions in each of the three scenarios. Yet when the heat effect changed nonlinearly with age, the age-28 contrast had bias of 28.3 g, and its nominal 95% intervals contained the true value in only 75.8% of repetitions. The code ran successfully, but the prescribed method's statistical performance was poor for this quantity in this scenario. The sample-average contrast performed much better, so examining only that average would have concealed the problem at age 28.
+All 1,200 fits in the saved simulation completed without failure: 400 repetitions in each of the three scenarios. Yet when the heat effect changed nonlinearly with age, the estimated difference in mean birthweight between 10 and 5 hot days at maternal age 28 had bias of 28.3 g, and its nominal 95% intervals contained the true value in only 75.8% of repetitions. The code ran successfully, but the prescribed method's statistical performance was poor for this quantity in this scenario. The sample-average contrast performed much better, so examining only that average would have concealed the problem at age 28.
 
 ![](figures/simulation-performance.svg){#fig-simulation-performance fig-alt="Saved simulation results compare bias and interval coverage across three scenarios. The age-28 contrast performs poorly when the heat effect changes nonlinearly with age, while the sample-average contrast performs better. Bars show Monte Carlo uncertainty, not birthweight confidence intervals."}
 
@@ -1187,7 +1187,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^independent-headless]: [Chapter 15: Divide work between agents: shared projects and git worktrees](https://dss-agentic-toolkit.pages.dev/chapters/parallel-work.html#agent-execution-terms) in the companion guide *Extending Your Agent's Toolkit* compares subagents, headless sessions, and background execution. [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) explains setup and control over each run's inputs and tool access.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -1199,7 +1199,7 @@ The inputs depend on what you want to check. To check data processing as well as
 
 <!-- prompt:independent-implementation -->
 ::: {#request-independent-implementation .prompt}
-> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
+> Working only from the supplied `SPECIFICATION.md`, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 <!-- /prompt:independent-implementation -->
 
@@ -1221,7 +1221,7 @@ Once both implementations are complete, have the coordinating agent launch anoth
 
 <!-- prompt:compare-implementations -->
 ::: {#request-compare-implementations .prompt}
-> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
+> Compare the completed implementations against the shared `SPECIFICATION.md` and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
 :::
 <!-- /prompt:compare-implementations -->
 
@@ -1292,7 +1292,7 @@ If the team also fine-tunes an LLM, a *training set* supplies examples used to u
 
 <!-- prompt:develop-labeling -->
 ::: {#request-develop-labeling .prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 <!-- /prompt:develop-labeling -->
 
@@ -1645,7 +1645,7 @@ A headless session alone does not isolate files or software: the agent must conf
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
-> Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+> Copy `archive/` into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied `README` using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 <!-- /prompt:reproduce-project -->
 
@@ -1663,7 +1663,7 @@ Before sharing, have the agent review the proposed files for confidential materi
 
 <!-- prompt:review-deposit -->
 ::: {#request-review-deposit .prompt}
-> Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+> Review the exact contents of `archive/` proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 <!-- /prompt:review-deposit -->
 
@@ -2190,7 +2190,7 @@ Point the agent to: the project files, existing instructions, and agreed researc
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
 ::: {.prompt}
-> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 
 :::
@@ -2203,7 +2203,7 @@ Point the agent to: the project folder and its project context files.
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-resume-project).
 
 ::: {.prompt}
-> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
+> Read `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, and `TASKS.md`, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 
 :::
@@ -2216,7 +2216,7 @@ Point the agent to: the current session’s work, checked outputs, and unresolve
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-close-session).
 
 ::: {.prompt}
-> Update TASKS.md and STATUS.md from the work and outputs actually checked. For scientific changes I approved, update SPECIFICATION.md and add dated entries at the top of METHODOLOGY.md explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
+> Update `TASKS.md` and `STATUS.md` from the work and outputs actually checked. For scientific changes I approved, update `SPECIFICATION.md` and add dated entries at the top of `METHODOLOGY.md` explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 
 :::
@@ -2270,7 +2270,7 @@ Point the agent to: your research decisions and the questions that still need re
 Explanation and checks: [Chapter 10: The example research project](#request-research-specification).
 
 ::: {.prompt}
-> Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
+> Write `SPECIFICATION.md` from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 
 :::
@@ -2283,7 +2283,7 @@ Point the agent to: the research question, eligibility criteria, and any existin
 Explanation and checks: [Chapter 11: Find and assess research literature](#request-literature-search).
 
 ::: {.prompt}
-> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in `SPECIFICATION.md`. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
 :::
 
 :::
@@ -2309,7 +2309,7 @@ Point the agent to: approved inputs, their documentation, and the current scient
 Explanation and checks: [Chapter 12: Bring data into the project](#request-bring-data).
 
 ::: {.prompt}
-> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in SPECIFICATION.md. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
+> Inspect the research data and documentation. Record each source, version or acquisition date, permitted use, and checksum. Preserve the originals. Write checks for the variables, identifiers, units, ranges, and missingness rules in `SPECIFICATION.md`. Report discrepancies before using the data in an analysis. Do not substitute synthetic observations for missing research inputs.
 :::
 
 :::
@@ -2324,7 +2324,7 @@ Point the agent to: SPECIFICATION.md, the research data and documentation, and a
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-modular-workflow).
 
 ::: {.prompt}
-> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
+> Read `SPECIFICATION.md` and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
 :::
 
 :::
@@ -2337,7 +2337,7 @@ Point the agent to: the workflow code, input data and documentation, SPECIFICATI
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-smoke-test-workflow).
 
 ::: {.prompt}
-> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on `SPECIFICATION.md` and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
 :::
 
 :::
@@ -2350,7 +2350,7 @@ Point the agent to: the unexpected result, specification, current code, and save
 Explanation and checks: [Chapter 13: Build a modular analysis workflow](#request-investigate-result).
 
 ::: {.prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
+> Investigate the unexpected result identified below using `SPECIFICATION.md`, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update `SPECIFICATION.md`, record the decision and reason in `METHODOLOGY.md`, and compare the original and revised results for the specified quantities.
 :::
 
 :::
@@ -2363,7 +2363,7 @@ Point the agent to: the specification and scientific scenarios or performance qu
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
 ::: {.prompt}
-> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 
 :::
@@ -2378,7 +2378,7 @@ Ask the current agent to prepare two fresh headless sessions, each receiving the
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-independent-implementation).
 
 ::: {.prompt}
-> Working only from the supplied SPECIFICATION.md, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
+> Working only from the supplied `SPECIFICATION.md`, data dictionary, and approved input files, independently implement the prescribed analysis in the assigned language. Do not consult another implementation's code or results, or use intermediate files it produced beyond the shared inputs explicitly approved for this check. Stop and ask about missing inputs or ambiguous requirements. Save the code, input-file checksums, included record identifiers, derived variables, model terms, and labeled full-precision estimates and uncertainty calculations.
 :::
 
 :::
@@ -2393,7 +2393,7 @@ Ask the current agent to launch a separate fresh headless session for this compa
 Explanation and checks: [Chapter 15: Check the agent with independent implementations](#request-compare-implementations).
 
 ::: {.prompt}
-> Compare the completed implementations against the shared SPECIFICATION.md and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
+> Compare the completed implementations against the shared `SPECIFICATION.md` and agreed tolerances. Work from input-file checksums and included records through exclusions, derived variables, model terms, fitted results, and reported quantities and uncertainty. Use full-precision values. Save an agreement-and-discrepancy table and identify the earliest stage at which each difference appears. Investigate its cause against the specification and source data; do not treat either implementation as the answer key or change outputs merely to make them agree. Report unresolved issues and proposed corrections, distinguishing code errors from scientific decisions that need my approval.
 :::
 
 :::
@@ -2408,7 +2408,7 @@ Point the agent to: the research question, development material, reviewed human 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-develop-labeling).
 
 ::: {.prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in SPECIFICATION.md after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 
 :::
@@ -2503,7 +2503,7 @@ Point the agent to: the proposed archive/ folder or zipped copy, its README and 
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-reproduce-project).
 
 ::: {.prompt}
-> Copy archive/ into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied README using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
+> Copy `archive/` into a temporary test directory outside the working project, or extract the exact zip file proposed for sharing there. Set up a separate software environment and a fresh headless agent session whose file access excludes the working project. Have that agent follow the supplied `README` using only the supplied files, listed inputs, and documented commands. Restore the recorded software versions without upgrading them. Compare rebuilt outputs with the supplied results using the agreed tolerances. Report missing files or instructions rather than filling gaps from the working project. Record failures and untested steps; do not alter the analysis or comparison criteria to force agreement.
 :::
 
 :::
@@ -2516,7 +2516,7 @@ Point the agent to: the exact files proposed for sharing, the manuscript, reprod
 Explanation and checks: [Chapter 19: Reproduce and hand off the research](#request-review-deposit).
 
 ::: {.prompt}
-> Review the exact contents of archive/ proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
+> Review the exact contents of `archive/` proposed for sharing against the manuscript, reproduction report, and sharing requirements. Identify confidential material, credentials, personal paths, missing files, and incomplete access instructions, including in any supplied version history. Check contributors, licenses, AI disclosure, and the manuscript version. Explain how proposed exclusions affect reproduction. Propose corrections without uploading, deleting files, or rewriting history.
 :::
 
 :::

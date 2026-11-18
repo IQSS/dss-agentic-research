@@ -34,7 +34,7 @@ For an existing analysis, ask the agent to identify those steps within the curre
 
 <!-- prompt:modular-workflow -->
 ::: {#request-modular-workflow .prompt}
-> Read SPECIFICATION.md and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
+> Read `SPECIFICATION.md` and propose independently runnable analysis steps, identifying the inputs and saved outputs for each. Implement the structure using shared functions where appropriate. If analysis code already exists, first run it and save its code and results for comparison. After reorganizing it, use the same inputs to compare sample membership, estimates, and uncertainty intervals. Investigate and report unexpected differences before proceeding.
 :::
 <!-- /prompt:modular-workflow -->
 
@@ -69,7 +69,7 @@ Ask the agent to include automatic checks in the scripts themselves. These check
 
 <!-- prompt:smoke-test-workflow -->
 ::: {#request-smoke-test-workflow .prompt}
-> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on SPECIFICATION.md and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on `SPECIFICATION.md` and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
 :::
 <!-- /prompt:smoke-test-workflow -->
 
@@ -85,7 +85,7 @@ If that investigation suggests the statistical model represents the age-dependen
 
 <!-- prompt:investigate-result -->
 ::: {#request-investigate-result .prompt}
-> Investigate the unexpected result identified below using SPECIFICATION.md, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update SPECIFICATION.md, record the decision and reason in METHODOLOGY.md, and compare the original and revised results for the specified quantities.
+> Investigate the unexpected result identified below using `SPECIFICATION.md`, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update `SPECIFICATION.md`, record the decision and reason in `METHODOLOGY.md`, and compare the original and revised results for the specified quantities.
 :::
 <!-- /prompt:investigate-result -->
 

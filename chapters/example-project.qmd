@@ -48,7 +48,7 @@ A real study would also need a target population and defensible assumptions abou
 
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
-> Write SPECIFICATION.md from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
+> Write `SPECIFICATION.md` from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
 :::
 <!-- /prompt:research-specification -->
 

@@ -24,7 +24,7 @@ Synthetic data also let the agent exercise conditions the code needs to handle. 
 
 The methodological question is how well the proposed analysis performs under conditions that could matter for the study. You identify those conditions; the agent can help turn them into simulation scenarios and explain what each would reveal. In other projects, the simulation scenarios might vary in sample size, the amount of missing data, measurement error, or dependence among observations.
 
-The birthweight example examines three scenarios. All retain a curved relationship between maternal age and birthweight. They differ in how heat exposure affects birthweight, while the prescribed analysis allows the heat effect to change linearly with age.
+The birthweight example examines three scenarios. In each repetition, the agent generates new birthweights while keeping the 1,200 individuals' maternal ages, smoking indicators, and heat exposures fixed. All three scenarios retain a curved relationship between maternal age and birthweight. They differ in how heat exposure affects birthweight, while the prescribed analysis allows the heat effect to change linearly with age.
 
 | Scenario | How the data are generated | What the comparison examines |
 |:----------------------|:------------------------------------------|:----------------------------------|
@@ -43,7 +43,7 @@ Have the agent record the approved scenarios, true quantities, number of repetit
 <details class="guide-example">
 <summary>How the example generates outcomes and calculates truth</summary>
 
-The simulation holds the 1,200 synthetic individuals' ages, smoking indicators, and exposures fixed, and generates new birthweights in each repetition. Its performance results therefore concern those covariate values. The generator uses positive, right-skewed noise with spread increasing with the conditional mean. The download labels the three scenarios `null`, `main`, and `curved`.
+The simulation's performance results concern the fixed covariate values of the 1,200 synthetic individuals. The generator uses positive, right-skewed noise with spread increasing with the conditional mean. The download labels the three scenarios `null`, `main`, and `curved`.
 
 For each scenario, the true sample contrast averages the difference between conditional mean birthweight at 10 and 5 hot days over the saved individuals. Age-specific truth uses the stated age and the sample's smoking distribution. The estimator includes quadratic age, a linear heat-by-age interaction, and smoking, with HC3 covariance and normal-reference intervals. It is unchanged across scenarios.
 
@@ -74,7 +74,7 @@ The number of repetitions determines how precisely the simulation estimates stat
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Using SPECIFICATION.md, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 
@@ -83,7 +83,7 @@ Have the agent retain failed runs and report their number alongside the successf
 ## Use the results to assess and revise the method {#simulation-decisions}
 
 <!-- example:simulation-results -->
-All 1,200 fits in the saved simulation completed without failure: 400 repetitions in each of the three scenarios. Yet when the heat effect changed nonlinearly with age, the age-28 contrast had bias of 28.3 g, and its nominal 95% intervals contained the true value in only 75.8% of repetitions. The code ran successfully, but the prescribed method's statistical performance was poor for this quantity in this scenario. The sample-average contrast performed much better, so examining only that average would have concealed the problem at age 28.
+All 1,200 fits in the saved simulation completed without failure: 400 repetitions in each of the three scenarios. Yet when the heat effect changed nonlinearly with age, the estimated difference in mean birthweight between 10 and 5 hot days at maternal age 28 had bias of 28.3 g, and its nominal 95% intervals contained the true value in only 75.8% of repetitions. The code ran successfully, but the prescribed method's statistical performance was poor for this quantity in this scenario. The sample-average contrast performed much better, so examining only that average would have concealed the problem at age 28.
 
 ![](figures/simulation-performance.svg){#fig-simulation-performance fig-alt="Saved simulation results compare bias and interval coverage across three scenarios. The age-28 contrast performs poorly when the heat effect changes nonlinearly with age, while the sample-average contrast performs better. Bars show Monte Carlo uncertainty, not birthweight confidence intervals."}
 

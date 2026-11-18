@@ -34,7 +34,7 @@ Have the agent save search queries, dates, and unmodified results alongside its 
 
 <!-- prompt:literature-search -->
 ::: {#request-literature-search .prompt}
-> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in SPECIFICATION.md. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
+> Search OpenAlex, PubMed, and other relevant research databases using the question and criteria in `SPECIFICATION.md`. Use Crossref, other DOI registries, or publisher records to verify each journal article’s DOI, title, authors, and year. Flag mismatches and papers without a verified DOI. Record the services searched, exact queries, dates, screening decisions, and access gaps. Save verified references separately from unverified leads, and distinguish abstracts from full texts you actually read.
 :::
 <!-- /prompt:literature-search -->
 

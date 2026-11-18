@@ -40,7 +40,7 @@ The status, task, specification, and decision-log filenames are conventions, not
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft a concise CLAUDE.md for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
@@ -134,13 +134,13 @@ The following prompts can establish the routine or recover it when a session has
 
 <!-- prompt:resume-project -->
 ::: {#request-resume-project .prompt}
-> Read CLAUDE.md (or AGENTS.md), STATUS.md, and TASKS.md, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
+> Read `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, and `TASKS.md`, plus any other project context files relevant to the next task. Then inspect the inputs and outputs needed for that task. Summarize the current work, flag any disagreement between the project context files and the work saved on disk, and identify the next action.
 :::
 <!-- /prompt:resume-project -->
 
 <!-- prompt:close-session -->
 ::: {#request-close-session .prompt}
-> Update TASKS.md and STATUS.md from the work and outputs actually checked. For scientific changes I approved, update SPECIFICATION.md and add dated entries at the top of METHODOLOGY.md explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
+> Update `TASKS.md` and `STATUS.md` from the work and outputs actually checked. For scientific changes I approved, update `SPECIFICATION.md` and add dated entries at the top of `METHODOLOGY.md` explaining the decisions, reasons, and specification changes. Preserve earlier entries. Leave unfinished work and failures explicit, with enough information for the next session to continue.
 :::
 <!-- /prompt:close-session -->
 
