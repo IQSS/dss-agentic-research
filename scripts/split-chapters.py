@@ -102,9 +102,8 @@ def title_case_part(text: str) -> str:
 def frontmatter_end(lines: list[str]) -> int:
     """Index of the first line after a leading YAML frontmatter block, or 0 when there is none.
 
-    Frontmatter can carry YAML comments, and a comment starts with `# `, which is exactly an H1 to
-    this splitter: on 2026-09-11 a comment in the guide's frontmatter became a chapter page. Nothing
-    above this index is searched for headings or part markers.
+    YAML comments can start with `# ` just like Markdown headings. Exclude frontmatter
+    from the search for headings and part markers.
     """
     if not lines or lines[0].rstrip() != "---":
         return 0

@@ -158,11 +158,8 @@ def check(site: Path, source_dir: Path, root: Path) -> list[str]:
     # 7. Every console recipe points at a chapter that exists. The landing page is a hand-drawn
     # console (console.js on the research site, garage.js on the toolkit site) whose controls link to
     # chapters by slug, and it builds those links in JavaScript at runtime -- so they never appear in
-    # the rendered HTML and check 4 cannot see them. A retitled chapter changes its slug and leaves
-    # the recipe pointing at nothing, which is exactly how the landing page went stale on 2026-09-27
-    # while every static link resolved. Checked against chapters/*.qmd, the sync's output, rather
-    # than against _site: Quarto never prunes _site, so a stale render of the old slug can still be
-    # sitting there and would let a dead recipe pass.
+    # the rendered HTML and check 4 cannot see them. Check against chapters/*.qmd because
+    # a stale rendered page in _site could conceal a link to a removed chapter.
     chapters = {p.stem for p in (root / "chapters").glob("*.qmd")}
     for js in sorted(root.glob("*.js")):
         for slug in re.findall(r'slug:\s*"([^"]+)"', js.read_text(errors="replace")):

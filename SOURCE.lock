@@ -2,9 +2,9 @@
 # What chapters/ was generated from. CI re-runs the generator and compares.
 # upstream_commit is the last commit that touched the source file or figures/, not HEAD:
 # a commit to the document's template or meta-files does not make this site stale.
-upstream_commit: aaa9ec0fe11658b8f6777e879bb263e765cc8cbb
+upstream_commit: 3dc7011472d28ded95b28e299796f97c5ff16ac6
 upstream_dirty: false
 source_path: source/agentic-ai-for-researchers.md
-source_sha256: 64c3bdd2ff5d5ef056b53f1c0f5f787c2b515ab0afd22884f40ef81011366b2c
+source_sha256: 815320485a67e74881fb4f11774f3a5ee0d1d1fcdacc508e82fe42e6cc514d14
 chapters: 23
 figures: 84
