@@ -12,7 +12,9 @@ For the heat-and-birthweight study introduced in [Chapter 10: The example resear
 
 ## Identify and check the inputs {#identify-inputs}
 
-Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.
+Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.[^dss-eda]
+
+[^dss-eda]: The [DSS data-exploration skill](https://iqss.github.io/dss-agent-skills/skills/eda.html) creates an initial report on distributions and missingness using R and Quarto.
 
 In the heat-and-birthweight example, the agent should check for 1,200 unique birth identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, smoking status coded as 0 or 1, and positive birthweight values. If any check fails, the analysis should stop and report which values or records caused the problem.
 

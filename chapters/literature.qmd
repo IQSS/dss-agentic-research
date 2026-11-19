@@ -63,7 +63,7 @@ Literature can help refine the research question. For the heat-and-birthweight p
 
 ## Reuse the task as a skill {#literature-skill}
 
-Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
+Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS [`litsearch`](https://iqss.github.io/dss-agent-skills/skills/litsearch.html) skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
 
 A separate [literature-search example](resources/literature-search-example.md), about how long journal peer review takes, reports how many records were found, screened, and included. It also identifies which included papers were assessed only from titles or abstracts.

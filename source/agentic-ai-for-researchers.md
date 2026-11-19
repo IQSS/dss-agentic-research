@@ -377,7 +377,7 @@ A *project scaffold* is a starting set of folders and files suited to the intend
 :::
 <!-- /prompt:scaffold-project -->
 
-Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
+Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, the DSS [`scaffold`](https://iqss.github.io/dss-agent-skills/skills/scaffold.html) skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
 
 ## Organize an existing project {#restructure-project}
 
@@ -509,7 +509,9 @@ enforce file or network permissions; configure access controls separately.
 
 When a task needs a plan, distinguish the scientific decisions from the agent's proposed implementation. You may already have settled the estimand, sample, and estimator; the agent still needs to work out which scripts to change and which checks to run. Give it the research question and relevant supporting material, and have it identify unresolved choices before implementation.
 
-For difficult work, ask one or two fresh agent sessions to critique the proposed plan. Responses can differ even when the sessions use the same LLM. A fresh session also reviews the plan without the preceding conversation, which may help it notice assumptions the first session took for granted. Give each session the research question, constraints, evidence, and plan, and ask it to identify questionable assumptions, missing steps, or alternatives. Use your judgment and the evidence to resolve their suggestions; sessions using the same LLM can share mistakes, so agreement does not establish that a method is appropriate.
+For difficult work, ask one or two fresh agent sessions to critique the proposed plan.[^dss-review-plan] Responses can differ even when the sessions use the same LLM. A fresh session also reviews the plan without the preceding conversation, which may help it notice assumptions the first session took for granted. Give each session the research question, constraints, evidence, and plan, and ask it to identify questionable assumptions, missing steps, or alternatives. Use your judgment and the evidence to resolve their suggestions; sessions using the same LLM can share mistakes, so agreement does not establish that a method is appropriate.
+
+[^dss-review-plan]: The [DSS plan-review skill](https://iqss.github.io/dss-agent-skills/skills/review-plan.html) provides a reusable procedure for this review.
 
 Have the agent save its implementation plan separately from the scientific requirements in `SPECIFICATION.md`. When you approve a scientific change, have it rewrite the affected requirements and add a dated entry at the top of `METHODOLOGY.md`, explaining the decision and its reason. Preserve earlier entries. The project record should explain why the work changed, rather than leaving a later reader to infer the reason from altered code. [Chapter 14: Test the analysis against known truth](#simulation) and [Chapter 15: Check the agent with independent implementations](#checking-analysis) explain how to check the resulting analysis.
 
@@ -680,9 +682,9 @@ These are examples of tasks that might be useful to package into skills. A skill
 
 ## Use an existing skill {#use-existing-skill}
 
-Before creating a skill, ask the agent whether an installed skill or a maintained online collection[^skill-collections] already covers the task. Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
+Before creating a skill, ask the agent whether an installed skill or one in the [DSS agent skills catalogue](https://iqss.github.io/dss-agent-skills/) already covers the task.[^skill-collections] Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
 
-[^skill-collections]: Examples include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
+[^skill-collections]: Other collections include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
 
 In [`Claude Code`](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
 
@@ -899,7 +901,7 @@ Literature can help refine the research question. For the heat-and-birthweight p
 
 ## Reuse the task as a skill {#literature-skill}
 
-Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
+Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS [`litsearch`](https://iqss.github.io/dss-agent-skills/skills/litsearch.html) skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
 
 A separate [literature-search example](resources/literature-search-example.md), about how long journal peer review takes, reports how many records were found, screened, and included. It also identifies which included papers were assessed only from titles or abstracts.
@@ -912,7 +914,9 @@ For the heat-and-birthweight study introduced in [Chapter 10: The example resear
 
 ## Identify and check the inputs {#identify-inputs}
 
-Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.
+Ask the agent to compare the data with the requirements in `SPECIFICATION.md` and the available documentation. It should check what each row represents, the dates covered, and whether the required variables, units, and identifiers are present.[^dss-eda]
+
+[^dss-eda]: The [DSS data-exploration skill](https://iqss.github.io/dss-agent-skills/skills/eda.html) creates an initial report on distributions and missingness using R and Quarto.
 
 In the heat-and-birthweight example, the agent should check for 1,200 unique birth identifiers, maternal ages from 18 to 40, hot-day counts from 0 to 20, smoking status coded as 0 or 1, and positive birthweight values. If any check fails, the analysis should stop and report which values or records caused the problem.
 
@@ -1036,7 +1040,9 @@ Ask the agent to include automatic checks in the scripts themselves. These check
 
 A modular workflow also helps when a result needs investigating. The agent can inspect saved estimates and predictions before deciding whether a statistical model needs refitting. If a revised analysis is warranted, it can rerun the affected steps while preserving the original results.
 
-As a hypothetical example, suppose the estimated heat-related birthweight differences are much larger for the youngest mothers than for other ages. Ask the agent to check whether there are enough births at those ages across the exposure range, whether a few records have a large influence, and whether the code calculates the specified comparisons correctly. It should explain what it finds and which explanations need further investigation.
+As a hypothetical example, suppose the estimated heat-related birthweight differences are much larger for the youngest mothers than for other ages. Ask the agent to check whether there are enough births at those ages across the exposure range, whether a few records have a large influence, and whether the code calculates the specified comparisons correctly.[^dss-review-analysis] It should explain what it finds and which explanations need further investigation.
+
+[^dss-review-analysis]: The [DSS analysis-review skill](https://iqss.github.io/dss-agent-skills/skills/review-analysis.html) reviews code against scientific requirements; it does not run the analysis.
 
 If that investigation suggests the statistical model represents the age-dependent heat relationship too simply, you might approve a more flexible relationship as a sensitivity analysis. Have the agent preserve the original fit and compare the estimated difference between 10 and 5 hot days at the same maternal ages. It should add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and rerun the affected analysis and checks. If it instead finds code that fails to follow the existing specification, have it correct the code and record how it verified the repair.
 
@@ -1563,7 +1569,9 @@ The current `SPECIFICATION.md` may include approved changes that have not yet be
 :::
 <!-- /prompt:draft-from-results -->
 
-Read the draft for clear connections between ideas, sufficient context, and repetition. Have the agent save recurring style corrections in the global user instructions for writing, as explained in [Chapter 8: Apply your conventions across projects](#specialist-conventions). Manuscript-specific terminology belongs in the project context files. Use the literature checks in [Chapter 11: Find and assess research literature](#literature-synthesis) when assessing whether cited papers support a claim.
+Read the draft for clear connections between ideas, sufficient context, and repetition.[^dss-review-prose] Have the agent save recurring style corrections in the global user instructions for writing, as explained in [Chapter 8: Apply your conventions across projects](#specialist-conventions). Manuscript-specific terminology belongs in the project context files. Use the literature checks in [Chapter 11: Find and assess research literature](#literature-synthesis) when assessing whether cited papers support a claim.
+
+[^dss-review-prose]: The [DSS prose-review skill](https://iqss.github.io/dss-agent-skills/skills/review-prose.html) identifies unclear passages and proposes revisions in context.
 
 ## Incorporate coauthor edits {#preserve-coauthor-edits-and-respond-to-reviewers}
 

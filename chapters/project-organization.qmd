@@ -57,7 +57,7 @@ A *project scaffold* is a starting set of folders and files suited to the intend
 :::
 <!-- /prompt:scaffold-project -->
 
-Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, a scaffold skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
+Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, the DSS [`scaffold`](https://iqss.github.io/dss-agent-skills/skills/scaffold.html) skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
 
 ## Organize an existing project {#restructure-project}
 
