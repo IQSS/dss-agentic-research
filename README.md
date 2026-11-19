@@ -4,7 +4,7 @@ A guide for researchers, with 19 chapters and four appendices. [Read the guide](
 
 ## Build and check
 
-The repository includes the manuscript snapshot, generated chapter pages, figures, resources, and DSS theme needed to build the website. Building does not require access to the private authoring repositories or execute research code.
+The repository includes the manuscript snapshot, generated chapter pages, figures, resources, and DSS theme needed to build the website. The build is self-contained and executes no research code.
 
 Install Quarto 1.9.38, Python 3, and `just`, then run:
 
@@ -17,11 +17,9 @@ The Python checks use the standard library. GitHub Actions runs the same source 
 
 ## Maintain the guide
 
-Prose and figures are authored in the separate `agentic-ai-for-researchers` manuscript project. `SOURCE.lock` identifies the committed manuscript snapshot. Maintainers with the authoring repositories and shared `dss-training-ops` tooling can use `just sync` to refresh this site and `just verify` to check it against those sources. `just watch` supports local editorial previews, including uncommitted prose; make a normal sync from committed source before publishing.
+Prepare changes on a branch based on the latest IQSS `main`, preserving newer contributions. Run `just check` and open a pull request. Reviewed merges to `main` publish the website.
 
-Edit prose upstream rather than in generated `chapters/` pages. Chapter identifiers keep URLs stable when titles or order change. The landing illustration and its `console.js` controls are maintained here. Figures have light and dark variants.
-
-An existing private Cloudflare preview can be refreshed with `just deploy-preview`, using locally supplied `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` environment variables. This is separate from the public GitHub Pages deployment.
+The manuscript snapshot is in `source/`; `SOURCE.lock` records its commit and content fingerprint. Chapter pages in `chapters/` are generated from that snapshot, and checks enforce their agreement. Propose prose corrections against the manuscript snapshot; maintainers regenerate the chapter pages as part of review. Chapter identifiers keep URLs stable when titles or order change. The landing illustration and its `console.js` controls are maintained here. Figures have light and dark variants.
 
 ## License
 

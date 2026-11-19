@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Check a rendered agentic-AI site for the things the conversion can break silently.
 
-Used by both sites from CI, after `quarto render`. See
-training/dss-training-ops/docs/plans/2026-08-30-agentic-sites-conversion-plan.md, Phase 4.
+Used by both sites from CI, after `quarto render`.
 
 Every failure this looks for is one that leaves a page that renders fine and reads wrong: an authoring
 note in the page source, a figure that 404s, a cross-reference to a chapter that moved, a landing-page
@@ -133,7 +132,7 @@ def check(site: Path, source_dir: Path, root: Path) -> list[str]:
                 problems.append(f"{page.relative_to(site)}: link to {path}#{fragment}, "
                                 "which is not in that page")
 
-    # 6. The not-found page links by absolute path. Cloudflare Pages answers a request for any
+    # 6. The not-found page links by absolute path. A web host answers a request for any
     # unmatched address with this page's body, and the browser keeps the address it asked for, so a
     # relative link would resolve against whatever wrong path the reader typed: from
     # /chpaters/12-analysis.html, "index.html" points at /chpaters/index.html. Only a root-absolute
