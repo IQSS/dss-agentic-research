@@ -56,7 +56,9 @@ The current `SPECIFICATION.md` may include approved changes that have not yet be
 :::
 <!-- /prompt:draft-from-results -->
 
-Read the draft for clear connections between ideas, sufficient context, and repetition. Have the agent save recurring style corrections in the global user instructions for writing, as explained in [Chapter 8: Apply your conventions across projects](#specialist-conventions). Manuscript-specific terminology belongs in the project context files. Use the literature checks in [Chapter 11: Find and assess research literature](#literature-synthesis) when assessing whether cited papers support a claim.
+Read the draft for clear connections between ideas, sufficient context, and repetition.[^dss-review-prose] Have the agent save recurring style corrections in the global user instructions for writing, as explained in [Chapter 8: Apply your conventions across projects](#specialist-conventions). Manuscript-specific terminology belongs in the project context files. Use the literature checks in [Chapter 11: Find and assess research literature](#literature-synthesis) when assessing whether cited papers support a claim.
+
+[^dss-review-prose]: The [DSS prose-review skill](https://iqss.github.io/dss-agent-skills/skills/review-prose.html) identifies unclear passages and proposes revisions in context.
 
 ## Incorporate coauthor edits {#preserve-coauthor-edits-and-respond-to-reviewers}
 

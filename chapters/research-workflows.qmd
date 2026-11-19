@@ -79,7 +79,9 @@ Ask the agent to include automatic checks in the scripts themselves. These check
 
 A modular workflow also helps when a result needs investigating. The agent can inspect saved estimates and predictions before deciding whether a statistical model needs refitting. If a revised analysis is warranted, it can rerun the affected steps while preserving the original results.
 
-As a hypothetical example, suppose the estimated heat-related birthweight differences are much larger for the youngest mothers than for other ages. Ask the agent to check whether there are enough births at those ages across the exposure range, whether a few records have a large influence, and whether the code calculates the specified comparisons correctly. It should explain what it finds and which explanations need further investigation.
+As a hypothetical example, suppose the estimated heat-related birthweight differences are much larger for the youngest mothers than for other ages. Ask the agent to check whether there are enough births at those ages across the exposure range, whether a few records have a large influence, and whether the code calculates the specified comparisons correctly.[^dss-review-analysis] It should explain what it finds and which explanations need further investigation.
+
+[^dss-review-analysis]: The [DSS analysis-review skill](https://iqss.github.io/dss-agent-skills/skills/review-analysis.html) reviews code against scientific requirements; it does not run the analysis.
 
 If that investigation suggests the statistical model represents the age-dependent heat relationship too simply, you might approve a more flexible relationship as a sensitivity analysis. Have the agent preserve the original fit and compare the estimated difference between 10 and 5 hot days at the same maternal ages. It should add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and rerun the affected analysis and checks. If it instead finds code that fails to follow the existing specification, have it correct the code and record how it verified the repair.
 

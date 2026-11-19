@@ -29,9 +29,9 @@ These are examples of tasks that might be useful to package into skills. A skill
 
 ## Use an existing skill {#use-existing-skill}
 
-Before creating a skill, ask the agent whether an installed skill or a maintained online collection[^skill-collections] already covers the task. Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
+Before creating a skill, ask the agent whether an installed skill or one in the [DSS agent skills catalogue](https://iqss.github.io/dss-agent-skills/) already covers the task.[^skill-collections] Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
 
-[^skill-collections]: Examples include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
+[^skill-collections]: Other collections include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
 
 In [`Claude Code`](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
 
