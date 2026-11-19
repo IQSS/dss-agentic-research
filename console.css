@@ -166,6 +166,22 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
 .lost-agent { max-width: 260px; margin: 0 auto 4px; }
 .lost-agent svg { display: block; width: 100%; height: auto; }
 
+/* Give chapter titles the full reading width above the floated opening agent. */
+main:has(.chapter-agent) #title-block-header .quarto-title { display: block; }
+/* Quarto wraps the duplicated body heading in a level-one section. */
+.chapter-agent + section.level1 > h1:first-child,
+.chapter-agent + h1 { display: none; }
+
+/* Keep the first troubleshooting heading and table below the opening agent. */
+.chapter-agent + section.level1 > #troubleshoot-work {
+  clear: right;
+}
+
+/* Add text clearance only for the opening agents that need more room. */
+@media (min-width: 701px) {
+  main:has(#troubleshoot-work) > .chapter-agent { margin-left: 0; }
+}
+
 /* Physical instrument materials retain contrast on both console faces. */
 :root {
   --c-instrument-blue: #91aabc;
