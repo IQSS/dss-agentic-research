@@ -117,7 +117,7 @@ resources:
                 <h2 id="ro-title"></h2>
                 <div class="main">
                   <p id="ro-body"></p>
-                  <a class="go" id="ro-link" href="chapters/research-uses.html" target="_blank" rel="noopener" hidden>Open chapter</a>
+                  <a class="go no-external" id="ro-link" href="chapters/research-uses.html" hidden>Open chapter</a>
                 </div>
                 <div class="hint" id="ro-hint"></div>
               </div>

@@ -692,7 +692,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // A chapter opens in a new tab: this page is the way into the guide and stays put, the same rule the
     // training index and every other link to materials follows. Without it readers get a same-tab jump --
     // browser extensions that rewrite links can mask this locally, so it has to be set here to be real.
-    const a = el("a", { href: SITE + ch.slug + ".html", class: "hot", "data-n": ch.n, tabindex: "0", role: "link", target: "_blank", rel: "noopener" }, g);
+    const a = el("a", { href: SITE + ch.slug + ".html", class: "hot no-external", "data-n": ch.n, tabindex: "0", role: "link" }, g);
     el("title", {}, a).textContent = ch.n + ". " + ch.title;
     const drawing = el("g", { class: "control-art", transform: `translate(${x},${y}) scale(${options.scale || 1})` }, a);
     const appendix = ch.part === "A";
@@ -876,8 +876,7 @@ document.addEventListener("DOMContentLoaded", function () {
         roBody = document.getElementById("ro-body"), roLink = document.getElementById("ro-link"), roHint = document.getElementById("ro-hint");
   const controls = [...document.querySelectorAll(".hot")];
   const nextLink = document.createElement("a");
-  nextLink.className = "sequence-next-link";
-  nextLink.target = "_blank"; nextLink.rel = "noopener";
+  nextLink.className = "sequence-next-link no-external";
   const actions = document.createElement("div");
   actions.className = "sequence-actions";
   actions.append(roLink, nextLink);
