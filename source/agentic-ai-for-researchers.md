@@ -1063,8 +1063,6 @@ For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving
 
 # 14. Test the analysis against known truth {#simulation}
 
-<!-- aliases: calibration-example -->
-
 Simulation can check whether the code an agent has written runs successfully and whether a candidate estimator has desirable statistical properties under conditions relevant to the study. Those are different questions. Code can follow the specification and run without error while producing biased estimates or unreliable uncertainty intervals.
 
 In the heat-and-birthweight example ([Chapter 10: The example research project](#example-project)), the agent generates synthetic datasets with known relationships between maternal age, heat exposure, and birthweight. By varying those relationships and repeating the prescribed analysis, it can assess when the method produces reliable estimates and uncertainty intervals.
