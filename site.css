@@ -103,9 +103,7 @@ body.quarto-dark #fig-research-process .chapter-map-link[href$="research-handoff
 
 /* The tool-chain's function matrix. filters/site-filter.lua marks each row's first cell: an
    alternating band so a numbered group (1a/1b, 15a-15d) reads as one block, and a green pill on the
-   rows the author uses every day -- the prose promises a green highlight, and the print build draws
-   one. The daily-use list is the author's, kept upstream beside the document and carried here by the
-   sync, so the two builds cannot disagree about which rows are marked.
+   configured everyday-tool rows. The daily-use list comes from _quarto.yml.
 
    The mark sits on the cell rather than the row because pandoc's HTML writer gives every row its own
    odd/even class and discards row attributes. :has() reaches the row from the cell; where it is not

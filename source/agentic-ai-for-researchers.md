@@ -901,7 +901,6 @@ Literature can help refine the research question. For the heat-and-birthweight p
 
 Searching, verifying references, and linking claims to evidence recur across projects. A skill can supply those instructions while the current project supplies its question and criteria. The DSS `litsearch` skill packages this process; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) explains how to inspect and adapt a skill.
 
-<!-- RELEASE: add the verified public DSS litsearch repository link before publication; the current repository is private. -->
 
 A separate [literature-search example](resources/literature-search-example.md), about how long journal peer review takes, reports how many records were found, screened, and included. It also identifies which included papers were assessed only from titles or abstracts.
 

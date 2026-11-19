@@ -722,12 +722,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Left wing: Part I. The taller face provides more space between the rows.
   const wl = document.getElementById("wingL");
   heading(wl, "ORIENTATION", -101, 23, "I");
-  // Spacing set against a mock-up, 2026-09-13. Every row is distributed with an even gap and centred
-  // in the panel rather than pushed to one end. The panel face is longer than the join line suggests --
-  // the mitre extends it, to lx +43 at the top row's depth and +17 at the bottom row's -- so the inner
-  // end had ~59 units of dead panel on the top row and ~44 on the bottom. Top row: 14 between controls.
-  // Bottom row: the slack split three ways. Control 3 stops short of the mitre on purpose; at a wider
-  // gap its lower inner corner crosses the panel edge, which slants with depth.
+  // Centre each row with even gaps. The mitred panel edge slants with depth, so
+  // control 3 stops short of the join to keep its lower inner corner inside the panel.
   place(wl, [
     ["1", -212, 69, { labelY: 112 }],
     ["2", -122, 69, { labelY: 112, scale: .94 }],

@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 // The IQSS site's own values, so every DSS page reads as a sibling of the Data Science Services landing
 // page: Questrial for headings, Montserrat for text, band blue #3C72B4, button orange #BF5803.
-// The tokens live here; the training index (sites/dss-training/theme.scss) adds only its own colors on top.
+// Shared theme tokens are defined here.
 // Cosmo pulls in Source Sans Pro from Google on every page, and nothing in this theme or in Quarto's
 // output ever sets it as a font-family: a whole cross-origin round trip for a font that never renders.
 // Bootswatch guards that import behind $web-font-path, so false removes it.
@@ -13,11 +13,8 @@ $headings-font-weight: 400 !default;
 $font-size-base: 1rem !default;
 $body-color: #1e1e1e !default;
 $pre-color: $body-color !default;   // output blocks; Bootstrap's default is $body-emphasis-color, black in both modes
-// The ground is paper rather than white (0.7.0, Steve): a white page reads as too bright to work on.
-// One warmth for the whole surface -- ground, navbar, footer -- with the panel tone and the rule
-// stepped off it by the same amounts the old gray pair sat off white, so nothing reads half-changed.
-// Chosen from a swatch page that repainted real pages; it is the tone the console drawing calls paper.
-// dss-dark.scss is a separate set of tokens and is untouched.
+// Use a consistent paper tone for the page, navbar, and footer.
+// Dark-mode tokens are defined separately in dss-dark.scss.
 $body-bg: #f7f4ec !default;
 $primary: #3c72b4 !default;
 $link-color: #3c72b4 !default;
@@ -43,25 +40,10 @@ $dss-callout-tint: 10% !default;   // a callout box: this much of its color on t
 
 /*-- scss:rules --*/
 
-// The fonts are served from this site rather than from Google. The @import that used to sit in the
-// defaults above cost four sequential steps before any webfont existed -- parse a 511 KB stylesheet,
-// discover the import, fetch a stylesheet from fonts.googleapis.com, fetch the files from
-// fonts.gstatic.com -- so every page painted in Helvetica and re-flowed when Montserrat arrived.
-// Montserrat is wider, so the line breaks moved: the jitter on a hard refresh.
-//
-// They are embedded as data URIs rather than shipped as files, because Quarto copies only the
-// extension assets it learns about from configuration -- the logo and the favicon -- and will not
-// copy a font referenced from SCSS. A relative url() also resolves differently in this repository
-// than in a consumer, where the extension sits under _extensions/IQSS/. Embedding sidesteps both,
-// and because the stylesheet blocks rendering the font is present before anything paints, so there
-// is no swap to see. It costs 65 KB of base64 on a stylesheet that was already 511 KB.
-//
-// The originals are in assets/fonts/ with their license and the command to refresh them; the base64
-// below is generated from those files, so change them there and re-encode rather than editing this.
-// font-display is block, not swap. swap explicitly allows the browser to paint the fallback first and
-// re-flow when the real face arrives, which it still did even with the font embedded -- the table of
-// contents re-wrapped in its fixed 252px column. There is no network here to wait on, so block costs
-// nothing and forbids that first paint. Bootstrap Icons uses block for the same reason.
+// Embed fonts so consumers need no external font requests or relative asset paths.
+// Source fonts and their licenses are in assets/fonts/; regenerate these data URIs
+// from those files when updating fonts. font-display:block prevents fallback-font
+// layout shifts while the embedded face is prepared.
 // Montserrat is a variable font: one file covers 400 to 600.
 @font-face {
   font-family: "Montserrat";
@@ -141,20 +123,20 @@ body.nav-fixed { padding-top: 112px; }
 .navbar .navbar-nav.ms-auto:has(.dss-theme-switch)::after { display: none; }
 
 // Quarto's search control is the same shape of problem as the switch. #quarto-search is served empty
-// and its JS fills it, adding the type-overlay class and 40px of content, which pushed the navbar's
+// and its JS fills it, adding the type-overlay class and 40px of content, which can push the navbar's
 // right-hand links a further 44px left. Reserving the width on the element itself rather than on the
 // container puts the space in the right place, and costs nothing on a site with search: false, where
 // Quarto emits no search markup at all -- the training index is one, and a reservation on the
-// container would have left it a permanent gap.
+// container would leave a permanent gap.
 #quarto-search { min-width: 40px; }
 
 // Bootstrap Icons is a separate webfont that Quarto loads as a file, so until it arrives every .bi
 // glyph is zero-width and the text around it re-flows when it lands: the chevrons in the left nav and
 // the issue link in the right one. The glyphs are drawn on a 1em square, so reserving 1em costs
-// nothing -- of 43 icons on a workshop page it changed exactly one, by a pixel.
+// little space while keeping text positions stable.
 // content-box, because Bootstrap makes everything border-box: Quarto spaces the Report an issue icon
 // from its text with padding-right on the icon, and under border-box that padding sits inside the
-// reserved 1em, so the glyph overflowed it and sat on the first letter (0.6.7). With content-box the
+// reserved 1em, which can make the glyph overlap the first letter. With content-box the
 // 1em is the glyph and the padding is added outside it, before and after the font arrives alike.
 .bi { display: inline-block; width: 1em; box-sizing: content-box; text-align: center; }
 
@@ -173,14 +155,13 @@ body.nav-fixed { padding-top: 112px; }
 // Callouts and code.
 .callout { border-radius: 4px; }
 .callout .callout-header, .callout .callout-title-container { font-weight: 500; }
-// Callouts (Steve, 2026-08-29, chosen from a mockup of the options): Quarto's simple appearance (the rule down the
-// left edge, no title strip; untitled boxes stay untitled) with the whole box washed in the callout's color and the
-// the gray outer border gone, so a box reads as a box, as the 2021 alert boxes did.
+// Simple callouts use a left rule and tinted background without an outer border
+// or title strip. Untitled callouts retain no title.
 @each $k, $c in (note: $callout-color-note, tip: $callout-color-tip, warning: $callout-color-warning, important: $callout-color-important, caution: $callout-color-caution) {
   div.callout-#{$k}.callout-style-simple { background: mix($c, $body-bg, $dss-callout-tint); border-right-color: transparent; border-top-color: transparent; border-bottom-color: transparent; }
 }
 pre.sourceCode, div.sourceCode { border-radius: 4px; }
-// Output blocks (Steve, 2026-08-29, chosen from a mockup): a rule down the left edge marks what the code printed, no fill;
+// Output blocks use a left rule without background fill;
 // it pairs with the callouts. The text color is $pre-color above, so output follows the mode like everything else.
 .cell-output pre { border-left: 3px solid mix($dss-muted, $body-bg, 45%); padding: .1em 0 .1em .7em; margin-left: 2px; }
 code { font-size: 0.9em; }
@@ -201,8 +182,7 @@ footer.footer .nav-footer { align-items: center; }
 // emits an empty `.quarto-title-meta` on every page, so the rules hang off the children, which exist only
 // where the metadata does; the divider is behind `:has()` for the same reason, and its absence on an older
 // browser costs nothing. The `#title-block-header` prefix matches Quarto's own selector, which is an ID and
-// would otherwise win on size, weight, and a 0.8 opacity that dulls the color. Added 0.4.1 for IQSS/dss-ps,
-// whose cover carries "Noah Greifer / Published ...".
+// would otherwise win on size, weight, and a 0.8 opacity that dulls the color.
 #title-block-header.quarto-title-block.default {
   .quarto-title-meta-heading { font: 600 11.5px Montserrat, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: $dss-muted; opacity: 1; margin-top: 0; }
   .quarto-title-meta-contents { font-size: 14px; color: $body-color; p { margin-bottom: 0; } }
