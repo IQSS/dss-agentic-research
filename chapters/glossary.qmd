@@ -121,7 +121,7 @@ This glossary explains the technical terms used throughout the guide, including 
 :::
 
 ::: {#term-environment-variable}
-*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
+*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://iqss.github.io/dss-agentic-toolkit/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
 :::
 
 ::: {#term-estimand}

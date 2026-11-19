@@ -111,7 +111,7 @@ Once the labeling procedure is ready, ask the agent to apply it to the full coll
 
 A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
 
-[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 ### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
 

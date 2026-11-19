@@ -57,7 +57,7 @@ A *dependency-aware pipeline runner*, such as [`targets`](https://docs.ropensci.
 
 You can use both tools together. The agent can define `just all` to start a `targets` pipeline. You or the agent then use the same convenient command, while `targets` determines which calculations actually need to run. If the project already has working commands or a pipeline, ask the agent to extend them.
 
-The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 7: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html). [Chapter 8: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
+The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 7: Give research tasks reliable commands: just](https://iqss.github.io/dss-agentic-toolkit/chapters/project-commands.html). [Chapter 8: Rerun only affected steps: targets and Snakemake](https://iqss.github.io/dss-agentic-toolkit/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
 
 ## Check execution before scaling up
 
@@ -93,7 +93,7 @@ If that investigation suggests the statistical model represents the age-dependen
 
 A project may require many independent model fits or simulation runs. A *job* is one such task, run by a command. Running them all at once can overwhelm your computer; starting each one manually leaves the tasks idle between jobs. Ask the agent to prepare the commands and submit them to a job queue.
 
-[`pueue`](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
+[`pueue`](https://iqss.github.io/dss-agentic-toolkit/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
 
 The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
 
@@ -101,4 +101,4 @@ The queue's *slots* determine how many jobs may run simultaneously. Eight slots 
 
 The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
 
-For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
+For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving: pueue](https://iqss.github.io/dss-agentic-toolkit/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).

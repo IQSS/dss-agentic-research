@@ -30,7 +30,7 @@ The agent can record a *checksum*, a digital fingerprint of a file's contents, a
 
 Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] For a [`LaTeX`](https://www.latex-project.org/) manuscript, the agent can extract values from saved results into a file that the document reads when it is compiled. This keeps reported numbers connected to their sources without copying them by hand. If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. All three approaches need a check of the final document, including figure scales, labels, and captions.
 
-[^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
+[^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://iqss.github.io/dss-agentic-toolkit/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
@@ -66,7 +66,7 @@ Keep the document workflow your collaborators use. For direct `Word` editing, ha
 
 If coauthors draft together in [`Google Docs`](https://docs.google.com/), keep the shared document as the maintained manuscript. You can download the current draft as markdown and ask the agent to check its prose, citations, and reported numbers against the project's sources.[^google-docs-review] Incorporate the accepted changes into the shared document, preserving comments and any edits coauthors have made since the download.
 
-[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://dss-agentic-toolkit.pages.dev/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
+[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://iqss.github.io/dss-agentic-toolkit/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 ## Respond to reviewers {#respond-to-reviewers}
 
@@ -82,7 +82,7 @@ For an approved analysis change, have the agent preserve the original results, u
 
 ## Use the same results for a talk {#use-results-for-a-talk}
 
-Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
+Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://iqss.github.io/dss-agentic-toolkit/chapters/research-documents.html) covers output formats.
 
 ## Report how AI was used {#describe-ai-use-accurately}
 

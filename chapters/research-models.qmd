@@ -55,7 +55,7 @@ The following table identifies recognizable families and example releases, with 
 
 The smaller Qwen, Gemma, and Ministral examples are candidates for a personal computer, subject to its memory and the workload. Full releases such as Kimi K2 and DeepSeek-V3.2 require substantially greater resources. Have the agent report the exact release, license, runtime, and quantization used in its comparison. A license name alone does not establish that the system meets the open-source definition.
 
-[Chapter 17: Run and adapt an LLM on your own hardware](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
+[Chapter 17: Run and adapt an LLM on your own hardware](https://iqss.github.io/dss-agentic-toolkit/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
 
 ::: {.callout-note appearance="simple" icon="false"}
 ### Apple's on-device option {.unlisted}
@@ -89,7 +89,7 @@ For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/
 
 ![](figures/context-and-adaptation.svg){#fig-context-and-adaptation .tall fig-alt="A rubric, examples, and evidence accompany a new case in a prompt to an unchanged LLM. Alternatively, reviewed training examples produce a LoRA adapter while the base LLM's weights remain fixed. The adapter and matching base LLM process new cases. Compare both approaches on the same held-out test cases."}
 
-*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
+*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://iqss.github.io/dss-agentic-toolkit/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 
 [^lora-method]: Hu et al. (2021), [“LoRA: Low-Rank Adaptation of Large Language Models”](https://arxiv.org/abs/2106.09685), explains the method and reductions in trainable parameters and training memory.
 

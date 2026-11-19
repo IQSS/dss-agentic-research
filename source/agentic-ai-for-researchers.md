@@ -91,7 +91,7 @@ If you are new to agents, begin with *Orientation*. If you already use one, you 
 
 The examples use [`Claude Code`](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [`Git`](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
 
-The appendices provide downloadable project scaffolds and starter files, example prompts, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
+The appendices provide downloadable project scaffolds and starter files, example prompts, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://iqss.github.io/dss-agentic-toolkit/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
 
 # 2. Get started with the app {#first-session}
 
@@ -225,7 +225,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), *permission rules*
 
 [^access-operating-system]: The core software that manages a computer's hardware, files, and running programs. macOS, Windows, and Linux are examples. See IBM's [introduction to operating systems](https://www.ibm.com/think/topics/operating-systems).
 
-Both are needed because a file-tool restriction may not block a script that reads the same file. Conversely, the sandbox does not cover `Claude Code`'s built-in file tools or separately connected tools. A queued job or a command run outside the sandbox may also have different access. Have the agent check the controls for the tools it will actually use; [Chapter 2: Control what added tools can access](https://dss-agentic-toolkit.pages.dev/chapters/tool-access.html) in the companion guide *Extending Your Agent's Toolkit* explains configuration.
+Both are needed because a file-tool restriction may not block a script that reads the same file. Conversely, the sandbox does not cover `Claude Code`'s built-in file tools or separately connected tools. A queued job or a command run outside the sandbox may also have different access. Have the agent check the controls for the tools it will actually use; [Chapter 2: Control what added tools can access](https://iqss.github.io/dss-agentic-toolkit/chapters/tool-access.html) in the companion guide *Extending Your Agent's Toolkit* explains configuration.
 
 Use global settings for rules you want across your projects. Use project settings for permissions tied to a particular study, such as which input folders must remain unchanged and which services the work requires. Ask the agent to inspect both before proposing changes.
 
@@ -242,7 +242,7 @@ For many settings, your personal project file overrides the shared project file,
 [^settings-precedence]: Anthropic's [settings precedence](https://code.claude.com/docs/en/settings#settings-precedence) explains file priority; its [permission documentation](https://code.claude.com/docs/en/permissions#settings-precedence) explains why a deny rule from one file takes precedence over an allow from another.
 
 ::: {.guide-note}
-**Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains the setup.
+**Keep secrets out of saved permissions.** Choosing `Yes, and don't ask again` can save a command in `.claude/settings.local.json`, including any password or API key written into it.[^saved-permission-secrets] Have the agent keep this file out of [version control](#project-recovery) and shared archives, and supply credentials when commands run without writing their values into commands or output. If a credential has been exposed, revoke or replace it; deleting the file is not enough. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://iqss.github.io/dss-agentic-toolkit/chapters/credentials.html) explains the setup.
 :::
 
 [^saved-permission-secrets]: Apiiro's [November 2026 investigation](https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again) documents secrets in saved approvals. `Claude Code` normally adds the local settings file to your global `Git` ignore list when it writes the file inside a repository, but this does not protect a file `Git` already tracks. Exclude `.claude/settings.local.json` in the project's own `.gitignore` too; the shared `.claude/settings.json` can remain under version control. See Anthropic's [settings documentation](https://code.claude.com/docs/en/settings#keep-personal-settings-out-of-a-repository).
@@ -253,7 +253,7 @@ A *container*[^container-definition] provides a separate software environment wi
 
 [^container-definition]: A container runs a program and its supporting software in an isolated environment. Its configuration determines which files and connections it can access. See [`Docker`'s introduction to containers](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/).
 
-Containers can also preserve the software needed to reproduce an analysis. The toolkit's [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) covers these uses and their setup. Any environment processing protected data still needs to meet the requirements established in [Chapter 3: Know where your data goes](#research-limits).
+Containers can also preserve the software needed to reproduce an analysis. The toolkit's [Chapter 10: Run work in a separate environment: containers](https://iqss.github.io/dss-agentic-toolkit/chapters/containers.html) covers these uses and their setup. Any environment processing protected data still needs to meet the requirements established in [Chapter 3: Know where your data goes](#research-limits).
 
 ## Have the agent configure and check access {#access-report}
 
@@ -361,11 +361,11 @@ Paths in scripts should be relative to the *project root*, the folder containing
 
 ## Keep a recoverable version {#project-recovery}
 
-Use [`Git`](https://git-scm.com/) to retain versions of code, documentation, and suitable configuration files as the project develops. The agent can create these checkpoints and recover earlier work; you do not need to learn `Git` commands or inspect every line of code. Give a specific recovery prompt, such as restoring yesterday's sample-selection code while keeping today's manuscript edits. [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit* explains how to have the agent save versions of your work and restore earlier ones.
+Use [`Git`](https://git-scm.com/) to retain versions of code, documentation, and suitable configuration files as the project develops. The agent can create these checkpoints and recover earlier work; you do not need to learn `Git` commands or inspect every line of code. Give a specific recovery prompt, such as restoring yesterday's sample-selection code while keeping today's manuscript edits. [Chapter 4: Recover earlier work: git and gh](https://iqss.github.io/dss-agentic-toolkit/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit* explains how to have the agent save versions of your work and restore earlier ones.
 
 Before a substantial reorganization, also keep a recoverable copy outside the folder being changed. A dated copy is a workable starting point if you are not yet using version control. `Git` only preserves files and versions it records, and neither `Git` nor a synchronized folder replaces a backup. Keep restricted inputs and credentials out of `Git` history and use the project's approved storage for them.
 
-If the project uses a synchronization service (e.g., [`Dropbox`](https://www.dropbox.com/), [`Google Drive`](https://www.google.com/drive/), or [`OneDrive`](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage)), retain that arrangement while asking the agent to check how it handles software libraries, caches, and `Git`'s internal files. The toolkit's [synchronized-folder guidance](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#cloud-sync-storage) explains what to check and how to handle exclusions.
+If the project uses a synchronization service (e.g., [`Dropbox`](https://www.dropbox.com/), [`Google Drive`](https://www.google.com/drive/), or [`OneDrive`](https://www.microsoft.com/microsoft-365/onedrive/online-cloud-storage)), retain that arrangement while asking the agent to check how it handles software libraries, caches, and `Git`'s internal files. The toolkit's [synchronized-folder guidance](https://iqss.github.io/dss-agentic-toolkit/chapters/troubleshooting.html#cloud-sync-storage) explains what to check and how to handle exclusions.
 
 ## Start a new project {#scaffold-project}
 
@@ -653,7 +653,7 @@ When the same correction recurs, ask the agent to update the relevant shared gui
 
 A research group can maintain shared files in a repository and make a local copy available to each member's agent. Ask the agent to add the locations of the shared specialist files to `~/.claude/CLAUDE.md` and specify when to read each one. Have it flag any conflicting instructions. A shared folder is useful only if sessions know when to read its contents.
 
-Record a paper-specific exception in that project's files, with its reason. A new research group default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use [Appendix B: Keep records of shared settings: chezmoi](https://dss-agentic-toolkit.pages.dev/chapters/shared-settings.html) in the companion guide *Extending Your Agent's Toolkit* if you need to keep those files consistent across computers.
+Record a paper-specific exception in that project's files, with its reason. A new research group default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use [Appendix B: Keep records of shared settings: chezmoi](https://iqss.github.io/dss-agentic-toolkit/chapters/shared-settings.html) in the companion guide *Extending Your Agent's Toolkit* if you need to keep those files consistent across computers.
 
 # 9. Use skills for recurring tasks {#reusable-procedures}
 
@@ -927,9 +927,9 @@ Ask the agent to work down the ladder below and use the first suitable, permitte
 
 A documented API, bulk download, or CSV export usually leaves a clearer collection record than interpreting a displayed page. If the data are in the page's HTML, the agent can write a script to save the page and extract them. When collection requires interaction, such as logging in or clicking through results, ask it to automate those steps with a scripted browser. Where permitted, the script can save the data sent to the browser to populate the page.
 
-An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once the agent has worked out how to collect the data, ask it to write a script for any collection that needs to be repeated. [Chapter 14: Inspect and interact with a browser](https://dss-agentic-toolkit.pages.dev/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
+An interactive agent browser helps explore an unfamiliar site or complete a small task requiring visual judgment. Once the agent has worked out how to collect the data, ask it to write a script for any collection that needs to be repeated. [Chapter 14: Inspect and interact with a browser](https://iqss.github.io/dss-agentic-toolkit/chapters/browser-work.html) in the companion guide *Extending Your Agent's Toolkit* covers the tools.
 
-Ask the agent to check whether a website or service permits automated data collection before using it, including its access requirements and request limits. If access requires an API key (a credential that lets software access the service through your account), have the agent store it separately from collection scripts and keep it out of saved request records. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html) explains how. Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
+Ask the agent to check whether a website or service permits automated data collection before using it, including its access requirements and request limits. If access requires an API key (a credential that lets software access the service through your account), have the agent store it separately from collection scripts and keep it out of saved request records. The toolkit's [Chapter 12: Keep credentials out of research files: 1Password and direnv](https://iqss.github.io/dss-agentic-toolkit/chapters/credentials.html) explains how. Apply the data-use decisions in [Chapter 3: Know where your data goes](#data-chain-of-custody) to collection as well as analysis.
 
 ## Preserve originals and their provenance {#data-provenance}
 
@@ -1015,7 +1015,7 @@ A *dependency-aware pipeline runner*, such as [`targets`](https://docs.ropensci.
 
 You can use both tools together. The agent can define `just all` to start a `targets` pipeline. You or the agent then use the same convenient command, while `targets` determines which calculations actually need to run. If the project already has working commands or a pipeline, ask the agent to extend them.
 
-The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 7: Give research tasks reliable commands: just](https://dss-agentic-toolkit.pages.dev/chapters/project-commands.html). [Chapter 8: Rerun only affected steps: targets and Snakemake](https://dss-agentic-toolkit.pages.dev/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
+The companion guide *Extending Your Agent's Toolkit* covers setup in [Chapter 7: Give research tasks reliable commands: just](https://iqss.github.io/dss-agentic-toolkit/chapters/project-commands.html). [Chapter 8: Rerun only affected steps: targets and Snakemake](https://iqss.github.io/dss-agentic-toolkit/chapters/pipeline-dependencies.html) explains dependency-aware pipelines, including [`Snakemake`](https://snakemake.readthedocs.io/) as another option.
 
 ## Check execution before scaling up
 
@@ -1051,7 +1051,7 @@ If that investigation suggests the statistical model represents the age-dependen
 
 A project may require many independent model fits or simulation runs. A *job* is one such task, run by a command. Running them all at once can overwhelm your computer; starting each one manually leaves the tasks idle between jobs. Ask the agent to prepare the commands and submit them to a job queue.
 
-[`pueue`](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
+[`pueue`](https://iqss.github.io/dss-agentic-toolkit/chapters/job-queues.html) is a tool for creating and managing job queues on your computer. It starts waiting jobs automatically as running jobs finish. Once the jobs are submitted, `pueue` can keep them running after the agent conversation ends.
 
 The queue's *slots* determine how many jobs may run simultaneously. Eight slots allow eight running jobs; the rest wait. A *processor core* is a computing unit that can execute instructions independently of other cores. One job may use several cores, and each job also needs memory. Have the agent use a representative test run to choose how many jobs the computer can comfortably run together.
 
@@ -1059,7 +1059,7 @@ The queue's *slots* determine how many jobs may run simultaneously. Eight slots 
 
 The computer must remain awake while the jobs run. When you return, ask the agent to report which jobs completed, which failed, and which are still waiting or running. It should check the saved outputs and investigate failures before retrying the affected jobs. The diagram illustrates when you might submit and review a batch; its completion time depends on the work.
 
-For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving: pueue](https://dss-agentic-toolkit.pages.dev/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
+For setup and recovery instructions, see [Chapter 9: Keep unattended jobs moving: pueue](https://iqss.github.io/dss-agentic-toolkit/chapters/job-queues.html) in the companion toolkit. If the work exceeds your computer's capacity, use an approved institutional computing service, such as [Harvard FAS Research Computing](https://docs.rc.fas.harvard.edu/).
 
 # 14. Test the analysis against known truth {#simulation}
 
@@ -1187,7 +1187,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: [Chapter 15: Divide work between agents: shared projects and git worktrees](https://dss-agentic-toolkit.pages.dev/chapters/parallel-work.html#agent-execution-terms) in the companion guide *Extending Your Agent's Toolkit* compares subagents, headless sessions, and background execution. [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) explains setup and control over each run's inputs and tool access.
+[^independent-headless]: [Chapter 15: Divide work between agents: shared projects and git worktrees](https://iqss.github.io/dss-agentic-toolkit/chapters/parallel-work.html#agent-execution-terms) in the companion guide *Extending Your Agent's Toolkit* compares subagents, headless sessions, and background execution. [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) explains setup and control over each run's inputs and tool access.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -1367,7 +1367,7 @@ Once the labeling procedure is ready, ask the agent to apply it to the full coll
 
 A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
 
-[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
 ### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
 
@@ -1450,7 +1450,7 @@ The following table identifies recognizable families and example releases, with 
 
 The smaller Qwen, Gemma, and Ministral examples are candidates for a personal computer, subject to its memory and the workload. Full releases such as Kimi K2 and DeepSeek-V3.2 require substantially greater resources. Have the agent report the exact release, license, runtime, and quantization used in its comparison. A license name alone does not establish that the system meets the open-source definition.
 
-[Chapter 17: Run and adapt an LLM on your own hardware](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
+[Chapter 17: Run and adapt an LLM on your own hardware](https://iqss.github.io/dss-agentic-toolkit/chapters/local-models.html) in the companion guide *Extending Your Agent's Toolkit* covers installation, hardware checks, and connecting a compatible LLM to an agent.
 
 ::: {.callout-note appearance="simple" icon="false"}
 ### Apple's on-device option {.unlisted}
@@ -1484,7 +1484,7 @@ For example, Qwen names an LLM family, [`MLX LM`](https://github.com/ml-explore/
 
 ![](figures/context-and-adaptation.svg){#fig-context-and-adaptation .tall fig-alt="A rubric, examples, and evidence accompany a new case in a prompt to an unchanged LLM. Alternatively, reviewed training examples produce a LoRA adapter while the base LLM's weights remain fixed. The adapter and matching base LLM process new cases. Compare both approaches on the same held-out test cases."}
 
-*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://dss-agentic-toolkit.pages.dev/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
+*QLoRA* combines low-rank adaptation with a quantized base LLM to reduce training memory further.[^qlora-method] Whether a configuration fits the available hardware still depends on the release, context length, and training settings. The companion toolkit's [adaptation section](https://iqss.github.io/dss-agentic-toolkit/chapters/local-models.html#adapt-a-model-when-the-study-calls-for-it) explains how to have the agent set up training tools.
 
 [^lora-method]: Hu et al. (2021), [“LoRA: Low-Rank Adaptation of Large Language Models”](https://arxiv.org/abs/2106.09685), explains the method and reductions in trainable parameters and training memory.
 
@@ -1540,7 +1540,7 @@ The agent can record a *checksum*, a digital fingerprint of a file's contents, a
 
 Where the document software supports it, have the agent insert numbers directly from saved results. For example, [`Quarto`](https://quarto.org/) can calculate values within the text when it builds a document.[^inline-results] For a [`LaTeX`](https://www.latex-project.org/) manuscript, the agent can extract values from saved results into a file that the document reads when it is compiled. This keeps reported numbers connected to their sources without copying them by hand. If the team writes directly in [`Word`](https://www.microsoft.com/en-us/microsoft-365/word), the agent can instead compare manuscript values with the saved results after each revision. All three approaches need a check of the final document, including figure scales, labels, and captions.
 
-[^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
+[^inline-results]: [`Quarto`'s inline-code documentation](https://quarto.org/docs/computations/inline-code.html) explains how computed values appear in prose. The agent can configure this to read the project's saved estimates. For document setup, see [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://iqss.github.io/dss-agentic-toolkit/chapters/research-documents.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 <!-- prompt:trace-manuscript -->
 ::: {#request-trace-manuscript .prompt}
@@ -1576,7 +1576,7 @@ Keep the document workflow your collaborators use. For direct `Word` editing, ha
 
 If coauthors draft together in [`Google Docs`](https://docs.google.com/), keep the shared document as the maintained manuscript. You can download the current draft as markdown and ask the agent to check its prose, citations, and reported numbers against the project's sources.[^google-docs-review] Incorporate the accepted changes into the shared document, preserving comments and any edits coauthors have made since the download.
 
-[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://dss-agentic-toolkit.pages.dev/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
+[^google-docs-review]: Use `File → Download → Markdown (.md)`; see [Google's export instructions](https://support.google.com/docs/answer/12014036?hl=en). Anthropic also documents [direct Google Docs editing through connectors](https://support.claude.com/en/articles/10166901-use-google-workspace-connectors). Direct editing from a `Claude Code` session depends on its connected tools and permissions. For connection setup, see [Chapter 13: Connect to research data and services: MCP](https://iqss.github.io/dss-agentic-toolkit/chapters/service-connections.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 ## Respond to reviewers {#respond-to-reviewers}
 
@@ -1592,7 +1592,7 @@ For an approved analysis change, have the agent preserve the original results, u
 
 ## Use the same results for a talk {#use-results-for-a-talk}
 
-Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://dss-agentic-toolkit.pages.dev/chapters/research-documents.html) covers output formats.
+Ask for an outline with one main claim per slide and the supporting saved figure or result. Review the argument and audience fit before generating a deck. Use the same result-to-source links as the manuscript, and check the final slides after revisions. The companion toolkit's [Chapter 11: Generate documents from research outputs: Quarto and Pandoc](https://iqss.github.io/dss-agentic-toolkit/chapters/research-documents.html) covers output formats.
 
 ## Report how AI was used {#describe-ai-use-accurately}
 
@@ -1629,7 +1629,7 @@ Have the agent place a copy of the `SPECIFICATION.md` used for the reported anal
 
 Have the agent write a `README.md` for `archive/` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
 
-The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 6: Preserve a software environment: rig, renv, and uv](https://dss-agentic-toolkit.pages.dev/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
+The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 6: Preserve a software environment: rig, renv, and uv](https://iqss.github.io/dss-agentic-toolkit/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
 
 For restricted data, the instructions in `archive/` should explain how an authorized researcher can obtain the required files and where to place them. A synthetic example can let others run the code without access to those records. State clearly when only synthetic inputs have been tested: that run does not reproduce findings from the protected data.
 
@@ -1639,9 +1639,9 @@ For restricted data, the instructions in `archive/` should explain how an author
 
 Ask the agent to copy `archive/` into a temporary directory outside the working project. If you will share a zipped copy, have it extract and test that exact file there. It should start a fresh headless agent session[^handoff-headless] with access to the test directory but no access to the working project or earlier conversation. Have that agent restore the recorded software versions in a separate environment and follow the supplied `README.md`. Missing files, dependencies, or instructions should be reported rather than recovered from the working project.
 
-[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://dss-agentic-toolkit.pages.dev/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
 
-A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://dss-agentic-toolkit.pages.dev/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
+A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://iqss.github.io/dss-agentic-toolkit/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
 
 <!-- prompt:reproduce-project -->
 ::: {#request-reproduce-project .prompt}
@@ -2095,7 +2095,7 @@ report it; do not create a replacement or invent its instructions.
 
 If the project uses [`Git`](https://git-scm.com/), have the agent adapt these exclusions in its `.gitignore`. The template excludes data folders by default; permitted public or synthetic inputs may belong in the repository. An ignore rule affects which files Git tracks. It does not restrict agent access or remove files already tracked.
 
-Have the agent preserve the inputs needed for reproduction, including saved fits or LLM responses. Large or protected files can remain in approved storage, with their versions and locations documented in the project. For setup, see [Chapter 4: Recover earlier work: git and gh](https://dss-agentic-toolkit.pages.dev/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit*.
+Have the agent preserve the inputs needed for reproduction, including saved fits or LLM responses. Large or protected files can remain in approved storage, with their versions and locations documented in the project. For setup, see [Chapter 4: Recover earlier work: git and gh](https://iqss.github.io/dss-agentic-toolkit/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit*.
 
 [Download .gitignore](resources/starter-files/gitignore.txt){.download-button download=".gitignore"}
 
@@ -2547,7 +2547,7 @@ This appendix helps you resolve problems that arise when working with an agent, 
 |:-------------------------|:----------------------------------------------------------|:-------------------|
 | A long job seems to have stopped | Check whether the job is still running before starting another copy. Examine recent log entries and expected outputs. Fix a confirmed failure or resume from saved progress, then use logs and outputs to verify that work is progressing. | [Unattended jobs](#unattended-jobs) |
 | Reproduction works only in the original folder | Test the contents of `archive/` in a temporary folder, following its README and restoring the documented software environment without relying on files from the working project. Identify and repair missing inputs, software, paths, or instructions, then repeat the test. | [Testing the handoff](#test-and-name-the-reproduction-route) |
-| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check for the documented launch issue. If confirmed, use the toolkit's method of starting `R` through a pseudo-terminal[^troubleshoot-pty] and check that it produces output. This remedy is specific to that launch problem. | [R-on-macOS diagnosis](https://dss-agentic-toolkit.pages.dev/chapters/troubleshooting.html#r-on-macos) |
+| An [`R`](https://www.r-project.org/) job on macOS runs continuously without output when launched by an agent | Check for the documented launch issue. If confirmed, use the toolkit's method of starting `R` through a pseudo-terminal[^troubleshoot-pty] and check that it produces output. This remedy is specific to that launch problem. | [R-on-macOS diagnosis](https://iqss.github.io/dss-agentic-toolkit/chapters/troubleshooting.html#r-on-macos) |
 | An app control is missing or has a different label | Compare the visible layout and account with current documentation. Identify a supported way to perform the task. | [App controls](#find-your-way-around) |
 
 [^troubleshoot-pty]: A pseudo-terminal gives the launched program a terminal-like input/output connection. The agent can configure it without requiring you to work in a terminal. The linked diagnosis in the companion guide *Extending Your Agent's Toolkit* explains this specific problem and remedy.
@@ -2679,7 +2679,7 @@ This glossary explains the technical terms used throughout the guide, including 
 :::
 
 ::: {#term-environment-variable}
-*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://dss-agentic-toolkit.pages.dev/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
+*Environment variable.* A named value supplied to a running program, such as a configuration setting or credential. The program reads the value without needing it written into its code. See [supplying a credential to a command](https://iqss.github.io/dss-agentic-toolkit/chapters/credentials.html#supply-a-credential-to-a-command) in the companion guide *Extending Your Agent's Toolkit*.
 :::
 
 ::: {#term-estimand}

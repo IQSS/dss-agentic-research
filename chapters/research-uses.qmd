@@ -87,4 +87,4 @@ If you are new to agents, begin with *Orientation*. If you already use one, you 
 
 The examples use [`Claude Code`](https://code.claude.com/docs/en/overview) in the Mac desktop app. You do not need terminal or [`Git`](https://git-scm.com/) experience to begin, and the research practices apply to other agents. Harvard-specific guidance appears in clearly marked passages.
 
-The appendices provide downloadable project scaffolds and starter files, example prompts, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://dss-agentic-toolkit.pages.dev/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
+The appendices provide downloadable project scaffolds and starter files, example prompts, troubleshooting advice, and a glossary. The companion, [*Extending Your Agent’s Toolkit*](https://iqss.github.io/dss-agentic-toolkit/), explains how to ask an agent to install, configure, and use additional tools when your research needs them. You can adopt those tools as they become useful.
