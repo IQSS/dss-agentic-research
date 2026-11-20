@@ -86,7 +86,7 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
 #bubble .bubble-shape { fill: var(--c-card); stroke: var(--c-muted); stroke-width: 2; stroke-linejoin: round; transition: stroke .15s; }
 #bubble:has(#readout[data-preview="1"]) .bubble-shape { stroke: var(--c-mustard); }
 #bubble foreignObject { pointer-events: none; }
-#bubble a { pointer-events: auto; }
+#bubble a, #bubble button { pointer-events: auto; }
 #bubble-home { display: flow-root; font-family: Montserrat, Questrial, sans-serif; color: var(--c-ink); }
 
 .console-readout {
@@ -116,6 +116,20 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
 .console-readout .go { font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--c-mustard); padding-bottom: 1px; }
 .console-readout .go:hover, .console-readout .go:focus-visible { border-bottom-color: currentColor; outline: none; }
 .console-readout .hint { color: var(--c-muted); font-size: 0.85rem; margin-top: 6px; }
+.console-readout .overview-back {
+  display: inline-block; margin: 0 0 8px; padding: 2px 0; min-height: 24px;
+  border: 0; background: transparent; color: var(--c-ink-2); cursor: pointer;
+  font: inherit; font-size: 13px; line-height: 1.4; text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.console-readout .overview-back:hover { color: var(--c-ink); }
+.console-readout .overview-back:focus-visible { outline: 2px solid var(--c-ink); outline-offset: 3px; }
+.console-readout .intro h1:focus { outline: none; }
+.console-page .creator-credit { margin: .75rem 0 0; text-align: center; font-family: var(--c-mono); font-size: 12px; color: var(--c-muted); }
+.console-page .creator-credit a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .console-readout .overview-back { min-height: 44px; font-size: .85rem; }
+}
 /* in the bubble: no card, and sizes set for the drawing's scale */
 #bubble .console-readout { background: none; border: 0; border-radius: 0; padding: 0; margin: 0; }
 #bubble .console-readout h1 { font-size: 26px; line-height: 1.15; margin: 0 0 12px; font-weight: 600; }
@@ -128,7 +142,7 @@ body:has(.console-page) #title-block-header { display: none; }   /* the title li
 #bubble .console-readout .hint { font-size: 13px; margin-top: 4px; }
 .console-legend {
   display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; padding-left: 2px;
-  font-family: var(--c-mono); font-size: 12px; color: var(--c-muted);
+  font-family: var(--c-mono); font-size: calc(12px + 1pt); color: var(--c-muted);
 }
 .console-legend span::before {
   content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; background: var(--dot);

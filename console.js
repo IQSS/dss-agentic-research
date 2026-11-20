@@ -57,73 +57,73 @@ document.addEventListener("DOMContentLoaded", function () {
   const CH = [
     { n: "1", part: "I", slug: "research-uses", title: "How agents can help your research", ctl: "dome",
       r: { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null },
-      body: "Research depends on more than getting an answer quickly. We need to know what was done, whether it matches the question, and whether someone can reproduce it. An agent can help maintain that connection while doing much of the coding, searching, checking, and documentation. Used well, it can make research faster, more robust, reproducible, and auditable." },
+      body: "An agent can help develop ideas, run analyses, and check and document the work. This chapter explains how agents work, how to supervise them, and how AI-generated classifications can become research data." },
     { n: "2", part: "I", slug: "first-session", title: "Get started with the app", ctl: "app",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "slate", gloves: "cream", holds: "terminal", scene: null },
-      body: "You can use an agent with familiar research files and software without first learning a terminal. This chapter introduces the app and its main controls, so that later instructions about a folder, a session, or a permission mode have a clear meaning." },
+      body: "Get started with Claude Code in the Mac app: install it, sign in, choose a project folder, and give the agent a task. Learn how to follow its progress, clarify instructions, and inspect the result." },
     { n: "3", part: "I", slug: "research-limits", title: "Know where your data goes", ctl: "transfer",
       r: { hat: "fedora", eyes: "alert", arms: "guard", coat: "crimson", gloves: "cream", holds: "lock", scene: "dataflow" },
-      body: "Protected research material can reach an external service through an agent's normal work. Before using it, establish where the information will go, whether that processing is permitted, and what copies may remain. These decisions affect the research environment you choose and the records you need to keep." },
+      body: "An agent working on your computer may still send research material to an external LLM service. Check what is sent and retained, what your project permits, and how to work with restricted data." },
     { n: "4", part: "I", slug: "agent-access", title: "Control what the agent can do", ctl: "stop",
       r: { hat: "fedora", eyes: "alert", arms: "stop", coat: "slate", gloves: "cream", holds: null, scene: "glassbox" },
-      body: "You decide which files the agent may read or change and which services it may use. The agent can configure and check those controls, so routine work can proceed while other files remain protected. This chapter explains permission rules, sandbox restrictions, and when a separate environment helps." },
+      body: "Give the agent access to the files and services its task needs while protecting other material. Learn how permission rules and technical restrictions enforce those limits, and how to check that they work." },
     { n: "5", part: "I", slug: "directing-work", title: "Choose settings for the task", ctl: "rotary",
       r: { hat: "fedora", eyes: "alert", arms: "hold", coat: "mustard", gloves: "brown", holds: "dial", scene: null },
-      body: "Choose whether the agent should plan before acting, how actions receive approval, and which LLM and reasoning effort to use. A figure-label change can proceed directly; conflicting estimates may need investigation. The app also shows your usage allowance and reset information." },
+      body: "Choose when the agent should plan first, which actions need approval, and how much reasoning a task needs. Understand the app’s LLM choices, usage allowance, and how much information the agent can use at once." },
     { n: "6", part: "II", slug: "project-organization", title: "Organize your research projects", ctl: "folder",
       r: { hat: "hardhat", eyes: "calm", arms: "organize", coat: "crimson", gloves: "cream", holds: "project-tree", scene: null },
-      body: "An agent needs to find the right files before it can do useful work. A consistent project structure helps it locate the current analysis, preserve original inputs, and save results where you and your collaborators expect them. The same organization makes it easier to explain how a result was produced or return to an earlier version." },
+      body: "Organize folders so the agent can identify current files, preserve original data, and save results consistently. Set up a new project or reorganize an existing one while keeping earlier work recoverable." },
     { n: "7", part: "II", slug: "project-context", title: "Give the agent context for your project", ctl: "context",
       r: { hat: "fedora", eyes: "focus", arms: "read", coat: "sage", gloves: "cream", holds: "project-notes", scene: null },
-      body: "An agent joining a research project needs to know what you are trying to establish, which files to use, and which decisions have already been made. Saving that knowledge in the project lets it begin useful work without repeatedly asking you to reconstruct the study. The records also help you and your collaborators understand changes made along the way." },
+      body: "Use project context files to explain the research question, identify current files, and record decisions and unfinished work. Have the agent maintain them so a new session can continue without reconstructing the project’s history." },
     { n: "8", part: "II", slug: "shared-conventions", title: "Apply your conventions across projects", ctl: "defaults",
       r: { hat: "bowler", eyes: "calm", arms: "explain", coat: "mustard", gloves: "slate", holds: "conventions", scene: null },
-      body: "You should not have to explain the same coding, modeling, or writing preferences whenever you begin a project. Shared instructions let the agent reuse those conventions while keeping each study's question, data, and decisions in its own records. Corrections made during one project can then improve work on the next." },
+      body: "Save coding, modeling, and writing preferences as global user instructions that apply across projects. Learn how to organize that guidance, improve it after recurring corrections, and record exceptions for particular studies." },
     { n: "9", part: "II", slug: "reusable-procedures", title: "Use skills for recurring tasks", ctl: "keys",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "rose", gloves: "slate", holds: "gear", scene: null },
-      body: "Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task, including the checks that make its result useful. It can preserve lessons from earlier work and reduce the need to explain the same steps again." },
+      body: "A skill gives an agent reusable instructions for a task and its checks. Learn how to choose an existing skill or turn a successful procedure into one, then test and refine it." },
     { n: "10", part: "III", slug: "example-project", title: "The example research project", ctl: "study",
       r: { hat: "none", eyes: "focus", arms: "present", coat: "sage", gloves: "brown", holds: "study-sheet", scene: null },
-      body: "How does heat exposure relate to birthweight, and does that relationship vary with maternal age? This question connects the following chapters. An agent can help develop it, examine the evidence, and build an analysis whose results can be checked and reproduced." },
+      body: "Follow a study of heat exposure, maternal age, and birthweight using synthetic records. The example shows how to refine a research question, specify the analysis, and organize the files used throughout the research chapters." },
     { n: "11", part: "III", slug: "literature", title: "Find and assess research literature", ctl: "references",
       r: { hat: "beret", eyes: "alert", arms: "hold", coat: "slate", gloves: "cream", holds: "books", scene: null },
-      body: "An agent can help find evidence, compare explanations, and identify gaps in a proposed study. Its synthesis is useful only if you can locate the sources and check what they support." },
+      body: "Ask the agent to find relevant papers, verify references, and compare what the evidence supports. Learn how to define a search, distinguish abstracts from full-text evidence, and trace claims to their sources." },
     { n: "12", part: "III", slug: "data-acquisition", title: "Bring data into the project", ctl: "datainputs",
       r: { hat: "fedora", eyes: "calm", arms: "collect", coat: "sage", gloves: "mustard", holds: "key", scene: "database" },
-      body: "An agent needs the intended research inputs and enough documentation to use them correctly. Whether files arrive from a collaborator, already sit on disk, or must be collected, establish what they contain and preserve where they came from." },
+      body: "Have the agent check that supplied or collected data match the study’s requirements and documentation. Preserve original files, record their sources, and save a repeatable collection process when data must be gathered online." },
     { n: "13", part: "III", slug: "research-workflows", title: "Build a modular analysis workflow", ctl: "sequencer",
       r: { hat: "hardhat", eyes: "focus", arms: "assemble", coat: "slate", gloves: "cream", holds: "workflow", scene: null },
-      body: "Research analyses change repeatedly. Separating the work into independently runnable steps lets an agent revise one part without rerunning everything. Saved inputs and outputs also make errors easier to locate." },
+      body: "Separate the analysis into steps with explicit inputs and saved outputs, so a figure change need not rerun model fitting. Have the agent test the complete workflow, investigate unexpected results, and rerun affected steps." },
     { n: "14", part: "III", slug: "simulation", title: "Test the analysis against known truth", ctl: "scope",
       r: { hat: "hardhat", eyes: "calm", arms: "hold", coat: "mustard", gloves: "brown", holds: "dice", scene: null },
-      body: "Simulation can check whether the code an agent builds runs successfully and whether a statistical method produces reliable estimates and uncertainty intervals. Repeating the analysis on synthetic datasets with known truth lets you assess its performance under different conditions." },
+      body: "Have the agent repeat the analysis on synthetic datasets with known relationships. Check both whether the code runs and whether the method gives reliable estimates and uncertainty intervals under conditions relevant to the study." },
     { n: "15", part: "III", slug: "checking-analysis", title: "Check the agent with independent implementations", ctl: "twinmeters",
       r: { hat: "fedora", eyes: "focus", arms: "hold", coat: "sage", gloves: "mustard", holds: "magnifier", scene: null },
-      body: "Independently built implementations give mistakes a chance to produce observable disagreements. Each agent receives the same specification and inputs, works through the analysis separately, and saves comparable outputs. A rerun of the same code cannot provide this check." },
+      body: "Have separate agents write code for the same specified analysis without seeing each other’s work. Compare their data processing and results to find coding errors; agreement alone does not establish that the specification is correct." },
     { n: "16", part: "III", slug: "llm-measurements", title: "Use LLM outputs as research data", ctl: "measurement",
       r: { hat: "bowler", eyes: "alert", arms: "measure", coat: "crimson", gloves: "cream", holds: "evaluation", scene: null },
-      body: "LLMs can classify documents, extract information, or assess material that would take a research team considerable time to read. When their responses become variables in an analysis, errors in those responses affect the evidence. Define what the LLM should produce and evaluate whether it does that well enough for the study." },
+      body: "Use LLMs to label or extract information from research material, then evaluate those outputs against human judgments. Examine how errors and prompt choices affect the findings, and save the responses needed to reproduce the analysis." },
     { n: "17", part: "III", slug: "research-models", title: "Run and adapt LLMs for your research", ctl: "adaptlever",
       r: { hat: "hardhat", eyes: "focus", arms: "adjust", coat: "slate", gloves: "brown", holds: "llm-module", scene: null },
-      body: "Running an LLM yourself can give you control over where research material is processed and preserve access to the weights used in a study. Training an existing LLM on reviewed examples may improve a recurring task. These are separate choices, with different costs and checks." },
+      body: "Choose where an LLM runs and whether it needs further training for your task. Compare prompting with training on reviewed examples, evaluate any improvement, and preserve the files needed to use the resulting LLM again." },
     { n: "18", part: "III", slug: "research-writing", title: "Write and revise the manuscript", ctl: "paperprinter",
       r: { hat: "beret", eyes: "calm", arms: "hold", coat: "rose", gloves: "cream", holds: "pen", scene: null },
-      body: "A manuscript can retain an outdated estimate after the analysis has changed. An agent can help keep the text, tables, and figures consistent with the saved results, and identify interpretations that need reconsidering." },
+      body: "Draft and revise from verified sources and saved analysis results. Have the agent keep reported numbers consistent, combine accepted coauthor edits, and help prepare responses to reviewers while you decide the argument and interpretation." },
     { n: "19", part: "III", slug: "research-handoff", title: "Reproduce and hand off the research", ctl: "rerun",
       r: { hat: "none", eyes: "focus", arms: "carry", coat: "sage", gloves: "brown", holds: "archive", scene: null },
-      body: "Another researcher should be able to reproduce the reported results using the supplied files and instructions. An agent can prepare and test those materials, finding dependencies that are easy to miss in a familiar working project." },
+      body: "Prepare the data, code, software records, and instructions another researcher needs to reproduce the results. Have a fresh agent test the exact files intended for sharing, with no access to the working project." },
     { n: "A", part: "A", slug: "starter-files", title: "Project scaffolds and starter files", ctl: "key",
       r: { hat: "none", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "scaffold-sheet", scene: null },
-      body: "Choose a paper, dataset, or website scaffold, then have the agent adapt its folders and project context files to your work. Downloadable specifications accompany templates for project context files and global user instructions." },
+      body: "Download starting folder layouts and templates for project context files and global user instructions. Have the agent adapt them to a paper, dataset, or website while preserving any existing organization that works." },
     { n: "B", part: "A", slug: "prompt-index", title: "Prompt bank", ctl: "key",
       r: { hat: "bowler", eyes: "focus", arms: "hold", coat: "mustard", gloves: "brown", holds: "clipboard", scene: null },
-      body: "Find a prompt for your research task, supply the listed files or decisions, and adapt it to the project. Prompts are grouped by task and link to their explanations in the guide." },
+      body: "Find example prompts grouped by research task, with links to their explanations. Adapt a prompt to your files and decisions, or download the complete collection." },
     { n: "C", part: "A", slug: "troubleshooting", title: "Troubleshooting", ctl: "key",
       r: { hat: "fedora", eyes: "alarmed", arms: "up", coat: "rose", gloves: "brown", holds: null, scene: null },
-      body: "Find the problem you have encountered and what to ask the agent to investigate. Preserve the affected files and establish the cause before changing the analysis." },
+      body: "Find suggested investigations for forgotten instructions, inconsistent results, stalled jobs, or blocked access. Tell the agent what happened and what you expected, then have it check and document the repair." },
     { n: "D", part: "A", slug: "glossary", title: "Glossary", ctl: "key",
       r: { hat: "bowler", eyes: "calm", arms: "hold", coat: "sage", gloves: "cream", holds: "sheet", scene: null },
-      body: "Look up an unfamiliar term, then follow its link to the explanation in the guide. Definitions distinguish agents, LLMs, and statistical concepts." },
+      body: "Look up an unfamiliar term, then follow its link to the explanation in the guide. Definitions cover agent software, research workflows, and LLM training and evaluation." },
   ];
   const DEFAULT = { hat: "fedora", eyes: "calm", arms: "wave", coat: "sage", gloves: "brown", holds: null, scene: null };
 
@@ -914,6 +914,21 @@ document.addEventListener("DOMContentLoaded", function () {
     ro.dataset.preview = "0"; ro.style.setProperty("--dot", "var(--c-mustard)");
     roChapter.hidden = true; roIntro.hidden = false;
   }
+  function resetOverview() {
+    const moveFocus = ro.contains(document.activeElement) || controls.includes(document.activeElement);
+    pinned = null; explored = null;
+    controls.forEach(a => a.classList.remove("on"));
+    restore();
+    cueSequence(null);
+    if (moveFocus) roIntro.querySelector("h1").focus({ preventScroll: true });
+  }
+  document.getElementById("ro-back").addEventListener("click", resetOverview);
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape" || e.defaultPrevented || !explored) return;
+    if (e.target.closest("input, textarea, select, [contenteditable='true'], [role='dialog']")) return;
+    e.preventDefault();
+    resetOverview();
+  });
   const find = a => CH.find(c => c.n === a.dataset.n);
   const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (!fine) roHow.textContent = "Tap to explore; tap again to open. The blue glow marks the next chapter.";
@@ -943,7 +958,9 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   narrow.addEventListener("change", placeReadout); placeReadout();
   const fitBubble = () => {
-    const bottom = 38 + Math.max(150, home.offsetHeight) + 16;
+    const height = Math.max(150, home.offsetHeight);
+    bubble.querySelector("foreignObject").setAttribute("height", height);
+    const bottom = 38 + height + 16;
     shape.setAttribute("d", `M36 22 H462 a16 16 0 0 1 16 16 V84 L502 106 L478 124 V${bottom - 16} a16 16 0 0 1 -16 16 H36 a16 16 0 0 1 -16 -16 V38 a16 16 0 0 1 16 -16 Z`);
   };
   new ResizeObserver(fitBubble).observe(home); fitBubble();
