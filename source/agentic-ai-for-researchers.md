@@ -655,7 +655,7 @@ When the same correction recurs, ask the agent to update the relevant shared gui
 
 A research group can maintain shared files in a repository and make a local copy available to each member's agent. Ask the agent to add the locations of the shared specialist files to `~/.claude/CLAUDE.md` and specify when to read each one. Have it flag any conflicting instructions. A shared folder is useful only if sessions know when to read its contents.
 
-Record a paper-specific exception in that project's files, with its reason. A new research group default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use [Appendix B: Keep records of shared settings: chezmoi](https://iqss.github.io/dss-agentic-toolkit/chapters/shared-settings.html) in the companion guide *Extending Your Agent's Toolkit* if you need to keep those files consistent across computers.
+Record a paper-specific exception in that project's files, with its reason. A new research group default should not silently change a completed analysis. Keep one maintained copy of each shared rule, and use [Appendix B: Maintain personal settings: chezmoi](https://iqss.github.io/dss-agentic-toolkit/chapters/shared-settings.html) in the companion guide *Extending Your Agent's Toolkit* if you need to keep those files consistent across computers.
 
 # 9. Use skills for recurring tasks {#reusable-procedures}
 
@@ -818,7 +818,9 @@ The analysis specification tells the agent what to estimate, how to estimate it,
 | Uncertainty | 95% confidence intervals from an HC3 heteroskedasticity-robust covariance estimate and a normal reference distribution. |
 | Outputs | A contrast table and figure, simulation results, an independent comparison, and a manuscript passage. |
 
-The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.
+The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.[^estimand-design]
+
+[^estimand-design]: Lundberg, Johnson, and Stewart (2021) show how to state the quantity a research question asks about before choosing a statistical model, and how to identify the assumptions needed to estimate it from the available data. [“What Is Your Estimand?”](https://doi.org/10.1177/00031224211004187)
 
 A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison.
 
@@ -858,7 +860,9 @@ You might need an overview of a topic, evidence to inform a specific research de
 |------------------------|--------------------------------------------------------|
 | Get an overview of a topic | Find key papers, summarize the main findings, and identify competing explanations and unresolved questions. |
 | Inform a research decision | Use your inclusion criteria to find evidence relevant to a particular choice, such as how to measure an exposure. Compare the findings and explain disagreements. |
-| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies. |
+| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies.[^systematic-search-reporting] |
+
+[^systematic-search-reporting]: Rethlefsen and colleagues (2021) give a checklist and worked examples for reporting a systematic search, including which databases and platforms were searched, the exact queries, and the dates of the searches. [PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z)
 
 For a systematic review, involve a librarian or information specialist in designing a search that covers the eligible literature as fully as possible.
 
@@ -1256,7 +1260,9 @@ Other checks revealed problems that the final numerical agreement does not show.
 
 ## Keep the comparison with the project
 
-Ask the agent to save both implementations, the comparison code, and a report identifying the exact input files and specification version. Keep unresolved differences in that report, and have the agent rerun the affected comparisons when the data, code, or specification changes. Both implementations can share a mistaken interpretation or faulty software routine, so retain the simulations in [Chapter 14: Test the analysis against known truth](#simulation) and the targeted checks in [Chapter 13: Build a modular analysis workflow](#check-execution-before-scaling-up), including cases such as duplicates or boundary values.
+Ask the agent to save both implementations, the comparison code, and a report identifying the exact input files and specification version. Keep unresolved differences in that report, and have the agent rerun the affected comparisons when the data, code, or specification changes. Both implementations can share a mistaken interpretation or faulty software routine, so retain the simulations in [Chapter 14: Test the analysis against known truth](#simulation) and the targeted checks in [Chapter 13: Build a modular analysis workflow](#check-execution-before-scaling-up), including cases such as duplicates or boundary values.[^shared-implementation-errors]
+
+[^shared-implementation-errors]: Knight and Leveson (1986) tested 27 programs that people had written independently from the same specification. Different programs failed on the same inputs more often than expected if their errors had been independent. [“An Experimental Evaluation of the Assumption of Independence in Multiversion Programming”](https://doi.org/10.1109/TSE.1986.6312924)
 
 Even error-free code and excellent agreement provide no evidence that the specification is methodologically appropriate for the research question. Both agents could faithfully implement an analysis that estimates the wrong quantity or relies on implausible assumptions. The researcher remains responsible for justifying the approach; agreement between implementations cannot supply that justification.
 
@@ -1334,7 +1340,7 @@ Ask the agent to examine the errors that matter for the planned analysis and pro
 
 Agree on the approach before the full labeling run, including how observations will be selected for human review. Have the agent preserve those selections, the human and LLM labels, and the code for the proposed adjustment or sensitivity analysis. It should show how accounting for errors changes the estimates and intervals. When the evaluation material does not support a credible correction, additional human review or a narrower research claim may be needed.
 
-[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://arxiv.org/abs/2306.04746), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
+[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://proceedings.neurips.cc/paper_files/paper/2023/hash/d862f7f5445255090de13b825b880d59-Abstract-Conference.html), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
 
 ## Check sensitivity to prompts and LLMs {#llm-sensitivity}
 
@@ -1473,9 +1479,7 @@ Start by giving an existing LLM a clear rubric and representative examples. *In-
 | Apply a limited or changing rubric | Prompt an existing LLM with selected examples. |
 | Improve a recurring task whose errors remain consequential | Test fine-tuning after developing a strong prompt, if suitable training and evaluation data are available. |
 
-Fine-tuning may improve labeling accuracy, adherence to the output format, or performance with shorter prompts.[^adaptation-evidence] It adds training and maintenance work, especially when the rubric changes. A fine-tuned LLM can still receive retrieved passages when it needs information from documents.
-
-[^adaptation-evidence]: Liu et al. (2022), [“Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning”](https://arxiv.org/abs/2205.05638), found accuracy and prediction-time computation benefits for T-Few with IA³ under their comparisons. This was not a general demonstration that LoRA outperforms a well-prompted current LLM on any research task.
+For the interview study, does fine-tuning identify unmet needs more accurately than the best prompt you developed? Compare both approaches on the same excerpts held out for testing. Fine-tuning adds training and maintenance work, especially when the rubric changes. A fine-tuned LLM can still receive retrieved passages when it needs information from documents.
 
 [^retrieval-evidence]: Ovadia et al. (2024), [“Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs”](https://arxiv.org/abs/2312.05934), found retrieval more effective than unsupervised fine-tuning for the knowledge-intensive tasks tested. Training on unlabeled text differs from supervised training on reviewed excerpt/label pairs.
 
@@ -1632,7 +1636,9 @@ Ask the agent to prepare an `archive/` folder containing the files another resea
 
 Have the agent place a copy of the `SPECIFICATION.md` used for the reported analysis in `archive/`, together with the relevant decision history from `METHODOLOGY.md`. If the working project has newer requirements, the copy in `archive/` should retain the earlier specification that matches the supplied code and results. The working project's current `SPECIFICATION.md` stays in place.
 
-Have the agent write a `README.md` for `archive/` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output. Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
+Have the agent write a `README.md` for `archive/` that explains what the folder contains, where any additional inputs must come from, and which commands produce each output.[^archive-readme-template] Keep the existing commands from [Chapter 13: Build a modular analysis workflow](#saved-commands). The recipient should not need an agent to invent an execution order. Any manual steps must also be documented.
+
+[^archive-readme-template]: The Social Science Data Editors’ template shows how to tell another researcher where to obtain restricted inputs, what software the project requires, and which commands reproduce the tables and figures. [A Template README for Social Science Replication Packages](https://social-science-data-editors.github.io/template_README/)
 
 The *software environment* includes the language, packages, and system tools needed to run the code. Have the agent preserve their versions and the instructions for restoring them before changing the working setup. [Chapter 6: Preserve a software environment: rig, renv, and uv](https://iqss.github.io/dss-agentic-toolkit/chapters/environments.html) in the companion guide *Extending Your Agent's Toolkit* explains the supporting tools.
 

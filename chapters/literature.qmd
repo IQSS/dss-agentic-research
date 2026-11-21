@@ -20,7 +20,9 @@ You might need an overview of a topic, evidence to inform a specific research de
 |------------------------|--------------------------------------------------------|
 | Get an overview of a topic | Find key papers, summarize the main findings, and identify competing explanations and unresolved questions. |
 | Inform a research decision | Use your inclusion criteria to find evidence relevant to a particular choice, such as how to measure an exposure. Compare the findings and explain disagreements. |
-| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies. |
+| Conduct a systematic review | Follow the review protocol, search the specified databases, and document queries, eligibility decisions, and reasons for excluding studies.[^systematic-search-reporting] |
+
+[^systematic-search-reporting]: Rethlefsen and colleagues (2021) give a checklist and worked examples for reporting a systematic search, including which databases and platforms were searched, the exact queries, and the dates of the searches. [PRISMA-S](https://doi.org/10.1186/s13643-020-01542-z)
 
 For a systematic review, involve a librarian or information specialist in designing a search that covers the eligible literature as fully as possible.
 
