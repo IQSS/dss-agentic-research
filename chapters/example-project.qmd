@@ -42,7 +42,9 @@ The analysis specification tells the agent what to estimate, how to estimate it,
 | Uncertainty | 95% confidence intervals from an HC3 heteroskedasticity-robust covariance estimate and a normal reference distribution. |
 | Outputs | A contrast table and figure, simulation results, an independent comparison, and a manuscript passage. |
 
-The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.
+The exposure coefficient alone does not supply the requested average contrast when exposure interacts with age. Specifying the estimand prevents an agent from silently reporting that coefficient instead.[^estimand-design]
+
+[^estimand-design]: Lundberg, Johnson, and Stewart (2021) show how to state the quantity a research question asks about before choosing a statistical model, and how to identify the assumptions needed to estimate it from the available data. [“What Is Your Estimand?”](https://doi.org/10.1177/00031224211004187)
 
 A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison.
 

@@ -75,9 +75,7 @@ Start by giving an existing LLM a clear rubric and representative examples. *In-
 | Apply a limited or changing rubric | Prompt an existing LLM with selected examples. |
 | Improve a recurring task whose errors remain consequential | Test fine-tuning after developing a strong prompt, if suitable training and evaluation data are available. |
 
-Fine-tuning may improve labeling accuracy, adherence to the output format, or performance with shorter prompts.[^adaptation-evidence] It adds training and maintenance work, especially when the rubric changes. A fine-tuned LLM can still receive retrieved passages when it needs information from documents.
-
-[^adaptation-evidence]: Liu et al. (2022), [“Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning”](https://arxiv.org/abs/2205.05638), found accuracy and prediction-time computation benefits for T-Few with IA³ under their comparisons. This was not a general demonstration that LoRA outperforms a well-prompted current LLM on any research task.
+For the interview study, does fine-tuning identify unmet needs more accurately than the best prompt you developed? Compare both approaches on the same excerpts held out for testing. Fine-tuning adds training and maintenance work, especially when the rubric changes. A fine-tuned LLM can still receive retrieved passages when it needs information from documents.
 
 [^retrieval-evidence]: Ovadia et al. (2024), [“Fine-Tuning or Retrieval? Comparing Knowledge Injection in LLMs”](https://arxiv.org/abs/2312.05934), found retrieval more effective than unsupervised fine-tuning for the knowledge-intensive tasks tested. Training on unlabeled text differs from supervised training on reviewed excerpt/label pairs.
 

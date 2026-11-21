@@ -75,7 +75,7 @@ Ask the agent to examine the errors that matter for the planned analysis and pro
 
 Agree on the approach before the full labeling run, including how observations will be selected for human review. Have the agent preserve those selections, the human and LLM labels, and the code for the proposed adjustment or sensitivity analysis. It should show how accounting for errors changes the estimates and intervals. When the evaluation material does not support a credible correction, additional human review or a narrower research claim may be needed.
 
-[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://arxiv.org/abs/2306.04746), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
+[^label-error-inference]: Egami, Hinck, Stewart, and Wei (2023), [“Using Imperfect Surrogates for Downstream Inference: Design-based Supervised Learning for Social Science Applications of Large Language Models”](https://proceedings.neurips.cc/paper_files/paper/2023/hash/d862f7f5445255090de13b825b880d59-Abstract-Conference.html), show how high annotation accuracy can coexist with biased estimates and invalid confidence intervals. Their method combines surrogate labels with human reference labels using a specified sampling design for human annotation.
 
 ## Check sensitivity to prompts and LLMs {#llm-sensitivity}
 
