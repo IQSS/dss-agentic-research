@@ -20,7 +20,7 @@ Inspect this project and propose a clearer structure. Identify current and uncer
 
 Point the agent to: the project files, existing instructions, and agreed research decisions.
 
-Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+Read this project and draft a concise `CLAUDE.md` with standing instructions for future sessions. Identify which project context files to consult for current work, scientific decisions, and open questions. Say when to read and update each one. Preserve existing authored guidance and show me the proposed changes.
 
 ### Resume a project
 

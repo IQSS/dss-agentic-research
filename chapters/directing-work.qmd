@@ -53,7 +53,7 @@ Click the app's usage circle to see usage and reset information. If your account
 
 Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, `Claude Code` automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
 
-Keep consequential decisions and the current state of the work in project context files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7: Give the agent context for your project](#project-context) explains which context files to maintain.
+Keep important decisions and the current state of the work in project context files that the agent can read again, even in a new session. For example, after a long exchange about which observations to include, ask the agent to record the agreed sample definition, the reason for it, and any open questions. Once those details are saved, you can compact the conversation before moving on to fit the model. [Chapter 7: Give the agent context for your project](#project-context) explains which files to maintain.
 
 A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [Chapter 13: Build a modular analysis workflow](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
 

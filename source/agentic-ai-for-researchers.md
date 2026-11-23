@@ -10,7 +10,7 @@ version: "1.8 draft"
 
 # 1. How agents can help your research {#research-uses}
 
-An artificial intelligence (AI) agent can work directly with your research files and software, carrying out tasks you describe in ordinary language. You can ask it to find relevant papers, write and run an analysis, or revise a manuscript. These capabilities also make it useful for checking that the agent did what you asked and documenting how the results were produced. This guide explains how to use agents to make research more efficient, strengthen checks on the work, and preserve the information needed to understand and reproduce the findings.
+An artificial intelligence (AI) agent can work directly with your research files and software, carrying out tasks you describe in ordinary language. You can ask it to find relevant papers, write and run an analysis, or revise a manuscript. Two things help you get more from an agent over the course of a study. First, give it written guidance it can consult each time you work together. Some instructions, such as preserving original data files, will apply across your research. Others, such as which observations to include, will be specific to one study. Second, ask the agent to set up routines that make the project easier to manage and reproduce. For example, it can keep a history of changes to your files and set up a check that flags numbers in the manuscript when they no longer match the analysis. You could build and maintain those routines yourself, but having the agent handle the technical work makes them easier to adopt.
 
 Suppose you and a collaborator decide to change an inclusion criterion. An agent can update the analysis code, rerun the affected steps, and regenerate the tables and figures. It can then check that the sample sizes and estimates reported in the manuscript match the revised results. By saving the updated code and recording what changed, it leaves you and your collaborators with an analysis you can inspect and run again. Much of this guide concerns organizing the whole research workflow so agents can help carry it out, check it, and document it.
 
@@ -316,7 +316,7 @@ Click the app's usage circle to see usage and reset information. If your account
 
 Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, `Claude Code` automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
 
-Keep consequential decisions and the current state of the work in project context files that the agent can read again. This helps preserve an agreed sample definition or modeling choice when a conversation is compacted or a new session begins. [Chapter 7: Give the agent context for your project](#project-context) explains which context files to maintain.
+Keep important decisions and the current state of the work in project context files that the agent can read again, even in a new session. For example, after a long exchange about which observations to include, ask the agent to record the agreed sample definition, the reason for it, and any open questions. Once those details are saved, you can compact the conversation before moving on to fit the model. [Chapter 7: Give the agent context for your project](#project-context) explains which files to maintain.
 
 A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [Chapter 13: Build a modular analysis workflow](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
 
@@ -416,11 +416,11 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `C
 ::: {.needspace height="9cm"}
 :::
 
-| File | Purpose and example |
+| Project file | Purpose and example |
 |:------------|:----------------------------------------------------|
-| `CLAUDE.md` | How the agent should work: follow the scientific specification and read the current status before starting. |
-| `STATUS.md` | Current state: the main analysis is complete; the sensitivity analysis is pending. |
-| `TASKS.md` | Work to do and completed work: update Figure 2's labels, with a dated entry after checking the result. |
+| `CLAUDE.md` | Standing instructions for this project. For example, follow the scientific specification and read the current status before starting. Revise an instruction in place when it changes. |
+| `STATUS.md` | A short snapshot of where the work stands. For example, the main analysis is complete and the sensitivity analysis is pending. Rewrite the snapshot as the work moves on. |
+| `TASKS.md` | Work still to do and a record of completed tasks. For example, list the task of updating Figure 2’s labels, then move it to **Done** with the date once the result is checked. Keep earlier completions. |
 | `SPECIFICATION.md` | Current scientific requirements: which records to include, what to estimate, and which checks and outputs to produce. Have the agent rewrite it when approved decisions change. |
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
@@ -429,11 +429,11 @@ The status, task, specification, and decision-log filenames are conventions, not
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` with standing instructions for future sessions. Identify which project context files to consult for current work, scientific decisions, and open questions. Say when to read and update each one. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
-A useful instruction identifies both the record and its purpose:
+In response to that prompt, the agent might draft the following passage for your project’s `CLAUDE.md`. It tells the agent which files to read before starting work and what to update afterward.
 
 ```
 Before starting, read STATUS.md and TASKS.md and inspect the relevant files.
@@ -547,7 +547,7 @@ For example, you might ask the agent to save results at full precision and repor
 
 ## Decide which conventions apply across projects {#shared-instructions}
 
-Global user instructions establish default behaviors across your projects. When a project needs an exception, record it in that project's `CLAUDE.md`[^project-convention-file] and tell the agent to follow it for that project. For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
+Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's `CLAUDE.md`.[^project-convention-file] For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
 
 [^project-convention-file]: If you use an agent from another provider, record the exception in `AGENTS.md` if that is the project instructions file the agent reads.
 
@@ -555,21 +555,24 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The ~/.claude/ folder holds global user instructions. CLAUDE.md lists paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. Separate paper and website folders have their own project context files; the website uses DESIGN.md." above="8pt" below="8pt"}
+For example, your global `DESIGN.md` might specify the typefaces and colors you use across websites and slide decks. A `DESIGN.md` in one website’s project folder might also specify how that site’s publication pages should look.
+
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The global CLAUDE.md in ~/.claude/ points to four example specialist files: DESIGN.md, CODING.md, MODELING.md, and CONVENTIONS.md. Two paper projects and a website have their own project context files. The website folder holds a separate DESIGN.md for that site." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
 
 ## Organize detailed guidance by subject {#specialist-conventions}
 
-The global `CLAUDE.md` acts as a hub: it holds shared defaults and gives the agent paths to specialist files, with instructions on when to read them. Give each specialist file a clear purpose. The following examples cover common research needs; add the files that are useful to your work.
+The global `CLAUDE.md` acts as a hub: it holds shared defaults and gives the agent paths to specialist files, with instructions on when to read them. Keep the global instruction file and its specialist files current by revising rules in place and updating inventories when tools or project locations change. Give each specialist file a clear purpose. The following examples cover common research needs; add the files that are useful to your work.
 
-| File | When to consult it | Example content |
+| Global file | When to consult it | Example content |
 |:---------------------|:-------------------------|:---------------------------------------------------|
 | `CONVENTIONS.md` | Creating or organizing a project. | Folder layouts for papers, datasets, and websites; names for inputs and outputs. |
 | `CODING.md` | Writing or changing code. | Use project-relative paths, reusable functions, and the existing package environment. |
 | `MODELING.md` | Planning, fitting, or checking statistical models. | Specify the estimand; use the required simulation checks and uncertainty summaries. |
 | `WRITING.md` | Drafting or editing prose. | State the point directly, define unfamiliar terms, and remove repeated explanations. |
+| `DESIGN.md` | Building a website or preparing a slide deck. | Use consistent typefaces, colors, heading styles, and page or slide layouts across projects. |
 | `TOOLCHAIN.md` | Adding or troubleshooting software. | Available tools, their configurations, and how they are maintained. |
 | `WORKSPACE.md` | Finding a project or shared input. | Project purposes, folder locations, and dependencies between projects. |
 
@@ -2201,7 +2204,7 @@ Point the agent to: the project files, existing instructions, and agreed researc
 Explanation and checks: [Chapter 7: Give the agent context for your project](#request-project-context).
 
 ::: {.prompt}
-> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` with standing instructions for future sessions. Identify which project context files to consult for current work, scientific decisions, and open questions. Say when to read and update each one. Preserve existing authored guidance and show me the proposed changes.
 :::
 
 :::
