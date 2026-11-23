@@ -12,7 +12,7 @@ For example, you might ask the agent to save results at full precision and repor
 
 ## Decide which conventions apply across projects {#shared-instructions}
 
-Global user instructions establish default behaviors across your projects. When a project needs an exception, record it in that project's `CLAUDE.md`[^project-convention-file] and tell the agent to follow it for that project. For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
+Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's `CLAUDE.md`.[^project-convention-file] For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
 
 [^project-convention-file]: If you use an agent from another provider, record the exception in `AGENTS.md` if that is the project instructions file the agent reads.
 
@@ -20,21 +20,24 @@ Save instructions that describe a recurring way of working. “Preserve the exis
 
 Global user instructions can also point to reference information, such as the software already installed or the locations of related projects. Keeping an inventory is different from prescribing a rule, but both can prevent the agent from making unnecessary guesses.
 
-![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The ~/.claude/ folder holds global user instructions. CLAUDE.md lists paths to WRITING.md, CODING.md, MODELING.md, and CONVENTIONS.md and says when to read them. Separate paper and website folders have their own project context files; the website uses DESIGN.md." above="8pt" below="8pt"}
+For example, your global `DESIGN.md` might specify the typefaces and colors you use across websites and slide decks. A `DESIGN.md` in one website’s project folder might also specify how that site’s publication pages should look.
+
+![](figures/shared-conventions.svg){#fig-shared-conventions .tall fig-alt="The global CLAUDE.md in ~/.claude/ points to four example specialist files: DESIGN.md, CODING.md, MODELING.md, and CONVENTIONS.md. Two paper projects and a website have their own project context files. The website folder holds a separate DESIGN.md for that site." above="8pt" below="8pt"}
 
 ::: {.needspace height="12cm"}
 :::
 
 ## Organize detailed guidance by subject {#specialist-conventions}
 
-The global `CLAUDE.md` acts as a hub: it holds shared defaults and gives the agent paths to specialist files, with instructions on when to read them. Give each specialist file a clear purpose. The following examples cover common research needs; add the files that are useful to your work.
+The global `CLAUDE.md` acts as a hub: it holds shared defaults and gives the agent paths to specialist files, with instructions on when to read them. Keep the global instruction file and its specialist files current by revising rules in place and updating inventories when tools or project locations change. Give each specialist file a clear purpose. The following examples cover common research needs; add the files that are useful to your work.
 
-| File | When to consult it | Example content |
+| Global file | When to consult it | Example content |
 |:---------------------|:-------------------------|:---------------------------------------------------|
 | `CONVENTIONS.md` | Creating or organizing a project. | Folder layouts for papers, datasets, and websites; names for inputs and outputs. |
 | `CODING.md` | Writing or changing code. | Use project-relative paths, reusable functions, and the existing package environment. |
 | `MODELING.md` | Planning, fitting, or checking statistical models. | Specify the estimand; use the required simulation checks and uncertainty summaries. |
 | `WRITING.md` | Drafting or editing prose. | State the point directly, define unfamiliar terms, and remove repeated explanations. |
+| `DESIGN.md` | Building a website or preparing a slide deck. | Use consistent typefaces, colors, heading styles, and page or slide layouts across projects. |
 | `TOOLCHAIN.md` | Adding or troubleshooting software. | Available tools, their configurations, and how they are maintained. |
 | `WORKSPACE.md` | Finding a project or shared input. | Project purposes, folder locations, and dependencies between projects. |
 

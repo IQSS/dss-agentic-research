@@ -27,11 +27,11 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `C
 ::: {.needspace height="9cm"}
 :::
 
-| File | Purpose and example |
+| Project file | Purpose and example |
 |:------------|:----------------------------------------------------|
-| `CLAUDE.md` | How the agent should work: follow the scientific specification and read the current status before starting. |
-| `STATUS.md` | Current state: the main analysis is complete; the sensitivity analysis is pending. |
-| `TASKS.md` | Work to do and completed work: update Figure 2's labels, with a dated entry after checking the result. |
+| `CLAUDE.md` | Standing instructions for this project. For example, follow the scientific specification and read the current status before starting. Revise an instruction in place when it changes. |
+| `STATUS.md` | A short snapshot of where the work stands. For example, the main analysis is complete and the sensitivity analysis is pending. Rewrite the snapshot as the work moves on. |
+| `TASKS.md` | Work still to do and a record of completed tasks. For example, list the task of updating Figure 2’s labels, then move it to **Done** with the date once the result is checked. Keep earlier completions. |
 | `SPECIFICATION.md` | Current scientific requirements: which records to include, what to estimate, and which checks and outputs to produce. Have the agent rewrite it when approved decisions change. |
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
@@ -40,11 +40,11 @@ The status, task, specification, and decision-log filenames are conventions, not
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
-> Read this project and draft a concise `CLAUDE.md` for future sessions. Identify its purpose, current files, agreed research decisions, and unresolved questions. Point to the other project context files and include instructions to keep them current. Preserve existing authored guidance and show me the proposed changes.
+> Read this project and draft a concise `CLAUDE.md` with standing instructions for future sessions. Identify which project context files to consult for current work, scientific decisions, and open questions. Say when to read and update each one. Preserve existing authored guidance and show me the proposed changes.
 :::
 <!-- /prompt:project-context -->
 
-A useful instruction identifies both the record and its purpose:
+In response to that prompt, the agent might draft the following passage for your project’s `CLAUDE.md`. It tells the agent which files to read before starting work and what to update afterward.
 
 ```
 Before starting, read STATUS.md and TASKS.md and inspect the relevant files.
