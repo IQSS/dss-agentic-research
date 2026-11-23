@@ -1,0 +1,43 @@
+```{=html}
+<noscript>
+<style>.console-scene,.console-legend,.garage-scene,.garage-legend {display:none!important}</style>
+<nav class="landing-contents" aria-labelledby="landing-contents-title">
+<h1 id="landing-contents-title">Contents</h1>
+<section><h2>Part I — Orientation</h2>
+<ul>
+<li><a href="chapters/research-uses.html">1. How agents can help your research</a></li>
+<li><a href="chapters/first-session.html">2. Get started with the app</a></li>
+<li><a href="chapters/research-limits.html">3. Know where your data goes</a></li>
+<li><a href="chapters/agent-access.html">4. Control what the agent can do</a></li>
+<li><a href="chapters/directing-work.html">5. Choose settings for the task</a></li>
+</ul></section>
+<section><h2>Part II — Direct The Work</h2>
+<ul>
+<li><a href="chapters/project-organization.html">6. Organize your research projects</a></li>
+<li><a href="chapters/project-context.html">7. Give the agent context for your project</a></li>
+<li><a href="chapters/shared-conventions.html">8. Apply your conventions across projects</a></li>
+<li><a href="chapters/reusable-procedures.html">9. Use skills for recurring tasks</a></li>
+</ul></section>
+<section><h2>Part III — Do The Research</h2>
+<ul>
+<li><a href="chapters/example-project.html">10. The example research project</a></li>
+<li><a href="chapters/literature.html">11. Find and assess research literature</a></li>
+<li><a href="chapters/data-acquisition.html">12. Bring data into the project</a></li>
+<li><a href="chapters/research-workflows.html">13. Build a modular analysis workflow</a></li>
+<li><a href="chapters/simulation.html">14. Test the analysis against known truth</a></li>
+<li><a href="chapters/checking-analysis.html">15. Check the agent with independent implementations</a></li>
+<li><a href="chapters/llm-measurements.html">16. Use LLM outputs as research data</a></li>
+<li><a href="chapters/research-models.html">17. Run and adapt LLMs for your research</a></li>
+<li><a href="chapters/research-writing.html">18. Write and revise the manuscript</a></li>
+<li><a href="chapters/research-handoff.html">19. Reproduce and hand off the research</a></li>
+</ul></section>
+<section><h2>Reference</h2>
+<ul>
+<li><a href="chapters/starter-files.html">Appendix A. Project scaffolds and starter files</a></li>
+<li><a href="chapters/prompt-index.html">Appendix B. Prompt bank</a></li>
+<li><a href="chapters/troubleshooting.html">Appendix C. Troubleshooting</a></li>
+<li><a href="chapters/glossary.html">Appendix D. Glossary</a></li>
+</ul></section>
+</nav>
+</noscript>
+```

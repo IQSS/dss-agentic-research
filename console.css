@@ -244,3 +244,8 @@ body.quarto-dark {
 @media (prefers-reduced-motion: reduce) {
   .hot.sequence-start .control-art { animation: none; filter: drop-shadow(0 0 4px var(--c-sequence)); }
 }
+
+/* Ordinary chapter navigation when scripting is unavailable. */
+.landing-contents { max-width: 900px; margin: 32px auto; padding: 0 24px; }
+.landing-contents h2 { font-size: 1.25rem; margin-top: 1.75rem; }
+.landing-contents li { margin: 0.5rem 0; }
