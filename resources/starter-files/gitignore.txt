@@ -1,7 +1,8 @@
-# Exclude research inputs by default; share permitted files deliberately.
+# Research data, dataset releases, and saved R workspaces
 # Keep shareable input manifests outside these excluded folders.
-data/raw/
-data/processed/
+/data/*
+/outputs/releases/*
+.RData
 
 # Rebuildable environments and caches
 .venv/

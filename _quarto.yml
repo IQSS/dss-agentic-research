@@ -129,6 +129,7 @@ anchor-map:
   "bank-close-session": /chapters/prompt-index.qmd#bank-close-session
   "bank-compare-implementations": /chapters/prompt-index.qmd#bank-compare-implementations
   "bank-compare-research-approaches": /chapters/prompt-index.qmd#bank-compare-research-approaches
+  "bank-configure-access": /chapters/prompt-index.qmd#bank-configure-access
   "bank-controlled-llm-runs": /chapters/prompt-index.qmd#bank-controlled-llm-runs
   "bank-develop-labeling": /chapters/prompt-index.qmd#bank-develop-labeling
   "bank-draft-from-results": /chapters/prompt-index.qmd#bank-draft-from-results
@@ -223,6 +224,7 @@ anchor-map:
   "request-close-session": /chapters/project-context.qmd#request-close-session
   "request-compare-implementations": /chapters/checking-analysis.qmd#request-compare-implementations
   "request-compare-research-approaches": /chapters/example-project.qmd#request-compare-research-approaches
+  "request-configure-access": /chapters/agent-access.qmd#request-configure-access
   "request-controlled-llm-runs": /chapters/llm-measurements.qmd#request-controlled-llm-runs
   "request-develop-labeling": /chapters/llm-measurements.qmd#request-develop-labeling
   "request-draft-from-results": /chapters/research-writing.qmd#request-draft-from-results
@@ -256,11 +258,13 @@ anchor-map:
   "saved-commands": /chapters/research-workflows.qmd#saved-commands
   "scaffold-dataset-example": /chapters/starter-files.qmd#scaffold-dataset-example
   "scaffold-paper-example": /chapters/starter-files.qmd#scaffold-paper-example
+  "scaffold-project": /chapters/project-organization.qmd#scaffold-project
   "scaffold-website-example": /chapters/starter-files.qmd#scaffold-website-example
   "shared-conventions": /chapters/shared-conventions.qmd
   "shared-instructions": /chapters/shared-conventions.qmd#shared-instructions
   "simulation": /chapters/simulation.qmd
   "simulation-repetitions": /chapters/simulation.qmd#simulation-repetitions
+  "skill-hooks": /chapters/reusable-procedures.qmd#skill-hooks
   "specialist-conventions": /chapters/shared-conventions.qmd#specialist-conventions
   "starter-files": /chapters/starter-files.qmd
   "starter-gitignore": /chapters/starter-files.qmd#starter-gitignore
@@ -280,4 +284,5 @@ anchor-map:
   "what-reaches-the-llm": /chapters/research-limits.qmd#what-reaches-the-llm
   "what-skills-add": /chapters/reusable-procedures.qmd#what-skills-add
   "when-a-separate-environment-helps": /chapters/agent-access.qmd#when-a-separate-environment-helps
+  "workspace-layout": /chapters/project-organization.qmd#workspace-layout
 # END chapter-map

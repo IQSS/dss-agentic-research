@@ -48,6 +48,8 @@ If the LLM must analyze the material, such as coding confidential interviews, it
 
 For protected data, keep a *chain of custody*: a record of where the material goes, who or what can access it, and where copies remain. Include sensitive content in conversations, tool results, outputs, logs, and backups. Before sharing protected data with a service, establish where it will store the data, how long it will keep them, and how deletion can be arranged if your project requires it. Consult your institution’s guidance or ask the service administrator for these details.
 
+A local `Claude Code` session can leave a [transcript](https://code.claude.com/docs/en/claude-directory#application-data) on your computer for months. If you paste a protected record into the conversation or a tool displays one, the transcript may contain a copy. The agent may also save details in notes for future sessions. Ask the agent to locate the project’s transcripts and notes (under `~/.claude/projects/` on a Mac) and show you how to review them.
+
 ![](figures/chain-of-custody.svg){#fig-chain-of-custody .tall fig-alt="A chain links original data and permitted use, approved processing, copies that remain, and retention or deletion. Record each location, responsible person or service, and permitted access. Copies include conversations, outputs and logs, and backups; each needs a retention and removal record."}
 
 The example below keeps confidential birth records on an institutional server while the agent develops code with synthetic records. Replace these entries with your project’s actual locations, responsible people, and agreed retention dates.

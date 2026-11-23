@@ -48,6 +48,10 @@ The exposure coefficient alone does not supply the requested average contrast wh
 
 A real study would also need a target population and defensible assumptions about confounding, measurement, selection, and support for the exposure comparison.
 
+If your study tests a specific hypothesis, you can preregister[^analysis-preregistration] the analysis plan by depositing it in a research registry, such as the [Open Science Framework](https://www.cos.io/initiatives/prereg), before you or the agent examine the outcomes.
+
+[^analysis-preregistration]: To preregister an analysis plan, you specify how you will analyze the data and commit to those choices before you know the results. [Nosek et al. (2018), “The preregistration revolution”](https://www.pnas.org/doi/10.1073/pnas.1708274114).
+
 <!-- prompt:research-specification -->
 ::: {#request-research-specification .prompt}
 > Write `SPECIFICATION.md` from my research decisions: estimands, target population and analysis sample, comparisons, estimator, sample rules, inputs, uncertainty, and outputs. State any averaging or standardization explicitly. Include prescribed checks and tolerances. Flag unresolved choices for my review before fitting.
