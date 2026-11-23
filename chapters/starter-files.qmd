@@ -425,7 +425,7 @@ report it; do not create a replacement or invent its instructions.
 ::: {.keep-together}
 ## A.8 Git exclusions {#starter-gitignore}
 
-If the project uses [`Git`](https://git-scm.com/), have the agent adapt these exclusions in its `.gitignore`. The template excludes data folders by default; permitted public or synthetic inputs may belong in the repository. An ignore rule affects which files Git tracks. It does not restrict agent access or remove files already tracked.
+If the project uses [`Git`](https://git-scm.com/), have the agent adapt these exclusions in its `.gitignore`. Keep data files out of Git until you decide which ones the project can share. If the analysis needs a public or synthetic input, have the agent add an exception for that file and check which files Git will include before committing. An ignore rule does not restrict agent access or remove files already tracked.
 
 Have the agent preserve the inputs needed for reproduction, including saved fits or LLM responses. Large or protected files can remain in approved storage, with their versions and locations documented in the project. For setup, see [Chapter 4: Recover earlier work: git and gh](https://iqss.github.io/dss-agentic-toolkit/chapters/version-control.html) in the companion guide *Extending Your Agent's Toolkit*.
 
@@ -436,10 +436,11 @@ Have the agent preserve the inputs needed for reproduction, including saved fits
 
 <!-- starter:gitignore -->
 ```
-# Exclude research inputs by default; share permitted files deliberately.
+# Research data, dataset releases, and saved R workspaces
 # Keep shareable input manifests outside these excluded folders.
-data/raw/
-data/processed/
+/data/*
+/outputs/releases/*
+.RData
 
 # Rebuildable environments and caches
 .venv/

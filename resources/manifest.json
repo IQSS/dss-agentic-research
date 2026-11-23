@@ -1,6 +1,13 @@
 {
   "prompts": [
     {
+      "id": "configure-access",
+      "chapter": 4,
+      "title": "Configure and check access",
+      "group": "project",
+      "inputs": "the project folder, the files and services the task requires, and the access you have approved for each."
+    },
+    {
       "id": "scaffold-project",
       "chapter": 6,
       "title": "Start a new research project",

@@ -69,7 +69,7 @@ Ask the agent to include automatic checks in the scripts themselves. These check
 
 <!-- prompt:smoke-test-workflow -->
 ::: {#request-smoke-test-workflow .prompt}
-> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on `SPECIFICATION.md` and the data documentation. Fix implementation errors and repeat the test. Once it passes, run the full batch and report any failures.
+> Run a small, complete test of this workflow before starting the full batch. Check that every step receives the expected inputs and saves usable outputs. Add automatic checks based on `SPECIFICATION.md` and the data documentation. Using a copy of the test data, deliberately violate one important rule and show that the workflow stops and identifies the problem. If you revise the check, explain why and repeat the test. Fix implementation errors and confirm the workflow passes on the original test data before running the full batch. Report any failures.
 :::
 <!-- /prompt:smoke-test-workflow -->
 
@@ -85,9 +85,11 @@ As a hypothetical example, suppose the estimated heat-related birthweight differ
 
 If that investigation suggests the statistical model represents the age-dependent heat relationship too simply, you might approve a more flexible relationship as a sensitivity analysis. Have the agent preserve the original fit and compare the estimated difference between 10 and 5 hot days at the same maternal ages. It should add the approved sensitivity analysis to `SPECIFICATION.md`, explain the decision in `METHODOLOGY.md`, and rerun the affected analysis and checks. If it instead finds code that fails to follow the existing specification, have it correct the code and record how it verified the repair.
 
+When you try an alternative analysis on the study data, ask the agent to record why you tried it in the project context file `METHODOLOGY.md` and link to the saved results. Include alternatives you leave out of the paper.
+
 <!-- prompt:investigate-result -->
 ::: {#request-investigate-result .prompt}
-> Investigate the unexpected result identified below using `SPECIFICATION.md`, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After approval, update `SPECIFICATION.md`, record the decision and reason in `METHODOLOGY.md`, and compare the original and revised results for the specified quantities.
+> Investigate the unexpected result identified below using `SPECIFICATION.md`, the current code, and saved outputs. Examine possible explanations in the data, code, and statistical model, and report the evidence for each. Preserve the original analysis. Propose any justified sensitivity analysis for my decision. After I approve a sensitivity analysis, update the project context file `SPECIFICATION.md` and compare the original and revised estimates for the specified quantities. For each alternative you run, record why it was tried in the project context file `METHODOLOGY.md` and link to its saved results. Include alternatives I leave out of the paper.
 :::
 <!-- /prompt:investigate-result -->
 

@@ -66,7 +66,7 @@ Agree on the performance measures before launching the repetitions. Ask the agen
 | Power and false-positive rate | How often a specified decision rule detects an effect when one exists, or declares one when none exists. |
 | Failure rate | How often the analysis fails to produce an estimate or interval. |
 
-The number of repetitions determines how precisely the simulation estimates statistical performance. With 400 repetitions, an estimated coverage rate near 95 percent has a standard error of about 1.1 percentage points. This is *Monte Carlo uncertainty*: uncertainty in the estimated performance, rather than in an individual birthweight contrast. More repetitions reduce it. Have the agent choose enough repetitions to distinguish differences that matter for the methodological decision and report the remaining uncertainty.
+With a finite number of repetitions, running the same simulation with new random draws can give a different estimate of coverage. This variation is called *Monte Carlo error*. With 400 independent repetitions and estimated coverage near 95 percent, the *Monte Carlo standard error* is about 1.1 percentage points. More repetitions reduce this standard error. Have the agent choose enough repetitions to distinguish differences that matter for the methodological decision and report the remaining uncertainty.
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}

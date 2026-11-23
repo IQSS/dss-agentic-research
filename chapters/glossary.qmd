@@ -158,6 +158,10 @@ This glossary explains the technical terms used throughout the guide, including 
 *Held-out data.* Material excluded from a specified stage of fitting or choosing a method. In this guide, the test set is held out from all development and training decisions until final evaluation. [Separating development and testing](#evaluate-llm-labeling).
 :::
 
+::: {#term-hook}
+*Hook.* An action configured to run automatically at a particular event, such as checking a file after the agent edits it. [Automating a repeated check](#skill-hooks).
+:::
+
 ::: {#term-hosted-llm}
 *Hosted LLM.* An LLM running on a provider's computers, even when the agent's tools run on your computer. [Where information is sent](#what-reaches-the-llm).
 :::
@@ -219,7 +223,7 @@ This glossary explains the technical terms used throughout the guide, including 
 :::
 
 ::: {#term-monte-carlo-error}
-*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. For example, estimated interval coverage varies across repeated simulation experiments. It differs from the uncertainty interval for a study's effect estimate. [Repeated simulation and its uncertainty](#simulation-repetitions).
+*Monte Carlo error.* Variation from using a finite number of random draws or simulation repetitions. The *Monte Carlo standard error* estimates how much a result, such as interval coverage, would vary across independent runs of the same simulation. [Repeated simulation and its uncertainty](#simulation-repetitions).
 :::
 
 ::: {#term-multimodal-llm}
@@ -242,6 +246,10 @@ This glossary explains the technical terms used throughout the guide, including 
 *Permission mode.* A setting governing which actions require approval during a session. Permission rules and other access controls also affect what can run. [Approval settings](#choose-how-actions-are-approved).
 :::
 
+::: {#term-permission-rule}
+*Permission rule.* A setting that determines whether a particular tool action is allowed, requires your approval, or is blocked. [Enforcing access limits](#enforce-those-limits).
+:::
+
 ::: {#term-personal-instructions}
 *Personal instructions.* Another name for [global user instructions](#term-global-instructions).
 :::
@@ -257,6 +265,10 @@ This glossary explains the technical terms used throughout the guide, including 
 ::: {#term-project-context-files}
 []{#term-project-instructions}
 *Project context files.* Maintained files that tell the agent what a project is trying to achieve, how it should work, what has been decided, and what remains to be done. Examples include `CLAUDE.md` (or `AGENTS.md`), `STATUS.md`, `TASKS.md`, `SPECIFICATION.md`, and `METHODOLOGY.md`. [Saving project context](#project-records).
+:::
+
+::: {#term-project-scaffold}
+*Project scaffold.* A starting set of folders and files suited to the project's purpose. A scaffold for a paper might include folders for data, analysis code, and the manuscript. [Starting a new project](#scaffold-project).
 :::
 
 ::: {#term-prompt}
@@ -293,6 +305,10 @@ This glossary explains the technical terms used throughout the guide, including 
 
 ::: {#term-reproduction}
 *Reproduction.* Recreating reported results from supplied inputs, code, and instructions, with a comparison to check whether the outputs match. Generating new LLM responses is a new collection run; saved responses can be inputs to a reproducible analysis. [Starting inputs](#reproduction-starting-points).
+:::
+
+::: {#term-rubric}
+*Rubric.* Written criteria for making a judgment consistently. For interview labeling, a rubric defines each category and explains how to handle ambiguous excerpts. [Defining the labeling task](#define-the-output-and-its-research-meaning).
 :::
 
 ::: {#term-runtime}
@@ -363,4 +379,8 @@ This glossary explains the technical terms used throughout the guide, including 
 
 ::: {#term-weights}
 *Weights.* The numerical parameters learned during LLM training. Running an LLM uses those parameters; fine-tuning changes some of them or learns additional adjustments. [Context and training](#context-or-training).
+:::
+
+::: {#term-workspace}
+*Workspace.* A parent folder that holds your project folders. A workspace might contain a separate folder for each paper, dataset, or website. [Organizing projects in a workspace](#workspace-layout).
 :::
