@@ -243,9 +243,12 @@ body.quarto-dark {
   0%, 100% { filter: drop-shadow(0 0 2px var(--c-sequence-halo)); }
   50% { filter: drop-shadow(0 0 3px var(--c-sequence-label)) drop-shadow(0 0 8px var(--c-sequence)); }
 }
+.console-readout { display: grid; }
+.console-readout > :is(.intro, .chapter) { grid-area: 1 / 1; }
+.console-readout [inert] { visibility: hidden; }
 .chapter-summaries { display: grid; }
 .chapter-summary { grid-area: 1 / 1; visibility: hidden; }
-.chapter-summary.is-current { visibility: visible; }
+.chapter:not([inert]) .chapter-summary.is-current { visibility: visible; }
 .sequence-actions {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
   align-items: baseline; margin-top: 8px;
