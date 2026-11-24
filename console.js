@@ -866,30 +866,35 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- readout ----
   const ro = document.getElementById("readout");
   const roIntro = document.getElementById("ro-intro"), roChapter = document.getElementById("ro-chapter"), roHow = document.getElementById("ro-how");
-  const roPart = document.getElementById("ro-part"), roTitle = document.getElementById("ro-title"),
-        roBody = document.getElementById("ro-body"), roLink = document.getElementById("ro-link"), roHint = document.getElementById("ro-hint");
+  const roLink = document.getElementById("ro-link"), roNext = document.getElementById("ro-next");
+  const summaries = document.getElementById("ro-summaries");
+  const template = document.getElementById("ro-summary-template");
+  // The summaries share a grid cell so the controls sit below the tallest one at this width.
+  for (const ch of CH) {
+    const summary = template.content.firstElementChild.cloneNode(true);
+    summary.dataset.n = ch.n;
+    summary.querySelector(".eyebrow span").textContent = PARTS[ch.part].name;
+    summary.querySelector(".n").textContent = ch.n;
+    summary.querySelector("h2").append(ch.title);
+    summary.querySelector("p").textContent = ch.body;
+    summaries.append(summary);
+  }
   const controls = [...document.querySelectorAll(".hot")];
-  const nextLink = document.createElement("a");
-  nextLink.className = "sequence-next-link no-external";
-  const actions = document.createElement("div");
-  actions.className = "sequence-actions";
-  actions.append(roLink, nextLink);
-  roChapter.insertBefore(actions, roHint);
   const chapterName = n => /^[A-Z]$/.test(n) ? "Appendix " + n : "Chapter " + n;
+  const nextChapter = ch => CH[CH.indexOf(ch) + 1];
   function cueSequence(ch) {
     controls.forEach(a => a.classList.remove("sequence-next", "sequence-start"));
-    const next = ch ? CH[CH.indexOf(ch) + 1] : CH[0];
+    const next = ch ? nextChapter(ch) : CH[0];
     if (next) {
       const target = controls.find(a => a.dataset.n === next.n);
       target.classList.add(ch ? "sequence-next" : "sequence-start");
       const label = target.querySelector(".sequence-label");
       if (label) label.textContent = (ch ? "Next" : "Start") + " · " + next.n;
     }
-    nextLink.hidden = !ch || !next;
+    roNext.hidden = !ch || !next;
     if (ch && next) {
-      nextLink.textContent = "Next: " + chapterName(next.n) + " →";
-      nextLink.href = SITE + next.slug + ".html";
-      nextLink.setAttribute("aria-label", "Next: " + chapterName(next.n) + ": " + next.title);
+      roNext.textContent = "Preview " + chapterName(next.n) + " →";
+      roNext.setAttribute("aria-label", "Preview " + chapterName(next.n) + ": " + next.title);
     }
   }
   let pinned = null, explored = null;
@@ -899,15 +904,22 @@ document.addEventListener("DOMContentLoaded", function () {
     roIntro.hidden = true; roChapter.hidden = false;
     ro.style.setProperty("--dot", PARTS[ch.part].dot);
     ro.dataset.preview = preview ? "1" : "0";
-    roPart.textContent = PARTS[ch.part].name;
-    roTitle.innerHTML = '<span class="n">' + ch.n + '</span>' + ch.title;
-    roBody.textContent = ch.body;
-    roLink.href = SITE + ch.slug + ".html"; roLink.textContent = "Open chapter " + ch.n + " →"; roLink.hidden = preview;
-    roHint.textContent = preview ? "Press the control to open the chapter." : "Tap the control again to open the chapter, or use the link.";
+    for (const summary of summaries.querySelectorAll(".chapter-summary")) {
+      summary.classList.toggle("is-current", summary.dataset.n === ch.n);
+    }
+    roLink.href = SITE + ch.slug + ".html";
+    roLink.textContent = "Open " + chapterName(ch.n);
     document.querySelectorAll(".hot.on").forEach(a => a.classList.remove("on"));
     controls.find(a => a.dataset.n === ch.n).classList.add("on");
     cueSequence(ch);
   }
+  roNext.addEventListener("click", () => {
+    const next = nextChapter(explored);
+    if (!next) return;
+    pinned = next;
+    show(next, false);
+    if (roNext.hidden) roLink.focus({ preventScroll: true });
+  });
   function restore() {
     if (explored) { show(explored, !pinned || pinned.n !== explored.n); return; }
     applyRecipe(DEFAULT);

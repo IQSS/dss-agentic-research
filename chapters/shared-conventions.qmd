@@ -12,9 +12,7 @@ For example, you might ask the agent to save results at full precision and repor
 
 ## Decide which conventions apply across projects {#shared-instructions}
 
-Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's `CLAUDE.md`.[^project-convention-file] For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
-
-[^project-convention-file]: If you use an agent from another provider, record the exception in `AGENTS.md` if that is the project instructions file the agent reads.
+Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's instructions file. For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
 
 Save instructions that describe a recurring way of working. “Preserve the existing software environment and explain any required package change” is more useful than “be reproducible.” A good shared instruction tells the agent what to do in a recognizable situation. It should leave study-specific choices to the project.
 
@@ -115,7 +113,7 @@ report it; do not create a replacement or invent its instructions.
 </details>
 :::
 
-[^shared-instruction-location]: Anthropic calls these [user instructions](https://code.claude.com/docs/en/memory#choose-where-to-put-claudemd-files). Other agent tools may use `AGENTS.md` in a different location: [`Codex`](https://learn.chatgpt.com/docs/agent-configuration/agents-md#create-global-guidance), for example, uses `~/.codex/AGENTS.md` by default. Ask the agent to confirm the location for the tool you use.
+[^shared-instruction-location]: `Codex` looks for global user instructions in `~/.codex/AGENTS.md` by default. If you use both tools, you can keep the shared instructions in that file and ask the agent to put `@~/.codex/AGENTS.md` on its own line in `~/.claude/CLAUDE.md`. Both tools then read the same instructions. If the two filenames already point to the same file through a symbolic link, you can keep that setup. See [Claude Code file imports](https://code.claude.com/docs/en/memory#import-additional-files) and [Codex global instructions](https://learn.chatgpt.com/docs/agent-configuration/agents-md#create-global-guidance).
 
 ## Maintain and share the conventions {#maintain-shared-conventions}
 

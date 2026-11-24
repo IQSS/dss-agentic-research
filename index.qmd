@@ -116,13 +116,19 @@ resources:
               </div>
               <div class="chapter" id="ro-chapter" hidden>
                 <button type="button" class="overview-back" id="ro-back" aria-keyshortcuts="Escape" title="Return to the overview (Esc)"><span aria-hidden="true">← </span>Back to overview</button>
-                <div class="eyebrow"><i></i><span id="ro-part"></span></div>
-                <h2 id="ro-title"></h2>
-                <div class="main">
-                  <p id="ro-body"></p>
-                  <a class="go no-external" id="ro-link" href="chapters/research-uses.html" hidden>Open chapter</a>
+                <div class="chapter-summaries" id="ro-summaries">
+                  <template id="ro-summary-template">
+                    <div class="chapter-summary">
+                      <div class="eyebrow"><i></i><span></span></div>
+                      <h2><span class="n"></span></h2>
+                      <p></p>
+                    </div>
+                  </template>
                 </div>
-                <div class="hint" id="ro-hint"></div>
+                <div class="sequence-actions">
+                  <a class="go no-external" id="ro-link">Open chapter</a>
+                  <button type="button" class="sequence-preview" id="ro-next" aria-controls="ro-summaries">Preview next chapter →</button>
+                </div>
               </div>
             </section>
           </div>
