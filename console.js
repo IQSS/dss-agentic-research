@@ -881,18 +881,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   const controls = [...document.querySelectorAll(".hot")];
   const chapterName = n => /^[A-Z]$/.test(n) ? "Appendix " + n : "Chapter " + n;
-  const nextChapter = ch => CH[CH.indexOf(ch) + 1];
+  const nextChapter = ch => ch ? CH[CH.indexOf(ch) + 1] : CH[0];
   function cueSequence(ch) {
     controls.forEach(a => a.classList.remove("sequence-next", "sequence-start"));
-    const next = ch ? nextChapter(ch) : CH[0];
+    const next = nextChapter(ch);
     if (next) {
       const target = controls.find(a => a.dataset.n === next.n);
       target.classList.add(ch ? "sequence-next" : "sequence-start");
       const label = target.querySelector(".sequence-label");
       if (label) label.textContent = (ch ? "Next" : "Start") + " · " + next.n;
     }
-    roNext.hidden = !ch || !next;
-    if (ch && next) {
+    roLink.inert = !ch;
+    roNext.hidden = !next;
+    if (next) {
       roNext.textContent = "Preview " + chapterName(next.n) + " →";
       roNext.setAttribute("aria-label", "Preview " + chapterName(next.n) + ": " + next.title);
     }
@@ -901,7 +902,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function show(ch, preview) {
     explored = ch;
     applyRecipe(ch.r);
-    roIntro.hidden = true; roChapter.hidden = false;
+    roIntro.inert = true; roChapter.inert = false;
     ro.style.setProperty("--dot", PARTS[ch.part].dot);
     ro.dataset.preview = preview ? "1" : "0";
     for (const summary of summaries.querySelectorAll(".chapter-summary")) {
@@ -924,7 +925,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (explored) { show(explored, !pinned || pinned.n !== explored.n); return; }
     applyRecipe(DEFAULT);
     ro.dataset.preview = "0"; ro.style.setProperty("--dot", "var(--c-mustard)");
-    roChapter.hidden = true; roIntro.hidden = false;
+    roChapter.inert = true; roIntro.inert = false;
   }
   function resetOverview() {
     const moveFocus = ro.contains(document.activeElement) || controls.includes(document.activeElement);

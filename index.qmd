@@ -114,7 +114,7 @@ resources:
                 <p>How to run agents, teach them your conventions, use them at each stage of a paper, and keep your data and files safe.</p>
                 <p class="how"><b>Every chapter of the guide is a control on the console.</b> <span id="ro-how">Hover over one to see what it covers, and press it to open that chapter.</span></p>
               </div>
-              <div class="chapter" id="ro-chapter" hidden>
+              <div class="chapter" id="ro-chapter" inert>
                 <button type="button" class="overview-back" id="ro-back" aria-keyshortcuts="Escape" title="Return to the overview (Esc)"><span aria-hidden="true">← </span>Back to overview</button>
                 <div class="chapter-summaries" id="ro-summaries">
                   <template id="ro-summary-template">
@@ -125,10 +125,10 @@ resources:
                     </div>
                   </template>
                 </div>
-                <div class="sequence-actions">
-                  <a class="go no-external" id="ro-link">Open chapter</a>
-                  <button type="button" class="sequence-preview" id="ro-next" aria-controls="ro-summaries">Preview next chapter →</button>
-                </div>
+              </div>
+              <div class="sequence-actions">
+                <a class="go no-external" id="ro-link" inert>Open Chapter 1</a>
+                <button type="button" class="sequence-preview" id="ro-next" aria-controls="ro-summaries" hidden>Preview Chapter 1 →</button>
               </div>
             </section>
           </div>
