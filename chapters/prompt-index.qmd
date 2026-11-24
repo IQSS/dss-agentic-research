@@ -11,7 +11,7 @@ This prompt bank brings together the same example prompts used throughout the gu
 [Download all prompts as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
-**Set up and maintain a project:** [Configure and check access](#bank-configure-access) · [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a project-scaffolding skill](#bank-scaffold-skill)
+**Set up and maintain a project:** [Configure and check access](#bank-configure-access) · [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a skill to check figure captions](#bank-scaffold-skill)
 
 **Define the study and gather evidence:** [Compare research approaches](#bank-compare-research-approaches) · [Make the research specification explicit](#bank-research-specification) · [Search and verify the literature](#bank-literature-search) · [Synthesize the papers actually read](#bank-literature-synthesis) · [Bring approved data into the project](#bank-bring-data)
 
@@ -117,14 +117,14 @@ Explanation and checks: [Chapter 8: Apply your conventions across projects](#req
 :::
 
 ::: {.keep-together}
-### Create a project-scaffolding skill {#bank-scaffold-skill .unlisted}
+### Create a skill to check figure captions {#bank-scaffold-skill .unlisted}
 
-Point the agent to: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
+Point the agent to: your caption conventions, two figures with their captions and sources, and the folder where the agent should save the skill.
 
 Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-scaffold-skill).
 
 ::: {.prompt}
-> Write a reusable `SKILL.md` for the project setup we have agreed. Have it ask for the new project's purpose and where its folder should be created, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
+> Write a reusable skill called `check-figure-captions` using the caption conventions we agreed. Have it read each figure and caption together before consulting the manuscript. Check that readers can understand the figure on its own and that the caption defines every acronym and abbreviation used in the figure or its caption. Have it verify missing details against the figure source, suggest wording it can support, and ask me about anything it cannot verify. Try it on an incomplete caption and on one that already meets the conventions. Show me the findings before editing either caption.
 :::
 
 :::
@@ -285,12 +285,12 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 ::: {.keep-together}
 ### Develop an LLM labeling method {#bank-develop-labeling .unlisted}
 
-Point the agent to: the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together.
+Point the agent to: the research question, development excerpts with their reviewed human labels, candidate LLMs, and participant or document identifiers for the development excerpts.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-develop-labeling).
 
 ::: {.prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Work only with the development excerpts and their reviewed human labels. Flag any participant or document whose excerpts may also appear in the test set so I can check the assignment. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 
 :::
@@ -298,12 +298,12 @@ Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-
 ::: {.keep-together}
 ### Evaluate LLM labels on a held-out test set {#bank-evaluate-labeling .unlisted}
 
-Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling.
+Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Include the recorded selection probabilities if excerpts were sampled at different rates. Supply the human test labels after the predictions are saved.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-evaluate-labeling).
 
 ::: {.prompt}
-> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Once you have saved the predictions, ask me for the human test labels and use them to score the predictions. If some excerpts had a greater chance of selection than others, use the recorded selection probabilities when estimating error rates for the full study. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 
 :::
@@ -329,7 +329,7 @@ Point the agent to: the research protocol, fixed instructions, assigned input fo
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
 
 ::: {.prompt}
-> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Use `claude -p` with my usual Claude subscription. Before running the trial, confirm that it will use only my plan’s included allowance. If you cannot confirm that, or if the allowance runs out, stop and tell me. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 
 :::

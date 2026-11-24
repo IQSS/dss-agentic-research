@@ -52,9 +52,9 @@
     {
       "id": "scaffold-skill",
       "chapter": 9,
-      "title": "Create a project-scaffolding skill",
+      "title": "Create a skill to check figure captions",
       "group": "project",
-      "inputs": "an agreed project layout, setup instructions, and the folder where the agent should save the skill."
+      "inputs": "your caption conventions, two figures with their captions and sources, and the folder where the agent should save the skill."
     },
     {
       "id": "compare-research-approaches",
@@ -140,14 +140,14 @@
       "chapter": 16,
       "title": "Develop an LLM labeling method",
       "group": "llm",
-      "inputs": "the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together."
+      "inputs": "the research question, development excerpts with their reviewed human labels, candidate LLMs, and participant or document identifiers for the development excerpts."
     },
     {
       "id": "evaluate-labeling",
       "chapter": 16,
       "title": "Evaluate LLM labels on a held-out test set",
       "group": "llm",
-      "inputs": "the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling."
+      "inputs": "the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Include the recorded selection probabilities if excerpts were sampled at different rates. Supply the human test labels after the predictions are saved."
     },
     {
       "id": "llm-sensitivity",
@@ -230,7 +230,7 @@
     },
     {
       "id": "scaffold-skill",
-      "path": "skills/research-scaffold/SKILL.md"
+      "path": "skills/check-figure-captions/SKILL.md"
     }
   ],
   "prompt_groups": {

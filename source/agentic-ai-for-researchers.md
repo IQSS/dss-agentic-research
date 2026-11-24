@@ -389,7 +389,7 @@ A *project scaffold* is a starting set of folders and files suited to the intend
 :::
 <!-- /prompt:scaffold-project -->
 
-Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, the DSS [`scaffold`](https://iqss.github.io/dss-agent-skills/skills/scaffold.html) skill can reuse it for subsequent projects; [Chapter 9: Use skills for recurring tasks](#reusable-procedures) develops that example.
+Review the proposed organization and the facts entered in the project context files. Unknown methods, collaborators, or input permissions should remain questions for you. Once a layout works well, the DSS [`scaffold`](https://iqss.github.io/dss-agent-skills/skills/scaffold.html) skill can reuse it for subsequent projects. [Chapter 9: Use skills for recurring tasks](#use-existing-skill) explains how to use it.
 
 ## Organize an existing project {#restructure-project}
 
@@ -674,15 +674,15 @@ Record a paper-specific exception in that project's files, with its reason. A ne
 
 # 9. Use skills for recurring tasks {#reusable-procedures}
 
-Many research tasks recur with different inputs: setting up a paper, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task and check its work. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
+Many research tasks recur with different inputs: setting up folders for a new project, checking citations, or preparing figures for a manuscript. A *skill* saves instructions for an agent to carry out a task and check its work. It can preserve lessons from earlier work and reduce the need to explain the same steps again.
 
-Consider the [paper project scaffold](#scaffold-paper-example), which follows the approach described in [Chapter 6: Organize your research projects](#project-organization). Once you have a suitable paper project layout, a skill can direct the agent to create it for another study, draft the project context files, and identify missing information. You supply the new project's purpose; the skill supplies the setup instructions.
+If you find yourself making the same corrections to figure captions across papers, you can ask the agent to turn those checks into a reusable skill. A reader should be able to understand each figure from the figure and its caption alone. An unexplained abbreviation, a comparison with no units, or shading with no stated meaning can send the reader looking through the manuscript for an explanation.
 
 ## What a skill adds {#what-skills-add}
 
 A skill is a folder containing a file called `SKILL.md`. It can also contain scripts, reference material, or templates. The agent reads the instructions in `SKILL.md` and uses its tools to carry them out. A saved script specifies operations for a computer to execute; a skill can guide work that requires the agent to inspect inputs, choose suitable steps, or ask for a decision.
 
-![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="A reusable skill in ~/.claude/skills/project-scaffold/ contains SKILL.md and paper and website templates. Two agents invoke /project-scaffold with different purposes and destinations, creating and checking papers/attendance/ and websites/group-site/. Each folder contains its own layout and project context files." above="8pt" below="8pt"}
+![](figures/how-a-skill-works.svg){#fig-how-a-skill-works fig-alt="A skill folder contains SKILL.md with steps to follow and checks to run. The agent reads those instructions, carries out the task, and checks the result." above="8pt" below="8pt"}
 
 Project context files describe a study, its requirements, and its progress. Global user instructions establish conventions across projects, while a skill describes how to carry out a recurring task. Have the skill consult the project context files and global user instructions rather than copying their contents. That lets you change a convention once without updating every skill that uses it.
 
@@ -697,100 +697,87 @@ These are examples of tasks that might be useful to package into skills. A skill
 
 ## Use an existing skill {#use-existing-skill}
 
-Before creating a skill, ask the agent whether an installed skill or one in the [DSS agent skills catalogue](https://iqss.github.io/dss-agent-skills/) already covers the task.[^skill-collections] Your research group may have a collection of skills suited to its research. Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
+Some skills [come with `Claude Code`](https://code.claude.com/docs/en/skills#bundled-skills), and you can install others. Before creating a skill, ask the agent whether any of the skills already available to you can do the task. If none fits, check the [DSS agent skills library](https://iqss.github.io/dss-agent-skills/).[^skill-collections] Have the agent inspect the chosen skill's instructions and supporting files, explain the expected inputs and changes, and adapt anything that conflicts with your project. Try it on the next suitable task and review the resulting work.
 
 [^skill-collections]: Other collections include [Anthropic's skills repository](https://github.com/anthropics/skills) and [OpenAI's skills catalog](https://github.com/openai/skills). Ask the agent to check whether a candidate skill supports the app and tools you use.
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), you can invoke an available skill with `/skill-name` or ask for it by name. The agent may also choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use] Ask the agent to retain the source and version of an adopted skill so later changes can be understood.
+In [`Claude Code`](https://code.claude.com/docs/en/overview), you can start an installed skill by typing its slash command (`/skill-name`). For example, after [installing the DSS agent skills library](https://iqss.github.io/dss-agent-skills/installation.html), type `/dss-agent-skills:scaffold` to start its project setup skill. You can also ask for a skill by name. The agent may choose a relevant skill based on its description; the full instructions load when the skill is used.[^skill-use]
 
 [^skill-use]: Anthropic's [skills documentation](https://code.claude.com/docs/en/skills) explains invocation, supporting files, and when skill content loads. The description helps the agent select a skill; it is not a guarantee that it will choose or follow it correctly.
 
 ## Turn a useful task into a skill {#create-research-skill}
 
-When a task has worked well and is likely to recur, ask the agent to write a `SKILL.md` file with the instructions that made it work. Have it specify what the task receives, what it should produce, how to check the result, and which decisions remain yours. A scaffold skill should ask for the project's purpose and where its folder should be created, use the appropriate layout, and leave unresolved methods as questions.
+When a task has worked well and is likely to recur, ask the agent to write a `SKILL.md` file with the instructions that made it work. For example, if you often revise figure captions so readers can understand each figure on its own, you could turn that review into a skill. Have the agent read each figure alongside its caption before consulting the surrounding text. The caption should define every acronym and abbreviation used in the figure or its caption, even if it was defined earlier in the paper. A plot may need its units, comparison, and intervals explained. A historical map may need its place, period, and shading explained.
 
 <!-- prompt:scaffold-skill -->
 ::: {#request-scaffold-skill .prompt}
-> Write a reusable `SKILL.md` for the project setup we have agreed. Have it ask for the new project's purpose and where its folder should be created, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
+> Write a reusable skill called `check-figure-captions` using the caption conventions we agreed. Have it read each figure and caption together before consulting the manuscript. Check that readers can understand the figure on its own and that the caption defines every acronym and abbreviation used in the figure or its caption. Have it verify missing details against the figure source, suggest wording it can support, and ask me about anything it cannot verify. Try it on an incomplete caption and on one that already meets the conventions. Show me the findings before editing either caption.
 :::
 <!-- /prompt:scaffold-skill -->
 
-The agent might write the start of `SKILL.md` like this:
+The agent might write the following file. The header names the skill and describes when to use it.
 
-```
----
-name: research-scaffold
-description: Set up a new research project using the agreed workspace
-  and layout conventions. Use when asked to create a project.
----
-
-Read the workspace index and project-layout conventions if available.
-Confirm the project's purpose, intended output, and where its folder should be created.
-Propose the folder structure before creating it. Preserve existing files.
-```
-
-The header names the skill and describes when to use it. The body gives the steps; the complete example adds instructions for drafting and checking the project context files. Ask the agent to adapt this example to your project layouts and conventions, then use it to set up a project as described below.
-
-[Download the scaffold skill example](resources/skills/research-scaffold/SKILL.md){.download-button download="SKILL.md"}
-
-::: {.web-only}
-<details class="guide-example">
-<summary>Read the complete scaffold skill example</summary>
+::: {#caption-skill-file .guide-note}
+[`SKILL.md`]{.small .fw-semibold}
 
 <!-- starter:scaffold-skill -->
 ```
 ---
-name: research-scaffold
-description: Set up a new research project using the agreed workspace
-  and layout conventions. Use when asked to create a project.
+name: check-figure-captions
+description: Review manuscript figures and their captions together for
+  details a reader needs to understand each figure on its own.
 ---
 
-Read the workspace index and project-layout conventions if available.
-Confirm the project's purpose, intended output, and where its folder should be created.
-Propose the folder structure before creating it. Preserve existing files.
+Read each figure with its caption before consulting the surrounding manuscript.
+Use the researcher's caption conventions. Check whether a reader can identify
+what is shown, who or what is represented, and how to interpret it.
 
-After the researcher accepts the structure:
-- Create only the folders needed for the intended output.
-- Draft CLAUDE.md (or AGENTS.md) with instructions and paths to the other
-  project context files and relevant conventions.
-- Add status and task records appropriate to the work already agreed.
-- Record unresolved research decisions as questions, not assumed facts.
-- For a paper project, write SPECIFICATION.md from the researcher's current
-  decisions and start METHODOLOGY.md with decisions actually made and their reasons.
-  Leave unresolved choices explicit; do not invent a history.
-- In CLAUDE.md (or AGENTS.md), tell the agent to follow SPECIFICATION.md when
-  implementing or checking the analysis and consult METHODOLOGY.md for rationale.
-  Approved scientific changes update both: rewrite the specification and add a
-  dated decision at the top of the log, preserving earlier entries.
+Check that each caption defines every acronym and abbreviation used in the
+figure or caption, even if it was defined earlier in the paper. Where relevant,
+look for units, comparisons, place, time period, and the meanings of symbols,
+colors, lines, panels, or shaded areas.
 
-Check the result:
-- Confirm that the created paths match the accepted structure.
-- Check that the instructions refer to files that exist, or clearly identify
-  files still to be supplied or created.
-- Confirm that existing files were preserved.
-- Show the folder structure, the project context files, and unresolved decisions.
+For each gap, check the detail against the plotting code, saved results, or
+source used to make the figure. If a detail cannot be verified, ask the
+researcher a specific question.
 
-Ask before changing an existing project or adding software or services.
-Do not acquire data, fit models, or publish files as part of this setup.
+Report the figure number or title, what a reader would have to guess, and a
+suggested caption supported by the source. Leave captions that meet the
+conventions as written. Edit manuscript files only when asked.
 ```
 <!-- /starter:scaffold-skill -->
 
-</details>
 :::
 
-Ask the agent to place the skill in its supported location: global user skills in `Claude Code` use `~/.claude/skills/`, while project-specific skills use `.claude/skills/` inside the project.[^skill-location] Each skill has its own folder containing `SKILL.md`. Supporting templates or scripts belong beside it, with instructions explaining when to use them. The project scaffolds in [Appendix A: Project scaffolds and starter files](#starter-layouts) can supply the folder layouts for this skill.
+[Download the caption-checking skill](resources/skills/check-figure-captions/SKILL.md){.download-button download="SKILL.md"}
+
+If you want to use the skill across papers in `Claude Code`, ask the agent to create a folder named `check-figure-captions` in `~/.claude/skills/` and save `SKILL.md` there. If you want to use the skill in just one project, ask the agent to create the same folder and file inside that project's `.claude/skills/` folder.[^skill-location] You can then ask the agent to review a figure and its caption with `/check-figure-captions`.
 
 [^skill-location]: See Anthropic's [skill locations](https://code.claude.com/docs/en/skills#choose-where-skills-load), which calls global user skills “personal” skills. These apply across projects; project-specific skills can be shared with suitable project files.
 
 ## Refine and reuse the skill {#refine-skills}
 
-Have the agent use the skill on a representative task before relying on it repeatedly. For project setup, check that the folders match the intended output, the project context files contain known facts, and existing files remain intact. If it omits a required step or makes an unwanted assumption, ask it to revise the instructions or checks and try the affected part again.
+Try the skill on a deliberately incomplete caption for a figure in the [heat-and-birthweight example](#example-project): “Estimated birthweight differences by maternal age. Bars show uncertainty.” The [project download](resources/heat-birthweight.zip) includes the figure, `contrasts.png`, and the code that draws it, `figures.R`. Which exposure levels are being compared, and in what units is the difference reported? The bars could represent several different kinds of interval. The agent can check the plotting code and suggest a revision.
 
-Have the agent keep `SKILL.md` concise and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls. Preserve the skill's changes so you can identify which version was used for consequential work.
+::: {.example-output}
+**Revised caption**
+
+Estimated differences in birthweight, in grams, for 10 versus 5 hot days during pregnancy in the synthetic study. Points show estimates for the full sample and at maternal ages 22, 28, and 36 years. Horizontal lines show 95% confidence intervals.
+:::
+
+![](figures/reusable-skills.svg){#fig-reusable-skills .tall fig-alt="One check-figure-captions skill reviews two figures alongside their captions. The birthweight plot needs its exposure comparison, units, and confidence intervals explained. The map of Millford in 1850 already identifies its place, period, and shading, so its caption stays as written." above="8pt" below="8pt"}
+
+Try the skill again on the revised caption. It should leave the wording alone. If the agent guesses what an interval means when the source is missing, ask it to revise the skill so it brings that question back to you.
+
+Ask the agent to keep earlier versions when it revises a skill. When a skill helps produce or check a research result, have the agent record the skill's source and version alongside that result.
+
+Have the agent keep `SKILL.md` concise and move lengthy templates or reference material into supporting files. A step that always performs the same calculation can become a saved script that the skill calls.
 
 ## Automate a repeated check with a hook {#skill-hooks}
 
-A *hook* runs a configured action at a particular event, such as after a file edit. It can automate a quick check that is otherwise often missed. Begin with checks requested through the agent, then add a hook when there is a clear recurring need. Avoid launching a full analysis after every small edit. Whether a hook can prevent an action depends on its timing and configuration; the [official hooks documentation](https://code.claude.com/docs/en/hooks) explains setup and testing.
+A *hook* runs an action when a specified event occurs. For example, suppose you add another age group to the birthweight plot. The figure now shows the new estimate, but its caption still lists only ages 22, 28, and 36. If you revise this figure often, ask the agent to set up a project hook that runs whenever the saved figure changes during a `Claude Code` session. The hook can remind you to use `/check-figure-captions`, or it can start the caption review automatically and save any suggested changes for you to review.[^caption-hook]
+
+[^caption-hook]: The [file-change hook documentation](https://code.claude.com/docs/en/hooks#filechanged) explains how to watch a saved file. For an automatic review, the hook can [start a Claude Code session](https://code.claude.com/docs/en/headless) with the skill and the paths to the figure and its caption.
 
 <!-- ===================== PART III — DO THE RESEARCH ===================== -->
 
@@ -1215,7 +1202,7 @@ Keep the specification version used for the check even if the project later chan
 
 Ask the agent in your current session to prepare separate folders and launch two separate *headless*[^independent-headless] `Claude Code` sessions: agent runs that follow supplied instructions without an interactive conversation. Each receives the same specification, data dictionary, and approved inputs and builds its implementation without inheriting the current conversation or seeing the other's code or results. The coordinating agent can arrange these runs sequentially or simultaneously.
 
-[^independent-headless]: [Chapter 15: Divide work between agents: shared projects and git worktrees](https://iqss.github.io/dss-agentic-toolkit/chapters/parallel-work.html#agent-execution-terms) in the companion guide *Extending Your Agent's Toolkit* compares subagents, headless sessions, and background execution. [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) explains setup and control over each run's inputs and tool access.
+[^independent-headless]: [Chapter 15: Divide work between agents: shared projects and git worktrees](https://iqss.github.io/dss-agentic-toolkit/chapters/parallel-work.html#agent-execution-terms) in the companion guide *Extending Your Agent's Toolkit* compares subagents, headless sessions, and background execution. [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#control-what-each-run-receives) explains how to choose the tools and file access each session needs to write and run its own implementation.
 
 You can also open fresh interactive sessions yourself. [Chapter 16: Use LLM outputs as research data](#headless-agents) explains headless runs and how to control their inputs. Separate sessions and folders alone do not prevent access to shared files; configure any required access restrictions as described in [Chapter 4: Control what the agent can do](#agent-access).
 
@@ -1300,13 +1287,13 @@ This chapter uses a running example: a research team wants to estimate the propo
 
 ## Define what the LLM should produce {#define-the-output-and-its-research-meaning}
 
-Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Researchers familiar with the subject should review it and label a set of examples, resolving disagreements and recording their reasons. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
+Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Have two researchers familiar with the subject apply the rubric independently to the same excerpts before either sees the LLM’s labels. Record how often they agree, then have them review the passages they labeled differently and explain why they chose each final label. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
 
 Work with the agent to develop the rubric and prompt on examples reserved for that purpose. Include difficult cases and specify when the LLM should leave a case for human review. Ask the agent to record what the labels represent in `SPECIFICATION.md`, with links to the rubric and evaluation criteria. It should retain the exact rubric and prompt used for each completed run and record approved revisions and their reasons in `METHODOLOGY.md`.
 
 For recorded interviews, the agent might first use speech-recognition software to transcribe the audio, then ask an LLM to label passages. Have it select a sample for human review against the recordings so the evaluation captures transcription errors as well as labeling errors. Some LLMs can process images, audio, or video alongside text. These are called *multimodal LLMs*. Ask the agent to check whether the chosen LLM supports the material you want to analyze. [Chapter 12: Bring data into the project](#data-acquisition) covers collecting and documenting those inputs.
 
-Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that submits each excerpt with the rubric and saves the returned label. If the task also requires tools, such as retrieving passages from several files, the script can launch a separate agent session to do that work.
+Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that starts a fresh `Claude Code` session for each excerpt using your usual Claude subscription. The script gives each session the rubric and one excerpt, then saves the label it returns.
 
 [^llm-inference-tokens]: A token is a unit of text processed by an LLM. It may be a whole word, part of a word, or a punctuation mark.
 
@@ -1314,7 +1301,9 @@ Using a trained LLM to generate a response is called *LLM inference*. This is a 
 
 Evaluating LLM-generated labels follows a familiar principle from predictive modeling: assess performance on examples that were not used to develop or select the method.[^predictive-evaluation] Even without training an LLM, researchers make choices about the rubric, prompt, and which LLM to use. Repeatedly adjusting those choices to improve results on the same examples can give an overly optimistic picture of performance on new material.
 
-For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Keep the test set separate from all those decisions. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
+Choose the excerpts for human review with the study’s main source of uncertainty in mind. If you want to know how often the LLM misses an unmet need, the test set needs enough excerpts in which reviewers identify one. Ask the agent how many excerpts you would need to sample at random for a sufficiently precise estimate of how often the LLM misses a need identified by human reviewers. If unmet needs are rare, you could sample at random within each section of the interview and take a larger share from sections that ask about access to services. Have the agent record each sampled excerpt’s chance of selection. When estimating how common unmet needs are across all excerpts, it should give more weight to excerpts that had a lower chance of selection.
+
+For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Give the agent developing the prompt access only to the development excerpts and their human labels. Keep the test excerpts and labels in a folder that session cannot read. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
 
 ![](figures/llm-evaluation-split.svg){#fig-llm-evaluation-split .tall fig-alt="Partition human-labeled examples by participant or document. Development examples support refining the rubric and prompt and comparing LLMs and settings. An optional branch adds training data when fine-tuning. After choosing and fixing the labeling method, evaluate it on the held-out test set, comparing predicted labels with human labels withheld from the LLM."}
 
@@ -1322,7 +1311,7 @@ If the team also fine-tunes an LLM, a *training set* supplies examples used to u
 
 <!-- prompt:develop-labeling -->
 ::: {#request-develop-labeling .prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Work only with the development excerpts and their reviewed human labels. Flag any participant or document whose excerpts may also appear in the test set so I can check the assignment. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 <!-- /prompt:develop-labeling -->
 
@@ -1343,7 +1332,7 @@ Overall agreement is 92.5 percent: the LLM and human reference agree on 185 of 2
 
 <!-- prompt:evaluate-labeling -->
 ::: {#request-evaluate-labeling .prompt}
-> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Once you have saved the predictions, ask me for the human test labels and use them to score the predictions. If some excerpts had a greater chance of selection than others, use the recorded selection probabilities when estimating error rates for the full study. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 <!-- /prompt:evaluate-labeling -->
 
@@ -1397,7 +1386,7 @@ Once the labeling procedure is ready, ask the agent to apply it to the full coll
 
 A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
 
-[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^measurement-headless]: For an example of supplying one text directly to each fresh session, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#control-what-each-run-receives) in the companion guide *Extending Your Agent's Toolkit*.
 
 ### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
 
@@ -1409,7 +1398,7 @@ A fresh headless run can still load global user instructions, memory, files, plu
 
 <!-- prompt:controlled-llm-runs -->
 ::: {#request-controlled-llm-runs .prompt}
-> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Use `claude -p` with my usual Claude subscription. Before running the trial, confirm that it will use only my plan’s included allowance. If you cannot confirm that, or if the allowance runs out, stop and tell me. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 <!-- /prompt:controlled-llm-runs -->
 
@@ -1553,7 +1542,7 @@ Suppose a revised sample definition changes the estimated birthweight difference
 Ask the agent to create a *chain of evidence* linking each reported result to the saved output that produced it. The links should identify the results file, the analysis run, the exact entry, and every place that result appears in the manuscript. The agent can use these links to find affected passages when an analysis changes.
 
 <!-- example:manuscript-results -->
-For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
+In the heat-and-birthweight example, the `sample` row in `outputs/results/analysis/contrasts.csv` provides the estimate and confidence interval reported below.
 
 ::: {.example-output}
 In the synthetic sample, the estimated mean birthweight difference between ten and five hot days of maternal exposure during the third trimester was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the sample's maternal age and smoking distribution.
@@ -1671,7 +1660,7 @@ For restricted data, the instructions in `archive/` should explain how an author
 
 Ask the agent to copy `archive/` into a temporary directory outside the working project. If you will share a zipped copy, have it extract and test that exact file there. It should start a fresh headless agent session[^handoff-headless] with access to the test directory but no access to the working project or earlier conversation. Have that agent restore the recorded software versions in a separate environment and follow the supplied `README.md`. Missing files, dependencies, or instructions should be reported rather than recovered from the working project.
 
-[^handoff-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^handoff-headless]: For guidance on choosing the tools and file access a session needs to run the archived code, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#control-what-each-run-receives) in the companion guide *Extending Your Agent's Toolkit*.
 
 A headless session alone does not isolate files or software: the agent must configure the access restrictions and separate environment. A container can help; [Chapter 10: Run work in a separate environment: containers](https://iqss.github.io/dss-agentic-toolkit/chapters/containers.html) in the companion toolkit explains how. Once omissions are corrected in `archive/`, have the agent repeat the affected steps with a new copy of those corrected files.
 
@@ -1984,7 +1973,7 @@ task finishes. An in-progress entry states what remains to be done.
 ::: {.keep-together}
 ## A.5 SPECIFICATION.md: Current requirements {#starter-specification}
 
-Have the agent create `SPECIFICATION.md` from your research decisions, adapting the fields to the study and leaving unresolved choices explicit for your review. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight specification.
+Have the agent create the project context file `SPECIFICATION.md` from your research decisions, adapting the fields to the study and asking you about choices you have yet to make. After an approved scientific change, have it rewrite the affected requirements and add the decision and reason at the top of `METHODOLOGY.md`. [Chapter 10: The example research project](#example-specification) explains the completed heat-and-birthweight specification.
 
 [Download SPECIFICATION.md](resources/starter-files/SPECIFICATION.md){.download-button download="SPECIFICATION.md"}
 
@@ -1993,41 +1982,49 @@ Have the agent create `SPECIFICATION.md` from your research decisions, adapting 
 
 <!-- starter:specification -->
 ```
-# Scientific specification
+# Research specification
 
 Project: [name]
-Version and date: [identifier]
-Researcher approval: [pending / approved, with date]
+Version and date: [version, YYYY-MM-DD]
 
-## Research question and estimands
+Record the scientific decisions the researcher has made. List open questions
+under “Unresolved decisions” and ask the researcher about them before doing
+work that depends on the answer. When the researcher agrees to a change,
+update the affected requirement here and record the decision and its reason
+in METHODOLOGY.md.
+
+## Research question and objectives
 - Question and intended interpretation:
-- Target population and analysis sample:
-- Quantities to estimate, comparisons, units, and time periods:
-- Assumptions needed for that interpretation:
 
-## Inputs and sample rules
+## Population, sample, and inputs
+- Target population and analysis sample:
 - Approved inputs, versions, dictionary, and access location:
 - Inclusion, exclusion, and missing-data rules:
 - Required variables, derivations, units, and supported ranges:
 
-## Estimator and reported outputs
+## Quantities to estimate or evidence to assess
+- Estimands, comparisons, units, and time periods:
+
+## Methods, assumptions, and uncertainty
 - Estimation procedure, statistical model, and relevant settings:
+- Assumptions needed for the intended interpretation:
 - How fitted results become the requested estimands, including any averaging or standardization:
 - Uncertainty calculation and any decision rule:
-- Required tables, figures, and saved full-precision results:
 
-## Checks
+## Required checks and tolerances
 - Input and execution checks:
 - Known-truth scenarios and performance measures, where applicable:
 - Independent comparisons and numerical tolerances, where applicable:
 
-## Unresolved decisions
-[List questions for the researcher. Do not silently supply missing choices.]
+## Outputs to produce
+- Required tables, figures, and saved full-precision results:
 
-Have the agent maintain the current approved specification here, rewriting it
-when decisions change. Record each approved scientific change and its reason
-in METHODOLOGY.md, newest entry first. Preserve earlier specification versions
-in version control and retain frozen protocols used for particular runs.
+## Unresolved decisions
+- Questions to raise with the researcher:
+
+Keep the newest decisions at the top of METHODOLOGY.md. Preserve earlier
+specification versions in version control and retain frozen protocols used
+for particular runs.
 ```
 <!-- /starter:specification -->
 
@@ -2175,7 +2172,7 @@ This prompt bank brings together the same example prompts used throughout the gu
 [Download all prompts as Markdown](resources/prompt-bank.md){.download-button download="prompt-bank.md"}
 
 <!-- collection:prompts -->
-**Set up and maintain a project:** [Configure and check access](#bank-configure-access) · [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a project-scaffolding skill](#bank-scaffold-skill)
+**Set up and maintain a project:** [Configure and check access](#bank-configure-access) · [Start a new research project](#bank-scaffold-project) · [Organize an existing project](#bank-restructure-project) · [Write CLAUDE.md for a project](#bank-project-context) · [Resume a project](#bank-resume-project) · [Finish a session and update project context](#bank-close-session) · [Set global user instructions](#bank-shared-conventions) · [Create a skill to check figure captions](#bank-scaffold-skill)
 
 **Define the study and gather evidence:** [Compare research approaches](#bank-compare-research-approaches) · [Make the research specification explicit](#bank-research-specification) · [Search and verify the literature](#bank-literature-search) · [Synthesize the papers actually read](#bank-literature-synthesis) · [Bring approved data into the project](#bank-bring-data)
 
@@ -2281,14 +2278,14 @@ Explanation and checks: [Chapter 8: Apply your conventions across projects](#req
 :::
 
 ::: {.keep-together}
-### Create a project-scaffolding skill {#bank-scaffold-skill .unlisted}
+### Create a skill to check figure captions {#bank-scaffold-skill .unlisted}
 
-Point the agent to: an agreed project layout, setup instructions, and the folder where the agent should save the skill.
+Point the agent to: your caption conventions, two figures with their captions and sources, and the folder where the agent should save the skill.
 
 Explanation and checks: [Chapter 9: Use skills for recurring tasks](#request-scaffold-skill).
 
 ::: {.prompt}
-> Write a reusable `SKILL.md` for the project setup we have agreed. Have it ask for the new project's purpose and where its folder should be created, follow the relevant layout conventions, preserve existing files, and leave missing research decisions as questions. Include checks of the created folders and records. Try it on a new project folder and report the result.
+> Write a reusable skill called `check-figure-captions` using the caption conventions we agreed. Have it read each figure and caption together before consulting the manuscript. Check that readers can understand the figure on its own and that the caption defines every acronym and abbreviation used in the figure or its caption. Have it verify missing details against the figure source, suggest wording it can support, and ask me about anything it cannot verify. Try it on an incomplete caption and on one that already meets the conventions. Show me the findings before editing either caption.
 :::
 
 :::
@@ -2449,12 +2446,12 @@ Explanation and checks: [Chapter 15: Check the agent with independent implementa
 ::: {.keep-together}
 ### Develop an LLM labeling method {#bank-develop-labeling .unlisted}
 
-Point the agent to: the research question, development material, reviewed human examples, candidate LLMs, and participant or document identifiers for keeping related excerpts together.
+Point the agent to: the research question, development excerpts with their reviewed human labels, candidate LLMs, and participant or document identifiers for the development excerpts.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-develop-labeling).
 
 ::: {.prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Work only with the development excerpts and their reviewed human labels. Flag any participant or document whose excerpts may also appear in the test set so I can check the assignment. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 
 :::
@@ -2462,12 +2459,12 @@ Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-
 ::: {.keep-together}
 ### Evaluate LLM labels on a held-out test set {#bank-evaluate-labeling .unlisted}
 
-Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Keep the reviewed human labels unavailable to the LLM during labeling.
+Point the agent to: the fixed rubric, prompt, LLM settings, held-out test excerpts, groups to compare, and acceptance criteria. Include the recorded selection probabilities if excerpts were sampled at different rates. Supply the human test labels after the predictions are saved.
 
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-evaluate-labeling).
 
 ::: {.prompt}
-> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Once you have saved the predictions, ask me for the human test labels and use them to score the predictions. If some excerpts had a greater chance of selection than others, use the recorded selection probabilities when estimating error rates for the full study. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 
 :::
@@ -2493,7 +2490,7 @@ Point the agent to: the research protocol, fixed instructions, assigned input fo
 Explanation and checks: [Chapter 16: Use LLM outputs as research data](#request-controlled-llm-runs).
 
 ::: {.prompt}
-> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Use `claude -p` with my usual Claude subscription. Before running the trial, confirm that it will use only my plan’s included allowance. If you cannot confirm that, or if the allowance runs out, stop and tell me. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 
 :::

@@ -15,7 +15,7 @@ Suppose a revised sample definition changes the estimated birthweight difference
 Ask the agent to create a *chain of evidence* linking each reported result to the saved output that produced it. The links should identify the results file, the analysis run, the exact entry, and every place that result appears in the manuscript. The agent can use these links to find affected passages when an analysis changes.
 
 <!-- example:manuscript-results -->
-For the synthetic heat-and-birthweight study, the `sample` row in `outputs/results/analysis/contrasts.csv` supplies this sentence:
+In the heat-and-birthweight example, the `sample` row in `outputs/results/analysis/contrasts.csv` provides the estimate and confidence interval reported below.
 
 ::: {.example-output}
 In the synthetic sample, the estimated mean birthweight difference between ten and five hot days of maternal exposure during the third trimester was -31.6 g (95% confidence interval -74.3 to 11.0 g), standardized over the sample's maternal age and smoking distribution.

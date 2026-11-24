@@ -269,7 +269,6 @@ anchor-map:
   "starter-files": /chapters/starter-files.qmd
   "starter-gitignore": /chapters/starter-files.qmd#starter-gitignore
   "starter-global": /chapters/starter-files.qmd#starter-global
-  "starter-layouts": /chapters/starter-files.qmd#starter-layouts
   "starter-methodology": /chapters/starter-files.qmd#starter-methodology
   "starter-project": /chapters/starter-files.qmd#starter-project
   "starter-specification": /chapters/starter-files.qmd#starter-specification
@@ -281,6 +280,7 @@ anchor-map:
   "trace-manuscript": /chapters/research-writing.qmd#trace-manuscript
   "unattended-jobs": /chapters/research-workflows.qmd#unattended-jobs
   "usage-and-context": /chapters/directing-work.qmd#usage-and-context
+  "use-existing-skill": /chapters/reusable-procedures.qmd#use-existing-skill
   "what-reaches-the-llm": /chapters/research-limits.qmd#what-reaches-the-llm
   "what-skills-add": /chapters/reusable-procedures.qmd#what-skills-add
   "when-a-separate-environment-helps": /chapters/agent-access.qmd#when-a-separate-environment-helps
