@@ -14,13 +14,13 @@ This chapter uses a running example: a research team wants to estimate the propo
 
 ## Define what the LLM should produce {#define-the-output-and-its-research-meaning}
 
-Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Researchers familiar with the subject should review it and label a set of examples, resolving disagreements and recording their reasons. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
+Ask the agent to draft a *rubric*: instructions defining the categories, exclusions, and treatment of ambiguous cases. Have two researchers familiar with the subject apply the rubric independently to the same excerpts before either sees the LLM’s labels. Record how often they agree, then have them review the passages they labeled differently and explain why they chose each final label. These human judgments provide a reference against which to evaluate the LLM. Sometimes called a *gold standard*, the reference also needs scrutiny when people disagree about what a passage means.
 
 Work with the agent to develop the rubric and prompt on examples reserved for that purpose. Include difficult cases and specify when the LLM should leave a case for human review. Ask the agent to record what the labels represent in `SPECIFICATION.md`, with links to the rubric and evaluation criteria. It should retain the exact rubric and prompt used for each completed run and record approved revisions and their reasons in `METHODOLOGY.md`.
 
 For recorded interviews, the agent might first use speech-recognition software to transcribe the audio, then ask an LLM to label passages. Have it select a sample for human review against the recordings so the evaluation captures transcription errors as well as labeling errors. Some LLMs can process images, audio, or video alongside text. These are called *multimodal LLMs*. Ask the agent to check whether the chosen LLM supports the material you want to analyze. [Chapter 12: Bring data into the project](#data-acquisition) covers collecting and documenting those inputs.
 
-Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that submits each excerpt with the rubric and saves the returned label. If the task also requires tools, such as retrieving passages from several files, the script can launch a separate agent session to do that work.
+Using a trained LLM to generate a response is called *LLM inference*. This is a form of statistical prediction: the LLM uses patterns learned during training and the supplied context to predict successive tokens[^llm-inference-tokens]. “Inference” here therefore means something different from statistical inference about a population or an effect. For the interview-labeling task, the agent can write a script that starts a fresh `Claude Code` session for each excerpt using your usual Claude subscription. The script gives each session the rubric and one excerpt, then saves the label it returns.
 
 [^llm-inference-tokens]: A token is a unit of text processed by an LLM. It may be a whole word, part of a word, or a punctuation mark.
 
@@ -28,7 +28,9 @@ Using a trained LLM to generate a response is called *LLM inference*. This is a 
 
 Evaluating LLM-generated labels follows a familiar principle from predictive modeling: assess performance on examples that were not used to develop or select the method.[^predictive-evaluation] Even without training an LLM, researchers make choices about the rubric, prompt, and which LLM to use. Repeatedly adjusting those choices to improve results on the same examples can give an overly optimistic picture of performance on new material.
 
-For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Keep the test set separate from all those decisions. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
+Choose the excerpts for human review with the study’s main source of uncertainty in mind. If you want to know how often the LLM misses an unmet need, the test set needs enough excerpts in which reviewers identify one. Ask the agent how many excerpts you would need to sample at random for a sufficiently precise estimate of how often the LLM misses a need identified by human reviewers. If unmet needs are rare, you could sample at random within each section of the interview and take a larger share from sections that ask about access to services. Have the agent record each sampled excerpt’s chance of selection. When estimating how common unmet needs are across all excerpts, it should give more weight to excerpts that had a lower chance of selection.
+
+For the interview example, ask the agent to divide the human-labeled excerpts into a *development set* and a separate *held-out test set* before work on the prompt begins. Use the development examples to refine the rubric and prompt and compare LLMs and generation settings. Give the agent developing the prompt access only to the development excerpts and their human labels. Keep the test excerpts and labels in a folder that session cannot read. All excerpts from one participant or document should belong to the same set, so closely related passages do not appear in both development and testing.
 
 ![](figures/llm-evaluation-split.svg){#fig-llm-evaluation-split .tall fig-alt="Partition human-labeled examples by participant or document. Development examples support refining the rubric and prompt and comparing LLMs and settings. An optional branch adds training data when fine-tuning. After choosing and fixing the labeling method, evaluate it on the held-out test set, comparing predicted labels with human labels withheld from the LLM."}
 
@@ -36,7 +38,7 @@ If the team also fine-tunes an LLM, a *training set* supplies examples used to u
 
 <!-- prompt:develop-labeling -->
 ::: {#request-develop-labeling .prompt}
-> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Keep all excerpts from the same participant or document together when assigning material to development and test sets. Do not inspect the test set while selecting the method. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
+> Using the research question, development material, and reviewed human examples, help develop a rubric and prompt for the labeling task. Identify ambiguous cases and category definitions that need my decision. Compare the agreed candidate prompts and LLMs on development material only, reporting category-specific errors and cases requiring human review. Work only with the development excerpts and their reviewed human labels. Flag any participant or document whose excerpts may also appear in the test set so I can check the assignment. Save the candidate versions and comparisons, then record the chosen rubric, prompt, LLM settings, and final-test criteria in `SPECIFICATION.md` after my approval.
 :::
 <!-- /prompt:develop-labeling -->
 
@@ -57,7 +59,7 @@ Overall agreement is 92.5 percent: the LLM and human reference agree on 185 of 2
 
 <!-- prompt:evaluate-labeling -->
 ::: {#request-evaluate-labeling .prompt}
-> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Then compare the labels with the reviewed human reference. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
+> Apply the fixed rubric, prompt, and LLM settings to the held-out test excerpts without supplying their human labels to the LLM. Save each raw response, the label extracted from it, failed requests, and cases requiring human review. Once you have saved the predictions, ask me for the human test labels and use them to score the predictions. If some excerpts had a greater chance of selection than others, use the recorded selection probabilities when estimating error rates for the full study. Report a confusion matrix, uncertainty in error rates, differences across the specified groups, and remaining human review. Assess the acceptance criteria supplied before the run. Do not revise the labeling method using this test set or omit difficult cases.
 :::
 <!-- /prompt:evaluate-labeling -->
 
@@ -111,7 +113,7 @@ Once the labeling procedure is ready, ask the agent to apply it to the full coll
 
 A *headless agent*[^measurement-headless] follows supplied instructions without an interactive conversation. The agent in the app can prepare a file containing the prompt and input locations, then launch fresh headless sessions from a script. This extends the approach used for independent implementations in [Chapter 15: Check the agent with independent implementations](#checking-analysis). You do not need to operate a terminal yourself.
 
-[^measurement-headless]: For setup of headless sessions and guidance on controlling each run's inputs and tool access, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#turn-the-task-into-a-saved-workflow) in the companion guide *Extending Your Agent's Toolkit*.
+[^measurement-headless]: For an example of supplying one text directly to each fresh session, see [Chapter 16: Run agents from saved prompts](https://iqss.github.io/dss-agentic-toolkit/chapters/headless-agents.html#control-what-each-run-receives) in the companion guide *Extending Your Agent's Toolkit*.
 
 ### Keep each run's context separate {#control-what-each-reviewer-or-judge-receives}
 
@@ -123,7 +125,7 @@ A fresh headless run can still load global user instructions, memory, files, plu
 
 <!-- prompt:controlled-llm-runs -->
 ::: {#request-controlled-llm-runs .prompt}
-> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
+> Prepare one fresh headless session per case, using the supplied research protocol and fixed instructions. Use `claude -p` with my usual Claude subscription. Before running the trial, confirm that it will use only my plan’s included allowance. If you cannot confirm that, or if the allowance runs out, stop and tell me. Give each session its assigned input without conversation history from other cases. Configure and check which files, tools, and services it can access; report any access you cannot verify. Run a few cases through requesting and saving responses before launching the full collection. Save each case's inputs, raw response, failures, retries, LLM identifiers, and settings. Keep response collection separate from analysis so the saved outputs can be analyzed again without new LLM calls.
 :::
 <!-- /prompt:controlled-llm-runs -->
 

@@ -19,6 +19,7 @@ body.quarto-dark img[src$="data-acquisition-ladder.svg"] { content: url("figures
 body.quarto-dark img[src$="deposit-review.svg"] { content: url("figures/deposit-review-dark.svg"); }
 body.quarto-dark img[src$="four-boundaries.svg"] { content: url("figures/four-boundaries-dark.svg"); }
 body.quarto-dark img[src$="four-pillars.svg"] { content: url("figures/four-pillars-dark.svg"); }
+body.quarto-dark img[src$="how-a-skill-works.svg"] { content: url("figures/how-a-skill-works-dark.svg"); }
 body.quarto-dark img[src$="how-models-build-answers.svg"] { content: url("figures/how-models-build-answers-dark.svg"); }
 body.quarto-dark img[src$="hub-and-spoke.svg"] { content: url("figures/hub-and-spoke-dark.svg"); }
 body.quarto-dark img[src$="independent-implementations.svg"] { content: url("figures/independent-implementations-dark.svg"); }
