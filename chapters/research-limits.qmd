@@ -22,16 +22,16 @@ A script reading a dataset does not, by itself, send every record to the LLM. Wh
 
 The LLM uses the information sent to it to generate a response. The provider may retain conversations and tool results after the task ends. Using that material to train an LLM is a separate use: a promise not to train on your data does not mean that no copy is kept.
 
-Anthropic documents a standard 30-day retention period for commercial `Claude Code` use, with other arrangements available to qualifying organizations. Enterprise chat and project retention controls have different coverage.[^data-retention] Even a few weeks may exceed what your project permits. Confirm the terms for your product and account; personal-account privacy settings do not provide an institutional agreement’s contractual coverage.
+When you use `Claude Code` through your Harvard account, your inputs are not used to train its models, but session data is retained for 30 days.[^data-retention] If your project limits how long records may be kept, ask Harvard University Information Technology (HUIT) what records, if any, Harvard itself keeps from your use of `Claude Code` and for how long.
 
-[^data-retention]: See Anthropic’s [`Claude Code` data-usage documentation](https://code.claude.com/docs/en/data-usage) and [Enterprise retention guidance](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans), checked November 6, 2026. The products have different controls and exclusions. These public documents do not establish Harvard’s retention duration.
+[^data-retention]: See [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) and [Anthropic’s `Claude Code` data-usage policy](https://code.claude.com/docs/en/data-usage), checked November 24, 2026. For personal Claude Pro or Max accounts, see [Anthropic’s consumer retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
 ## Check what your project permits
 
 Check both institutional approval for the service and your project’s terms. An institution may approve a tool while a data-use agreement prohibits sending your records to it. Consent, an IRB protocol, confidentiality agreements, and federal grant or other funder requirements may also limit the use. If the terms are unclear, ask the responsible institutional office before supplying the material.
 
 ::: {.guide-note}
-**Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
+**Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to [Level 3](https://privsec.harvard.edu/classify-risk); inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
 :::
 
 If you connect the agent to another service, check your institution’s guidance to confirm that the connection is approved for the data you intend to use.

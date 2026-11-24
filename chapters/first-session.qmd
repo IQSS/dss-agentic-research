@@ -35,4 +35,6 @@ The illustration below shows the `Code` tab. [Hover over a numbered control to r
 
 Describe what you want in the message box. As the agent works, the conversation shows its progress, questions, and requests for permission. You can add information or clarify your instructions there. When it finishes, open the result and decide whether it needs further work. For example, if the revised figure labels are crowded, ask the agent to shorten them and regenerate the figure.
 
-If the agent misunderstands the task, you can stop it and explain what needs to change. Stopping does not undo changes it has already made. Before working with your research files, read [Chapter 3: Know where your data goes](#research-limits), [Chapter 4: Control what the agent can do](#agent-access), and [Chapter 5: Choose settings for the task](#directing-work).
+If the agent misunderstands the task, you can stop it and explain what needs to change. Stopping does not undo changes it has already made. Ask the agent to show you which files it changed and what it changed in each one before it makes any further edits. You can then tell it which edits to undo.
+
+Before working with your research files, read [Chapter 3: Know where your data goes](#research-limits), [Chapter 4: Control what the agent can do](#agent-access), and [Chapter 5: Choose settings for the task](#directing-work).

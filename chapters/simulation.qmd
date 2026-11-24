@@ -51,7 +51,7 @@ The [project download](resources/heat-birthweight.zip) contains generator code, 
 
 ## Have the agent evaluate repeated datasets {#simulation-repetitions}
 
-Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
+Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. Have it use a different random seed for each repetition and record the seed even if the analysis fails. With that seed, the same code can generate the same dataset again so you can investigate a failure or an unexpected estimate. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
 
 ![](figures/known-answer-check.svg){#fig-known-answer-check .tall fig-alt="A simulation specification sets scenarios and acceptance criteria. Within each scenario, repeatedly generate data, run the prescribed analysis, and save results. Independently calculated true quantities feed the evaluation. Confidence intervals and summaries of bias, coverage, power, and false positives reveal performance across scenarios; crosses mark values outside the displayed criteria."}
 
@@ -70,7 +70,7 @@ With a finite number of repetitions, running the same simulation with new random
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Use a different random seed for each repetition and save it with the result or failure record. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 

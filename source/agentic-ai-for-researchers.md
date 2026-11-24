@@ -124,7 +124,9 @@ The illustration below shows the `Code` tab. [Hover over a numbered control to r
 
 Describe what you want in the message box. As the agent works, the conversation shows its progress, questions, and requests for permission. You can add information or clarify your instructions there. When it finishes, open the result and decide whether it needs further work. For example, if the revised figure labels are crowded, ask the agent to shorten them and regenerate the figure.
 
-If the agent misunderstands the task, you can stop it and explain what needs to change. Stopping does not undo changes it has already made. Before working with your research files, read [Chapter 3: Know where your data goes](#research-limits), [Chapter 4: Control what the agent can do](#agent-access), and [Chapter 5: Choose settings for the task](#directing-work).
+If the agent misunderstands the task, you can stop it and explain what needs to change. Stopping does not undo changes it has already made. Ask the agent to show you which files it changed and what it changed in each one before it makes any further edits. You can then tell it which edits to undo.
+
+Before working with your research files, read [Chapter 3: Know where your data goes](#research-limits), [Chapter 4: Control what the agent can do](#agent-access), and [Chapter 5: Choose settings for the task](#directing-work).
 
 # 3. Know where your data goes {#research-limits}
 
@@ -144,16 +146,16 @@ A script reading a dataset does not, by itself, send every record to the LLM. Wh
 
 The LLM uses the information sent to it to generate a response. The provider may retain conversations and tool results after the task ends. Using that material to train an LLM is a separate use: a promise not to train on your data does not mean that no copy is kept.
 
-Anthropic documents a standard 30-day retention period for commercial `Claude Code` use, with other arrangements available to qualifying organizations. Enterprise chat and project retention controls have different coverage.[^data-retention] Even a few weeks may exceed what your project permits. Confirm the terms for your product and account; personal-account privacy settings do not provide an institutional agreement’s contractual coverage.
+When you use `Claude Code` through your Harvard account, your inputs are not used to train its models, but session data is retained for 30 days.[^data-retention] If your project limits how long records may be kept, ask Harvard University Information Technology (HUIT) what records, if any, Harvard itself keeps from your use of `Claude Code` and for how long.
 
-[^data-retention]: See Anthropic’s [`Claude Code` data-usage documentation](https://code.claude.com/docs/en/data-usage) and [Enterprise retention guidance](https://privacy.claude.com/en/articles/10440198-configure-custom-data-retention-controls-for-enterprise-plans), checked November 6, 2026. The products have different controls and exclusions. These public documents do not establish Harvard’s retention duration.
+[^data-retention]: See [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) and [Anthropic’s `Claude Code` data-usage policy](https://code.claude.com/docs/en/data-usage), checked November 24, 2026. For personal Claude Pro or Max accounts, see [Anthropic’s consumer retention policy](https://privacy.claude.com/en/articles/10023548-how-long-do-you-store-my-data).
 
 ## Check what your project permits
 
 Check both institutional approval for the service and your project’s terms. An institution may approve a tool while a data-use agreement prohibits sending your records to it. Consent, an IRB protocol, confidentiality agreements, and federal grant or other funder requirements may also limit the use. If the terms are unclear, ask the responsible institutional office before supplying the material.
 
 ::: {.guide-note}
-**Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to Level 3; inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
+**Harvard, checked November 6, 2026.** [HUIT’s `Claude` guidance](https://www.huit.harvard.edu/claude) approves Harvard `Claude` Chat and Code for data up to [Level 3](https://privsec.harvard.edu/classify-risk); inputs are not used for training. Connected services require separate security and privacy approval. Check the guidance for the feature you intend to use and confirm retention with the service team. Your project’s terms may be more restrictive.
 :::
 
 If you connect the agent to another service, check your institution’s guidance to confirm that the connection is approved for the data you intend to use.
@@ -223,7 +225,7 @@ A document can influence an agent’s work even when the agent has read-only acc
 
 Written instructions tell the agent how you want it to work. Telling it to leave the original data unchanged is useful, but does not prevent a program from overwriting them. Configure access restrictions as well; selecting a project folder does not, by itself, make other files inaccessible.
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), *permission rules*[^access-permission-rules] tell the harness[^access-harness] which tool actions to allow, ask you about, or deny. You can permit routine edits, require approval before publishing files, and deny changes to protected inputs. A *sandbox*[^access-sandbox] adds restrictions enforced by the operating system[^access-operating-system] on the commands running inside it, including programs those commands start. It can limit which files they read or change and which network destinations they contact.
+In [`Claude Code`](https://code.claude.com/docs/en/overview), *permission rules*[^access-permission-rules] tell the harness[^access-harness] which tool actions to allow, ask you about, or deny. You can permit routine edits, require approval before publishing files, and deny changes to protected inputs. A *sandbox*[^access-sandbox] adds restrictions enforced by the operating system[^access-operating-system] on the commands running inside it, including programs those commands start. The sandbox is off by default. When enabled, it can limit which files those programs read or change and which network destinations they contact.
 
 [^access-permission-rules]: Rules that allow specified tool actions, require approval, or block them. `Claude Code` enforces these settings; instructions in a prompt do not change them. See Anthropic's [permission documentation](https://code.claude.com/docs/en/permissions).
 
@@ -307,7 +309,7 @@ A *permission mode* determines which actions can proceed without asking you. `Pl
 | `Accept edits` | Allows file edits and common file operations; other commands may need approval. |
 | `Manual` | Usually asks before edits and commands, subject to existing permission rules. |
 
-Available modes depend on your account and institutional settings. The [permission-mode reference](https://code.claude.com/docs/en/permission-modes) explains their current behavior. `Auto` retains permission checks; it does not grant unrestricted access. `Bypass permissions` removes most checks and is intended for separately isolated environments, rather than ordinary work on your computer.
+Available modes depend on your account and institutional settings. The [permission-mode reference](https://code.claude.com/docs/en/permission-modes) explains their current behavior. In the desktop app, `Auto` can read files outside your project folder without asking. If another study’s files must stay out of reach, have the agent check the [access restrictions from Chapter 4](#enforce-those-limits) before you select `Auto`. `Bypass permissions` removes most checks and is intended for separately isolated environments, rather than ordinary work on your computer.
 
 ::: {.pagebreak}
 :::
@@ -326,7 +328,7 @@ Click the app's usage circle to see usage and reset information. If your account
 
 Your usage allowance is separate from the context window, which limits how much information the LLM can work with at once. As a conversation grows, `Claude Code` automatically summarizes earlier material to make room for continued work, a process called *compaction*. The summary can omit details, including earlier instructions. Compaction does not reset your account’s usage allowance.[^context-compaction]
 
-Keep important decisions and the current state of the work in project context files that the agent can read again, even in a new session. For example, after a long exchange about which observations to include, ask the agent to record the agreed sample definition, the reason for it, and any open questions. Once those details are saved, you can compact the conversation before moving on to fit the model. [Chapter 7: Give the agent context for your project](#project-context) explains which files to maintain.
+Keep important decisions and the current state of the work in project context files that the agent can read again, even in a new session. For example, after a long exchange about which observations to include, ask the agent to record the agreed sample definition, the reason for it, and any open questions. Once those details are saved, you can type `/compact` in the message box before asking the agent to fit the statistical model. This summarizes the earlier discussion and leaves more room in the context window for the model output and your questions about the results. [Chapter 7: Give the agent context for your project](#project-context) explains which files to maintain.
 
 A saved analysis can run for hours without continuous LLM work. Repeated progress questions and large logs can still consume tokens. Have the agent run the saved computation, then check its completion and relevant outputs; [Chapter 13: Build a modular analysis workflow](#unattended-jobs) explains how to manage longer jobs. The next chapter establishes the project files these tasks will use.
 
@@ -423,7 +425,7 @@ Conversation details can be lost during [compaction](#usage-and-context) or be u
 
 Project context files tell the agent what the project is trying to achieve, how it should work, what has been decided, and what remains to be done. Each file has a specific purpose, as shown below.
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for these instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
+In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. If you also use `Codex`, both tools can read project instructions from `AGENTS.md`.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
 
 ::: {.needspace height="9cm"}
 :::
@@ -437,7 +439,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `C
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
 
-The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
+The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions.
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
@@ -515,7 +517,7 @@ enforce file or network permissions; configure access controls separately.
 </details>
 :::
 
-[^project-instructions]: When using agent tools from multiple providers, keep one maintained instructions file. Ask the agent to make `CLAUDE.md` a *symbolic link* to `AGENTS.md`, so both filenames refer to the same content, and check that each tool reads it. This avoids independently edited copies. See Anthropic's [instructions for sharing a file](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools) and the [AGENTS.md guidance](https://agents.md/).
+[^project-instructions]: `Claude Code` reads `AGENTS.md` directly when it finds no project `CLAUDE.md` or `CLAUDE.local.md` in the working folder or its parent folders. If you also keep a project `CLAUDE.md`, ask the agent to add `@AGENTS.md` on its own line there so Claude reads the shared instructions. If `CLAUDE.md` is already a *symbolic link* to `AGENTS.md`, both names point to the same file. You can keep that setup and ask the agent to edit `AGENTS.md`. See Anthropic’s [project instruction rules](https://code.claude.com/docs/en/memory#when-claude-code-reads-agentsmd) and [guidance on sharing a file](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools).
 
 ## Record plans and research decisions {#review-project-plan}
 
@@ -559,9 +561,7 @@ For example, you might ask the agent to save results at full precision and repor
 
 ## Decide which conventions apply across projects {#shared-instructions}
 
-Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's `CLAUDE.md`.[^project-convention-file] For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
-
-[^project-convention-file]: If you use an agent from another provider, record the exception in `AGENTS.md` if that is the project instructions file the agent reads.
+Keep both global and project instruction files to standing guidance. The global file holds the defaults you want the agent to follow across projects. When one project needs a different rule, record it in that project's instructions file. For example, your usual writing conventions might specify American spelling, while a particular journal requires British spelling.
 
 Save instructions that describe a recurring way of working. “Preserve the existing software environment and explain any required package change” is more useful than “be reproducible.” A good shared instruction tells the agent what to do in a recognizable situation. It should leave study-specific choices to the project.
 
@@ -662,7 +662,7 @@ report it; do not create a replacement or invent its instructions.
 </details>
 :::
 
-[^shared-instruction-location]: Anthropic calls these [user instructions](https://code.claude.com/docs/en/memory#choose-where-to-put-claudemd-files). Other agent tools may use `AGENTS.md` in a different location: [`Codex`](https://learn.chatgpt.com/docs/agent-configuration/agents-md#create-global-guidance), for example, uses `~/.codex/AGENTS.md` by default. Ask the agent to confirm the location for the tool you use.
+[^shared-instruction-location]: `Codex` looks for global user instructions in `~/.codex/AGENTS.md` by default. If you use both tools, you can keep the shared instructions in that file and ask the agent to put `@~/.codex/AGENTS.md` on its own line in `~/.claude/CLAUDE.md`. Both tools then read the same instructions. If the two filenames already point to the same file through a symbolic link, you can keep that setup. See [Claude Code file imports](https://code.claude.com/docs/en/memory#import-additional-files) and [Codex global instructions](https://learn.chatgpt.com/docs/agent-configuration/agents-md#create-global-guidance).
 
 ## Maintain and share the conventions {#maintain-shared-conventions}
 
@@ -1125,7 +1125,7 @@ The [project download](resources/heat-birthweight.zip) contains generator code, 
 
 ## Have the agent evaluate repeated datasets {#simulation-repetitions}
 
-Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
+Within each scenario, have the agent repeatedly generate a dataset, run the prescribed analysis, and save the estimates, uncertainty intervals, and any failures. Have it use a different random seed for each repetition and record the seed even if the analysis fails. With that seed, the same code can generate the same dataset again so you can investigate a failure or an unexpected estimate. The estimator stays unchanged throughout that evaluation. A single estimate can differ from the truth through sampling variation; repeated datasets show how the method behaves across those variations.
 
 ![](figures/known-answer-check.svg){#fig-known-answer-check .tall fig-alt="A simulation specification sets scenarios and acceptance criteria. Within each scenario, repeatedly generate data, run the prescribed analysis, and save results. Independently calculated true quantities feed the evaluation. Confidence intervals and summaries of bias, coverage, power, and false positives reveal performance across scenarios; crosses mark values outside the displayed criteria."}
 
@@ -1144,7 +1144,7 @@ With a finite number of repetitions, running the same simulation with new random
 
 <!-- prompt:simulation-plan -->
 ::: {#request-simulation-plan .prompt}
-> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Use a different random seed for each repetition and save it with the result or failure record. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 <!-- /prompt:simulation-plan -->
 
@@ -1617,7 +1617,7 @@ Ask for an outline with one main claim per slide and the supporting saved figure
 
 Ask the agent to check the target journal's current AI-use instructions when preparing the submission. For example, ICMJE guidance calls for disclosure of AI assistance and holds human authors responsible for the submitted work; AI tools cannot be listed as authors. Individual journals determine the applicable details and placement.[^ai-disclosure]
 
-[^ai-disclosure]: [ICMJE, “AI Use by Authors”](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html), checked November 12, 2026. Acting as a reviewer raises a separate confidentiality question: using AI on your own paper does not authorize sending someone else's manuscript or grant application to a provider. Follow the journal's or funder's policy; see [ICMJE's reviewer guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-reviewers.html).
+[^ai-disclosure]: [ICMJE, “AI Use by Authors”](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html), checked November 12, 2026. Acting as a reviewer raises a separate confidentiality question: using AI on your own paper does not authorize sending someone else's manuscript or grant application to a provider. For a manuscript, check the journal’s policy and [ICMJE’s reviewer guidance](https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-reviewers.html). For a grant application, check the funder’s instructions for reviewers, such as those from the [National Institutes of Health](https://grants.nih.gov/grants/guide/notice-files/NOT-OD-23-149.html) or the [National Science Foundation](https://www.nsf.gov/policies/ai/merit-review).
 
 Have the agent maintain a brief account of the tools used, dates, tasks, affected work, and checks completed. Include the LLM name and version when available, without inferring an exact version from an app label. From those records, it can draft a disclosure explaining the assistance and how the authors checked the work. Review the statement against what was actually done before submitting it.
 
@@ -2406,7 +2406,7 @@ Point the agent to: the specification and scientific scenarios or performance qu
 Explanation and checks: [Chapter 14: Test the analysis against known truth](#request-simulation-plan).
 
 ::: {.prompt}
-> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
+> Using `SPECIFICATION.md`, propose simulation scenarios relevant to this study and performance measures for the prescribed estimator. Explain how each dataset will be generated and how the true quantities will be calculated independently of the fitting code. Check that the generator produces plausible values and variability. After I approve the simulation specification, test one complete run, then evaluate repeated datasets in each scenario without changing the estimator. Use a different random seed for each repetition and save it with the result or failure record. Save estimates, intervals, and failed runs; report performance and its Monte Carlo uncertainty. Keep simulation files separate from the primary analysis and propose any methodological changes for my decision.
 :::
 
 :::

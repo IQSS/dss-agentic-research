@@ -22,7 +22,7 @@ Conversation details can be lost during [compaction](#usage-and-context) or be u
 
 Project context files tell the agent what the project is trying to achieve, how it should work, what has been decided, and what remains to be done. Each file has a specific purpose, as shown below.
 
-In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. Other agent tools use `AGENTS.md` for these instructions.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
+In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `CLAUDE.md` supplies instructions at the start of a session. If you also use `Codex`, both tools can read project instructions from `AGENTS.md`.[^project-instructions] Keep the instructions short: explain the project, identify the important files, and tell the agent when to consult them. Detailed plans, results, and decision histories can remain in separate files.
 
 ::: {.needspace height="9cm"}
 :::
@@ -36,7 +36,7 @@ In [`Claude Code`](https://code.claude.com/docs/en/overview), a project-level `C
 | `METHODOLOGY.md` | Dated scientific decisions and reasons: why an exclusion rule changed and which part of the specification it affects. Add new entries at the top, preserving earlier ones. |
 | `README.md` | A collaborator's introduction: what the project contains and how to reproduce its outputs. |
 
-The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions. When you approve a methodological change, have it update the specification and add an entry to the decision log.
+The status, task, specification, and decision-log filenames are conventions, not special commands. Tell the agent which files to read and maintain. For a paper project, keep the current scientific requirements in `SPECIFICATION.md` and the reasons for decisions in `METHODOLOGY.md`. The agent can then find the prescribed analysis without reconstructing it from earlier decisions.
 
 <!-- prompt:project-context -->
 ::: {#request-project-context .prompt}
@@ -114,7 +114,7 @@ enforce file or network permissions; configure access controls separately.
 </details>
 :::
 
-[^project-instructions]: When using agent tools from multiple providers, keep one maintained instructions file. Ask the agent to make `CLAUDE.md` a *symbolic link* to `AGENTS.md`, so both filenames refer to the same content, and check that each tool reads it. This avoids independently edited copies. See Anthropic's [instructions for sharing a file](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools) and the [AGENTS.md guidance](https://agents.md/).
+[^project-instructions]: `Claude Code` reads `AGENTS.md` directly when it finds no project `CLAUDE.md` or `CLAUDE.local.md` in the working folder or its parent folders. If you also keep a project `CLAUDE.md`, ask the agent to add `@AGENTS.md` on its own line there so Claude reads the shared instructions. If `CLAUDE.md` is already a *symbolic link* to `AGENTS.md`, both names point to the same file. You can keep that setup and ask the agent to edit `AGENTS.md`. See Anthropic’s [project instruction rules](https://code.claude.com/docs/en/memory#when-claude-code-reads-agentsmd) and [guidance on sharing a file](https://code.claude.com/docs/en/memory#share-one-file-with-other-coding-tools).
 
 ## Record plans and research decisions {#review-project-plan}
 
