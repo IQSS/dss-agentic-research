@@ -265,6 +265,7 @@ body.quarto-dark {
 @media (max-width: 760px) {
   .how-diagram { display: none; }
   .how-phone { display: block; }
+  .console-readout .intro .how-phone { margin-top: 12px; border-top: 1px solid var(--c-rule); padding-top: 11px; }
   .console-readout { container-type: inline-size; }
   .sequence-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0 8px; }
   .sequence-actions a, .sequence-preview {
