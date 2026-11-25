@@ -112,7 +112,8 @@ resources:
               <div class="intro" id="ro-intro">
                 <h1 tabindex="-1">Doing Research with AI Agents</h1>
                 <p>How to run agents, teach them your conventions, use them at each stage of a paper, and keep your data and files safe.</p>
-                <p class="how"><b>Every chapter of the guide is a control on the console.</b> <span id="ro-how">Hover over one to see what it covers, and press it to open that chapter.</span></p>
+                <p class="how how-diagram"><b>Every chapter of the guide is a control on the console.</b> <span id="ro-how">Hover over one to see what it covers, and press it to open that chapter.</span></p>
+                <p class="how how-phone">Tap <b>Preview Chapter 1</b> below to see what it covers. Then tap <b>Open</b> to read the chapter or <b>Preview</b> to see the next summary.</p>
               </div>
               <div class="chapter" id="ro-chapter" inert>
                 <button type="button" class="overview-back" id="ro-back" aria-keyshortcuts="Escape" title="Return to the overview (Esc)"><span aria-hidden="true">← </span>Back to overview</button>
